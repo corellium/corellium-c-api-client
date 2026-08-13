@@ -1,0 +1,72 @@
+#ifndef touch_curve_input_request_TEST
+#define touch_curve_input_request_TEST
+
+// the following is to include only the main from the first c file
+#ifndef TEST_MAIN
+#define TEST_MAIN
+#define touch_curve_input_request_MAIN
+#endif // TEST_MAIN
+
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include "../external/cJSON.h"
+
+#include "../model/touch_curve_input_request.h"
+touch_curve_input_request_t* instantiate_touch_curve_input_request(int include_optional);
+
+
+
+touch_curve_input_request_t* instantiate_touch_curve_input_request(int include_optional) {
+  touch_curve_input_request_t* touch_curve_input_request = NULL;
+  if (include_optional) {
+    touch_curve_input_request = touch_curve_input_request_create(
+      list_createList(),
+      list_createList(),
+      list_createList(),
+      list_createList(),
+      list_createList(),
+      1,
+      56,
+      56
+    );
+  } else {
+    touch_curve_input_request = touch_curve_input_request_create(
+      list_createList(),
+      list_createList(),
+      list_createList(),
+      list_createList(),
+      list_createList(),
+      1,
+      56,
+      56
+    );
+  }
+
+  return touch_curve_input_request;
+}
+
+
+#ifdef touch_curve_input_request_MAIN
+
+void test_touch_curve_input_request(int include_optional) {
+    touch_curve_input_request_t* touch_curve_input_request_1 = instantiate_touch_curve_input_request(include_optional);
+
+	cJSON* jsontouch_curve_input_request_1 = touch_curve_input_request_convertToJSON(touch_curve_input_request_1);
+	printf("touch_curve_input_request :\n%s\n", cJSON_Print(jsontouch_curve_input_request_1));
+	touch_curve_input_request_t* touch_curve_input_request_2 = touch_curve_input_request_parseFromJSON(jsontouch_curve_input_request_1);
+	cJSON* jsontouch_curve_input_request_2 = touch_curve_input_request_convertToJSON(touch_curve_input_request_2);
+	printf("repeating touch_curve_input_request:\n%s\n", cJSON_Print(jsontouch_curve_input_request_2));
+}
+
+int main() {
+  test_touch_curve_input_request(1);
+  test_touch_curve_input_request(0);
+
+  printf("Hello world \n");
+  return 0;
+}
+
+#endif // touch_curve_input_request_MAIN
+#endif // touch_curve_input_request_TEST

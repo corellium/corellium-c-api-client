@@ -1,0 +1,44 @@
+/*
+ * project_settings.h
+ *
+ * Project settings.
+ */
+
+#ifndef _project_settings_H_
+#define _project_settings_H_
+
+#include <string.h>
+#include "../external/cJSON.h"
+#include "../include/list.h"
+#include "../include/keyValuePair.h"
+#include "../include/binary.h"
+
+typedef struct project_settings_t project_settings_t;
+
+
+
+
+typedef struct project_settings_t {
+    double version; //numeric
+    int internet_access; //boolean
+    int dhcp; //boolean
+    char *connection; // string
+
+    int _library_owned; // Is the library responsible for freeing this object?
+} project_settings_t;
+
+__attribute__((deprecated)) project_settings_t *project_settings_create(
+    double version,
+    int internet_access,
+    int dhcp,
+    char *connection
+);
+
+void project_settings_free(project_settings_t *project_settings);
+
+project_settings_t *project_settings_parseFromJSON(cJSON *project_settingsJSON);
+
+cJSON *project_settings_convertToJSON(project_settings_t *project_settings);
+
+#endif /* _project_settings_H_ */
+

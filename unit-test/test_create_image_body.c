@@ -1,0 +1,70 @@
+#ifndef create_image_body_TEST
+#define create_image_body_TEST
+
+// the following is to include only the main from the first c file
+#ifndef TEST_MAIN
+#define TEST_MAIN
+#define create_image_body_MAIN
+#endif // TEST_MAIN
+
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include "../external/cJSON.h"
+
+#include "../model/create_image_body.h"
+create_image_body_t* instantiate_create_image_body(int include_optional);
+
+
+
+create_image_body_t* instantiate_create_image_body(int include_optional) {
+  create_image_body_t* create_image_body = NULL;
+  if (include_optional) {
+    create_image_body = create_image_body_create(
+      corellium_api_create_image_body_TYPE_fwbinary,
+      corellium_api_create_image_body_ENCODING_plain,
+      1,
+      "0",
+      "0",
+      "0",
+      "0"
+    );
+  } else {
+    create_image_body = create_image_body_create(
+      corellium_api_create_image_body_TYPE_fwbinary,
+      corellium_api_create_image_body_ENCODING_plain,
+      1,
+      "0",
+      "0",
+      "0",
+      "0"
+    );
+  }
+
+  return create_image_body;
+}
+
+
+#ifdef create_image_body_MAIN
+
+void test_create_image_body(int include_optional) {
+    create_image_body_t* create_image_body_1 = instantiate_create_image_body(include_optional);
+
+	cJSON* jsoncreate_image_body_1 = create_image_body_convertToJSON(create_image_body_1);
+	printf("create_image_body :\n%s\n", cJSON_Print(jsoncreate_image_body_1));
+	create_image_body_t* create_image_body_2 = create_image_body_parseFromJSON(jsoncreate_image_body_1);
+	cJSON* jsoncreate_image_body_2 = create_image_body_convertToJSON(create_image_body_2);
+	printf("repeating create_image_body:\n%s\n", cJSON_Print(jsoncreate_image_body_2));
+}
+
+int main() {
+  test_create_image_body(1);
+  test_create_image_body(0);
+
+  printf("Hello world \n");
+  return 0;
+}
+
+#endif // create_image_body_MAIN
+#endif // create_image_body_TEST

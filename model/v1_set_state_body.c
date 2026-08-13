@@ -1,0 +1,96 @@
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include "v1_set_state_body.h"
+
+
+
+static v1_set_state_body_t *v1_set_state_body_create_internal(
+    corellium_api_instance_state_v1__e state
+    ) {
+    v1_set_state_body_t *v1_set_state_body_local_var = malloc(sizeof(v1_set_state_body_t));
+    if (!v1_set_state_body_local_var) {
+        return NULL;
+    }
+    v1_set_state_body_local_var->state = state;
+
+    v1_set_state_body_local_var->_library_owned = 1;
+    return v1_set_state_body_local_var;
+}
+
+__attribute__((deprecated)) v1_set_state_body_t *v1_set_state_body_create(
+    corellium_api_instance_state_v1__e state
+    ) {
+    return v1_set_state_body_create_internal (
+        state
+        );
+}
+
+void v1_set_state_body_free(v1_set_state_body_t *v1_set_state_body) {
+    if(NULL == v1_set_state_body){
+        return ;
+    }
+    if(v1_set_state_body->_library_owned != 1){
+        fprintf(stderr, "WARNING: %s() does NOT free objects allocated by the user\n", "v1_set_state_body_free");
+        return ;
+    }
+    listEntry_t *listEntry;
+    free(v1_set_state_body);
+}
+
+cJSON *v1_set_state_body_convertToJSON(v1_set_state_body_t *v1_set_state_body) {
+    cJSON *item = cJSON_CreateObject();
+
+    // v1_set_state_body->state
+    if (corellium_api_instance_state_v1__NULL == v1_set_state_body->state) {
+        goto fail;
+    }
+    cJSON *state_local_JSON = instance_state_v1_convertToJSON(v1_set_state_body->state);
+    if(state_local_JSON == NULL) {
+        goto fail; // custom
+    }
+    cJSON_AddItemToObject(item, "state", state_local_JSON);
+    if(item->child == NULL) {
+        goto fail;
+    }
+
+    return item;
+fail:
+    if (item) {
+        cJSON_Delete(item);
+    }
+    return NULL;
+}
+
+v1_set_state_body_t *v1_set_state_body_parseFromJSON(cJSON *v1_set_state_bodyJSON){
+
+    v1_set_state_body_t *v1_set_state_body_local_var = NULL;
+
+    // define the local variable for v1_set_state_body->state
+    corellium_api_instance_state_v1__e state_local_nonprim = 0;
+
+    // v1_set_state_body->state
+    cJSON *state = cJSON_GetObjectItemCaseSensitive(v1_set_state_bodyJSON, "state");
+    if (cJSON_IsNull(state)) {
+        state = NULL;
+    }
+    if (!state) {
+        goto end;
+    }
+
+    
+    state_local_nonprim = instance_state_v1_parseFromJSON(state); //custom
+
+
+    v1_set_state_body_local_var = v1_set_state_body_create_internal (
+        state_local_nonprim
+        );
+
+    return v1_set_state_body_local_var;
+end:
+    if (state_local_nonprim) {
+        state_local_nonprim = 0;
+    }
+    return NULL;
+
+}

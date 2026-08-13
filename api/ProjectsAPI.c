@@ -1,0 +1,1788 @@
+#include <stdlib.h>
+#include <stdio.h>
+#include <ctype.h>
+#include "ProjectsAPI.h"
+
+#define MAX_NUMBER_LENGTH 16
+#define MAX_BUFFER_LENGTH 4096
+
+
+// Create a project
+//
+// Create a new project in the authenticated user's domain.
+//
+project_t*
+ProjectsAPI_v3CreateProject(apiClient_t *apiClient, create_project_body_t *create_project_body)
+{
+    list_t    *localVarQueryParameters = NULL;
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = list_createList();
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/projects");
+
+
+
+
+
+    // Body Param
+    cJSON *localVarSingleItemJSON_create_project_body = NULL;
+    if (create_project_body != NULL)
+    {
+        //not string, not binary
+        localVarSingleItemJSON_create_project_body = create_project_body_convertToJSON(create_project_body);
+        localVarBodyParameters = cJSON_Print(localVarSingleItemJSON_create_project_body);
+        localVarBodyLength = strlen(localVarBodyParameters);
+    }
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    list_addElement(localVarContentType,"application/json"); //consumes
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "POST");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 201) {
+    //    printf("%s\n","The created project.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 400) {
+    //    printf("%s\n","The project payload is invalid.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","Only domain administrators may create projects.");
+    //}
+    //nonprimitive not container
+    project_t *elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
+        cJSON *ProjectsAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
+        elementToReturn = project_parseFromJSON(ProjectsAPIlocalVarJSON);
+        cJSON_Delete(ProjectsAPIlocalVarJSON);
+        if(elementToReturn == NULL) {
+            // return 0;
+        }
+    }
+
+    //return type
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    
+    
+    
+    list_freeList(localVarHeaderType);
+    list_freeList(localVarContentType);
+    free(localVarPath);
+    if (localVarSingleItemJSON_create_project_body) {
+        cJSON_Delete(localVarSingleItemJSON_create_project_body);
+        localVarSingleItemJSON_create_project_body = NULL;
+    }
+    free(localVarBodyParameters);
+    return elementToReturn;
+end:
+    free(localVarPath);
+    return NULL;
+
+}
+
+// Add a project key
+//
+// Add an authorized key to a project.
+//
+project_key_t*
+ProjectsAPI_v3CreateProjectKey(apiClient_t *apiClient, char *projectId, create_project_key_body_t *create_project_key_body)
+{
+    list_t    *localVarQueryParameters = NULL;
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = list_createList();
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/projects/{projectId}/keys");
+
+    if(!projectId)
+        goto end;
+
+
+    // Path Params
+    long sizeOfPathParams_projectId = strlen(projectId)+3 + sizeof("{ projectId }") - 1;
+    if(projectId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_projectId = malloc(sizeOfPathParams_projectId);
+    sprintf(localVarToReplace_projectId, "{%s}", "projectId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_projectId, projectId);
+
+
+
+    // Body Param
+    cJSON *localVarSingleItemJSON_create_project_key_body = NULL;
+    if (create_project_key_body != NULL)
+    {
+        //not string, not binary
+        localVarSingleItemJSON_create_project_key_body = create_project_key_body_convertToJSON(create_project_key_body);
+        localVarBodyParameters = cJSON_Print(localVarSingleItemJSON_create_project_key_body);
+        localVarBodyLength = strlen(localVarBodyParameters);
+    }
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    list_addElement(localVarContentType,"application/json"); //consumes
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "POST");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 201) {
+    //    printf("%s\n","The added authorized key.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 400) {
+    //    printf("%s\n","The supplied public key is invalid.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","This deployment is not licensed for SSH key pairing.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 404) {
+    //    printf("%s\n","No project with the given identifier.");
+    //}
+    //nonprimitive not container
+    project_key_t *elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
+        cJSON *ProjectsAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
+        elementToReturn = project_key_parseFromJSON(ProjectsAPIlocalVarJSON);
+        cJSON_Delete(ProjectsAPIlocalVarJSON);
+        if(elementToReturn == NULL) {
+            // return 0;
+        }
+    }
+
+    //return type
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    
+    
+    
+    list_freeList(localVarHeaderType);
+    list_freeList(localVarContentType);
+    free(localVarPath);
+    free(localVarToReplace_projectId);
+    if (localVarSingleItemJSON_create_project_key_body) {
+        cJSON_Delete(localVarSingleItemJSON_create_project_key_body);
+        localVarSingleItemJSON_create_project_key_body = NULL;
+    }
+    free(localVarBodyParameters);
+    return elementToReturn;
+end:
+    free(localVarPath);
+    return NULL;
+
+}
+
+// Delete a project
+//
+// Delete a project. The project must contain no devices.
+//
+void
+ProjectsAPI_v3DeleteProject(apiClient_t *apiClient, char *projectId)
+{
+    list_t    *localVarQueryParameters = NULL;
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = NULL;
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/projects/{projectId}");
+
+    if(!projectId)
+        goto end;
+
+
+    // Path Params
+    long sizeOfPathParams_projectId = strlen(projectId)+3 + sizeof("{ projectId }") - 1;
+    if(projectId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_projectId = malloc(sizeOfPathParams_projectId);
+    sprintf(localVarToReplace_projectId, "{%s}", "projectId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_projectId, projectId);
+
+
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "DELETE");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 204) {
+    //    printf("%s\n","The project was deleted.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","Only domain administrators may delete projects.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 404) {
+    //    printf("%s\n","No project with the given identifier.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 409) {
+    //    printf("%s\n","The project still contains devices and cannot be deleted.");
+    //}
+    //No return type
+end:
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    
+    
+    
+    list_freeList(localVarHeaderType);
+    
+    free(localVarPath);
+    free(localVarToReplace_projectId);
+
+}
+
+// Delete a project key
+//
+// Remove an authorized key from a project.
+//
+void
+ProjectsAPI_v3DeleteProjectKey(apiClient_t *apiClient, char *projectId, char *keyId)
+{
+    list_t    *localVarQueryParameters = NULL;
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = NULL;
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/projects/{projectId}/keys/{keyId}");
+
+    if(!projectId)
+        goto end;
+    if(!keyId)
+        goto end;
+
+
+    // Path Params
+    long sizeOfPathParams_projectId = strlen(projectId)+3 + strlen(keyId)+3 + sizeof("{ projectId }") - 1;
+    if(projectId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_projectId = malloc(sizeOfPathParams_projectId);
+    sprintf(localVarToReplace_projectId, "{%s}", "projectId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_projectId, projectId);
+
+    // Path Params
+    long sizeOfPathParams_keyId = strlen(projectId)+3 + strlen(keyId)+3 + sizeof("{ keyId }") - 1;
+    if(keyId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_keyId = malloc(sizeOfPathParams_keyId);
+    sprintf(localVarToReplace_keyId, "{%s}", "keyId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_keyId, keyId);
+
+
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "DELETE");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 204) {
+    //    printf("%s\n","The authorized key was removed.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","Permission denied.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 404) {
+    //    printf("%s\n","No authorized key with the given identifier exists for the project.");
+    //}
+    //No return type
+end:
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    
+    
+    
+    list_freeList(localVarHeaderType);
+    
+    free(localVarPath);
+    free(localVarToReplace_projectId);
+    free(localVarToReplace_keyId);
+
+}
+
+// Get a project
+//
+// Retrieve a single project by identifier.
+//
+project_t*
+ProjectsAPI_v3GetProject(apiClient_t *apiClient, char *projectId)
+{
+    list_t    *localVarQueryParameters = NULL;
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = NULL;
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/projects/{projectId}");
+
+    if(!projectId)
+        goto end;
+
+
+    // Path Params
+    long sizeOfPathParams_projectId = strlen(projectId)+3 + sizeof("{ projectId }") - 1;
+    if(projectId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_projectId = malloc(sizeOfPathParams_projectId);
+    sprintf(localVarToReplace_projectId, "{%s}", "projectId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_projectId, projectId);
+
+
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "GET");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 200) {
+    //    printf("%s\n","The requested project.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","Permission denied.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 404) {
+    //    printf("%s\n","No project with the given identifier.");
+    //}
+    //nonprimitive not container
+    project_t *elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
+        cJSON *ProjectsAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
+        elementToReturn = project_parseFromJSON(ProjectsAPIlocalVarJSON);
+        cJSON_Delete(ProjectsAPIlocalVarJSON);
+        if(elementToReturn == NULL) {
+            // return 0;
+        }
+    }
+
+    //return type
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    
+    
+    
+    list_freeList(localVarHeaderType);
+    
+    free(localVarPath);
+    free(localVarToReplace_projectId);
+    return elementToReturn;
+end:
+    free(localVarPath);
+    return NULL;
+
+}
+
+// Get image upload status
+//
+// Check resumable upload status for a project image or download the image file.
+//
+binary_t*
+ProjectsAPI_v3GetProjectImageUpload(apiClient_t *apiClient, char *projectId, char *type, char *imageId, char *name, char *resumableChunkNumber)
+{
+    list_t    *localVarQueryParameters = list_createList();
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = NULL;
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/projects/{projectId}/image-upload/{type}/{imageId}/{name}");
+
+    if(!projectId)
+        goto end;
+    if(!type)
+        goto end;
+    if(!imageId)
+        goto end;
+    if(!name)
+        goto end;
+
+
+    // Path Params
+    long sizeOfPathParams_projectId = strlen(projectId)+3 + strlen(type)+3 + strlen(imageId)+3 + strlen(name)+3 + sizeof("{ projectId }") - 1;
+    if(projectId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_projectId = malloc(sizeOfPathParams_projectId);
+    sprintf(localVarToReplace_projectId, "{%s}", "projectId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_projectId, projectId);
+
+    // Path Params
+    long sizeOfPathParams_type = strlen(projectId)+3 + strlen(type)+3 + strlen(imageId)+3 + strlen(name)+3 + sizeof("{ type }") - 1;
+    if(type == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_type = malloc(sizeOfPathParams_type);
+    sprintf(localVarToReplace_type, "{%s}", "type");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_type, type);
+
+    // Path Params
+    long sizeOfPathParams_imageId = strlen(projectId)+3 + strlen(type)+3 + strlen(imageId)+3 + strlen(name)+3 + sizeof("{ imageId }") - 1;
+    if(imageId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_imageId = malloc(sizeOfPathParams_imageId);
+    sprintf(localVarToReplace_imageId, "{%s}", "imageId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_imageId, imageId);
+
+    // Path Params
+    long sizeOfPathParams_name = strlen(projectId)+3 + strlen(type)+3 + strlen(imageId)+3 + strlen(name)+3 + sizeof("{ name }") - 1;
+    if(name == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_name = malloc(sizeOfPathParams_name);
+    sprintf(localVarToReplace_name, "{%s}", "name");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_name, name);
+
+
+
+    // query parameters
+    char *keyQuery_resumableChunkNumber = NULL;
+    char * valueQuery_resumableChunkNumber = NULL;
+    keyValuePair_t *keyPairQuery_resumableChunkNumber = 0;
+    if (resumableChunkNumber)
+    {
+        keyQuery_resumableChunkNumber = strdup("resumableChunkNumber");
+        valueQuery_resumableChunkNumber = strdup((resumableChunkNumber));
+        keyPairQuery_resumableChunkNumber = keyValuePair_create(keyQuery_resumableChunkNumber, valueQuery_resumableChunkNumber);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableChunkNumber);
+    }
+    list_addElement(localVarHeaderType,"application/octet-stream"); //produces
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "GET");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 200) {
+    //    printf("%s\n","Chunk is present (when resumableChunkNumber supplied) or the image file stream.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 204) {
+    //    printf("%s\n","Chunk is missing and still needs to be uploaded.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 302) {
+    //    printf("%s\n","Image is stored in S3; follow the Location header to download it.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 400) {
+    //    printf("%s\n","The image identifier is invalid or the image record is missing.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","Permission denied.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 404) {
+    //    printf("%s\n","No image with the given identifier.");
+    //}
+    //primitive return type simple binary
+    binary_t* elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300)
+        elementToReturn = instantiate_binary_t(apiClient->dataReceived, apiClient->dataReceivedLen);
+
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    list_freeList(localVarQueryParameters);
+    
+    
+    list_freeList(localVarHeaderType);
+    
+    free(localVarPath);
+    free(localVarToReplace_projectId);
+    free(localVarToReplace_type);
+    free(localVarToReplace_imageId);
+    free(localVarToReplace_name);
+    if(keyQuery_resumableChunkNumber){
+        free(keyQuery_resumableChunkNumber);
+        keyQuery_resumableChunkNumber = NULL;
+    }
+    if(valueQuery_resumableChunkNumber){
+        free(valueQuery_resumableChunkNumber);
+        valueQuery_resumableChunkNumber = NULL;
+    }
+    if(keyPairQuery_resumableChunkNumber){
+        keyValuePair_free(keyPairQuery_resumableChunkNumber);
+        keyPairQuery_resumableChunkNumber = NULL;
+    }
+    return elementToReturn;
+end:
+    free(localVarPath);
+    return NULL;
+
+}
+
+// Get project network log
+//
+// Retrieve the egress network connection log for a project as plain text.
+//
+char*
+ProjectsAPI_v3GetProjectNetworkLog(apiClient_t *apiClient, char *projectId)
+{
+    list_t    *localVarQueryParameters = NULL;
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = NULL;
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/projects/{projectId}/network/log");
+
+    if(!projectId)
+        goto end;
+
+
+    // Path Params
+    long sizeOfPathParams_projectId = strlen(projectId)+3 + sizeof("{ projectId }") - 1;
+    if(projectId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_projectId = malloc(sizeOfPathParams_projectId);
+    sprintf(localVarToReplace_projectId, "{%s}", "projectId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_projectId, projectId);
+
+
+    list_addElement(localVarHeaderType,"text/plain"); //produces
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "GET");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 200) {
+    //    printf("%s\n","The project network connection log.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","Permission denied.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 404) {
+    //    printf("%s\n","No project with the given identifier.");
+    //}
+    //primitive return type simple string
+    char* elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300)
+        elementToReturn = strdup((char*)apiClient->dataReceived);
+
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    
+    
+    
+    list_freeList(localVarHeaderType);
+    
+    free(localVarPath);
+    free(localVarToReplace_projectId);
+    return elementToReturn;
+end:
+    free(localVarPath);
+    return NULL;
+
+}
+
+// Get project network status
+//
+// Retrieve the egress network connection status for a project.
+//
+network_status_t*
+ProjectsAPI_v3GetProjectNetworkStatus(apiClient_t *apiClient, char *projectId)
+{
+    list_t    *localVarQueryParameters = NULL;
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = NULL;
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/projects/{projectId}/network/status");
+
+    if(!projectId)
+        goto end;
+
+
+    // Path Params
+    long sizeOfPathParams_projectId = strlen(projectId)+3 + sizeof("{ projectId }") - 1;
+    if(projectId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_projectId = malloc(sizeOfPathParams_projectId);
+    sprintf(localVarToReplace_projectId, "{%s}", "projectId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_projectId, projectId);
+
+
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "GET");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 200) {
+    //    printf("%s\n","The project network connection status.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","Permission denied.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 404) {
+    //    printf("%s\n","No project with the given identifier.");
+    //}
+    //nonprimitive not container
+    network_status_t *elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
+        cJSON *ProjectsAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
+        elementToReturn = network_status_parseFromJSON(ProjectsAPIlocalVarJSON);
+        cJSON_Delete(ProjectsAPIlocalVarJSON);
+        if(elementToReturn == NULL) {
+            // return 0;
+        }
+    }
+
+    //return type
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    
+    
+    
+    list_freeList(localVarHeaderType);
+    
+    free(localVarPath);
+    free(localVarToReplace_projectId);
+    return elementToReturn;
+end:
+    free(localVarPath);
+    return NULL;
+
+}
+
+// Get project VPN configuration
+//
+// Retrieve the project VPN configuration. A project VPN allows a client (e.g. a researcher's computer) to connect into the virtual devices within the project.
+//
+char*
+ProjectsAPI_v3GetProjectVpnConfig(apiClient_t *apiClient, char *projectId, char *format)
+{
+    list_t    *localVarQueryParameters = NULL;
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = NULL;
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/projects/{projectId}/vpnconfig/{format}");
+
+    if(!projectId)
+        goto end;
+    if(!format)
+        goto end;
+
+
+    // Path Params
+    long sizeOfPathParams_projectId = strlen(projectId)+3 + strlen(format)+3 + sizeof("{ projectId }") - 1;
+    if(projectId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_projectId = malloc(sizeOfPathParams_projectId);
+    sprintf(localVarToReplace_projectId, "{%s}", "projectId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_projectId, projectId);
+
+    // Path Params
+    long sizeOfPathParams_format = strlen(projectId)+3 + strlen(format)+3 + sizeof("{ format }") - 1;
+    if(format == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_format = malloc(sizeOfPathParams_format);
+    sprintf(localVarToReplace_format, "{%s}", "format");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_format, format);
+
+
+    list_addElement(localVarHeaderType,"text/plain"); //produces
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "GET");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 200) {
+    //    printf("%s\n","The OpenVPN configuration.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 400) {
+    //    printf("%s\n","The project does not have an active VPN IP or port.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","Permission denied.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 404) {
+    //    printf("%s\n","No project with the given identifier.");
+    //}
+    //primitive return type simple string
+    char* elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300)
+        elementToReturn = strdup((char*)apiClient->dataReceived);
+
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    
+    
+    
+    list_freeList(localVarHeaderType);
+    
+    free(localVarPath);
+    free(localVarToReplace_projectId);
+    free(localVarToReplace_format);
+    return elementToReturn;
+end:
+    free(localVarPath);
+    return NULL;
+
+}
+
+// List project instances
+//
+// List the instances belonging to a project.
+//
+project_instance_list_t*
+ProjectsAPI_v3ListProjectInstances(apiClient_t *apiClient, char *projectId, double *limit, double *offset, char *name)
+{
+    list_t    *localVarQueryParameters = list_createList();
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = NULL;
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/projects/{projectId}/instances");
+
+    if(!projectId)
+        goto end;
+
+
+    // Path Params
+    long sizeOfPathParams_projectId = strlen(projectId)+3 + sizeof("{ projectId }") - 1;
+    if(projectId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_projectId = malloc(sizeOfPathParams_projectId);
+    sprintf(localVarToReplace_projectId, "{%s}", "projectId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_projectId, projectId);
+
+
+
+    // query parameters
+    char *keyQuery_limit = NULL;
+    char * valueQuery_limit = NULL;
+    keyValuePair_t *keyPairQuery_limit = 0;
+    if (limit)
+    {
+        keyQuery_limit = strdup("limit");
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", *limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
+        list_addElement(localVarQueryParameters,keyPairQuery_limit);
+    }
+
+    // query parameters
+    char *keyQuery_offset = NULL;
+    char * valueQuery_offset = NULL;
+    keyValuePair_t *keyPairQuery_offset = 0;
+    if (offset)
+    {
+        keyQuery_offset = strdup("offset");
+        valueQuery_offset = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_offset, MAX_NUMBER_LENGTH, "%d", *offset);
+        keyPairQuery_offset = keyValuePair_create(keyQuery_offset, valueQuery_offset);
+        list_addElement(localVarQueryParameters,keyPairQuery_offset);
+    }
+
+    // query parameters
+    char *keyQuery_name = NULL;
+    char * valueQuery_name = NULL;
+    keyValuePair_t *keyPairQuery_name = 0;
+    if (name)
+    {
+        keyQuery_name = strdup("name");
+        valueQuery_name = strdup((name));
+        keyPairQuery_name = keyValuePair_create(keyQuery_name, valueQuery_name);
+        list_addElement(localVarQueryParameters,keyPairQuery_name);
+    }
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "GET");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 200) {
+    //    printf("%s\n","Paginated list of instances in the project.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","Permission denied.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 404) {
+    //    printf("%s\n","No project with the given identifier.");
+    //}
+    //nonprimitive not container
+    project_instance_list_t *elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
+        cJSON *ProjectsAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
+        elementToReturn = project_instance_list_parseFromJSON(ProjectsAPIlocalVarJSON);
+        cJSON_Delete(ProjectsAPIlocalVarJSON);
+        if(elementToReturn == NULL) {
+            // return 0;
+        }
+    }
+
+    //return type
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    list_freeList(localVarQueryParameters);
+    
+    
+    list_freeList(localVarHeaderType);
+    
+    free(localVarPath);
+    free(localVarToReplace_projectId);
+    if(keyQuery_limit){
+        free(keyQuery_limit);
+        keyQuery_limit = NULL;
+    }
+    if(valueQuery_limit){
+        free(valueQuery_limit);
+        valueQuery_limit = NULL;
+    }
+    if(keyPairQuery_limit){
+        keyValuePair_free(keyPairQuery_limit);
+        keyPairQuery_limit = NULL;
+    }
+    if(keyQuery_offset){
+        free(keyQuery_offset);
+        keyQuery_offset = NULL;
+    }
+    if(valueQuery_offset){
+        free(valueQuery_offset);
+        valueQuery_offset = NULL;
+    }
+    if(keyPairQuery_offset){
+        keyValuePair_free(keyPairQuery_offset);
+        keyPairQuery_offset = NULL;
+    }
+    if(keyQuery_name){
+        free(keyQuery_name);
+        keyQuery_name = NULL;
+    }
+    if(valueQuery_name){
+        free(valueQuery_name);
+        valueQuery_name = NULL;
+    }
+    if(keyPairQuery_name){
+        keyValuePair_free(keyPairQuery_name);
+        keyPairQuery_name = NULL;
+    }
+    return elementToReturn;
+end:
+    free(localVarPath);
+    return NULL;
+
+}
+
+// List project keys
+//
+// List the authorized keys for a project.
+//
+project_key_list_t*
+ProjectsAPI_v3ListProjectKeys(apiClient_t *apiClient, char *projectId, double *limit, double *offset)
+{
+    list_t    *localVarQueryParameters = list_createList();
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = NULL;
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/projects/{projectId}/keys");
+
+    if(!projectId)
+        goto end;
+
+
+    // Path Params
+    long sizeOfPathParams_projectId = strlen(projectId)+3 + sizeof("{ projectId }") - 1;
+    if(projectId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_projectId = malloc(sizeOfPathParams_projectId);
+    sprintf(localVarToReplace_projectId, "{%s}", "projectId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_projectId, projectId);
+
+
+
+    // query parameters
+    char *keyQuery_limit = NULL;
+    char * valueQuery_limit = NULL;
+    keyValuePair_t *keyPairQuery_limit = 0;
+    if (limit)
+    {
+        keyQuery_limit = strdup("limit");
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", *limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
+        list_addElement(localVarQueryParameters,keyPairQuery_limit);
+    }
+
+    // query parameters
+    char *keyQuery_offset = NULL;
+    char * valueQuery_offset = NULL;
+    keyValuePair_t *keyPairQuery_offset = 0;
+    if (offset)
+    {
+        keyQuery_offset = strdup("offset");
+        valueQuery_offset = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_offset, MAX_NUMBER_LENGTH, "%d", *offset);
+        keyPairQuery_offset = keyValuePair_create(keyQuery_offset, valueQuery_offset);
+        list_addElement(localVarQueryParameters,keyPairQuery_offset);
+    }
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "GET");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 200) {
+    //    printf("%s\n","Paginated list of authorized keys.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","This deployment is not licensed for SSH key pairing.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 404) {
+    //    printf("%s\n","No project with the given identifier.");
+    //}
+    //nonprimitive not container
+    project_key_list_t *elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
+        cJSON *ProjectsAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
+        elementToReturn = project_key_list_parseFromJSON(ProjectsAPIlocalVarJSON);
+        cJSON_Delete(ProjectsAPIlocalVarJSON);
+        if(elementToReturn == NULL) {
+            // return 0;
+        }
+    }
+
+    //return type
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    list_freeList(localVarQueryParameters);
+    
+    
+    list_freeList(localVarHeaderType);
+    
+    free(localVarPath);
+    free(localVarToReplace_projectId);
+    if(keyQuery_limit){
+        free(keyQuery_limit);
+        keyQuery_limit = NULL;
+    }
+    if(valueQuery_limit){
+        free(valueQuery_limit);
+        valueQuery_limit = NULL;
+    }
+    if(keyPairQuery_limit){
+        keyValuePair_free(keyPairQuery_limit);
+        keyPairQuery_limit = NULL;
+    }
+    if(keyQuery_offset){
+        free(keyQuery_offset);
+        keyQuery_offset = NULL;
+    }
+    if(valueQuery_offset){
+        free(valueQuery_offset);
+        valueQuery_offset = NULL;
+    }
+    if(keyPairQuery_offset){
+        keyValuePair_free(keyPairQuery_offset);
+        keyPairQuery_offset = NULL;
+    }
+    return elementToReturn;
+end:
+    free(localVarPath);
+    return NULL;
+
+}
+
+// List projects
+//
+// List the projects the authenticated user can access.
+//
+project_list_t*
+ProjectsAPI_v3ListProjects(apiClient_t *apiClient, double *limit, double *offset, char *name)
+{
+    list_t    *localVarQueryParameters = list_createList();
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = NULL;
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/projects");
+
+
+
+
+
+    // query parameters
+    char *keyQuery_limit = NULL;
+    char * valueQuery_limit = NULL;
+    keyValuePair_t *keyPairQuery_limit = 0;
+    if (limit)
+    {
+        keyQuery_limit = strdup("limit");
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", *limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
+        list_addElement(localVarQueryParameters,keyPairQuery_limit);
+    }
+
+    // query parameters
+    char *keyQuery_offset = NULL;
+    char * valueQuery_offset = NULL;
+    keyValuePair_t *keyPairQuery_offset = 0;
+    if (offset)
+    {
+        keyQuery_offset = strdup("offset");
+        valueQuery_offset = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_offset, MAX_NUMBER_LENGTH, "%d", *offset);
+        keyPairQuery_offset = keyValuePair_create(keyQuery_offset, valueQuery_offset);
+        list_addElement(localVarQueryParameters,keyPairQuery_offset);
+    }
+
+    // query parameters
+    char *keyQuery_name = NULL;
+    char * valueQuery_name = NULL;
+    keyValuePair_t *keyPairQuery_name = 0;
+    if (name)
+    {
+        keyQuery_name = strdup("name");
+        valueQuery_name = strdup((name));
+        keyPairQuery_name = keyValuePair_create(keyQuery_name, valueQuery_name);
+        list_addElement(localVarQueryParameters,keyPairQuery_name);
+    }
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "GET");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 200) {
+    //    printf("%s\n","Paginated list of projects.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","Permission denied.");
+    //}
+    //nonprimitive not container
+    project_list_t *elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
+        cJSON *ProjectsAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
+        elementToReturn = project_list_parseFromJSON(ProjectsAPIlocalVarJSON);
+        cJSON_Delete(ProjectsAPIlocalVarJSON);
+        if(elementToReturn == NULL) {
+            // return 0;
+        }
+    }
+
+    //return type
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    list_freeList(localVarQueryParameters);
+    
+    
+    list_freeList(localVarHeaderType);
+    
+    free(localVarPath);
+    if(keyQuery_limit){
+        free(keyQuery_limit);
+        keyQuery_limit = NULL;
+    }
+    if(valueQuery_limit){
+        free(valueQuery_limit);
+        valueQuery_limit = NULL;
+    }
+    if(keyPairQuery_limit){
+        keyValuePair_free(keyPairQuery_limit);
+        keyPairQuery_limit = NULL;
+    }
+    if(keyQuery_offset){
+        free(keyQuery_offset);
+        keyQuery_offset = NULL;
+    }
+    if(valueQuery_offset){
+        free(valueQuery_offset);
+        valueQuery_offset = NULL;
+    }
+    if(keyPairQuery_offset){
+        keyValuePair_free(keyPairQuery_offset);
+        keyPairQuery_offset = NULL;
+    }
+    if(keyQuery_name){
+        free(keyQuery_name);
+        keyQuery_name = NULL;
+    }
+    if(valueQuery_name){
+        free(valueQuery_name);
+        valueQuery_name = NULL;
+    }
+    if(keyPairQuery_name){
+        keyValuePair_free(keyPairQuery_name);
+        keyPairQuery_name = NULL;
+    }
+    return elementToReturn;
+end:
+    free(localVarPath);
+    return NULL;
+
+}
+
+// Update a project
+//
+// Update a project's name, settings, or quotas. This is the single canonical way to change project settings: fields provided in `settings` are merged into the project's existing settings, so omitted fields are preserved.
+//
+project_t*
+ProjectsAPI_v3PatchProject(apiClient_t *apiClient, char *projectId, patch_project_body_t *patch_project_body)
+{
+    list_t    *localVarQueryParameters = NULL;
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = list_createList();
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/projects/{projectId}");
+
+    if(!projectId)
+        goto end;
+
+
+    // Path Params
+    long sizeOfPathParams_projectId = strlen(projectId)+3 + sizeof("{ projectId }") - 1;
+    if(projectId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_projectId = malloc(sizeOfPathParams_projectId);
+    sprintf(localVarToReplace_projectId, "{%s}", "projectId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_projectId, projectId);
+
+
+
+    // Body Param
+    cJSON *localVarSingleItemJSON_patch_project_body = NULL;
+    if (patch_project_body != NULL)
+    {
+        //not string, not binary
+        localVarSingleItemJSON_patch_project_body = patch_project_body_convertToJSON(patch_project_body);
+        localVarBodyParameters = cJSON_Print(localVarSingleItemJSON_patch_project_body);
+        localVarBodyLength = strlen(localVarBodyParameters);
+    }
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    list_addElement(localVarContentType,"application/json"); //consumes
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "PATCH");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 200) {
+    //    printf("%s\n","The updated project.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 400) {
+    //    printf("%s\n","The update payload is invalid, or the network connection cannot be changed while instances are active.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","Permission denied.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 404) {
+    //    printf("%s\n","No project with the given identifier.");
+    //}
+    //nonprimitive not container
+    project_t *elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
+        cJSON *ProjectsAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
+        elementToReturn = project_parseFromJSON(ProjectsAPIlocalVarJSON);
+        cJSON_Delete(ProjectsAPIlocalVarJSON);
+        if(elementToReturn == NULL) {
+            // return 0;
+        }
+    }
+
+    //return type
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    
+    
+    
+    list_freeList(localVarHeaderType);
+    list_freeList(localVarContentType);
+    free(localVarPath);
+    free(localVarToReplace_projectId);
+    if (localVarSingleItemJSON_patch_project_body) {
+        cJSON_Delete(localVarSingleItemJSON_patch_project_body);
+        localVarSingleItemJSON_patch_project_body = NULL;
+    }
+    free(localVarBodyParameters);
+    return elementToReturn;
+end:
+    free(localVarPath);
+    return NULL;
+
+}
+
+// Upload image chunk
+//
+// Upload a chunk of a project image using the resumable upload protocol. Creates the image record on the first chunk if it does not yet exist.
+//
+void
+ProjectsAPI_v3PutProjectImageUpload(apiClient_t *apiClient, char *projectId, char *type, char *imageId, char *name, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, char *corelliumChecksum, char *flavor)
+{
+    list_t    *localVarQueryParameters = list_createList();
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = NULL;
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/projects/{projectId}/image-upload/{type}/{imageId}/{name}");
+
+    if(!projectId)
+        goto end;
+    if(!type)
+        goto end;
+    if(!imageId)
+        goto end;
+    if(!name)
+        goto end;
+
+
+    // Path Params
+    long sizeOfPathParams_projectId = strlen(projectId)+3 + strlen(type)+3 + strlen(imageId)+3 + strlen(name)+3 + sizeof("{ projectId }") - 1;
+    if(projectId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_projectId = malloc(sizeOfPathParams_projectId);
+    sprintf(localVarToReplace_projectId, "{%s}", "projectId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_projectId, projectId);
+
+    // Path Params
+    long sizeOfPathParams_type = strlen(projectId)+3 + strlen(type)+3 + strlen(imageId)+3 + strlen(name)+3 + sizeof("{ type }") - 1;
+    if(type == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_type = malloc(sizeOfPathParams_type);
+    sprintf(localVarToReplace_type, "{%s}", "type");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_type, type);
+
+    // Path Params
+    long sizeOfPathParams_imageId = strlen(projectId)+3 + strlen(type)+3 + strlen(imageId)+3 + strlen(name)+3 + sizeof("{ imageId }") - 1;
+    if(imageId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_imageId = malloc(sizeOfPathParams_imageId);
+    sprintf(localVarToReplace_imageId, "{%s}", "imageId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_imageId, imageId);
+
+    // Path Params
+    long sizeOfPathParams_name = strlen(projectId)+3 + strlen(type)+3 + strlen(imageId)+3 + strlen(name)+3 + sizeof("{ name }") - 1;
+    if(name == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_name = malloc(sizeOfPathParams_name);
+    sprintf(localVarToReplace_name, "{%s}", "name");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_name, name);
+
+
+
+    // query parameters
+    char *keyQuery_resumableChunkNumber = NULL;
+    char * valueQuery_resumableChunkNumber = NULL;
+    keyValuePair_t *keyPairQuery_resumableChunkNumber = 0;
+    if (resumableChunkNumber)
+    {
+        keyQuery_resumableChunkNumber = strdup("resumableChunkNumber");
+        valueQuery_resumableChunkNumber = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_resumableChunkNumber, MAX_NUMBER_LENGTH, "%d", *resumableChunkNumber);
+        keyPairQuery_resumableChunkNumber = keyValuePair_create(keyQuery_resumableChunkNumber, valueQuery_resumableChunkNumber);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableChunkNumber);
+    }
+
+    // query parameters
+    char *keyQuery_resumableChunkSize = NULL;
+    char * valueQuery_resumableChunkSize = NULL;
+    keyValuePair_t *keyPairQuery_resumableChunkSize = 0;
+    if (resumableChunkSize)
+    {
+        keyQuery_resumableChunkSize = strdup("resumableChunkSize");
+        valueQuery_resumableChunkSize = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_resumableChunkSize, MAX_NUMBER_LENGTH, "%d", *resumableChunkSize);
+        keyPairQuery_resumableChunkSize = keyValuePair_create(keyQuery_resumableChunkSize, valueQuery_resumableChunkSize);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableChunkSize);
+    }
+
+    // query parameters
+    char *keyQuery_resumableCurrentChunkSize = NULL;
+    char * valueQuery_resumableCurrentChunkSize = NULL;
+    keyValuePair_t *keyPairQuery_resumableCurrentChunkSize = 0;
+    if (resumableCurrentChunkSize)
+    {
+        keyQuery_resumableCurrentChunkSize = strdup("resumableCurrentChunkSize");
+        valueQuery_resumableCurrentChunkSize = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_resumableCurrentChunkSize, MAX_NUMBER_LENGTH, "%d", *resumableCurrentChunkSize);
+        keyPairQuery_resumableCurrentChunkSize = keyValuePair_create(keyQuery_resumableCurrentChunkSize, valueQuery_resumableCurrentChunkSize);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableCurrentChunkSize);
+    }
+
+    // query parameters
+    char *keyQuery_resumableTotalSize = NULL;
+    char * valueQuery_resumableTotalSize = NULL;
+    keyValuePair_t *keyPairQuery_resumableTotalSize = 0;
+    if (resumableTotalSize)
+    {
+        keyQuery_resumableTotalSize = strdup("resumableTotalSize");
+        valueQuery_resumableTotalSize = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_resumableTotalSize, MAX_NUMBER_LENGTH, "%d", *resumableTotalSize);
+        keyPairQuery_resumableTotalSize = keyValuePair_create(keyQuery_resumableTotalSize, valueQuery_resumableTotalSize);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableTotalSize);
+    }
+
+    // query parameters
+    char *keyQuery_resumableTotalChunks = NULL;
+    char * valueQuery_resumableTotalChunks = NULL;
+    keyValuePair_t *keyPairQuery_resumableTotalChunks = 0;
+    if (resumableTotalChunks)
+    {
+        keyQuery_resumableTotalChunks = strdup("resumableTotalChunks");
+        valueQuery_resumableTotalChunks = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_resumableTotalChunks, MAX_NUMBER_LENGTH, "%d", *resumableTotalChunks);
+        keyPairQuery_resumableTotalChunks = keyValuePair_create(keyQuery_resumableTotalChunks, valueQuery_resumableTotalChunks);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableTotalChunks);
+    }
+
+    // query parameters
+    char *keyQuery_corelliumChecksum = NULL;
+    char * valueQuery_corelliumChecksum = NULL;
+    keyValuePair_t *keyPairQuery_corelliumChecksum = 0;
+    if (corelliumChecksum)
+    {
+        keyQuery_corelliumChecksum = strdup("corelliumChecksum");
+        valueQuery_corelliumChecksum = strdup((corelliumChecksum));
+        keyPairQuery_corelliumChecksum = keyValuePair_create(keyQuery_corelliumChecksum, valueQuery_corelliumChecksum);
+        list_addElement(localVarQueryParameters,keyPairQuery_corelliumChecksum);
+    }
+
+    // query parameters
+    char *keyQuery_flavor = NULL;
+    char * valueQuery_flavor = NULL;
+    keyValuePair_t *keyPairQuery_flavor = 0;
+    if (flavor)
+    {
+        keyQuery_flavor = strdup("flavor");
+        valueQuery_flavor = strdup((flavor));
+        keyPairQuery_flavor = keyValuePair_create(keyQuery_flavor, valueQuery_flavor);
+        list_addElement(localVarQueryParameters,keyPairQuery_flavor);
+    }
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "PUT");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 204) {
+    //    printf("%s\n","Chunk accepted.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 400) {
+    //    printf("%s\n","Invalid chunk or upload parameters or missing required checksum in airgapped deployments.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","Permission denied.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 404) {
+    //    printf("%s\n","No image with the given identifier.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 507) {
+    //    printf("%s\n","The image pool does not have enough space for this upload.");
+    //}
+    //No return type
+end:
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    list_freeList(localVarQueryParameters);
+    
+    
+    list_freeList(localVarHeaderType);
+    
+    free(localVarPath);
+    free(localVarToReplace_projectId);
+    free(localVarToReplace_type);
+    free(localVarToReplace_imageId);
+    free(localVarToReplace_name);
+    if(keyQuery_corelliumChecksum){
+        free(keyQuery_corelliumChecksum);
+        keyQuery_corelliumChecksum = NULL;
+    }
+    if(valueQuery_corelliumChecksum){
+        free(valueQuery_corelliumChecksum);
+        valueQuery_corelliumChecksum = NULL;
+    }
+    if(keyPairQuery_corelliumChecksum){
+        keyValuePair_free(keyPairQuery_corelliumChecksum);
+        keyPairQuery_corelliumChecksum = NULL;
+    }
+    if(keyQuery_corelliumChecksum){
+        free(keyQuery_corelliumChecksum);
+        keyQuery_corelliumChecksum = NULL;
+    }
+    if(keyPairQuery_corelliumChecksum){
+        keyValuePair_free(keyPairQuery_corelliumChecksum);
+        keyPairQuery_corelliumChecksum = NULL;
+    }
+    if(keyQuery_flavor){
+        free(keyQuery_flavor);
+        keyQuery_flavor = NULL;
+    }
+    if(valueQuery_flavor){
+        free(valueQuery_flavor);
+        valueQuery_flavor = NULL;
+    }
+    if(keyPairQuery_flavor){
+        keyValuePair_free(keyPairQuery_flavor);
+        keyPairQuery_flavor = NULL;
+    }
+    if(keyQuery_flavor){
+        free(keyQuery_flavor);
+        keyQuery_flavor = NULL;
+    }
+    if(keyPairQuery_flavor){
+        keyValuePair_free(keyPairQuery_flavor);
+        keyPairQuery_flavor = NULL;
+    }
+
+}
+

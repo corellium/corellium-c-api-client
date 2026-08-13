@@ -1,0 +1,68 @@
+#ifndef cluster_node_status_cluster_totals_TEST
+#define cluster_node_status_cluster_totals_TEST
+
+// the following is to include only the main from the first c file
+#ifndef TEST_MAIN
+#define TEST_MAIN
+#define cluster_node_status_cluster_totals_MAIN
+#endif // TEST_MAIN
+
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include "../external/cJSON.h"
+
+#include "../model/cluster_node_status_cluster_totals.h"
+cluster_node_status_cluster_totals_t* instantiate_cluster_node_status_cluster_totals(int include_optional);
+
+#include "test_cluster_node_status_cluster_totals_reserved.c"
+#include "test_cluster_node_status_cluster_totals_total.c"
+#include "test_cluster_node_status_cluster_totals_available.c"
+
+
+cluster_node_status_cluster_totals_t* instantiate_cluster_node_status_cluster_totals(int include_optional) {
+  cluster_node_status_cluster_totals_t* cluster_node_status_cluster_totals = NULL;
+  if (include_optional) {
+    cluster_node_status_cluster_totals = cluster_node_status_cluster_totals_create(
+       // false, not to have infinite recursion
+      instantiate_cluster_node_status_cluster_totals_reserved(0),
+       // false, not to have infinite recursion
+      instantiate_cluster_node_status_cluster_totals_total(0),
+       // false, not to have infinite recursion
+      instantiate_cluster_node_status_cluster_totals_available(0)
+    );
+  } else {
+    cluster_node_status_cluster_totals = cluster_node_status_cluster_totals_create(
+      NULL,
+      NULL,
+      NULL
+    );
+  }
+
+  return cluster_node_status_cluster_totals;
+}
+
+
+#ifdef cluster_node_status_cluster_totals_MAIN
+
+void test_cluster_node_status_cluster_totals(int include_optional) {
+    cluster_node_status_cluster_totals_t* cluster_node_status_cluster_totals_1 = instantiate_cluster_node_status_cluster_totals(include_optional);
+
+	cJSON* jsoncluster_node_status_cluster_totals_1 = cluster_node_status_cluster_totals_convertToJSON(cluster_node_status_cluster_totals_1);
+	printf("cluster_node_status_cluster_totals :\n%s\n", cJSON_Print(jsoncluster_node_status_cluster_totals_1));
+	cluster_node_status_cluster_totals_t* cluster_node_status_cluster_totals_2 = cluster_node_status_cluster_totals_parseFromJSON(jsoncluster_node_status_cluster_totals_1);
+	cJSON* jsoncluster_node_status_cluster_totals_2 = cluster_node_status_cluster_totals_convertToJSON(cluster_node_status_cluster_totals_2);
+	printf("repeating cluster_node_status_cluster_totals:\n%s\n", cJSON_Print(jsoncluster_node_status_cluster_totals_2));
+}
+
+int main() {
+  test_cluster_node_status_cluster_totals(1);
+  test_cluster_node_status_cluster_totals(0);
+
+  printf("Hello world \n");
+  return 0;
+}
+
+#endif // cluster_node_status_cluster_totals_MAIN
+#endif // cluster_node_status_cluster_totals_TEST
