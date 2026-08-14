@@ -10,7 +10,7 @@ static activity_query_options_t *activity_query_options_create_internal(
     double limit,
     double offset,
     char *order_by,
-    char *instance,
+    char *instance_id,
     char *project_id,
     char *actor,
     char *search,
@@ -25,7 +25,7 @@ static activity_query_options_t *activity_query_options_create_internal(
     activity_query_options_local_var->limit = limit;
     activity_query_options_local_var->offset = offset;
     activity_query_options_local_var->order_by = order_by;
-    activity_query_options_local_var->instance = instance;
+    activity_query_options_local_var->instance_id = instance_id;
     activity_query_options_local_var->project_id = project_id;
     activity_query_options_local_var->actor = actor;
     activity_query_options_local_var->search = search;
@@ -41,7 +41,7 @@ __attribute__((deprecated)) activity_query_options_t *activity_query_options_cre
     double limit,
     double offset,
     char *order_by,
-    char *instance,
+    char *instance_id,
     char *project_id,
     char *actor,
     char *search,
@@ -53,7 +53,7 @@ __attribute__((deprecated)) activity_query_options_t *activity_query_options_cre
         limit,
         offset,
         order_by,
-        instance,
+        instance_id,
         project_id,
         actor,
         search,
@@ -79,9 +79,9 @@ void activity_query_options_free(activity_query_options_t *activity_query_option
         free(activity_query_options->order_by);
         activity_query_options->order_by = NULL;
     }
-    if (activity_query_options->instance) {
-        free(activity_query_options->instance);
-        activity_query_options->instance = NULL;
+    if (activity_query_options->instance_id) {
+        free(activity_query_options->instance_id);
+        activity_query_options->instance_id = NULL;
     }
     if (activity_query_options->project_id) {
         free(activity_query_options->project_id);
@@ -146,9 +146,9 @@ cJSON *activity_query_options_convertToJSON(activity_query_options_t *activity_q
     }
 
 
-    // activity_query_options->instance
-    if(activity_query_options->instance) {
-    if(cJSON_AddStringToObject(item, "instance", activity_query_options->instance) == NULL) {
+    // activity_query_options->instance_id
+    if(activity_query_options->instance_id) {
+    if(cJSON_AddStringToObject(item, "instanceId", activity_query_options->instance_id) == NULL) {
     goto fail; //String
     }
     }
@@ -251,13 +251,13 @@ activity_query_options_t *activity_query_options_parseFromJSON(cJSON *activity_q
     }
     }
 
-    // activity_query_options->instance
-    cJSON *instance = cJSON_GetObjectItemCaseSensitive(activity_query_optionsJSON, "instance");
-    if (cJSON_IsNull(instance)) {
-        instance = NULL;
+    // activity_query_options->instance_id
+    cJSON *instance_id = cJSON_GetObjectItemCaseSensitive(activity_query_optionsJSON, "instanceId");
+    if (cJSON_IsNull(instance_id)) {
+        instance_id = NULL;
     }
-    if (instance) { 
-    if(!cJSON_IsString(instance) && !cJSON_IsNull(instance))
+    if (instance_id) { 
+    if(!cJSON_IsString(instance_id) && !cJSON_IsNull(instance_id))
     {
     goto end; //String
     }
@@ -329,7 +329,7 @@ activity_query_options_t *activity_query_options_parseFromJSON(cJSON *activity_q
         limit ? limit->valuedouble : 0,
         offset ? offset->valuedouble : 0,
         order_by && !cJSON_IsNull(order_by) ? strdup(order_by->valuestring) : NULL,
-        instance && !cJSON_IsNull(instance) ? strdup(instance->valuestring) : NULL,
+        instance_id && !cJSON_IsNull(instance_id) ? strdup(instance_id->valuestring) : NULL,
         project_id && !cJSON_IsNull(project_id) ? strdup(project_id->valuestring) : NULL,
         actor && !cJSON_IsNull(actor) ? strdup(actor->valuestring) : NULL,
         search && !cJSON_IsNull(search) ? strdup(search->valuestring) : NULL,

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **name** | **char \*** | Image name. Defaults to the uploaded filename when omitted in multipart uploads. | [optional] 
 **full_path** | **char \*** | Absolute path to an existing file on the server. | [optional] 
 **project_id** | **char \*** | Owning project ID. | [optional] 
-**instance** | **char \*** | Owning instance ID. | [optional] 
+**instance_id** | **char \*** | Owning instance ID. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

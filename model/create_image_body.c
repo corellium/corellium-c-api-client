@@ -46,7 +46,7 @@ static create_image_body_t *create_image_body_create_internal(
     char *name,
     char *full_path,
     char *project_id,
-    char *instance
+    char *instance_id
     ) {
     create_image_body_t *create_image_body_local_var = malloc(sizeof(create_image_body_t));
     if (!create_image_body_local_var) {
@@ -58,7 +58,7 @@ static create_image_body_t *create_image_body_create_internal(
     create_image_body_local_var->name = name;
     create_image_body_local_var->full_path = full_path;
     create_image_body_local_var->project_id = project_id;
-    create_image_body_local_var->instance = instance;
+    create_image_body_local_var->instance_id = instance_id;
 
     create_image_body_local_var->_library_owned = 1;
     return create_image_body_local_var;
@@ -71,7 +71,7 @@ __attribute__((deprecated)) create_image_body_t *create_image_body_create(
     char *name,
     char *full_path,
     char *project_id,
-    char *instance
+    char *instance_id
     ) {
     return create_image_body_create_internal (
         type,
@@ -80,7 +80,7 @@ __attribute__((deprecated)) create_image_body_t *create_image_body_create(
         name,
         full_path,
         project_id,
-        instance
+        instance_id
         );
 }
 
@@ -105,9 +105,9 @@ void create_image_body_free(create_image_body_t *create_image_body) {
         free(create_image_body->project_id);
         create_image_body->project_id = NULL;
     }
-    if (create_image_body->instance) {
-        free(create_image_body->instance);
-        create_image_body->instance = NULL;
+    if (create_image_body->instance_id) {
+        free(create_image_body->instance_id);
+        create_image_body->instance_id = NULL;
     }
     free(create_image_body);
 }
@@ -167,9 +167,9 @@ cJSON *create_image_body_convertToJSON(create_image_body_t *create_image_body) {
     }
 
 
-    // create_image_body->instance
-    if(create_image_body->instance) {
-    if(cJSON_AddStringToObject(item, "instance", create_image_body->instance) == NULL) {
+    // create_image_body->instance_id
+    if(create_image_body->instance_id) {
+    if(cJSON_AddStringToObject(item, "instanceId", create_image_body->instance_id) == NULL) {
     goto fail; //String
     }
     }
@@ -268,13 +268,13 @@ create_image_body_t *create_image_body_parseFromJSON(cJSON *create_image_bodyJSO
     }
     }
 
-    // create_image_body->instance
-    cJSON *instance = cJSON_GetObjectItemCaseSensitive(create_image_bodyJSON, "instance");
-    if (cJSON_IsNull(instance)) {
-        instance = NULL;
+    // create_image_body->instance_id
+    cJSON *instance_id = cJSON_GetObjectItemCaseSensitive(create_image_bodyJSON, "instanceId");
+    if (cJSON_IsNull(instance_id)) {
+        instance_id = NULL;
     }
-    if (instance) { 
-    if(!cJSON_IsString(instance) && !cJSON_IsNull(instance))
+    if (instance_id) { 
+    if(!cJSON_IsString(instance_id) && !cJSON_IsNull(instance_id))
     {
     goto end; //String
     }
@@ -288,7 +288,7 @@ create_image_body_t *create_image_body_parseFromJSON(cJSON *create_image_bodyJSO
         name && !cJSON_IsNull(name) ? strdup(name->valuestring) : NULL,
         full_path && !cJSON_IsNull(full_path) ? strdup(full_path->valuestring) : NULL,
         project_id && !cJSON_IsNull(project_id) ? strdup(project_id->valuestring) : NULL,
-        instance && !cJSON_IsNull(instance) ? strdup(instance->valuestring) : NULL
+        instance_id && !cJSON_IsNull(instance_id) ? strdup(instance_id->valuestring) : NULL
         );
 
     return create_image_body_local_var;

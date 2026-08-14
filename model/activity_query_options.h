@@ -25,7 +25,7 @@ typedef struct activity_query_options_t {
     double limit; //numeric
     double offset; //numeric
     char *order_by; // string
-    char *instance; // string
+    char *instance_id; // string
     char *project_id; // string
     char *actor; // string
     char *search; // string
@@ -40,7 +40,7 @@ __attribute__((deprecated)) activity_query_options_t *activity_query_options_cre
     double limit,
     double offset,
     char *order_by,
-    char *instance,
+    char *instance_id,
     char *project_id,
     char *actor,
     char *search,

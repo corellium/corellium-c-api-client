@@ -24,7 +24,7 @@ typedef struct create_activity_export_body_t {
     object_t *resource; //object
     double offset; //numeric
     char *order_by; // string
-    char *instance; // string
+    char *instance_id; // string
     char *project_id; // string
     char *actor; // string
     char *search; // string
@@ -38,7 +38,7 @@ __attribute__((deprecated)) create_activity_export_body_t *create_activity_expor
     object_t *resource,
     double offset,
     char *order_by,
-    char *instance,
+    char *instance_id,
     char *project_id,
     char *actor,
     char *search,

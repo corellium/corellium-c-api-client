@@ -424,7 +424,7 @@ end:
 // Get resource activities
 //
 activity_list_response_t*
-ActivityAPI_v3ListActivities(apiClient_t *apiClient, char *resource, double *limit, double *offset, char *orderBy, char *instance, char *projectId, char *actor, char *search, char to, char from)
+ActivityAPI_v3ListActivities(apiClient_t *apiClient, char *resource, double *limit, double *offset, char *orderBy, char *instanceId, char *projectId, char *actor, char *search, char to, char from)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -495,15 +495,15 @@ ActivityAPI_v3ListActivities(apiClient_t *apiClient, char *resource, double *lim
     }
 
     // query parameters
-    char *keyQuery_instance = NULL;
-    char * valueQuery_instance = NULL;
-    keyValuePair_t *keyPairQuery_instance = 0;
-    if (instance)
+    char *keyQuery_instanceId = NULL;
+    char * valueQuery_instanceId = NULL;
+    keyValuePair_t *keyPairQuery_instanceId = 0;
+    if (instanceId)
     {
-        keyQuery_instance = strdup("instance");
-        valueQuery_instance = strdup((instance));
-        keyPairQuery_instance = keyValuePair_create(keyQuery_instance, valueQuery_instance);
-        list_addElement(localVarQueryParameters,keyPairQuery_instance);
+        keyQuery_instanceId = strdup("instanceId");
+        valueQuery_instanceId = strdup((instanceId));
+        keyPairQuery_instanceId = keyValuePair_create(keyQuery_instanceId, valueQuery_instanceId);
+        list_addElement(localVarQueryParameters,keyPairQuery_instanceId);
     }
 
     // query parameters
@@ -660,17 +660,17 @@ ActivityAPI_v3ListActivities(apiClient_t *apiClient, char *resource, double *lim
         keyValuePair_free(keyPairQuery_orderBy);
         keyPairQuery_orderBy = NULL;
     }
-    if(keyQuery_instance){
-        free(keyQuery_instance);
-        keyQuery_instance = NULL;
+    if(keyQuery_instanceId){
+        free(keyQuery_instanceId);
+        keyQuery_instanceId = NULL;
     }
-    if(valueQuery_instance){
-        free(valueQuery_instance);
-        valueQuery_instance = NULL;
+    if(valueQuery_instanceId){
+        free(valueQuery_instanceId);
+        valueQuery_instanceId = NULL;
     }
-    if(keyPairQuery_instance){
-        keyValuePair_free(keyPairQuery_instance);
-        keyPairQuery_instance = NULL;
+    if(keyPairQuery_instanceId){
+        keyValuePair_free(keyPairQuery_instanceId);
+        keyPairQuery_instanceId = NULL;
     }
     if(keyQuery_projectId){
         free(keyQuery_projectId);

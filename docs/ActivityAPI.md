@@ -133,7 +133,7 @@ Name | Type | Description  | Notes
 ```c
 // Get resource activities
 //
-activity_list_response_t* ActivityAPI_v3ListActivities(apiClient_t *apiClient, char *resource, double *limit, double *offset, char *orderBy, char *instance, char *projectId, char *actor, char *search, char to, char from);
+activity_list_response_t* ActivityAPI_v3ListActivities(apiClient_t *apiClient, char *resource, double *limit, double *offset, char *orderBy, char *instanceId, char *projectId, char *actor, char *search, char to, char from);
 ```
 
 ### Parameters
@@ -144,7 +144,7 @@ Name | Type | Description  | Notes
 **limit** | **double \*** | Number of entries to return. | [optional] [default to 10]
 **offset** | **double \*** | Number of results to skip. | [optional] [default to 0]
 **orderBy** | **char \*** | Sorting order (&#39;-createdAt&#39; or &#39;createdAt&#39;). | [optional] [default to &#39;-createdAt&#39;]
-**instance** | **char \*** | Instance identifier used to filter instance resources. | [optional] 
+**instanceId** | **char \*** | Instance identifier used to filter instance resources. | [optional] 
 **projectId** | **char \*** | Project identifier used to filter instance resources. | [optional] 
 **actor** | **char \*** | Actor identifier used to filter actor resources. | [optional] 
 **search** | **char \*** | Last filter applied and is a fuzzy match on results. | [optional] 

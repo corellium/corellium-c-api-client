@@ -43,6 +43,6 @@ ActivityAPI_v3GetActivityExportTasks(apiClient_t *apiClient, double *limit, doub
 // Get resource activities
 //
 activity_list_response_t*
-ActivityAPI_v3ListActivities(apiClient_t *apiClient, char *resource, double *limit, double *offset, char *orderBy, char *instance, char *projectId, char *actor, char *search, char to, char from);
+ActivityAPI_v3ListActivities(apiClient_t *apiClient, char *resource, double *limit, double *offset, char *orderBy, char *instanceId, char *projectId, char *actor, char *search, char to, char from);
 
 

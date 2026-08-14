@@ -9,7 +9,7 @@ static create_activity_export_body_t *create_activity_export_body_create_interna
     object_t *resource,
     double offset,
     char *order_by,
-    char *instance,
+    char *instance_id,
     char *project_id,
     char *actor,
     char *search,
@@ -23,7 +23,7 @@ static create_activity_export_body_t *create_activity_export_body_create_interna
     create_activity_export_body_local_var->resource = resource;
     create_activity_export_body_local_var->offset = offset;
     create_activity_export_body_local_var->order_by = order_by;
-    create_activity_export_body_local_var->instance = instance;
+    create_activity_export_body_local_var->instance_id = instance_id;
     create_activity_export_body_local_var->project_id = project_id;
     create_activity_export_body_local_var->actor = actor;
     create_activity_export_body_local_var->search = search;
@@ -38,7 +38,7 @@ __attribute__((deprecated)) create_activity_export_body_t *create_activity_expor
     object_t *resource,
     double offset,
     char *order_by,
-    char *instance,
+    char *instance_id,
     char *project_id,
     char *actor,
     char *search,
@@ -49,7 +49,7 @@ __attribute__((deprecated)) create_activity_export_body_t *create_activity_expor
         resource,
         offset,
         order_by,
-        instance,
+        instance_id,
         project_id,
         actor,
         search,
@@ -75,9 +75,9 @@ void create_activity_export_body_free(create_activity_export_body_t *create_acti
         free(create_activity_export_body->order_by);
         create_activity_export_body->order_by = NULL;
     }
-    if (create_activity_export_body->instance) {
-        free(create_activity_export_body->instance);
-        create_activity_export_body->instance = NULL;
+    if (create_activity_export_body->instance_id) {
+        free(create_activity_export_body->instance_id);
+        create_activity_export_body->instance_id = NULL;
     }
     if (create_activity_export_body->project_id) {
         free(create_activity_export_body->project_id);
@@ -134,9 +134,9 @@ cJSON *create_activity_export_body_convertToJSON(create_activity_export_body_t *
     }
 
 
-    // create_activity_export_body->instance
-    if(create_activity_export_body->instance) {
-    if(cJSON_AddStringToObject(item, "instance", create_activity_export_body->instance) == NULL) {
+    // create_activity_export_body->instance_id
+    if(create_activity_export_body->instance_id) {
+    if(cJSON_AddStringToObject(item, "instanceId", create_activity_export_body->instance_id) == NULL) {
     goto fail; //String
     }
     }
@@ -227,13 +227,13 @@ create_activity_export_body_t *create_activity_export_body_parseFromJSON(cJSON *
     }
     }
 
-    // create_activity_export_body->instance
-    cJSON *instance = cJSON_GetObjectItemCaseSensitive(create_activity_export_bodyJSON, "instance");
-    if (cJSON_IsNull(instance)) {
-        instance = NULL;
+    // create_activity_export_body->instance_id
+    cJSON *instance_id = cJSON_GetObjectItemCaseSensitive(create_activity_export_bodyJSON, "instanceId");
+    if (cJSON_IsNull(instance_id)) {
+        instance_id = NULL;
     }
-    if (instance) { 
-    if(!cJSON_IsString(instance) && !cJSON_IsNull(instance))
+    if (instance_id) { 
+    if(!cJSON_IsString(instance_id) && !cJSON_IsNull(instance_id))
     {
     goto end; //String
     }
@@ -304,7 +304,7 @@ create_activity_export_body_t *create_activity_export_body_parseFromJSON(cJSON *
         resource ? resource_local_object : NULL,
         offset ? offset->valuedouble : 0,
         order_by && !cJSON_IsNull(order_by) ? strdup(order_by->valuestring) : NULL,
-        instance && !cJSON_IsNull(instance) ? strdup(instance->valuestring) : NULL,
+        instance_id && !cJSON_IsNull(instance_id) ? strdup(instance_id->valuestring) : NULL,
         project_id && !cJSON_IsNull(project_id) ? strdup(project_id->valuestring) : NULL,
         actor && !cJSON_IsNull(actor) ? strdup(actor->valuestring) : NULL,
         search && !cJSON_IsNull(search) ? strdup(search->valuestring) : NULL,
