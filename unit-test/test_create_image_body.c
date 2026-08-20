@@ -28,7 +28,8 @@ create_image_body_t* instantiate_create_image_body(int include_optional) {
       "0",
       "0",
       "0",
-      "0"
+      "0",
+      instantiate_binary_t("blah", 5)
     );
   } else {
     create_image_body = create_image_body_create(
@@ -38,7 +39,8 @@ create_image_body_t* instantiate_create_image_body(int include_optional) {
       "0",
       "0",
       "0",
-      "0"
+      "0",
+      instantiate_binary_t("blah", 5)
     );
   }
 

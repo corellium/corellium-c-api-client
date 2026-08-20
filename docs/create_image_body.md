@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **full_path** | **char \*** | Absolute path to an existing file on the server. | [optional] 
 **project_id** | **char \*** | Owning project ID. | [optional] 
 **instance_id** | **char \*** | Owning instance ID. | [optional] 
+**file** | **binary_t*** | Optionally the actual file to upload in the same request. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

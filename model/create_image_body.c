@@ -46,7 +46,8 @@ static create_image_body_t *create_image_body_create_internal(
     char *name,
     char *full_path,
     char *project_id,
-    char *instance_id
+    char *instance_id,
+    binary_t* file
     ) {
     create_image_body_t *create_image_body_local_var = malloc(sizeof(create_image_body_t));
     if (!create_image_body_local_var) {
@@ -59,6 +60,7 @@ static create_image_body_t *create_image_body_create_internal(
     create_image_body_local_var->full_path = full_path;
     create_image_body_local_var->project_id = project_id;
     create_image_body_local_var->instance_id = instance_id;
+    create_image_body_local_var->file = file;
 
     create_image_body_local_var->_library_owned = 1;
     return create_image_body_local_var;
@@ -71,7 +73,8 @@ __attribute__((deprecated)) create_image_body_t *create_image_body_create(
     char *name,
     char *full_path,
     char *project_id,
-    char *instance_id
+    char *instance_id,
+    binary_t* file
     ) {
     return create_image_body_create_internal (
         type,
@@ -80,7 +83,8 @@ __attribute__((deprecated)) create_image_body_t *create_image_body_create(
         name,
         full_path,
         project_id,
-        instance_id
+        instance_id,
+        file
         );
 }
 
@@ -108,6 +112,10 @@ void create_image_body_free(create_image_body_t *create_image_body) {
     if (create_image_body->instance_id) {
         free(create_image_body->instance_id);
         create_image_body->instance_id = NULL;
+    }
+    if (create_image_body->file) {
+        free(create_image_body->file->data);
+        create_image_body->file = NULL;
     }
     free(create_image_body);
 }
@@ -172,6 +180,16 @@ cJSON *create_image_body_convertToJSON(create_image_body_t *create_image_body) {
     if(cJSON_AddStringToObject(item, "instanceId", create_image_body->instance_id) == NULL) {
     goto fail; //String
     }
+    }
+
+
+    // create_image_body->file
+    if(create_image_body->file) {
+    char* encoded_str_file = base64encode(create_image_body->file->data,create_image_body->file->len);
+    if(cJSON_AddStringToObject(item, "file", encoded_str_file) == NULL) {
+    goto fail; //Binary
+    }
+    free (encoded_str_file);
     }
 
     return item;
@@ -280,6 +298,23 @@ create_image_body_t *create_image_body_parseFromJSON(cJSON *create_image_bodyJSO
     }
     }
 
+    // create_image_body->file
+    cJSON *file = cJSON_GetObjectItemCaseSensitive(create_image_bodyJSON, "file");
+    if (cJSON_IsNull(file)) {
+        file = NULL;
+    }
+    binary_t* decoded_str_file = malloc(sizeof(struct binary_t));
+    if (file) { 
+    if(!cJSON_IsString(file))
+    {
+    goto end; //Binary
+    }
+    decoded_str_file->data = base64decode(file->valuestring, strlen(file->valuestring), &decoded_str_file->len);
+    if (!decoded_str_file->data) {
+        goto end;
+    }
+    }
+
 
     create_image_body_local_var = create_image_body_create_internal (
         typeVariable,
@@ -288,7 +323,8 @@ create_image_body_t *create_image_body_parseFromJSON(cJSON *create_image_bodyJSO
         name && !cJSON_IsNull(name) ? strdup(name->valuestring) : NULL,
         full_path && !cJSON_IsNull(full_path) ? strdup(full_path->valuestring) : NULL,
         project_id && !cJSON_IsNull(project_id) ? strdup(project_id->valuestring) : NULL,
-        instance_id && !cJSON_IsNull(instance_id) ? strdup(instance_id->valuestring) : NULL
+        instance_id && !cJSON_IsNull(instance_id) ? strdup(instance_id->valuestring) : NULL,
+        file ? decoded_str_file : NULL
         );
 
     return create_image_body_local_var;

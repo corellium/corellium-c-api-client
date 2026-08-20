@@ -42,6 +42,7 @@ typedef struct create_image_body_t {
     char *full_path; // string
     char *project_id; // string
     char *instance_id; // string
+    binary_t* file; //binary
 
     int _library_owned; // Is the library responsible for freeing this object?
 } create_image_body_t;
@@ -53,7 +54,8 @@ __attribute__((deprecated)) create_image_body_t *create_image_body_create(
     char *name,
     char *full_path,
     char *project_id,
-    char *instance_id
+    char *instance_id,
+    binary_t* file
 );
 
 void create_image_body_free(create_image_body_t *create_image_body);
