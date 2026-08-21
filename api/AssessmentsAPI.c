@@ -743,7 +743,7 @@ end:
 // Returns a paginated list of assessments for the given instance.
 //
 paginated_assessments_t*
-AssessmentsAPI_v3GetAssessmentsByInstanceId(apiClient_t *apiClient, char *instanceId, char *targetInstanceId, double *limit, double *offset)
+AssessmentsAPI_v3GetAssessmentsByInstanceId(apiClient_t *apiClient, char *instanceId, char *targetInstanceId, double *limit, double *offset, char *sort)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -812,6 +812,18 @@ AssessmentsAPI_v3GetAssessmentsByInstanceId(apiClient_t *apiClient, char *instan
         keyPairQuery_offset = keyValuePair_create(keyQuery_offset, valueQuery_offset);
         list_addElement(localVarQueryParameters,keyPairQuery_offset);
     }
+
+    // query parameters
+    char *keyQuery_sort = NULL;
+    char * valueQuery_sort = NULL;
+    keyValuePair_t *keyPairQuery_sort = 0;
+    if (sort)
+    {
+        keyQuery_sort = strdup("sort");
+        valueQuery_sort = strdup((sort));
+        keyPairQuery_sort = keyValuePair_create(keyQuery_sort, valueQuery_sort);
+        list_addElement(localVarQueryParameters,keyPairQuery_sort);
+    }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
                     localVarPath,
@@ -827,6 +839,10 @@ AssessmentsAPI_v3GetAssessmentsByInstanceId(apiClient_t *apiClient, char *instan
     // uncomment below to debug the error response
     //if (apiClient->response_code == 200) {
     //    printf("%s\n","A page of assessments for the instance.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 400) {
+    //    printf("%s\n","Invalid query parameters.");
     //}
     //nonprimitive not container
     paginated_assessments_t *elementToReturn = NULL;
@@ -876,6 +892,18 @@ AssessmentsAPI_v3GetAssessmentsByInstanceId(apiClient_t *apiClient, char *instan
     if(keyPairQuery_offset){
         keyValuePair_free(keyPairQuery_offset);
         keyPairQuery_offset = NULL;
+    }
+    if(keyQuery_sort){
+        free(keyQuery_sort);
+        keyQuery_sort = NULL;
+    }
+    if(valueQuery_sort){
+        free(valueQuery_sort);
+        valueQuery_sort = NULL;
+    }
+    if(keyPairQuery_sort){
+        keyValuePair_free(keyPairQuery_sort);
+        keyPairQuery_sort = NULL;
     }
     return elementToReturn;
 end:

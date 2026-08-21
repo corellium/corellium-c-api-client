@@ -218,7 +218,7 @@ Name | Type | Description  | Notes
 //
 // Returns a paginated list of assessments for the given instance.
 //
-paginated_assessments_t* AssessmentsAPI_v3GetAssessmentsByInstanceId(apiClient_t *apiClient, char *instanceId, char *targetInstanceId, double *limit, double *offset);
+paginated_assessments_t* AssessmentsAPI_v3GetAssessmentsByInstanceId(apiClient_t *apiClient, char *instanceId, char *targetInstanceId, double *limit, double *offset, char *sort);
 ```
 
 ### Parameters
@@ -229,6 +229,7 @@ Name | Type | Description  | Notes
 **targetInstanceId** | **char \*** | Identifier of the instance whose assessments are listed. | 
 **limit** | **double \*** | Maximum number of assessments to return. Defaults to 100. | [optional] [default to 100]
 **offset** | **double \*** | Number of assessments to skip before returning results. Defaults to 0. | [optional] [default to 0]
+**sort** | **char \*** | Comma-separated fields to order by; prefix a field with \&quot;-\&quot; for descending. Allowed fields: createdAt, status. Defaults to \&quot;-createdAt\&quot;. | [optional] 
 
 ### Return type
 
