@@ -36,10 +36,7 @@ typedef struct config_response_v1_t {
     char *invoiced_publishable_key; // string
     char *stripe_public_key; // string
     char *intercom_id; // string
-    char *aux_webhook; // string
     char *gtm_id; // string
-    char *zapier_feedback_webhook; // string
-    char *zapier_bugs_webhook; // string
     char *billing_backend; // string
     object_t *maintenance; //object
     struct logging_v1_t *logging; //model
@@ -76,10 +73,7 @@ __attribute__((deprecated)) config_response_v1_t *config_response_v1_create(
     char *invoiced_publishable_key,
     char *stripe_public_key,
     char *intercom_id,
-    char *aux_webhook,
     char *gtm_id,
-    char *zapier_feedback_webhook,
-    char *zapier_bugs_webhook,
     char *billing_backend,
     object_t *maintenance,
     logging_v1_t *logging,

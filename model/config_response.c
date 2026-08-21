@@ -17,10 +17,7 @@ static config_response_t *config_response_create_internal(
     char *invoiced_publishable_key,
     char *stripe_public_key,
     char *intercom_id,
-    char *aux_webhook,
     char *gtm_id,
-    char *zapier_feedback_webhook,
-    char *zapier_bugs_webhook,
     char *billing_backend,
     config_response_maintenance_t *maintenance,
     logging_t *logging,
@@ -62,10 +59,7 @@ static config_response_t *config_response_create_internal(
     config_response_local_var->invoiced_publishable_key = invoiced_publishable_key;
     config_response_local_var->stripe_public_key = stripe_public_key;
     config_response_local_var->intercom_id = intercom_id;
-    config_response_local_var->aux_webhook = aux_webhook;
     config_response_local_var->gtm_id = gtm_id;
-    config_response_local_var->zapier_feedback_webhook = zapier_feedback_webhook;
-    config_response_local_var->zapier_bugs_webhook = zapier_bugs_webhook;
     config_response_local_var->billing_backend = billing_backend;
     config_response_local_var->maintenance = maintenance;
     config_response_local_var->logging = logging;
@@ -108,10 +102,7 @@ __attribute__((deprecated)) config_response_t *config_response_create(
     char *invoiced_publishable_key,
     char *stripe_public_key,
     char *intercom_id,
-    char *aux_webhook,
     char *gtm_id,
-    char *zapier_feedback_webhook,
-    char *zapier_bugs_webhook,
     char *billing_backend,
     config_response_maintenance_t *maintenance,
     logging_t *logging,
@@ -150,10 +141,7 @@ __attribute__((deprecated)) config_response_t *config_response_create(
         invoiced_publishable_key,
         stripe_public_key,
         intercom_id,
-        aux_webhook,
         gtm_id,
-        zapier_feedback_webhook,
-        zapier_bugs_webhook,
         billing_backend,
         maintenance,
         logging,
@@ -218,21 +206,9 @@ void config_response_free(config_response_t *config_response) {
         free(config_response->intercom_id);
         config_response->intercom_id = NULL;
     }
-    if (config_response->aux_webhook) {
-        free(config_response->aux_webhook);
-        config_response->aux_webhook = NULL;
-    }
     if (config_response->gtm_id) {
         free(config_response->gtm_id);
         config_response->gtm_id = NULL;
-    }
-    if (config_response->zapier_feedback_webhook) {
-        free(config_response->zapier_feedback_webhook);
-        config_response->zapier_feedback_webhook = NULL;
-    }
-    if (config_response->zapier_bugs_webhook) {
-        free(config_response->zapier_bugs_webhook);
-        config_response->zapier_bugs_webhook = NULL;
     }
     if (config_response->billing_backend) {
         free(config_response->billing_backend);
@@ -410,33 +386,9 @@ cJSON *config_response_convertToJSON(config_response_t *config_response) {
     }
 
 
-    // config_response->aux_webhook
-    if(config_response->aux_webhook) {
-    if(cJSON_AddStringToObject(item, "auxWebhook", config_response->aux_webhook) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
     // config_response->gtm_id
     if(config_response->gtm_id) {
     if(cJSON_AddStringToObject(item, "gtmId", config_response->gtm_id) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
-    // config_response->zapier_feedback_webhook
-    if(config_response->zapier_feedback_webhook) {
-    if(cJSON_AddStringToObject(item, "zapierFeedbackWebhook", config_response->zapier_feedback_webhook) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
-    // config_response->zapier_bugs_webhook
-    if(config_response->zapier_bugs_webhook) {
-    if(cJSON_AddStringToObject(item, "zapierBugsWebhook", config_response->zapier_bugs_webhook) == NULL) {
     goto fail; //String
     }
     }
@@ -874,18 +826,6 @@ config_response_t *config_response_parseFromJSON(cJSON *config_responseJSON){
     }
     }
 
-    // config_response->aux_webhook
-    cJSON *aux_webhook = cJSON_GetObjectItemCaseSensitive(config_responseJSON, "auxWebhook");
-    if (cJSON_IsNull(aux_webhook)) {
-        aux_webhook = NULL;
-    }
-    if (aux_webhook) { 
-    if(!cJSON_IsString(aux_webhook) && !cJSON_IsNull(aux_webhook))
-    {
-    goto end; //String
-    }
-    }
-
     // config_response->gtm_id
     cJSON *gtm_id = cJSON_GetObjectItemCaseSensitive(config_responseJSON, "gtmId");
     if (cJSON_IsNull(gtm_id)) {
@@ -893,30 +833,6 @@ config_response_t *config_response_parseFromJSON(cJSON *config_responseJSON){
     }
     if (gtm_id) { 
     if(!cJSON_IsString(gtm_id) && !cJSON_IsNull(gtm_id))
-    {
-    goto end; //String
-    }
-    }
-
-    // config_response->zapier_feedback_webhook
-    cJSON *zapier_feedback_webhook = cJSON_GetObjectItemCaseSensitive(config_responseJSON, "zapierFeedbackWebhook");
-    if (cJSON_IsNull(zapier_feedback_webhook)) {
-        zapier_feedback_webhook = NULL;
-    }
-    if (zapier_feedback_webhook) { 
-    if(!cJSON_IsString(zapier_feedback_webhook) && !cJSON_IsNull(zapier_feedback_webhook))
-    {
-    goto end; //String
-    }
-    }
-
-    // config_response->zapier_bugs_webhook
-    cJSON *zapier_bugs_webhook = cJSON_GetObjectItemCaseSensitive(config_responseJSON, "zapierBugsWebhook");
-    if (cJSON_IsNull(zapier_bugs_webhook)) {
-        zapier_bugs_webhook = NULL;
-    }
-    if (zapier_bugs_webhook) { 
-    if(!cJSON_IsString(zapier_bugs_webhook) && !cJSON_IsNull(zapier_bugs_webhook))
     {
     goto end; //String
     }
@@ -1268,10 +1184,7 @@ config_response_t *config_response_parseFromJSON(cJSON *config_responseJSON){
         invoiced_publishable_key && !cJSON_IsNull(invoiced_publishable_key) ? strdup(invoiced_publishable_key->valuestring) : NULL,
         stripe_public_key && !cJSON_IsNull(stripe_public_key) ? strdup(stripe_public_key->valuestring) : NULL,
         intercom_id && !cJSON_IsNull(intercom_id) ? strdup(intercom_id->valuestring) : NULL,
-        aux_webhook && !cJSON_IsNull(aux_webhook) ? strdup(aux_webhook->valuestring) : NULL,
         gtm_id && !cJSON_IsNull(gtm_id) ? strdup(gtm_id->valuestring) : NULL,
-        zapier_feedback_webhook && !cJSON_IsNull(zapier_feedback_webhook) ? strdup(zapier_feedback_webhook->valuestring) : NULL,
-        zapier_bugs_webhook && !cJSON_IsNull(zapier_bugs_webhook) ? strdup(zapier_bugs_webhook->valuestring) : NULL,
         billing_backend && !cJSON_IsNull(billing_backend) ? strdup(billing_backend->valuestring) : NULL,
         maintenance ? maintenance_local_nonprim : NULL,
         logging ? logging_local_nonprim : NULL,

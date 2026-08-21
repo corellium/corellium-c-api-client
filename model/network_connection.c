@@ -10,7 +10,7 @@ static network_connection_t *network_connection_create_internal(
     char *provider,
     char *name,
     object_t *config,
-    list_t *projects,
+    object_t *projects,
     char *created_at,
     char *updated_at,
     char *created_by,
@@ -39,7 +39,7 @@ __attribute__((deprecated)) network_connection_t *network_connection_create(
     char *provider,
     char *name,
     object_t *config,
-    list_t *projects,
+    object_t *projects,
     char *created_at,
     char *updated_at,
     char *created_by,
@@ -84,10 +84,7 @@ void network_connection_free(network_connection_t *network_connection) {
         network_connection->config = NULL;
     }
     if (network_connection->projects) {
-        list_ForEach(listEntry, network_connection->projects) {
-            project_network_state_free(listEntry->data);
-        }
-        list_freeList(network_connection->projects);
+        object_free(network_connection->projects);
         network_connection->projects = NULL;
     }
     if (network_connection->created_at) {
@@ -155,20 +152,13 @@ cJSON *network_connection_convertToJSON(network_connection_t *network_connection
 
     // network_connection->projects
     if(network_connection->projects) {
-    cJSON *projects = cJSON_AddArrayToObject(item, "projects");
-    if(projects == NULL) {
-    goto fail; //nonprimitive container
+    cJSON *projects_object = object_convertToJSON(network_connection->projects);
+    if(projects_object == NULL) {
+    goto fail; //model
     }
-
-    listEntry_t *projectsListEntry;
-    if (network_connection->projects) {
-    list_ForEach(projectsListEntry, network_connection->projects) {
-    cJSON *itemLocal = project_network_state_convertToJSON(projectsListEntry->data);
-    if(itemLocal == NULL) {
+    cJSON_AddItemToObject(item, "projects", projects_object);
+    if(item->child == NULL) {
     goto fail;
-    }
-    cJSON_AddItemToArray(projects, itemLocal);
-    }
     }
     }
 
@@ -219,9 +209,6 @@ fail:
 network_connection_t *network_connection_parseFromJSON(cJSON *network_connectionJSON){
 
     network_connection_t *network_connection_local_var = NULL;
-
-    // define the local list for network_connection->projects
-    list_t *projectsList = NULL;
 
     // network_connection->identifier
     cJSON *identifier = cJSON_GetObjectItemCaseSensitive(network_connectionJSON, "identifier");
@@ -286,23 +273,9 @@ network_connection_t *network_connection_parseFromJSON(cJSON *network_connection
     if (cJSON_IsNull(projects)) {
         projects = NULL;
     }
+    object_t *projects_local_object = NULL;
     if (projects) { 
-    cJSON *projects_local_nonprimitive = NULL;
-    if(!cJSON_IsArray(projects)){
-        goto end; //nonprimitive container
-    }
-
-    projectsList = list_createList();
-
-    cJSON_ArrayForEach(projects_local_nonprimitive,projects )
-    {
-        if(!cJSON_IsObject(projects_local_nonprimitive)){
-            goto end;
-        }
-        project_network_state_t *projectsItem = project_network_state_parseFromJSON(projects_local_nonprimitive);
-
-        list_addElement(projectsList, projectsItem);
-    }
+    projects_local_object = object_parseFromJSON(projects); //object
     }
 
     // network_connection->created_at
@@ -371,7 +344,7 @@ network_connection_t *network_connection_parseFromJSON(cJSON *network_connection
         strdup(provider->valuestring),
         strdup(name->valuestring),
         config_local_object,
-        projects ? projectsList : NULL,
+        projects ? projects_local_object : NULL,
         strdup(created_at->valuestring),
         strdup(updated_at->valuestring),
         strdup(created_by->valuestring),
@@ -380,15 +353,6 @@ network_connection_t *network_connection_parseFromJSON(cJSON *network_connection
 
     return network_connection_local_var;
 end:
-    if (projectsList) {
-        listEntry_t *listEntry = NULL;
-        list_ForEach(listEntry, projectsList) {
-            project_network_state_free(listEntry->data);
-            listEntry->data = NULL;
-        }
-        list_freeList(projectsList);
-        projectsList = NULL;
-    }
     return NULL;
 
 }

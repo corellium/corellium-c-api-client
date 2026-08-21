@@ -39,9 +39,6 @@ config_response_t* instantiate_config_response(int include_optional) {
       "0",
       "0",
       "0",
-      "0",
-      "0",
-      "0",
        // false, not to have infinite recursion
       instantiate_config_response_maintenance(0),
        // false, not to have infinite recursion
@@ -80,9 +77,6 @@ config_response_t* instantiate_config_response(int include_optional) {
       1,
       1,
       1,
-      "0",
-      "0",
-      "0",
       "0",
       "0",
       "0",
