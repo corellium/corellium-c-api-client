@@ -9,7 +9,7 @@
 
 // Delete cluster snapshot
 //
-// Deletes a cluster snapshot by ID. Requires cluster administrator permissions and the clusterSnapshotMgmt feature.
+// **Required role:** Cluster administrator.  Deletes a cluster snapshot by ID. Requires the clusterSnapshotMgmt feature.
 //
 void
 ClusterAPI_v3DeleteClusterSnapshot(apiClient_t *apiClient, char *snapshotId)
@@ -69,7 +69,7 @@ ClusterAPI_v3DeleteClusterSnapshot(apiClient_t *apiClient, char *snapshotId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Cluster administrator permissions required. The clusterSnapshotMgmt feature must be enabled.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -94,7 +94,7 @@ end:
 
 // Get cluster configuration
 //
-// Returns the current cluster configuration. Requires cluster administrator permissions.
+// **Required role:** Cluster administrator.  Returns the current cluster configuration.
 //
 object_t*
 ClusterAPI_v3GetClusterConfig(apiClient_t *apiClient)
@@ -138,7 +138,7 @@ ClusterAPI_v3GetClusterConfig(apiClient_t *apiClient)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Cluster administrator permissions required.");
     //}
     //nonprimitive not container
     object_t *elementToReturn = NULL;
@@ -172,7 +172,7 @@ end:
 
 // Get cluster node
 //
-// Returns details for a specific node by ID. Requires cluster administrator permissions.
+// **Required role:** Cluster administrator.  Returns details for a specific node by ID.
 //
 node_information_t*
 ClusterAPI_v3GetClusterNode(apiClient_t *apiClient, char *nodeId)
@@ -228,7 +228,7 @@ ClusterAPI_v3GetClusterNode(apiClient_t *apiClient, char *nodeId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Cluster administrator permissions required.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -267,7 +267,7 @@ end:
 
 // Get node console websocket URL
 //
-// Returns the WebSocket URL for accessing the node console via SSH. Connect to the returned URL to open the console stream. Requires cluster administrator permissions.
+// **Required role:** Cluster administrator.  Returns the WebSocket URL for accessing the node console via SSH. Connect to the returned URL to open the console stream.
 //
 node_console_endpoint_t*
 ClusterAPI_v3GetClusterNodeConsole(apiClient_t *apiClient, char *nodeId)
@@ -323,7 +323,7 @@ ClusterAPI_v3GetClusterNodeConsole(apiClient_t *apiClient, char *nodeId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Cluster administrator permissions required.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -362,7 +362,7 @@ end:
 
 // Get cluster snapshot
 //
-// Returns details for a specific cluster snapshot. Requires cluster administrator permissions and the clusterSnapshotMgmt feature.
+// **Required role:** Cluster administrator.  Returns details for a specific cluster snapshot. Requires the clusterSnapshotMgmt feature.
 //
 cluster_snapshot_t*
 ClusterAPI_v3GetClusterSnapshot(apiClient_t *apiClient, char *snapshotId)
@@ -422,7 +422,7 @@ ClusterAPI_v3GetClusterSnapshot(apiClient_t *apiClient, char *snapshotId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Cluster administrator permissions required. The clusterSnapshotMgmt feature must be enabled.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -461,7 +461,7 @@ end:
 
 // List cluster nodes
 //
-// Returns information about all nodes in the cluster. Requires cluster administrator permissions.
+// **Required role:** Cluster administrator.  Returns information about all nodes in the cluster.
 //
 node_list_t*
 ClusterAPI_v3ListClusterNodes(apiClient_t *apiClient, double *limit, double *offset)
@@ -531,7 +531,7 @@ ClusterAPI_v3ListClusterNodes(apiClient_t *apiClient, double *limit, double *off
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Cluster administrator permissions required.");
     //}
     //nonprimitive not container
     node_list_t *elementToReturn = NULL;
@@ -589,7 +589,7 @@ end:
 
 // List cluster snapshots
 //
-// Returns a paginated list of cluster volume snapshots. Requires cluster administrator permissions and the clusterSnapshotMgmt feature.
+// **Required role:** Cluster administrator.  Returns a paginated list of cluster volume snapshots. Requires the clusterSnapshotMgmt feature.
 //
 cluster_snapshot_list_t*
 ClusterAPI_v3ListClusterSnapshots(apiClient_t *apiClient, double *limit, double *offset, char *springboard, char *live, char *fresh, char *deviceName, char *task, char *search, char *to, char *from, char *orderBy)
@@ -771,7 +771,7 @@ ClusterAPI_v3ListClusterSnapshots(apiClient_t *apiClient, double *limit, double 
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Cluster administrator permissions required. The clusterSnapshotMgmt feature must be enabled.");
     //}
     //nonprimitive not container
     cluster_snapshot_list_t *elementToReturn = NULL;
@@ -937,7 +937,7 @@ end:
 
 // Update cluster configuration
 //
-// Applies configuration changes across all controller nodes. Requires cluster administrator permissions.
+// **Required role:** Cluster administrator.  Applies configuration changes across all controller nodes.
 //
 void
 ClusterAPI_v3PatchClusterConfig(apiClient_t *apiClient, patch_cluster_config_body_t *patch_cluster_config_body)
@@ -996,7 +996,7 @@ ClusterAPI_v3PatchClusterConfig(apiClient_t *apiClient, patch_cluster_config_bod
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Cluster administrator permissions required.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 500) {

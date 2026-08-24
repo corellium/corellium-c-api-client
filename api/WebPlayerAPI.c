@@ -9,7 +9,7 @@
 
 // Create a webplayer session
 //
-// Creates a new webplayer session for the requested instance.
+// **Required role:** Domain administrator.  Creates a new webplayer session for the requested instance.
 //
 web_player_created_session_t*
 WebPlayerAPI_v3CreateWebPlayerSession(apiClient_t *apiClient, create_web_player_session_body_t *create_web_player_session_body)
@@ -68,7 +68,7 @@ WebPlayerAPI_v3CreateWebPlayerSession(apiClient_t *apiClient, create_web_player_
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Domain administrator permissions required.");
     //}
     //nonprimitive not container
     web_player_created_session_t *elementToReturn = NULL;
@@ -107,7 +107,7 @@ end:
 
 // Delete a webplayer session
 //
-// Deletes the webplayer session identified by the given sessionId.
+// **Required role:** Domain administrator.  Deletes the webplayer session identified by the given sessionId.
 //
 list_t*
 WebPlayerAPI_v3DeleteWebPlayerSession(apiClient_t *apiClient, char *sessionId)
@@ -167,7 +167,7 @@ WebPlayerAPI_v3DeleteWebPlayerSession(apiClient_t *apiClient, char *sessionId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Domain administrator permissions required.");
     //}
     //primitive return type not simple
     list_t *elementToReturn = NULL;
@@ -285,7 +285,7 @@ end:
 
 // Get a webplayer session
 //
-// Returns the webplayer session identified by the given sessionId.
+// **Required role:** Domain administrator.  Returns the webplayer session identified by the given sessionId.
 //
 list_t*
 WebPlayerAPI_v3GetWebPlayerSession(apiClient_t *apiClient, char *sessionId)
@@ -345,7 +345,7 @@ WebPlayerAPI_v3GetWebPlayerSession(apiClient_t *apiClient, char *sessionId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Domain administrator permissions required.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -394,7 +394,7 @@ end:
 
 // List webplayer sessions
 //
-// Returns a paginated list of webplayer sessions for the authenticated user.
+// **Required role:** Domain administrator.  Returns a paginated list of webplayer sessions for the authenticated user.
 //
 web_player_session_list_response_t*
 WebPlayerAPI_v3ListWebPlayerSessions(apiClient_t *apiClient, double *limit, double *offset)
@@ -468,7 +468,7 @@ WebPlayerAPI_v3ListWebPlayerSessions(apiClient_t *apiClient, double *limit, doub
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Domain administrator permissions required.");
     //}
     //nonprimitive not container
     web_player_session_list_response_t *elementToReturn = NULL;

@@ -163,7 +163,7 @@ end:
 
 // Create a user
 //
-// Creates a new user in the caller's domain.
+// **Required role:** Domain administrator.  Creates a new user in the caller's domain.
 //
 user_created_t*
 UsersAPI_v3CreateUser(apiClient_t *apiClient, create_user_body_t *create_user_body)
@@ -218,7 +218,7 @@ UsersAPI_v3CreateUser(apiClient_t *apiClient, create_user_body_t *create_user_bo
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Domain administrator permissions required.");
     //}
     //nonprimitive not container
     user_created_t *elementToReturn = NULL;
@@ -257,7 +257,7 @@ end:
 
 // Delete a user
 //
-// Deletes the user identified by the given userId.
+// **Required role:** Domain administrator.  Deletes the user identified by the given userId.
 //
 void
 UsersAPI_v3DeleteUser(apiClient_t *apiClient, char *userId)
@@ -309,7 +309,7 @@ UsersAPI_v3DeleteUser(apiClient_t *apiClient, char *userId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Domain administrator permissions required.");
     //}
     //No return type
 end:

@@ -16,7 +16,7 @@ Method | HTTP request | Description
 ```c
 // Create invites
 //
-// Invite one or more users to create an account in the domain.
+// **Required role:** Domain administrator or project administrator.  Invite one or more users to create an account in the domain.
 //
 object_t* InvitesAPI_v3CreateInvites(apiClient_t *apiClient, create_invites_body_t *create_invites_body);
 ```
@@ -47,7 +47,7 @@ Name | Type | Description  | Notes
 ```c
 // Edit invites
 //
-// Edit the settings of one or more existing invites.
+// **Required role:** Domain administrator or project administrator.  Edit the settings of one or more existing invites.
 //
 invitation_t* InvitesAPI_v3EditInvites(apiClient_t *apiClient, edit_invites_body_t *edit_invites_body);
 ```
@@ -109,7 +109,7 @@ Name | Type | Description  | Notes
 ```c
 // List invites
 //
-// List all invites for the requesting user's domain.
+// **Required role:** Domain administrator or project administrator.  List all invites for the requesting user's domain.
 //
 invites_list_response_t* InvitesAPI_v3ListInvites(apiClient_t *apiClient, double *limit, double *offset);
 ```
@@ -141,7 +141,7 @@ Name | Type | Description  | Notes
 ```c
 // Revoke invites
 //
-// Revoke one or more invites.
+// **Required role:** Domain administrator or project administrator.  Revoke one or more invites.
 //
 revoke_invites_response_t* InvitesAPI_v3RevokeInvites(apiClient_t *apiClient, revoke_invites_body_t *revoke_invites_body);
 ```

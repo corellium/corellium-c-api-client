@@ -18,11 +18,15 @@
 
 // Start activity export
 //
+// **Required role:** Domain administrator.  Start activity export.
+//
 v3_create_activity_export_201_response_t*
 ActivityAPI_v3CreateActivityExport(apiClient_t *apiClient, char *accept, create_activity_export_body_t *create_activity_export_body);
 
 
 // Download activity for a given task
+//
+// **Required role:** Domain administrator.  Download activity for a given task.
 //
 activity_download_t*
 ActivityAPI_v3DownloadActivity(apiClient_t *apiClient, char *taskId);
@@ -30,11 +34,15 @@ ActivityAPI_v3DownloadActivity(apiClient_t *apiClient, char *taskId);
 
 // Get export task status
 //
+// **Required role:** Domain administrator.  Get export task status.
+//
 v3_get_activity_export_status_200_response_t*
 ActivityAPI_v3GetActivityExportStatus(apiClient_t *apiClient, char *taskId);
 
 
 // Get all export tasks for user
+//
+// **Required role:** Domain administrator.  Get all export tasks for user.
 //
 activity_export_tasks_list_t*
 ActivityAPI_v3GetActivityExportTasks(apiClient_t *apiClient, double *limit, double *offset);

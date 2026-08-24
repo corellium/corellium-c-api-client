@@ -9,7 +9,7 @@
 
 // Create a project
 //
-// Create a new project in the authenticated user's domain.
+// **Required role:** Domain administrator.  Create a new project in the authenticated user's domain.
 //
 project_t*
 ProjectsAPI_v3CreateProject(apiClient_t *apiClient, create_project_body_t *create_project_body)
@@ -68,7 +68,7 @@ ProjectsAPI_v3CreateProject(apiClient_t *apiClient, create_project_body_t *creat
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Only domain administrators may create projects.");
+    //    printf("%s\n","Domain administrator permissions required.");
     //}
     //nonprimitive not container
     project_t *elementToReturn = NULL;
@@ -107,7 +107,7 @@ end:
 
 // Add a project key
 //
-// Add an authorized key to a project.
+// **Required role:** Domain administrator or project administrator.  Add an authorized key to a project.
 //
 project_key_t*
 ProjectsAPI_v3CreateProjectKey(apiClient_t *apiClient, char *projectId, create_project_key_body_t *create_project_key_body)
@@ -178,7 +178,7 @@ ProjectsAPI_v3CreateProjectKey(apiClient_t *apiClient, char *projectId, create_p
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","This deployment is not licensed for SSH key pairing.");
+    //    printf("%s\n","Domain administrator or project administrator permissions required. This deployment is not licensed for SSH key pairing.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -222,7 +222,7 @@ end:
 
 // Delete a project
 //
-// Delete a project. The project must contain no devices.
+// **Required role:** Domain administrator.  Delete a project. The project must contain no devices.
 //
 void
 ProjectsAPI_v3DeleteProject(apiClient_t *apiClient, char *projectId)
@@ -278,7 +278,7 @@ ProjectsAPI_v3DeleteProject(apiClient_t *apiClient, char *projectId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Only domain administrators may delete projects.");
+    //    printf("%s\n","Domain administrator permissions required.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -307,7 +307,7 @@ end:
 
 // Delete a project key
 //
-// Remove an authorized key from a project.
+// **Required role:** Domain administrator or project administrator.  Remove an authorized key from a project.
 //
 void
 ProjectsAPI_v3DeleteProjectKey(apiClient_t *apiClient, char *projectId, char *keyId)
@@ -375,7 +375,7 @@ ProjectsAPI_v3DeleteProjectKey(apiClient_t *apiClient, char *projectId, char *ke
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Domain administrator or project administrator permissions required.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {

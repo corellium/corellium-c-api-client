@@ -209,7 +209,7 @@ char*
 ```c
 // List authentication provider types
 //
-// Return schemas describing the supported authentication provider types.
+// **Required role:** Domain administrator.  Return schemas describing the supported authentication provider types.
 //
 auth_provider_types_list_response_t* AuthenticationAPI_v3ListAuthProviderTypes(apiClient_t *apiClient, double *limit, double *offset);
 ```

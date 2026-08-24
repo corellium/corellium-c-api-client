@@ -16,7 +16,7 @@ Method | HTTP request | Description
 ```c
 // Delete an existing extension
 //
-// Deletes the extension identified by the given extension ID.
+// **Required role:** Domain administrator.  Deletes the extension identified by the given extension ID. Available on on-site deployments only.
 //
 void ExtensionsAPI_v3DeleteExtension(apiClient_t *apiClient, char *extensionId);
 ```
@@ -46,7 +46,7 @@ void
 ```c
 // Get extension by ID
 //
-// Returns the extension identified by the given extension ID.
+// **Required role:** Domain administrator.  Returns the extension identified by the given extension ID. Available on on-site deployments only.
 //
 extension_t* ExtensionsAPI_v3GetExtensionById(apiClient_t *apiClient, char *extensionId);
 ```
@@ -77,7 +77,7 @@ Name | Type | Description  | Notes
 ```c
 // List all extensions
 //
-// Returns a paginated list of extensions available to the authenticated user.
+// **Required role:** Domain administrator.  Returns a paginated list of extensions available to the authenticated user. Available on on-site deployments only.
 //
 extension_list_t* ExtensionsAPI_v3ListExtensions(apiClient_t *apiClient, double *limit, double *offset, char *if_none_match);
 ```
@@ -110,7 +110,7 @@ Name | Type | Description  | Notes
 ```c
 // Load an extension
 //
-// Loads an extension from a previously uploaded image, identified by its image ID. The extension definition is read from the image (its extension.json), so only the image ID is supplied.
+// **Required role:** Domain administrator.  Loads an extension from a previously uploaded image, identified by its image ID. The extension definition is read from the image (its extension.json), so only the image ID is supplied. Available on on-site deployments only.
 //
 extension_t* ExtensionsAPI_v3LoadExtension(apiClient_t *apiClient, load_extension_body_t *load_extension_body);
 ```
@@ -141,7 +141,7 @@ Name | Type | Description  | Notes
 ```c
 // Validates extension.json
 //
-// Validates and normalises an extension.json document, returning the parsed extension definition.
+// **Required role:** Domain administrator.  Validates and normalises an extension.json document, returning the parsed extension definition. Available on on-site deployments only.
 //
 object_t* ExtensionsAPI_v3ParseExtensionJson(apiClient_t *apiClient, object_t *body);
 ```
@@ -172,7 +172,7 @@ Name | Type | Description  | Notes
 ```c
 // Update an existing extension
 //
-// Updates the extension identified by the given extension ID with the supplied definition.
+// **Required role:** Domain administrator.  Updates the extension identified by the given extension ID with the supplied definition. Available on on-site deployments only.
 //
 extension_t* ExtensionsAPI_v3UpdateExtension(apiClient_t *apiClient, char *extensionId, update_extension_body_t *update_extension_body);
 ```

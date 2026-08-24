@@ -21,7 +21,7 @@
 
 // Delete cluster snapshot
 //
-// Deletes a cluster snapshot by ID. Requires cluster administrator permissions and the clusterSnapshotMgmt feature.
+// **Required role:** Cluster administrator.  Deletes a cluster snapshot by ID. Requires the clusterSnapshotMgmt feature.
 //
 void
 ClusterAPI_v3DeleteClusterSnapshot(apiClient_t *apiClient, char *snapshotId);
@@ -29,7 +29,7 @@ ClusterAPI_v3DeleteClusterSnapshot(apiClient_t *apiClient, char *snapshotId);
 
 // Get cluster configuration
 //
-// Returns the current cluster configuration. Requires cluster administrator permissions.
+// **Required role:** Cluster administrator.  Returns the current cluster configuration.
 //
 object_t*
 ClusterAPI_v3GetClusterConfig(apiClient_t *apiClient);
@@ -37,7 +37,7 @@ ClusterAPI_v3GetClusterConfig(apiClient_t *apiClient);
 
 // Get cluster node
 //
-// Returns details for a specific node by ID. Requires cluster administrator permissions.
+// **Required role:** Cluster administrator.  Returns details for a specific node by ID.
 //
 node_information_t*
 ClusterAPI_v3GetClusterNode(apiClient_t *apiClient, char *nodeId);
@@ -45,7 +45,7 @@ ClusterAPI_v3GetClusterNode(apiClient_t *apiClient, char *nodeId);
 
 // Get node console websocket URL
 //
-// Returns the WebSocket URL for accessing the node console via SSH. Connect to the returned URL to open the console stream. Requires cluster administrator permissions.
+// **Required role:** Cluster administrator.  Returns the WebSocket URL for accessing the node console via SSH. Connect to the returned URL to open the console stream.
 //
 node_console_endpoint_t*
 ClusterAPI_v3GetClusterNodeConsole(apiClient_t *apiClient, char *nodeId);
@@ -53,7 +53,7 @@ ClusterAPI_v3GetClusterNodeConsole(apiClient_t *apiClient, char *nodeId);
 
 // Get cluster snapshot
 //
-// Returns details for a specific cluster snapshot. Requires cluster administrator permissions and the clusterSnapshotMgmt feature.
+// **Required role:** Cluster administrator.  Returns details for a specific cluster snapshot. Requires the clusterSnapshotMgmt feature.
 //
 cluster_snapshot_t*
 ClusterAPI_v3GetClusterSnapshot(apiClient_t *apiClient, char *snapshotId);
@@ -61,7 +61,7 @@ ClusterAPI_v3GetClusterSnapshot(apiClient_t *apiClient, char *snapshotId);
 
 // List cluster nodes
 //
-// Returns information about all nodes in the cluster. Requires cluster administrator permissions.
+// **Required role:** Cluster administrator.  Returns information about all nodes in the cluster.
 //
 node_list_t*
 ClusterAPI_v3ListClusterNodes(apiClient_t *apiClient, double *limit, double *offset);
@@ -69,7 +69,7 @@ ClusterAPI_v3ListClusterNodes(apiClient_t *apiClient, double *limit, double *off
 
 // List cluster snapshots
 //
-// Returns a paginated list of cluster volume snapshots. Requires cluster administrator permissions and the clusterSnapshotMgmt feature.
+// **Required role:** Cluster administrator.  Returns a paginated list of cluster volume snapshots. Requires the clusterSnapshotMgmt feature.
 //
 cluster_snapshot_list_t*
 ClusterAPI_v3ListClusterSnapshots(apiClient_t *apiClient, double *limit, double *offset, char *springboard, char *live, char *fresh, char *deviceName, char *task, char *search, char *to, char *from, char *orderBy);
@@ -77,7 +77,7 @@ ClusterAPI_v3ListClusterSnapshots(apiClient_t *apiClient, double *limit, double 
 
 // Update cluster configuration
 //
-// Applies configuration changes across all controller nodes. Requires cluster administrator permissions.
+// **Required role:** Cluster administrator.  Applies configuration changes across all controller nodes.
 //
 void
 ClusterAPI_v3PatchClusterConfig(apiClient_t *apiClient, patch_cluster_config_body_t *patch_cluster_config_body);

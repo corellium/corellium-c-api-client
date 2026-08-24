@@ -677,7 +677,7 @@ end:
 
 // List authentication provider types
 //
-// Return schemas describing the supported authentication provider types.
+// **Required role:** Domain administrator.  Return schemas describing the supported authentication provider types.
 //
 auth_provider_types_list_response_t*
 AuthenticationAPI_v3ListAuthProviderTypes(apiClient_t *apiClient, double *limit, double *offset)
@@ -747,7 +747,7 @@ AuthenticationAPI_v3ListAuthProviderTypes(apiClient_t *apiClient, double *limit,
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Domain administrator permissions required.");
     //}
     //nonprimitive not container
     auth_provider_types_list_response_t *elementToReturn = NULL;

@@ -9,6 +9,8 @@
 
 // Start activity export
 //
+// **Required role:** Domain administrator.  Start activity export.
+//
 v3_create_activity_export_201_response_t*
 ActivityAPI_v3CreateActivityExport(apiClient_t *apiClient, char *accept, create_activity_export_body_t *create_activity_export_body)
 {
@@ -74,7 +76,7 @@ ActivityAPI_v3CreateActivityExport(apiClient_t *apiClient, char *accept, create_
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Domain administrator permissions required.");
     //}
     //nonprimitive not container
     v3_create_activity_export_201_response_t *elementToReturn = NULL;
@@ -121,6 +123,8 @@ end:
 }
 
 // Download activity for a given task
+//
+// **Required role:** Domain administrator.  Download activity for a given task.
 //
 activity_download_t*
 ActivityAPI_v3DownloadActivity(apiClient_t *apiClient, char *taskId)
@@ -177,7 +181,7 @@ ActivityAPI_v3DownloadActivity(apiClient_t *apiClient, char *taskId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Domain administrator permissions required.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -215,6 +219,8 @@ end:
 }
 
 // Get export task status
+//
+// **Required role:** Domain administrator.  Get export task status.
 //
 v3_get_activity_export_status_200_response_t*
 ActivityAPI_v3GetActivityExportStatus(apiClient_t *apiClient, char *taskId)
@@ -266,7 +272,7 @@ ActivityAPI_v3GetActivityExportStatus(apiClient_t *apiClient, char *taskId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Domain administrator permissions required.");
     //}
     //nonprimitive not container
     v3_get_activity_export_status_200_response_t *elementToReturn = NULL;
@@ -300,6 +306,8 @@ end:
 }
 
 // Get all export tasks for user
+//
+// **Required role:** Domain administrator.  Get all export tasks for user.
 //
 activity_export_tasks_list_t*
 ActivityAPI_v3GetActivityExportTasks(apiClient_t *apiClient, double *limit, double *offset)
@@ -365,7 +373,7 @@ ActivityAPI_v3GetActivityExportTasks(apiClient_t *apiClient, double *limit, doub
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Domain administrator permissions required.");
     //}
     //nonprimitive not container
     activity_export_tasks_list_t *elementToReturn = NULL;

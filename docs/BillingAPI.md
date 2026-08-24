@@ -17,7 +17,7 @@ Method | HTTP request | Description
 ```c
 // Cancel a subscription
 //
-// Cancel the current subscription for the domain.
+// **Required role:** Domain administrator.  Cancel the current subscription for the domain.
 //
 void BillingAPI_v3CancelSubscription(apiClient_t *apiClient, cancel_subscription_body_t *cancel_subscription_body);
 ```
@@ -47,7 +47,7 @@ void
 ```c
 // Get billing summary
 //
-// Return a billing summary for the current domain, including plan, usage, and payment state.
+// **Required role:** Domain administrator.  Return a billing summary for the current domain, including plan, usage, and payment state.
 //
 billing_summary_t* BillingAPI_v3GetBillingSummary(apiClient_t *apiClient);
 ```
@@ -107,7 +107,7 @@ Name | Type | Description  | Notes
 ```c
 // Get metered subscription usage
 //
-// Return current metered usage for the subscription against its billing thresholds.
+// **Required role:** Domain administrator.  Return current metered usage for the subscription against its billing thresholds.
 //
 metered_subscription_usage_t* BillingAPI_v3GetMeteredSubscriptionUsage(apiClient_t *apiClient);
 ```
@@ -198,7 +198,7 @@ Name | Type | Description  | Notes
 ```c
 // Uncancel a subscription
 //
-// Reactivate a subscription that was previously scheduled for cancellation.
+// **Required role:** Domain administrator.  Reactivate a subscription that was previously scheduled for cancellation.
 //
 void BillingAPI_v3UncancelSubscription(apiClient_t *apiClient, uncancel_subscription_body_t *uncancel_subscription_body);
 ```

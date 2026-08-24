@@ -24,7 +24,7 @@ Method | HTTP request | Description
 ```c
 // Create a project
 //
-// Create a new project in the authenticated user's domain.
+// **Required role:** Domain administrator.  Create a new project in the authenticated user's domain.
 //
 project_t* ProjectsAPI_v3CreateProject(apiClient_t *apiClient, create_project_body_t *create_project_body);
 ```
@@ -55,7 +55,7 @@ Name | Type | Description  | Notes
 ```c
 // Add a project key
 //
-// Add an authorized key to a project.
+// **Required role:** Domain administrator or project administrator.  Add an authorized key to a project.
 //
 project_key_t* ProjectsAPI_v3CreateProjectKey(apiClient_t *apiClient, char *projectId, create_project_key_body_t *create_project_key_body);
 ```
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 ```c
 // Delete a project
 //
-// Delete a project. The project must contain no devices.
+// **Required role:** Domain administrator.  Delete a project. The project must contain no devices.
 //
 void ProjectsAPI_v3DeleteProject(apiClient_t *apiClient, char *projectId);
 ```
@@ -117,7 +117,7 @@ void
 ```c
 // Delete a project key
 //
-// Remove an authorized key from a project.
+// **Required role:** Domain administrator or project administrator.  Remove an authorized key from a project.
 //
 void ProjectsAPI_v3DeleteProjectKey(apiClient_t *apiClient, char *projectId, char *keyId);
 ```

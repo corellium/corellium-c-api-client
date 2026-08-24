@@ -17,7 +17,7 @@
 
 // Create a webplayer session
 //
-// Creates a new webplayer session for the requested instance.
+// **Required role:** Domain administrator.  Creates a new webplayer session for the requested instance.
 //
 web_player_created_session_t*
 WebPlayerAPI_v3CreateWebPlayerSession(apiClient_t *apiClient, create_web_player_session_body_t *create_web_player_session_body);
@@ -25,7 +25,7 @@ WebPlayerAPI_v3CreateWebPlayerSession(apiClient_t *apiClient, create_web_player_
 
 // Delete a webplayer session
 //
-// Deletes the webplayer session identified by the given sessionId.
+// **Required role:** Domain administrator.  Deletes the webplayer session identified by the given sessionId.
 //
 list_t*
 WebPlayerAPI_v3DeleteWebPlayerSession(apiClient_t *apiClient, char *sessionId);
@@ -41,7 +41,7 @@ WebPlayerAPI_v3GetWebPlayerAllowedDomains(apiClient_t *apiClient);
 
 // Get a webplayer session
 //
-// Returns the webplayer session identified by the given sessionId.
+// **Required role:** Domain administrator.  Returns the webplayer session identified by the given sessionId.
 //
 list_t*
 WebPlayerAPI_v3GetWebPlayerSession(apiClient_t *apiClient, char *sessionId);
@@ -49,7 +49,7 @@ WebPlayerAPI_v3GetWebPlayerSession(apiClient_t *apiClient, char *sessionId);
 
 // List webplayer sessions
 //
-// Returns a paginated list of webplayer sessions for the authenticated user.
+// **Required role:** Domain administrator.  Returns a paginated list of webplayer sessions for the authenticated user.
 //
 web_player_session_list_response_t*
 WebPlayerAPI_v3ListWebPlayerSessions(apiClient_t *apiClient, double *limit, double *offset);

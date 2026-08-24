@@ -20,7 +20,7 @@
 
 // Add firmware assets
 //
-// Adds firmware assets to the cluster firmware service.
+// **Required role:** Cluster administrator.  Adds firmware assets to the cluster firmware service.
 //
 char*
 FirmwareServiceAPI_v3CreateFirmwareAssets(apiClient_t *apiClient, object_t *body);
@@ -28,7 +28,7 @@ FirmwareServiceAPI_v3CreateFirmwareAssets(apiClient_t *apiClient, object_t *body
 
 // Delete a firmware
 //
-// Deletes the firmware identified by the given filename from the cluster firmware service.
+// **Required role:** Cluster administrator.  Deletes the firmware identified by the given filename from the cluster firmware service.
 //
 void
 FirmwareServiceAPI_v3DeleteFirmware(apiClient_t *apiClient, char *filename);
@@ -36,7 +36,7 @@ FirmwareServiceAPI_v3DeleteFirmware(apiClient_t *apiClient, char *filename);
 
 // Delete a firmware asset
 //
-// Deletes the firmware asset identified by the given asset URL from the cluster firmware service.
+// **Required role:** Cluster administrator.  Deletes the firmware asset identified by the given asset URL from the cluster firmware service.
 //
 void
 FirmwareServiceAPI_v3DeleteFirmwareAsset(apiClient_t *apiClient, char *assetUrl);
@@ -44,7 +44,7 @@ FirmwareServiceAPI_v3DeleteFirmwareAsset(apiClient_t *apiClient, char *assetUrl)
 
 // Get extended firmware asset info
 //
-// Returns the firmwares and instances associated with a firmware asset.
+// **Required role:** Cluster administrator.  Returns the firmwares and instances associated with a firmware asset.
 //
 extended_firmware_asset_info_t*
 FirmwareServiceAPI_v3GetFirmwareAssetExtended(apiClient_t *apiClient, char *assetUrl);
@@ -52,7 +52,7 @@ FirmwareServiceAPI_v3GetFirmwareAssetExtended(apiClient_t *apiClient, char *asse
 
 // Get firmware service configuration
 //
-// Returns the current configuration of the cluster firmware service.
+// **Required role:** Cluster administrator.  Returns the current configuration of the cluster firmware service.
 //
 object_t*
 FirmwareServiceAPI_v3GetFirmwareServiceConfig(apiClient_t *apiClient);
@@ -60,7 +60,7 @@ FirmwareServiceAPI_v3GetFirmwareServiceConfig(apiClient_t *apiClient);
 
 // List firmware assets
 //
-// Returns a paginated list of firmware assets available in the cluster firmware service.
+// **Required role:** Cluster administrator.  Returns a paginated list of firmware assets available in the cluster firmware service.
 //
 firmware_asset_list_t*
 FirmwareServiceAPI_v3ListFirmwareAssets(apiClient_t *apiClient, double *limit, double *offset, char *search, char *order, char *filter);
@@ -68,7 +68,7 @@ FirmwareServiceAPI_v3ListFirmwareAssets(apiClient_t *apiClient, double *limit, d
 
 // List firmware service devices
 //
-// Returns a paginated list of devices known to the cluster firmware service.
+// **Required role:** Cluster administrator.  Returns a paginated list of devices known to the cluster firmware service.
 //
 firmware_device_list_t*
 FirmwareServiceAPI_v3ListFirmwareDevices(apiClient_t *apiClient, double *limit, double *offset, char *search, char *order, char *type, char *model, char *name, char *platform, char *hwModel);
@@ -76,7 +76,7 @@ FirmwareServiceAPI_v3ListFirmwareDevices(apiClient_t *apiClient, double *limit, 
 
 // List firmwares
 //
-// Returns a paginated list of firmwares available in the cluster firmware service.
+// **Required role:** Cluster administrator.  Returns a paginated list of firmwares available in the cluster firmware service.
 //
 firmware_list_t*
 FirmwareServiceAPI_v3ListFirmwares(apiClient_t *apiClient, double *limit, double *offset, char *search, char *order, char *filename, char *model, char *type, char *version, char *buildId, char *firmwareAssets, char *installed);
@@ -84,7 +84,7 @@ FirmwareServiceAPI_v3ListFirmwares(apiClient_t *apiClient, double *limit, double
 
 // Update firmware service configuration
 //
-// Updates the cluster firmware service configuration and returns the merged result.
+// **Required role:** Cluster administrator.  Updates the cluster firmware service configuration and returns the merged result.
 //
 object_t*
 FirmwareServiceAPI_v3PatchFirmwareServiceConfig(apiClient_t *apiClient, patch_firmware_service_config_body_t *patch_firmware_service_config_body);

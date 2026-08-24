@@ -35,7 +35,7 @@ UsersAPI_v3ChangePassword(apiClient_t *apiClient, change_password_body_t *change
 
 // Create a user
 //
-// Creates a new user in the caller's domain.
+// **Required role:** Domain administrator.  Creates a new user in the caller's domain.
 //
 user_created_t*
 UsersAPI_v3CreateUser(apiClient_t *apiClient, create_user_body_t *create_user_body);
@@ -43,7 +43,7 @@ UsersAPI_v3CreateUser(apiClient_t *apiClient, create_user_body_t *create_user_bo
 
 // Delete a user
 //
-// Deletes the user identified by the given userId.
+// **Required role:** Domain administrator.  Deletes the user identified by the given userId.
 //
 void
 UsersAPI_v3DeleteUser(apiClient_t *apiClient, char *userId);

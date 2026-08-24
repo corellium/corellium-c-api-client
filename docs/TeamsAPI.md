@@ -16,7 +16,7 @@ Method | HTTP request | Description
 ```c
 // Add a user to a team
 //
-// Add a user to a team. Available for Enterprise accounts only.
+// **Required role:** Domain administrator.  Add a user to a team. Available for Enterprise accounts only.
 //
 void TeamsAPI_v3AddUserToTeam(apiClient_t *apiClient, char *teamId, char *userId);
 ```
@@ -47,7 +47,7 @@ void
 ```c
 // Create a team
 //
-// Create a team. Available for Enterprise accounts only.
+// **Required role:** Domain administrator.  Create a team. Available for Enterprise accounts only.
 //
 team_created_t* TeamsAPI_v3CreateTeam(apiClient_t *apiClient, create_team_body_t *create_team_body);
 ```
@@ -78,7 +78,7 @@ Name | Type | Description  | Notes
 ```c
 // Delete a team
 //
-// Delete a team. Available for Enterprise accounts only.
+// **Required role:** Domain administrator.  Delete a team. Available for Enterprise accounts only.
 //
 void TeamsAPI_v3DeleteTeam(apiClient_t *apiClient, char *teamId);
 ```
@@ -140,7 +140,7 @@ Name | Type | Description  | Notes
 ```c
 // Remove a user from a team
 //
-// Remove a user from a team. Available for Enterprise accounts only.
+// **Required role:** Domain administrator.  Remove a user from a team. Available for Enterprise accounts only.
 //
 void TeamsAPI_v3RemoveUserFromTeam(apiClient_t *apiClient, char *teamId, char *userId);
 ```
@@ -171,7 +171,7 @@ void
 ```c
 // Update a team
 //
-// Update a team. Available for Enterprise accounts only.
+// **Required role:** Domain administrator.  Update a team. Available for Enterprise accounts only.
 //
 void TeamsAPI_v3UpdateTeam(apiClient_t *apiClient, char *teamId, update_team_body_t *update_team_body);
 ```

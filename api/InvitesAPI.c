@@ -9,7 +9,7 @@
 
 // Create invites
 //
-// Invite one or more users to create an account in the domain.
+// **Required role:** Domain administrator or project administrator.  Invite one or more users to create an account in the domain.
 //
 object_t*
 InvitesAPI_v3CreateInvites(apiClient_t *apiClient, create_invites_body_t *create_invites_body)
@@ -60,7 +60,7 @@ InvitesAPI_v3CreateInvites(apiClient_t *apiClient, create_invites_body_t *create
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Domain administrator or project administrator permissions required.");
     //}
     //nonprimitive not container
     object_t *elementToReturn = NULL;
@@ -99,7 +99,7 @@ end:
 
 // Edit invites
 //
-// Edit the settings of one or more existing invites.
+// **Required role:** Domain administrator or project administrator.  Edit the settings of one or more existing invites.
 //
 invitation_t*
 InvitesAPI_v3EditInvites(apiClient_t *apiClient, edit_invites_body_t *edit_invites_body)
@@ -150,7 +150,7 @@ InvitesAPI_v3EditInvites(apiClient_t *apiClient, edit_invites_body_t *edit_invit
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Domain administrator or project administrator permissions required.");
     //}
     //nonprimitive not container
     invitation_t *elementToReturn = NULL;
@@ -291,7 +291,7 @@ end:
 
 // List invites
 //
-// List all invites for the requesting user's domain.
+// **Required role:** Domain administrator or project administrator.  List all invites for the requesting user's domain.
 //
 invites_list_response_t*
 InvitesAPI_v3ListInvites(apiClient_t *apiClient, double *limit, double *offset)
@@ -361,7 +361,7 @@ InvitesAPI_v3ListInvites(apiClient_t *apiClient, double *limit, double *offset)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Domain administrator or project administrator permissions required.");
     //}
     //nonprimitive not container
     invites_list_response_t *elementToReturn = NULL;
@@ -419,7 +419,7 @@ end:
 
 // Revoke invites
 //
-// Revoke one or more invites.
+// **Required role:** Domain administrator or project administrator.  Revoke one or more invites.
 //
 revoke_invites_response_t*
 InvitesAPI_v3RevokeInvites(apiClient_t *apiClient, revoke_invites_body_t *revoke_invites_body)
@@ -470,7 +470,7 @@ InvitesAPI_v3RevokeInvites(apiClient_t *apiClient, revoke_invites_body_t *revoke
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Domain administrator or project administrator permissions required.");
     //}
     //nonprimitive not container
     revoke_invites_response_t *elementToReturn = NULL;

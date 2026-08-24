@@ -9,6 +9,8 @@
 
 // Create a new auth provider for a domain
 //
+// **Required role:** Domain administrator.  Create a new auth provider for a domain.
+//
 create_domain_auth_provider_response_t*
 DomainAuthProvidersAPI_v3CreateDomainAuthProvider(apiClient_t *apiClient, char *domainId, create_domain_auth_provider_body_t *create_domain_auth_provider_body)
 {
@@ -74,7 +76,7 @@ DomainAuthProvidersAPI_v3CreateDomainAuthProvider(apiClient_t *apiClient, char *
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Domain administrator permissions required.");
     //}
     //nonprimitive not container
     create_domain_auth_provider_response_t *elementToReturn = NULL;
@@ -113,6 +115,8 @@ end:
 }
 
 // Delete an auth provider from a domain
+//
+// **Required role:** Domain administrator.  Delete an auth provider from a domain.
 //
 void
 DomainAuthProvidersAPI_v3DeleteDomainAuthProvider(apiClient_t *apiClient, char *domainId, char *providerId)
@@ -180,7 +184,7 @@ DomainAuthProvidersAPI_v3DeleteDomainAuthProvider(apiClient_t *apiClient, char *
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Domain administrator permissions required.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -205,6 +209,8 @@ end:
 }
 
 // Return all configured auth providers for a domain (including globally configured providers)
+//
+// **Required role:** Domain administrator.  Return all configured auth providers for a domain (including globally configured providers).
 //
 domain_auth_providers_list_t*
 DomainAuthProvidersAPI_v3ListDomainAuthProviders(apiClient_t *apiClient, char *domainId, double *limit, double *offset)
@@ -282,7 +288,7 @@ DomainAuthProvidersAPI_v3ListDomainAuthProviders(apiClient_t *apiClient, char *d
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Domain administrator permissions required.");
     //}
     //nonprimitive not container
     domain_auth_providers_list_t *elementToReturn = NULL;
@@ -340,6 +346,8 @@ end:
 }
 
 // Partially update an auth provider for a domain
+//
+// **Required role:** Domain administrator.  Partially update an auth provider for a domain.
 //
 domain_auth_provider_response_t*
 DomainAuthProvidersAPI_v3PatchDomainAuthProvider(apiClient_t *apiClient, char *domainId, char *providerId, patch_domain_auth_provider_body_t *patch_domain_auth_provider_body)
@@ -418,7 +426,7 @@ DomainAuthProvidersAPI_v3PatchDomainAuthProvider(apiClient_t *apiClient, char *d
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Domain administrator permissions required.");
     //}
     //nonprimitive not container
     domain_auth_provider_response_t *elementToReturn = NULL;
@@ -458,6 +466,8 @@ end:
 }
 
 // Update an auth provider for a domain
+//
+// **Required role:** Domain administrator.  Update an auth provider for a domain.
 //
 domain_auth_provider_response_t*
 DomainAuthProvidersAPI_v3UpdateDomainAuthProvider(apiClient_t *apiClient, char *domainId, char *providerId, create_domain_auth_provider_body_t *create_domain_auth_provider_body)
@@ -536,7 +546,7 @@ DomainAuthProvidersAPI_v3UpdateDomainAuthProvider(apiClient_t *apiClient, char *
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Domain administrator permissions required.");
     //}
     //nonprimitive not container
     domain_auth_provider_response_t *elementToReturn = NULL;

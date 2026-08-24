@@ -15,7 +15,7 @@ Method | HTTP request | Description
 ```c
 // Attach storage device
 //
-// Mounts a registered storage device. Returns 200 if already mounted, 202 if a mount job was queued. Requires cluster administrator permissions.
+// **Required role:** Cluster administrator.  Mounts a registered storage device. Returns 200 if already mounted, 202 if a mount job was queued. Requires the serverAttachedStorage feature.
 //
 storage_already_mounted_response_t* StorageAPI_v3AttachClusterStorage(apiClient_t *apiClient, char *id);
 ```
@@ -46,7 +46,7 @@ Name | Type | Description  | Notes
 ```c
 // Eject storage device
 //
-// Unmounts a registered storage device. Returns 200 if already unmounted, 202 if an unmount job was queued. Requires cluster administrator permissions.
+// **Required role:** Cluster administrator.  Unmounts a registered storage device. Returns 200 if already unmounted, 202 if an unmount job was queued. Requires the serverAttachedStorage feature.
 //
 storage_eject_already_unmounted_response_t* StorageAPI_v3EjectClusterStorage(apiClient_t *apiClient, char *id);
 ```
@@ -77,7 +77,7 @@ Name | Type | Description  | Notes
 ```c
 // List cluster storage devices
 //
-// Returns all attached storage devices. Requires cluster administrator permissions.
+// **Required role:** Cluster administrator.  Returns all attached storage devices. Requires the serverAttachedStorage feature.
 //
 storage_device_list_t* StorageAPI_v3ListClusterStorage(apiClient_t *apiClient, double *limit, double *offset, char *id, char *device, char *fsType, char *fsUuid, char *label, char *serial, char *vendor, char *model, char *mountPolicy, char *status, char *sort);
 ```

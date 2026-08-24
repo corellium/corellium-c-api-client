@@ -13,7 +13,7 @@
 
 // Add team role to deployment
 //
-// Grants a team a role within a deployment. Available for Enterprise accounts only.
+// **Required role:** Domain administrator.  Grants a team a role within a deployment. Available for Enterprise accounts only.
 //
 void
 RolesAPI_v3AddTeamRoleToDeployment(apiClient_t *apiClient, char *deploymentId, char *teamId, char *roleId);
@@ -21,7 +21,7 @@ RolesAPI_v3AddTeamRoleToDeployment(apiClient_t *apiClient, char *deploymentId, c
 
 // Add team role to project
 //
-// Grants a team a role within a project. Available for Enterprise accounts only.
+// **Required role:** Domain administrator or project administrator.  Grants a team a role within a project. Available for Enterprise accounts only.
 //
 void
 RolesAPI_v3AddTeamRoleToProject(apiClient_t *apiClient, char *projectId, char *teamId, char *roleId);
@@ -29,7 +29,7 @@ RolesAPI_v3AddTeamRoleToProject(apiClient_t *apiClient, char *projectId, char *t
 
 // Add user role to deployment
 //
-// Grants a user a role within a deployment. Available for Enterprise accounts only.
+// **Required role:** Domain administrator.  Grants a user a role within a deployment. Available for Enterprise accounts only.
 //
 void
 RolesAPI_v3AddUserRoleToDeployment(apiClient_t *apiClient, char *deploymentId, char *userId, char *roleId);
@@ -37,7 +37,7 @@ RolesAPI_v3AddUserRoleToDeployment(apiClient_t *apiClient, char *deploymentId, c
 
 // Add user role to project
 //
-// Grants a user a role within a project. Available for Enterprise accounts only.
+// **Required role:** Domain administrator or project administrator.  Grants a user a role within a project. Available for Enterprise accounts only.
 //
 void
 RolesAPI_v3AddUserRoleToProject(apiClient_t *apiClient, char *projectId, char *userId, char *roleId);
@@ -45,7 +45,7 @@ RolesAPI_v3AddUserRoleToProject(apiClient_t *apiClient, char *projectId, char *u
 
 // List deployment role assignments
 //
-// Returns paginated role assignments scoped to deployments. Available for Enterprise accounts only.
+// **Required role:** Domain administrator or project administrator.  Returns paginated role assignments scoped to deployments. Available for Enterprise accounts only.
 //
 roles_list_response_t*
 RolesAPI_v3ListDeploymentRoles(apiClient_t *apiClient, double *limit, double *offset);
@@ -53,7 +53,7 @@ RolesAPI_v3ListDeploymentRoles(apiClient_t *apiClient, double *limit, double *of
 
 // List all role assignments for the caller's domain
 //
-// Returns paginated project role assignments for both users and teams. Available for Enterprise accounts only.
+// **Required role:** Domain administrator or project administrator.  Returns paginated project role assignments for both users and teams. Available for Enterprise accounts only.
 //
 roles_list_response_t*
 RolesAPI_v3ListRoles(apiClient_t *apiClient, double *limit, double *offset);
@@ -61,7 +61,7 @@ RolesAPI_v3ListRoles(apiClient_t *apiClient, double *limit, double *offset);
 
 // Remove team role from deployment
 //
-// Revokes a team role within a deployment. Available for Enterprise accounts only.
+// **Required role:** Domain administrator.  Revokes a team role within a deployment. Available for Enterprise accounts only.
 //
 void
 RolesAPI_v3RemoveTeamRoleFromDeployment(apiClient_t *apiClient, char *deploymentId, char *teamId, char *roleId);
@@ -69,7 +69,7 @@ RolesAPI_v3RemoveTeamRoleFromDeployment(apiClient_t *apiClient, char *deployment
 
 // Remove team role from project
 //
-// Revokes a team role within a project. Available for Enterprise accounts only.
+// **Required role:** Domain administrator or project administrator.  Revokes a team role within a project. Available for Enterprise accounts only.
 //
 void
 RolesAPI_v3RemoveTeamRoleFromProject(apiClient_t *apiClient, char *projectId, char *teamId, char *roleId);
@@ -77,7 +77,7 @@ RolesAPI_v3RemoveTeamRoleFromProject(apiClient_t *apiClient, char *projectId, ch
 
 // Remove user role from deployment
 //
-// Revokes a user role within a deployment. Available for Enterprise accounts only.
+// **Required role:** Domain administrator.  Revokes a user role within a deployment. Available for Enterprise accounts only.
 //
 void
 RolesAPI_v3RemoveUserRoleFromDeployment(apiClient_t *apiClient, char *deploymentId, char *userId, char *roleId);
@@ -85,7 +85,7 @@ RolesAPI_v3RemoveUserRoleFromDeployment(apiClient_t *apiClient, char *deployment
 
 // Remove user role from project
 //
-// Revokes a user role within a project. Available for Enterprise accounts only.
+// **Required role:** Domain administrator or project administrator.  Revokes a user role within a project. Available for Enterprise accounts only.
 //
 void
 RolesAPI_v3RemoveUserRoleFromProject(apiClient_t *apiClient, char *projectId, char *userId, char *roleId);
