@@ -237,6 +237,10 @@ HyperTraceAPI_v3GetInstanceKcrange(apiClient_t *apiClient, char *instanceId)
     //if (apiClient->response_code == 403) {
     //    printf("%s\n","Permission denied.");
     //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 404) {
+    //    printf("%s\n","Instance not found.");
+    //}
     list_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
         cJSON *HyperTraceAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);

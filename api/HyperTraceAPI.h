@@ -6,6 +6,7 @@
 #include "../include/keyValuePair.h"
 #include "../include/binary.h"
 #include "../model/api_error.h"
+#include "../model/api_not_found_error.h"
 #include "../model/enable_btrace_body.h"
 #include "../model/kcrange.h"
 #include "../model/token.h"
