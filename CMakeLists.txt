@@ -434,6 +434,7 @@ set(SRCS
     model/patch_instance_body.c
     model/patch_instance_body_boot_options.c
     model/patch_instance_body_proxy_inner.c
+    model/patch_instance_body_strace_filter_inner.c
     model/patch_instance_options.c
     model/patch_instance_read_only.c
     model/patch_instance_read_only_body.c
@@ -637,6 +638,8 @@ set(SRCS
     api/DomainAuthProviderAPI.c
     api/DomainAuthProvidersAPI.c
     api/DomainV1API.c
+    api/ExtensionsAPI.c
+    api/ExtensionsV1API.c
     api/ExternalServicesAPI.c
     api/FirmwareServiceAPI.c
     api/FlavorsAPI.c
@@ -1075,6 +1078,7 @@ set(HDRS
     model/patch_instance_body.h
     model/patch_instance_body_boot_options.h
     model/patch_instance_body_proxy_inner.h
+    model/patch_instance_body_strace_filter_inner.h
     model/patch_instance_options.h
     model/patch_instance_read_only.h
     model/patch_instance_read_only_body.h
@@ -1278,6 +1282,8 @@ set(HDRS
     api/DomainAuthProviderAPI.h
     api/DomainAuthProvidersAPI.h
     api/DomainV1API.h
+    api/ExtensionsAPI.h
+    api/ExtensionsV1API.h
     api/ExternalServicesAPI.h
     api/FirmwareServiceAPI.h
     api/FlavorsAPI.h
@@ -1422,6 +1428,8 @@ set(HDRS "")
 #    unit-tests/manual-DomainAuthProviderAPI.c
 #    unit-tests/manual-DomainAuthProvidersAPI.c
 #    unit-tests/manual-DomainV1API.c
+#    unit-tests/manual-ExtensionsAPI.c
+#    unit-tests/manual-ExtensionsV1API.c
 #    unit-tests/manual-ExternalServicesAPI.c
 #    unit-tests/manual-FirmwareServiceAPI.c
 #    unit-tests/manual-FlavorsAPI.c

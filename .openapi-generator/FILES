@@ -47,6 +47,10 @@ api/DomainAuthProvidersAPI.c
 api/DomainAuthProvidersAPI.h
 api/DomainV1API.c
 api/DomainV1API.h
+api/ExtensionsAPI.c
+api/ExtensionsAPI.h
+api/ExtensionsV1API.c
+api/ExtensionsV1API.h
 api/ExternalServicesAPI.c
 api/ExternalServicesAPI.h
 api/FirmwareServiceAPI.c
@@ -151,6 +155,8 @@ docs/DomainAPI.md
 docs/DomainAuthProviderAPI.md
 docs/DomainAuthProvidersAPI.md
 docs/DomainV1API.md
+docs/ExtensionsAPI.md
+docs/ExtensionsV1API.md
 docs/ExternalServicesAPI.md
 docs/FirmwareServiceAPI.md
 docs/FlavorsAPI.md
@@ -578,6 +584,7 @@ docs/patch_firmware_service_config_body.md
 docs/patch_instance_body.md
 docs/patch_instance_body_boot_options.md
 docs/patch_instance_body_proxy_inner.md
+docs/patch_instance_body_strace_filter_inner.md
 docs/patch_instance_options.md
 docs/patch_instance_read_only.md
 docs/patch_instance_read_only_body.md
@@ -1542,6 +1549,8 @@ model/patch_instance_body_boot_options.c
 model/patch_instance_body_boot_options.h
 model/patch_instance_body_proxy_inner.c
 model/patch_instance_body_proxy_inner.h
+model/patch_instance_body_strace_filter_inner.c
+model/patch_instance_body_strace_filter_inner.h
 model/patch_instance_options.c
 model/patch_instance_options.h
 model/patch_instance_read_only.c
@@ -2295,6 +2304,7 @@ unit-test/test_patch_firmware_service_config_body.c
 unit-test/test_patch_instance_body.c
 unit-test/test_patch_instance_body_boot_options.c
 unit-test/test_patch_instance_body_proxy_inner.c
+unit-test/test_patch_instance_body_strace_filter_inner.c
 unit-test/test_patch_instance_options.c
 unit-test/test_patch_instance_read_only.c
 unit-test/test_patch_instance_read_only_body.c

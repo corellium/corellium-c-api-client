@@ -25,12 +25,14 @@ patch_instance_body_t* instantiate_patch_instance_body(int include_optional) {
     patch_instance_body = patch_instance_body_create(
       "0",
       null,
+      list_createList(),
       list_createList()
     );
   } else {
     patch_instance_body = patch_instance_body_create(
       "0",
       null,
+      list_createList(),
       list_createList()
     );
   }

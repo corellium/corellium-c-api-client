@@ -8,7 +8,8 @@
 static patch_instance_body_t *patch_instance_body_create_internal(
     char *name,
     patch_instance_body_boot_options_t *boot_options,
-    list_t *proxy
+    list_t *proxy,
+    list_t *strace_filter
     ) {
     patch_instance_body_t *patch_instance_body_local_var = malloc(sizeof(patch_instance_body_t));
     if (!patch_instance_body_local_var) {
@@ -17,6 +18,7 @@ static patch_instance_body_t *patch_instance_body_create_internal(
     patch_instance_body_local_var->name = name;
     patch_instance_body_local_var->boot_options = boot_options;
     patch_instance_body_local_var->proxy = proxy;
+    patch_instance_body_local_var->strace_filter = strace_filter;
 
     patch_instance_body_local_var->_library_owned = 1;
     return patch_instance_body_local_var;
@@ -25,12 +27,14 @@ static patch_instance_body_t *patch_instance_body_create_internal(
 __attribute__((deprecated)) patch_instance_body_t *patch_instance_body_create(
     char *name,
     patch_instance_body_boot_options_t *boot_options,
-    list_t *proxy
+    list_t *proxy,
+    list_t *strace_filter
     ) {
     return patch_instance_body_create_internal (
         name,
         boot_options,
-        proxy
+        proxy,
+        strace_filter
         );
 }
 
@@ -57,6 +61,13 @@ void patch_instance_body_free(patch_instance_body_t *patch_instance_body) {
         }
         list_freeList(patch_instance_body->proxy);
         patch_instance_body->proxy = NULL;
+    }
+    if (patch_instance_body->strace_filter) {
+        list_ForEach(listEntry, patch_instance_body->strace_filter) {
+            patch_instance_body_strace_filter_inner_free(listEntry->data);
+        }
+        list_freeList(patch_instance_body->strace_filter);
+        patch_instance_body->strace_filter = NULL;
     }
     free(patch_instance_body);
 }
@@ -104,6 +115,26 @@ cJSON *patch_instance_body_convertToJSON(patch_instance_body_t *patch_instance_b
     }
     }
 
+
+    // patch_instance_body->strace_filter
+    if(patch_instance_body->strace_filter) {
+    cJSON *strace_filter = cJSON_AddArrayToObject(item, "straceFilter");
+    if(strace_filter == NULL) {
+    goto fail; //nonprimitive container
+    }
+
+    listEntry_t *strace_filterListEntry;
+    if (patch_instance_body->strace_filter) {
+    list_ForEach(strace_filterListEntry, patch_instance_body->strace_filter) {
+    cJSON *itemLocal = patch_instance_body_strace_filter_inner_convertToJSON(strace_filterListEntry->data);
+    if(itemLocal == NULL) {
+    goto fail;
+    }
+    cJSON_AddItemToArray(strace_filter, itemLocal);
+    }
+    }
+    }
+
     return item;
 fail:
     if (item) {
@@ -121,6 +152,9 @@ patch_instance_body_t *patch_instance_body_parseFromJSON(cJSON *patch_instance_b
 
     // define the local list for patch_instance_body->proxy
     list_t *proxyList = NULL;
+
+    // define the local list for patch_instance_body->strace_filter
+    list_t *strace_filterList = NULL;
 
     // patch_instance_body->name
     cJSON *name = cJSON_GetObjectItemCaseSensitive(patch_instance_bodyJSON, "name");
@@ -167,11 +201,36 @@ patch_instance_body_t *patch_instance_body_parseFromJSON(cJSON *patch_instance_b
     }
     }
 
+    // patch_instance_body->strace_filter
+    cJSON *strace_filter = cJSON_GetObjectItemCaseSensitive(patch_instance_bodyJSON, "straceFilter");
+    if (cJSON_IsNull(strace_filter)) {
+        strace_filter = NULL;
+    }
+    if (strace_filter) { 
+    cJSON *strace_filter_local_nonprimitive = NULL;
+    if(!cJSON_IsArray(strace_filter)){
+        goto end; //nonprimitive container
+    }
+
+    strace_filterList = list_createList();
+
+    cJSON_ArrayForEach(strace_filter_local_nonprimitive,strace_filter )
+    {
+        if(!cJSON_IsObject(strace_filter_local_nonprimitive)){
+            goto end;
+        }
+        patch_instance_body_strace_filter_inner_t *strace_filterItem = patch_instance_body_strace_filter_inner_parseFromJSON(strace_filter_local_nonprimitive);
+
+        list_addElement(strace_filterList, strace_filterItem);
+    }
+    }
+
 
     patch_instance_body_local_var = patch_instance_body_create_internal (
         name && !cJSON_IsNull(name) ? strdup(name->valuestring) : NULL,
         boot_options ? boot_options_local_nonprim : NULL,
-        proxy ? proxyList : NULL
+        proxy ? proxyList : NULL,
+        strace_filter ? strace_filterList : NULL
         );
 
     return patch_instance_body_local_var;
@@ -188,6 +247,15 @@ end:
         }
         list_freeList(proxyList);
         proxyList = NULL;
+    }
+    if (strace_filterList) {
+        listEntry_t *listEntry = NULL;
+        list_ForEach(listEntry, strace_filterList) {
+            patch_instance_body_strace_filter_inner_free(listEntry->data);
+            listEntry->data = NULL;
+        }
+        list_freeList(strace_filterList);
+        strace_filterList = NULL;
     }
     return NULL;
 
