@@ -486,7 +486,6 @@ set(SRCS
     model/role_v1.c
     model/roles_list_response.c
     model/rotate_body.c
-    model/rotate_body_orientation.c
     model/rotate_body_v1.c
     model/send_reset_link_body.c
     model/service_endpoint_schema.c
@@ -638,8 +637,6 @@ set(SRCS
     api/DomainAuthProviderAPI.c
     api/DomainAuthProvidersAPI.c
     api/DomainV1API.c
-    api/ExtensionsAPI.c
-    api/ExtensionsV1API.c
     api/ExternalServicesAPI.c
     api/FirmwareServiceAPI.c
     api/FlavorsAPI.c
@@ -1130,7 +1127,6 @@ set(HDRS
     model/role_v1.h
     model/roles_list_response.h
     model/rotate_body.h
-    model/rotate_body_orientation.h
     model/rotate_body_v1.h
     model/send_reset_link_body.h
     model/service_endpoint_schema.h
@@ -1282,8 +1278,6 @@ set(HDRS
     api/DomainAuthProviderAPI.h
     api/DomainAuthProvidersAPI.h
     api/DomainV1API.h
-    api/ExtensionsAPI.h
-    api/ExtensionsV1API.h
     api/ExternalServicesAPI.h
     api/FirmwareServiceAPI.h
     api/FlavorsAPI.h
@@ -1428,8 +1422,6 @@ set(HDRS "")
 #    unit-tests/manual-DomainAuthProviderAPI.c
 #    unit-tests/manual-DomainAuthProvidersAPI.c
 #    unit-tests/manual-DomainV1API.c
-#    unit-tests/manual-ExtensionsAPI.c
-#    unit-tests/manual-ExtensionsV1API.c
 #    unit-tests/manual-ExternalServicesAPI.c
 #    unit-tests/manual-FirmwareServiceAPI.c
 #    unit-tests/manual-FlavorsAPI.c

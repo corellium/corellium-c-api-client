@@ -47,10 +47,6 @@ api/DomainAuthProvidersAPI.c
 api/DomainAuthProvidersAPI.h
 api/DomainV1API.c
 api/DomainV1API.h
-api/ExtensionsAPI.c
-api/ExtensionsAPI.h
-api/ExtensionsV1API.c
-api/ExtensionsV1API.h
 api/ExternalServicesAPI.c
 api/ExternalServicesAPI.h
 api/FirmwareServiceAPI.c
@@ -155,8 +151,6 @@ docs/DomainAPI.md
 docs/DomainAuthProviderAPI.md
 docs/DomainAuthProvidersAPI.md
 docs/DomainV1API.md
-docs/ExtensionsAPI.md
-docs/ExtensionsV1API.md
 docs/ExternalServicesAPI.md
 docs/FirmwareServiceAPI.md
 docs/FlavorsAPI.md
@@ -636,7 +630,6 @@ docs/role_name.md
 docs/role_v1.md
 docs/roles_list_response.md
 docs/rotate_body.md
-docs/rotate_body_orientation.md
 docs/rotate_body_v1.md
 docs/send_reset_link_body.md
 docs/service_endpoint_schema.md
@@ -1653,8 +1646,6 @@ model/roles_list_response.c
 model/roles_list_response.h
 model/rotate_body.c
 model/rotate_body.h
-model/rotate_body_orientation.c
-model/rotate_body_orientation.h
 model/rotate_body_v1.c
 model/rotate_body_v1.h
 model/send_reset_link_body.c
@@ -2356,7 +2347,6 @@ unit-test/test_role_name.c
 unit-test/test_role_v1.c
 unit-test/test_roles_list_response.c
 unit-test/test_rotate_body.c
-unit-test/test_rotate_body_orientation.c
 unit-test/test_rotate_body_v1.c
 unit-test/test_send_reset_link_body.c
 unit-test/test_service_endpoint_schema.c

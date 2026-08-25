@@ -4,9 +4,26 @@
 #include "rotate_body.h"
 
 
+char* rotate_body_orientation_ToString(corellium_api_rotate_body_ORIENTATION_e orientation) {
+    char* orientationArray[] =  { "NULL", "1", "2", "3", "4" };
+    return orientationArray[orientation];
+}
+
+corellium_api_rotate_body_ORIENTATION_e rotate_body_orientation_FromString(char* orientation){
+    int stringToReturn = 0;
+    char *orientationArray[] =  { "NULL", "1", "2", "3", "4" };
+    size_t sizeofArray = sizeof(orientationArray) / sizeof(orientationArray[0]);
+    while(stringToReturn < sizeofArray) {
+        if(strcmp(orientation, orientationArray[stringToReturn]) == 0) {
+            return stringToReturn;
+        }
+        stringToReturn++;
+    }
+    return 0;
+}
 
 static rotate_body_t *rotate_body_create_internal(
-    rotate_body_orientation_t *orientation
+    double orientation
     ) {
     rotate_body_t *rotate_body_local_var = malloc(sizeof(rotate_body_t));
     if (!rotate_body_local_var) {
@@ -19,7 +36,7 @@ static rotate_body_t *rotate_body_create_internal(
 }
 
 __attribute__((deprecated)) rotate_body_t *rotate_body_create(
-    rotate_body_orientation_t *orientation
+    double orientation
     ) {
     return rotate_body_create_internal (
         orientation
@@ -35,10 +52,6 @@ void rotate_body_free(rotate_body_t *rotate_body) {
         return ;
     }
     listEntry_t *listEntry;
-    if (rotate_body->orientation) {
-        rotate_body_orientation_free(rotate_body->orientation);
-        rotate_body->orientation = NULL;
-    }
     free(rotate_body);
 }
 
@@ -46,16 +59,11 @@ cJSON *rotate_body_convertToJSON(rotate_body_t *rotate_body) {
     cJSON *item = cJSON_CreateObject();
 
     // rotate_body->orientation
-    if (!rotate_body->orientation) {
+    if (corellium_api_rotate_body_ORIENTATION_NULL == rotate_body->orientation) {
         goto fail;
     }
-    cJSON *orientation_local_JSON = rotate_body_orientation_convertToJSON(rotate_body->orientation);
-    if(orientation_local_JSON == NULL) {
-    goto fail; //model
-    }
-    cJSON_AddItemToObject(item, "orientation", orientation_local_JSON);
-    if(item->child == NULL) {
-    goto fail;
+    if(cJSON_AddNumberToObject(item, "orientation", rotate_body->orientation) == NULL) {
+    goto fail; //Numeric
     }
 
     return item;
@@ -70,9 +78,6 @@ rotate_body_t *rotate_body_parseFromJSON(cJSON *rotate_bodyJSON){
 
     rotate_body_t *rotate_body_local_var = NULL;
 
-    // define the local variable for rotate_body->orientation
-    rotate_body_orientation_t *orientation_local_nonprim = NULL;
-
     // rotate_body->orientation
     cJSON *orientation = cJSON_GetObjectItemCaseSensitive(rotate_bodyJSON, "orientation");
     if (cJSON_IsNull(orientation)) {
@@ -83,19 +88,18 @@ rotate_body_t *rotate_body_parseFromJSON(cJSON *rotate_bodyJSON){
     }
 
     
-    orientation_local_nonprim = rotate_body_orientation_parseFromJSON(orientation); //nonprimitive
+    if(!cJSON_IsNumber(orientation))
+    {
+    goto end; //Numeric
+    }
 
 
     rotate_body_local_var = rotate_body_create_internal (
-        orientation_local_nonprim
+        orientation->valuedouble
         );
 
     return rotate_body_local_var;
 end:
-    if (orientation_local_nonprim) {
-        rotate_body_orientation_free(orientation_local_nonprim);
-        orientation_local_nonprim = NULL;
-    }
     return NULL;
 
 }

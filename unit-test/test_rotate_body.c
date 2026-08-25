@@ -16,18 +16,17 @@
 #include "../model/rotate_body.h"
 rotate_body_t* instantiate_rotate_body(int include_optional);
 
-#include "test_rotate_body_orientation.c"
 
 
 rotate_body_t* instantiate_rotate_body(int include_optional) {
   rotate_body_t* rotate_body = NULL;
   if (include_optional) {
     rotate_body = rotate_body_create(
-      null
+      corellium_api_rotate_body_ORIENTATION_1
     );
   } else {
     rotate_body = rotate_body_create(
-      null
+      corellium_api_rotate_body_ORIENTATION_1
     );
   }
 

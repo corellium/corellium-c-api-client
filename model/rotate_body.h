@@ -15,18 +15,25 @@
 
 typedef struct rotate_body_t rotate_body_t;
 
-#include "rotate_body_orientation.h"
+
+// Enum ORIENTATION for rotate_body
+
+typedef enum  { corellium_api_rotate_body_ORIENTATION_NULL = 0, corellium_api_rotate_body_ORIENTATION__1, corellium_api_rotate_body_ORIENTATION__2, corellium_api_rotate_body_ORIENTATION__3, corellium_api_rotate_body_ORIENTATION__4 } corellium_api_rotate_body_ORIENTATION_e;
+
+char* rotate_body_orientation_ToString(corellium_api_rotate_body_ORIENTATION_e orientation);
+
+corellium_api_rotate_body_ORIENTATION_e rotate_body_orientation_FromString(char* orientation);
 
 
 
 typedef struct rotate_body_t {
-    struct rotate_body_orientation_t *orientation; //model
+    double orientation; //numeric
 
     int _library_owned; // Is the library responsible for freeing this object?
 } rotate_body_t;
 
 __attribute__((deprecated)) rotate_body_t *rotate_body_create(
-    rotate_body_orientation_t *orientation
+    double orientation
 );
 
 void rotate_body_free(rotate_body_t *rotate_body);
