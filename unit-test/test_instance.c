@@ -69,6 +69,7 @@ instance_t* instantiate_instance(int include_optional) {
       "0",
       "0",
       list_createList(),
+      list_createList(),
        // false, not to have infinite recursion
       instantiate_instance_services(0),
       1,
@@ -132,6 +133,7 @@ instance_t* instantiate_instance(int include_optional) {
       "0",
       "0",
       "0",
+      list_createList(),
       list_createList(),
       NULL,
       1,

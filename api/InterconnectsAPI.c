@@ -11,7 +11,7 @@
 //
 // Create an I/O Interconnect for the specified project and attach virtual device interfaces.
 //
-create_interconnect_response_schema_t*
+interconnect_t*
 InterconnectsAPI_v3CreateInterconnect(apiClient_t *apiClient, create_interconnect_v3_body_t *create_interconnect_v3_body)
 {
     list_t    *localVarQueryParameters = NULL;
@@ -75,10 +75,10 @@ InterconnectsAPI_v3CreateInterconnect(apiClient_t *apiClient, create_interconnec
     //    printf("%s\n","Internal server error.");
     //}
     //nonprimitive not container
-    create_interconnect_response_schema_t *elementToReturn = NULL;
+    interconnect_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
         cJSON *InterconnectsAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = create_interconnect_response_schema_parseFromJSON(InterconnectsAPIlocalVarJSON);
+        elementToReturn = interconnect_parseFromJSON(InterconnectsAPIlocalVarJSON);
         cJSON_Delete(InterconnectsAPIlocalVarJSON);
         if(elementToReturn == NULL) {
             // return 0;
@@ -190,7 +190,7 @@ end:
 
 // Get Interconnect
 //
-get_interconnect_response_schema_t*
+interconnect_t*
 InterconnectsAPI_v3GetInterconnect(apiClient_t *apiClient, char *interconnectId)
 {
     list_t    *localVarQueryParameters = NULL;
@@ -255,10 +255,10 @@ InterconnectsAPI_v3GetInterconnect(apiClient_t *apiClient, char *interconnectId)
     //    printf("%s\n","Internal server error.");
     //}
     //nonprimitive not container
-    get_interconnect_response_schema_t *elementToReturn = NULL;
+    interconnect_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
         cJSON *InterconnectsAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = get_interconnect_response_schema_parseFromJSON(InterconnectsAPIlocalVarJSON);
+        elementToReturn = interconnect_parseFromJSON(InterconnectsAPIlocalVarJSON);
         cJSON_Delete(InterconnectsAPIlocalVarJSON);
         if(elementToReturn == NULL) {
             // return 0;
@@ -287,7 +287,7 @@ end:
 
 // List I/O Interconnects
 //
-get_interconnects_response_schema_t*
+interconnect_list_t*
 InterconnectsAPI_v3ListInterconnects(apiClient_t *apiClient, double *limit, double *offset, char *name, char *protocol, char *type, char *status, char *sort, char *projectId)
 {
     list_t    *localVarQueryParameters = list_createList();
@@ -438,10 +438,10 @@ InterconnectsAPI_v3ListInterconnects(apiClient_t *apiClient, double *limit, doub
     //    printf("%s\n","Internal server error.");
     //}
     //nonprimitive not container
-    get_interconnects_response_schema_t *elementToReturn = NULL;
+    interconnect_list_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
         cJSON *InterconnectsAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = get_interconnects_response_schema_parseFromJSON(InterconnectsAPIlocalVarJSON);
+        elementToReturn = interconnect_list_parseFromJSON(InterconnectsAPIlocalVarJSON);
         cJSON_Delete(InterconnectsAPIlocalVarJSON);
         if(elementToReturn == NULL) {
             // return 0;
@@ -565,7 +565,7 @@ end:
 
 // Patch I/O Interconnect
 //
-get_interconnect_response_schema_t*
+interconnect_t*
 InterconnectsAPI_v3PatchInterconnect(apiClient_t *apiClient, char *interconnectId, patch_interconnect_body_t *patch_interconnect_body)
 {
     list_t    *localVarQueryParameters = NULL;
@@ -641,10 +641,10 @@ InterconnectsAPI_v3PatchInterconnect(apiClient_t *apiClient, char *interconnectI
     //    printf("%s\n","Internal server error.");
     //}
     //nonprimitive not container
-    get_interconnect_response_schema_t *elementToReturn = NULL;
+    interconnect_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
         cJSON *InterconnectsAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = get_interconnect_response_schema_parseFromJSON(InterconnectsAPIlocalVarJSON);
+        elementToReturn = interconnect_parseFromJSON(InterconnectsAPIlocalVarJSON);
         cJSON_Delete(InterconnectsAPIlocalVarJSON);
         if(elementToReturn == NULL) {
             // return 0;
@@ -678,7 +678,7 @@ end:
 
 // Update I/O Interconnect
 //
-get_interconnect_response_schema_t*
+interconnect_t*
 InterconnectsAPI_v3UpdateInterconnect(apiClient_t *apiClient, char *interconnectId, update_interconnect_v3_body_t *update_interconnect_v3_body)
 {
     list_t    *localVarQueryParameters = NULL;
@@ -754,10 +754,10 @@ InterconnectsAPI_v3UpdateInterconnect(apiClient_t *apiClient, char *interconnect
     //    printf("%s\n","Internal server error.");
     //}
     //nonprimitive not container
-    get_interconnect_response_schema_t *elementToReturn = NULL;
+    interconnect_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
         cJSON *InterconnectsAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = get_interconnect_response_schema_parseFromJSON(InterconnectsAPIlocalVarJSON);
+        elementToReturn = interconnect_parseFromJSON(InterconnectsAPIlocalVarJSON);
         cJSON_Delete(InterconnectsAPIlocalVarJSON);
         if(elementToReturn == NULL) {
             // return 0;

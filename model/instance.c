@@ -39,6 +39,7 @@ static instance_t *instance_create_internal(
     char *port_sockcap,
     char *port_model_gw,
     list_t *consoles,
+    list_t *interfaces,
     instance_services_t *services,
     int panicked,
     char *created,
@@ -97,6 +98,7 @@ static instance_t *instance_create_internal(
     instance_local_var->port_sockcap = port_sockcap;
     instance_local_var->port_model_gw = port_model_gw;
     instance_local_var->consoles = consoles;
+    instance_local_var->interfaces = interfaces;
     instance_local_var->services = services;
     instance_local_var->panicked = panicked;
     instance_local_var->created = created;
@@ -156,6 +158,7 @@ __attribute__((deprecated)) instance_t *instance_create(
     char *port_sockcap,
     char *port_model_gw,
     list_t *consoles,
+    list_t *interfaces,
     instance_services_t *services,
     int panicked,
     char *created,
@@ -211,6 +214,7 @@ __attribute__((deprecated)) instance_t *instance_create(
         port_sockcap,
         port_model_gw,
         consoles,
+        interfaces,
         services,
         panicked,
         created,
@@ -373,6 +377,13 @@ void instance_free(instance_t *instance) {
         }
         list_freeList(instance->consoles);
         instance->consoles = NULL;
+    }
+    if (instance->interfaces) {
+        list_ForEach(listEntry, instance->interfaces) {
+            instance_interface_status_free(listEntry->data);
+        }
+        list_freeList(instance->interfaces);
+        instance->interfaces = NULL;
     }
     if (instance->services) {
         instance_services_free(instance->services);
@@ -746,6 +757,26 @@ cJSON *instance_convertToJSON(instance_t *instance) {
     }
 
 
+    // instance->interfaces
+    if(instance->interfaces) {
+    cJSON *interfaces = cJSON_AddArrayToObject(item, "interfaces");
+    if(interfaces == NULL) {
+    goto fail; //nonprimitive container
+    }
+
+    listEntry_t *interfacesListEntry;
+    if (instance->interfaces) {
+    list_ForEach(interfacesListEntry, instance->interfaces) {
+    cJSON *itemLocal = instance_interface_status_convertToJSON(interfacesListEntry->data);
+    if(itemLocal == NULL) {
+    goto fail;
+    }
+    cJSON_AddItemToArray(interfaces, itemLocal);
+    }
+    }
+    }
+
+
     // instance->services
     if(instance->services) {
     cJSON *services_local_JSON = instance_services_convertToJSON(instance->services);
@@ -981,6 +1012,9 @@ instance_t *instance_parseFromJSON(cJSON *instanceJSON){
 
     // define the local list for instance->consoles
     list_t *consolesList = NULL;
+
+    // define the local list for instance->interfaces
+    list_t *interfacesList = NULL;
 
     // define the local variable for instance->services
     instance_services_t *services_local_nonprim = NULL;
@@ -1426,6 +1460,30 @@ instance_t *instance_parseFromJSON(cJSON *instanceJSON){
     }
     }
 
+    // instance->interfaces
+    cJSON *interfaces = cJSON_GetObjectItemCaseSensitive(instanceJSON, "interfaces");
+    if (cJSON_IsNull(interfaces)) {
+        interfaces = NULL;
+    }
+    if (interfaces) { 
+    cJSON *interfaces_local_nonprimitive = NULL;
+    if(!cJSON_IsArray(interfaces)){
+        goto end; //nonprimitive container
+    }
+
+    interfacesList = list_createList();
+
+    cJSON_ArrayForEach(interfaces_local_nonprimitive,interfaces )
+    {
+        if(!cJSON_IsObject(interfaces_local_nonprimitive)){
+            goto end;
+        }
+        instance_interface_status_t *interfacesItem = instance_interface_status_parseFromJSON(interfaces_local_nonprimitive);
+
+        list_addElement(interfacesList, interfacesItem);
+    }
+    }
+
     // instance->services
     cJSON *services = cJSON_GetObjectItemCaseSensitive(instanceJSON, "services");
     if (cJSON_IsNull(services)) {
@@ -1690,6 +1748,7 @@ instance_t *instance_parseFromJSON(cJSON *instanceJSON){
         port_sockcap && !cJSON_IsNull(port_sockcap) ? strdup(port_sockcap->valuestring) : NULL,
         port_model_gw && !cJSON_IsNull(port_model_gw) ? strdup(port_model_gw->valuestring) : NULL,
         consoles ? consolesList : NULL,
+        interfaces ? interfacesList : NULL,
         services ? services_local_nonprim : NULL,
         panicked ? panicked->valueint : 0,
         strdup(created->valuestring),
@@ -1737,6 +1796,15 @@ end:
         }
         list_freeList(consolesList);
         consolesList = NULL;
+    }
+    if (interfacesList) {
+        listEntry_t *listEntry = NULL;
+        list_ForEach(listEntry, interfacesList) {
+            instance_interface_status_free(listEntry->data);
+            listEntry->data = NULL;
+        }
+        list_freeList(interfacesList);
+        interfacesList = NULL;
     }
     if (services_local_nonprim) {
         instance_services_free(services_local_nonprim);

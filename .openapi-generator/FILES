@@ -47,10 +47,6 @@ api/DomainAuthProvidersAPI.c
 api/DomainAuthProvidersAPI.h
 api/DomainV1API.c
 api/DomainV1API.h
-api/ExtensionsAPI.c
-api/ExtensionsAPI.h
-api/ExtensionsV1API.c
-api/ExtensionsV1API.h
 api/ExternalServicesAPI.c
 api/ExternalServicesAPI.h
 api/FirmwareServiceAPI.c
@@ -155,8 +151,6 @@ docs/DomainAPI.md
 docs/DomainAuthProviderAPI.md
 docs/DomainAuthProvidersAPI.md
 docs/DomainV1API.md
-docs/ExtensionsAPI.md
-docs/ExtensionsV1API.md
 docs/ExternalServicesAPI.md
 docs/FirmwareServiceAPI.md
 docs/FlavorsAPI.md
@@ -338,7 +332,6 @@ docs/create_image_body.md
 docs/create_instance_body.md
 docs/create_instance_response.md
 docs/create_interconnect_body.md
-docs/create_interconnect_response_schema.md
 docs/create_interconnect_v3_body.md
 docs/create_invites_body.md
 docs/create_invites_body_settings.md
@@ -430,9 +423,7 @@ docs/flavor_frame.md
 docs/flavor_frame_dimensions.md
 docs/flavor_frame_home.md
 docs/flavor_frame_inner.md
-docs/get_interconnect_response_schema.md
 docs/get_interconnects_response.md
-docs/get_interconnects_response_schema.md
 docs/get_storage_response.md
 docs/gpio_state_definition.md
 docs/gpio_state_definition_banks_inner_inner.md
@@ -480,6 +471,7 @@ docs/instance_hyper_trace_state_v1.md
 docs/instance_input_body.md
 docs/instance_input_request.md
 docs/instance_interface.md
+docs/instance_interface_status.md
 docs/instance_list.md
 docs/instance_netdump_state.md
 docs/instance_netdump_state_v1.md
@@ -506,6 +498,9 @@ docs/instance_upgrade_return.md
 docs/instance_v1.md
 docs/insufficient_storage_error.md
 docs/insufficient_storage_error_v1.md
+docs/interconnect.md
+docs/interconnect_list.md
+docs/interconnect_protocol.md
 docs/interconnect_response.md
 docs/interfaces_schema_inner.md
 docs/invitation.md
@@ -1054,8 +1049,6 @@ model/create_instance_response.c
 model/create_instance_response.h
 model/create_interconnect_body.c
 model/create_interconnect_body.h
-model/create_interconnect_response_schema.c
-model/create_interconnect_response_schema.h
 model/create_interconnect_v3_body.c
 model/create_interconnect_v3_body.h
 model/create_invites_body.c
@@ -1238,12 +1231,8 @@ model/flavor_frame_home.c
 model/flavor_frame_home.h
 model/flavor_frame_inner.c
 model/flavor_frame_inner.h
-model/get_interconnect_response_schema.c
-model/get_interconnect_response_schema.h
 model/get_interconnects_response.c
 model/get_interconnects_response.h
-model/get_interconnects_response_schema.c
-model/get_interconnects_response_schema.h
 model/get_storage_response.c
 model/get_storage_response.h
 model/gpio_state_definition.c
@@ -1338,6 +1327,8 @@ model/instance_input_request.c
 model/instance_input_request.h
 model/instance_interface.c
 model/instance_interface.h
+model/instance_interface_status.c
+model/instance_interface_status.h
 model/instance_list.c
 model/instance_list.h
 model/instance_netdump_state.c
@@ -1390,6 +1381,12 @@ model/insufficient_storage_error.c
 model/insufficient_storage_error.h
 model/insufficient_storage_error_v1.c
 model/insufficient_storage_error_v1.h
+model/interconnect.c
+model/interconnect.h
+model/interconnect_list.c
+model/interconnect_list.h
+model/interconnect_protocol.c
+model/interconnect_protocol.h
 model/interconnect_response.c
 model/interconnect_response.h
 model/interfaces_schema_inner.c
@@ -2055,7 +2052,6 @@ unit-test/test_create_image_body.c
 unit-test/test_create_instance_body.c
 unit-test/test_create_instance_response.c
 unit-test/test_create_interconnect_body.c
-unit-test/test_create_interconnect_response_schema.c
 unit-test/test_create_interconnect_v3_body.c
 unit-test/test_create_invites_body.c
 unit-test/test_create_invites_body_settings.c
@@ -2147,9 +2143,7 @@ unit-test/test_flavor_frame.c
 unit-test/test_flavor_frame_dimensions.c
 unit-test/test_flavor_frame_home.c
 unit-test/test_flavor_frame_inner.c
-unit-test/test_get_interconnect_response_schema.c
 unit-test/test_get_interconnects_response.c
-unit-test/test_get_interconnects_response_schema.c
 unit-test/test_get_storage_response.c
 unit-test/test_gpio_state_definition.c
 unit-test/test_gpio_state_definition_banks_inner_inner.c
@@ -2197,6 +2191,7 @@ unit-test/test_instance_hyper_trace_state_v1.c
 unit-test/test_instance_input_body.c
 unit-test/test_instance_input_request.c
 unit-test/test_instance_interface.c
+unit-test/test_instance_interface_status.c
 unit-test/test_instance_list.c
 unit-test/test_instance_netdump_state.c
 unit-test/test_instance_netdump_state_v1.c
@@ -2223,6 +2218,9 @@ unit-test/test_instance_upgrade_return.c
 unit-test/test_instance_v1.c
 unit-test/test_insufficient_storage_error.c
 unit-test/test_insufficient_storage_error_v1.c
+unit-test/test_interconnect.c
+unit-test/test_interconnect_list.c
+unit-test/test_interconnect_protocol.c
 unit-test/test_interconnect_response.c
 unit-test/test_interfaces_schema_inner.c
 unit-test/test_invitation.c

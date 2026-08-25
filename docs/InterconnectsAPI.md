@@ -18,7 +18,7 @@ Method | HTTP request | Description
 //
 // Create an I/O Interconnect for the specified project and attach virtual device interfaces.
 //
-create_interconnect_response_schema_t* InterconnectsAPI_v3CreateInterconnect(apiClient_t *apiClient, create_interconnect_v3_body_t *create_interconnect_v3_body);
+interconnect_t* InterconnectsAPI_v3CreateInterconnect(apiClient_t *apiClient, create_interconnect_v3_body_t *create_interconnect_v3_body);
 ```
 
 ### Parameters
@@ -29,7 +29,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[create_interconnect_response_schema_t](create_interconnect_response_schema.md) *
+[interconnect_t](interconnect.md) *
 
 
 ### Authorization
@@ -75,7 +75,7 @@ void
 ```c
 // Get Interconnect
 //
-get_interconnect_response_schema_t* InterconnectsAPI_v3GetInterconnect(apiClient_t *apiClient, char *interconnectId);
+interconnect_t* InterconnectsAPI_v3GetInterconnect(apiClient_t *apiClient, char *interconnectId);
 ```
 
 ### Parameters
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[get_interconnect_response_schema_t](get_interconnect_response_schema.md) *
+[interconnect_t](interconnect.md) *
 
 
 ### Authorization
@@ -104,7 +104,7 @@ Name | Type | Description  | Notes
 ```c
 // List I/O Interconnects
 //
-get_interconnects_response_schema_t* InterconnectsAPI_v3ListInterconnects(apiClient_t *apiClient, double *limit, double *offset, char *name, char *protocol, char *type, char *status, char *sort, char *projectId);
+interconnect_list_t* InterconnectsAPI_v3ListInterconnects(apiClient_t *apiClient, double *limit, double *offset, char *name, char *protocol, char *type, char *status, char *sort, char *projectId);
 ```
 
 ### Parameters
@@ -122,7 +122,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[get_interconnects_response_schema_t](get_interconnects_response_schema.md) *
+[interconnect_list_t](interconnect_list.md) *
 
 
 ### Authorization
@@ -140,7 +140,7 @@ Name | Type | Description  | Notes
 ```c
 // Patch I/O Interconnect
 //
-get_interconnect_response_schema_t* InterconnectsAPI_v3PatchInterconnect(apiClient_t *apiClient, char *interconnectId, patch_interconnect_body_t *patch_interconnect_body);
+interconnect_t* InterconnectsAPI_v3PatchInterconnect(apiClient_t *apiClient, char *interconnectId, patch_interconnect_body_t *patch_interconnect_body);
 ```
 
 ### Parameters
@@ -152,7 +152,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[get_interconnect_response_schema_t](get_interconnect_response_schema.md) *
+[interconnect_t](interconnect.md) *
 
 
 ### Authorization
@@ -170,7 +170,7 @@ Name | Type | Description  | Notes
 ```c
 // Update I/O Interconnect
 //
-get_interconnect_response_schema_t* InterconnectsAPI_v3UpdateInterconnect(apiClient_t *apiClient, char *interconnectId, update_interconnect_v3_body_t *update_interconnect_v3_body);
+interconnect_t* InterconnectsAPI_v3UpdateInterconnect(apiClient_t *apiClient, char *interconnectId, update_interconnect_v3_body_t *update_interconnect_v3_body);
 ```
 
 ### Parameters
@@ -182,7 +182,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[get_interconnect_response_schema_t](get_interconnect_response_schema.md) *
+[interconnect_t](interconnect.md) *
 
 
 ### Authorization

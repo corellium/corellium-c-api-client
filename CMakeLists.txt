@@ -188,7 +188,6 @@ set(SRCS
     model/create_instance_body.c
     model/create_instance_response.c
     model/create_interconnect_body.c
-    model/create_interconnect_response_schema.c
     model/create_interconnect_v3_body.c
     model/create_invites_body.c
     model/create_invites_body_settings.c
@@ -280,9 +279,7 @@ set(SRCS
     model/flavor_frame_dimensions.c
     model/flavor_frame_home.c
     model/flavor_frame_inner.c
-    model/get_interconnect_response_schema.c
     model/get_interconnects_response.c
-    model/get_interconnects_response_schema.c
     model/get_storage_response.c
     model/gpio_state_definition.c
     model/gpio_state_definition_banks_inner_inner.c
@@ -330,6 +327,7 @@ set(SRCS
     model/instance_input_body.c
     model/instance_input_request.c
     model/instance_interface.c
+    model/instance_interface_status.c
     model/instance_list.c
     model/instance_netdump_state.c
     model/instance_netdump_state_v1.c
@@ -356,6 +354,9 @@ set(SRCS
     model/instance_v1.c
     model/insufficient_storage_error.c
     model/insufficient_storage_error_v1.c
+    model/interconnect.c
+    model/interconnect_list.c
+    model/interconnect_protocol.c
     model/interconnect_response.c
     model/interfaces_schema_inner.c
     model/invitation.c
@@ -637,8 +638,6 @@ set(SRCS
     api/DomainAuthProviderAPI.c
     api/DomainAuthProvidersAPI.c
     api/DomainV1API.c
-    api/ExtensionsAPI.c
-    api/ExtensionsV1API.c
     api/ExternalServicesAPI.c
     api/FirmwareServiceAPI.c
     api/FlavorsAPI.c
@@ -831,7 +830,6 @@ set(HDRS
     model/create_instance_body.h
     model/create_instance_response.h
     model/create_interconnect_body.h
-    model/create_interconnect_response_schema.h
     model/create_interconnect_v3_body.h
     model/create_invites_body.h
     model/create_invites_body_settings.h
@@ -923,9 +921,7 @@ set(HDRS
     model/flavor_frame_dimensions.h
     model/flavor_frame_home.h
     model/flavor_frame_inner.h
-    model/get_interconnect_response_schema.h
     model/get_interconnects_response.h
-    model/get_interconnects_response_schema.h
     model/get_storage_response.h
     model/gpio_state_definition.h
     model/gpio_state_definition_banks_inner_inner.h
@@ -973,6 +969,7 @@ set(HDRS
     model/instance_input_body.h
     model/instance_input_request.h
     model/instance_interface.h
+    model/instance_interface_status.h
     model/instance_list.h
     model/instance_netdump_state.h
     model/instance_netdump_state_v1.h
@@ -999,6 +996,9 @@ set(HDRS
     model/instance_v1.h
     model/insufficient_storage_error.h
     model/insufficient_storage_error_v1.h
+    model/interconnect.h
+    model/interconnect_list.h
+    model/interconnect_protocol.h
     model/interconnect_response.h
     model/interfaces_schema_inner.h
     model/invitation.h
@@ -1280,8 +1280,6 @@ set(HDRS
     api/DomainAuthProviderAPI.h
     api/DomainAuthProvidersAPI.h
     api/DomainV1API.h
-    api/ExtensionsAPI.h
-    api/ExtensionsV1API.h
     api/ExternalServicesAPI.h
     api/FirmwareServiceAPI.h
     api/FlavorsAPI.h
@@ -1426,8 +1424,6 @@ set(HDRS "")
 #    unit-tests/manual-DomainAuthProviderAPI.c
 #    unit-tests/manual-DomainAuthProvidersAPI.c
 #    unit-tests/manual-DomainV1API.c
-#    unit-tests/manual-ExtensionsAPI.c
-#    unit-tests/manual-ExtensionsV1API.c
 #    unit-tests/manual-ExternalServicesAPI.c
 #    unit-tests/manual-FirmwareServiceAPI.c
 #    unit-tests/manual-FlavorsAPI.c

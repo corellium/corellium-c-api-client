@@ -25,9 +25,9 @@ corellium_api_update_interconnect_v3_body_TYPE_e update_interconnect_v3_body_typ
 static update_interconnect_v3_body_t *update_interconnect_v3_body_create_internal(
     char *name,
     list_t *interfaces,
-    char *protocol,
     corellium_api_update_interconnect_v3_body_TYPE_e type,
-    char *project_id
+    char *project_id,
+    corellium_api_interconnect_protocol__e protocol
     ) {
     update_interconnect_v3_body_t *update_interconnect_v3_body_local_var = malloc(sizeof(update_interconnect_v3_body_t));
     if (!update_interconnect_v3_body_local_var) {
@@ -35,9 +35,9 @@ static update_interconnect_v3_body_t *update_interconnect_v3_body_create_interna
     }
     update_interconnect_v3_body_local_var->name = name;
     update_interconnect_v3_body_local_var->interfaces = interfaces;
-    update_interconnect_v3_body_local_var->protocol = protocol;
     update_interconnect_v3_body_local_var->type = type;
     update_interconnect_v3_body_local_var->project_id = project_id;
+    update_interconnect_v3_body_local_var->protocol = protocol;
 
     update_interconnect_v3_body_local_var->_library_owned = 1;
     return update_interconnect_v3_body_local_var;
@@ -46,16 +46,16 @@ static update_interconnect_v3_body_t *update_interconnect_v3_body_create_interna
 __attribute__((deprecated)) update_interconnect_v3_body_t *update_interconnect_v3_body_create(
     char *name,
     list_t *interfaces,
-    char *protocol,
     corellium_api_update_interconnect_v3_body_TYPE_e type,
-    char *project_id
+    char *project_id,
+    corellium_api_interconnect_protocol__e protocol
     ) {
     return update_interconnect_v3_body_create_internal (
         name,
         interfaces,
-        protocol,
         type,
-        project_id
+        project_id,
+        protocol
         );
 }
 
@@ -78,10 +78,6 @@ void update_interconnect_v3_body_free(update_interconnect_v3_body_t *update_inte
         }
         list_freeList(update_interconnect_v3_body->interfaces);
         update_interconnect_v3_body->interfaces = NULL;
-    }
-    if (update_interconnect_v3_body->protocol) {
-        free(update_interconnect_v3_body->protocol);
-        update_interconnect_v3_body->protocol = NULL;
     }
     if (update_interconnect_v3_body->project_id) {
         free(update_interconnect_v3_body->project_id);
@@ -123,14 +119,6 @@ cJSON *update_interconnect_v3_body_convertToJSON(update_interconnect_v3_body_t *
     }
 
 
-    // update_interconnect_v3_body->protocol
-    if(update_interconnect_v3_body->protocol) {
-    if(cJSON_AddStringToObject(item, "protocol", update_interconnect_v3_body->protocol) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
     // update_interconnect_v3_body->type
     if(update_interconnect_v3_body->type != corellium_api_update_interconnect_v3_body_TYPE_NULL) {
     if(cJSON_AddStringToObject(item, "type", update_interconnect_v3_body_type_ToString(update_interconnect_v3_body->type)) == NULL)
@@ -144,6 +132,19 @@ cJSON *update_interconnect_v3_body_convertToJSON(update_interconnect_v3_body_t *
     if(update_interconnect_v3_body->project_id) {
     if(cJSON_AddStringToObject(item, "projectId", update_interconnect_v3_body->project_id) == NULL) {
     goto fail; //String
+    }
+    }
+
+
+    // update_interconnect_v3_body->protocol
+    if(update_interconnect_v3_body->protocol != corellium_api_interconnect_protocol__NULL) {
+    cJSON *protocol_local_JSON = interconnect_protocol_convertToJSON(update_interconnect_v3_body->protocol);
+    if(protocol_local_JSON == NULL) {
+        goto fail; // custom
+    }
+    cJSON_AddItemToObject(item, "protocol", protocol_local_JSON);
+    if(item->child == NULL) {
+        goto fail;
     }
     }
 
@@ -161,6 +162,9 @@ update_interconnect_v3_body_t *update_interconnect_v3_body_parseFromJSON(cJSON *
 
     // define the local list for update_interconnect_v3_body->interfaces
     list_t *interfacesList = NULL;
+
+    // define the local variable for update_interconnect_v3_body->protocol
+    corellium_api_interconnect_protocol__e protocol_local_nonprim = 0;
 
     // update_interconnect_v3_body->name
     cJSON *name = cJSON_GetObjectItemCaseSensitive(update_interconnect_v3_bodyJSON, "name");
@@ -204,18 +208,6 @@ update_interconnect_v3_body_t *update_interconnect_v3_body_parseFromJSON(cJSON *
         list_addElement(interfacesList, interfacesItem);
     }
 
-    // update_interconnect_v3_body->protocol
-    cJSON *protocol = cJSON_GetObjectItemCaseSensitive(update_interconnect_v3_bodyJSON, "protocol");
-    if (cJSON_IsNull(protocol)) {
-        protocol = NULL;
-    }
-    if (protocol) { 
-    if(!cJSON_IsString(protocol) && !cJSON_IsNull(protocol))
-    {
-    goto end; //String
-    }
-    }
-
     // update_interconnect_v3_body->type
     cJSON *type = cJSON_GetObjectItemCaseSensitive(update_interconnect_v3_bodyJSON, "type");
     if (cJSON_IsNull(type)) {
@@ -242,13 +234,22 @@ update_interconnect_v3_body_t *update_interconnect_v3_body_parseFromJSON(cJSON *
     }
     }
 
+    // update_interconnect_v3_body->protocol
+    cJSON *protocol = cJSON_GetObjectItemCaseSensitive(update_interconnect_v3_bodyJSON, "protocol");
+    if (cJSON_IsNull(protocol)) {
+        protocol = NULL;
+    }
+    if (protocol) { 
+    protocol_local_nonprim = interconnect_protocol_parseFromJSON(protocol); //custom
+    }
+
 
     update_interconnect_v3_body_local_var = update_interconnect_v3_body_create_internal (
         strdup(name->valuestring),
         interfacesList,
-        protocol && !cJSON_IsNull(protocol) ? strdup(protocol->valuestring) : NULL,
         type ? typeVariable : corellium_api_update_interconnect_v3_body_TYPE_NULL,
-        project_id && !cJSON_IsNull(project_id) ? strdup(project_id->valuestring) : NULL
+        project_id && !cJSON_IsNull(project_id) ? strdup(project_id->valuestring) : NULL,
+        protocol ? protocol_local_nonprim : 0
         );
 
     return update_interconnect_v3_body_local_var;
@@ -261,6 +262,9 @@ end:
         }
         list_freeList(interfacesList);
         interfacesList = NULL;
+    }
+    if (protocol_local_nonprim) {
+        protocol_local_nonprim = 0;
     }
     return NULL;
 

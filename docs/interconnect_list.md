@@ -1,9 +1,9 @@
-# get_interconnects_response_schema_t
+# interconnect_list_t
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**results** | [**list_t**](get_interconnect_response_schema.md) \* | Array of interconnects. | 
+**results** | [**list_t**](interconnect.md) \* | Array of interconnects. | 
 **count** | **double** | Number of results in this response. | 
 **total** | **double** | Total number of results across all pages. | 
 **limit** | **double** | Limit used for pagination. | 

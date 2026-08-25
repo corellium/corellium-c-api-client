@@ -20,6 +20,7 @@ typedef struct instance_t instance_t;
 #include "instance_boot_options.h"
 #include "instance_console.h"
 #include "instance_hyper_trace_state.h"
+#include "instance_interface_status.h"
 #include "instance_netdump_state.h"
 #include "instance_netmon_state.h"
 #include "instance_read_only_status.h"
@@ -65,6 +66,7 @@ typedef struct instance_t {
     char *port_sockcap; // string
     char *port_model_gw; // string
     list_t *consoles; //nonprimitive container
+    list_t *interfaces; //nonprimitive container
     struct instance_services_t *services; //model
     int panicked; //boolean
     char *created; //date time
@@ -123,6 +125,7 @@ __attribute__((deprecated)) instance_t *instance_create(
     char *port_sockcap,
     char *port_model_gw,
     list_t *consoles,
+    list_t *interfaces,
     instance_services_t *services,
     int panicked,
     char *created,

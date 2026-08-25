@@ -36,6 +36,7 @@ Name | Type | Description | Notes
 **port_sockcap** | **char \*** | Socket capture port number. | [optional] 
 **port_model_gw** | **char \*** | Model gateway port number. | [optional] 
 **consoles** | [**list_t**](instance_console.md) \* | Available console connections. | [optional] 
+**interfaces** | [**list_t**](instance_interface_status.md) \* | Available configurable interfaces and their attachment status. | [optional] 
 **services** | [**instance_services_t**](instance_services.md) \* |  | [optional] 
 **panicked** | **int** | Whether the instance has panicked. | [optional] 
 **created** | **char \*** | Time instance was created. | 

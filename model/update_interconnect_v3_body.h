@@ -15,6 +15,7 @@
 
 typedef struct update_interconnect_v3_body_t update_interconnect_v3_body_t;
 
+#include "interconnect_protocol.h"
 #include "interfaces_schema_inner.h"
 
 // Enum TYPE for update_interconnect_v3_body
@@ -30,9 +31,9 @@ corellium_api_update_interconnect_v3_body_TYPE_e update_interconnect_v3_body_typ
 typedef struct update_interconnect_v3_body_t {
     char *name; // string
     list_t *interfaces; //nonprimitive container
-    char *protocol; // string
     corellium_api_update_interconnect_v3_body_TYPE_e type; //enum
     char *project_id; // string
+    corellium_api_interconnect_protocol__e protocol; //referenced enum
 
     int _library_owned; // Is the library responsible for freeing this object?
 } update_interconnect_v3_body_t;
@@ -40,9 +41,9 @@ typedef struct update_interconnect_v3_body_t {
 __attribute__((deprecated)) update_interconnect_v3_body_t *update_interconnect_v3_body_create(
     char *name,
     list_t *interfaces,
-    char *protocol,
     corellium_api_update_interconnect_v3_body_TYPE_e type,
-    char *project_id
+    char *project_id,
+    corellium_api_interconnect_protocol__e protocol
 );
 
 void update_interconnect_v3_body_free(update_interconnect_v3_body_t *update_interconnect_v3_body);

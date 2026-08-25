@@ -24,17 +24,17 @@ update_interconnect_v3_body_t* instantiate_update_interconnect_v3_body(int inclu
     update_interconnect_v3_body = update_interconnect_v3_body_create(
       "0",
       list_createList(),
-      "0",
       corellium_api_update_interconnect_v3_body_TYPE_hub,
-      "0"
+      "0",
+      corellium_api_update_interconnect_v3_body__can
     );
   } else {
     update_interconnect_v3_body = update_interconnect_v3_body_create(
       "0",
       list_createList(),
-      "0",
       corellium_api_update_interconnect_v3_body_TYPE_hub,
-      "0"
+      "0",
+      corellium_api_update_interconnect_v3_body__can
     );
   }
 

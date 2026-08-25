@@ -24,20 +24,20 @@ corellium_api_create_interconnect_v3_body_TYPE_e create_interconnect_v3_body_typ
 
 static create_interconnect_v3_body_t *create_interconnect_v3_body_create_internal(
     char *name,
-    char *protocol,
     corellium_api_create_interconnect_v3_body_TYPE_e type,
     list_t *interfaces,
-    char *project_id
+    char *project_id,
+    corellium_api_interconnect_protocol__e protocol
     ) {
     create_interconnect_v3_body_t *create_interconnect_v3_body_local_var = malloc(sizeof(create_interconnect_v3_body_t));
     if (!create_interconnect_v3_body_local_var) {
         return NULL;
     }
     create_interconnect_v3_body_local_var->name = name;
-    create_interconnect_v3_body_local_var->protocol = protocol;
     create_interconnect_v3_body_local_var->type = type;
     create_interconnect_v3_body_local_var->interfaces = interfaces;
     create_interconnect_v3_body_local_var->project_id = project_id;
+    create_interconnect_v3_body_local_var->protocol = protocol;
 
     create_interconnect_v3_body_local_var->_library_owned = 1;
     return create_interconnect_v3_body_local_var;
@@ -45,17 +45,17 @@ static create_interconnect_v3_body_t *create_interconnect_v3_body_create_interna
 
 __attribute__((deprecated)) create_interconnect_v3_body_t *create_interconnect_v3_body_create(
     char *name,
-    char *protocol,
     corellium_api_create_interconnect_v3_body_TYPE_e type,
     list_t *interfaces,
-    char *project_id
+    char *project_id,
+    corellium_api_interconnect_protocol__e protocol
     ) {
     return create_interconnect_v3_body_create_internal (
         name,
-        protocol,
         type,
         interfaces,
-        project_id
+        project_id,
+        protocol
         );
 }
 
@@ -71,10 +71,6 @@ void create_interconnect_v3_body_free(create_interconnect_v3_body_t *create_inte
     if (create_interconnect_v3_body->name) {
         free(create_interconnect_v3_body->name);
         create_interconnect_v3_body->name = NULL;
-    }
-    if (create_interconnect_v3_body->protocol) {
-        free(create_interconnect_v3_body->protocol);
-        create_interconnect_v3_body->protocol = NULL;
     }
     if (create_interconnect_v3_body->interfaces) {
         list_ForEach(listEntry, create_interconnect_v3_body->interfaces) {
@@ -98,15 +94,6 @@ cJSON *create_interconnect_v3_body_convertToJSON(create_interconnect_v3_body_t *
         goto fail;
     }
     if(cJSON_AddStringToObject(item, "name", create_interconnect_v3_body->name) == NULL) {
-    goto fail; //String
-    }
-
-
-    // create_interconnect_v3_body->protocol
-    if (!create_interconnect_v3_body->protocol) {
-        goto fail;
-    }
-    if(cJSON_AddStringToObject(item, "protocol", create_interconnect_v3_body->protocol) == NULL) {
     goto fail; //String
     }
 
@@ -150,6 +137,20 @@ cJSON *create_interconnect_v3_body_convertToJSON(create_interconnect_v3_body_t *
     goto fail; //String
     }
 
+
+    // create_interconnect_v3_body->protocol
+    if (corellium_api_interconnect_protocol__NULL == create_interconnect_v3_body->protocol) {
+        goto fail;
+    }
+    cJSON *protocol_local_JSON = interconnect_protocol_convertToJSON(create_interconnect_v3_body->protocol);
+    if(protocol_local_JSON == NULL) {
+        goto fail; // custom
+    }
+    cJSON_AddItemToObject(item, "protocol", protocol_local_JSON);
+    if(item->child == NULL) {
+        goto fail;
+    }
+
     return item;
 fail:
     if (item) {
@@ -165,6 +166,9 @@ create_interconnect_v3_body_t *create_interconnect_v3_body_parseFromJSON(cJSON *
     // define the local list for create_interconnect_v3_body->interfaces
     list_t *interfacesList = NULL;
 
+    // define the local variable for create_interconnect_v3_body->protocol
+    corellium_api_interconnect_protocol__e protocol_local_nonprim = 0;
+
     // create_interconnect_v3_body->name
     cJSON *name = cJSON_GetObjectItemCaseSensitive(create_interconnect_v3_bodyJSON, "name");
     if (cJSON_IsNull(name)) {
@@ -176,21 +180,6 @@ create_interconnect_v3_body_t *create_interconnect_v3_body_parseFromJSON(cJSON *
 
     
     if(!cJSON_IsString(name))
-    {
-    goto end; //String
-    }
-
-    // create_interconnect_v3_body->protocol
-    cJSON *protocol = cJSON_GetObjectItemCaseSensitive(create_interconnect_v3_bodyJSON, "protocol");
-    if (cJSON_IsNull(protocol)) {
-        protocol = NULL;
-    }
-    if (!protocol) {
-        goto end;
-    }
-
-    
-    if(!cJSON_IsString(protocol))
     {
     goto end; //String
     }
@@ -254,13 +243,25 @@ create_interconnect_v3_body_t *create_interconnect_v3_body_parseFromJSON(cJSON *
     goto end; //String
     }
 
+    // create_interconnect_v3_body->protocol
+    cJSON *protocol = cJSON_GetObjectItemCaseSensitive(create_interconnect_v3_bodyJSON, "protocol");
+    if (cJSON_IsNull(protocol)) {
+        protocol = NULL;
+    }
+    if (!protocol) {
+        goto end;
+    }
+
+    
+    protocol_local_nonprim = interconnect_protocol_parseFromJSON(protocol); //custom
+
 
     create_interconnect_v3_body_local_var = create_interconnect_v3_body_create_internal (
         strdup(name->valuestring),
-        strdup(protocol->valuestring),
         typeVariable,
         interfacesList,
-        strdup(project_id->valuestring)
+        strdup(project_id->valuestring),
+        protocol_local_nonprim
         );
 
     return create_interconnect_v3_body_local_var;
@@ -273,6 +274,9 @@ end:
         }
         list_freeList(interfacesList);
         interfacesList = NULL;
+    }
+    if (protocol_local_nonprim) {
+        protocol_local_nonprim = 0;
     }
     return NULL;
 
