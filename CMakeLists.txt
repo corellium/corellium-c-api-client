@@ -186,6 +186,7 @@ set(SRCS
     model/create_hook_body.c
     model/create_image_body.c
     model/create_instance_body.c
+    model/create_instance_response.c
     model/create_interconnect_body.c
     model/create_interconnect_response_schema.c
     model/create_interconnect_v3_body.c
@@ -339,7 +340,6 @@ set(SRCS
     model/instance_restore_status.c
     model/instance_restore_status_v1.c
     model/instance_return.c
-    model/instance_return_v1.c
     model/instance_services.c
     model/instance_services_v1.c
     model/instance_start_options.c
@@ -494,8 +494,9 @@ set(SRCS
     model/set_domain_welcome_message_body.c
     model/set_snapshot_permissions_body.c
     model/share_snapshot_body.c
+    model/shared_snapshot.c
     model/shared_snapshots_info.c
-    model/shared_snapshots_info_schema.c
+    model/shared_snapshots_response.c
     model/sharing_type.c
     model/snapshot.c
     model/snapshot_creation_options.c
@@ -591,7 +592,6 @@ set(SRCS
     model/user_error.c
     model/user_error_v1.c
     model/user_snapshots.c
-    model/user_snapshots_schema.c
     model/user_update.c
     model/v1_check_subdomain_existence_parameters.c
     model/v1_create_hook_parameters.c
@@ -637,6 +637,8 @@ set(SRCS
     api/DomainAuthProviderAPI.c
     api/DomainAuthProvidersAPI.c
     api/DomainV1API.c
+    api/ExtensionsAPI.c
+    api/ExtensionsV1API.c
     api/ExternalServicesAPI.c
     api/FirmwareServiceAPI.c
     api/FlavorsAPI.c
@@ -827,6 +829,7 @@ set(HDRS
     model/create_hook_body.h
     model/create_image_body.h
     model/create_instance_body.h
+    model/create_instance_response.h
     model/create_interconnect_body.h
     model/create_interconnect_response_schema.h
     model/create_interconnect_v3_body.h
@@ -980,7 +983,6 @@ set(HDRS
     model/instance_restore_status.h
     model/instance_restore_status_v1.h
     model/instance_return.h
-    model/instance_return_v1.h
     model/instance_services.h
     model/instance_services_v1.h
     model/instance_start_options.h
@@ -1135,8 +1137,9 @@ set(HDRS
     model/set_domain_welcome_message_body.h
     model/set_snapshot_permissions_body.h
     model/share_snapshot_body.h
+    model/shared_snapshot.h
     model/shared_snapshots_info.h
-    model/shared_snapshots_info_schema.h
+    model/shared_snapshots_response.h
     model/sharing_type.h
     model/snapshot.h
     model/snapshot_creation_options.h
@@ -1232,7 +1235,6 @@ set(HDRS
     model/user_error.h
     model/user_error_v1.h
     model/user_snapshots.h
-    model/user_snapshots_schema.h
     model/user_update.h
     model/v1_check_subdomain_existence_parameters.h
     model/v1_create_hook_parameters.h
@@ -1278,6 +1280,8 @@ set(HDRS
     api/DomainAuthProviderAPI.h
     api/DomainAuthProvidersAPI.h
     api/DomainV1API.h
+    api/ExtensionsAPI.h
+    api/ExtensionsV1API.h
     api/ExternalServicesAPI.h
     api/FirmwareServiceAPI.h
     api/FlavorsAPI.h
@@ -1422,6 +1426,8 @@ set(HDRS "")
 #    unit-tests/manual-DomainAuthProviderAPI.c
 #    unit-tests/manual-DomainAuthProvidersAPI.c
 #    unit-tests/manual-DomainV1API.c
+#    unit-tests/manual-ExtensionsAPI.c
+#    unit-tests/manual-ExtensionsV1API.c
 #    unit-tests/manual-ExternalServicesAPI.c
 #    unit-tests/manual-FirmwareServiceAPI.c
 #    unit-tests/manual-FlavorsAPI.c

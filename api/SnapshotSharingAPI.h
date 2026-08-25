@@ -10,9 +10,9 @@
 #include "../model/api_not_found_error.h"
 #include "../model/set_snapshot_permissions_body.h"
 #include "../model/share_snapshot_body.h"
+#include "../model/shared_snapshots_response.h"
 #include "../model/snapshot.h"
 #include "../model/user_error.h"
-#include "../model/user_snapshots_schema.h"
 
 
 // Accept a shared snapshot
@@ -33,7 +33,7 @@ SnapshotSharingAPI_v3DeleteSnapshotPermissions(apiClient_t *apiClient, char *sna
 //
 // Fetch snapshots shared with and shared by the requesting user.
 //
-user_snapshots_schema_t*
+shared_snapshots_response_t*
 SnapshotSharingAPI_v3GetSharedSnapshots(apiClient_t *apiClient);
 
 

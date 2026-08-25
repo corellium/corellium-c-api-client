@@ -47,6 +47,10 @@ api/DomainAuthProvidersAPI.c
 api/DomainAuthProvidersAPI.h
 api/DomainV1API.c
 api/DomainV1API.h
+api/ExtensionsAPI.c
+api/ExtensionsAPI.h
+api/ExtensionsV1API.c
+api/ExtensionsV1API.h
 api/ExternalServicesAPI.c
 api/ExternalServicesAPI.h
 api/FirmwareServiceAPI.c
@@ -151,6 +155,8 @@ docs/DomainAPI.md
 docs/DomainAuthProviderAPI.md
 docs/DomainAuthProvidersAPI.md
 docs/DomainV1API.md
+docs/ExtensionsAPI.md
+docs/ExtensionsV1API.md
 docs/ExternalServicesAPI.md
 docs/FirmwareServiceAPI.md
 docs/FlavorsAPI.md
@@ -330,6 +336,7 @@ docs/create_domain_welcome_message_body.md
 docs/create_hook_body.md
 docs/create_image_body.md
 docs/create_instance_body.md
+docs/create_instance_response.md
 docs/create_interconnect_body.md
 docs/create_interconnect_response_schema.md
 docs/create_interconnect_v3_body.md
@@ -483,7 +490,6 @@ docs/instance_read_only_status_v1.md
 docs/instance_restore_status.md
 docs/instance_restore_status_v1.md
 docs/instance_return.md
-docs/instance_return_v1.md
 docs/instance_services.md
 docs/instance_services_v1.md
 docs/instance_start_options.md
@@ -638,8 +644,9 @@ docs/service_status_request_body_vms_inner.md
 docs/set_domain_welcome_message_body.md
 docs/set_snapshot_permissions_body.md
 docs/share_snapshot_body.md
+docs/shared_snapshot.md
 docs/shared_snapshots_info.md
-docs/shared_snapshots_info_schema.md
+docs/shared_snapshots_response.md
 docs/sharing_type.md
 docs/snapshot.md
 docs/snapshot_creation_options.md
@@ -735,7 +742,6 @@ docs/user_created.md
 docs/user_error.md
 docs/user_error_v1.md
 docs/user_snapshots.md
-docs/user_snapshots_schema.md
 docs/user_update.md
 docs/v1_check_subdomain_existence_parameters.md
 docs/v1_create_hook_parameters.md
@@ -1044,6 +1050,8 @@ model/create_image_body.c
 model/create_image_body.h
 model/create_instance_body.c
 model/create_instance_body.h
+model/create_instance_response.c
+model/create_instance_response.h
 model/create_interconnect_body.c
 model/create_interconnect_body.h
 model/create_interconnect_response_schema.c
@@ -1350,8 +1358,6 @@ model/instance_restore_status_v1.c
 model/instance_restore_status_v1.h
 model/instance_return.c
 model/instance_return.h
-model/instance_return_v1.c
-model/instance_return_v1.h
 model/instance_services.c
 model/instance_services.h
 model/instance_services_v1.c
@@ -1662,10 +1668,12 @@ model/set_snapshot_permissions_body.c
 model/set_snapshot_permissions_body.h
 model/share_snapshot_body.c
 model/share_snapshot_body.h
+model/shared_snapshot.c
+model/shared_snapshot.h
 model/shared_snapshots_info.c
 model/shared_snapshots_info.h
-model/shared_snapshots_info_schema.c
-model/shared_snapshots_info_schema.h
+model/shared_snapshots_response.c
+model/shared_snapshots_response.h
 model/sharing_type.c
 model/sharing_type.h
 model/snapshot.c
@@ -1856,8 +1864,6 @@ model/user_error_v1.c
 model/user_error_v1.h
 model/user_snapshots.c
 model/user_snapshots.h
-model/user_snapshots_schema.c
-model/user_snapshots_schema.h
 model/user_update.c
 model/user_update.h
 model/v1_check_subdomain_existence_parameters.c
@@ -2047,6 +2053,7 @@ unit-test/test_create_domain_welcome_message_body.c
 unit-test/test_create_hook_body.c
 unit-test/test_create_image_body.c
 unit-test/test_create_instance_body.c
+unit-test/test_create_instance_response.c
 unit-test/test_create_interconnect_body.c
 unit-test/test_create_interconnect_response_schema.c
 unit-test/test_create_interconnect_v3_body.c
@@ -2200,7 +2207,6 @@ unit-test/test_instance_read_only_status_v1.c
 unit-test/test_instance_restore_status.c
 unit-test/test_instance_restore_status_v1.c
 unit-test/test_instance_return.c
-unit-test/test_instance_return_v1.c
 unit-test/test_instance_services.c
 unit-test/test_instance_services_v1.c
 unit-test/test_instance_start_options.c
@@ -2355,8 +2361,9 @@ unit-test/test_service_status_request_body_vms_inner.c
 unit-test/test_set_domain_welcome_message_body.c
 unit-test/test_set_snapshot_permissions_body.c
 unit-test/test_share_snapshot_body.c
+unit-test/test_shared_snapshot.c
 unit-test/test_shared_snapshots_info.c
-unit-test/test_shared_snapshots_info_schema.c
+unit-test/test_shared_snapshots_response.c
 unit-test/test_sharing_type.c
 unit-test/test_snapshot.c
 unit-test/test_snapshot_creation_options.c
@@ -2452,7 +2459,6 @@ unit-test/test_user_created.c
 unit-test/test_user_error.c
 unit-test/test_user_error_v1.c
 unit-test/test_user_snapshots.c
-unit-test/test_user_snapshots_schema.c
 unit-test/test_user_update.c
 unit-test/test_v1_check_subdomain_existence_parameters.c
 unit-test/test_v1_create_hook_parameters.c

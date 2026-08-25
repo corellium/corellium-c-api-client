@@ -11,6 +11,7 @@
 #include "../model/api_not_found_error.h"
 #include "../model/attach_interface_body.h"
 #include "../model/create_instance_body.h"
+#include "../model/create_instance_response.h"
 #include "../model/detach_interface_body.h"
 #include "../model/enable_netdump_body.h"
 #include "../model/enable_sslsplit_body.h"
@@ -20,7 +21,6 @@
 #include "../model/instance_console_endpoint.h"
 #include "../model/instance_input_body.h"
 #include "../model/instance_list.h"
-#include "../model/instance_return.h"
 #include "../model/instance_state.h"
 #include "../model/instance_upgrade_body.h"
 #include "../model/instance_upgrade_return.h"
@@ -54,7 +54,7 @@ InstancesAPI_v3ClearInstancePanics(apiClient_t *apiClient, char *instanceId);
 
 // Create Instance
 //
-instance_return_t*
+create_instance_response_t*
 InstancesAPI_v3CreateInstance(apiClient_t *apiClient, create_instance_body_t *create_instance_body);
 
 

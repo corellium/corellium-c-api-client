@@ -185,7 +185,7 @@ end:
 
 // Create Instance
 //
-instance_return_v1_t*
+instance_return_t*
 InstancesV1API_v1CreateInstance(apiClient_t *apiClient, instance_create_options_t *instance_create_options)
 {
     list_t    *localVarQueryParameters = NULL;
@@ -241,10 +241,10 @@ InstancesV1API_v1CreateInstance(apiClient_t *apiClient, instance_create_options_
     //    printf("%s\n","Forbidden");
     //}
     //nonprimitive not container
-    instance_return_v1_t *elementToReturn = NULL;
+    instance_return_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
         cJSON *InstancesV1APIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = instance_return_v1_parseFromJSON(InstancesV1APIlocalVarJSON);
+        elementToReturn = instance_return_parseFromJSON(InstancesV1APIlocalVarJSON);
         cJSON_Delete(InstancesV1APIlocalVarJSON);
         if(elementToReturn == NULL) {
             // return 0;

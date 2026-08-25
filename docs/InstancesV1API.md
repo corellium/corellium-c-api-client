@@ -107,7 +107,7 @@ void
 ```c
 // Create Instance
 //
-instance_return_v1_t* InstancesV1API_v1CreateInstance(apiClient_t *apiClient, instance_create_options_t *instance_create_options);
+instance_return_t* InstancesV1API_v1CreateInstance(apiClient_t *apiClient, instance_create_options_t *instance_create_options);
 ```
 
 ### Parameters
@@ -118,7 +118,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[instance_return_v1_t](instance_return_v1.md) *
+[instance_return_t](instance_return.md) *
 
 
 ### Authorization

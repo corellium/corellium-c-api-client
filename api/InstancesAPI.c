@@ -185,7 +185,7 @@ end:
 
 // Create Instance
 //
-instance_return_t*
+create_instance_response_t*
 InstancesAPI_v3CreateInstance(apiClient_t *apiClient, create_instance_body_t *create_instance_body)
 {
     list_t    *localVarQueryParameters = NULL;
@@ -249,10 +249,10 @@ InstancesAPI_v3CreateInstance(apiClient_t *apiClient, create_instance_body_t *cr
     //    printf("%s\n","Instance could not be created due to a conflict.");
     //}
     //nonprimitive not container
-    instance_return_t *elementToReturn = NULL;
+    create_instance_response_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
         cJSON *InstancesAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = instance_return_parseFromJSON(InstancesAPIlocalVarJSON);
+        elementToReturn = create_instance_response_parseFromJSON(InstancesAPIlocalVarJSON);
         cJSON_Delete(InstancesAPIlocalVarJSON);
         if(elementToReturn == NULL) {
             // return 0;

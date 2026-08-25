@@ -216,11 +216,10 @@ cJSON *create_instance_body_convertToJSON(create_instance_body_t *create_instanc
 
 
     // create_instance_body->flavor
-    if (!create_instance_body->flavor) {
-        goto fail;
-    }
+    if(create_instance_body->flavor) {
     if(cJSON_AddStringToObject(item, "flavor", create_instance_body->flavor) == NULL) {
     goto fail; //String
+    }
     }
 
 
@@ -234,11 +233,10 @@ cJSON *create_instance_body_convertToJSON(create_instance_body_t *create_instanc
 
 
     // create_instance_body->os_version
-    if (!create_instance_body->os_version) {
-        goto fail;
-    }
+    if(create_instance_body->os_version) {
     if(cJSON_AddStringToObject(item, "osVersion", create_instance_body->os_version) == NULL) {
     goto fail; //String
+    }
     }
 
 
@@ -450,14 +448,11 @@ create_instance_body_t *create_instance_body_parseFromJSON(cJSON *create_instanc
     if (cJSON_IsNull(flavor)) {
         flavor = NULL;
     }
-    if (!flavor) {
-        goto end;
-    }
-
-    
-    if(!cJSON_IsString(flavor))
+    if (flavor) { 
+    if(!cJSON_IsString(flavor) && !cJSON_IsNull(flavor))
     {
     goto end; //String
+    }
     }
 
     // create_instance_body->project_id
@@ -480,14 +475,11 @@ create_instance_body_t *create_instance_body_parseFromJSON(cJSON *create_instanc
     if (cJSON_IsNull(os_version)) {
         os_version = NULL;
     }
-    if (!os_version) {
-        goto end;
-    }
-
-    
-    if(!cJSON_IsString(os_version))
+    if (os_version) { 
+    if(!cJSON_IsString(os_version) && !cJSON_IsNull(os_version))
     {
     goto end; //String
+    }
     }
 
     // create_instance_body->os_build
@@ -654,9 +646,9 @@ create_instance_body_t *create_instance_body_parseFromJSON(cJSON *create_instanc
         shared_snapshot_password && !cJSON_IsNull(shared_snapshot_password) ? strdup(shared_snapshot_password->valuestring) : NULL,
         name && !cJSON_IsNull(name) ? strdup(name->valuestring) : NULL,
         key && !cJSON_IsNull(key) ? strdup(key->valuestring) : NULL,
-        strdup(flavor->valuestring),
+        flavor && !cJSON_IsNull(flavor) ? strdup(flavor->valuestring) : NULL,
         strdup(project_id->valuestring),
-        strdup(os_version->valuestring),
+        os_version && !cJSON_IsNull(os_version) ? strdup(os_version->valuestring) : NULL,
         os_build && !cJSON_IsNull(os_build) ? strdup(os_build->valuestring) : NULL,
         patches ? patchesList : NULL,
         fw_package ? fw_package_local_object : NULL,

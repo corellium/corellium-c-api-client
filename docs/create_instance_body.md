@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 **shared_snapshot_password** | **char \*** | Password of the shared snapshot named by sharedSnapshot, as set when it was shared. Required when that snapshot was shared with sharing type passwordPublicLink. This is the same value passed as password to POST /v3/snapshots/accept. | [optional] 
 **name** | **char \*** | The name of the device. | [optional] 
 **key** | **char \*** | Key used to encrypt the instance (hex). | [optional] 
-**flavor** | **char \*** | The flavor ID. | 
+**flavor** | **char \*** | The flavor ID. | [optional] 
 **project_id** | **char \*** | Project UUID. | 
-**os_version** | **char \*** | OS version. | 
+**os_version** | **char \*** | OS version. | [optional] 
 **os_build** | **char \*** | OS build. | [optional] 
 **patches** | **list_t \*** | List of patches to apply. | [optional] 
 **fw_package** | [**object_t**](.md) \* | URL or image ID. | [optional] 

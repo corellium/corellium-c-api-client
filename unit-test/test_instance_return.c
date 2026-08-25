@@ -23,12 +23,12 @@ instance_return_t* instantiate_instance_return(int include_optional) {
   if (include_optional) {
     instance_return = instance_return_create(
       "0",
-      corellium_api_instance_return_STATE_creating
+      corellium_api_instance_return__on
     );
   } else {
     instance_return = instance_return_create(
       "0",
-      corellium_api_instance_return_STATE_creating
+      corellium_api_instance_return__on
     );
   }
 

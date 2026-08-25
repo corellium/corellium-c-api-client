@@ -218,7 +218,7 @@ end:
 //
 // Fetch snapshots shared with and shared by the requesting user.
 //
-user_snapshots_schema_t*
+shared_snapshots_response_t*
 SnapshotSharingAPI_v3GetSharedSnapshots(apiClient_t *apiClient)
 {
     list_t    *localVarQueryParameters = NULL;
@@ -259,10 +259,10 @@ SnapshotSharingAPI_v3GetSharedSnapshots(apiClient_t *apiClient)
     //    printf("%s\n","Permission denied.");
     //}
     //nonprimitive not container
-    user_snapshots_schema_t *elementToReturn = NULL;
+    shared_snapshots_response_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
         cJSON *SnapshotSharingAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = user_snapshots_schema_parseFromJSON(SnapshotSharingAPIlocalVarJSON);
+        elementToReturn = shared_snapshots_response_parseFromJSON(SnapshotSharingAPIlocalVarJSON);
         cJSON_Delete(SnapshotSharingAPIlocalVarJSON);
         if(elementToReturn == NULL) {
             // return 0;

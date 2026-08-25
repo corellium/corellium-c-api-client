@@ -78,7 +78,7 @@ Name | Type | Description  | Notes
 //
 // Fetch snapshots shared with and shared by the requesting user.
 //
-user_snapshots_schema_t* SnapshotSharingAPI_v3GetSharedSnapshots(apiClient_t *apiClient);
+shared_snapshots_response_t* SnapshotSharingAPI_v3GetSharedSnapshots(apiClient_t *apiClient);
 ```
 
 ### Parameters
@@ -88,7 +88,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[user_snapshots_schema_t](user_snapshots_schema.md) *
+[shared_snapshots_response_t](shared_snapshots_response.md) *
 
 
 ### Authorization

@@ -15,7 +15,7 @@
 #include "../model/instance_console_endpoint_v1.h"
 #include "../model/instance_create_options.h"
 #include "../model/instance_input_request.h"
-#include "../model/instance_return_v1.h"
+#include "../model/instance_return.h"
 #include "../model/instance_start_options.h"
 #include "../model/instance_stop_options.h"
 #include "../model/instance_upgrade_body_v1.h"
@@ -50,7 +50,7 @@ InstancesV1API_v1ClearInstancePanics(apiClient_t *apiClient, char *instanceId);
 
 // Create Instance
 //
-instance_return_v1_t*
+instance_return_t*
 InstancesV1API_v1CreateInstance(apiClient_t *apiClient, instance_create_options_t *instance_create_options);
 
 
