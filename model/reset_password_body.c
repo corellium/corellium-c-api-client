@@ -71,10 +71,11 @@ cJSON *reset_password_body_convertToJSON(reset_password_body_t *reset_password_b
 
 
     // reset_password_body->new_password
-    if(reset_password_body->new_password) {
+    if (!reset_password_body->new_password) {
+        goto fail;
+    }
     if(cJSON_AddStringToObject(item, "newPassword", reset_password_body->new_password) == NULL) {
     goto fail; //String
-    }
     }
 
 
@@ -117,11 +118,14 @@ reset_password_body_t *reset_password_body_parseFromJSON(cJSON *reset_password_b
     if (cJSON_IsNull(new_password)) {
         new_password = NULL;
     }
-    if (new_password) { 
-    if(!cJSON_IsString(new_password) && !cJSON_IsNull(new_password))
+    if (!new_password) {
+        goto end;
+    }
+
+    
+    if(!cJSON_IsString(new_password))
     {
     goto end; //String
-    }
     }
 
     // reset_password_body->totp_token
@@ -139,7 +143,7 @@ reset_password_body_t *reset_password_body_parseFromJSON(cJSON *reset_password_b
 
     reset_password_body_local_var = reset_password_body_create_internal (
         strdup(token->valuestring),
-        new_password && !cJSON_IsNull(new_password) ? strdup(new_password->valuestring) : NULL,
+        strdup(new_password->valuestring),
         totp_token && !cJSON_IsNull(totp_token) ? strdup(totp_token->valuestring) : NULL
         );
 
