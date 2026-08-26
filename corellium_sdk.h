@@ -59,6 +59,7 @@
 #include "api/ModelsAPI.h"
 #include "api/ModelsV1API.h"
 #include "api/NetConnectAPI.h"
+#include "api/NetConnectV1API.h"
 #include "api/ProjectsAPI.h"
 #include "api/ProjectsV1API.h"
 #include "api/RAMDumpAPI.h"
@@ -306,14 +307,14 @@
 #define corellium_models_list ModelsAPI_v3GetModels
 
 /* netConnect */
-#define corellium_netConnect_create NetConnectAPI_v1CreateNetworkConnection
-#define corellium_netConnect_delete NetConnectAPI_v1DeleteNetworkConnection
-#define corellium_netConnect_get NetConnectAPI_v1GetNetworkConnection
-#define corellium_netConnect_list NetConnectAPI_v1ListNetworkConnections
-#define corellium_netConnect_listInterfaces NetConnectAPI_v1ListNetworkInterfaces
-#define corellium_netConnect_listProviders NetConnectAPI_v1ListNetworkProviders
-#define corellium_netConnect_patch NetConnectAPI_v1PartialUpdateNetworkConnection
-#define corellium_netConnect_update NetConnectAPI_v1UpdateNetworkConnection
+#define corellium_netConnect_create NetConnectAPI_v3CreateNetworkConnection
+#define corellium_netConnect_delete NetConnectAPI_v3DeleteNetworkConnection
+#define corellium_netConnect_get NetConnectAPI_v3GetNetworkConnection
+#define corellium_netConnect_list NetConnectAPI_v3ListNetworkConnections
+#define corellium_netConnect_listInterfaces NetConnectAPI_v3ListNetworkInterfaces
+#define corellium_netConnect_listProviders NetConnectAPI_v3ListNetworkProviders
+#define corellium_netConnect_patch NetConnectAPI_v3PartialUpdateNetworkConnection
+#define corellium_netConnect_update NetConnectAPI_v3UpdateNetworkConnection
 
 /* projects */
 #define corellium_projects_create ProjectsAPI_v3CreateProject
@@ -572,14 +573,14 @@
 #define corellium_v1_models_list ModelsV1API_v1GetModels
 
 /* netConnect */
-#define corellium_v1_netConnect_create NetConnectAPI_v1CreateNetworkConnection
-#define corellium_v1_netConnect_delete NetConnectAPI_v1DeleteNetworkConnection
-#define corellium_v1_netConnect_get NetConnectAPI_v1GetNetworkConnection
-#define corellium_v1_netConnect_list NetConnectAPI_v1ListNetworkConnections
-#define corellium_v1_netConnect_listInterfaces NetConnectAPI_v1ListNetworkInterfaces
-#define corellium_v1_netConnect_listProviders NetConnectAPI_v1ListNetworkProviders
-#define corellium_v1_netConnect_patch NetConnectAPI_v1PartialUpdateNetworkConnection
-#define corellium_v1_netConnect_update NetConnectAPI_v1UpdateNetworkConnection
+#define corellium_v1_netConnect_create NetConnectV1API_v1CreateNetworkConnection
+#define corellium_v1_netConnect_delete NetConnectV1API_v1DeleteNetworkConnection
+#define corellium_v1_netConnect_get NetConnectV1API_v1GetNetworkConnection
+#define corellium_v1_netConnect_list NetConnectV1API_v1ListNetworkConnections
+#define corellium_v1_netConnect_listInterfaces NetConnectV1API_v1ListNetworkInterfaces
+#define corellium_v1_netConnect_listProviders NetConnectV1API_v1ListNetworkProviders
+#define corellium_v1_netConnect_patch NetConnectV1API_v1PartialUpdateNetworkConnection
+#define corellium_v1_netConnect_update NetConnectV1API_v1UpdateNetworkConnection
 
 /* projects */
 #define corellium_v1_projects_create ProjectsV1API_v1CreateProject
@@ -888,6 +889,16 @@
 /* models */
 #define corellium_v3_models_getSoftware ModelsAPI_v3GetModelSoftware
 #define corellium_v3_models_list ModelsAPI_v3GetModels
+
+/* netConnect */
+#define corellium_v3_netConnect_create NetConnectAPI_v3CreateNetworkConnection
+#define corellium_v3_netConnect_delete NetConnectAPI_v3DeleteNetworkConnection
+#define corellium_v3_netConnect_get NetConnectAPI_v3GetNetworkConnection
+#define corellium_v3_netConnect_list NetConnectAPI_v3ListNetworkConnections
+#define corellium_v3_netConnect_listInterfaces NetConnectAPI_v3ListNetworkInterfaces
+#define corellium_v3_netConnect_listProviders NetConnectAPI_v3ListNetworkProviders
+#define corellium_v3_netConnect_patch NetConnectAPI_v3PartialUpdateNetworkConnection
+#define corellium_v3_netConnect_update NetConnectAPI_v3UpdateNetworkConnection
 
 /* projects */
 #define corellium_v3_projects_create ProjectsAPI_v3CreateProject

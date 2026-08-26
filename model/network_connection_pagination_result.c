@@ -57,7 +57,7 @@ void network_connection_pagination_result_free(network_connection_pagination_res
     listEntry_t *listEntry;
     if (network_connection_pagination_result->results) {
         list_ForEach(listEntry, network_connection_pagination_result->results) {
-            network_connection_free(listEntry->data);
+            object_free(listEntry->data);
         }
         list_freeList(network_connection_pagination_result->results);
         network_connection_pagination_result->results = NULL;
@@ -125,7 +125,7 @@ cJSON *network_connection_pagination_result_convertToJSON(network_connection_pag
     listEntry_t *resultsListEntry;
     if (network_connection_pagination_result->results) {
     list_ForEach(resultsListEntry, network_connection_pagination_result->results) {
-    cJSON *itemLocal = network_connection_convertToJSON(resultsListEntry->data);
+    cJSON *itemLocal = object_convertToJSON(resultsListEntry->data);
     if(itemLocal == NULL) {
     goto fail;
     }
@@ -245,7 +245,7 @@ network_connection_pagination_result_t *network_connection_pagination_result_par
         if(!cJSON_IsObject(results_local_nonprimitive)){
             goto end;
         }
-        network_connection_t *resultsItem = network_connection_parseFromJSON(results_local_nonprimitive);
+        object_t *resultsItem = object_parseFromJSON(results_local_nonprimitive);
 
         list_addElement(resultsList, resultsItem);
     }
@@ -265,7 +265,7 @@ end:
     if (resultsList) {
         listEntry_t *listEntry = NULL;
         list_ForEach(listEntry, resultsList) {
-            network_connection_free(listEntry->data);
+            object_free(listEntry->data);
             listEntry->data = NULL;
         }
         list_freeList(resultsList);

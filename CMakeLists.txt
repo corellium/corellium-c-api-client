@@ -191,7 +191,8 @@ set(SRCS
     model/create_interconnect_v3_body.c
     model/create_invites_body.c
     model/create_invites_body_settings.c
-    model/create_network_connection_options.c
+    model/create_open_vpn_network_connection_body.c
+    model/create_open_vpn_network_connection_body_v1.c
     model/create_project_body.c
     model/create_project_body_settings.c
     model/create_project_key_body.c
@@ -202,6 +203,8 @@ set(SRCS
     model/create_trial_request_response.c
     model/create_trial_request_response_trial_request.c
     model/create_user_body.c
+    model/create_vlan_network_connection_body.c
+    model/create_vlan_network_connection_body_v1.c
     model/create_web_player_session_body.c
     model/created_by.c
     model/credentials.c
@@ -406,10 +409,13 @@ set(SRCS
     model/model_software_v1.c
     model/model_v1.c
     model/netdump_filter.c
-    model/network_connection.c
     model/network_connection_pagination_result.c
     model/network_connection_provider.c
     model/network_connection_provider_pagination_result.c
+    model/network_connection_providers.c
+    model/network_connection_providers_results_inner.c
+    model/network_connections.c
+    model/network_interfaces.c
     model/network_schema.c
     model/network_status.c
     model/network_status_response.c
@@ -421,9 +427,14 @@ set(SRCS
     model/node_updates_failed.c
     model/open_id_config.c
     model/open_id_config_v1.c
+    model/open_vpn_config.c
+    model/open_vpn_config_v1.c
+    model/open_vpn_network_connection.c
+    model/open_vpn_network_connection_v1.c
     model/paginated_assessments.c
     model/pagination.c
     model/partial_update_interconnect_request.c
+    model/partial_update_network_connection_options.c
     model/password_change_body.c
     model/password_reset_body.c
     model/patch_cluster_config_body.c
@@ -583,6 +594,7 @@ set(SRCS
     model/update_interconnect_body.c
     model/update_interconnect_v3_body.c
     model/update_network_connection_options.c
+    model/update_network_connection_options_config.c
     model/update_team_body.c
     model/update_trial_request_body.c
     model/update_trial_request_params.c
@@ -600,9 +612,17 @@ set(SRCS
     model/v1_set_state_body.c
     model/v1_update_hook_parameters.c
     model/v3_create_activity_export_201_response.c
+    model/v3_delete_network_connection_request.c
     model/v3_get_activity_export_status_200_response.c
+    model/v3_partial_update_network_connection_request.c
+    model/v3_update_network_connection_request.c
+    model/v3_update_network_connection_request_config.c
     model/v3_update_snapshot_request.c
     model/validation_error.c
+    model/vlan_config.c
+    model/vlan_config_v1.c
+    model/vlan_network_connection.c
+    model/vlan_network_connection_v1.c
     model/volume_options.c
     model/volume_options_v1.c
     model/vpn_definition.c
@@ -658,6 +678,7 @@ set(SRCS
     api/ModelsAPI.c
     api/ModelsV1API.c
     api/NetConnectAPI.c
+    api/NetConnectV1API.c
     api/ProjectsAPI.c
     api/ProjectsV1API.c
     api/RAMDumpAPI.c
@@ -833,7 +854,8 @@ set(HDRS
     model/create_interconnect_v3_body.h
     model/create_invites_body.h
     model/create_invites_body_settings.h
-    model/create_network_connection_options.h
+    model/create_open_vpn_network_connection_body.h
+    model/create_open_vpn_network_connection_body_v1.h
     model/create_project_body.h
     model/create_project_body_settings.h
     model/create_project_key_body.h
@@ -844,6 +866,8 @@ set(HDRS
     model/create_trial_request_response.h
     model/create_trial_request_response_trial_request.h
     model/create_user_body.h
+    model/create_vlan_network_connection_body.h
+    model/create_vlan_network_connection_body_v1.h
     model/create_web_player_session_body.h
     model/created_by.h
     model/credentials.h
@@ -1048,10 +1072,13 @@ set(HDRS
     model/model_software_v1.h
     model/model_v1.h
     model/netdump_filter.h
-    model/network_connection.h
     model/network_connection_pagination_result.h
     model/network_connection_provider.h
     model/network_connection_provider_pagination_result.h
+    model/network_connection_providers.h
+    model/network_connection_providers_results_inner.h
+    model/network_connections.h
+    model/network_interfaces.h
     model/network_schema.h
     model/network_status.h
     model/network_status_response.h
@@ -1063,9 +1090,14 @@ set(HDRS
     model/node_updates_failed.h
     model/open_id_config.h
     model/open_id_config_v1.h
+    model/open_vpn_config.h
+    model/open_vpn_config_v1.h
+    model/open_vpn_network_connection.h
+    model/open_vpn_network_connection_v1.h
     model/paginated_assessments.h
     model/pagination.h
     model/partial_update_interconnect_request.h
+    model/partial_update_network_connection_options.h
     model/password_change_body.h
     model/password_reset_body.h
     model/patch_cluster_config_body.h
@@ -1225,6 +1257,7 @@ set(HDRS
     model/update_interconnect_body.h
     model/update_interconnect_v3_body.h
     model/update_network_connection_options.h
+    model/update_network_connection_options_config.h
     model/update_team_body.h
     model/update_trial_request_body.h
     model/update_trial_request_params.h
@@ -1242,9 +1275,17 @@ set(HDRS
     model/v1_set_state_body.h
     model/v1_update_hook_parameters.h
     model/v3_create_activity_export_201_response.h
+    model/v3_delete_network_connection_request.h
     model/v3_get_activity_export_status_200_response.h
+    model/v3_partial_update_network_connection_request.h
+    model/v3_update_network_connection_request.h
+    model/v3_update_network_connection_request_config.h
     model/v3_update_snapshot_request.h
     model/validation_error.h
+    model/vlan_config.h
+    model/vlan_config_v1.h
+    model/vlan_network_connection.h
+    model/vlan_network_connection_v1.h
     model/volume_options.h
     model/volume_options_v1.h
     model/vpn_definition.h
@@ -1300,6 +1341,7 @@ set(HDRS
     api/ModelsAPI.h
     api/ModelsV1API.h
     api/NetConnectAPI.h
+    api/NetConnectV1API.h
     api/ProjectsAPI.h
     api/ProjectsV1API.h
     api/RAMDumpAPI.h
@@ -1444,6 +1486,7 @@ set(HDRS "")
 #    unit-tests/manual-ModelsAPI.c
 #    unit-tests/manual-ModelsV1API.c
 #    unit-tests/manual-NetConnectAPI.c
+#    unit-tests/manual-NetConnectV1API.c
 #    unit-tests/manual-ProjectsAPI.c
 #    unit-tests/manual-ProjectsV1API.c
 #    unit-tests/manual-RAMDumpAPI.c

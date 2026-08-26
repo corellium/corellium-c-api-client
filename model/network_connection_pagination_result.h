@@ -15,7 +15,8 @@
 
 typedef struct network_connection_pagination_result_t network_connection_pagination_result_t;
 
-#include "network_connection.h"
+#include "any_type.h"
+#include "object.h"
 
 
 

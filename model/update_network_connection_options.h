@@ -15,14 +15,13 @@
 
 typedef struct update_network_connection_options_t update_network_connection_options_t;
 
-#include "any_type.h"
-#include "object.h"
+#include "update_network_connection_options_config.h"
 
 
 
 typedef struct update_network_connection_options_t {
     char *name; // string
-    object_t *config; //object
+    struct update_network_connection_options_config_t *config; //model
     int force; //boolean
 
     int _library_owned; // Is the library responsible for freeing this object?
@@ -30,7 +29,7 @@ typedef struct update_network_connection_options_t {
 
 __attribute__((deprecated)) update_network_connection_options_t *update_network_connection_options_create(
     char *name,
-    object_t *config,
+    update_network_connection_options_config_t *config,
     int force
 );
 

@@ -24,13 +24,15 @@ user_error_v1_t* instantiate_user_error_v1(int include_optional) {
     user_error_v1 = user_error_v1_create(
       "0",
       corellium_api_user_error_v1_ERRORID_UserError,
-      "0"
+      "0",
+      list_createList()
     );
   } else {
     user_error_v1 = user_error_v1_create(
       "0",
       corellium_api_user_error_v1_ERRORID_UserError,
-      "0"
+      "0",
+      list_createList()
     );
   }
 

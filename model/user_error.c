@@ -25,7 +25,8 @@ corellium_api_user_error_ERRORID_e user_error_error_id_FromString(char* error_id
 static user_error_t *user_error_create_internal(
     char *error,
     corellium_api_user_error_ERRORID_e error_id,
-    char *field
+    char *field,
+    list_t *project_ids
     ) {
     user_error_t *user_error_local_var = malloc(sizeof(user_error_t));
     if (!user_error_local_var) {
@@ -34,6 +35,7 @@ static user_error_t *user_error_create_internal(
     user_error_local_var->error = error;
     user_error_local_var->error_id = error_id;
     user_error_local_var->field = field;
+    user_error_local_var->project_ids = project_ids;
 
     user_error_local_var->_library_owned = 1;
     return user_error_local_var;
@@ -42,12 +44,14 @@ static user_error_t *user_error_create_internal(
 __attribute__((deprecated)) user_error_t *user_error_create(
     char *error,
     corellium_api_user_error_ERRORID_e error_id,
-    char *field
+    char *field,
+    list_t *project_ids
     ) {
     return user_error_create_internal (
         error,
         error_id,
-        field
+        field,
+        project_ids
         );
 }
 
@@ -67,6 +71,13 @@ void user_error_free(user_error_t *user_error) {
     if (user_error->field) {
         free(user_error->field);
         user_error->field = NULL;
+    }
+    if (user_error->project_ids) {
+        list_ForEach(listEntry, user_error->project_ids) {
+            free(listEntry->data);
+        }
+        list_freeList(user_error->project_ids);
+        user_error->project_ids = NULL;
     }
     free(user_error);
 }
@@ -100,6 +111,23 @@ cJSON *user_error_convertToJSON(user_error_t *user_error) {
     }
     }
 
+
+    // user_error->project_ids
+    if(user_error->project_ids) {
+    cJSON *project_ids = cJSON_AddArrayToObject(item, "projectIds");
+    if(project_ids == NULL) {
+        goto fail; //primitive container
+    }
+
+    listEntry_t *project_idsListEntry;
+    list_ForEach(project_idsListEntry, user_error->project_ids) {
+    if(cJSON_AddStringToObject(project_ids, "", project_idsListEntry->data) == NULL)
+    {
+        goto fail;
+    }
+    }
+    }
+
     return item;
 fail:
     if (item) {
@@ -111,6 +139,9 @@ fail:
 user_error_t *user_error_parseFromJSON(cJSON *user_errorJSON){
 
     user_error_t *user_error_local_var = NULL;
+
+    // define the local list for user_error->project_ids
+    list_t *project_idsList = NULL;
 
     // user_error->error
     cJSON *error = cJSON_GetObjectItemCaseSensitive(user_errorJSON, "error");
@@ -156,15 +187,47 @@ user_error_t *user_error_parseFromJSON(cJSON *user_errorJSON){
     }
     }
 
+    // user_error->project_ids
+    cJSON *project_ids = cJSON_GetObjectItemCaseSensitive(user_errorJSON, "projectIds");
+    if (cJSON_IsNull(project_ids)) {
+        project_ids = NULL;
+    }
+    if (project_ids) { 
+    cJSON *project_ids_local = NULL;
+    if(!cJSON_IsArray(project_ids)) {
+        goto end;//primitive container
+    }
+    project_idsList = list_createList();
+
+    cJSON_ArrayForEach(project_ids_local, project_ids)
+    {
+        if(!cJSON_IsString(project_ids_local))
+        {
+            goto end;
+        }
+        list_addElement(project_idsList , strdup(project_ids_local->valuestring));
+    }
+    }
+
 
     user_error_local_var = user_error_create_internal (
         strdup(error->valuestring),
         error_idVariable,
-        field && !cJSON_IsNull(field) ? strdup(field->valuestring) : NULL
+        field && !cJSON_IsNull(field) ? strdup(field->valuestring) : NULL,
+        project_ids ? project_idsList : NULL
         );
 
     return user_error_local_var;
 end:
+    if (project_idsList) {
+        listEntry_t *listEntry = NULL;
+        list_ForEach(listEntry, project_idsList) {
+            free(listEntry->data);
+            listEntry->data = NULL;
+        }
+        list_freeList(project_idsList);
+        project_idsList = NULL;
+    }
     return NULL;
 
 }

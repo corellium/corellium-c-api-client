@@ -7,7 +7,7 @@
 
 static update_network_connection_options_t *update_network_connection_options_create_internal(
     char *name,
-    object_t *config,
+    update_network_connection_options_config_t *config,
     int force
     ) {
     update_network_connection_options_t *update_network_connection_options_local_var = malloc(sizeof(update_network_connection_options_t));
@@ -24,7 +24,7 @@ static update_network_connection_options_t *update_network_connection_options_cr
 
 __attribute__((deprecated)) update_network_connection_options_t *update_network_connection_options_create(
     char *name,
-    object_t *config,
+    update_network_connection_options_config_t *config,
     int force
     ) {
     return update_network_connection_options_create_internal (
@@ -48,7 +48,7 @@ void update_network_connection_options_free(update_network_connection_options_t 
         update_network_connection_options->name = NULL;
     }
     if (update_network_connection_options->config) {
-        object_free(update_network_connection_options->config);
+        update_network_connection_options_config_free(update_network_connection_options->config);
         update_network_connection_options->config = NULL;
     }
     free(update_network_connection_options);
@@ -68,11 +68,11 @@ cJSON *update_network_connection_options_convertToJSON(update_network_connection
 
     // update_network_connection_options->config
     if(update_network_connection_options->config) {
-    cJSON *config_object = object_convertToJSON(update_network_connection_options->config);
-    if(config_object == NULL) {
+    cJSON *config_local_JSON = update_network_connection_options_config_convertToJSON(update_network_connection_options->config);
+    if(config_local_JSON == NULL) {
     goto fail; //model
     }
-    cJSON_AddItemToObject(item, "config", config_object);
+    cJSON_AddItemToObject(item, "config", config_local_JSON);
     if(item->child == NULL) {
     goto fail;
     }
@@ -98,6 +98,9 @@ update_network_connection_options_t *update_network_connection_options_parseFrom
 
     update_network_connection_options_t *update_network_connection_options_local_var = NULL;
 
+    // define the local variable for update_network_connection_options->config
+    update_network_connection_options_config_t *config_local_nonprim = NULL;
+
     // update_network_connection_options->name
     cJSON *name = cJSON_GetObjectItemCaseSensitive(update_network_connection_optionsJSON, "name");
     if (cJSON_IsNull(name)) {
@@ -118,9 +121,8 @@ update_network_connection_options_t *update_network_connection_options_parseFrom
     if (cJSON_IsNull(config)) {
         config = NULL;
     }
-    object_t *config_local_object = NULL;
     if (config) { 
-    config_local_object = object_parseFromJSON(config); //object
+    config_local_nonprim = update_network_connection_options_config_parseFromJSON(config); //nonprimitive
     }
 
     // update_network_connection_options->force
@@ -138,12 +140,16 @@ update_network_connection_options_t *update_network_connection_options_parseFrom
 
     update_network_connection_options_local_var = update_network_connection_options_create_internal (
         strdup(name->valuestring),
-        config ? config_local_object : NULL,
+        config ? config_local_nonprim : NULL,
         force ? force->valueint : 0
         );
 
     return update_network_connection_options_local_var;
 end:
+    if (config_local_nonprim) {
+        update_network_connection_options_config_free(config_local_nonprim);
+        config_local_nonprim = NULL;
+    }
     return NULL;
 
 }

@@ -16,6 +16,7 @@
 #include "../model/update_network_connection_options.h"
 update_network_connection_options_t* instantiate_update_network_connection_options(int include_optional);
 
+#include "test_update_network_connection_options_config.c"
 
 
 update_network_connection_options_t* instantiate_update_network_connection_options(int include_optional) {
@@ -23,13 +24,14 @@ update_network_connection_options_t* instantiate_update_network_connection_optio
   if (include_optional) {
     update_network_connection_options = update_network_connection_options_create(
       "0",
-      0,
+       // false, not to have infinite recursion
+      instantiate_update_network_connection_options_config(0),
       1
     );
   } else {
     update_network_connection_options = update_network_connection_options_create(
       "0",
-      0,
+      NULL,
       1
     );
   }
