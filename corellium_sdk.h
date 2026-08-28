@@ -40,6 +40,8 @@
 #include "api/DomainAuthProviderAPI.h"
 #include "api/DomainAuthProvidersAPI.h"
 #include "api/DomainV1API.h"
+#include "api/ExtensionsAPI.h"
+#include "api/ExtensionsV1API.h"
 #include "api/FirmwareServiceAPI.h"
 #include "api/FlavorsAPI.h"
 #include "api/HyperTraceAPI.h"
@@ -186,6 +188,14 @@
 #define corellium_domain_patchWelcomeMessage DomainAPI_v3PatchDomainWelcomeMessage
 #define corellium_domain_uploadImage DomainAPI_v3UploadDomainImage
 
+/* extensions */
+#define corellium_extensions_create ExtensionsAPI_v3LoadExtension
+#define corellium_extensions_delete ExtensionsAPI_v3DeleteExtension
+#define corellium_extensions_get ExtensionsAPI_v3GetExtensionById
+#define corellium_extensions_list ExtensionsAPI_v3ListExtensions
+#define corellium_extensions_parseJson ExtensionsAPI_v3ParseExtensionJson
+#define corellium_extensions_update ExtensionsAPI_v3UpdateExtension
+
 /* firmwareService */
 #define corellium_firmwareService_createAssets FirmwareServiceAPI_v3CreateFirmwareAssets
 #define corellium_firmwareService_deleteAsset FirmwareServiceAPI_v3DeleteFirmwareAsset
@@ -319,6 +329,7 @@
 /* projects */
 #define corellium_projects_create ProjectsAPI_v3CreateProject
 #define corellium_projects_delete ProjectsAPI_v3DeleteProject
+#define corellium_projects_fetchFirmwareAssets ProjectsAPI_v3FetchProjectFirmwareAssets
 #define corellium_projects_get ProjectsAPI_v3GetProject
 #define corellium_projects_getNetworkLog ProjectsAPI_v3GetProjectNetworkLog
 #define corellium_projects_getNetworkStatus ProjectsAPI_v3GetProjectNetworkStatus
@@ -465,6 +476,14 @@
 #define corellium_v1_domain_deleteWelcomeMessage DomainV1API_v1DeleteDomainWelcomeMessage
 #define corellium_v1_domain_getWelcomeMessage DomainV1API_v1GetDomainWelcomeMessage
 #define corellium_v1_domain_patchWelcomeMessage DomainV1API_v1UpdateDomainWelcomeMessage
+
+/* extensions */
+#define corellium_v1_extensions_create ExtensionsV1API_v1LoadExtension
+#define corellium_v1_extensions_delete ExtensionsV1API_v1DeleteExtension
+#define corellium_v1_extensions_get ExtensionsV1API_v1GetExtensionById
+#define corellium_v1_extensions_list ExtensionsV1API_v1GetExtensions
+#define corellium_v1_extensions_parseJson ExtensionsV1API_v1ParseExtensionJson
+#define corellium_v1_extensions_update ExtensionsV1API_v1UpdateExtension
 
 /* firmwareService */
 #define corellium_v1_firmwareService_createAssets ClusterAdministrationFirmwareServiceAPI_v1CreateAssetsFirmwareService
@@ -771,6 +790,14 @@
 #define corellium_v3_domain_patchWelcomeMessage DomainAPI_v3PatchDomainWelcomeMessage
 #define corellium_v3_domain_uploadImage DomainAPI_v3UploadDomainImage
 
+/* extensions */
+#define corellium_v3_extensions_create ExtensionsAPI_v3LoadExtension
+#define corellium_v3_extensions_delete ExtensionsAPI_v3DeleteExtension
+#define corellium_v3_extensions_get ExtensionsAPI_v3GetExtensionById
+#define corellium_v3_extensions_list ExtensionsAPI_v3ListExtensions
+#define corellium_v3_extensions_parseJson ExtensionsAPI_v3ParseExtensionJson
+#define corellium_v3_extensions_update ExtensionsAPI_v3UpdateExtension
+
 /* firmwareService */
 #define corellium_v3_firmwareService_createAssets FirmwareServiceAPI_v3CreateFirmwareAssets
 #define corellium_v3_firmwareService_deleteAsset FirmwareServiceAPI_v3DeleteFirmwareAsset
@@ -903,6 +930,7 @@
 /* projects */
 #define corellium_v3_projects_create ProjectsAPI_v3CreateProject
 #define corellium_v3_projects_delete ProjectsAPI_v3DeleteProject
+#define corellium_v3_projects_fetchFirmwareAssets ProjectsAPI_v3FetchProjectFirmwareAssets
 #define corellium_v3_projects_get ProjectsAPI_v3GetProject
 #define corellium_v3_projects_getNetworkLog ProjectsAPI_v3GetProjectNetworkLog
 #define corellium_v3_projects_getNetworkStatus ProjectsAPI_v3GetProjectNetworkStatus

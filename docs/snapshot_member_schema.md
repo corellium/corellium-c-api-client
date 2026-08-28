@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**email** | [**object_t**](.md) \* | The email of the member. | 
+**email** | **char \*** | The email of the member. | 
 **invite_sent_at** | **char \*** | The date when the invite was sent. | [optional] 
 **shared_on** | **char \*** | Date of when the snapshot was first shared with member. | [optional] 
 **user_id** | **char \*** | The member&#39;s user ID. | [optional] 

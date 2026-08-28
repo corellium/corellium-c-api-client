@@ -23,12 +23,12 @@ assessment_id_status_t* instantiate_assessment_id_status(int include_optional) {
   if (include_optional) {
     assessment_id_status = assessment_id_status_create(
       "0",
-      corellium_api_assessment_id_status_STATUS_"complete"
+      corellium_api_assessment_id_status__"complete"
     );
   } else {
     assessment_id_status = assessment_id_status_create(
       "0",
-      corellium_api_assessment_id_status_STATUS_"complete"
+      corellium_api_assessment_id_status__"complete"
     );
   }
 

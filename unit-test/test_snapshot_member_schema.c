@@ -22,7 +22,7 @@ snapshot_member_schema_t* instantiate_snapshot_member_schema(int include_optiona
   snapshot_member_schema_t* snapshot_member_schema = NULL;
   if (include_optional) {
     snapshot_member_schema = snapshot_member_schema_create(
-      0,
+      "0",
       "2013-10-20T19:20:30+01:00",
       "2013-10-20T19:20:30+01:00",
       "0",
@@ -30,7 +30,7 @@ snapshot_member_schema_t* instantiate_snapshot_member_schema(int include_optiona
     );
   } else {
     snapshot_member_schema = snapshot_member_schema_create(
-      0,
+      "0",
       "2013-10-20T19:20:30+01:00",
       "2013-10-20T19:20:30+01:00",
       "0",

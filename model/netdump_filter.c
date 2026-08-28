@@ -11,7 +11,8 @@ static netdump_filter_t *netdump_filter_create_internal(
     list_t *dst_ports,
     list_t *ports,
     list_t *protocols,
-    list_t *processes
+    list_t *processes,
+    list_t *hosts
     ) {
     netdump_filter_t *netdump_filter_local_var = malloc(sizeof(netdump_filter_t));
     if (!netdump_filter_local_var) {
@@ -23,6 +24,7 @@ static netdump_filter_t *netdump_filter_create_internal(
     netdump_filter_local_var->ports = ports;
     netdump_filter_local_var->protocols = protocols;
     netdump_filter_local_var->processes = processes;
+    netdump_filter_local_var->hosts = hosts;
 
     netdump_filter_local_var->_library_owned = 1;
     return netdump_filter_local_var;
@@ -34,7 +36,8 @@ __attribute__((deprecated)) netdump_filter_t *netdump_filter_create(
     list_t *dst_ports,
     list_t *ports,
     list_t *protocols,
-    list_t *processes
+    list_t *processes,
+    list_t *hosts
     ) {
     return netdump_filter_create_internal (
         port_ranges,
@@ -42,7 +45,8 @@ __attribute__((deprecated)) netdump_filter_t *netdump_filter_create(
         dst_ports,
         ports,
         protocols,
-        processes
+        processes,
+        hosts
         );
 }
 
@@ -96,6 +100,13 @@ void netdump_filter_free(netdump_filter_t *netdump_filter) {
         }
         list_freeList(netdump_filter->processes);
         netdump_filter->processes = NULL;
+    }
+    if (netdump_filter->hosts) {
+        list_ForEach(listEntry, netdump_filter->hosts) {
+            free(listEntry->data);
+        }
+        list_freeList(netdump_filter->hosts);
+        netdump_filter->hosts = NULL;
     }
     free(netdump_filter);
 }
@@ -204,6 +215,23 @@ cJSON *netdump_filter_convertToJSON(netdump_filter_t *netdump_filter) {
     }
     }
 
+
+    // netdump_filter->hosts
+    if(netdump_filter->hosts) {
+    cJSON *hosts = cJSON_AddArrayToObject(item, "hosts");
+    if(hosts == NULL) {
+        goto fail; //primitive container
+    }
+
+    listEntry_t *hostsListEntry;
+    list_ForEach(hostsListEntry, netdump_filter->hosts) {
+    if(cJSON_AddStringToObject(hosts, "", hostsListEntry->data) == NULL)
+    {
+        goto fail;
+    }
+    }
+    }
+
     return item;
 fail:
     if (item) {
@@ -233,6 +261,9 @@ netdump_filter_t *netdump_filter_parseFromJSON(cJSON *netdump_filterJSON){
 
     // define the local list for netdump_filter->processes
     list_t *processesList = NULL;
+
+    // define the local list for netdump_filter->hosts
+    list_t *hostsList = NULL;
 
     // netdump_filter->port_ranges
     cJSON *port_ranges = cJSON_GetObjectItemCaseSensitive(netdump_filterJSON, "portRanges");
@@ -366,6 +397,28 @@ netdump_filter_t *netdump_filter_parseFromJSON(cJSON *netdump_filterJSON){
     }
     }
 
+    // netdump_filter->hosts
+    cJSON *hosts = cJSON_GetObjectItemCaseSensitive(netdump_filterJSON, "hosts");
+    if (cJSON_IsNull(hosts)) {
+        hosts = NULL;
+    }
+    if (hosts) { 
+    cJSON *hosts_local = NULL;
+    if(!cJSON_IsArray(hosts)) {
+        goto end;//primitive container
+    }
+    hostsList = list_createList();
+
+    cJSON_ArrayForEach(hosts_local, hosts)
+    {
+        if(!cJSON_IsString(hosts_local))
+        {
+            goto end;
+        }
+        list_addElement(hostsList , strdup(hosts_local->valuestring));
+    }
+    }
+
 
     netdump_filter_local_var = netdump_filter_create_internal (
         port_ranges ? port_rangesList : NULL,
@@ -373,7 +426,8 @@ netdump_filter_t *netdump_filter_parseFromJSON(cJSON *netdump_filterJSON){
         dst_ports ? dst_portsList : NULL,
         ports ? portsList : NULL,
         protocols ? protocolsList : NULL,
-        processes ? processesList : NULL
+        processes ? processesList : NULL,
+        hosts ? hostsList : NULL
         );
 
     return netdump_filter_local_var;
@@ -431,6 +485,15 @@ end:
         }
         list_freeList(processesList);
         processesList = NULL;
+    }
+    if (hostsList) {
+        listEntry_t *listEntry = NULL;
+        list_ForEach(listEntry, hostsList) {
+            free(listEntry->data);
+            listEntry->data = NULL;
+        }
+        list_freeList(hostsList);
+        hostsList = NULL;
     }
     return NULL;
 

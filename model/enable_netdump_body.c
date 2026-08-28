@@ -11,7 +11,8 @@ static enable_netdump_body_t *enable_netdump_body_create_internal(
     list_t *dst_ports,
     list_t *ports,
     list_t *protocols,
-    list_t *processes
+    list_t *processes,
+    list_t *hosts
     ) {
     enable_netdump_body_t *enable_netdump_body_local_var = malloc(sizeof(enable_netdump_body_t));
     if (!enable_netdump_body_local_var) {
@@ -23,6 +24,7 @@ static enable_netdump_body_t *enable_netdump_body_create_internal(
     enable_netdump_body_local_var->ports = ports;
     enable_netdump_body_local_var->protocols = protocols;
     enable_netdump_body_local_var->processes = processes;
+    enable_netdump_body_local_var->hosts = hosts;
 
     enable_netdump_body_local_var->_library_owned = 1;
     return enable_netdump_body_local_var;
@@ -34,7 +36,8 @@ __attribute__((deprecated)) enable_netdump_body_t *enable_netdump_body_create(
     list_t *dst_ports,
     list_t *ports,
     list_t *protocols,
-    list_t *processes
+    list_t *processes,
+    list_t *hosts
     ) {
     return enable_netdump_body_create_internal (
         port_ranges,
@@ -42,7 +45,8 @@ __attribute__((deprecated)) enable_netdump_body_t *enable_netdump_body_create(
         dst_ports,
         ports,
         protocols,
-        processes
+        processes,
+        hosts
         );
 }
 
@@ -96,6 +100,13 @@ void enable_netdump_body_free(enable_netdump_body_t *enable_netdump_body) {
         }
         list_freeList(enable_netdump_body->processes);
         enable_netdump_body->processes = NULL;
+    }
+    if (enable_netdump_body->hosts) {
+        list_ForEach(listEntry, enable_netdump_body->hosts) {
+            free(listEntry->data);
+        }
+        list_freeList(enable_netdump_body->hosts);
+        enable_netdump_body->hosts = NULL;
     }
     free(enable_netdump_body);
 }
@@ -204,6 +215,23 @@ cJSON *enable_netdump_body_convertToJSON(enable_netdump_body_t *enable_netdump_b
     }
     }
 
+
+    // enable_netdump_body->hosts
+    if(enable_netdump_body->hosts) {
+    cJSON *hosts = cJSON_AddArrayToObject(item, "hosts");
+    if(hosts == NULL) {
+        goto fail; //primitive container
+    }
+
+    listEntry_t *hostsListEntry;
+    list_ForEach(hostsListEntry, enable_netdump_body->hosts) {
+    if(cJSON_AddStringToObject(hosts, "", hostsListEntry->data) == NULL)
+    {
+        goto fail;
+    }
+    }
+    }
+
     return item;
 fail:
     if (item) {
@@ -233,6 +261,9 @@ enable_netdump_body_t *enable_netdump_body_parseFromJSON(cJSON *enable_netdump_b
 
     // define the local list for enable_netdump_body->processes
     list_t *processesList = NULL;
+
+    // define the local list for enable_netdump_body->hosts
+    list_t *hostsList = NULL;
 
     // enable_netdump_body->port_ranges
     cJSON *port_ranges = cJSON_GetObjectItemCaseSensitive(enable_netdump_bodyJSON, "portRanges");
@@ -366,6 +397,28 @@ enable_netdump_body_t *enable_netdump_body_parseFromJSON(cJSON *enable_netdump_b
     }
     }
 
+    // enable_netdump_body->hosts
+    cJSON *hosts = cJSON_GetObjectItemCaseSensitive(enable_netdump_bodyJSON, "hosts");
+    if (cJSON_IsNull(hosts)) {
+        hosts = NULL;
+    }
+    if (hosts) { 
+    cJSON *hosts_local = NULL;
+    if(!cJSON_IsArray(hosts)) {
+        goto end;//primitive container
+    }
+    hostsList = list_createList();
+
+    cJSON_ArrayForEach(hosts_local, hosts)
+    {
+        if(!cJSON_IsString(hosts_local))
+        {
+            goto end;
+        }
+        list_addElement(hostsList , strdup(hosts_local->valuestring));
+    }
+    }
+
 
     enable_netdump_body_local_var = enable_netdump_body_create_internal (
         port_ranges ? port_rangesList : NULL,
@@ -373,7 +426,8 @@ enable_netdump_body_t *enable_netdump_body_parseFromJSON(cJSON *enable_netdump_b
         dst_ports ? dst_portsList : NULL,
         ports ? portsList : NULL,
         protocols ? protocolsList : NULL,
-        processes ? processesList : NULL
+        processes ? processesList : NULL,
+        hosts ? hostsList : NULL
         );
 
     return enable_netdump_body_local_var;
@@ -431,6 +485,15 @@ end:
         }
         list_freeList(processesList);
         processesList = NULL;
+    }
+    if (hostsList) {
+        listEntry_t *listEntry = NULL;
+        list_ForEach(listEntry, hostsList) {
+            free(listEntry->data);
+            listEntry->data = NULL;
+        }
+        list_freeList(hostsList);
+        hostsList = NULL;
     }
     return NULL;
 

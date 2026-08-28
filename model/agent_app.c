@@ -15,7 +15,8 @@ static agent_app_t *agent_app_create_internal(
     char *bundle_id,
     char *bundle_path,
     char *bundle_data_path,
-    int is_launchable
+    int is_launchable,
+    char *icon
     ) {
     agent_app_t *agent_app_local_var = malloc(sizeof(agent_app_t));
     if (!agent_app_local_var) {
@@ -31,6 +32,7 @@ static agent_app_t *agent_app_create_internal(
     agent_app_local_var->bundle_path = bundle_path;
     agent_app_local_var->bundle_data_path = bundle_data_path;
     agent_app_local_var->is_launchable = is_launchable;
+    agent_app_local_var->icon = icon;
 
     agent_app_local_var->_library_owned = 1;
     return agent_app_local_var;
@@ -46,7 +48,8 @@ __attribute__((deprecated)) agent_app_t *agent_app_create(
     char *bundle_id,
     char *bundle_path,
     char *bundle_data_path,
-    int is_launchable
+    int is_launchable,
+    char *icon
     ) {
     return agent_app_create_internal (
         tags,
@@ -58,7 +61,8 @@ __attribute__((deprecated)) agent_app_t *agent_app_create(
         bundle_id,
         bundle_path,
         bundle_data_path,
-        is_launchable
+        is_launchable,
+        icon
         );
 }
 
@@ -97,6 +101,10 @@ void agent_app_free(agent_app_t *agent_app) {
     if (agent_app->bundle_data_path) {
         free(agent_app->bundle_data_path);
         agent_app->bundle_data_path = NULL;
+    }
+    if (agent_app->icon) {
+        free(agent_app->icon);
+        agent_app->icon = NULL;
     }
     free(agent_app);
 }
@@ -196,6 +204,14 @@ cJSON *agent_app_convertToJSON(agent_app_t *agent_app) {
     if(agent_app->is_launchable) {
     if(cJSON_AddBoolToObject(item, "isLaunchable", agent_app->is_launchable) == NULL) {
     goto fail; //Bool
+    }
+    }
+
+
+    // agent_app->icon
+    if(agent_app->icon) {
+    if(cJSON_AddStringToObject(item, "icon", agent_app->icon) == NULL) {
+    goto fail; //String
     }
     }
 
@@ -365,6 +381,18 @@ agent_app_t *agent_app_parseFromJSON(cJSON *agent_appJSON){
     }
     }
 
+    // agent_app->icon
+    cJSON *icon = cJSON_GetObjectItemCaseSensitive(agent_appJSON, "icon");
+    if (cJSON_IsNull(icon)) {
+        icon = NULL;
+    }
+    if (icon) { 
+    if(!cJSON_IsString(icon) && !cJSON_IsNull(icon))
+    {
+    goto end; //String
+    }
+    }
+
 
     agent_app_local_var = agent_app_create_internal (
         tags ? tagsList : NULL,
@@ -376,7 +404,8 @@ agent_app_t *agent_app_parseFromJSON(cJSON *agent_appJSON){
         strdup(bundle_id->valuestring),
         strdup(bundle_path->valuestring),
         strdup(bundle_data_path->valuestring),
-        is_launchable ? is_launchable->valueint : 0
+        is_launchable ? is_launchable->valueint : 0,
+        icon && !cJSON_IsNull(icon) ? strdup(icon->valuestring) : NULL
         );
 
     return agent_app_local_var;

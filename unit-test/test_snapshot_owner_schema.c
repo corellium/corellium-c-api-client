@@ -23,12 +23,12 @@ snapshot_owner_schema_t* instantiate_snapshot_owner_schema(int include_optional)
   if (include_optional) {
     snapshot_owner_schema = snapshot_owner_schema_create(
       "0",
-      0
+      "0"
     );
   } else {
     snapshot_owner_schema = snapshot_owner_schema_create(
       "0",
-      0
+      "0"
     );
   }
 

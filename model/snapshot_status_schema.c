@@ -50,11 +50,10 @@ cJSON *snapshot_status_schema_convertToJSON(snapshot_status_schema_t *snapshot_s
     cJSON *item = cJSON_CreateObject();
 
     // snapshot_status_schema->task
-    if (!snapshot_status_schema->task) {
-        goto fail;
-    }
+    if(snapshot_status_schema->task) {
     if(cJSON_AddStringToObject(item, "task", snapshot_status_schema->task) == NULL) {
     goto fail; //String
+    }
     }
 
 
@@ -82,14 +81,11 @@ snapshot_status_schema_t *snapshot_status_schema_parseFromJSON(cJSON *snapshot_s
     if (cJSON_IsNull(task)) {
         task = NULL;
     }
-    if (!task) {
-        goto end;
-    }
-
-    
-    if(!cJSON_IsString(task))
+    if (task) { 
+    if(!cJSON_IsString(task) && !cJSON_IsNull(task))
     {
     goto end; //String
+    }
     }
 
     // snapshot_status_schema->created
@@ -106,7 +102,7 @@ snapshot_status_schema_t *snapshot_status_schema_parseFromJSON(cJSON *snapshot_s
 
 
     snapshot_status_schema_local_var = snapshot_status_schema_create_internal (
-        strdup(task->valuestring),
+        task && !cJSON_IsNull(task) ? strdup(task->valuestring) : NULL,
         created ? created->valueint : 0
         );
 

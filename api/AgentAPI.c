@@ -1603,9 +1603,9 @@ end:
 // List installed apps on the VM.
 //
 agent_apps_list_t*
-AgentAPI_v3ListAppsAgent(apiClient_t *apiClient, char *instanceId)
+AgentAPI_v3ListAppsAgent(apiClient_t *apiClient, char *instanceId, char *loadIcons)
 {
-    list_t    *localVarQueryParameters = NULL;
+    list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
     list_t    *localVarFormParameters = NULL;
     list_t *localVarHeaderType = list_createList();
@@ -1634,6 +1634,18 @@ AgentAPI_v3ListAppsAgent(apiClient_t *apiClient, char *instanceId)
     localVarPath = strReplace(localVarPath, localVarToReplace_instanceId, instanceId);
 
 
+
+    // query parameters
+    char *keyQuery_loadIcons = NULL;
+    char * valueQuery_loadIcons = NULL;
+    keyValuePair_t *keyPairQuery_loadIcons = 0;
+    if (loadIcons)
+    {
+        keyQuery_loadIcons = strdup("loadIcons");
+        valueQuery_loadIcons = strdup((loadIcons));
+        keyPairQuery_loadIcons = keyValuePair_create(keyQuery_loadIcons, valueQuery_loadIcons);
+        list_addElement(localVarQueryParameters,keyPairQuery_loadIcons);
+    }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
                     localVarPath,
@@ -1679,13 +1691,25 @@ AgentAPI_v3ListAppsAgent(apiClient_t *apiClient, char *instanceId)
         apiClient->dataReceived = NULL;
         apiClient->dataReceivedLen = 0;
     }
-    
+    list_freeList(localVarQueryParameters);
     
     
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
     free(localVarToReplace_instanceId);
+    if(keyQuery_loadIcons){
+        free(keyQuery_loadIcons);
+        keyQuery_loadIcons = NULL;
+    }
+    if(valueQuery_loadIcons){
+        free(valueQuery_loadIcons);
+        valueQuery_loadIcons = NULL;
+    }
+    if(keyPairQuery_loadIcons){
+        keyValuePair_free(keyPairQuery_loadIcons);
+        keyPairQuery_loadIcons = NULL;
+    }
     return elementToReturn;
 end:
     free(localVarPath);

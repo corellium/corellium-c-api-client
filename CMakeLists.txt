@@ -118,6 +118,7 @@ set(SRCS
     model/api_token.c
     model/assessment.c
     model/assessment_bundle.c
+    model/assessment_format.c
     model/assessment_frida_script.c
     model/assessment_history.c
     model/assessment_history_line_item.c
@@ -127,6 +128,7 @@ set(SRCS
     model/assessment_metadata.c
     model/assessment_results.c
     model/assessment_severity_counts.c
+    model/assessment_status.c
     model/assessment_wordlist.c
     model/attach_interface_body.c
     model/attach_interface_request.c
@@ -268,6 +270,9 @@ set(SRCS
     model/extension_list.c
     model/extension_v1.c
     model/features.c
+    model/fetch_firmware_assets_body.c
+    model/fetch_firmware_assets_response.c
+    model/fetch_firmware_assets_response_failed_inner.c
     model/file_changes.c
     model/firmware.c
     model/firmware_asset.c
@@ -509,7 +514,6 @@ set(SRCS
     model/shared_snapshot.c
     model/shared_snapshots_info.c
     model/shared_snapshots_response.c
-    model/sharing_type.c
     model/snapshot.c
     model/snapshot_creation_options.c
     model/snapshot_list.c
@@ -522,6 +526,7 @@ set(SRCS
     model/snapshot_sharing.c
     model/snapshot_sharing_permissions.c
     model/snapshot_sharing_permissions_request_schema.c
+    model/snapshot_sharing_type.c
     model/snapshot_sharing_v1.c
     model/snapshot_status.c
     model/snapshot_status_schema.c
@@ -658,6 +663,8 @@ set(SRCS
     api/DomainAuthProviderAPI.c
     api/DomainAuthProvidersAPI.c
     api/DomainV1API.c
+    api/ExtensionsAPI.c
+    api/ExtensionsV1API.c
     api/ExternalServicesAPI.c
     api/FirmwareServiceAPI.c
     api/FlavorsAPI.c
@@ -781,6 +788,7 @@ set(HDRS
     model/api_token.h
     model/assessment.h
     model/assessment_bundle.h
+    model/assessment_format.h
     model/assessment_frida_script.h
     model/assessment_history.h
     model/assessment_history_line_item.h
@@ -790,6 +798,7 @@ set(HDRS
     model/assessment_metadata.h
     model/assessment_results.h
     model/assessment_severity_counts.h
+    model/assessment_status.h
     model/assessment_wordlist.h
     model/attach_interface_body.h
     model/attach_interface_request.h
@@ -931,6 +940,9 @@ set(HDRS
     model/extension_list.h
     model/extension_v1.h
     model/features.h
+    model/fetch_firmware_assets_body.h
+    model/fetch_firmware_assets_response.h
+    model/fetch_firmware_assets_response_failed_inner.h
     model/file_changes.h
     model/firmware.h
     model/firmware_asset.h
@@ -1172,7 +1184,6 @@ set(HDRS
     model/shared_snapshot.h
     model/shared_snapshots_info.h
     model/shared_snapshots_response.h
-    model/sharing_type.h
     model/snapshot.h
     model/snapshot_creation_options.h
     model/snapshot_list.h
@@ -1185,6 +1196,7 @@ set(HDRS
     model/snapshot_sharing.h
     model/snapshot_sharing_permissions.h
     model/snapshot_sharing_permissions_request_schema.h
+    model/snapshot_sharing_type.h
     model/snapshot_sharing_v1.h
     model/snapshot_status.h
     model/snapshot_status_schema.h
@@ -1321,6 +1333,8 @@ set(HDRS
     api/DomainAuthProviderAPI.h
     api/DomainAuthProvidersAPI.h
     api/DomainV1API.h
+    api/ExtensionsAPI.h
+    api/ExtensionsV1API.h
     api/ExternalServicesAPI.h
     api/FirmwareServiceAPI.h
     api/FlavorsAPI.h
@@ -1466,6 +1480,8 @@ set(HDRS "")
 #    unit-tests/manual-DomainAuthProviderAPI.c
 #    unit-tests/manual-DomainAuthProvidersAPI.c
 #    unit-tests/manual-DomainV1API.c
+#    unit-tests/manual-ExtensionsAPI.c
+#    unit-tests/manual-ExtensionsV1API.c
 #    unit-tests/manual-ExternalServicesAPI.c
 #    unit-tests/manual-FirmwareServiceAPI.c
 #    unit-tests/manual-FlavorsAPI.c

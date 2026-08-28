@@ -15,14 +15,12 @@
 
 typedef struct report_modification_input_t report_modification_input_t;
 
-#include "any_type.h"
-#include "object.h"
 
 
 
 typedef struct report_modification_input_t {
     char *check_id; // string
-    object_t *property; //object
+    char *property; // string
     int suppressed; //boolean
     char *value; // string
 
@@ -31,7 +29,7 @@ typedef struct report_modification_input_t {
 
 __attribute__((deprecated)) report_modification_input_t *report_modification_input_create(
     char *check_id,
-    object_t *property,
+    char *property,
     int suppressed,
     char *value
 );

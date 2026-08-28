@@ -4,28 +4,11 @@
 #include "shared_snapshot.h"
 
 
-char* shared_snapshot_sharing_type_ToString(corellium_api_shared_snapshot_SHARINGTYPE_e sharing_type) {
-    char* sharing_typeArray[] =  { "NULL", "publicLink", "domainRestrictedLink", "passwordPublicLink", "emailInvite", "notShared" };
-    return sharing_typeArray[sharing_type];
-}
-
-corellium_api_shared_snapshot_SHARINGTYPE_e shared_snapshot_sharing_type_FromString(char* sharing_type){
-    int stringToReturn = 0;
-    char *sharing_typeArray[] =  { "NULL", "publicLink", "domainRestrictedLink", "passwordPublicLink", "emailInvite", "notShared" };
-    size_t sizeofArray = sizeof(sharing_typeArray) / sizeof(sharing_typeArray[0]);
-    while(stringToReturn < sizeofArray) {
-        if(strcmp(sharing_type, sharing_typeArray[stringToReturn]) == 0) {
-            return stringToReturn;
-        }
-        stringToReturn++;
-    }
-    return 0;
-}
 
 static shared_snapshot_t *shared_snapshot_create_internal(
     char *shared_on,
     char *shared_with_member,
-    corellium_api_shared_snapshot_SHARINGTYPE_e sharing_type,
+    corellium_api_snapshot_sharing_type__e sharing_type,
     snapshot_owner_schema_t *shared_by,
     char *id,
     double date,
@@ -68,7 +51,7 @@ static shared_snapshot_t *shared_snapshot_create_internal(
 __attribute__((deprecated)) shared_snapshot_t *shared_snapshot_create(
     char *shared_on,
     char *shared_with_member,
-    corellium_api_shared_snapshot_SHARINGTYPE_e sharing_type,
+    corellium_api_snapshot_sharing_type__e sharing_type,
     snapshot_owner_schema_t *shared_by,
     char *id,
     double date,
@@ -175,12 +158,16 @@ cJSON *shared_snapshot_convertToJSON(shared_snapshot_t *shared_snapshot) {
 
 
     // shared_snapshot->sharing_type
-    if (corellium_api_shared_snapshot_SHARINGTYPE_NULL == shared_snapshot->sharing_type) {
+    if (corellium_api_snapshot_sharing_type__NULL == shared_snapshot->sharing_type) {
         goto fail;
     }
-    if(cJSON_AddStringToObject(item, "sharingType", shared_snapshot_sharing_type_ToString(shared_snapshot->sharing_type)) == NULL)
-    {
-    goto fail; //Enum
+    cJSON *sharing_type_local_JSON = snapshot_sharing_type_convertToJSON(shared_snapshot->sharing_type);
+    if(sharing_type_local_JSON == NULL) {
+        goto fail; // custom
+    }
+    cJSON_AddItemToObject(item, "sharingType", sharing_type_local_JSON);
+    if(item->child == NULL) {
+        goto fail;
     }
 
 
@@ -321,6 +308,9 @@ shared_snapshot_t *shared_snapshot_parseFromJSON(cJSON *shared_snapshotJSON){
 
     shared_snapshot_t *shared_snapshot_local_var = NULL;
 
+    // define the local variable for shared_snapshot->sharing_type
+    corellium_api_snapshot_sharing_type__e sharing_type_local_nonprim = 0;
+
     // define the local variable for shared_snapshot->shared_by
     snapshot_owner_schema_t *shared_by_local_nonprim = NULL;
 
@@ -363,13 +353,8 @@ shared_snapshot_t *shared_snapshot_parseFromJSON(cJSON *shared_snapshotJSON){
         goto end;
     }
 
-    corellium_api_shared_snapshot_SHARINGTYPE_e sharing_typeVariable;
     
-    if(!cJSON_IsString(sharing_type))
-    {
-    goto end; //Enum
-    }
-    sharing_typeVariable = shared_snapshot_sharing_type_FromString(sharing_type->valuestring);
+    sharing_type_local_nonprim = snapshot_sharing_type_parseFromJSON(sharing_type); //custom
 
     // shared_snapshot->shared_by
     cJSON *shared_by = cJSON_GetObjectItemCaseSensitive(shared_snapshotJSON, "sharedBy");
@@ -543,7 +528,7 @@ shared_snapshot_t *shared_snapshot_parseFromJSON(cJSON *shared_snapshotJSON){
     shared_snapshot_local_var = shared_snapshot_create_internal (
         shared_on && !cJSON_IsNull(shared_on) ? strdup(shared_on->valuestring) : NULL,
         shared_with_member && !cJSON_IsNull(shared_with_member) ? strdup(shared_with_member->valuestring) : NULL,
-        sharing_typeVariable,
+        sharing_type_local_nonprim,
         shared_by ? shared_by_local_nonprim : NULL,
         strdup(id->valuestring),
         date->valuedouble,
@@ -561,6 +546,9 @@ shared_snapshot_t *shared_snapshot_parseFromJSON(cJSON *shared_snapshotJSON){
 
     return shared_snapshot_local_var;
 end:
+    if (sharing_type_local_nonprim) {
+        sharing_type_local_nonprim = 0;
+    }
     if (shared_by_local_nonprim) {
         snapshot_owner_schema_free(shared_by_local_nonprim);
         shared_by_local_nonprim = NULL;

@@ -6,7 +6,7 @@
 
 
 static snapshot_sharing_t *snapshot_sharing_create_internal(
-    corellium_api_sharing_type__e sharing_type,
+    corellium_api_snapshot_sharing_type__e sharing_type,
     char *access_code,
     char *shared_on,
     snapshot_owner_schema_t *shared_by,
@@ -27,7 +27,7 @@ static snapshot_sharing_t *snapshot_sharing_create_internal(
 }
 
 __attribute__((deprecated)) snapshot_sharing_t *snapshot_sharing_create(
-    corellium_api_sharing_type__e sharing_type,
+    corellium_api_snapshot_sharing_type__e sharing_type,
     char *access_code,
     char *shared_on,
     snapshot_owner_schema_t *shared_by,
@@ -77,10 +77,10 @@ cJSON *snapshot_sharing_convertToJSON(snapshot_sharing_t *snapshot_sharing) {
     cJSON *item = cJSON_CreateObject();
 
     // snapshot_sharing->sharing_type
-    if (corellium_api_sharing_type__NULL == snapshot_sharing->sharing_type) {
+    if (corellium_api_snapshot_sharing_type__NULL == snapshot_sharing->sharing_type) {
         goto fail;
     }
-    cJSON *sharing_type_local_JSON = sharing_type_convertToJSON(snapshot_sharing->sharing_type);
+    cJSON *sharing_type_local_JSON = snapshot_sharing_type_convertToJSON(snapshot_sharing->sharing_type);
     if(sharing_type_local_JSON == NULL) {
         goto fail; // custom
     }
@@ -151,7 +151,7 @@ snapshot_sharing_t *snapshot_sharing_parseFromJSON(cJSON *snapshot_sharingJSON){
     snapshot_sharing_t *snapshot_sharing_local_var = NULL;
 
     // define the local variable for snapshot_sharing->sharing_type
-    corellium_api_sharing_type__e sharing_type_local_nonprim = 0;
+    corellium_api_snapshot_sharing_type__e sharing_type_local_nonprim = 0;
 
     // define the local variable for snapshot_sharing->shared_by
     snapshot_owner_schema_t *shared_by_local_nonprim = NULL;
@@ -169,7 +169,7 @@ snapshot_sharing_t *snapshot_sharing_parseFromJSON(cJSON *snapshot_sharingJSON){
     }
 
     
-    sharing_type_local_nonprim = sharing_type_parseFromJSON(sharing_type); //custom
+    sharing_type_local_nonprim = snapshot_sharing_type_parseFromJSON(sharing_type); //custom
 
     // snapshot_sharing->access_code
     cJSON *access_code = cJSON_GetObjectItemCaseSensitive(snapshot_sharingJSON, "accessCode");

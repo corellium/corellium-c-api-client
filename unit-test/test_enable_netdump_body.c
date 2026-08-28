@@ -27,10 +27,12 @@ enable_netdump_body_t* instantiate_enable_netdump_body(int include_optional) {
       list_createList(),
       list_createList(),
       list_createList(),
+      list_createList(),
       list_createList()
     );
   } else {
     enable_netdump_body = enable_netdump_body_create(
+      list_createList(),
       list_createList(),
       list_createList(),
       list_createList(),

@@ -4,27 +4,10 @@
 #include "assessment_id_status.h"
 
 
-char* assessment_id_status_status_ToString(corellium_api_assessment_id_status_STATUS_e status) {
-    char* statusArray[] =  { "NULL", "new", "startingMonitoring", "monitoring", "stoppingMonitoring", "readyForTesting", "testing", "complete", "failed" };
-    return statusArray[status];
-}
-
-corellium_api_assessment_id_status_STATUS_e assessment_id_status_status_FromString(char* status){
-    int stringToReturn = 0;
-    char *statusArray[] =  { "NULL", "new", "startingMonitoring", "monitoring", "stoppingMonitoring", "readyForTesting", "testing", "complete", "failed" };
-    size_t sizeofArray = sizeof(statusArray) / sizeof(statusArray[0]);
-    while(stringToReturn < sizeofArray) {
-        if(strcmp(status, statusArray[stringToReturn]) == 0) {
-            return stringToReturn;
-        }
-        stringToReturn++;
-    }
-    return 0;
-}
 
 static assessment_id_status_t *assessment_id_status_create_internal(
     char *id,
-    corellium_api_assessment_id_status_STATUS_e status
+    corellium_api_assessment_status__e status
     ) {
     assessment_id_status_t *assessment_id_status_local_var = malloc(sizeof(assessment_id_status_t));
     if (!assessment_id_status_local_var) {
@@ -39,7 +22,7 @@ static assessment_id_status_t *assessment_id_status_create_internal(
 
 __attribute__((deprecated)) assessment_id_status_t *assessment_id_status_create(
     char *id,
-    corellium_api_assessment_id_status_STATUS_e status
+    corellium_api_assessment_status__e status
     ) {
     return assessment_id_status_create_internal (
         id,
@@ -76,12 +59,16 @@ cJSON *assessment_id_status_convertToJSON(assessment_id_status_t *assessment_id_
 
 
     // assessment_id_status->status
-    if (corellium_api_assessment_id_status_STATUS_NULL == assessment_id_status->status) {
+    if (corellium_api_assessment_status__NULL == assessment_id_status->status) {
         goto fail;
     }
-    if(cJSON_AddStringToObject(item, "status", assessment_id_status_status_ToString(assessment_id_status->status)) == NULL)
-    {
-    goto fail; //Enum
+    cJSON *status_local_JSON = assessment_status_convertToJSON(assessment_id_status->status);
+    if(status_local_JSON == NULL) {
+        goto fail; // custom
+    }
+    cJSON_AddItemToObject(item, "status", status_local_JSON);
+    if(item->child == NULL) {
+        goto fail;
     }
 
     return item;
@@ -95,6 +82,9 @@ fail:
 assessment_id_status_t *assessment_id_status_parseFromJSON(cJSON *assessment_id_statusJSON){
 
     assessment_id_status_t *assessment_id_status_local_var = NULL;
+
+    // define the local variable for assessment_id_status->status
+    corellium_api_assessment_status__e status_local_nonprim = 0;
 
     // assessment_id_status->id
     cJSON *id = cJSON_GetObjectItemCaseSensitive(assessment_id_statusJSON, "id");
@@ -120,22 +110,20 @@ assessment_id_status_t *assessment_id_status_parseFromJSON(cJSON *assessment_id_
         goto end;
     }
 
-    corellium_api_assessment_id_status_STATUS_e statusVariable;
     
-    if(!cJSON_IsString(status))
-    {
-    goto end; //Enum
-    }
-    statusVariable = assessment_id_status_status_FromString(status->valuestring);
+    status_local_nonprim = assessment_status_parseFromJSON(status); //custom
 
 
     assessment_id_status_local_var = assessment_id_status_create_internal (
         strdup(id->valuestring),
-        statusVariable
+        status_local_nonprim
         );
 
     return assessment_id_status_local_var;
 end:
+    if (status_local_nonprim) {
+        status_local_nonprim = 0;
+    }
     return NULL;
 
 }

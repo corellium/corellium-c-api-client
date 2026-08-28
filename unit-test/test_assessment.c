@@ -29,7 +29,7 @@ assessment_t* instantiate_assessment(int include_optional) {
   if (include_optional) {
     assessment = assessment_create(
       "0",
-      corellium_api_assessment_STATUS_"complete",
+      corellium_api_assessment__"complete",
       "0",
        // false, not to have infinite recursion
       instantiate_assessment_bundle(0),
@@ -52,7 +52,7 @@ assessment_t* instantiate_assessment(int include_optional) {
   } else {
     assessment = assessment_create(
       "0",
-      corellium_api_assessment_STATUS_"complete",
+      corellium_api_assessment__"complete",
       "0",
       NULL,
       NULL,

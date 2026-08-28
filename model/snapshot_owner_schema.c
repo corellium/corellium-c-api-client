@@ -7,7 +7,7 @@
 
 static snapshot_owner_schema_t *snapshot_owner_schema_create_internal(
     char *name,
-    object_t *email
+    char *email
     ) {
     snapshot_owner_schema_t *snapshot_owner_schema_local_var = malloc(sizeof(snapshot_owner_schema_t));
     if (!snapshot_owner_schema_local_var) {
@@ -22,7 +22,7 @@ static snapshot_owner_schema_t *snapshot_owner_schema_create_internal(
 
 __attribute__((deprecated)) snapshot_owner_schema_t *snapshot_owner_schema_create(
     char *name,
-    object_t *email
+    char *email
     ) {
     return snapshot_owner_schema_create_internal (
         name,
@@ -44,7 +44,7 @@ void snapshot_owner_schema_free(snapshot_owner_schema_t *snapshot_owner_schema) 
         snapshot_owner_schema->name = NULL;
     }
     if (snapshot_owner_schema->email) {
-        object_free(snapshot_owner_schema->email);
+        free(snapshot_owner_schema->email);
         snapshot_owner_schema->email = NULL;
     }
     free(snapshot_owner_schema);
@@ -66,13 +66,8 @@ cJSON *snapshot_owner_schema_convertToJSON(snapshot_owner_schema_t *snapshot_own
     if (!snapshot_owner_schema->email) {
         goto fail;
     }
-    cJSON *email_object = object_convertToJSON(snapshot_owner_schema->email);
-    if(email_object == NULL) {
-    goto fail; //model
-    }
-    cJSON_AddItemToObject(item, "email", email_object);
-    if(item->child == NULL) {
-    goto fail;
+    if(cJSON_AddStringToObject(item, "email", snapshot_owner_schema->email) == NULL) {
+    goto fail; //String
     }
 
     return item;
@@ -111,14 +106,16 @@ snapshot_owner_schema_t *snapshot_owner_schema_parseFromJSON(cJSON *snapshot_own
         goto end;
     }
 
-    object_t *email_local_object = NULL;
     
-    email_local_object = object_parseFromJSON(email); //object
+    if(!cJSON_IsString(email))
+    {
+    goto end; //String
+    }
 
 
     snapshot_owner_schema_local_var = snapshot_owner_schema_create_internal (
         strdup(name->valuestring),
-        email_local_object
+        strdup(email->valuestring)
         );
 
     return snapshot_owner_schema_local_var;

@@ -7,7 +7,7 @@
 
 static delete_modification_input_t *delete_modification_input_create_internal(
     char *check_id,
-    object_t *property
+    char *property
     ) {
     delete_modification_input_t *delete_modification_input_local_var = malloc(sizeof(delete_modification_input_t));
     if (!delete_modification_input_local_var) {
@@ -22,7 +22,7 @@ static delete_modification_input_t *delete_modification_input_create_internal(
 
 __attribute__((deprecated)) delete_modification_input_t *delete_modification_input_create(
     char *check_id,
-    object_t *property
+    char *property
     ) {
     return delete_modification_input_create_internal (
         check_id,
@@ -44,7 +44,7 @@ void delete_modification_input_free(delete_modification_input_t *delete_modifica
         delete_modification_input->check_id = NULL;
     }
     if (delete_modification_input->property) {
-        object_free(delete_modification_input->property);
+        free(delete_modification_input->property);
         delete_modification_input->property = NULL;
     }
     free(delete_modification_input);
@@ -66,13 +66,8 @@ cJSON *delete_modification_input_convertToJSON(delete_modification_input_t *dele
     if (!delete_modification_input->property) {
         goto fail;
     }
-    cJSON *property_object = object_convertToJSON(delete_modification_input->property);
-    if(property_object == NULL) {
-    goto fail; //model
-    }
-    cJSON_AddItemToObject(item, "property", property_object);
-    if(item->child == NULL) {
-    goto fail;
+    if(cJSON_AddStringToObject(item, "property", delete_modification_input->property) == NULL) {
+    goto fail; //String
     }
 
     return item;
@@ -111,14 +106,16 @@ delete_modification_input_t *delete_modification_input_parseFromJSON(cJSON *dele
         goto end;
     }
 
-    object_t *property_local_object = NULL;
     
-    property_local_object = object_parseFromJSON(property); //object
+    if(!cJSON_IsString(property))
+    {
+    goto end; //String
+    }
 
 
     delete_modification_input_local_var = delete_modification_input_create_internal (
         strdup(check_id->valuestring),
-        property_local_object
+        strdup(property->valuestring)
         );
 
     return delete_modification_input_local_var;

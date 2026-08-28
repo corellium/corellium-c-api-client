@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**sharing_type** | **sharing_type_t \*** |  | 
+**sharing_type** | **snapshot_sharing_type_t \*** |  | 
 **access_code** | **char \*** | Access code of shared snapshot. | [optional] 
 **shared_on** | **char \*** | Date of when the snapshot was first shared with member. | [optional] 
 **shared_by** | [**snapshot_owner_schema_t**](snapshot_owner_schema.md) \* |  | [optional] 

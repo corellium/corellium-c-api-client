@@ -23,12 +23,12 @@ delete_modification_input_t* instantiate_delete_modification_input(int include_o
   if (include_optional) {
     delete_modification_input = delete_modification_input_create(
       "masvs-storage-2-android-8",
-      0
+      "severity"
     );
   } else {
     delete_modification_input = delete_modification_input_create(
       "masvs-storage-2-android-8",
-      0
+      "severity"
     );
   }
 

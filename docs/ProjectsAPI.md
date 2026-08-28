@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**ProjectsAPI_v3CreateProjectKey**](ProjectsAPI.md#ProjectsAPI_v3CreateProjectKey) | **POST** /v3/projects/{projectId}/keys | Add a project key
 [**ProjectsAPI_v3DeleteProject**](ProjectsAPI.md#ProjectsAPI_v3DeleteProject) | **DELETE** /v3/projects/{projectId} | Delete a project
 [**ProjectsAPI_v3DeleteProjectKey**](ProjectsAPI.md#ProjectsAPI_v3DeleteProjectKey) | **DELETE** /v3/projects/{projectId}/keys/{keyId} | Delete a project key
+[**ProjectsAPI_v3FetchProjectFirmwareAssets**](ProjectsAPI.md#ProjectsAPI_v3FetchProjectFirmwareAssets) | **POST** /v3/projects/{projectId}/firmware-assets | Fetch firmware assets for a project
 [**ProjectsAPI_v3GetProject**](ProjectsAPI.md#ProjectsAPI_v3GetProject) | **GET** /v3/projects/{projectId} | Get a project
 [**ProjectsAPI_v3GetProjectImageUpload**](ProjectsAPI.md#ProjectsAPI_v3GetProjectImageUpload) | **GET** /v3/projects/{projectId}/image-upload/{type}/{imageId}/{name} | Get image upload status
 [**ProjectsAPI_v3GetProjectNetworkLog**](ProjectsAPI.md#ProjectsAPI_v3GetProjectNetworkLog) | **GET** /v3/projects/{projectId}/network/log | Get project network log
@@ -140,6 +141,38 @@ void
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ProjectsAPI_v3FetchProjectFirmwareAssets**
+```c
+// Fetch firmware assets for a project
+//
+// Relays a set of firmware asset URLs to the firmware service, which downloads the assets server-side and stores them for the project's domain.
+//
+fetch_firmware_assets_response_t* ProjectsAPI_v3FetchProjectFirmwareAssets(apiClient_t *apiClient, char *projectId, fetch_firmware_assets_body_t *fetch_firmware_assets_body);
+```
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**apiClient** | **apiClient_t \*** | context containing the client configuration |
+**projectId** | **char \*** | Project identifier. | 
+**fetch_firmware_assets_body** | **[fetch_firmware_assets_body_t](fetch_firmware_assets_body.md) \*** | Firmware asset URLs to fetch. | 
+
+### Return type
+
+[fetch_firmware_assets_response_t](fetch_firmware_assets_response.md) *
+
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

@@ -399,6 +399,129 @@ end:
 
 }
 
+// Fetch firmware assets for a project
+//
+// Relays a set of firmware asset URLs to the firmware service, which downloads the assets server-side and stores them for the project's domain.
+//
+fetch_firmware_assets_response_t*
+ProjectsAPI_v3FetchProjectFirmwareAssets(apiClient_t *apiClient, char *projectId, fetch_firmware_assets_body_t *fetch_firmware_assets_body)
+{
+    list_t    *localVarQueryParameters = NULL;
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = list_createList();
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/projects/{projectId}/firmware-assets");
+
+    if(!projectId)
+        goto end;
+
+
+    // Path Params
+    long sizeOfPathParams_projectId = strlen(projectId)+3 + sizeof("{ projectId }") - 1;
+    if(projectId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_projectId = malloc(sizeOfPathParams_projectId);
+    sprintf(localVarToReplace_projectId, "{%s}", "projectId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_projectId, projectId);
+
+
+
+    // Body Param
+    cJSON *localVarSingleItemJSON_fetch_firmware_assets_body = NULL;
+    if (fetch_firmware_assets_body != NULL)
+    {
+        //not string, not binary
+        localVarSingleItemJSON_fetch_firmware_assets_body = fetch_firmware_assets_body_convertToJSON(fetch_firmware_assets_body);
+        localVarBodyParameters = cJSON_Print(localVarSingleItemJSON_fetch_firmware_assets_body);
+        localVarBodyLength = strlen(localVarBodyParameters);
+    }
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    list_addElement(localVarContentType,"application/json"); //consumes
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "POST");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 200) {
+    //    printf("%s\n","The fetch result reported by the firmware service.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 400) {
+    //    printf("%s\n","The asset URL payload is invalid.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","Permission denied.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 404) {
+    //    printf("%s\n","No project with the given identifier.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 409) {
+    //    printf("%s\n","Fetching firmware assets is disabled on this cluster.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 503) {
+    //    printf("%s\n","The firmware service is currently unavailable.");
+    //}
+    //nonprimitive not container
+    fetch_firmware_assets_response_t *elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
+        cJSON *ProjectsAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
+        elementToReturn = fetch_firmware_assets_response_parseFromJSON(ProjectsAPIlocalVarJSON);
+        cJSON_Delete(ProjectsAPIlocalVarJSON);
+        if(elementToReturn == NULL) {
+            // return 0;
+        }
+    }
+
+    //return type
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    
+    
+    
+    list_freeList(localVarHeaderType);
+    list_freeList(localVarContentType);
+    free(localVarPath);
+    free(localVarToReplace_projectId);
+    if (localVarSingleItemJSON_fetch_firmware_assets_body) {
+        cJSON_Delete(localVarSingleItemJSON_fetch_firmware_assets_body);
+        localVarSingleItemJSON_fetch_firmware_assets_body = NULL;
+    }
+    free(localVarBodyParameters);
+    return elementToReturn;
+end:
+    free(localVarPath);
+    return NULL;
+
+}
+
 // Get a project
 //
 // Retrieve a single project by identifier.

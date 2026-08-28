@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ports** | **list_t \*** | Ports to capture. | [optional] 
 **protocols** | **list_t \*** | Protocols to capture. | [optional] 
 **processes** | **list_t \*** | Process names to capture traffic for. | [optional] 
+**hosts** | **list_t \*** | Host IP addresses to capture. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

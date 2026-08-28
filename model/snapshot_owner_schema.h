@@ -15,21 +15,19 @@
 
 typedef struct snapshot_owner_schema_t snapshot_owner_schema_t;
 
-#include "any_type.h"
-#include "object.h"
 
 
 
 typedef struct snapshot_owner_schema_t {
     char *name; // string
-    object_t *email; //object
+    char *email; // string
 
     int _library_owned; // Is the library responsible for freeing this object?
 } snapshot_owner_schema_t;
 
 __attribute__((deprecated)) snapshot_owner_schema_t *snapshot_owner_schema_create(
     char *name,
-    object_t *email
+    char *email
 );
 
 void snapshot_owner_schema_free(snapshot_owner_schema_t *snapshot_owner_schema);

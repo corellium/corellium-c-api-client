@@ -47,6 +47,10 @@ api/DomainAuthProvidersAPI.c
 api/DomainAuthProvidersAPI.h
 api/DomainV1API.c
 api/DomainV1API.h
+api/ExtensionsAPI.c
+api/ExtensionsAPI.h
+api/ExtensionsV1API.c
+api/ExtensionsV1API.h
 api/ExternalServicesAPI.c
 api/ExternalServicesAPI.h
 api/FirmwareServiceAPI.c
@@ -153,6 +157,8 @@ docs/DomainAPI.md
 docs/DomainAuthProviderAPI.md
 docs/DomainAuthProvidersAPI.md
 docs/DomainV1API.md
+docs/ExtensionsAPI.md
+docs/ExtensionsV1API.md
 docs/ExternalServicesAPI.md
 docs/FirmwareServiceAPI.md
 docs/FlavorsAPI.md
@@ -265,6 +271,7 @@ docs/api_not_found_error_v1.md
 docs/api_token.md
 docs/assessment.md
 docs/assessment_bundle.md
+docs/assessment_format.md
 docs/assessment_frida_script.md
 docs/assessment_history.md
 docs/assessment_history_line_item.md
@@ -274,6 +281,7 @@ docs/assessment_id_status.md
 docs/assessment_metadata.md
 docs/assessment_results.md
 docs/assessment_severity_counts.md
+docs/assessment_status.md
 docs/assessment_wordlist.md
 docs/attach_interface_body.md
 docs/attach_interface_request.md
@@ -415,6 +423,9 @@ docs/extension_flavor.md
 docs/extension_list.md
 docs/extension_v1.md
 docs/features.md
+docs/fetch_firmware_assets_body.md
+docs/fetch_firmware_assets_response.md
+docs/fetch_firmware_assets_response_failed_inner.md
 docs/file_changes.md
 docs/firmware.md
 docs/firmware_asset.md
@@ -656,7 +667,6 @@ docs/share_snapshot_body.md
 docs/shared_snapshot.md
 docs/shared_snapshots_info.md
 docs/shared_snapshots_response.md
-docs/sharing_type.md
 docs/snapshot.md
 docs/snapshot_creation_options.md
 docs/snapshot_list.md
@@ -669,6 +679,7 @@ docs/snapshot_request.md
 docs/snapshot_sharing.md
 docs/snapshot_sharing_permissions.md
 docs/snapshot_sharing_permissions_request_schema.md
+docs/snapshot_sharing_type.md
 docs/snapshot_sharing_v1.md
 docs/snapshot_status.md
 docs/snapshot_status_schema.md
@@ -932,6 +943,8 @@ model/assessment.c
 model/assessment.h
 model/assessment_bundle.c
 model/assessment_bundle.h
+model/assessment_format.c
+model/assessment_format.h
 model/assessment_frida_script.c
 model/assessment_frida_script.h
 model/assessment_history.c
@@ -950,6 +963,8 @@ model/assessment_results.c
 model/assessment_results.h
 model/assessment_severity_counts.c
 model/assessment_severity_counts.h
+model/assessment_status.c
+model/assessment_status.h
 model/assessment_wordlist.c
 model/assessment_wordlist.h
 model/attach_interface_body.c
@@ -1232,6 +1247,12 @@ model/extension_v1.c
 model/extension_v1.h
 model/features.c
 model/features.h
+model/fetch_firmware_assets_body.c
+model/fetch_firmware_assets_body.h
+model/fetch_firmware_assets_response.c
+model/fetch_firmware_assets_response.h
+model/fetch_firmware_assets_response_failed_inner.c
+model/fetch_firmware_assets_response_failed_inner.h
 model/file_changes.c
 model/file_changes.h
 model/firmware.c
@@ -1716,8 +1737,6 @@ model/shared_snapshots_info.c
 model/shared_snapshots_info.h
 model/shared_snapshots_response.c
 model/shared_snapshots_response.h
-model/sharing_type.c
-model/sharing_type.h
 model/snapshot.c
 model/snapshot.h
 model/snapshot_creation_options.c
@@ -1742,6 +1761,8 @@ model/snapshot_sharing_permissions.c
 model/snapshot_sharing_permissions.h
 model/snapshot_sharing_permissions_request_schema.c
 model/snapshot_sharing_permissions_request_schema.h
+model/snapshot_sharing_type.c
+model/snapshot_sharing_type.h
 model/snapshot_sharing_v1.c
 model/snapshot_sharing_v1.h
 model/snapshot_status.c
@@ -2045,6 +2066,7 @@ unit-test/test_api_not_found_error_v1.c
 unit-test/test_api_token.c
 unit-test/test_assessment.c
 unit-test/test_assessment_bundle.c
+unit-test/test_assessment_format.c
 unit-test/test_assessment_frida_script.c
 unit-test/test_assessment_history.c
 unit-test/test_assessment_history_line_item.c
@@ -2054,6 +2076,7 @@ unit-test/test_assessment_id_status.c
 unit-test/test_assessment_metadata.c
 unit-test/test_assessment_results.c
 unit-test/test_assessment_severity_counts.c
+unit-test/test_assessment_status.c
 unit-test/test_assessment_wordlist.c
 unit-test/test_attach_interface_body.c
 unit-test/test_attach_interface_request.c
@@ -2195,6 +2218,9 @@ unit-test/test_extension_flavor.c
 unit-test/test_extension_list.c
 unit-test/test_extension_v1.c
 unit-test/test_features.c
+unit-test/test_fetch_firmware_assets_body.c
+unit-test/test_fetch_firmware_assets_response.c
+unit-test/test_fetch_firmware_assets_response_failed_inner.c
 unit-test/test_file_changes.c
 unit-test/test_firmware.c
 unit-test/test_firmware_asset.c
@@ -2436,7 +2462,6 @@ unit-test/test_share_snapshot_body.c
 unit-test/test_shared_snapshot.c
 unit-test/test_shared_snapshots_info.c
 unit-test/test_shared_snapshots_response.c
-unit-test/test_sharing_type.c
 unit-test/test_snapshot.c
 unit-test/test_snapshot_creation_options.c
 unit-test/test_snapshot_list.c
@@ -2449,6 +2474,7 @@ unit-test/test_snapshot_request.c
 unit-test/test_snapshot_sharing.c
 unit-test/test_snapshot_sharing_permissions.c
 unit-test/test_snapshot_sharing_permissions_request_schema.c
+unit-test/test_snapshot_sharing_type.c
 unit-test/test_snapshot_sharing_v1.c
 unit-test/test_snapshot_status.c
 unit-test/test_snapshot_status_schema.c

@@ -29,6 +29,7 @@ typedef struct agent_app_t {
     char *bundle_path; // string
     char *bundle_data_path; // string
     int is_launchable; //boolean
+    char *icon; // string
 
     int _library_owned; // Is the library responsible for freeing this object?
 } agent_app_t;
@@ -43,7 +44,8 @@ __attribute__((deprecated)) agent_app_t *agent_app_create(
     char *bundle_id,
     char *bundle_path,
     char *bundle_data_path,
-    int is_launchable
+    int is_launchable,
+    char *icon
 );
 
 void agent_app_free(agent_app_t *agent_app);

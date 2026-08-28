@@ -27,7 +27,7 @@ shared_snapshot_t* instantiate_shared_snapshot(int include_optional) {
     shared_snapshot = shared_snapshot_create(
       "2013-10-20T19:20:30+01:00",
       "0",
-      corellium_api_shared_snapshot_SHARINGTYPE_publicLink,
+      corellium_api_shared_snapshot__publicLink,
        // false, not to have infinite recursion
       instantiate_snapshot_owner_schema(0),
       "0",
@@ -49,7 +49,7 @@ shared_snapshot_t* instantiate_shared_snapshot(int include_optional) {
     shared_snapshot = shared_snapshot_create(
       "2013-10-20T19:20:30+01:00",
       "0",
-      corellium_api_shared_snapshot_SHARINGTYPE_publicLink,
+      corellium_api_shared_snapshot__publicLink,
       NULL,
       "0",
       1.337,

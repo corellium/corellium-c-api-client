@@ -15,7 +15,7 @@ static create_instance_body_t *create_instance_body_create_internal(
     char *os_version,
     char *os_build,
     list_t *patches,
-    object_t *fw_package,
+    char *fw_package,
     char *original_firmware_package_url,
     int encrypt,
     char *wifi_mac,
@@ -64,7 +64,7 @@ __attribute__((deprecated)) create_instance_body_t *create_instance_body_create(
     char *os_version,
     char *os_build,
     list_t *patches,
-    object_t *fw_package,
+    char *fw_package,
     char *original_firmware_package_url,
     int encrypt,
     char *wifi_mac,
@@ -147,7 +147,7 @@ void create_instance_body_free(create_instance_body_t *create_instance_body) {
         create_instance_body->patches = NULL;
     }
     if (create_instance_body->fw_package) {
-        object_free(create_instance_body->fw_package);
+        free(create_instance_body->fw_package);
         create_instance_body->fw_package = NULL;
     }
     if (create_instance_body->original_firmware_package_url) {
@@ -267,13 +267,8 @@ cJSON *create_instance_body_convertToJSON(create_instance_body_t *create_instanc
 
     // create_instance_body->fw_package
     if(create_instance_body->fw_package) {
-    cJSON *fw_package_object = object_convertToJSON(create_instance_body->fw_package);
-    if(fw_package_object == NULL) {
-    goto fail; //model
-    }
-    cJSON_AddItemToObject(item, "fwPackage", fw_package_object);
-    if(item->child == NULL) {
-    goto fail;
+    if(cJSON_AddStringToObject(item, "fwPackage", create_instance_body->fw_package) == NULL) {
+    goto fail; //String
     }
     }
 
@@ -521,9 +516,11 @@ create_instance_body_t *create_instance_body_parseFromJSON(cJSON *create_instanc
     if (cJSON_IsNull(fw_package)) {
         fw_package = NULL;
     }
-    object_t *fw_package_local_object = NULL;
     if (fw_package) { 
-    fw_package_local_object = object_parseFromJSON(fw_package); //object
+    if(!cJSON_IsString(fw_package) && !cJSON_IsNull(fw_package))
+    {
+    goto end; //String
+    }
     }
 
     // create_instance_body->original_firmware_package_url
@@ -651,7 +648,7 @@ create_instance_body_t *create_instance_body_parseFromJSON(cJSON *create_instanc
         os_version && !cJSON_IsNull(os_version) ? strdup(os_version->valuestring) : NULL,
         os_build && !cJSON_IsNull(os_build) ? strdup(os_build->valuestring) : NULL,
         patches ? patchesList : NULL,
-        fw_package ? fw_package_local_object : NULL,
+        fw_package && !cJSON_IsNull(fw_package) ? strdup(fw_package->valuestring) : NULL,
         original_firmware_package_url && !cJSON_IsNull(original_firmware_package_url) ? strdup(original_firmware_package_url->valuestring) : NULL,
         encrypt ? encrypt->valueint : 0,
         wifi_mac && !cJSON_IsNull(wifi_mac) ? strdup(wifi_mac->valuestring) : NULL,

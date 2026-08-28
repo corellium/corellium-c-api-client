@@ -6,7 +6,7 @@
 
 
 static snapshot_member_schema_t *snapshot_member_schema_create_internal(
-    object_t *email,
+    char *email,
     char *invite_sent_at,
     char *shared_on,
     char *user_id,
@@ -27,7 +27,7 @@ static snapshot_member_schema_t *snapshot_member_schema_create_internal(
 }
 
 __attribute__((deprecated)) snapshot_member_schema_t *snapshot_member_schema_create(
-    object_t *email,
+    char *email,
     char *invite_sent_at,
     char *shared_on,
     char *user_id,
@@ -52,7 +52,7 @@ void snapshot_member_schema_free(snapshot_member_schema_t *snapshot_member_schem
     }
     listEntry_t *listEntry;
     if (snapshot_member_schema->email) {
-        object_free(snapshot_member_schema->email);
+        free(snapshot_member_schema->email);
         snapshot_member_schema->email = NULL;
     }
     if (snapshot_member_schema->invite_sent_at) {
@@ -81,13 +81,8 @@ cJSON *snapshot_member_schema_convertToJSON(snapshot_member_schema_t *snapshot_m
     if (!snapshot_member_schema->email) {
         goto fail;
     }
-    cJSON *email_object = object_convertToJSON(snapshot_member_schema->email);
-    if(email_object == NULL) {
-    goto fail; //model
-    }
-    cJSON_AddItemToObject(item, "email", email_object);
-    if(item->child == NULL) {
-    goto fail;
+    if(cJSON_AddStringToObject(item, "email", snapshot_member_schema->email) == NULL) {
+    goto fail; //String
     }
 
 
@@ -143,9 +138,11 @@ snapshot_member_schema_t *snapshot_member_schema_parseFromJSON(cJSON *snapshot_m
         goto end;
     }
 
-    object_t *email_local_object = NULL;
     
-    email_local_object = object_parseFromJSON(email); //object
+    if(!cJSON_IsString(email))
+    {
+    goto end; //String
+    }
 
     // snapshot_member_schema->invite_sent_at
     cJSON *invite_sent_at = cJSON_GetObjectItemCaseSensitive(snapshot_member_schemaJSON, "inviteSentAt");
@@ -197,7 +194,7 @@ snapshot_member_schema_t *snapshot_member_schema_parseFromJSON(cJSON *snapshot_m
 
 
     snapshot_member_schema_local_var = snapshot_member_schema_create_internal (
-        email_local_object,
+        strdup(email->valuestring),
         invite_sent_at && !cJSON_IsNull(invite_sent_at) ? strdup(invite_sent_at->valuestring) : NULL,
         shared_on && !cJSON_IsNull(shared_on) ? strdup(shared_on->valuestring) : NULL,
         user_id && !cJSON_IsNull(user_id) ? strdup(user_id->valuestring) : NULL,

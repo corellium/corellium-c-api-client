@@ -15,14 +15,14 @@
 
 typedef struct snapshot_sharing_t snapshot_sharing_t;
 
-#include "sharing_type.h"
 #include "snapshot_member_schema.h"
 #include "snapshot_owner_schema.h"
+#include "snapshot_sharing_type.h"
 
 
 
 typedef struct snapshot_sharing_t {
-    corellium_api_sharing_type__e sharing_type; //referenced enum
+    corellium_api_snapshot_sharing_type__e sharing_type; //referenced enum
     char *access_code; // string
     char *shared_on; //date time
     struct snapshot_owner_schema_t *shared_by; //model
@@ -32,7 +32,7 @@ typedef struct snapshot_sharing_t {
 } snapshot_sharing_t;
 
 __attribute__((deprecated)) snapshot_sharing_t *snapshot_sharing_create(
-    corellium_api_sharing_type__e sharing_type,
+    corellium_api_snapshot_sharing_type__e sharing_type,
     char *access_code,
     char *shared_on,
     snapshot_owner_schema_t *shared_by,

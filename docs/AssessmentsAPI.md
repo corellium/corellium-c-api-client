@@ -161,7 +161,7 @@ Name | Type | Description  | Notes
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **instanceId** | **char \*** | Identifier of the instance, supplied as the MATRIX service-proxy path segment. | 
 **assessmentId** | **char \*** | Identifier of the assessment. | 
-**format** | **char \*** | Report download format. Defaults to \&quot;html\&quot;. | [optional] [default to &#39;html&#39;]
+**format** | **char \*** | Report download format. Defaults to \&quot;html\&quot;. | [optional] 
 
 ### Return type
 

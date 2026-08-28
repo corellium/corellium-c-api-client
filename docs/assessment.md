@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **char \*** | Identifier of the assessment. | 
-**status** | **corellium_api_assessment_STATUS_e** | Lifecycle status of the assessment. | 
+**status** | **assessment_status_t \*** |  | 
 **instance_id** | **char \*** | Identifier of the instance under assessment. | 
 **bundle** | [**assessment_bundle_t**](assessment_bundle.md) \* |  | 
 **wordlist** | [**assessment_wordlist_t**](assessment_wordlist.md) \* |  | [optional] 

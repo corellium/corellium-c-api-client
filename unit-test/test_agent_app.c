@@ -31,7 +31,8 @@ agent_app_t* instantiate_agent_app(int include_optional) {
       "0",
       "0",
       "0",
-      1
+      1,
+      "0"
     );
   } else {
     agent_app = agent_app_create(
@@ -44,7 +45,8 @@ agent_app_t* instantiate_agent_app(int include_optional) {
       "0",
       "0",
       "0",
-      1
+      1,
+      "0"
     );
   }
 

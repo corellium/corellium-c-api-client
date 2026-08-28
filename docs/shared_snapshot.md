@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **shared_on** | **char \*** | Date of when the snapshot was first shared with member. | [optional] 
 **shared_with_member** | **char \*** | The member who the snapshot was shared with. Only present in sharedWithUser. | [optional] 
-**sharing_type** | **corellium_api_shared_snapshot_SHARINGTYPE_e** | Sharing type of the snapshot. | 
+**sharing_type** | **snapshot_sharing_type_t \*** |  | 
 **shared_by** | [**snapshot_owner_schema_t**](snapshot_owner_schema.md) \* |  | [optional] 
 **id** | **char \*** | The snapshot identifier. | 
 **date** | **double** | Date that the snapshot was created (UNIX epoch milliseconds). | 

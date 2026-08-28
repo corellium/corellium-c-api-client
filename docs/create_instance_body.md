@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **os_version** | **char \*** | OS version. | [optional] 
 **os_build** | **char \*** | OS build. | [optional] 
 **patches** | **list_t \*** | List of patches to apply. | [optional] 
-**fw_package** | [**object_t**](.md) \* | URL or image ID. | [optional] 
+**fw_package** | **char \*** | URL or image ID. | [optional] 
 **original_firmware_package_url** | **char \*** | URL that the firmware package is available at. | [optional] 
 **encrypt** | **int** | Whether to encrypt the instance. | [optional] 
 **wifi_mac** | **char \*** | WiFi MAC address to assign to the instance. | [optional] 

@@ -20,21 +20,14 @@ typedef struct assessment_t assessment_t;
 #include "assessment_metadata.h"
 #include "assessment_results.h"
 #include "assessment_severity_counts.h"
+#include "assessment_status.h"
 #include "assessment_wordlist.h"
-
-// Enum STATUS for assessment
-
-typedef enum  { corellium_api_assessment_STATUS_NULL = 0, corellium_api_assessment_STATUS__new, corellium_api_assessment_STATUS_startingMonitoring, corellium_api_assessment_STATUS_monitoring, corellium_api_assessment_STATUS_stoppingMonitoring, corellium_api_assessment_STATUS_readyForTesting, corellium_api_assessment_STATUS_testing, corellium_api_assessment_STATUS_complete, corellium_api_assessment_STATUS_failed } corellium_api_assessment_STATUS_e;
-
-char* assessment_status_ToString(corellium_api_assessment_STATUS_e status);
-
-corellium_api_assessment_STATUS_e assessment_status_FromString(char* status);
 
 
 
 typedef struct assessment_t {
     char *id; // string
-    corellium_api_assessment_STATUS_e status; //enum
+    corellium_api_assessment_status__e status; //referenced enum
     char *instance_id; // string
     struct assessment_bundle_t *bundle; //model
     struct assessment_wordlist_t *wordlist; //model
@@ -53,7 +46,7 @@ typedef struct assessment_t {
 
 __attribute__((deprecated)) assessment_t *assessment_create(
     char *id,
-    corellium_api_assessment_STATUS_e status,
+    corellium_api_assessment_status__e status,
     char *instance_id,
     assessment_bundle_t *bundle,
     assessment_wordlist_t *wordlist,

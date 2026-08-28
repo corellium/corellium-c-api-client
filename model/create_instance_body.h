@@ -32,7 +32,7 @@ typedef struct create_instance_body_t {
     char *os_version; // string
     char *os_build; // string
     list_t *patches; //primitive container
-    object_t *fw_package; //object
+    char *fw_package; // string
     char *original_firmware_package_url; // string
     int encrypt; //boolean
     char *wifi_mac; // string
@@ -56,7 +56,7 @@ __attribute__((deprecated)) create_instance_body_t *create_instance_body_create(
     char *os_version,
     char *os_build,
     list_t *patches,
-    object_t *fw_package,
+    char *fw_package,
     char *original_firmware_package_url,
     int encrypt,
     char *wifi_mac,

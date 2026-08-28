@@ -25,6 +25,7 @@ typedef struct enable_netdump_body_t {
     list_t *ports; //primitive container
     list_t *protocols; //primitive container
     list_t *processes; //primitive container
+    list_t *hosts; //primitive container
 
     int _library_owned; // Is the library responsible for freeing this object?
 } enable_netdump_body_t;
@@ -35,7 +36,8 @@ __attribute__((deprecated)) enable_netdump_body_t *enable_netdump_body_create(
     list_t *dst_ports,
     list_t *ports,
     list_t *protocols,
-    list_t *processes
+    list_t *processes,
+    list_t *hosts
 );
 
 void enable_netdump_body_free(enable_netdump_body_t *enable_netdump_body);

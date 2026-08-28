@@ -23,14 +23,14 @@ report_modification_input_t* instantiate_report_modification_input(int include_o
   if (include_optional) {
     report_modification_input = report_modification_input_create(
       "masvs-storage-2-android-8",
-      0,
+      "severity",
       1,
       "low"
     );
   } else {
     report_modification_input = report_modification_input_create(
       "masvs-storage-2-android-8",
-      0,
+      "severity",
       1,
       "low"
     );

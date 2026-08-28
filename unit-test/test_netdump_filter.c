@@ -27,10 +27,12 @@ netdump_filter_t* instantiate_netdump_filter(int include_optional) {
       list_createList(),
       list_createList(),
       list_createList(),
+      list_createList(),
       list_createList()
     );
   } else {
     netdump_filter = netdump_filter_create(
+      list_createList(),
       list_createList(),
       list_createList(),
       list_createList(),

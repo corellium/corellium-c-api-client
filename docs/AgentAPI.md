@@ -552,7 +552,7 @@ Name | Type | Description  | Notes
 //
 // List installed apps on the VM.
 //
-agent_apps_list_t* AgentAPI_v3ListAppsAgent(apiClient_t *apiClient, char *instanceId);
+agent_apps_list_t* AgentAPI_v3ListAppsAgent(apiClient_t *apiClient, char *instanceId, char *loadIcons);
 ```
 
 ### Parameters
@@ -560,6 +560,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **instanceId** | **char \*** | Instance ID. | 
+**loadIcons** | **char \*** | Whether to include each app icon in the response. | [optional] 
 
 ### Return type
 

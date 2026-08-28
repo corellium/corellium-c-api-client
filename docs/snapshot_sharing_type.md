@@ -1,4 +1,4 @@
-# sharing_type_t
+# snapshot_sharing_type_t
 
 ## Properties
 Name | Type | Description | Notes

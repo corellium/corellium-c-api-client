@@ -10,6 +10,8 @@
 #include "../model/api_not_found_error.h"
 #include "../model/create_project_body.h"
 #include "../model/create_project_key_body.h"
+#include "../model/fetch_firmware_assets_body.h"
+#include "../model/fetch_firmware_assets_response.h"
 #include "../model/insufficient_storage_error.h"
 #include "../model/network_status.h"
 #include "../model/patch_project_body.h"
@@ -51,6 +53,14 @@ ProjectsAPI_v3DeleteProject(apiClient_t *apiClient, char *projectId);
 //
 void
 ProjectsAPI_v3DeleteProjectKey(apiClient_t *apiClient, char *projectId, char *keyId);
+
+
+// Fetch firmware assets for a project
+//
+// Relays a set of firmware asset URLs to the firmware service, which downloads the assets server-side and stores them for the project's domain.
+//
+fetch_firmware_assets_response_t*
+ProjectsAPI_v3FetchProjectFirmwareAssets(apiClient_t *apiClient, char *projectId, fetch_firmware_assets_body_t *fetch_firmware_assets_body);
 
 
 // Get a project

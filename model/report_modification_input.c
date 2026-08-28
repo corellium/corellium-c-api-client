@@ -7,7 +7,7 @@
 
 static report_modification_input_t *report_modification_input_create_internal(
     char *check_id,
-    object_t *property,
+    char *property,
     int suppressed,
     char *value
     ) {
@@ -26,7 +26,7 @@ static report_modification_input_t *report_modification_input_create_internal(
 
 __attribute__((deprecated)) report_modification_input_t *report_modification_input_create(
     char *check_id,
-    object_t *property,
+    char *property,
     int suppressed,
     char *value
     ) {
@@ -52,7 +52,7 @@ void report_modification_input_free(report_modification_input_t *report_modifica
         report_modification_input->check_id = NULL;
     }
     if (report_modification_input->property) {
-        object_free(report_modification_input->property);
+        free(report_modification_input->property);
         report_modification_input->property = NULL;
     }
     if (report_modification_input->value) {
@@ -78,13 +78,8 @@ cJSON *report_modification_input_convertToJSON(report_modification_input_t *repo
     if (!report_modification_input->property) {
         goto fail;
     }
-    cJSON *property_object = object_convertToJSON(report_modification_input->property);
-    if(property_object == NULL) {
-    goto fail; //model
-    }
-    cJSON_AddItemToObject(item, "property", property_object);
-    if(item->child == NULL) {
-    goto fail;
+    if(cJSON_AddStringToObject(item, "property", report_modification_input->property) == NULL) {
+    goto fail; //String
     }
 
 
@@ -139,9 +134,11 @@ report_modification_input_t *report_modification_input_parseFromJSON(cJSON *repo
         goto end;
     }
 
-    object_t *property_local_object = NULL;
     
-    property_local_object = object_parseFromJSON(property); //object
+    if(!cJSON_IsString(property))
+    {
+    goto end; //String
+    }
 
     // report_modification_input->suppressed
     cJSON *suppressed = cJSON_GetObjectItemCaseSensitive(report_modification_inputJSON, "suppressed");
@@ -170,7 +167,7 @@ report_modification_input_t *report_modification_input_parseFromJSON(cJSON *repo
 
     report_modification_input_local_var = report_modification_input_create_internal (
         strdup(check_id->valuestring),
-        property_local_object,
+        strdup(property->valuestring),
         suppressed ? suppressed->valueint : 0,
         value && !cJSON_IsNull(value) ? strdup(value->valuestring) : NULL
         );

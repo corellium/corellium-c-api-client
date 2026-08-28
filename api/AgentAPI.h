@@ -165,7 +165,7 @@ AgentAPI_v3ListAppIconsAgent(apiClient_t *apiClient, char *instanceId, char *bun
 // List installed apps on the VM.
 //
 agent_apps_list_t*
-AgentAPI_v3ListAppsAgent(apiClient_t *apiClient, char *instanceId);
+AgentAPI_v3ListAppsAgent(apiClient_t *apiClient, char *instanceId, char *loadIcons);
 
 
 // List apps status

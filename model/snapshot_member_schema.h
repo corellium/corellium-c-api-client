@@ -15,13 +15,11 @@
 
 typedef struct snapshot_member_schema_t snapshot_member_schema_t;
 
-#include "any_type.h"
-#include "object.h"
 
 
 
 typedef struct snapshot_member_schema_t {
-    object_t *email; //object
+    char *email; // string
     char *invite_sent_at; //date time
     char *shared_on; //date time
     char *user_id; // string
@@ -31,7 +29,7 @@ typedef struct snapshot_member_schema_t {
 } snapshot_member_schema_t;
 
 __attribute__((deprecated)) snapshot_member_schema_t *snapshot_member_schema_create(
-    object_t *email,
+    char *email,
     char *invite_sent_at,
     char *shared_on,
     char *user_id,

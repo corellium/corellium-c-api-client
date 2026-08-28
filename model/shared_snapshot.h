@@ -17,22 +17,15 @@ typedef struct shared_snapshot_t shared_snapshot_t;
 
 #include "snapshot_owner_schema.h"
 #include "snapshot_sharing.h"
+#include "snapshot_sharing_type.h"
 #include "snapshot_status_schema.h"
-
-// Enum SHARINGTYPE for shared_snapshot
-
-typedef enum  { corellium_api_shared_snapshot_SHARINGTYPE_NULL = 0, corellium_api_shared_snapshot_SHARINGTYPE_publicLink, corellium_api_shared_snapshot_SHARINGTYPE_domainRestrictedLink, corellium_api_shared_snapshot_SHARINGTYPE_passwordPublicLink, corellium_api_shared_snapshot_SHARINGTYPE_emailInvite, corellium_api_shared_snapshot_SHARINGTYPE_notShared } corellium_api_shared_snapshot_SHARINGTYPE_e;
-
-char* shared_snapshot_sharing_type_ToString(corellium_api_shared_snapshot_SHARINGTYPE_e sharing_type);
-
-corellium_api_shared_snapshot_SHARINGTYPE_e shared_snapshot_sharing_type_FromString(char* sharing_type);
 
 
 
 typedef struct shared_snapshot_t {
     char *shared_on; //date time
     char *shared_with_member; // string
-    corellium_api_shared_snapshot_SHARINGTYPE_e sharing_type; //enum
+    corellium_api_snapshot_sharing_type__e sharing_type; //referenced enum
     struct snapshot_owner_schema_t *shared_by; //model
     char *id; // string
     double date; //numeric
@@ -53,7 +46,7 @@ typedef struct shared_snapshot_t {
 __attribute__((deprecated)) shared_snapshot_t *shared_snapshot_create(
     char *shared_on,
     char *shared_with_member,
-    corellium_api_shared_snapshot_SHARINGTYPE_e sharing_type,
+    corellium_api_snapshot_sharing_type__e sharing_type,
     snapshot_owner_schema_t *shared_by,
     char *id,
     double date,
