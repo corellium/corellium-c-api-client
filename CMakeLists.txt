@@ -280,6 +280,8 @@ set(SRCS
     model/firmware_asset_v1.c
     model/firmware_device.c
     model/firmware_device_list.c
+    model/firmware_info_device.c
+    model/firmware_info_device_firmwares_inner.c
     model/firmware_list.c
     model/firmware_service_configuration.c
     model/firmware_v1.c
@@ -287,6 +289,7 @@ set(SRCS
     model/flavor_frame_dimensions.c
     model/flavor_frame_home.c
     model/flavor_frame_inner.c
+    model/get_firmware_info_body.c
     model/get_interconnects_response.c
     model/get_storage_response.c
     model/gpio_state_definition.c
@@ -302,6 +305,8 @@ set(SRCS
     model/image_extended.c
     model/image_extended_device.c
     model/image_firmware.c
+    model/image_firmware_info.c
+    model/image_firmware_info_boot_args.c
     model/image_list.c
     model/image_v1.c
     model/input_response.c
@@ -948,6 +953,8 @@ set(HDRS
     model/firmware_asset_v1.h
     model/firmware_device.h
     model/firmware_device_list.h
+    model/firmware_info_device.h
+    model/firmware_info_device_firmwares_inner.h
     model/firmware_list.h
     model/firmware_service_configuration.h
     model/firmware_v1.h
@@ -955,6 +962,7 @@ set(HDRS
     model/flavor_frame_dimensions.h
     model/flavor_frame_home.h
     model/flavor_frame_inner.h
+    model/get_firmware_info_body.h
     model/get_interconnects_response.h
     model/get_storage_response.h
     model/gpio_state_definition.h
@@ -970,6 +978,8 @@ set(HDRS
     model/image_extended.h
     model/image_extended_device.h
     model/image_firmware.h
+    model/image_firmware_info.h
+    model/image_firmware_info_boot_args.h
     model/image_list.h
     model/image_v1.h
     model/input_response.h

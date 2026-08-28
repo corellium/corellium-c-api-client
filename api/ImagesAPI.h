@@ -9,7 +9,9 @@
 #include "../model/api_error.h"
 #include "../model/api_not_found_error.h"
 #include "../model/create_image_body.h"
+#include "../model/get_firmware_info_body.h"
 #include "../model/image.h"
+#include "../model/image_firmware_info.h"
 #include "../model/image_list.h"
 #include "../model/install_firmware_assets_body.h"
 #include "../model/install_firmware_assets_response.h"
@@ -41,6 +43,14 @@ ImagesAPI_v3DeleteImage(apiClient_t *apiClient, char *imageId);
 //
 image_t*
 ImagesAPI_v3GetImage(apiClient_t *apiClient, char *imageId);
+
+
+// Get firmware info embedded in an image
+//
+// Extracts and returns the firmware metadata embedded in an uploaded image (IPSW, COREIMG, CLBI, UFD, or extension). For an encrypted image, supply `password` to decrypt it. Set `extended` to also resolve the matching supported device model.
+//
+image_firmware_info_t*
+ImagesAPI_v3GetImageFirmwareInfo(apiClient_t *apiClient, char *imageId, get_firmware_info_body_t *get_firmware_info_body);
 
 
 // Get install-firmware task status

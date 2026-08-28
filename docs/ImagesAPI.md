@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**ImagesAPI_v3CreateImage**](ImagesAPI.md#ImagesAPI_v3CreateImage) | **POST** /v3/images | Create an image
 [**ImagesAPI_v3DeleteImage**](ImagesAPI.md#ImagesAPI_v3DeleteImage) | **DELETE** /v3/images/{imageId} | Delete an image
 [**ImagesAPI_v3GetImage**](ImagesAPI.md#ImagesAPI_v3GetImage) | **GET** /v3/images/{imageId} | Get image metadata
+[**ImagesAPI_v3GetImageFirmwareInfo**](ImagesAPI.md#ImagesAPI_v3GetImageFirmwareInfo) | **POST** /v3/images/{imageId}/fwinfo | Get firmware info embedded in an image
 [**ImagesAPI_v3GetInstallFirmwareStatus**](ImagesAPI.md#ImagesAPI_v3GetInstallFirmwareStatus) | **GET** /v3/images/install-firmware/{taskId} | Get install-firmware task status
 [**ImagesAPI_v3InstallFirmware**](ImagesAPI.md#ImagesAPI_v3InstallFirmware) | **POST** /v3/images/install-firmware | Install firmware cluster-wide
 [**ImagesAPI_v3InstallFirmwareAssets**](ImagesAPI.md#ImagesAPI_v3InstallFirmwareAssets) | **POST** /v3/images/install-firmware-assets | Install firmware assets cluster-wide
@@ -102,6 +103,38 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ImagesAPI_v3GetImageFirmwareInfo**
+```c
+// Get firmware info embedded in an image
+//
+// Extracts and returns the firmware metadata embedded in an uploaded image (IPSW, COREIMG, CLBI, UFD, or extension). For an encrypted image, supply `password` to decrypt it. Set `extended` to also resolve the matching supported device model.
+//
+image_firmware_info_t* ImagesAPI_v3GetImageFirmwareInfo(apiClient_t *apiClient, char *imageId, get_firmware_info_body_t *get_firmware_info_body);
+```
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**apiClient** | **apiClient_t \*** | context containing the client configuration |
+**imageId** | **char \*** |  | 
+**get_firmware_info_body** | **[get_firmware_info_body_t](get_firmware_info_body.md) \*** | Optional decryption password and extended-info flag. | [optional] 
+
+### Return type
+
+[image_firmware_info_t](image_firmware_info.md) *
+
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

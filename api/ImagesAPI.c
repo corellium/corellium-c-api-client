@@ -273,6 +273,125 @@ end:
 
 }
 
+// Get firmware info embedded in an image
+//
+// Extracts and returns the firmware metadata embedded in an uploaded image (IPSW, COREIMG, CLBI, UFD, or extension). For an encrypted image, supply `password` to decrypt it. Set `extended` to also resolve the matching supported device model.
+//
+image_firmware_info_t*
+ImagesAPI_v3GetImageFirmwareInfo(apiClient_t *apiClient, char *imageId, get_firmware_info_body_t *get_firmware_info_body)
+{
+    list_t    *localVarQueryParameters = NULL;
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = list_createList();
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/images/{imageId}/fwinfo");
+
+    if(!imageId)
+        goto end;
+
+
+    // Path Params
+    long sizeOfPathParams_imageId = strlen(imageId)+3 + sizeof("{ imageId }") - 1;
+    if(imageId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_imageId = malloc(sizeOfPathParams_imageId);
+    sprintf(localVarToReplace_imageId, "{%s}", "imageId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_imageId, imageId);
+
+
+
+    // Body Param
+    cJSON *localVarSingleItemJSON_get_firmware_info_body = NULL;
+    if (get_firmware_info_body != NULL)
+    {
+        //not string, not binary
+        localVarSingleItemJSON_get_firmware_info_body = get_firmware_info_body_convertToJSON(get_firmware_info_body);
+        localVarBodyParameters = cJSON_Print(localVarSingleItemJSON_get_firmware_info_body);
+        localVarBodyLength = strlen(localVarBodyParameters);
+    }
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    list_addElement(localVarContentType,"application/json"); //consumes
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "POST");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 200) {
+    //    printf("%s\n","Firmware info parsed from the image.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 400) {
+    //    printf("%s\n","Invalid request body, or the supplied password is wrong.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","No permission for the image&#39;s project.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 404) {
+    //    printf("%s\n","No image with the given imageId, no firmware info file inside it, or the info was unparseable.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 409) {
+    //    printf("%s\n","The image backing file is not currently accessible.");
+    //}
+    //nonprimitive not container
+    image_firmware_info_t *elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
+        cJSON *ImagesAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
+        elementToReturn = image_firmware_info_parseFromJSON(ImagesAPIlocalVarJSON);
+        cJSON_Delete(ImagesAPIlocalVarJSON);
+        if(elementToReturn == NULL) {
+            // return 0;
+        }
+    }
+
+    //return type
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    
+    
+    
+    list_freeList(localVarHeaderType);
+    list_freeList(localVarContentType);
+    free(localVarPath);
+    free(localVarToReplace_imageId);
+    if (localVarSingleItemJSON_get_firmware_info_body) {
+        cJSON_Delete(localVarSingleItemJSON_get_firmware_info_body);
+        localVarSingleItemJSON_get_firmware_info_body = NULL;
+    }
+    free(localVarBodyParameters);
+    return elementToReturn;
+end:
+    free(localVarPath);
+    return NULL;
+
+}
+
 // Get install-firmware task status
 //
 // Returns the current status of a firmware installation task previously created via [`installFirmware`](#operation/installFirmware). Clients should poll this endpoint until `status` is `complete` or `error`.
