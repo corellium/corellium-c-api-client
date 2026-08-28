@@ -144,7 +144,7 @@ Name | Type | Description  | Notes
 //
 // **Required role:** Cluster administrator.  Returns the current configuration of the cluster firmware service.
 //
-object_t* FirmwareServiceAPI_v3GetFirmwareServiceConfig(apiClient_t *apiClient);
+firmware_service_config_t* FirmwareServiceAPI_v3GetFirmwareServiceConfig(apiClient_t *apiClient);
 ```
 
 ### Parameters
@@ -154,7 +154,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[object_t](object.md) *
+[firmware_service_config_t](firmware_service_config.md) *
 
 
 ### Authorization
@@ -174,7 +174,7 @@ Name | Type | Description  | Notes
 //
 // **Required role:** Cluster administrator.  Returns a paginated list of firmware assets available in the cluster firmware service.
 //
-firmware_asset_list_t* FirmwareServiceAPI_v3ListFirmwareAssets(apiClient_t *apiClient, double *limit, double *offset, char *search, char *order, char *filter);
+firmware_asset_list_t* FirmwareServiceAPI_v3ListFirmwareAssets(apiClient_t *apiClient, double *limit, double *offset, char *search, char *order, firmware_asset_filter_t *filter);
 ```
 
 ### Parameters
@@ -184,8 +184,8 @@ Name | Type | Description  | Notes
 **limit** | **double \*** | Number of results to return. | [optional] [default to 100]
 **offset** | **double \*** | Index of the first row to return. | [optional] [default to 0]
 **search** | **char \*** | Case-insensitive partial match across key fields. | [optional] 
-**order** | **char \*** | Comma-separated sort fields; prefix with \&quot;-\&quot; for ascending order. | [optional] 
-**filter** | **char \*** | Exact-match filters (filter[url], filter[domain]). | [optional] 
+**order** | **char \*** | Comma-separated sort fields; prefix with \&quot;-\&quot; for descending order. | [optional] 
+**filter** | **[firmware_asset_filter_t](.md) \*** | Exact-match filters (filter[url], filter[domain]). | [optional] 
 
 ### Return type
 
@@ -219,7 +219,7 @@ Name | Type | Description  | Notes
 **limit** | **double \*** | Number of results to return. | [optional] [default to 100]
 **offset** | **double \*** | Index of the first row to return. | [optional] [default to 0]
 **search** | **char \*** | Case-insensitive partial match across key fields. | [optional] 
-**order** | **char \*** | Comma-separated sort fields; prefix with \&quot;-\&quot; for ascending order. | [optional] 
+**order** | **char \*** | Comma-separated sort fields; prefix with \&quot;-\&quot; for descending order. | [optional] 
 **type** | **char \*** | Filter by exact type. | [optional] 
 **model** | **char \*** | Filter by exact model. | [optional] 
 **name** | **char \*** | Filter by exact name. | [optional] 
@@ -248,7 +248,7 @@ Name | Type | Description  | Notes
 //
 // **Required role:** Cluster administrator.  Returns a paginated list of firmwares available in the cluster firmware service.
 //
-firmware_list_t* FirmwareServiceAPI_v3ListFirmwares(apiClient_t *apiClient, double *limit, double *offset, char *search, char *order, char *filename, char *model, char *type, char *version, char *buildId, char *firmwareAssets, char *installed);
+firmware_list_t* FirmwareServiceAPI_v3ListFirmwares(apiClient_t *apiClient, double *limit, double *offset, char *search, char *order, char *filename, char *model, char *type, char *version, char *buildId, char *firmwareAssets, char *corelliumChecksum, int *installed);
 ```
 
 ### Parameters
@@ -258,14 +258,15 @@ Name | Type | Description  | Notes
 **limit** | **double \*** | Number of results to return. | [optional] [default to 100]
 **offset** | **double \*** | Index of the first row to return. | [optional] [default to 0]
 **search** | **char \*** | Case-insensitive partial match across key fields. | [optional] 
-**order** | **char \*** | Comma-separated sort fields; prefix with \&quot;-\&quot; for ascending order. | [optional] 
+**order** | **char \*** | Comma-separated sort fields; prefix with \&quot;-\&quot; for descending order. | [optional] 
 **filename** | **char \*** | Filter by exact filename. | [optional] 
 **model** | **char \*** | Filter by exact model. | [optional] 
 **type** | **char \*** | Filter by exact type. | [optional] 
 **version** | **char \*** | Filter by exact version. | [optional] 
 **buildId** | **char \*** | Filter by exact build ID. | [optional] 
 **firmwareAssets** | **char \*** | Filter by exact asset URL/ID. | [optional] 
-**installed** | **char \*** | Filter by installed status. | [optional] 
+**corelliumChecksum** | **char \*** | Filter by exact Corellium checksum (upload preflight). | [optional] 
+**installed** | **int \*** | Filter by installed status. | [optional] 
 
 ### Return type
 
@@ -289,7 +290,7 @@ Name | Type | Description  | Notes
 //
 // **Required role:** Cluster administrator.  Updates the cluster firmware service configuration and returns the merged result.
 //
-object_t* FirmwareServiceAPI_v3PatchFirmwareServiceConfig(apiClient_t *apiClient, patch_firmware_service_config_body_t *patch_firmware_service_config_body);
+firmware_service_settings_t* FirmwareServiceAPI_v3PatchFirmwareServiceConfig(apiClient_t *apiClient, patch_firmware_service_config_body_t *patch_firmware_service_config_body);
 ```
 
 ### Parameters
@@ -300,7 +301,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[object_t](object.md) *
+[firmware_service_settings_t](firmware_service_settings.md) *
 
 
 ### Authorization

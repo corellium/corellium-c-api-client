@@ -17,11 +17,17 @@ static firmware_t *firmware_create_internal(
     char *md5sum,
     char *sha1sum,
     char *sha256sum,
+    char *corellium_checksum,
     char *release_date,
     char *upload_date,
     object_t *metadata,
     char *unique_id,
-    int installed
+    char *android_flavor,
+    char *api_version,
+    int rooted,
+    int installed,
+    char *created_at,
+    char *updated_at
     ) {
     firmware_t *firmware_local_var = malloc(sizeof(firmware_t));
     if (!firmware_local_var) {
@@ -38,11 +44,17 @@ static firmware_t *firmware_create_internal(
     firmware_local_var->md5sum = md5sum;
     firmware_local_var->sha1sum = sha1sum;
     firmware_local_var->sha256sum = sha256sum;
+    firmware_local_var->corellium_checksum = corellium_checksum;
     firmware_local_var->release_date = release_date;
     firmware_local_var->upload_date = upload_date;
     firmware_local_var->metadata = metadata;
     firmware_local_var->unique_id = unique_id;
+    firmware_local_var->android_flavor = android_flavor;
+    firmware_local_var->api_version = api_version;
+    firmware_local_var->rooted = rooted;
     firmware_local_var->installed = installed;
+    firmware_local_var->created_at = created_at;
+    firmware_local_var->updated_at = updated_at;
 
     firmware_local_var->_library_owned = 1;
     return firmware_local_var;
@@ -60,11 +72,17 @@ __attribute__((deprecated)) firmware_t *firmware_create(
     char *md5sum,
     char *sha1sum,
     char *sha256sum,
+    char *corellium_checksum,
     char *release_date,
     char *upload_date,
     object_t *metadata,
     char *unique_id,
-    int installed
+    char *android_flavor,
+    char *api_version,
+    int rooted,
+    int installed,
+    char *created_at,
+    char *updated_at
     ) {
     return firmware_create_internal (
         model,
@@ -78,11 +96,17 @@ __attribute__((deprecated)) firmware_t *firmware_create(
         md5sum,
         sha1sum,
         sha256sum,
+        corellium_checksum,
         release_date,
         upload_date,
         metadata,
         unique_id,
-        installed
+        android_flavor,
+        api_version,
+        rooted,
+        installed,
+        created_at,
+        updated_at
         );
 }
 
@@ -141,6 +165,10 @@ void firmware_free(firmware_t *firmware) {
         free(firmware->sha256sum);
         firmware->sha256sum = NULL;
     }
+    if (firmware->corellium_checksum) {
+        free(firmware->corellium_checksum);
+        firmware->corellium_checksum = NULL;
+    }
     if (firmware->release_date) {
         free(firmware->release_date);
         firmware->release_date = NULL;
@@ -156,6 +184,22 @@ void firmware_free(firmware_t *firmware) {
     if (firmware->unique_id) {
         free(firmware->unique_id);
         firmware->unique_id = NULL;
+    }
+    if (firmware->android_flavor) {
+        free(firmware->android_flavor);
+        firmware->android_flavor = NULL;
+    }
+    if (firmware->api_version) {
+        free(firmware->api_version);
+        firmware->api_version = NULL;
+    }
+    if (firmware->created_at) {
+        free(firmware->created_at);
+        firmware->created_at = NULL;
+    }
+    if (firmware->updated_at) {
+        free(firmware->updated_at);
+        firmware->updated_at = NULL;
     }
     free(firmware);
 }
@@ -225,11 +269,10 @@ cJSON *firmware_convertToJSON(firmware_t *firmware) {
 
 
     // firmware->url
-    if (!firmware->url) {
-        goto fail;
-    }
+    if(firmware->url) {
     if(cJSON_AddStringToObject(item, "url", firmware->url) == NULL) {
     goto fail; //String
+    }
     }
 
 
@@ -243,11 +286,10 @@ cJSON *firmware_convertToJSON(firmware_t *firmware) {
 
 
     // firmware->build_id
-    if (!firmware->build_id) {
-        goto fail;
-    }
+    if(firmware->build_id) {
     if(cJSON_AddStringToObject(item, "buildId", firmware->build_id) == NULL) {
     goto fail; //String
+    }
     }
 
 
@@ -275,10 +317,18 @@ cJSON *firmware_convertToJSON(firmware_t *firmware) {
     }
 
 
+    // firmware->corellium_checksum
+    if(firmware->corellium_checksum) {
+    if(cJSON_AddStringToObject(item, "corelliumChecksum", firmware->corellium_checksum) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
     // firmware->release_date
     if(firmware->release_date) {
     if(cJSON_AddStringToObject(item, "releaseDate", firmware->release_date) == NULL) {
-    goto fail; //Date-Time
+    goto fail; //String
     }
     }
 
@@ -286,7 +336,7 @@ cJSON *firmware_convertToJSON(firmware_t *firmware) {
     // firmware->upload_date
     if(firmware->upload_date) {
     if(cJSON_AddStringToObject(item, "uploadDate", firmware->upload_date) == NULL) {
-    goto fail; //Date-Time
+    goto fail; //String
     }
     }
 
@@ -312,12 +362,51 @@ cJSON *firmware_convertToJSON(firmware_t *firmware) {
     }
 
 
-    // firmware->installed
-    if (!firmware->installed) {
-        goto fail;
+    // firmware->android_flavor
+    if(firmware->android_flavor) {
+    if(cJSON_AddStringToObject(item, "androidFlavor", firmware->android_flavor) == NULL) {
+    goto fail; //String
     }
+    }
+
+
+    // firmware->api_version
+    if(firmware->api_version) {
+    if(cJSON_AddStringToObject(item, "apiVersion", firmware->api_version) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // firmware->rooted
+    if(firmware->rooted) {
+    if(cJSON_AddBoolToObject(item, "rooted", firmware->rooted) == NULL) {
+    goto fail; //Bool
+    }
+    }
+
+
+    // firmware->installed
+    if(firmware->installed) {
     if(cJSON_AddBoolToObject(item, "installed", firmware->installed) == NULL) {
     goto fail; //Bool
+    }
+    }
+
+
+    // firmware->created_at
+    if(firmware->created_at) {
+    if(cJSON_AddStringToObject(item, "createdAt", firmware->created_at) == NULL) {
+    goto fail; //Date-Time
+    }
+    }
+
+
+    // firmware->updated_at
+    if(firmware->updated_at) {
+    if(cJSON_AddStringToObject(item, "updatedAt", firmware->updated_at) == NULL) {
+    goto fail; //Date-Time
+    }
     }
 
     return item;
@@ -432,14 +521,11 @@ firmware_t *firmware_parseFromJSON(cJSON *firmwareJSON){
     if (cJSON_IsNull(url)) {
         url = NULL;
     }
-    if (!url) {
-        goto end;
-    }
-
-    
-    if(!cJSON_IsString(url))
+    if (url) { 
+    if(!cJSON_IsString(url) && !cJSON_IsNull(url))
     {
     goto end; //String
+    }
     }
 
     // firmware->version
@@ -462,14 +548,11 @@ firmware_t *firmware_parseFromJSON(cJSON *firmwareJSON){
     if (cJSON_IsNull(build_id)) {
         build_id = NULL;
     }
-    if (!build_id) {
-        goto end;
-    }
-
-    
-    if(!cJSON_IsString(build_id))
+    if (build_id) { 
+    if(!cJSON_IsString(build_id) && !cJSON_IsNull(build_id))
     {
     goto end; //String
+    }
     }
 
     // firmware->md5sum
@@ -508,6 +591,18 @@ firmware_t *firmware_parseFromJSON(cJSON *firmwareJSON){
     }
     }
 
+    // firmware->corellium_checksum
+    cJSON *corellium_checksum = cJSON_GetObjectItemCaseSensitive(firmwareJSON, "corelliumChecksum");
+    if (cJSON_IsNull(corellium_checksum)) {
+        corellium_checksum = NULL;
+    }
+    if (corellium_checksum) { 
+    if(!cJSON_IsString(corellium_checksum) && !cJSON_IsNull(corellium_checksum))
+    {
+    goto end; //String
+    }
+    }
+
     // firmware->release_date
     cJSON *release_date = cJSON_GetObjectItemCaseSensitive(firmwareJSON, "releaseDate");
     if (cJSON_IsNull(release_date)) {
@@ -516,7 +611,7 @@ firmware_t *firmware_parseFromJSON(cJSON *firmwareJSON){
     if (release_date) { 
     if(!cJSON_IsString(release_date) && !cJSON_IsNull(release_date))
     {
-    goto end; //DateTime
+    goto end; //String
     }
     }
 
@@ -528,7 +623,7 @@ firmware_t *firmware_parseFromJSON(cJSON *firmwareJSON){
     if (upload_date) { 
     if(!cJSON_IsString(upload_date) && !cJSON_IsNull(upload_date))
     {
-    goto end; //DateTime
+    goto end; //String
     }
     }
 
@@ -554,19 +649,76 @@ firmware_t *firmware_parseFromJSON(cJSON *firmwareJSON){
     }
     }
 
+    // firmware->android_flavor
+    cJSON *android_flavor = cJSON_GetObjectItemCaseSensitive(firmwareJSON, "androidFlavor");
+    if (cJSON_IsNull(android_flavor)) {
+        android_flavor = NULL;
+    }
+    if (android_flavor) { 
+    if(!cJSON_IsString(android_flavor) && !cJSON_IsNull(android_flavor))
+    {
+    goto end; //String
+    }
+    }
+
+    // firmware->api_version
+    cJSON *api_version = cJSON_GetObjectItemCaseSensitive(firmwareJSON, "apiVersion");
+    if (cJSON_IsNull(api_version)) {
+        api_version = NULL;
+    }
+    if (api_version) { 
+    if(!cJSON_IsString(api_version) && !cJSON_IsNull(api_version))
+    {
+    goto end; //String
+    }
+    }
+
+    // firmware->rooted
+    cJSON *rooted = cJSON_GetObjectItemCaseSensitive(firmwareJSON, "rooted");
+    if (cJSON_IsNull(rooted)) {
+        rooted = NULL;
+    }
+    if (rooted) { 
+    if(!cJSON_IsBool(rooted))
+    {
+    goto end; //Bool
+    }
+    }
+
     // firmware->installed
     cJSON *installed = cJSON_GetObjectItemCaseSensitive(firmwareJSON, "installed");
     if (cJSON_IsNull(installed)) {
         installed = NULL;
     }
-    if (!installed) {
-        goto end;
-    }
-
-    
+    if (installed) { 
     if(!cJSON_IsBool(installed))
     {
     goto end; //Bool
+    }
+    }
+
+    // firmware->created_at
+    cJSON *created_at = cJSON_GetObjectItemCaseSensitive(firmwareJSON, "createdAt");
+    if (cJSON_IsNull(created_at)) {
+        created_at = NULL;
+    }
+    if (created_at) { 
+    if(!cJSON_IsString(created_at) && !cJSON_IsNull(created_at))
+    {
+    goto end; //DateTime
+    }
+    }
+
+    // firmware->updated_at
+    cJSON *updated_at = cJSON_GetObjectItemCaseSensitive(firmwareJSON, "updatedAt");
+    if (cJSON_IsNull(updated_at)) {
+        updated_at = NULL;
+    }
+    if (updated_at) { 
+    if(!cJSON_IsString(updated_at) && !cJSON_IsNull(updated_at))
+    {
+    goto end; //DateTime
+    }
     }
 
 
@@ -576,17 +728,23 @@ firmware_t *firmware_parseFromJSON(cJSON *firmwareJSON){
         strdup(filename->valuestring),
         type && !cJSON_IsNull(type) ? strdup(type->valuestring) : NULL,
         size->valuedouble,
-        strdup(url->valuestring),
+        url && !cJSON_IsNull(url) ? strdup(url->valuestring) : NULL,
         strdup(version->valuestring),
-        strdup(build_id->valuestring),
+        build_id && !cJSON_IsNull(build_id) ? strdup(build_id->valuestring) : NULL,
         md5sum && !cJSON_IsNull(md5sum) ? strdup(md5sum->valuestring) : NULL,
         sha1sum && !cJSON_IsNull(sha1sum) ? strdup(sha1sum->valuestring) : NULL,
         sha256sum && !cJSON_IsNull(sha256sum) ? strdup(sha256sum->valuestring) : NULL,
+        corellium_checksum && !cJSON_IsNull(corellium_checksum) ? strdup(corellium_checksum->valuestring) : NULL,
         release_date && !cJSON_IsNull(release_date) ? strdup(release_date->valuestring) : NULL,
         upload_date && !cJSON_IsNull(upload_date) ? strdup(upload_date->valuestring) : NULL,
         metadata ? metadata_local_object : NULL,
         unique_id && !cJSON_IsNull(unique_id) ? strdup(unique_id->valuestring) : NULL,
-        installed->valueint
+        android_flavor && !cJSON_IsNull(android_flavor) ? strdup(android_flavor->valuestring) : NULL,
+        api_version && !cJSON_IsNull(api_version) ? strdup(api_version->valuestring) : NULL,
+        rooted ? rooted->valueint : 0,
+        installed ? installed->valueint : 0,
+        created_at && !cJSON_IsNull(created_at) ? strdup(created_at->valuestring) : NULL,
+        updated_at && !cJSON_IsNull(updated_at) ? strdup(updated_at->valuestring) : NULL
         );
 
     return firmware_local_var;

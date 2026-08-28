@@ -363,7 +363,7 @@ end:
 //
 // **Required role:** Cluster administrator.  Returns the current configuration of the cluster firmware service.
 //
-object_t*
+firmware_service_config_t*
 FirmwareServiceAPI_v3GetFirmwareServiceConfig(apiClient_t *apiClient)
 {
     list_t    *localVarQueryParameters = NULL;
@@ -408,10 +408,10 @@ FirmwareServiceAPI_v3GetFirmwareServiceConfig(apiClient_t *apiClient)
     //    printf("%s\n","Cluster administrator permissions required.");
     //}
     //nonprimitive not container
-    object_t *elementToReturn = NULL;
+    firmware_service_config_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
         cJSON *FirmwareServiceAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = object_parseFromJSON(FirmwareServiceAPIlocalVarJSON);
+        elementToReturn = firmware_service_config_parseFromJSON(FirmwareServiceAPIlocalVarJSON);
         cJSON_Delete(FirmwareServiceAPIlocalVarJSON);
         if(elementToReturn == NULL) {
             // return 0;
@@ -442,7 +442,7 @@ end:
 // **Required role:** Cluster administrator.  Returns a paginated list of firmware assets available in the cluster firmware service.
 //
 firmware_asset_list_t*
-FirmwareServiceAPI_v3ListFirmwareAssets(apiClient_t *apiClient, double *limit, double *offset, char *search, char *order, char *filter)
+FirmwareServiceAPI_v3ListFirmwareAssets(apiClient_t *apiClient, double *limit, double *offset, char *search, char *order, firmware_asset_filter_t *filter)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -514,13 +514,13 @@ FirmwareServiceAPI_v3ListFirmwareAssets(apiClient_t *apiClient, double *limit, d
 
     // query parameters
     char *keyQuery_filter = NULL;
-    char * valueQuery_filter = NULL;
+    firmware_asset_filter_t * valueQuery_filter ;
     keyValuePair_t *keyPairQuery_filter = 0;
     if (filter)
     {
         keyQuery_filter = strdup("filter");
-        valueQuery_filter = strdup((filter));
-        keyPairQuery_filter = keyValuePair_create(keyQuery_filter, valueQuery_filter);
+        valueQuery_filter = (filter);
+        keyPairQuery_filter = keyValuePair_create(keyQuery_filter, &valueQuery_filter);
         list_addElement(localVarQueryParameters,keyPairQuery_filter);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -625,10 +625,6 @@ FirmwareServiceAPI_v3ListFirmwareAssets(apiClient_t *apiClient, double *limit, d
     if(keyQuery_filter){
         free(keyQuery_filter);
         keyQuery_filter = NULL;
-    }
-    if(valueQuery_filter){
-        free(valueQuery_filter);
-        valueQuery_filter = NULL;
     }
     if(keyPairQuery_filter){
         keyValuePair_free(keyPairQuery_filter);
@@ -946,7 +942,7 @@ end:
 // **Required role:** Cluster administrator.  Returns a paginated list of firmwares available in the cluster firmware service.
 //
 firmware_list_t*
-FirmwareServiceAPI_v3ListFirmwares(apiClient_t *apiClient, double *limit, double *offset, char *search, char *order, char *filename, char *model, char *type, char *version, char *buildId, char *firmwareAssets, char *installed)
+FirmwareServiceAPI_v3ListFirmwares(apiClient_t *apiClient, double *limit, double *offset, char *search, char *order, char *filename, char *model, char *type, char *version, char *buildId, char *firmwareAssets, char *corelliumChecksum, int *installed)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -1089,13 +1085,26 @@ FirmwareServiceAPI_v3ListFirmwares(apiClient_t *apiClient, double *limit, double
     }
 
     // query parameters
+    char *keyQuery_corelliumChecksum = NULL;
+    char * valueQuery_corelliumChecksum = NULL;
+    keyValuePair_t *keyPairQuery_corelliumChecksum = 0;
+    if (corelliumChecksum)
+    {
+        keyQuery_corelliumChecksum = strdup("corelliumChecksum");
+        valueQuery_corelliumChecksum = strdup((corelliumChecksum));
+        keyPairQuery_corelliumChecksum = keyValuePair_create(keyQuery_corelliumChecksum, valueQuery_corelliumChecksum);
+        list_addElement(localVarQueryParameters,keyPairQuery_corelliumChecksum);
+    }
+
+    // query parameters
     char *keyQuery_installed = NULL;
     char * valueQuery_installed = NULL;
     keyValuePair_t *keyPairQuery_installed = 0;
     if (installed)
     {
         keyQuery_installed = strdup("installed");
-        valueQuery_installed = strdup((installed));
+        valueQuery_installed = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_installed, MAX_NUMBER_LENGTH, "%d", *installed);
         keyPairQuery_installed = keyValuePair_create(keyQuery_installed, valueQuery_installed);
         list_addElement(localVarQueryParameters,keyPairQuery_installed);
     }
@@ -1270,6 +1279,18 @@ FirmwareServiceAPI_v3ListFirmwares(apiClient_t *apiClient, double *limit, double
         keyValuePair_free(keyPairQuery_firmwareAssets);
         keyPairQuery_firmwareAssets = NULL;
     }
+    if(keyQuery_corelliumChecksum){
+        free(keyQuery_corelliumChecksum);
+        keyQuery_corelliumChecksum = NULL;
+    }
+    if(valueQuery_corelliumChecksum){
+        free(valueQuery_corelliumChecksum);
+        valueQuery_corelliumChecksum = NULL;
+    }
+    if(keyPairQuery_corelliumChecksum){
+        keyValuePair_free(keyPairQuery_corelliumChecksum);
+        keyPairQuery_corelliumChecksum = NULL;
+    }
     if(keyQuery_installed){
         free(keyQuery_installed);
         keyQuery_installed = NULL;
@@ -1293,7 +1314,7 @@ end:
 //
 // **Required role:** Cluster administrator.  Updates the cluster firmware service configuration and returns the merged result.
 //
-object_t*
+firmware_service_settings_t*
 FirmwareServiceAPI_v3PatchFirmwareServiceConfig(apiClient_t *apiClient, patch_firmware_service_config_body_t *patch_firmware_service_config_body)
 {
     list_t    *localVarQueryParameters = NULL;
@@ -1338,7 +1359,7 @@ FirmwareServiceAPI_v3PatchFirmwareServiceConfig(apiClient_t *apiClient, patch_fi
 
     // uncomment below to debug the error response
     //if (apiClient->response_code == 200) {
-    //    printf("%s\n","Updated firmware service configuration.");
+    //    printf("%s\n","The full merged settings after the update.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
@@ -1349,10 +1370,10 @@ FirmwareServiceAPI_v3PatchFirmwareServiceConfig(apiClient_t *apiClient, patch_fi
     //    printf("%s\n","Cluster administrator permissions required.");
     //}
     //nonprimitive not container
-    object_t *elementToReturn = NULL;
+    firmware_service_settings_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
         cJSON *FirmwareServiceAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = object_parseFromJSON(FirmwareServiceAPIlocalVarJSON);
+        elementToReturn = firmware_service_settings_parseFromJSON(FirmwareServiceAPIlocalVarJSON);
         cJSON_Delete(FirmwareServiceAPIlocalVarJSON);
         if(elementToReturn == NULL) {
             // return 0;

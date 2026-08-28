@@ -32,11 +32,17 @@ typedef struct firmware_t {
     char *md5sum; // string
     char *sha1sum; // string
     char *sha256sum; // string
-    char *release_date; //date time
-    char *upload_date; //date time
+    char *corellium_checksum; // string
+    char *release_date; // string
+    char *upload_date; // string
     object_t *metadata; //object
     char *unique_id; // string
+    char *android_flavor; // string
+    char *api_version; // string
+    int rooted; //boolean
     int installed; //boolean
+    char *created_at; //date time
+    char *updated_at; //date time
 
     int _library_owned; // Is the library responsible for freeing this object?
 } firmware_t;
@@ -53,11 +59,17 @@ __attribute__((deprecated)) firmware_t *firmware_create(
     char *md5sum,
     char *sha1sum,
     char *sha256sum,
+    char *corellium_checksum,
     char *release_date,
     char *upload_date,
     object_t *metadata,
     char *unique_id,
-    int installed
+    char *android_flavor,
+    char *api_version,
+    int rooted,
+    int installed,
+    char *created_at,
+    char *updated_at
 );
 
 void firmware_free(firmware_t *firmware);

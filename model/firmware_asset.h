@@ -26,7 +26,9 @@ typedef struct firmware_asset_t {
     char *md5sum; // string
     char *sha1sum; // string
     char *sha256sum; // string
-    char *upload_date; //date time
+    char *upload_date; // string
+    char *created_at; //date time
+    char *updated_at; //date time
 
     int _library_owned; // Is the library responsible for freeing this object?
 } firmware_asset_t;
@@ -39,7 +41,9 @@ __attribute__((deprecated)) firmware_asset_t *firmware_asset_create(
     char *md5sum,
     char *sha1sum,
     char *sha256sum,
-    char *upload_date
+    char *upload_date,
+    char *created_at,
+    char *updated_at
 );
 
 void firmware_asset_free(firmware_asset_t *firmware_asset);

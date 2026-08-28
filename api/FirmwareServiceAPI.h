@@ -10,9 +10,12 @@
 #include "../model/api_error.h"
 #include "../model/api_not_found_error.h"
 #include "../model/extended_firmware_asset_info.h"
+#include "../model/firmware_asset_filter.h"
 #include "../model/firmware_asset_list.h"
 #include "../model/firmware_device_list.h"
 #include "../model/firmware_list.h"
+#include "../model/firmware_service_config.h"
+#include "../model/firmware_service_settings.h"
 #include "../model/object.h"
 #include "../model/patch_firmware_service_config_body.h"
 #include "../model/user_error.h"
@@ -54,7 +57,7 @@ FirmwareServiceAPI_v3GetFirmwareAssetExtended(apiClient_t *apiClient, char *asse
 //
 // **Required role:** Cluster administrator.  Returns the current configuration of the cluster firmware service.
 //
-object_t*
+firmware_service_config_t*
 FirmwareServiceAPI_v3GetFirmwareServiceConfig(apiClient_t *apiClient);
 
 
@@ -63,7 +66,7 @@ FirmwareServiceAPI_v3GetFirmwareServiceConfig(apiClient_t *apiClient);
 // **Required role:** Cluster administrator.  Returns a paginated list of firmware assets available in the cluster firmware service.
 //
 firmware_asset_list_t*
-FirmwareServiceAPI_v3ListFirmwareAssets(apiClient_t *apiClient, double *limit, double *offset, char *search, char *order, char *filter);
+FirmwareServiceAPI_v3ListFirmwareAssets(apiClient_t *apiClient, double *limit, double *offset, char *search, char *order, firmware_asset_filter_t *filter);
 
 
 // List firmware service devices
@@ -79,14 +82,14 @@ FirmwareServiceAPI_v3ListFirmwareDevices(apiClient_t *apiClient, double *limit, 
 // **Required role:** Cluster administrator.  Returns a paginated list of firmwares available in the cluster firmware service.
 //
 firmware_list_t*
-FirmwareServiceAPI_v3ListFirmwares(apiClient_t *apiClient, double *limit, double *offset, char *search, char *order, char *filename, char *model, char *type, char *version, char *buildId, char *firmwareAssets, char *installed);
+FirmwareServiceAPI_v3ListFirmwares(apiClient_t *apiClient, double *limit, double *offset, char *search, char *order, char *filename, char *model, char *type, char *version, char *buildId, char *firmwareAssets, char *corelliumChecksum, int *installed);
 
 
 // Update firmware service configuration
 //
 // **Required role:** Cluster administrator.  Updates the cluster firmware service configuration and returns the merged result.
 //
-object_t*
+firmware_service_settings_t*
 FirmwareServiceAPI_v3PatchFirmwareServiceConfig(apiClient_t *apiClient, patch_firmware_service_config_body_t *patch_firmware_service_config_body);
 
 

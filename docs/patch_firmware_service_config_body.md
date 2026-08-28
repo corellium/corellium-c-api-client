@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **fallback_original_url** | **int** | Use original URL to fetch firmware. | [optional] 
 **fetch_firmware_assets** | **int** | Automatically fetch assets. | [optional] 
 **should_download** | **int** | Download firmwares. | [optional] 
-**download_ipsw_filters** | [**list_t**](object.md) \* | Filters controlling which IPSW builds are downloaded. | [optional] 
+**download_ipsw_filters** | [**list_t**](ipsw_filter_v3.md) \* | Filters controlling which IPSW builds are downloaded. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

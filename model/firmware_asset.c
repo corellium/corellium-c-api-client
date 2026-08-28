@@ -13,7 +13,9 @@ static firmware_asset_t *firmware_asset_create_internal(
     char *md5sum,
     char *sha1sum,
     char *sha256sum,
-    char *upload_date
+    char *upload_date,
+    char *created_at,
+    char *updated_at
     ) {
     firmware_asset_t *firmware_asset_local_var = malloc(sizeof(firmware_asset_t));
     if (!firmware_asset_local_var) {
@@ -27,6 +29,8 @@ static firmware_asset_t *firmware_asset_create_internal(
     firmware_asset_local_var->sha1sum = sha1sum;
     firmware_asset_local_var->sha256sum = sha256sum;
     firmware_asset_local_var->upload_date = upload_date;
+    firmware_asset_local_var->created_at = created_at;
+    firmware_asset_local_var->updated_at = updated_at;
 
     firmware_asset_local_var->_library_owned = 1;
     return firmware_asset_local_var;
@@ -40,7 +44,9 @@ __attribute__((deprecated)) firmware_asset_t *firmware_asset_create(
     char *md5sum,
     char *sha1sum,
     char *sha256sum,
-    char *upload_date
+    char *upload_date,
+    char *created_at,
+    char *updated_at
     ) {
     return firmware_asset_create_internal (
         domain,
@@ -50,7 +56,9 @@ __attribute__((deprecated)) firmware_asset_t *firmware_asset_create(
         md5sum,
         sha1sum,
         sha256sum,
-        upload_date
+        upload_date,
+        created_at,
+        updated_at
         );
 }
 
@@ -90,6 +98,14 @@ void firmware_asset_free(firmware_asset_t *firmware_asset) {
     if (firmware_asset->upload_date) {
         free(firmware_asset->upload_date);
         firmware_asset->upload_date = NULL;
+    }
+    if (firmware_asset->created_at) {
+        free(firmware_asset->created_at);
+        firmware_asset->created_at = NULL;
+    }
+    if (firmware_asset->updated_at) {
+        free(firmware_asset->updated_at);
+        firmware_asset->updated_at = NULL;
     }
     free(firmware_asset);
 }
@@ -160,6 +176,22 @@ cJSON *firmware_asset_convertToJSON(firmware_asset_t *firmware_asset) {
     // firmware_asset->upload_date
     if(firmware_asset->upload_date) {
     if(cJSON_AddStringToObject(item, "uploadDate", firmware_asset->upload_date) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // firmware_asset->created_at
+    if(firmware_asset->created_at) {
+    if(cJSON_AddStringToObject(item, "createdAt", firmware_asset->created_at) == NULL) {
+    goto fail; //Date-Time
+    }
+    }
+
+
+    // firmware_asset->updated_at
+    if(firmware_asset->updated_at) {
+    if(cJSON_AddStringToObject(item, "updatedAt", firmware_asset->updated_at) == NULL) {
     goto fail; //Date-Time
     }
     }
@@ -280,6 +312,30 @@ firmware_asset_t *firmware_asset_parseFromJSON(cJSON *firmware_assetJSON){
     if (upload_date) { 
     if(!cJSON_IsString(upload_date) && !cJSON_IsNull(upload_date))
     {
+    goto end; //String
+    }
+    }
+
+    // firmware_asset->created_at
+    cJSON *created_at = cJSON_GetObjectItemCaseSensitive(firmware_assetJSON, "createdAt");
+    if (cJSON_IsNull(created_at)) {
+        created_at = NULL;
+    }
+    if (created_at) { 
+    if(!cJSON_IsString(created_at) && !cJSON_IsNull(created_at))
+    {
+    goto end; //DateTime
+    }
+    }
+
+    // firmware_asset->updated_at
+    cJSON *updated_at = cJSON_GetObjectItemCaseSensitive(firmware_assetJSON, "updatedAt");
+    if (cJSON_IsNull(updated_at)) {
+        updated_at = NULL;
+    }
+    if (updated_at) { 
+    if(!cJSON_IsString(updated_at) && !cJSON_IsNull(updated_at))
+    {
     goto end; //DateTime
     }
     }
@@ -293,7 +349,9 @@ firmware_asset_t *firmware_asset_parseFromJSON(cJSON *firmware_assetJSON){
         md5sum && !cJSON_IsNull(md5sum) ? strdup(md5sum->valuestring) : NULL,
         sha1sum && !cJSON_IsNull(sha1sum) ? strdup(sha1sum->valuestring) : NULL,
         sha256sum && !cJSON_IsNull(sha256sum) ? strdup(sha256sum->valuestring) : NULL,
-        upload_date && !cJSON_IsNull(upload_date) ? strdup(upload_date->valuestring) : NULL
+        upload_date && !cJSON_IsNull(upload_date) ? strdup(upload_date->valuestring) : NULL,
+        created_at && !cJSON_IsNull(created_at) ? strdup(created_at->valuestring) : NULL,
+        updated_at && !cJSON_IsNull(updated_at) ? strdup(updated_at->valuestring) : NULL
         );
 
     return firmware_asset_local_var;

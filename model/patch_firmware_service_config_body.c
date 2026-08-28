@@ -57,7 +57,7 @@ void patch_firmware_service_config_body_free(patch_firmware_service_config_body_
     listEntry_t *listEntry;
     if (patch_firmware_service_config_body->download_ipsw_filters) {
         list_ForEach(listEntry, patch_firmware_service_config_body->download_ipsw_filters) {
-            object_free(listEntry->data);
+            ipsw_filter_v3_free(listEntry->data);
         }
         list_freeList(patch_firmware_service_config_body->download_ipsw_filters);
         patch_firmware_service_config_body->download_ipsw_filters = NULL;
@@ -118,7 +118,7 @@ cJSON *patch_firmware_service_config_body_convertToJSON(patch_firmware_service_c
     listEntry_t *download_ipsw_filtersListEntry;
     if (patch_firmware_service_config_body->download_ipsw_filters) {
     list_ForEach(download_ipsw_filtersListEntry, patch_firmware_service_config_body->download_ipsw_filters) {
-    cJSON *itemLocal = object_convertToJSON(download_ipsw_filtersListEntry->data);
+    cJSON *itemLocal = ipsw_filter_v3_convertToJSON(download_ipsw_filtersListEntry->data);
     if(itemLocal == NULL) {
     goto fail;
     }
@@ -220,7 +220,7 @@ patch_firmware_service_config_body_t *patch_firmware_service_config_body_parseFr
         if(!cJSON_IsObject(download_ipsw_filters_local_nonprimitive)){
             goto end;
         }
-        object_t *download_ipsw_filtersItem = object_parseFromJSON(download_ipsw_filters_local_nonprimitive);
+        ipsw_filter_v3_t *download_ipsw_filtersItem = ipsw_filter_v3_parseFromJSON(download_ipsw_filters_local_nonprimitive);
 
         list_addElement(download_ipsw_filtersList, download_ipsw_filtersItem);
     }
@@ -241,7 +241,7 @@ end:
     if (download_ipsw_filtersList) {
         listEntry_t *listEntry = NULL;
         list_ForEach(listEntry, download_ipsw_filtersList) {
-            object_free(listEntry->data);
+            ipsw_filter_v3_free(listEntry->data);
             listEntry->data = NULL;
         }
         list_freeList(download_ipsw_filtersList);

@@ -276,6 +276,7 @@ set(SRCS
     model/file_changes.c
     model/firmware.c
     model/firmware_asset.c
+    model/firmware_asset_filter.c
     model/firmware_asset_list.c
     model/firmware_asset_v1.c
     model/firmware_device.c
@@ -283,7 +284,11 @@ set(SRCS
     model/firmware_info_device.c
     model/firmware_info_device_firmwares_inner.c
     model/firmware_list.c
+    model/firmware_service_config.c
+    model/firmware_service_config_cache_firmware.c
+    model/firmware_service_config_download_ipsw_filters.c
     model/firmware_service_configuration.c
+    model/firmware_service_settings.c
     model/firmware_v1.c
     model/flavor_frame.c
     model/flavor_frame_dimensions.c
@@ -388,6 +393,9 @@ set(SRCS
     model/invites_list_response.c
     model/ipsw_device_constraint.c
     model/ipsw_filter.c
+    model/ipsw_filter_v3.c
+    model/ipsw_filter_v3_device.c
+    model/ipsw_filter_v3_version.c
     model/ipsw_version_constraint.c
     model/kcrange.c
     model/kcrange_v1.c
@@ -949,6 +957,7 @@ set(HDRS
     model/file_changes.h
     model/firmware.h
     model/firmware_asset.h
+    model/firmware_asset_filter.h
     model/firmware_asset_list.h
     model/firmware_asset_v1.h
     model/firmware_device.h
@@ -956,7 +965,11 @@ set(HDRS
     model/firmware_info_device.h
     model/firmware_info_device_firmwares_inner.h
     model/firmware_list.h
+    model/firmware_service_config.h
+    model/firmware_service_config_cache_firmware.h
+    model/firmware_service_config_download_ipsw_filters.h
     model/firmware_service_configuration.h
+    model/firmware_service_settings.h
     model/firmware_v1.h
     model/flavor_frame.h
     model/flavor_frame_dimensions.h
@@ -1061,6 +1074,9 @@ set(HDRS
     model/invites_list_response.h
     model/ipsw_device_constraint.h
     model/ipsw_filter.h
+    model/ipsw_filter_v3.h
+    model/ipsw_filter_v3_device.h
+    model/ipsw_filter_v3_version.h
     model/ipsw_version_constraint.h
     model/kcrange.h
     model/kcrange_v1.h

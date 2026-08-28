@@ -311,7 +311,7 @@ Name | Type | Description  | Notes
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **limit** | **double** | Number of results to return (min: 1, max: 10000, default: 100) | [optional] 
 **offset** | **double** | Index of the first row to return (default: 0) | [optional] 
-**order** | **char \*** | Comma-separated field names for sorting. Prefix with &#39;-&#39; for ascending order (e.g., &#39;url,-domain&#39;). | [optional] 
+**order** | **char \*** | Comma-separated field names for sorting. Prefix with &#39;-&#39; for descending order (e.g., &#39;url,-domain&#39;). | [optional] 
 **search** | **char \*** | Case-insensitive partial match across url, domain | [optional] 
 
 ### Return type
@@ -346,7 +346,7 @@ Name | Type | Description  | Notes
 **limit** | **double** | Number of results to return (min: 1, max: 10000, default: 100) | [optional] 
 **offset** | **double** | Index of the first row to return (default: 0) | [optional] 
 **search** | **char \*** | Case-insensitive partial match across name, model, platform, and hwmodel fields | [optional] 
-**order** | **char \*** | Comma-separated field names for sorting. Prefix with &#39;-&#39; for ascending order (e.g., &#39;name,-platform&#39;). Allowed fields: name, model, type, platform, hwmodel  Filtering options: | [optional] 
+**order** | **char \*** | Comma-separated field names for sorting. Prefix with &#39;-&#39; for descending order (e.g., &#39;name,-platform&#39;). Allowed fields: name, model, type, platform, hwmodel  Filtering options: | [optional] 
 **type** | **char \*** | Filter by exact type. Example: coreimg | [optional] 
 **model** | **char \*** | Filter by exact model. Example: Example: iPhone8,1 | [optional] 
 **name** | **char \*** | Filter by exact name. Example: iPhone6s | [optional] 
@@ -384,7 +384,7 @@ Name | Type | Description  | Notes
 **limit** | **double** | Number of results to return (min: 1, max: 10000, default: 100) | [optional] 
 **offset** | **double** | Index of the first row to return (default: 0) | [optional] 
 **search** | **char \*** | Case-insensitive partial match across filename, model, type, version and buildid fields | [optional] 
-**order** | **char \*** | Comma-separated field names for sorting. Prefix with &#39;-&#39; for ascending order (e.g., &#39;name,-platform&#39;). Allowed fields: filename, model, type, version, buildid  Filtering options: | [optional] 
+**order** | **char \*** | Comma-separated field names for sorting. Prefix with &#39;-&#39; for descending order (e.g., &#39;name,-platform&#39;). Allowed fields: filename, model, type, version, buildid  Filtering options: | [optional] 
 **filename** | **char \*** | Filter by exact filename. Example: iPhone_4.7_P3_12.1.4_16D57_Restore.ipsw | [optional] 
 **model** | **char \*** | Filter by exact model. Example: iPhone10,4 | [optional] 
 **type** | **char \*** | Filter by exact type. Example: ipsw | [optional] 
