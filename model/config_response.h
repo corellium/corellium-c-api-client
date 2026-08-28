@@ -21,12 +21,20 @@ typedef struct config_response_t config_response_t;
 #include "logging.h"
 #include "trial.h"
 
+// Enum NETWORKTYPE for config_response
+
+typedef enum  { corellium_api_config_response_NETWORKTYPE_NULL = 0, corellium_api_config_response_NETWORKTYPE_bridged, corellium_api_config_response_NETWORKTYPE_nat, corellium_api_config_response_NETWORKTYPE_routed } corellium_api_config_response_NETWORKTYPE_e;
+
+char* config_response_network_type_ToString(corellium_api_config_response_NETWORKTYPE_e network_type);
+
+corellium_api_config_response_NETWORKTYPE_e config_response_network_type_FromString(char* network_type);
+
 
 
 typedef struct config_response_t {
     int on_site; //boolean
     list_t *network_types; //primitive container
-    char *network_type; // string
+    corellium_api_config_response_NETWORKTYPE_e network_type; //enum
     int show_domain_settings; //boolean
     char *version; // string
     int invalid_build; //boolean
@@ -68,7 +76,7 @@ typedef struct config_response_t {
 __attribute__((deprecated)) config_response_t *config_response_create(
     int on_site,
     list_t *network_types,
-    char *network_type,
+    corellium_api_config_response_NETWORKTYPE_e network_type,
     int show_domain_settings,
     char *version,
     int invalid_build,

@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **on_site** | **int** | Denotes whether it&#39;s an on-site install. | 
 **network_types** | **list_t \*** | Valid network types (e.g. \&quot;nat\&quot;, \&quot;bridged\&quot;, \&quot;routed\&quot;). | [optional] 
-**network_type** | **char \*** | Current network type setting. | 
+**network_type** | **corellium_api_config_response_NETWORKTYPE_e** | Current network type setting. | 
 **show_domain_settings** | **int** | Denotes whether to show domain settings. | 
 **version** | **char \*** | Denotes the version. | 
 **invalid_build** | **int** | Denotes whether the build is invalid. | [optional] 

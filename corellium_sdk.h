@@ -40,8 +40,6 @@
 #include "api/DomainAuthProviderAPI.h"
 #include "api/DomainAuthProvidersAPI.h"
 #include "api/DomainV1API.h"
-#include "api/ExtensionsAPI.h"
-#include "api/ExtensionsV1API.h"
 #include "api/FirmwareServiceAPI.h"
 #include "api/FlavorsAPI.h"
 #include "api/HyperTraceAPI.h"
@@ -187,14 +185,6 @@
 #define corellium_domain_getWelcomeMessage DomainAPI_v3GetDomainWelcomeMessage
 #define corellium_domain_patchWelcomeMessage DomainAPI_v3PatchDomainWelcomeMessage
 #define corellium_domain_uploadImage DomainAPI_v3UploadDomainImage
-
-/* extensions */
-#define corellium_extensions_create ExtensionsAPI_v3LoadExtension
-#define corellium_extensions_delete ExtensionsAPI_v3DeleteExtension
-#define corellium_extensions_get ExtensionsAPI_v3GetExtensionById
-#define corellium_extensions_list ExtensionsAPI_v3ListExtensions
-#define corellium_extensions_parseJson ExtensionsAPI_v3ParseExtensionJson
-#define corellium_extensions_update ExtensionsAPI_v3UpdateExtension
 
 /* firmwareService */
 #define corellium_firmwareService_createAssets FirmwareServiceAPI_v3CreateFirmwareAssets
@@ -476,14 +466,6 @@
 #define corellium_v1_domain_deleteWelcomeMessage DomainV1API_v1DeleteDomainWelcomeMessage
 #define corellium_v1_domain_getWelcomeMessage DomainV1API_v1GetDomainWelcomeMessage
 #define corellium_v1_domain_patchWelcomeMessage DomainV1API_v1UpdateDomainWelcomeMessage
-
-/* extensions */
-#define corellium_v1_extensions_create ExtensionsV1API_v1LoadExtension
-#define corellium_v1_extensions_delete ExtensionsV1API_v1DeleteExtension
-#define corellium_v1_extensions_get ExtensionsV1API_v1GetExtensionById
-#define corellium_v1_extensions_list ExtensionsV1API_v1GetExtensions
-#define corellium_v1_extensions_parseJson ExtensionsV1API_v1ParseExtensionJson
-#define corellium_v1_extensions_update ExtensionsV1API_v1UpdateExtension
 
 /* firmwareService */
 #define corellium_v1_firmwareService_createAssets ClusterAdministrationFirmwareServiceAPI_v1CreateAssetsFirmwareService
@@ -789,14 +771,6 @@
 #define corellium_v3_domain_getWelcomeMessage DomainAPI_v3GetDomainWelcomeMessage
 #define corellium_v3_domain_patchWelcomeMessage DomainAPI_v3PatchDomainWelcomeMessage
 #define corellium_v3_domain_uploadImage DomainAPI_v3UploadDomainImage
-
-/* extensions */
-#define corellium_v3_extensions_create ExtensionsAPI_v3LoadExtension
-#define corellium_v3_extensions_delete ExtensionsAPI_v3DeleteExtension
-#define corellium_v3_extensions_get ExtensionsAPI_v3GetExtensionById
-#define corellium_v3_extensions_list ExtensionsAPI_v3ListExtensions
-#define corellium_v3_extensions_parseJson ExtensionsAPI_v3ParseExtensionJson
-#define corellium_v3_extensions_update ExtensionsAPI_v3UpdateExtension
 
 /* firmwareService */
 #define corellium_v3_firmwareService_createAssets FirmwareServiceAPI_v3CreateFirmwareAssets

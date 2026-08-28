@@ -28,7 +28,7 @@ config_response_t* instantiate_config_response(int include_optional) {
     config_response = config_response_create(
       1,
       list_createList(),
-      "0",
+      corellium_api_config_response_NETWORKTYPE_bridged,
       1,
       "0",
       1,
@@ -71,7 +71,7 @@ config_response_t* instantiate_config_response(int include_optional) {
     config_response = config_response_create(
       1,
       list_createList(),
-      "0",
+      corellium_api_config_response_NETWORKTYPE_bridged,
       1,
       "0",
       1,

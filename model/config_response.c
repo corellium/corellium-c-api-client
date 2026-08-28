@@ -4,11 +4,28 @@
 #include "config_response.h"
 
 
+char* config_response_network_type_ToString(corellium_api_config_response_NETWORKTYPE_e network_type) {
+    char* network_typeArray[] =  { "NULL", "bridged", "nat", "routed" };
+    return network_typeArray[network_type];
+}
+
+corellium_api_config_response_NETWORKTYPE_e config_response_network_type_FromString(char* network_type){
+    int stringToReturn = 0;
+    char *network_typeArray[] =  { "NULL", "bridged", "nat", "routed" };
+    size_t sizeofArray = sizeof(network_typeArray) / sizeof(network_typeArray[0]);
+    while(stringToReturn < sizeofArray) {
+        if(strcmp(network_type, network_typeArray[stringToReturn]) == 0) {
+            return stringToReturn;
+        }
+        stringToReturn++;
+    }
+    return 0;
+}
 
 static config_response_t *config_response_create_internal(
     int on_site,
     list_t *network_types,
-    char *network_type,
+    corellium_api_config_response_NETWORKTYPE_e network_type,
     int show_domain_settings,
     char *version,
     int invalid_build,
@@ -93,7 +110,7 @@ static config_response_t *config_response_create_internal(
 __attribute__((deprecated)) config_response_t *config_response_create(
     int on_site,
     list_t *network_types,
-    char *network_type,
+    corellium_api_config_response_NETWORKTYPE_e network_type,
     int show_domain_settings,
     char *version,
     int invalid_build,
@@ -185,10 +202,6 @@ void config_response_free(config_response_t *config_response) {
         }
         list_freeList(config_response->network_types);
         config_response->network_types = NULL;
-    }
-    if (config_response->network_type) {
-        free(config_response->network_type);
-        config_response->network_type = NULL;
     }
     if (config_response->version) {
         free(config_response->version);
@@ -310,11 +323,12 @@ cJSON *config_response_convertToJSON(config_response_t *config_response) {
 
 
     // config_response->network_type
-    if (!config_response->network_type) {
+    if (corellium_api_config_response_NETWORKTYPE_NULL == config_response->network_type) {
         goto fail;
     }
-    if(cJSON_AddStringToObject(item, "networkType", config_response->network_type) == NULL) {
-    goto fail; //String
+    if(cJSON_AddStringToObject(item, "networkType", config_response_network_type_ToString(config_response->network_type)) == NULL)
+    {
+    goto fail; //Enum
     }
 
 
@@ -712,11 +726,13 @@ config_response_t *config_response_parseFromJSON(cJSON *config_responseJSON){
         goto end;
     }
 
+    corellium_api_config_response_NETWORKTYPE_e network_typeVariable;
     
     if(!cJSON_IsString(network_type))
     {
-    goto end; //String
+    goto end; //Enum
     }
+    network_typeVariable = config_response_network_type_FromString(network_type->valuestring);
 
     // config_response->show_domain_settings
     cJSON *show_domain_settings = cJSON_GetObjectItemCaseSensitive(config_responseJSON, "showDomainSettings");
@@ -1175,7 +1191,7 @@ config_response_t *config_response_parseFromJSON(cJSON *config_responseJSON){
     config_response_local_var = config_response_create_internal (
         on_site->valueint,
         network_types ? network_typesList : NULL,
-        strdup(network_type->valuestring),
+        network_typeVariable,
         show_domain_settings->valueint,
         strdup(version->valuestring),
         invalid_build ? invalid_build->valueint : 0,

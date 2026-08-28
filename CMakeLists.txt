@@ -663,8 +663,6 @@ set(SRCS
     api/DomainAuthProviderAPI.c
     api/DomainAuthProvidersAPI.c
     api/DomainV1API.c
-    api/ExtensionsAPI.c
-    api/ExtensionsV1API.c
     api/ExternalServicesAPI.c
     api/FirmwareServiceAPI.c
     api/FlavorsAPI.c
@@ -1333,8 +1331,6 @@ set(HDRS
     api/DomainAuthProviderAPI.h
     api/DomainAuthProvidersAPI.h
     api/DomainV1API.h
-    api/ExtensionsAPI.h
-    api/ExtensionsV1API.h
     api/ExternalServicesAPI.h
     api/FirmwareServiceAPI.h
     api/FlavorsAPI.h
@@ -1480,8 +1476,6 @@ set(HDRS "")
 #    unit-tests/manual-DomainAuthProviderAPI.c
 #    unit-tests/manual-DomainAuthProvidersAPI.c
 #    unit-tests/manual-DomainV1API.c
-#    unit-tests/manual-ExtensionsAPI.c
-#    unit-tests/manual-ExtensionsV1API.c
 #    unit-tests/manual-ExternalServicesAPI.c
 #    unit-tests/manual-FirmwareServiceAPI.c
 #    unit-tests/manual-FlavorsAPI.c

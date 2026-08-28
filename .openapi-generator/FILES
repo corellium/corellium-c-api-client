@@ -47,10 +47,6 @@ api/DomainAuthProvidersAPI.c
 api/DomainAuthProvidersAPI.h
 api/DomainV1API.c
 api/DomainV1API.h
-api/ExtensionsAPI.c
-api/ExtensionsAPI.h
-api/ExtensionsV1API.c
-api/ExtensionsV1API.h
 api/ExternalServicesAPI.c
 api/ExternalServicesAPI.h
 api/FirmwareServiceAPI.c
@@ -157,8 +153,6 @@ docs/DomainAPI.md
 docs/DomainAuthProviderAPI.md
 docs/DomainAuthProvidersAPI.md
 docs/DomainV1API.md
-docs/ExtensionsAPI.md
-docs/ExtensionsV1API.md
 docs/ExternalServicesAPI.md
 docs/FirmwareServiceAPI.md
 docs/FlavorsAPI.md
