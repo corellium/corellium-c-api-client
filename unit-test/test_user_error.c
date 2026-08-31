@@ -25,6 +25,7 @@ user_error_t* instantiate_user_error(int include_optional) {
       "0",
       corellium_api_user_error_ERRORID_UserError,
       "0",
+      list_createList(),
       list_createList()
     );
   } else {
@@ -32,6 +33,7 @@ user_error_t* instantiate_user_error(int include_optional) {
       "0",
       corellium_api_user_error_ERRORID_UserError,
       "0",
+      list_createList(),
       list_createList()
     );
   }

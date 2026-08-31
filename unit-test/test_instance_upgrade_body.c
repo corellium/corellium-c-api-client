@@ -23,12 +23,10 @@ instance_upgrade_body_t* instantiate_instance_upgrade_body(int include_optional)
   if (include_optional) {
     instance_upgrade_body = instance_upgrade_body_create(
       "0",
-      "0",
       "0"
     );
   } else {
     instance_upgrade_body = instance_upgrade_body_create(
-      "0",
       "0",
       "0"
     );

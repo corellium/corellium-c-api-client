@@ -22,8 +22,8 @@ create_image_body_t* instantiate_create_image_body(int include_optional) {
   create_image_body_t* create_image_body = NULL;
   if (include_optional) {
     create_image_body = create_image_body_create(
-      corellium_api_create_image_body_TYPE_fwbinary,
-      corellium_api_create_image_body_ENCODING_plain,
+      corellium_api_create_image_body__fwbinary,
+      corellium_api_create_image_body__plain,
       1,
       "0",
       "0",
@@ -33,8 +33,8 @@ create_image_body_t* instantiate_create_image_body(int include_optional) {
     );
   } else {
     create_image_body = create_image_body_create(
-      corellium_api_create_image_body_TYPE_fwbinary,
-      corellium_api_create_image_body_ENCODING_plain,
+      corellium_api_create_image_body__fwbinary,
+      corellium_api_create_image_body__plain,
       1,
       "0",
       "0",

@@ -31,6 +31,7 @@ typedef struct user_error_t {
     corellium_api_user_error_ERRORID_e error_id; //enum
     char *field; // string
     list_t *project_ids; //primitive container
+    list_t *missing_fw_assets; //primitive container
 
     int _library_owned; // Is the library responsible for freeing this object?
 } user_error_t;
@@ -39,7 +40,8 @@ __attribute__((deprecated)) user_error_t *user_error_create(
     char *error,
     corellium_api_user_error_ERRORID_e error_id,
     char *field,
-    list_t *project_ids
+    list_t *project_ids,
+    list_t *missing_fw_assets
 );
 
 void user_error_free(user_error_t *user_error);

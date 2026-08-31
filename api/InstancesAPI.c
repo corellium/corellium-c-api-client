@@ -4021,7 +4021,7 @@ end:
 
 // Upgrade iOS version
 //
-instance_upgrade_return_t*
+instance_upgrade_response_t*
 InstancesAPI_v3UpgradeInstance(apiClient_t *apiClient, char *instanceId, instance_upgrade_body_t *instance_upgrade_body)
 {
     list_t    *localVarQueryParameters = NULL;
@@ -4093,10 +4093,10 @@ InstancesAPI_v3UpgradeInstance(apiClient_t *apiClient, char *instanceId, instanc
     //    printf("%s\n","Permission denied.");
     //}
     //nonprimitive not container
-    instance_upgrade_return_t *elementToReturn = NULL;
+    instance_upgrade_response_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
         cJSON *InstancesAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = instance_upgrade_return_parseFromJSON(InstancesAPIlocalVarJSON);
+        elementToReturn = instance_upgrade_response_parseFromJSON(InstancesAPIlocalVarJSON);
         cJSON_Delete(InstancesAPIlocalVarJSON);
         if(elementToReturn == NULL) {
             // return 0;

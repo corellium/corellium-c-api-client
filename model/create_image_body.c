@@ -4,44 +4,10 @@
 #include "create_image_body.h"
 
 
-char* create_image_body_type_ToString(corellium_api_create_image_body_TYPE_e type) {
-    char* typeArray[] =  { "NULL", "fwbinary", "fwpackage", "iotfirmware", "kernel", "devicetree", "ramdisk", "loaderfile", "media", "sepfw", "seprom", "bootrom", "llb", "iboot", "ibootdata", "fw", "fwasset", "partition", "extension", "vmfile", "backup", "activity-export", "ufd", "clbi", "pongo", "mast-report", "mast-frida" };
-    return typeArray[type];
-}
-
-corellium_api_create_image_body_TYPE_e create_image_body_type_FromString(char* type){
-    int stringToReturn = 0;
-    char *typeArray[] =  { "NULL", "fwbinary", "fwpackage", "iotfirmware", "kernel", "devicetree", "ramdisk", "loaderfile", "media", "sepfw", "seprom", "bootrom", "llb", "iboot", "ibootdata", "fw", "fwasset", "partition", "extension", "vmfile", "backup", "activity-export", "ufd", "clbi", "pongo", "mast-report", "mast-frida" };
-    size_t sizeofArray = sizeof(typeArray) / sizeof(typeArray[0]);
-    while(stringToReturn < sizeofArray) {
-        if(strcmp(type, typeArray[stringToReturn]) == 0) {
-            return stringToReturn;
-        }
-        stringToReturn++;
-    }
-    return 0;
-}
-char* create_image_body_encoding_ToString(corellium_api_create_image_body_ENCODING_e encoding) {
-    char* encodingArray[] =  { "NULL", "plain", "encrypted" };
-    return encodingArray[encoding];
-}
-
-corellium_api_create_image_body_ENCODING_e create_image_body_encoding_FromString(char* encoding){
-    int stringToReturn = 0;
-    char *encodingArray[] =  { "NULL", "plain", "encrypted" };
-    size_t sizeofArray = sizeof(encodingArray) / sizeof(encodingArray[0]);
-    while(stringToReturn < sizeofArray) {
-        if(strcmp(encoding, encodingArray[stringToReturn]) == 0) {
-            return stringToReturn;
-        }
-        stringToReturn++;
-    }
-    return 0;
-}
 
 static create_image_body_t *create_image_body_create_internal(
-    corellium_api_create_image_body_TYPE_e type,
-    corellium_api_create_image_body_ENCODING_e encoding,
+    corellium_api_image_type__e type,
+    corellium_api_image_encoding__e encoding,
     int encapsulated,
     char *name,
     char *full_path,
@@ -67,8 +33,8 @@ static create_image_body_t *create_image_body_create_internal(
 }
 
 __attribute__((deprecated)) create_image_body_t *create_image_body_create(
-    corellium_api_create_image_body_TYPE_e type,
-    corellium_api_create_image_body_ENCODING_e encoding,
+    corellium_api_image_type__e type,
+    corellium_api_image_encoding__e encoding,
     int encapsulated,
     char *name,
     char *full_path,
@@ -124,22 +90,30 @@ cJSON *create_image_body_convertToJSON(create_image_body_t *create_image_body) {
     cJSON *item = cJSON_CreateObject();
 
     // create_image_body->type
-    if (corellium_api_create_image_body_TYPE_NULL == create_image_body->type) {
+    if (corellium_api_image_type__NULL == create_image_body->type) {
         goto fail;
     }
-    if(cJSON_AddStringToObject(item, "type", create_image_body_type_ToString(create_image_body->type)) == NULL)
-    {
-    goto fail; //Enum
+    cJSON *type_local_JSON = image_type_convertToJSON(create_image_body->type);
+    if(type_local_JSON == NULL) {
+        goto fail; // custom
+    }
+    cJSON_AddItemToObject(item, "type", type_local_JSON);
+    if(item->child == NULL) {
+        goto fail;
     }
 
 
     // create_image_body->encoding
-    if (corellium_api_create_image_body_ENCODING_NULL == create_image_body->encoding) {
+    if (corellium_api_image_encoding__NULL == create_image_body->encoding) {
         goto fail;
     }
-    if(cJSON_AddStringToObject(item, "encoding", create_image_body_encoding_ToString(create_image_body->encoding)) == NULL)
-    {
-    goto fail; //Enum
+    cJSON *encoding_local_JSON = image_encoding_convertToJSON(create_image_body->encoding);
+    if(encoding_local_JSON == NULL) {
+        goto fail; // custom
+    }
+    cJSON_AddItemToObject(item, "encoding", encoding_local_JSON);
+    if(item->child == NULL) {
+        goto fail;
     }
 
 
@@ -204,6 +178,12 @@ create_image_body_t *create_image_body_parseFromJSON(cJSON *create_image_bodyJSO
 
     create_image_body_t *create_image_body_local_var = NULL;
 
+    // define the local variable for create_image_body->type
+    corellium_api_image_type__e type_local_nonprim = 0;
+
+    // define the local variable for create_image_body->encoding
+    corellium_api_image_encoding__e encoding_local_nonprim = 0;
+
     // create_image_body->type
     cJSON *type = cJSON_GetObjectItemCaseSensitive(create_image_bodyJSON, "type");
     if (cJSON_IsNull(type)) {
@@ -213,13 +193,8 @@ create_image_body_t *create_image_body_parseFromJSON(cJSON *create_image_bodyJSO
         goto end;
     }
 
-    corellium_api_create_image_body_TYPE_e typeVariable;
     
-    if(!cJSON_IsString(type))
-    {
-    goto end; //Enum
-    }
-    typeVariable = create_image_body_type_FromString(type->valuestring);
+    type_local_nonprim = image_type_parseFromJSON(type); //custom
 
     // create_image_body->encoding
     cJSON *encoding = cJSON_GetObjectItemCaseSensitive(create_image_bodyJSON, "encoding");
@@ -230,13 +205,8 @@ create_image_body_t *create_image_body_parseFromJSON(cJSON *create_image_bodyJSO
         goto end;
     }
 
-    corellium_api_create_image_body_ENCODING_e encodingVariable;
     
-    if(!cJSON_IsString(encoding))
-    {
-    goto end; //Enum
-    }
-    encodingVariable = create_image_body_encoding_FromString(encoding->valuestring);
+    encoding_local_nonprim = image_encoding_parseFromJSON(encoding); //custom
 
     // create_image_body->encapsulated
     cJSON *encapsulated = cJSON_GetObjectItemCaseSensitive(create_image_bodyJSON, "encapsulated");
@@ -317,8 +287,8 @@ create_image_body_t *create_image_body_parseFromJSON(cJSON *create_image_bodyJSO
 
 
     create_image_body_local_var = create_image_body_create_internal (
-        typeVariable,
-        encodingVariable,
+        type_local_nonprim,
+        encoding_local_nonprim,
         encapsulated ? encapsulated->valueint : 0,
         name && !cJSON_IsNull(name) ? strdup(name->valuestring) : NULL,
         full_path && !cJSON_IsNull(full_path) ? strdup(full_path->valuestring) : NULL,
@@ -329,6 +299,12 @@ create_image_body_t *create_image_body_parseFromJSON(cJSON *create_image_bodyJSO
 
     return create_image_body_local_var;
 end:
+    if (type_local_nonprim) {
+        type_local_nonprim = 0;
+    }
+    if (encoding_local_nonprim) {
+        encoding_local_nonprim = 0;
+    }
     return NULL;
 
 }

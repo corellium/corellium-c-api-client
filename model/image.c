@@ -4,50 +4,16 @@
 #include "image.h"
 
 
-char* image_type_ToString(corellium_api_image_TYPE_e type) {
-    char* typeArray[] =  { "NULL", "fwbinary", "fwpackage", "iotfirmware", "kernel", "devicetree", "ramdisk", "loaderfile", "media", "sepfw", "seprom", "bootrom", "llb", "iboot", "ibootdata", "fw", "fwasset", "partition", "extension", "vmfile", "backup", "activity-export", "ufd", "clbi", "pongo", "mast-report", "mast-frida" };
-    return typeArray[type];
-}
-
-corellium_api_image_TYPE_e image_type_FromString(char* type){
-    int stringToReturn = 0;
-    char *typeArray[] =  { "NULL", "fwbinary", "fwpackage", "iotfirmware", "kernel", "devicetree", "ramdisk", "loaderfile", "media", "sepfw", "seprom", "bootrom", "llb", "iboot", "ibootdata", "fw", "fwasset", "partition", "extension", "vmfile", "backup", "activity-export", "ufd", "clbi", "pongo", "mast-report", "mast-frida" };
-    size_t sizeofArray = sizeof(typeArray) / sizeof(typeArray[0]);
-    while(stringToReturn < sizeofArray) {
-        if(strcmp(type, typeArray[stringToReturn]) == 0) {
-            return stringToReturn;
-        }
-        stringToReturn++;
-    }
-    return 0;
-}
-char* image_encoding_ToString(corellium_api_image_ENCODING_e encoding) {
-    char* encodingArray[] =  { "NULL", "plain", "encrypted" };
-    return encodingArray[encoding];
-}
-
-corellium_api_image_ENCODING_e image_encoding_FromString(char* encoding){
-    int stringToReturn = 0;
-    char *encodingArray[] =  { "NULL", "plain", "encrypted" };
-    size_t sizeofArray = sizeof(encodingArray) / sizeof(encodingArray[0]);
-    while(stringToReturn < sizeofArray) {
-        if(strcmp(encoding, encodingArray[stringToReturn]) == 0) {
-            return stringToReturn;
-        }
-        stringToReturn++;
-    }
-    return 0;
-}
 
 static image_t *image_create_internal(
     char *status,
     char *id,
     char *name,
-    corellium_api_image_TYPE_e type,
+    corellium_api_image_type__e type,
     double size,
     char *checksum,
     char *corellium_checksum,
-    corellium_api_image_ENCODING_e encoding,
+    corellium_api_image_encoding__e encoding,
     char *project,
     char *instance,
     char *created_at,
@@ -78,11 +44,11 @@ __attribute__((deprecated)) image_t *image_create(
     char *status,
     char *id,
     char *name,
-    corellium_api_image_TYPE_e type,
+    corellium_api_image_type__e type,
     double size,
     char *checksum,
     char *corellium_checksum,
-    corellium_api_image_ENCODING_e encoding,
+    corellium_api_image_encoding__e encoding,
     char *project,
     char *instance,
     char *created_at,
@@ -183,12 +149,16 @@ cJSON *image_convertToJSON(image_t *image) {
 
 
     // image->type
-    if (corellium_api_image_TYPE_NULL == image->type) {
+    if (corellium_api_image_type__NULL == image->type) {
         goto fail;
     }
-    if(cJSON_AddStringToObject(item, "type", image_type_ToString(image->type)) == NULL)
-    {
-    goto fail; //Enum
+    cJSON *type_local_JSON = image_type_convertToJSON(image->type);
+    if(type_local_JSON == NULL) {
+        goto fail; // custom
+    }
+    cJSON_AddItemToObject(item, "type", type_local_JSON);
+    if(item->child == NULL) {
+        goto fail;
     }
 
 
@@ -217,10 +187,14 @@ cJSON *image_convertToJSON(image_t *image) {
 
 
     // image->encoding
-    if(image->encoding != corellium_api_image_ENCODING_NULL) {
-    if(cJSON_AddStringToObject(item, "encoding", image_encoding_ToString(image->encoding)) == NULL)
-    {
-    goto fail; //Enum
+    if(image->encoding != corellium_api_image_encoding__NULL) {
+    cJSON *encoding_local_JSON = image_encoding_convertToJSON(image->encoding);
+    if(encoding_local_JSON == NULL) {
+        goto fail; // custom
+    }
+    cJSON_AddItemToObject(item, "encoding", encoding_local_JSON);
+    if(item->child == NULL) {
+        goto fail;
     }
     }
 
@@ -267,6 +241,12 @@ fail:
 image_t *image_parseFromJSON(cJSON *imageJSON){
 
     image_t *image_local_var = NULL;
+
+    // define the local variable for image->type
+    corellium_api_image_type__e type_local_nonprim = 0;
+
+    // define the local variable for image->encoding
+    corellium_api_image_encoding__e encoding_local_nonprim = 0;
 
     // image->status
     cJSON *status = cJSON_GetObjectItemCaseSensitive(imageJSON, "status");
@@ -322,13 +302,8 @@ image_t *image_parseFromJSON(cJSON *imageJSON){
         goto end;
     }
 
-    corellium_api_image_TYPE_e typeVariable;
     
-    if(!cJSON_IsString(type))
-    {
-    goto end; //Enum
-    }
-    typeVariable = image_type_FromString(type->valuestring);
+    type_local_nonprim = image_type_parseFromJSON(type); //custom
 
     // image->size
     cJSON *size = cJSON_GetObjectItemCaseSensitive(imageJSON, "size");
@@ -371,13 +346,8 @@ image_t *image_parseFromJSON(cJSON *imageJSON){
     if (cJSON_IsNull(encoding)) {
         encoding = NULL;
     }
-    corellium_api_image_ENCODING_e encodingVariable;
     if (encoding) { 
-    if(!cJSON_IsString(encoding))
-    {
-    goto end; //Enum
-    }
-    encodingVariable = image_encoding_FromString(encoding->valuestring);
+    encoding_local_nonprim = image_encoding_parseFromJSON(encoding); //custom
     }
 
     // image->project
@@ -433,11 +403,11 @@ image_t *image_parseFromJSON(cJSON *imageJSON){
         strdup(status->valuestring),
         strdup(id->valuestring),
         strdup(name->valuestring),
-        typeVariable,
+        type_local_nonprim,
         size ? size->valuedouble : 0,
         checksum && !cJSON_IsNull(checksum) ? strdup(checksum->valuestring) : NULL,
         corellium_checksum && !cJSON_IsNull(corellium_checksum) ? strdup(corellium_checksum->valuestring) : NULL,
-        encoding ? encodingVariable : corellium_api_image_ENCODING_NULL,
+        encoding ? encoding_local_nonprim : 0,
         project && !cJSON_IsNull(project) ? strdup(project->valuestring) : NULL,
         instance && !cJSON_IsNull(instance) ? strdup(instance->valuestring) : NULL,
         created_at && !cJSON_IsNull(created_at) ? strdup(created_at->valuestring) : NULL,
@@ -446,6 +416,12 @@ image_t *image_parseFromJSON(cJSON *imageJSON){
 
     return image_local_var;
 end:
+    if (type_local_nonprim) {
+        type_local_nonprim = 0;
+    }
+    if (encoding_local_nonprim) {
+        encoding_local_nonprim = 0;
+    }
     return NULL;
 
 }

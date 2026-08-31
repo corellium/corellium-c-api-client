@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **corellium_api_create_image_body_TYPE_e** |  | 
-**encoding** | **corellium_api_create_image_body_ENCODING_e** |  | 
+**type** | **image_type_t \*** |  | 
+**encoding** | **image_encoding_t \*** |  | 
 **encapsulated** | **int** | Set false if the uploaded file should not be unzipped. Defaults to false for direct uploads. | [optional] 
 **name** | **char \*** | Image name. Defaults to the uploaded filename when omitted in multipart uploads. | [optional] 
 **full_path** | **char \*** | Absolute path to an existing file on the server. | [optional] 

@@ -21,15 +21,13 @@ typedef struct instance_upgrade_body_t instance_upgrade_body_t;
 typedef struct instance_upgrade_body_t {
     char *os_version; // string
     char *os_build; // string
-    char *image_id; // string
 
     int _library_owned; // Is the library responsible for freeing this object?
 } instance_upgrade_body_t;
 
 __attribute__((deprecated)) instance_upgrade_body_t *instance_upgrade_body_create(
     char *os_version,
-    char *os_build,
-    char *image_id
+    char *os_build
 );
 
 void instance_upgrade_body_free(instance_upgrade_body_t *instance_upgrade_body);

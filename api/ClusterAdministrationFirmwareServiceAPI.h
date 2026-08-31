@@ -83,7 +83,7 @@ ClusterAdministrationFirmwareServiceAPI_v1GetInstallFirmwareStatus(apiClient_t *
 
 // Installs a firmware for cluster-wide use
 //
-// Takes an uploaded firmware image and installs it for cluster-wide use.  The firmware is then removed from Images.  In order to install a firmware, you need to follow a 4-step process. First, POST /v1/images/ with { name: string, type: 'fw' } using content-type application/json to acquire an imageId.  Second, upload the firmware file via a multipart/form-data POST to /v1/images/:imageId.  Third, POST /v1/images/install-firmware with { imageId: string; filename: string } using content-type application/json to acquire a taskId.    The 'filename' must be an exact match for the filename in the firmware service that you're uploading this image for.  Fourth, you can poll the state of the installation via GET /v1/images/install-firmware/:taskId.
+// Takes an uploaded firmware image and installs it for cluster-wide use.  The firmware is then removed from Images.  In order to install a firmware, you need to follow a 4-step process. First, POST /v1/images/ with { name: string, type: 'fw' } using content-type application/json to acquire an imageId.  Second, upload the firmware file via a multipart/form-data POST to /v1/images/:imageId.  Third, POST /v1/images/install-firmware with { imageId: string } using content-type application/json to acquire a taskId.  Fourth, you can poll the state of the installation via GET /v1/images/install-firmware/:taskId.
 //
 install_firmware_response_v1_t*
 ClusterAdministrationFirmwareServiceAPI_v1InstallFirmware(apiClient_t *apiClient, install_firmware_body_v1_t *install_firmware_body_v1);

@@ -22,12 +22,10 @@ install_firmware_body_v1_t* instantiate_install_firmware_body_v1(int include_opt
   install_firmware_body_v1_t* install_firmware_body_v1 = NULL;
   if (include_optional) {
     install_firmware_body_v1 = install_firmware_body_v1_create(
-      "0",
       "0"
     );
   } else {
     install_firmware_body_v1 = install_firmware_body_v1_create(
-      "0",
       "0"
     );
   }

@@ -307,12 +307,14 @@ set(SRCS
     model/hook_v1.c
     model/image.c
     model/image_creation_options.c
+    model/image_encoding.c
     model/image_extended.c
     model/image_extended_device.c
     model/image_firmware.c
     model/image_firmware_info.c
     model/image_firmware_info_boot_args.c
     model/image_list.c
+    model/image_type.c
     model/image_v1.c
     model/input_response.c
     model/input_response_v1.c
@@ -368,7 +370,7 @@ set(SRCS
     model/instance_uefi_bootloader.c
     model/instance_upgrade_body.c
     model/instance_upgrade_body_v1.c
-    model/instance_upgrade_return.c
+    model/instance_upgrade_response.c
     model/instance_v1.c
     model/insufficient_storage_error.c
     model/insufficient_storage_error_v1.c
@@ -676,6 +678,8 @@ set(SRCS
     api/DomainAuthProviderAPI.c
     api/DomainAuthProvidersAPI.c
     api/DomainV1API.c
+    api/ExtensionsAPI.c
+    api/ExtensionsV1API.c
     api/ExternalServicesAPI.c
     api/FirmwareServiceAPI.c
     api/FlavorsAPI.c
@@ -988,12 +992,14 @@ set(HDRS
     model/hook_v1.h
     model/image.h
     model/image_creation_options.h
+    model/image_encoding.h
     model/image_extended.h
     model/image_extended_device.h
     model/image_firmware.h
     model/image_firmware_info.h
     model/image_firmware_info_boot_args.h
     model/image_list.h
+    model/image_type.h
     model/image_v1.h
     model/input_response.h
     model/input_response_v1.h
@@ -1049,7 +1055,7 @@ set(HDRS
     model/instance_uefi_bootloader.h
     model/instance_upgrade_body.h
     model/instance_upgrade_body_v1.h
-    model/instance_upgrade_return.h
+    model/instance_upgrade_response.h
     model/instance_v1.h
     model/insufficient_storage_error.h
     model/insufficient_storage_error_v1.h
@@ -1357,6 +1363,8 @@ set(HDRS
     api/DomainAuthProviderAPI.h
     api/DomainAuthProvidersAPI.h
     api/DomainV1API.h
+    api/ExtensionsAPI.h
+    api/ExtensionsV1API.h
     api/ExternalServicesAPI.h
     api/FirmwareServiceAPI.h
     api/FlavorsAPI.h
@@ -1502,6 +1510,8 @@ set(HDRS "")
 #    unit-tests/manual-DomainAuthProviderAPI.c
 #    unit-tests/manual-DomainAuthProvidersAPI.c
 #    unit-tests/manual-DomainV1API.c
+#    unit-tests/manual-ExtensionsAPI.c
+#    unit-tests/manual-ExtensionsV1API.c
 #    unit-tests/manual-ExternalServicesAPI.c
 #    unit-tests/manual-FirmwareServiceAPI.c
 #    unit-tests/manual-FlavorsAPI.c

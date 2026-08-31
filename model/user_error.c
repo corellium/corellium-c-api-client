@@ -26,7 +26,8 @@ static user_error_t *user_error_create_internal(
     char *error,
     corellium_api_user_error_ERRORID_e error_id,
     char *field,
-    list_t *project_ids
+    list_t *project_ids,
+    list_t *missing_fw_assets
     ) {
     user_error_t *user_error_local_var = malloc(sizeof(user_error_t));
     if (!user_error_local_var) {
@@ -36,6 +37,7 @@ static user_error_t *user_error_create_internal(
     user_error_local_var->error_id = error_id;
     user_error_local_var->field = field;
     user_error_local_var->project_ids = project_ids;
+    user_error_local_var->missing_fw_assets = missing_fw_assets;
 
     user_error_local_var->_library_owned = 1;
     return user_error_local_var;
@@ -45,13 +47,15 @@ __attribute__((deprecated)) user_error_t *user_error_create(
     char *error,
     corellium_api_user_error_ERRORID_e error_id,
     char *field,
-    list_t *project_ids
+    list_t *project_ids,
+    list_t *missing_fw_assets
     ) {
     return user_error_create_internal (
         error,
         error_id,
         field,
-        project_ids
+        project_ids,
+        missing_fw_assets
         );
 }
 
@@ -78,6 +82,13 @@ void user_error_free(user_error_t *user_error) {
         }
         list_freeList(user_error->project_ids);
         user_error->project_ids = NULL;
+    }
+    if (user_error->missing_fw_assets) {
+        list_ForEach(listEntry, user_error->missing_fw_assets) {
+            free(listEntry->data);
+        }
+        list_freeList(user_error->missing_fw_assets);
+        user_error->missing_fw_assets = NULL;
     }
     free(user_error);
 }
@@ -128,6 +139,23 @@ cJSON *user_error_convertToJSON(user_error_t *user_error) {
     }
     }
 
+
+    // user_error->missing_fw_assets
+    if(user_error->missing_fw_assets) {
+    cJSON *missing_fw_assets = cJSON_AddArrayToObject(item, "missingFwAssets");
+    if(missing_fw_assets == NULL) {
+        goto fail; //primitive container
+    }
+
+    listEntry_t *missing_fw_assetsListEntry;
+    list_ForEach(missing_fw_assetsListEntry, user_error->missing_fw_assets) {
+    if(cJSON_AddStringToObject(missing_fw_assets, "", missing_fw_assetsListEntry->data) == NULL)
+    {
+        goto fail;
+    }
+    }
+    }
+
     return item;
 fail:
     if (item) {
@@ -142,6 +170,9 @@ user_error_t *user_error_parseFromJSON(cJSON *user_errorJSON){
 
     // define the local list for user_error->project_ids
     list_t *project_idsList = NULL;
+
+    // define the local list for user_error->missing_fw_assets
+    list_t *missing_fw_assetsList = NULL;
 
     // user_error->error
     cJSON *error = cJSON_GetObjectItemCaseSensitive(user_errorJSON, "error");
@@ -209,12 +240,35 @@ user_error_t *user_error_parseFromJSON(cJSON *user_errorJSON){
     }
     }
 
+    // user_error->missing_fw_assets
+    cJSON *missing_fw_assets = cJSON_GetObjectItemCaseSensitive(user_errorJSON, "missingFwAssets");
+    if (cJSON_IsNull(missing_fw_assets)) {
+        missing_fw_assets = NULL;
+    }
+    if (missing_fw_assets) { 
+    cJSON *missing_fw_assets_local = NULL;
+    if(!cJSON_IsArray(missing_fw_assets)) {
+        goto end;//primitive container
+    }
+    missing_fw_assetsList = list_createList();
+
+    cJSON_ArrayForEach(missing_fw_assets_local, missing_fw_assets)
+    {
+        if(!cJSON_IsString(missing_fw_assets_local))
+        {
+            goto end;
+        }
+        list_addElement(missing_fw_assetsList , strdup(missing_fw_assets_local->valuestring));
+    }
+    }
+
 
     user_error_local_var = user_error_create_internal (
         strdup(error->valuestring),
         error_idVariable,
         field && !cJSON_IsNull(field) ? strdup(field->valuestring) : NULL,
-        project_ids ? project_idsList : NULL
+        project_ids ? project_idsList : NULL,
+        missing_fw_assets ? missing_fw_assetsList : NULL
         );
 
     return user_error_local_var;
@@ -227,6 +281,15 @@ end:
         }
         list_freeList(project_idsList);
         project_idsList = NULL;
+    }
+    if (missing_fw_assetsList) {
+        listEntry_t *listEntry = NULL;
+        list_ForEach(listEntry, missing_fw_assetsList) {
+            free(listEntry->data);
+            listEntry->data = NULL;
+        }
+        list_freeList(missing_fw_assetsList);
+        missing_fw_assetsList = NULL;
     }
     return NULL;
 

@@ -6,27 +6,23 @@
 
 
 static install_firmware_body_t *install_firmware_body_create_internal(
-    char *image_id,
-    char *filename
+    char *image_id
     ) {
     install_firmware_body_t *install_firmware_body_local_var = malloc(sizeof(install_firmware_body_t));
     if (!install_firmware_body_local_var) {
         return NULL;
     }
     install_firmware_body_local_var->image_id = image_id;
-    install_firmware_body_local_var->filename = filename;
 
     install_firmware_body_local_var->_library_owned = 1;
     return install_firmware_body_local_var;
 }
 
 __attribute__((deprecated)) install_firmware_body_t *install_firmware_body_create(
-    char *image_id,
-    char *filename
+    char *image_id
     ) {
     return install_firmware_body_create_internal (
-        image_id,
-        filename
+        image_id
         );
 }
 
@@ -43,10 +39,6 @@ void install_firmware_body_free(install_firmware_body_t *install_firmware_body) 
         free(install_firmware_body->image_id);
         install_firmware_body->image_id = NULL;
     }
-    if (install_firmware_body->filename) {
-        free(install_firmware_body->filename);
-        install_firmware_body->filename = NULL;
-    }
     free(install_firmware_body);
 }
 
@@ -59,14 +51,6 @@ cJSON *install_firmware_body_convertToJSON(install_firmware_body_t *install_firm
     }
     if(cJSON_AddStringToObject(item, "imageId", install_firmware_body->image_id) == NULL) {
     goto fail; //String
-    }
-
-
-    // install_firmware_body->filename
-    if(install_firmware_body->filename) {
-    if(cJSON_AddStringToObject(item, "filename", install_firmware_body->filename) == NULL) {
-    goto fail; //String
-    }
     }
 
     return item;
@@ -96,22 +80,9 @@ install_firmware_body_t *install_firmware_body_parseFromJSON(cJSON *install_firm
     goto end; //String
     }
 
-    // install_firmware_body->filename
-    cJSON *filename = cJSON_GetObjectItemCaseSensitive(install_firmware_bodyJSON, "filename");
-    if (cJSON_IsNull(filename)) {
-        filename = NULL;
-    }
-    if (filename) { 
-    if(!cJSON_IsString(filename) && !cJSON_IsNull(filename))
-    {
-    goto end; //String
-    }
-    }
-
 
     install_firmware_body_local_var = install_firmware_body_create_internal (
-        strdup(image_id->valuestring),
-        filename && !cJSON_IsNull(filename) ? strdup(filename->valuestring) : NULL
+        strdup(image_id->valuestring)
         );
 
     return install_firmware_body_local_var;

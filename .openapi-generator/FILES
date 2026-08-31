@@ -47,6 +47,10 @@ api/DomainAuthProvidersAPI.c
 api/DomainAuthProvidersAPI.h
 api/DomainV1API.c
 api/DomainV1API.h
+api/ExtensionsAPI.c
+api/ExtensionsAPI.h
+api/ExtensionsV1API.c
+api/ExtensionsV1API.h
 api/ExternalServicesAPI.c
 api/ExternalServicesAPI.h
 api/FirmwareServiceAPI.c
@@ -153,6 +157,8 @@ docs/DomainAPI.md
 docs/DomainAuthProviderAPI.md
 docs/DomainAuthProvidersAPI.md
 docs/DomainV1API.md
+docs/ExtensionsAPI.md
+docs/ExtensionsV1API.md
 docs/ExternalServicesAPI.md
 docs/FirmwareServiceAPI.md
 docs/FlavorsAPI.md
@@ -454,12 +460,14 @@ docs/hook_list.md
 docs/hook_v1.md
 docs/image.md
 docs/image_creation_options.md
+docs/image_encoding.md
 docs/image_extended.md
 docs/image_extended_device.md
 docs/image_firmware.md
 docs/image_firmware_info.md
 docs/image_firmware_info_boot_args.md
 docs/image_list.md
+docs/image_type.md
 docs/image_v1.md
 docs/input_response.md
 docs/input_response_v1.md
@@ -515,7 +523,7 @@ docs/instance_trace_state_v1.md
 docs/instance_uefi_bootloader.md
 docs/instance_upgrade_body.md
 docs/instance_upgrade_body_v1.md
-docs/instance_upgrade_return.md
+docs/instance_upgrade_response.md
 docs/instance_v1.md
 docs/insufficient_storage_error.md
 docs/insufficient_storage_error_v1.md
@@ -1328,6 +1336,8 @@ model/image.c
 model/image.h
 model/image_creation_options.c
 model/image_creation_options.h
+model/image_encoding.c
+model/image_encoding.h
 model/image_extended.c
 model/image_extended.h
 model/image_extended_device.c
@@ -1340,6 +1350,8 @@ model/image_firmware_info_boot_args.c
 model/image_firmware_info_boot_args.h
 model/image_list.c
 model/image_list.h
+model/image_type.c
+model/image_type.h
 model/image_v1.c
 model/image_v1.h
 model/input_response.c
@@ -1450,8 +1462,8 @@ model/instance_upgrade_body.c
 model/instance_upgrade_body.h
 model/instance_upgrade_body_v1.c
 model/instance_upgrade_body_v1.h
-model/instance_upgrade_return.c
-model/instance_upgrade_return.h
+model/instance_upgrade_response.c
+model/instance_upgrade_response.h
 model/instance_v1.c
 model/instance_v1.h
 model/insufficient_storage_error.c
@@ -2288,12 +2300,14 @@ unit-test/test_hook_list.c
 unit-test/test_hook_v1.c
 unit-test/test_image.c
 unit-test/test_image_creation_options.c
+unit-test/test_image_encoding.c
 unit-test/test_image_extended.c
 unit-test/test_image_extended_device.c
 unit-test/test_image_firmware.c
 unit-test/test_image_firmware_info.c
 unit-test/test_image_firmware_info_boot_args.c
 unit-test/test_image_list.c
+unit-test/test_image_type.c
 unit-test/test_image_v1.c
 unit-test/test_input_response.c
 unit-test/test_input_response_v1.c
@@ -2349,7 +2363,7 @@ unit-test/test_instance_trace_state_v1.c
 unit-test/test_instance_uefi_bootloader.c
 unit-test/test_instance_upgrade_body.c
 unit-test/test_instance_upgrade_body_v1.c
-unit-test/test_instance_upgrade_return.c
+unit-test/test_instance_upgrade_response.c
 unit-test/test_instance_v1.c
 unit-test/test_insufficient_storage_error.c
 unit-test/test_insufficient_storage_error_v1.c

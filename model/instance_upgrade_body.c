@@ -7,8 +7,7 @@
 
 static instance_upgrade_body_t *instance_upgrade_body_create_internal(
     char *os_version,
-    char *os_build,
-    char *image_id
+    char *os_build
     ) {
     instance_upgrade_body_t *instance_upgrade_body_local_var = malloc(sizeof(instance_upgrade_body_t));
     if (!instance_upgrade_body_local_var) {
@@ -16,7 +15,6 @@ static instance_upgrade_body_t *instance_upgrade_body_create_internal(
     }
     instance_upgrade_body_local_var->os_version = os_version;
     instance_upgrade_body_local_var->os_build = os_build;
-    instance_upgrade_body_local_var->image_id = image_id;
 
     instance_upgrade_body_local_var->_library_owned = 1;
     return instance_upgrade_body_local_var;
@@ -24,13 +22,11 @@ static instance_upgrade_body_t *instance_upgrade_body_create_internal(
 
 __attribute__((deprecated)) instance_upgrade_body_t *instance_upgrade_body_create(
     char *os_version,
-    char *os_build,
-    char *image_id
+    char *os_build
     ) {
     return instance_upgrade_body_create_internal (
         os_version,
-        os_build,
-        image_id
+        os_build
         );
 }
 
@@ -51,10 +47,6 @@ void instance_upgrade_body_free(instance_upgrade_body_t *instance_upgrade_body) 
         free(instance_upgrade_body->os_build);
         instance_upgrade_body->os_build = NULL;
     }
-    if (instance_upgrade_body->image_id) {
-        free(instance_upgrade_body->image_id);
-        instance_upgrade_body->image_id = NULL;
-    }
     free(instance_upgrade_body);
 }
 
@@ -73,14 +65,6 @@ cJSON *instance_upgrade_body_convertToJSON(instance_upgrade_body_t *instance_upg
     // instance_upgrade_body->os_build
     if(instance_upgrade_body->os_build) {
     if(cJSON_AddStringToObject(item, "osBuild", instance_upgrade_body->os_build) == NULL) {
-    goto fail; //String
-    }
-    }
-
-
-    // instance_upgrade_body->image_id
-    if(instance_upgrade_body->image_id) {
-    if(cJSON_AddStringToObject(item, "imageId", instance_upgrade_body->image_id) == NULL) {
     goto fail; //String
     }
     }
@@ -124,23 +108,10 @@ instance_upgrade_body_t *instance_upgrade_body_parseFromJSON(cJSON *instance_upg
     }
     }
 
-    // instance_upgrade_body->image_id
-    cJSON *image_id = cJSON_GetObjectItemCaseSensitive(instance_upgrade_bodyJSON, "imageId");
-    if (cJSON_IsNull(image_id)) {
-        image_id = NULL;
-    }
-    if (image_id) { 
-    if(!cJSON_IsString(image_id) && !cJSON_IsNull(image_id))
-    {
-    goto end; //String
-    }
-    }
-
 
     instance_upgrade_body_local_var = instance_upgrade_body_create_internal (
         strdup(os_version->valuestring),
-        os_build && !cJSON_IsNull(os_build) ? strdup(os_build->valuestring) : NULL,
-        image_id && !cJSON_IsNull(image_id) ? strdup(image_id->valuestring) : NULL
+        os_build && !cJSON_IsNull(os_build) ? strdup(os_build->valuestring) : NULL
         );
 
     return instance_upgrade_body_local_var;

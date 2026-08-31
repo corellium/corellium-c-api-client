@@ -23,7 +23,7 @@
 #include "../model/instance_list.h"
 #include "../model/instance_state.h"
 #include "../model/instance_upgrade_body.h"
-#include "../model/instance_upgrade_return.h"
+#include "../model/instance_upgrade_response.h"
 #include "../model/media_play_body.h"
 #include "../model/message_body.h"
 #include "../model/object.h"
@@ -300,7 +300,7 @@ InstancesAPI_v3UnpauseInstance(apiClient_t *apiClient, char *instanceId);
 
 // Upgrade iOS version
 //
-instance_upgrade_return_t*
+instance_upgrade_response_t*
 InstancesAPI_v3UpgradeInstance(apiClient_t *apiClient, char *instanceId, instance_upgrade_body_t *instance_upgrade_body);
 
 

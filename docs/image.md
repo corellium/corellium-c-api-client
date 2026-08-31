@@ -6,11 +6,11 @@ Name | Type | Description | Notes
 **status** | **char \*** | Image status. | 
 **id** | **char \*** | Image ID. | 
 **name** | **char \*** | Descriptive image name. | 
-**type** | **corellium_api_image_TYPE_e** | Image type. | 
+**type** | **image_type_t \*** |  | 
 **size** | **double** | Size in bytes; null until upload completes. Absent for generated artifacts. | [optional] 
 **checksum** | **char \*** | MD5 checksum; null until upload completes. Absent for generated artifacts. | [optional] 
 **corellium_checksum** | **char \*** | Corellium checksum of the image; null until upload completes. Absent for generated artifacts. | [optional] 
-**encoding** | **corellium_api_image_ENCODING_e** | How the file is stored. Absent for generated artifacts. | [optional] 
+**encoding** | **image_encoding_t \*** |  | [optional] 
 **project** | **char \*** | Owning project ID; null for domain-level images. Absent for generated artifacts. | [optional] 
 **instance** | **char \*** | Owning instance ID; null for project-level images. Absent for generated artifacts. | [optional] 
 **created_at** | **char \*** | When Image was created. Absent for generated artifacts. | [optional] 

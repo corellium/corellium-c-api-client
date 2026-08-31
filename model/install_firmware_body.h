@@ -20,14 +20,12 @@ typedef struct install_firmware_body_t install_firmware_body_t;
 
 typedef struct install_firmware_body_t {
     char *image_id; // string
-    char *filename; // string
 
     int _library_owned; // Is the library responsible for freeing this object?
 } install_firmware_body_t;
 
 __attribute__((deprecated)) install_firmware_body_t *install_firmware_body_create(
-    char *image_id,
-    char *filename
+    char *image_id
 );
 
 void install_firmware_body_free(install_firmware_body_t *install_firmware_body);
