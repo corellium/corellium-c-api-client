@@ -16,7 +16,7 @@
 typedef struct snapshot_t snapshot_t;
 
 #include "snapshot_sharing.h"
-#include "snapshot_status_schema.h"
+#include "snapshot_status.h"
 
 
 
@@ -24,7 +24,7 @@ typedef struct snapshot_t {
     char *id; // string
     char *name; // string
     char *instance; // string
-    struct snapshot_status_schema_t *status; //model
+    struct snapshot_status_t *status; //model
     double date; //numeric
     int fresh; //boolean
     int live; //boolean
@@ -39,7 +39,7 @@ __attribute__((deprecated)) snapshot_t *snapshot_create(
     char *id,
     char *name,
     char *instance,
-    snapshot_status_schema_t *status,
+    snapshot_status_t *status,
     double date,
     int fresh,
     int live,

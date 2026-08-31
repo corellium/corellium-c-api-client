@@ -40,14 +40,14 @@ Name | Type | Description  | Notes
 ```c
 // Update cluster configuration
 //
-void ClusterAdministrationConfigAPI_v1PatchClusterConfig(apiClient_t *apiClient, cluster_configuration_payload_t *cluster_configuration_payload);
+void ClusterAdministrationConfigAPI_v1PatchClusterConfig(apiClient_t *apiClient, body);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**cluster_configuration_payload** | **[cluster_configuration_payload_t](cluster_configuration_payload.md) \*** | Cluster Configuration Payload | 
+**body** |  | Cluster Configuration Payload | 
 
 ### Return type
 

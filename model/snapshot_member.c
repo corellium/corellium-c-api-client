@@ -7,10 +7,10 @@
 
 static snapshot_member_t *snapshot_member_create_internal(
     char *email,
-    double invite_sent_at,
-    double shared_on,
+    char *invite_sent_at,
+    char *shared_on,
     char *user_id,
-    char *label
+    char *name
     ) {
     snapshot_member_t *snapshot_member_local_var = malloc(sizeof(snapshot_member_t));
     if (!snapshot_member_local_var) {
@@ -20,7 +20,7 @@ static snapshot_member_t *snapshot_member_create_internal(
     snapshot_member_local_var->invite_sent_at = invite_sent_at;
     snapshot_member_local_var->shared_on = shared_on;
     snapshot_member_local_var->user_id = user_id;
-    snapshot_member_local_var->label = label;
+    snapshot_member_local_var->name = name;
 
     snapshot_member_local_var->_library_owned = 1;
     return snapshot_member_local_var;
@@ -28,17 +28,17 @@ static snapshot_member_t *snapshot_member_create_internal(
 
 __attribute__((deprecated)) snapshot_member_t *snapshot_member_create(
     char *email,
-    double invite_sent_at,
-    double shared_on,
+    char *invite_sent_at,
+    char *shared_on,
     char *user_id,
-    char *label
+    char *name
     ) {
     return snapshot_member_create_internal (
         email,
         invite_sent_at,
         shared_on,
         user_id,
-        label
+        name
         );
 }
 
@@ -55,13 +55,21 @@ void snapshot_member_free(snapshot_member_t *snapshot_member) {
         free(snapshot_member->email);
         snapshot_member->email = NULL;
     }
+    if (snapshot_member->invite_sent_at) {
+        free(snapshot_member->invite_sent_at);
+        snapshot_member->invite_sent_at = NULL;
+    }
+    if (snapshot_member->shared_on) {
+        free(snapshot_member->shared_on);
+        snapshot_member->shared_on = NULL;
+    }
     if (snapshot_member->user_id) {
         free(snapshot_member->user_id);
         snapshot_member->user_id = NULL;
     }
-    if (snapshot_member->label) {
-        free(snapshot_member->label);
-        snapshot_member->label = NULL;
+    if (snapshot_member->name) {
+        free(snapshot_member->name);
+        snapshot_member->name = NULL;
     }
     free(snapshot_member);
 }
@@ -79,20 +87,18 @@ cJSON *snapshot_member_convertToJSON(snapshot_member_t *snapshot_member) {
 
 
     // snapshot_member->invite_sent_at
-    if (!snapshot_member->invite_sent_at) {
-        goto fail;
+    if(snapshot_member->invite_sent_at) {
+    if(cJSON_AddStringToObject(item, "inviteSentAt", snapshot_member->invite_sent_at) == NULL) {
+    goto fail; //Date-Time
     }
-    if(cJSON_AddNumberToObject(item, "inviteSentAt", snapshot_member->invite_sent_at) == NULL) {
-    goto fail; //Numeric
     }
 
 
     // snapshot_member->shared_on
-    if (!snapshot_member->shared_on) {
-        goto fail;
+    if(snapshot_member->shared_on) {
+    if(cJSON_AddStringToObject(item, "sharedOn", snapshot_member->shared_on) == NULL) {
+    goto fail; //Date-Time
     }
-    if(cJSON_AddNumberToObject(item, "sharedOn", snapshot_member->shared_on) == NULL) {
-    goto fail; //Numeric
     }
 
 
@@ -104,9 +110,9 @@ cJSON *snapshot_member_convertToJSON(snapshot_member_t *snapshot_member) {
     }
 
 
-    // snapshot_member->label
-    if(snapshot_member->label) {
-    if(cJSON_AddStringToObject(item, "label", snapshot_member->label) == NULL) {
+    // snapshot_member->name
+    if(snapshot_member->name) {
+    if(cJSON_AddStringToObject(item, "name", snapshot_member->name) == NULL) {
     goto fail; //String
     }
     }
@@ -143,14 +149,11 @@ snapshot_member_t *snapshot_member_parseFromJSON(cJSON *snapshot_memberJSON){
     if (cJSON_IsNull(invite_sent_at)) {
         invite_sent_at = NULL;
     }
-    if (!invite_sent_at) {
-        goto end;
-    }
-
-    
-    if(!cJSON_IsNumber(invite_sent_at))
+    if (invite_sent_at) { 
+    if(!cJSON_IsString(invite_sent_at) && !cJSON_IsNull(invite_sent_at))
     {
-    goto end; //Numeric
+    goto end; //DateTime
+    }
     }
 
     // snapshot_member->shared_on
@@ -158,14 +161,11 @@ snapshot_member_t *snapshot_member_parseFromJSON(cJSON *snapshot_memberJSON){
     if (cJSON_IsNull(shared_on)) {
         shared_on = NULL;
     }
-    if (!shared_on) {
-        goto end;
-    }
-
-    
-    if(!cJSON_IsNumber(shared_on))
+    if (shared_on) { 
+    if(!cJSON_IsString(shared_on) && !cJSON_IsNull(shared_on))
     {
-    goto end; //Numeric
+    goto end; //DateTime
+    }
     }
 
     // snapshot_member->user_id
@@ -180,13 +180,13 @@ snapshot_member_t *snapshot_member_parseFromJSON(cJSON *snapshot_memberJSON){
     }
     }
 
-    // snapshot_member->label
-    cJSON *label = cJSON_GetObjectItemCaseSensitive(snapshot_memberJSON, "label");
-    if (cJSON_IsNull(label)) {
-        label = NULL;
+    // snapshot_member->name
+    cJSON *name = cJSON_GetObjectItemCaseSensitive(snapshot_memberJSON, "name");
+    if (cJSON_IsNull(name)) {
+        name = NULL;
     }
-    if (label) { 
-    if(!cJSON_IsString(label) && !cJSON_IsNull(label))
+    if (name) { 
+    if(!cJSON_IsString(name) && !cJSON_IsNull(name))
     {
     goto end; //String
     }
@@ -195,10 +195,10 @@ snapshot_member_t *snapshot_member_parseFromJSON(cJSON *snapshot_memberJSON){
 
     snapshot_member_local_var = snapshot_member_create_internal (
         strdup(email->valuestring),
-        invite_sent_at->valuedouble,
-        shared_on->valuedouble,
+        invite_sent_at && !cJSON_IsNull(invite_sent_at) ? strdup(invite_sent_at->valuestring) : NULL,
+        shared_on && !cJSON_IsNull(shared_on) ? strdup(shared_on->valuestring) : NULL,
         user_id && !cJSON_IsNull(user_id) ? strdup(user_id->valuestring) : NULL,
-        label && !cJSON_IsNull(label) ? strdup(label->valuestring) : NULL
+        name && !cJSON_IsNull(name) ? strdup(name->valuestring) : NULL
         );
 
     return snapshot_member_local_var;

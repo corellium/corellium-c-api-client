@@ -1,7 +1,7 @@
 /*
  * snapshot_owner.h
  *
- * 
+ * The owner of the snapshot.
  */
 
 #ifndef _snapshot_owner_H_

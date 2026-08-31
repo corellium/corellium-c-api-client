@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 **id** | **char \*** | Snapshot ID | 
 **name** | **char \*** | Snapshot name | 
 **instance** | **char \*** | Instance that this snapshot is of | 
-**status** | [**snapshot_status_t**](snapshot_status.md) \* |  | 
+**status** | [**snapshot_status_v1_t**](snapshot_status_v1.md) \* |  | 
 **date** | **double** | UNIX Date that the snapshot was created | 
 **fresh** | **int** |  | 
 **live** | **int** | Live snapshot (included state and memory) | 

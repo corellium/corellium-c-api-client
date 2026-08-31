@@ -18,6 +18,7 @@ instance_boot_options_t* instantiate_instance_boot_options(int include_optional)
 
 #include "test_instance_boot_options_kernel.c"
 #include "test_instance_boot_options_pongo.c"
+#include "test_instance_boot_options_fvp.c"
 
 
 instance_boot_options_t* instantiate_instance_boot_options(int include_optional) {
@@ -37,7 +38,26 @@ instance_boot_options_t* instantiate_instance_boot_options(int include_optional)
        // false, not to have infinite recursion
       instantiate_instance_boot_options_kernel(0),
        // false, not to have infinite recursion
-      instantiate_instance_boot_options_pongo(0)
+      instantiate_instance_boot_options_pongo(0),
+      "0",
+      1,
+      "0",
+      list_createList(),
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      1,
+      "0",
+      1,
+      "0",
+      list_createList(),
+       // false, not to have infinite recursion
+      instantiate_instance_boot_options_fvp(0)
     );
   } else {
     instance_boot_options = instance_boot_options_create(
@@ -52,6 +72,24 @@ instance_boot_options_t* instantiate_instance_boot_options(int include_optional)
       1.337,
       list_createList(),
       NULL,
+      NULL,
+      "0",
+      1,
+      "0",
+      list_createList(),
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      1,
+      "0",
+      1,
+      "0",
+      list_createList(),
       NULL
     );
   }

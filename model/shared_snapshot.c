@@ -9,7 +9,7 @@ static shared_snapshot_t *shared_snapshot_create_internal(
     char *shared_on,
     char *shared_with_member,
     corellium_api_snapshot_sharing_type__e sharing_type,
-    snapshot_owner_schema_t *shared_by,
+    snapshot_owner_t *shared_by,
     char *id,
     double date,
     double hw_pac,
@@ -19,7 +19,7 @@ static shared_snapshot_t *shared_snapshot_create_internal(
     char *model,
     char *type,
     char *name,
-    snapshot_status_schema_t *status,
+    snapshot_status_t *status,
     int fresh,
     snapshot_sharing_t *sharing
     ) {
@@ -52,7 +52,7 @@ __attribute__((deprecated)) shared_snapshot_t *shared_snapshot_create(
     char *shared_on,
     char *shared_with_member,
     corellium_api_snapshot_sharing_type__e sharing_type,
-    snapshot_owner_schema_t *shared_by,
+    snapshot_owner_t *shared_by,
     char *id,
     double date,
     double hw_pac,
@@ -62,7 +62,7 @@ __attribute__((deprecated)) shared_snapshot_t *shared_snapshot_create(
     char *model,
     char *type,
     char *name,
-    snapshot_status_schema_t *status,
+    snapshot_status_t *status,
     int fresh,
     snapshot_sharing_t *sharing
     ) {
@@ -104,7 +104,7 @@ void shared_snapshot_free(shared_snapshot_t *shared_snapshot) {
         shared_snapshot->shared_with_member = NULL;
     }
     if (shared_snapshot->shared_by) {
-        snapshot_owner_schema_free(shared_snapshot->shared_by);
+        snapshot_owner_free(shared_snapshot->shared_by);
         shared_snapshot->shared_by = NULL;
     }
     if (shared_snapshot->id) {
@@ -128,7 +128,7 @@ void shared_snapshot_free(shared_snapshot_t *shared_snapshot) {
         shared_snapshot->name = NULL;
     }
     if (shared_snapshot->status) {
-        snapshot_status_schema_free(shared_snapshot->status);
+        snapshot_status_free(shared_snapshot->status);
         shared_snapshot->status = NULL;
     }
     if (shared_snapshot->sharing) {
@@ -173,7 +173,7 @@ cJSON *shared_snapshot_convertToJSON(shared_snapshot_t *shared_snapshot) {
 
     // shared_snapshot->shared_by
     if(shared_snapshot->shared_by) {
-    cJSON *shared_by_local_JSON = snapshot_owner_schema_convertToJSON(shared_snapshot->shared_by);
+    cJSON *shared_by_local_JSON = snapshot_owner_convertToJSON(shared_snapshot->shared_by);
     if(shared_by_local_JSON == NULL) {
     goto fail; //model
     }
@@ -266,7 +266,7 @@ cJSON *shared_snapshot_convertToJSON(shared_snapshot_t *shared_snapshot) {
     if (!shared_snapshot->status) {
         goto fail;
     }
-    cJSON *status_local_JSON = snapshot_status_schema_convertToJSON(shared_snapshot->status);
+    cJSON *status_local_JSON = snapshot_status_convertToJSON(shared_snapshot->status);
     if(status_local_JSON == NULL) {
     goto fail; //model
     }
@@ -312,10 +312,10 @@ shared_snapshot_t *shared_snapshot_parseFromJSON(cJSON *shared_snapshotJSON){
     corellium_api_snapshot_sharing_type__e sharing_type_local_nonprim = 0;
 
     // define the local variable for shared_snapshot->shared_by
-    snapshot_owner_schema_t *shared_by_local_nonprim = NULL;
+    snapshot_owner_t *shared_by_local_nonprim = NULL;
 
     // define the local variable for shared_snapshot->status
-    snapshot_status_schema_t *status_local_nonprim = NULL;
+    snapshot_status_t *status_local_nonprim = NULL;
 
     // define the local variable for shared_snapshot->sharing
     snapshot_sharing_t *sharing_local_nonprim = NULL;
@@ -362,7 +362,7 @@ shared_snapshot_t *shared_snapshot_parseFromJSON(cJSON *shared_snapshotJSON){
         shared_by = NULL;
     }
     if (shared_by) { 
-    shared_by_local_nonprim = snapshot_owner_schema_parseFromJSON(shared_by); //nonprimitive
+    shared_by_local_nonprim = snapshot_owner_parseFromJSON(shared_by); //nonprimitive
     }
 
     // shared_snapshot->id
@@ -501,7 +501,7 @@ shared_snapshot_t *shared_snapshot_parseFromJSON(cJSON *shared_snapshotJSON){
     }
 
     
-    status_local_nonprim = snapshot_status_schema_parseFromJSON(status); //nonprimitive
+    status_local_nonprim = snapshot_status_parseFromJSON(status); //nonprimitive
 
     // shared_snapshot->fresh
     cJSON *fresh = cJSON_GetObjectItemCaseSensitive(shared_snapshotJSON, "fresh");
@@ -550,11 +550,11 @@ end:
         sharing_type_local_nonprim = 0;
     }
     if (shared_by_local_nonprim) {
-        snapshot_owner_schema_free(shared_by_local_nonprim);
+        snapshot_owner_free(shared_by_local_nonprim);
         shared_by_local_nonprim = NULL;
     }
     if (status_local_nonprim) {
-        snapshot_status_schema_free(status_local_nonprim);
+        snapshot_status_free(status_local_nonprim);
         status_local_nonprim = NULL;
     }
     if (sharing_local_nonprim) {

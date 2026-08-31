@@ -24,7 +24,7 @@ corellium_api_snapshot_sharing_v1_SHARINGTYPE_e snapshot_sharing_v1_sharing_type
 
 static snapshot_sharing_v1_t *snapshot_sharing_v1_create_internal(
     corellium_api_snapshot_sharing_v1_SHARINGTYPE_e sharing_type,
-    snapshot_owner_t *shared_by,
+    snapshot_owner_v1_t *shared_by,
     list_t *members
     ) {
     snapshot_sharing_v1_t *snapshot_sharing_v1_local_var = malloc(sizeof(snapshot_sharing_v1_t));
@@ -41,7 +41,7 @@ static snapshot_sharing_v1_t *snapshot_sharing_v1_create_internal(
 
 __attribute__((deprecated)) snapshot_sharing_v1_t *snapshot_sharing_v1_create(
     corellium_api_snapshot_sharing_v1_SHARINGTYPE_e sharing_type,
-    snapshot_owner_t *shared_by,
+    snapshot_owner_v1_t *shared_by,
     list_t *members
     ) {
     return snapshot_sharing_v1_create_internal (
@@ -61,12 +61,12 @@ void snapshot_sharing_v1_free(snapshot_sharing_v1_t *snapshot_sharing_v1) {
     }
     listEntry_t *listEntry;
     if (snapshot_sharing_v1->shared_by) {
-        snapshot_owner_free(snapshot_sharing_v1->shared_by);
+        snapshot_owner_v1_free(snapshot_sharing_v1->shared_by);
         snapshot_sharing_v1->shared_by = NULL;
     }
     if (snapshot_sharing_v1->members) {
         list_ForEach(listEntry, snapshot_sharing_v1->members) {
-            snapshot_member_free(listEntry->data);
+            snapshot_member_v1_free(listEntry->data);
         }
         list_freeList(snapshot_sharing_v1->members);
         snapshot_sharing_v1->members = NULL;
@@ -89,7 +89,7 @@ cJSON *snapshot_sharing_v1_convertToJSON(snapshot_sharing_v1_t *snapshot_sharing
 
     // snapshot_sharing_v1->shared_by
     if(snapshot_sharing_v1->shared_by) {
-    cJSON *shared_by_local_JSON = snapshot_owner_convertToJSON(snapshot_sharing_v1->shared_by);
+    cJSON *shared_by_local_JSON = snapshot_owner_v1_convertToJSON(snapshot_sharing_v1->shared_by);
     if(shared_by_local_JSON == NULL) {
     goto fail; //model
     }
@@ -110,7 +110,7 @@ cJSON *snapshot_sharing_v1_convertToJSON(snapshot_sharing_v1_t *snapshot_sharing
     listEntry_t *membersListEntry;
     if (snapshot_sharing_v1->members) {
     list_ForEach(membersListEntry, snapshot_sharing_v1->members) {
-    cJSON *itemLocal = snapshot_member_convertToJSON(membersListEntry->data);
+    cJSON *itemLocal = snapshot_member_v1_convertToJSON(membersListEntry->data);
     if(itemLocal == NULL) {
     goto fail;
     }
@@ -132,7 +132,7 @@ snapshot_sharing_v1_t *snapshot_sharing_v1_parseFromJSON(cJSON *snapshot_sharing
     snapshot_sharing_v1_t *snapshot_sharing_v1_local_var = NULL;
 
     // define the local variable for snapshot_sharing_v1->shared_by
-    snapshot_owner_t *shared_by_local_nonprim = NULL;
+    snapshot_owner_v1_t *shared_by_local_nonprim = NULL;
 
     // define the local list for snapshot_sharing_v1->members
     list_t *membersList = NULL;
@@ -160,7 +160,7 @@ snapshot_sharing_v1_t *snapshot_sharing_v1_parseFromJSON(cJSON *snapshot_sharing
         shared_by = NULL;
     }
     if (shared_by) { 
-    shared_by_local_nonprim = snapshot_owner_parseFromJSON(shared_by); //nonprimitive
+    shared_by_local_nonprim = snapshot_owner_v1_parseFromJSON(shared_by); //nonprimitive
     }
 
     // snapshot_sharing_v1->members
@@ -181,7 +181,7 @@ snapshot_sharing_v1_t *snapshot_sharing_v1_parseFromJSON(cJSON *snapshot_sharing
         if(!cJSON_IsObject(members_local_nonprimitive)){
             goto end;
         }
-        snapshot_member_t *membersItem = snapshot_member_parseFromJSON(members_local_nonprimitive);
+        snapshot_member_v1_t *membersItem = snapshot_member_v1_parseFromJSON(members_local_nonprimitive);
 
         list_addElement(membersList, membersItem);
     }
@@ -197,13 +197,13 @@ snapshot_sharing_v1_t *snapshot_sharing_v1_parseFromJSON(cJSON *snapshot_sharing
     return snapshot_sharing_v1_local_var;
 end:
     if (shared_by_local_nonprim) {
-        snapshot_owner_free(shared_by_local_nonprim);
+        snapshot_owner_v1_free(shared_by_local_nonprim);
         shared_by_local_nonprim = NULL;
     }
     if (membersList) {
         listEntry_t *listEntry = NULL;
         list_ForEach(listEntry, membersList) {
-            snapshot_member_free(listEntry->data);
+            snapshot_member_v1_free(listEntry->data);
             listEntry->data = NULL;
         }
         list_freeList(membersList);

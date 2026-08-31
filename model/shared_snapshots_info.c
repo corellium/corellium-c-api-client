@@ -11,7 +11,7 @@ static shared_snapshots_info_t *shared_snapshots_info_create_internal(
     char *model,
     double shared_on,
     char *shared_with_member,
-    snapshot_owner_t *shared_by
+    snapshot_owner_v1_t *shared_by
     ) {
     shared_snapshots_info_t *shared_snapshots_info_local_var = malloc(sizeof(shared_snapshots_info_t));
     if (!shared_snapshots_info_local_var) {
@@ -34,7 +34,7 @@ __attribute__((deprecated)) shared_snapshots_info_t *shared_snapshots_info_creat
     char *model,
     double shared_on,
     char *shared_with_member,
-    snapshot_owner_t *shared_by
+    snapshot_owner_v1_t *shared_by
     ) {
     return shared_snapshots_info_create_internal (
         id,
@@ -72,7 +72,7 @@ void shared_snapshots_info_free(shared_snapshots_info_t *shared_snapshots_info) 
         shared_snapshots_info->shared_with_member = NULL;
     }
     if (shared_snapshots_info->shared_by) {
-        snapshot_owner_free(shared_snapshots_info->shared_by);
+        snapshot_owner_v1_free(shared_snapshots_info->shared_by);
         shared_snapshots_info->shared_by = NULL;
     }
     free(shared_snapshots_info);
@@ -127,7 +127,7 @@ cJSON *shared_snapshots_info_convertToJSON(shared_snapshots_info_t *shared_snaps
 
     // shared_snapshots_info->shared_by
     if(shared_snapshots_info->shared_by) {
-    cJSON *shared_by_local_JSON = snapshot_owner_convertToJSON(shared_snapshots_info->shared_by);
+    cJSON *shared_by_local_JSON = snapshot_owner_v1_convertToJSON(shared_snapshots_info->shared_by);
     if(shared_by_local_JSON == NULL) {
     goto fail; //model
     }
@@ -150,7 +150,7 @@ shared_snapshots_info_t *shared_snapshots_info_parseFromJSON(cJSON *shared_snaps
     shared_snapshots_info_t *shared_snapshots_info_local_var = NULL;
 
     // define the local variable for shared_snapshots_info->shared_by
-    snapshot_owner_t *shared_by_local_nonprim = NULL;
+    snapshot_owner_v1_t *shared_by_local_nonprim = NULL;
 
     // shared_snapshots_info->id
     cJSON *id = cJSON_GetObjectItemCaseSensitive(shared_snapshots_infoJSON, "id");
@@ -230,7 +230,7 @@ shared_snapshots_info_t *shared_snapshots_info_parseFromJSON(cJSON *shared_snaps
         shared_by = NULL;
     }
     if (shared_by) { 
-    shared_by_local_nonprim = snapshot_owner_parseFromJSON(shared_by); //nonprimitive
+    shared_by_local_nonprim = snapshot_owner_v1_parseFromJSON(shared_by); //nonprimitive
     }
 
 
@@ -246,7 +246,7 @@ shared_snapshots_info_t *shared_snapshots_info_parseFromJSON(cJSON *shared_snaps
     return shared_snapshots_info_local_var;
 end:
     if (shared_by_local_nonprim) {
-        snapshot_owner_free(shared_by_local_nonprim);
+        snapshot_owner_v1_free(shared_by_local_nonprim);
         shared_by_local_nonprim = NULL;
     }
     return NULL;

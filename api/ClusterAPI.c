@@ -96,7 +96,7 @@ end:
 //
 // **Required role:** Cluster administrator.  Returns the current cluster configuration.
 //
-object_t*
+cluster_config_t*
 ClusterAPI_v3GetClusterConfig(apiClient_t *apiClient)
 {
     list_t    *localVarQueryParameters = NULL;
@@ -141,10 +141,10 @@ ClusterAPI_v3GetClusterConfig(apiClient_t *apiClient)
     //    printf("%s\n","Cluster administrator permissions required.");
     //}
     //nonprimitive not container
-    object_t *elementToReturn = NULL;
+    cluster_config_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
         cJSON *ClusterAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = object_parseFromJSON(ClusterAPIlocalVarJSON);
+        elementToReturn = cluster_config_parseFromJSON(ClusterAPIlocalVarJSON);
         cJSON_Delete(ClusterAPIlocalVarJSON);
         if(elementToReturn == NULL) {
             // return 0;
@@ -592,7 +592,7 @@ end:
 // **Required role:** Cluster administrator.  Returns a paginated list of cluster volume snapshots. Requires the clusterSnapshotMgmt feature.
 //
 cluster_snapshot_list_t*
-ClusterAPI_v3ListClusterSnapshots(apiClient_t *apiClient, double *limit, double *offset, char *springboard, char *live, char *fresh, char *deviceName, char *task, char *search, char *to, char *from, char *orderBy)
+ClusterAPI_v3ListClusterSnapshots(apiClient_t *apiClient, double *limit, double *offset, char *springboard, char *live, char *fresh, char *deviceName, char *task, char *search, char to, char from, char *orderBy)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -712,25 +712,25 @@ ClusterAPI_v3ListClusterSnapshots(apiClient_t *apiClient, double *limit, double 
 
     // query parameters
     char *keyQuery_to = NULL;
-    char * valueQuery_to = NULL;
+    char valueQuery_to ;
     keyValuePair_t *keyPairQuery_to = 0;
     if (to)
     {
         keyQuery_to = strdup("to");
-        valueQuery_to = strdup((to));
-        keyPairQuery_to = keyValuePair_create(keyQuery_to, valueQuery_to);
+        valueQuery_to = (to);
+        keyPairQuery_to = keyValuePair_create(keyQuery_to, &valueQuery_to);
         list_addElement(localVarQueryParameters,keyPairQuery_to);
     }
 
     // query parameters
     char *keyQuery_from = NULL;
-    char * valueQuery_from = NULL;
+    char valueQuery_from ;
     keyValuePair_t *keyPairQuery_from = 0;
     if (from)
     {
         keyQuery_from = strdup("from");
-        valueQuery_from = strdup((from));
-        keyPairQuery_from = keyValuePair_create(keyQuery_from, valueQuery_from);
+        valueQuery_from = (from);
+        keyPairQuery_from = keyValuePair_create(keyQuery_from, &valueQuery_from);
         list_addElement(localVarQueryParameters,keyPairQuery_from);
     }
 
@@ -896,10 +896,6 @@ ClusterAPI_v3ListClusterSnapshots(apiClient_t *apiClient, double *limit, double 
         free(keyQuery_to);
         keyQuery_to = NULL;
     }
-    if(valueQuery_to){
-        free(valueQuery_to);
-        valueQuery_to = NULL;
-    }
     if(keyPairQuery_to){
         keyValuePair_free(keyPairQuery_to);
         keyPairQuery_to = NULL;
@@ -907,10 +903,6 @@ ClusterAPI_v3ListClusterSnapshots(apiClient_t *apiClient, double *limit, double 
     if(keyQuery_from){
         free(keyQuery_from);
         keyQuery_from = NULL;
-    }
-    if(valueQuery_from){
-        free(valueQuery_from);
-        valueQuery_from = NULL;
     }
     if(keyPairQuery_from){
         keyValuePair_free(keyPairQuery_from);

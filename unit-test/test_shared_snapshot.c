@@ -16,8 +16,8 @@
 #include "../model/shared_snapshot.h"
 shared_snapshot_t* instantiate_shared_snapshot(int include_optional);
 
-#include "test_snapshot_owner_schema.c"
-#include "test_snapshot_status_schema.c"
+#include "test_snapshot_owner.c"
+#include "test_snapshot_status.c"
 #include "test_snapshot_sharing.c"
 
 
@@ -29,7 +29,7 @@ shared_snapshot_t* instantiate_shared_snapshot(int include_optional) {
       "0",
       corellium_api_shared_snapshot__publicLink,
        // false, not to have infinite recursion
-      instantiate_snapshot_owner_schema(0),
+      instantiate_snapshot_owner(0),
       "0",
       1.337,
       1.337,
@@ -40,7 +40,7 @@ shared_snapshot_t* instantiate_shared_snapshot(int include_optional) {
       "0",
       "0",
        // false, not to have infinite recursion
-      instantiate_snapshot_status_schema(0),
+      instantiate_snapshot_status(0),
       1,
        // false, not to have infinite recursion
       instantiate_snapshot_sharing(0)

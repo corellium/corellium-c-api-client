@@ -171,7 +171,7 @@ Name | Type | Description  | Notes
 ```c
 // List instance snapshots
 //
-list_instance_snapshots_response_t* SnapshotsAPI_v3ListInstanceSnapshots(apiClient_t *apiClient, char *instanceId, double *limit, double *offset);
+instance_snapshots_list_t* SnapshotsAPI_v3ListInstanceSnapshots(apiClient_t *apiClient, char *instanceId, double *limit, double *offset);
 ```
 
 ### Parameters
@@ -184,7 +184,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[list_instance_snapshots_response_t](list_instance_snapshots_response.md) *
+[instance_snapshots_list_t](instance_snapshots_list.md) *
 
 
 ### Authorization

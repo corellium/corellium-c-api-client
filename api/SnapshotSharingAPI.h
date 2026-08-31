@@ -45,7 +45,9 @@ snapshot_t*
 SnapshotSharingAPI_v3SetSnapshotPermissions(apiClient_t *apiClient, char *snapshotId, set_snapshot_permissions_body_t *set_snapshot_permissions_body);
 
 
-// Share a snapshot
+// Create or update snapshot sharing
+//
+// Creates or updates the sharing configuration for a snapshot.
 //
 snapshot_t*
 SnapshotSharingAPI_v3ShareSnapshot(apiClient_t *apiClient, char *snapshotId, share_snapshot_body_t *share_snapshot_body);

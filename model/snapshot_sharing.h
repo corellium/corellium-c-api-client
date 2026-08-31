@@ -15,8 +15,8 @@
 
 typedef struct snapshot_sharing_t snapshot_sharing_t;
 
-#include "snapshot_member_schema.h"
-#include "snapshot_owner_schema.h"
+#include "snapshot_member.h"
+#include "snapshot_owner.h"
 #include "snapshot_sharing_type.h"
 
 
@@ -25,7 +25,7 @@ typedef struct snapshot_sharing_t {
     corellium_api_snapshot_sharing_type__e sharing_type; //referenced enum
     char *access_code; // string
     char *shared_on; //date time
-    struct snapshot_owner_schema_t *shared_by; //model
+    struct snapshot_owner_t *shared_by; //model
     list_t *members; //nonprimitive container
 
     int _library_owned; // Is the library responsible for freeing this object?
@@ -35,7 +35,7 @@ __attribute__((deprecated)) snapshot_sharing_t *snapshot_sharing_create(
     corellium_api_snapshot_sharing_type__e sharing_type,
     char *access_code,
     char *shared_on,
-    snapshot_owner_schema_t *shared_by,
+    snapshot_owner_t *shared_by,
     list_t *members
 );
 

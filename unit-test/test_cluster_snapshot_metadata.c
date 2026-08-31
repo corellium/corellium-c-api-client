@@ -16,6 +16,7 @@
 #include "../model/cluster_snapshot_metadata.h"
 cluster_snapshot_metadata_t* instantiate_cluster_snapshot_metadata(int include_optional);
 
+#include "test_cluster_snapshot_metadata_boot_options.c"
 
 
 cluster_snapshot_metadata_t* instantiate_cluster_snapshot_metadata(int include_optional) {
@@ -26,7 +27,7 @@ cluster_snapshot_metadata_t* instantiate_cluster_snapshot_metadata(int include_o
       1,
       1.337,
       1,
-      0,
+      null,
       0,
       "0",
       "0",
@@ -40,7 +41,7 @@ cluster_snapshot_metadata_t* instantiate_cluster_snapshot_metadata(int include_o
       1,
       1.337,
       1,
-      0,
+      null,
       0,
       "0",
       "0",

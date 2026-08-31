@@ -1,7 +1,7 @@
 /*
  * snapshot_status.h
  *
- * 
+ * The status of the snapshot.
  */
 
 #ifndef _snapshot_status_H_

@@ -19,13 +19,23 @@ typedef struct update_domain_settings_response_snapshot_sharing_permissions_t up
 
 
 typedef struct update_domain_settings_response_snapshot_sharing_permissions_t {
+    int cloud_enabled; //boolean
     int domain_enabled; //boolean
+    int public_link; //boolean
+    int domain_restricted_link; //boolean
+    int password_public_link; //boolean
+    int email_invite; //boolean
 
     int _library_owned; // Is the library responsible for freeing this object?
 } update_domain_settings_response_snapshot_sharing_permissions_t;
 
 __attribute__((deprecated)) update_domain_settings_response_snapshot_sharing_permissions_t *update_domain_settings_response_snapshot_sharing_permissions_create(
-    int domain_enabled
+    int cloud_enabled,
+    int domain_enabled,
+    int public_link,
+    int domain_restricted_link,
+    int password_public_link,
+    int email_invite
 );
 
 void update_domain_settings_response_snapshot_sharing_permissions_free(update_domain_settings_response_snapshot_sharing_permissions_t *update_domain_settings_response_snapshot_sharing_permissions);

@@ -10,7 +10,7 @@ static cluster_snapshot_metadata_t *cluster_snapshot_metadata_create_internal(
     int fresh,
     double hw_pac,
     int springboard,
-    object_t *boot_options,
+    cluster_snapshot_metadata_boot_options_t *boot_options,
     object_t *device,
     char *flavor,
     char *os_version,
@@ -43,7 +43,7 @@ __attribute__((deprecated)) cluster_snapshot_metadata_t *cluster_snapshot_metada
     int fresh,
     double hw_pac,
     int springboard,
-    object_t *boot_options,
+    cluster_snapshot_metadata_boot_options_t *boot_options,
     object_t *device,
     char *flavor,
     char *os_version,
@@ -76,7 +76,7 @@ void cluster_snapshot_metadata_free(cluster_snapshot_metadata_t *cluster_snapsho
     }
     listEntry_t *listEntry;
     if (cluster_snapshot_metadata->boot_options) {
-        object_free(cluster_snapshot_metadata->boot_options);
+        cluster_snapshot_metadata_boot_options_free(cluster_snapshot_metadata->boot_options);
         cluster_snapshot_metadata->boot_options = NULL;
     }
     if (cluster_snapshot_metadata->device) {
@@ -139,11 +139,11 @@ cJSON *cluster_snapshot_metadata_convertToJSON(cluster_snapshot_metadata_t *clus
 
     // cluster_snapshot_metadata->boot_options
     if(cluster_snapshot_metadata->boot_options) {
-    cJSON *boot_options_object = object_convertToJSON(cluster_snapshot_metadata->boot_options);
-    if(boot_options_object == NULL) {
+    cJSON *boot_options_local_JSON = cluster_snapshot_metadata_boot_options_convertToJSON(cluster_snapshot_metadata->boot_options);
+    if(boot_options_local_JSON == NULL) {
     goto fail; //model
     }
-    cJSON_AddItemToObject(item, "bootOptions", boot_options_object);
+    cJSON_AddItemToObject(item, "bootOptions", boot_options_local_JSON);
     if(item->child == NULL) {
     goto fail;
     }
@@ -214,6 +214,9 @@ cluster_snapshot_metadata_t *cluster_snapshot_metadata_parseFromJSON(cJSON *clus
 
     cluster_snapshot_metadata_t *cluster_snapshot_metadata_local_var = NULL;
 
+    // define the local variable for cluster_snapshot_metadata->boot_options
+    cluster_snapshot_metadata_boot_options_t *boot_options_local_nonprim = NULL;
+
     // cluster_snapshot_metadata->live
     cJSON *live = cJSON_GetObjectItemCaseSensitive(cluster_snapshot_metadataJSON, "live");
     if (cJSON_IsNull(live)) {
@@ -267,9 +270,8 @@ cluster_snapshot_metadata_t *cluster_snapshot_metadata_parseFromJSON(cJSON *clus
     if (cJSON_IsNull(boot_options)) {
         boot_options = NULL;
     }
-    object_t *boot_options_local_object = NULL;
     if (boot_options) { 
-    boot_options_local_object = object_parseFromJSON(boot_options); //object
+    boot_options_local_nonprim = cluster_snapshot_metadata_boot_options_parseFromJSON(boot_options); //nonprimitive
     }
 
     // cluster_snapshot_metadata->device
@@ -348,7 +350,7 @@ cluster_snapshot_metadata_t *cluster_snapshot_metadata_parseFromJSON(cJSON *clus
         fresh ? fresh->valueint : 0,
         hw_pac ? hw_pac->valuedouble : 0,
         springboard ? springboard->valueint : 0,
-        boot_options ? boot_options_local_object : NULL,
+        boot_options ? boot_options_local_nonprim : NULL,
         device ? device_local_object : NULL,
         flavor && !cJSON_IsNull(flavor) ? strdup(flavor->valuestring) : NULL,
         os_version && !cJSON_IsNull(os_version) ? strdup(os_version->valuestring) : NULL,
@@ -359,6 +361,10 @@ cluster_snapshot_metadata_t *cluster_snapshot_metadata_parseFromJSON(cJSON *clus
 
     return cluster_snapshot_metadata_local_var;
 end:
+    if (boot_options_local_nonprim) {
+        cluster_snapshot_metadata_boot_options_free(boot_options_local_nonprim);
+        boot_options_local_nonprim = NULL;
+    }
     return NULL;
 
 }

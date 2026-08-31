@@ -15,7 +15,7 @@
 
 typedef struct shared_snapshots_info_t shared_snapshots_info_t;
 
-#include "snapshot_owner.h"
+#include "snapshot_owner_v1.h"
 
 
 
@@ -25,7 +25,7 @@ typedef struct shared_snapshots_info_t {
     char *model; // string
     double shared_on; //numeric
     char *shared_with_member; // string
-    struct snapshot_owner_t *shared_by; //model
+    struct snapshot_owner_v1_t *shared_by; //model
 
     int _library_owned; // Is the library responsible for freeing this object?
 } shared_snapshots_info_t;
@@ -36,7 +36,7 @@ __attribute__((deprecated)) shared_snapshots_info_t *shared_snapshots_info_creat
     char *model,
     double shared_on,
     char *shared_with_member,
-    snapshot_owner_t *shared_by
+    snapshot_owner_v1_t *shared_by
 );
 
 void shared_snapshots_info_free(shared_snapshots_info_t *shared_snapshots_info);

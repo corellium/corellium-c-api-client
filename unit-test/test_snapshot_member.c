@@ -23,16 +23,16 @@ snapshot_member_t* instantiate_snapshot_member(int include_optional) {
   if (include_optional) {
     snapshot_member = snapshot_member_create(
       "0",
-      1.337,
-      1.337,
+      "2013-10-20T19:20:30+01:00",
+      "2013-10-20T19:20:30+01:00",
       "0",
       "0"
     );
   } else {
     snapshot_member = snapshot_member_create(
       "0",
-      1.337,
-      1.337,
+      "2013-10-20T19:20:30+01:00",
+      "2013-10-20T19:20:30+01:00",
       "0",
       "0"
     );

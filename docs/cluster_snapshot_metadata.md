@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **fresh** | **int** | Whether the snapshot was created immediately after device restore. | [optional] 
 **hw_pac** | **double** | Hardware PAC value. | [optional] 
 **springboard** | **int** | Whether this is a springboard snapshot. | [optional] 
-**boot_options** | [**object_t**](.md) \* | Boot options. | [optional] 
+**boot_options** | [**cluster_snapshot_metadata_boot_options_t**](cluster_snapshot_metadata_boot_options.md) \* |  | [optional] 
 **device** | [**object_t**](.md) \* | Device metadata. | [optional] 
 **flavor** | **char \*** | Device flavor. | [optional] 
 **os_version** | **char \*** | OS version. | [optional] 

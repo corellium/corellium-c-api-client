@@ -21,6 +21,6 @@ ClusterAdministrationConfigAPI_v1GetClusterConfig(apiClient_t *apiClient);
 // Update cluster configuration
 //
 void
-ClusterAdministrationConfigAPI_v1PatchClusterConfig(apiClient_t *apiClient, cluster_configuration_payload_t *cluster_configuration_payload);
+ClusterAdministrationConfigAPI_v1PatchClusterConfig(apiClient_t *apiClient, body);
 
 

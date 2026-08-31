@@ -82,7 +82,7 @@ end:
 // Update cluster configuration
 //
 void
-ClusterAdministrationConfigAPI_v1PatchClusterConfig(apiClient_t *apiClient, cluster_configuration_payload_t *cluster_configuration_payload)
+ClusterAdministrationConfigAPI_v1PatchClusterConfig(apiClient_t *apiClient, body)
 {
     list_t    *localVarQueryParameters = NULL;
     list_t    *localVarHeaderParameters = NULL;
@@ -103,12 +103,12 @@ ClusterAdministrationConfigAPI_v1PatchClusterConfig(apiClient_t *apiClient, clus
 
 
     // Body Param
-    cJSON *localVarSingleItemJSON_cluster_configuration_payload = NULL;
-    if (cluster_configuration_payload != NULL)
+    cJSON *localVarSingleItemJSON_body = NULL;
+    if (body != NULL)
     {
         //not string, not binary
-        localVarSingleItemJSON_cluster_configuration_payload = cluster_configuration_payload_convertToJSON(cluster_configuration_payload);
-        localVarBodyParameters = cJSON_Print(localVarSingleItemJSON_cluster_configuration_payload);
+        localVarSingleItemJSON_body = cluster_configuration_payload_convertToJSON(body);
+        localVarBodyParameters = cJSON_Print(localVarSingleItemJSON_body);
         localVarBodyLength = strlen(localVarBodyParameters);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -149,9 +149,9 @@ end:
     list_freeList(localVarHeaderType);
     list_freeList(localVarContentType);
     free(localVarPath);
-    if (localVarSingleItemJSON_cluster_configuration_payload) {
-        cJSON_Delete(localVarSingleItemJSON_cluster_configuration_payload);
-        localVarSingleItemJSON_cluster_configuration_payload = NULL;
+    if (localVarSingleItemJSON_body) {
+        cJSON_Delete(localVarSingleItemJSON_body);
+        localVarSingleItemJSON_body = NULL;
     }
     free(localVarBodyParameters);
 

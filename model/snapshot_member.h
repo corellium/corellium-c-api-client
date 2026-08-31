@@ -20,20 +20,20 @@ typedef struct snapshot_member_t snapshot_member_t;
 
 typedef struct snapshot_member_t {
     char *email; // string
-    double invite_sent_at; //numeric
-    double shared_on; //numeric
+    char *invite_sent_at; //date time
+    char *shared_on; //date time
     char *user_id; // string
-    char *label; // string
+    char *name; // string
 
     int _library_owned; // Is the library responsible for freeing this object?
 } snapshot_member_t;
 
 __attribute__((deprecated)) snapshot_member_t *snapshot_member_create(
     char *email,
-    double invite_sent_at,
-    double shared_on,
+    char *invite_sent_at,
+    char *shared_on,
     char *user_id,
-    char *label
+    char *name
 );
 
 void snapshot_member_free(snapshot_member_t *snapshot_member);

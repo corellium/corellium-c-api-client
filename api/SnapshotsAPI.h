@@ -8,7 +8,7 @@
 #include "../model/api_error.h"
 #include "../model/api_not_found_error.h"
 #include "../model/create_snapshot_body.h"
-#include "../model/list_instance_snapshots_response.h"
+#include "../model/instance_snapshots_list.h"
 #include "../model/snapshot.h"
 #include "../model/user_error.h"
 #include "../model/v3_update_snapshot_request.h"
@@ -52,7 +52,7 @@ SnapshotsAPI_v3GetSnapshot(apiClient_t *apiClient, char *snapshotId);
 
 // List instance snapshots
 //
-list_instance_snapshots_response_t*
+instance_snapshots_list_t*
 SnapshotsAPI_v3ListInstanceSnapshots(apiClient_t *apiClient, char *instanceId, double *limit, double *offset);
 
 

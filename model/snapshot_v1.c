@@ -9,7 +9,7 @@ static snapshot_v1_t *snapshot_v1_create_internal(
     char *id,
     char *name,
     char *instance,
-    snapshot_status_t *status,
+    snapshot_status_v1_t *status,
     double date,
     int fresh,
     int live,
@@ -40,7 +40,7 @@ __attribute__((deprecated)) snapshot_v1_t *snapshot_v1_create(
     char *id,
     char *name,
     char *instance,
-    snapshot_status_t *status,
+    snapshot_status_v1_t *status,
     double date,
     int fresh,
     int live,
@@ -84,7 +84,7 @@ void snapshot_v1_free(snapshot_v1_t *snapshot_v1) {
         snapshot_v1->instance = NULL;
     }
     if (snapshot_v1->status) {
-        snapshot_status_free(snapshot_v1->status);
+        snapshot_status_v1_free(snapshot_v1->status);
         snapshot_v1->status = NULL;
     }
     if (snapshot_v1->model) {
@@ -132,7 +132,7 @@ cJSON *snapshot_v1_convertToJSON(snapshot_v1_t *snapshot_v1) {
     if (!snapshot_v1->status) {
         goto fail;
     }
-    cJSON *status_local_JSON = snapshot_status_convertToJSON(snapshot_v1->status);
+    cJSON *status_local_JSON = snapshot_status_v1_convertToJSON(snapshot_v1->status);
     if(status_local_JSON == NULL) {
     goto fail; //model
     }
@@ -211,7 +211,7 @@ snapshot_v1_t *snapshot_v1_parseFromJSON(cJSON *snapshot_v1JSON){
     snapshot_v1_t *snapshot_v1_local_var = NULL;
 
     // define the local variable for snapshot_v1->status
-    snapshot_status_t *status_local_nonprim = NULL;
+    snapshot_status_v1_t *status_local_nonprim = NULL;
 
     // define the local variable for snapshot_v1->sharing
     snapshot_sharing_v1_t *sharing_local_nonprim = NULL;
@@ -271,7 +271,7 @@ snapshot_v1_t *snapshot_v1_parseFromJSON(cJSON *snapshot_v1JSON){
     }
 
     
-    status_local_nonprim = snapshot_status_parseFromJSON(status); //nonprimitive
+    status_local_nonprim = snapshot_status_v1_parseFromJSON(status); //nonprimitive
 
     // snapshot_v1->date
     cJSON *date = cJSON_GetObjectItemCaseSensitive(snapshot_v1JSON, "date");
@@ -371,7 +371,7 @@ snapshot_v1_t *snapshot_v1_parseFromJSON(cJSON *snapshot_v1JSON){
     return snapshot_v1_local_var;
 end:
     if (status_local_nonprim) {
-        snapshot_status_free(status_local_nonprim);
+        snapshot_status_v1_free(status_local_nonprim);
         status_local_nonprim = NULL;
     }
     if (sharing_local_nonprim) {

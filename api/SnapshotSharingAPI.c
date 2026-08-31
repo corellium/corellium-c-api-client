@@ -399,7 +399,9 @@ end:
 
 }
 
-// Share a snapshot
+// Create or update snapshot sharing
+//
+// Creates or updates the sharing configuration for a snapshot.
 //
 snapshot_t*
 SnapshotSharingAPI_v3ShareSnapshot(apiClient_t *apiClient, char *snapshotId, share_snapshot_body_t *share_snapshot_body)
@@ -458,7 +460,7 @@ SnapshotSharingAPI_v3ShareSnapshot(apiClient_t *apiClient, char *snapshotId, sha
 
     // uncomment below to debug the error response
     //if (apiClient->response_code == 200) {
-    //    printf("%s\n","Successfully shared snapshot.");
+    //    printf("%s\n","Snapshot sharing configuration updated.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {

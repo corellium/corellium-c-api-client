@@ -16,7 +16,7 @@
 #include "../model/shared_snapshots_info.h"
 shared_snapshots_info_t* instantiate_shared_snapshots_info(int include_optional);
 
-#include "test_snapshot_owner.c"
+#include "test_snapshot_owner_v1.c"
 
 
 shared_snapshots_info_t* instantiate_shared_snapshots_info(int include_optional) {
@@ -29,7 +29,7 @@ shared_snapshots_info_t* instantiate_shared_snapshots_info(int include_optional)
       1.337,
       "0",
        // false, not to have infinite recursion
-      instantiate_snapshot_owner(0)
+      instantiate_snapshot_owner_v1(0)
     );
   } else {
     shared_snapshots_info = shared_snapshots_info_create(

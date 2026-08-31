@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**SnapshotSharingAPI_v3DeleteSnapshotPermissions**](SnapshotSharingAPI.md#SnapshotSharingAPI_v3DeleteSnapshotPermissions) | **DELETE** /v3/snapshots/{snapshotId}/permissions | Delete member(s)
 [**SnapshotSharingAPI_v3GetSharedSnapshots**](SnapshotSharingAPI.md#SnapshotSharingAPI_v3GetSharedSnapshots) | **GET** /v3/snapshots/shared | Fetch shared snapshots
 [**SnapshotSharingAPI_v3SetSnapshotPermissions**](SnapshotSharingAPI.md#SnapshotSharingAPI_v3SetSnapshotPermissions) | **POST** /v3/snapshots/{snapshotId}/permissions | Set member list
-[**SnapshotSharingAPI_v3ShareSnapshot**](SnapshotSharingAPI.md#SnapshotSharingAPI_v3ShareSnapshot) | **POST** /v3/snapshots/{snapshotId}/share | Share a snapshot
+[**SnapshotSharingAPI_v3ShareSnapshot**](SnapshotSharingAPI.md#SnapshotSharingAPI_v3ShareSnapshot) | **POST** /v3/snapshots/{snapshotId}/share | Create or update snapshot sharing
 
 
 # **SnapshotSharingAPI_v3AcceptSharedSnapshot**
@@ -136,7 +136,9 @@ Name | Type | Description  | Notes
 
 # **SnapshotSharingAPI_v3ShareSnapshot**
 ```c
-// Share a snapshot
+// Create or update snapshot sharing
+//
+// Creates or updates the sharing configuration for a snapshot.
 //
 snapshot_t* SnapshotSharingAPI_v3ShareSnapshot(apiClient_t *apiClient, char *snapshotId, share_snapshot_body_t *share_snapshot_body);
 ```

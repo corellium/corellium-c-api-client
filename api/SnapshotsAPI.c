@@ -474,7 +474,7 @@ end:
 
 // List instance snapshots
 //
-list_instance_snapshots_response_t*
+instance_snapshots_list_t*
 SnapshotsAPI_v3ListInstanceSnapshots(apiClient_t *apiClient, char *instanceId, double *limit, double *offset)
 {
     list_t    *localVarQueryParameters = list_createList();
@@ -557,10 +557,10 @@ SnapshotsAPI_v3ListInstanceSnapshots(apiClient_t *apiClient, char *instanceId, d
     //    printf("%s\n","Instance not found.");
     //}
     //nonprimitive not container
-    list_instance_snapshots_response_t *elementToReturn = NULL;
+    instance_snapshots_list_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
         cJSON *SnapshotsAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = list_instance_snapshots_response_parseFromJSON(SnapshotsAPIlocalVarJSON);
+        elementToReturn = instance_snapshots_list_parseFromJSON(SnapshotsAPIlocalVarJSON);
         cJSON_Delete(SnapshotsAPIlocalVarJSON);
         if(elementToReturn == NULL) {
             // return 0;

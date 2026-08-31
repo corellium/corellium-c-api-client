@@ -16,7 +16,7 @@
 #include "../model/snapshot_sharing_v1.h"
 snapshot_sharing_v1_t* instantiate_snapshot_sharing_v1(int include_optional);
 
-#include "test_snapshot_owner.c"
+#include "test_snapshot_owner_v1.c"
 
 
 snapshot_sharing_v1_t* instantiate_snapshot_sharing_v1(int include_optional) {
@@ -25,7 +25,7 @@ snapshot_sharing_v1_t* instantiate_snapshot_sharing_v1(int include_optional) {
     snapshot_sharing_v1 = snapshot_sharing_v1_create(
       corellium_api_snapshot_sharing_v1_SHARINGTYPE_publicLink,
        // false, not to have infinite recursion
-      instantiate_snapshot_owner(0),
+      instantiate_snapshot_owner_v1(0),
       list_createList()
     );
   } else {

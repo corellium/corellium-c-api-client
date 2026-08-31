@@ -9,7 +9,7 @@ static snapshot_sharing_t *snapshot_sharing_create_internal(
     corellium_api_snapshot_sharing_type__e sharing_type,
     char *access_code,
     char *shared_on,
-    snapshot_owner_schema_t *shared_by,
+    snapshot_owner_t *shared_by,
     list_t *members
     ) {
     snapshot_sharing_t *snapshot_sharing_local_var = malloc(sizeof(snapshot_sharing_t));
@@ -30,7 +30,7 @@ __attribute__((deprecated)) snapshot_sharing_t *snapshot_sharing_create(
     corellium_api_snapshot_sharing_type__e sharing_type,
     char *access_code,
     char *shared_on,
-    snapshot_owner_schema_t *shared_by,
+    snapshot_owner_t *shared_by,
     list_t *members
     ) {
     return snapshot_sharing_create_internal (
@@ -60,12 +60,12 @@ void snapshot_sharing_free(snapshot_sharing_t *snapshot_sharing) {
         snapshot_sharing->shared_on = NULL;
     }
     if (snapshot_sharing->shared_by) {
-        snapshot_owner_schema_free(snapshot_sharing->shared_by);
+        snapshot_owner_free(snapshot_sharing->shared_by);
         snapshot_sharing->shared_by = NULL;
     }
     if (snapshot_sharing->members) {
         list_ForEach(listEntry, snapshot_sharing->members) {
-            snapshot_member_schema_free(listEntry->data);
+            snapshot_member_free(listEntry->data);
         }
         list_freeList(snapshot_sharing->members);
         snapshot_sharing->members = NULL;
@@ -108,7 +108,7 @@ cJSON *snapshot_sharing_convertToJSON(snapshot_sharing_t *snapshot_sharing) {
 
     // snapshot_sharing->shared_by
     if(snapshot_sharing->shared_by) {
-    cJSON *shared_by_local_JSON = snapshot_owner_schema_convertToJSON(snapshot_sharing->shared_by);
+    cJSON *shared_by_local_JSON = snapshot_owner_convertToJSON(snapshot_sharing->shared_by);
     if(shared_by_local_JSON == NULL) {
     goto fail; //model
     }
@@ -129,7 +129,7 @@ cJSON *snapshot_sharing_convertToJSON(snapshot_sharing_t *snapshot_sharing) {
     listEntry_t *membersListEntry;
     if (snapshot_sharing->members) {
     list_ForEach(membersListEntry, snapshot_sharing->members) {
-    cJSON *itemLocal = snapshot_member_schema_convertToJSON(membersListEntry->data);
+    cJSON *itemLocal = snapshot_member_convertToJSON(membersListEntry->data);
     if(itemLocal == NULL) {
     goto fail;
     }
@@ -154,7 +154,7 @@ snapshot_sharing_t *snapshot_sharing_parseFromJSON(cJSON *snapshot_sharingJSON){
     corellium_api_snapshot_sharing_type__e sharing_type_local_nonprim = 0;
 
     // define the local variable for snapshot_sharing->shared_by
-    snapshot_owner_schema_t *shared_by_local_nonprim = NULL;
+    snapshot_owner_t *shared_by_local_nonprim = NULL;
 
     // define the local list for snapshot_sharing->members
     list_t *membersList = NULL;
@@ -201,7 +201,7 @@ snapshot_sharing_t *snapshot_sharing_parseFromJSON(cJSON *snapshot_sharingJSON){
         shared_by = NULL;
     }
     if (shared_by) { 
-    shared_by_local_nonprim = snapshot_owner_schema_parseFromJSON(shared_by); //nonprimitive
+    shared_by_local_nonprim = snapshot_owner_parseFromJSON(shared_by); //nonprimitive
     }
 
     // snapshot_sharing->members
@@ -222,7 +222,7 @@ snapshot_sharing_t *snapshot_sharing_parseFromJSON(cJSON *snapshot_sharingJSON){
         if(!cJSON_IsObject(members_local_nonprimitive)){
             goto end;
         }
-        snapshot_member_schema_t *membersItem = snapshot_member_schema_parseFromJSON(members_local_nonprimitive);
+        snapshot_member_t *membersItem = snapshot_member_parseFromJSON(members_local_nonprimitive);
 
         list_addElement(membersList, membersItem);
     }
@@ -243,13 +243,13 @@ end:
         sharing_type_local_nonprim = 0;
     }
     if (shared_by_local_nonprim) {
-        snapshot_owner_schema_free(shared_by_local_nonprim);
+        snapshot_owner_free(shared_by_local_nonprim);
         shared_by_local_nonprim = NULL;
     }
     if (membersList) {
         listEntry_t *listEntry = NULL;
         list_ForEach(listEntry, membersList) {
-            snapshot_member_schema_free(listEntry->data);
+            snapshot_member_free(listEntry->data);
             listEntry->data = NULL;
         }
         list_freeList(membersList);

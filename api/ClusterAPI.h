@@ -5,16 +5,15 @@
 #include "../external/cJSON.h"
 #include "../include/keyValuePair.h"
 #include "../include/binary.h"
-#include "../model/any_type.h"
 #include "../model/api_error.h"
 #include "../model/api_not_found_error.h"
+#include "../model/cluster_config.h"
 #include "../model/cluster_config_update_error.h"
 #include "../model/cluster_snapshot.h"
 #include "../model/cluster_snapshot_list.h"
 #include "../model/node_console_endpoint.h"
 #include "../model/node_information.h"
 #include "../model/node_list.h"
-#include "../model/object.h"
 #include "../model/patch_cluster_config_body.h"
 #include "../model/user_error.h"
 
@@ -31,7 +30,7 @@ ClusterAPI_v3DeleteClusterSnapshot(apiClient_t *apiClient, char *snapshotId);
 //
 // **Required role:** Cluster administrator.  Returns the current cluster configuration.
 //
-object_t*
+cluster_config_t*
 ClusterAPI_v3GetClusterConfig(apiClient_t *apiClient);
 
 
@@ -72,7 +71,7 @@ ClusterAPI_v3ListClusterNodes(apiClient_t *apiClient, double *limit, double *off
 // **Required role:** Cluster administrator.  Returns a paginated list of cluster volume snapshots. Requires the clusterSnapshotMgmt feature.
 //
 cluster_snapshot_list_t*
-ClusterAPI_v3ListClusterSnapshots(apiClient_t *apiClient, double *limit, double *offset, char *springboard, char *live, char *fresh, char *deviceName, char *task, char *search, char *to, char *from, char *orderBy);
+ClusterAPI_v3ListClusterSnapshots(apiClient_t *apiClient, double *limit, double *offset, char *springboard, char *live, char *fresh, char *deviceName, char *task, char *search, char to, char from, char *orderBy);
 
 
 // Update cluster configuration

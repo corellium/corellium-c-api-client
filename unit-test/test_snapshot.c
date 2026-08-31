@@ -16,7 +16,7 @@
 #include "../model/snapshot.h"
 snapshot_t* instantiate_snapshot(int include_optional);
 
-#include "test_snapshot_status_schema.c"
+#include "test_snapshot_status.c"
 #include "test_snapshot_sharing.c"
 
 
@@ -28,7 +28,7 @@ snapshot_t* instantiate_snapshot(int include_optional) {
       "0",
       "0",
        // false, not to have infinite recursion
-      instantiate_snapshot_status_schema(0),
+      instantiate_snapshot_status(0),
       1.337,
       1,
       1,

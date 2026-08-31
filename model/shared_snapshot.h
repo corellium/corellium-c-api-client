@@ -15,10 +15,10 @@
 
 typedef struct shared_snapshot_t shared_snapshot_t;
 
-#include "snapshot_owner_schema.h"
+#include "snapshot_owner.h"
 #include "snapshot_sharing.h"
 #include "snapshot_sharing_type.h"
-#include "snapshot_status_schema.h"
+#include "snapshot_status.h"
 
 
 
@@ -26,7 +26,7 @@ typedef struct shared_snapshot_t {
     char *shared_on; //date time
     char *shared_with_member; // string
     corellium_api_snapshot_sharing_type__e sharing_type; //referenced enum
-    struct snapshot_owner_schema_t *shared_by; //model
+    struct snapshot_owner_t *shared_by; //model
     char *id; // string
     double date; //numeric
     double hw_pac; //numeric
@@ -36,7 +36,7 @@ typedef struct shared_snapshot_t {
     char *model; // string
     char *type; // string
     char *name; // string
-    struct snapshot_status_schema_t *status; //model
+    struct snapshot_status_t *status; //model
     int fresh; //boolean
     struct snapshot_sharing_t *sharing; //model
 
@@ -47,7 +47,7 @@ __attribute__((deprecated)) shared_snapshot_t *shared_snapshot_create(
     char *shared_on,
     char *shared_with_member,
     corellium_api_snapshot_sharing_type__e sharing_type,
-    snapshot_owner_schema_t *shared_by,
+    snapshot_owner_t *shared_by,
     char *id,
     double date,
     double hw_pac,
@@ -57,7 +57,7 @@ __attribute__((deprecated)) shared_snapshot_t *shared_snapshot_create(
     char *model,
     char *type,
     char *name,
-    snapshot_status_schema_t *status,
+    snapshot_status_t *status,
     int fresh,
     snapshot_sharing_t *sharing
 );

@@ -16,7 +16,7 @@
 #include "../model/snapshot_sharing.h"
 snapshot_sharing_t* instantiate_snapshot_sharing(int include_optional);
 
-#include "test_snapshot_owner_schema.c"
+#include "test_snapshot_owner.c"
 
 
 snapshot_sharing_t* instantiate_snapshot_sharing(int include_optional) {
@@ -27,7 +27,7 @@ snapshot_sharing_t* instantiate_snapshot_sharing(int include_optional) {
       "0",
       "2013-10-20T19:20:30+01:00",
        // false, not to have infinite recursion
-      instantiate_snapshot_owner_schema(0),
+      instantiate_snapshot_owner(0),
       list_createList()
     );
   } else {

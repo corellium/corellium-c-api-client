@@ -154,8 +154,36 @@ set(SRCS
     model/check_subdomain_response_v1.c
     model/cloud_notification_item.c
     model/cloud_notification_list.c
+    model/cluster_config.c
+    model/cluster_config_coordinator_config.c
+    model/cluster_config_coordinator_config_auth_providers_inner.c
+    model/cluster_config_coordinator_config_auth_providers_inner_any_of.c
+    model/cluster_config_coordinator_config_auth_providers_inner_any_of_1.c
+    model/cluster_config_coordinator_config_aws_marketplace.c
+    model/cluster_config_coordinator_config_ensure_domain.c
+    model/cluster_config_coordinator_config_ensure_domain_properties.c
+    model/cluster_config_coordinator_config_ensure_domain_quotas.c
+    model/cluster_config_coordinator_config_hubspot.c
+    model/cluster_config_coordinator_config_hypertune.c
+    model/cluster_config_coordinator_config_pipedrive.c
+    model/cluster_config_coordinator_config_trial.c
+    model/cluster_config_coordinator_config_webplayer.c
+    model/cluster_config_firmware_service_config.c
+    model/cluster_config_ipsw_filters_inner.c
+    model/cluster_config_ipsw_filters_inner_device.c
+    model/cluster_config_ipsw_filters_inner_version.c
+    model/cluster_config_maintenance.c
+    model/cluster_config_net_mon_ca.c
+    model/cluster_config_node_specific_config.c
+    model/cluster_config_package_config.c
+    model/cluster_config_package_config_components.c
+    model/cluster_config_package_config_features.c
+    model/cluster_config_package_config_flavor_filters_inner.c
+    model/cluster_config_package_config_flavor_filters_inner_apply.c
+    model/cluster_config_package_config_flavor_filters_inner_filter.c
+    model/cluster_config_setup_config.c
+    model/cluster_config_stripe.c
     model/cluster_config_update_error.c
-    model/cluster_configuration_payload.c
     model/cluster_node.c
     model/cluster_node_available.c
     model/cluster_node_reserved.c
@@ -168,6 +196,7 @@ set(SRCS
     model/cluster_snapshot.c
     model/cluster_snapshot_list.c
     model/cluster_snapshot_metadata.c
+    model/cluster_snapshot_metadata_boot_options.c
     model/cluster_snapshot_status.c
     model/cluster_snapshot_v1.c
     model/config_auth_provider.c
@@ -332,11 +361,13 @@ set(SRCS
     model/instance_agent_state_v1.c
     model/instance_boot_options.c
     model/instance_boot_options_additional_tag.c
+    model/instance_boot_options_fvp.c
     model/instance_boot_options_kernel.c
     model/instance_boot_options_kernel_v1.c
     model/instance_boot_options_pongo.c
     model/instance_boot_options_pongo_v1.c
     model/instance_boot_options_v1.c
+    model/instance_boot_options_v_mmio_inner.c
     model/instance_console.c
     model/instance_console_endpoint.c
     model/instance_console_endpoint_v1.c
@@ -360,6 +391,7 @@ set(SRCS
     model/instance_return.c
     model/instance_services.c
     model/instance_services_v1.c
+    model/instance_snapshots_list.c
     model/instance_start_options.c
     model/instance_state.c
     model/instance_state_v1.c
@@ -406,7 +438,6 @@ set(SRCS
     model/kernel_thread.c
     model/kernel_thread_v1.c
     model/layout_schema.c
-    model/list_instance_snapshots_response.c
     model/load_extension_body.c
     model/logging.c
     model/logging_v1.c
@@ -533,9 +564,9 @@ set(SRCS
     model/snapshot_creation_options.c
     model/snapshot_list.c
     model/snapshot_member.c
-    model/snapshot_member_schema.c
+    model/snapshot_member_v1.c
     model/snapshot_owner.c
-    model/snapshot_owner_schema.c
+    model/snapshot_owner_v1.c
     model/snapshot_permissions_request_payload.c
     model/snapshot_request.c
     model/snapshot_sharing.c
@@ -544,7 +575,7 @@ set(SRCS
     model/snapshot_sharing_type.c
     model/snapshot_sharing_v1.c
     model/snapshot_status.c
-    model/snapshot_status_schema.c
+    model/snapshot_status_v1.c
     model/snapshot_v1.c
     model/sslsplit_filter.c
     model/start_instance_body.c
@@ -839,8 +870,36 @@ set(HDRS
     model/check_subdomain_response_v1.h
     model/cloud_notification_item.h
     model/cloud_notification_list.h
+    model/cluster_config.h
+    model/cluster_config_coordinator_config.h
+    model/cluster_config_coordinator_config_auth_providers_inner.h
+    model/cluster_config_coordinator_config_auth_providers_inner_any_of.h
+    model/cluster_config_coordinator_config_auth_providers_inner_any_of_1.h
+    model/cluster_config_coordinator_config_aws_marketplace.h
+    model/cluster_config_coordinator_config_ensure_domain.h
+    model/cluster_config_coordinator_config_ensure_domain_properties.h
+    model/cluster_config_coordinator_config_ensure_domain_quotas.h
+    model/cluster_config_coordinator_config_hubspot.h
+    model/cluster_config_coordinator_config_hypertune.h
+    model/cluster_config_coordinator_config_pipedrive.h
+    model/cluster_config_coordinator_config_trial.h
+    model/cluster_config_coordinator_config_webplayer.h
+    model/cluster_config_firmware_service_config.h
+    model/cluster_config_ipsw_filters_inner.h
+    model/cluster_config_ipsw_filters_inner_device.h
+    model/cluster_config_ipsw_filters_inner_version.h
+    model/cluster_config_maintenance.h
+    model/cluster_config_net_mon_ca.h
+    model/cluster_config_node_specific_config.h
+    model/cluster_config_package_config.h
+    model/cluster_config_package_config_components.h
+    model/cluster_config_package_config_features.h
+    model/cluster_config_package_config_flavor_filters_inner.h
+    model/cluster_config_package_config_flavor_filters_inner_apply.h
+    model/cluster_config_package_config_flavor_filters_inner_filter.h
+    model/cluster_config_setup_config.h
+    model/cluster_config_stripe.h
     model/cluster_config_update_error.h
-    model/cluster_configuration_payload.h
     model/cluster_node.h
     model/cluster_node_available.h
     model/cluster_node_reserved.h
@@ -853,6 +912,7 @@ set(HDRS
     model/cluster_snapshot.h
     model/cluster_snapshot_list.h
     model/cluster_snapshot_metadata.h
+    model/cluster_snapshot_metadata_boot_options.h
     model/cluster_snapshot_status.h
     model/cluster_snapshot_v1.h
     model/config_auth_provider.h
@@ -1017,11 +1077,13 @@ set(HDRS
     model/instance_agent_state_v1.h
     model/instance_boot_options.h
     model/instance_boot_options_additional_tag.h
+    model/instance_boot_options_fvp.h
     model/instance_boot_options_kernel.h
     model/instance_boot_options_kernel_v1.h
     model/instance_boot_options_pongo.h
     model/instance_boot_options_pongo_v1.h
     model/instance_boot_options_v1.h
+    model/instance_boot_options_v_mmio_inner.h
     model/instance_console.h
     model/instance_console_endpoint.h
     model/instance_console_endpoint_v1.h
@@ -1045,6 +1107,7 @@ set(HDRS
     model/instance_return.h
     model/instance_services.h
     model/instance_services_v1.h
+    model/instance_snapshots_list.h
     model/instance_start_options.h
     model/instance_state.h
     model/instance_state_v1.h
@@ -1091,7 +1154,6 @@ set(HDRS
     model/kernel_thread.h
     model/kernel_thread_v1.h
     model/layout_schema.h
-    model/list_instance_snapshots_response.h
     model/load_extension_body.h
     model/logging.h
     model/logging_v1.h
@@ -1218,9 +1280,9 @@ set(HDRS
     model/snapshot_creation_options.h
     model/snapshot_list.h
     model/snapshot_member.h
-    model/snapshot_member_schema.h
+    model/snapshot_member_v1.h
     model/snapshot_owner.h
-    model/snapshot_owner_schema.h
+    model/snapshot_owner_v1.h
     model/snapshot_permissions_request_payload.h
     model/snapshot_request.h
     model/snapshot_sharing.h
@@ -1229,7 +1291,7 @@ set(HDRS
     model/snapshot_sharing_type.h
     model/snapshot_sharing_v1.h
     model/snapshot_status.h
-    model/snapshot_status_schema.h
+    model/snapshot_status_v1.h
     model/snapshot_v1.h
     model/sslsplit_filter.h
     model/start_instance_body.h

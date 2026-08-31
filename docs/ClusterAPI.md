@@ -50,7 +50,7 @@ void
 //
 // **Required role:** Cluster administrator.  Returns the current cluster configuration.
 //
-object_t* ClusterAPI_v3GetClusterConfig(apiClient_t *apiClient);
+cluster_config_t* ClusterAPI_v3GetClusterConfig(apiClient_t *apiClient);
 ```
 
 ### Parameters
@@ -60,7 +60,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[object_t](object.md) *
+[cluster_config_t](cluster_config.md) *
 
 
 ### Authorization
@@ -205,7 +205,7 @@ Name | Type | Description  | Notes
 //
 // **Required role:** Cluster administrator.  Returns a paginated list of cluster volume snapshots. Requires the clusterSnapshotMgmt feature.
 //
-cluster_snapshot_list_t* ClusterAPI_v3ListClusterSnapshots(apiClient_t *apiClient, double *limit, double *offset, char *springboard, char *live, char *fresh, char *deviceName, char *task, char *search, char *to, char *from, char *orderBy);
+cluster_snapshot_list_t* ClusterAPI_v3ListClusterSnapshots(apiClient_t *apiClient, double *limit, double *offset, char *springboard, char *live, char *fresh, char *deviceName, char *task, char *search, char to, char from, char *orderBy);
 ```
 
 ### Parameters
@@ -220,9 +220,9 @@ Name | Type | Description  | Notes
 **deviceName** | **char \*** | Filter by device name. | [optional] 
 **task** | **char \*** | Filter by task being executed on the snapshot. | [optional] 
 **search** | **char \*** | Fuzzy search on snapshot and instance name or ID. | [optional] 
-**to** | **char \*** | Filter to this date (based on createdAt). | [optional] 
-**from** | **char \*** | Filter from this date (based on createdAt). | [optional] 
-**orderBy** | **char \*** | Sort order, e.g. &#39;-createdAt&#39; or &#39;createdAt&#39;. | [optional] [default to &#39;-createdAt&#39;]
+**to** | **char** | Filter to this date (based on createdAt). | [optional] 
+**from** | **char** | Filter from this date (based on createdAt). | [optional] 
+**orderBy** | **char \*** | Sort field and direction. | [optional] [default to &#39;-createdAt&#39;]
 
 ### Return type
 

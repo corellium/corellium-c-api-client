@@ -16,6 +16,7 @@
 typedef struct cluster_snapshot_metadata_t cluster_snapshot_metadata_t;
 
 #include "any_type.h"
+#include "cluster_snapshot_metadata_boot_options.h"
 #include "object.h"
 
 
@@ -25,7 +26,7 @@ typedef struct cluster_snapshot_metadata_t {
     int fresh; //boolean
     double hw_pac; //numeric
     int springboard; //boolean
-    object_t *boot_options; //object
+    struct cluster_snapshot_metadata_boot_options_t *boot_options; //model
     object_t *device; //object
     char *flavor; // string
     char *os_version; // string
@@ -41,7 +42,7 @@ __attribute__((deprecated)) cluster_snapshot_metadata_t *cluster_snapshot_metada
     int fresh,
     double hw_pac,
     int springboard,
-    object_t *boot_options,
+    cluster_snapshot_metadata_boot_options_t *boot_options,
     object_t *device,
     char *flavor,
     char *os_version,

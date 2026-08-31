@@ -9,7 +9,7 @@ static snapshot_t *snapshot_create_internal(
     char *id,
     char *name,
     char *instance,
-    snapshot_status_schema_t *status,
+    snapshot_status_t *status,
     double date,
     int fresh,
     int live,
@@ -40,7 +40,7 @@ __attribute__((deprecated)) snapshot_t *snapshot_create(
     char *id,
     char *name,
     char *instance,
-    snapshot_status_schema_t *status,
+    snapshot_status_t *status,
     double date,
     int fresh,
     int live,
@@ -84,7 +84,7 @@ void snapshot_free(snapshot_t *snapshot) {
         snapshot->instance = NULL;
     }
     if (snapshot->status) {
-        snapshot_status_schema_free(snapshot->status);
+        snapshot_status_free(snapshot->status);
         snapshot->status = NULL;
     }
     if (snapshot->model) {
@@ -132,7 +132,7 @@ cJSON *snapshot_convertToJSON(snapshot_t *snapshot) {
     if (!snapshot->status) {
         goto fail;
     }
-    cJSON *status_local_JSON = snapshot_status_schema_convertToJSON(snapshot->status);
+    cJSON *status_local_JSON = snapshot_status_convertToJSON(snapshot->status);
     if(status_local_JSON == NULL) {
     goto fail; //model
     }
@@ -210,7 +210,7 @@ snapshot_t *snapshot_parseFromJSON(cJSON *snapshotJSON){
     snapshot_t *snapshot_local_var = NULL;
 
     // define the local variable for snapshot->status
-    snapshot_status_schema_t *status_local_nonprim = NULL;
+    snapshot_status_t *status_local_nonprim = NULL;
 
     // define the local variable for snapshot->sharing
     snapshot_sharing_t *sharing_local_nonprim = NULL;
@@ -270,7 +270,7 @@ snapshot_t *snapshot_parseFromJSON(cJSON *snapshotJSON){
     }
 
     
-    status_local_nonprim = snapshot_status_schema_parseFromJSON(status); //nonprimitive
+    status_local_nonprim = snapshot_status_parseFromJSON(status); //nonprimitive
 
     // snapshot->date
     cJSON *date = cJSON_GetObjectItemCaseSensitive(snapshotJSON, "date");
@@ -367,7 +367,7 @@ snapshot_t *snapshot_parseFromJSON(cJSON *snapshotJSON){
     return snapshot_local_var;
 end:
     if (status_local_nonprim) {
-        snapshot_status_schema_free(status_local_nonprim);
+        snapshot_status_free(status_local_nonprim);
         status_local_nonprim = NULL;
     }
     if (sharing_local_nonprim) {

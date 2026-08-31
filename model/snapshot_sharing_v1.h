@@ -15,8 +15,8 @@
 
 typedef struct snapshot_sharing_v1_t snapshot_sharing_v1_t;
 
-#include "snapshot_member.h"
-#include "snapshot_owner.h"
+#include "snapshot_member_v1.h"
+#include "snapshot_owner_v1.h"
 
 // Enum SHARINGTYPE for snapshot_sharing_v1
 
@@ -30,7 +30,7 @@ corellium_api_snapshot_sharing_v1_SHARINGTYPE_e snapshot_sharing_v1_sharing_type
 
 typedef struct snapshot_sharing_v1_t {
     corellium_api_snapshot_sharing_v1_SHARINGTYPE_e sharing_type; //enum
-    struct snapshot_owner_t *shared_by; //model
+    struct snapshot_owner_v1_t *shared_by; //model
     list_t *members; //nonprimitive container
 
     int _library_owned; // Is the library responsible for freeing this object?
@@ -38,7 +38,7 @@ typedef struct snapshot_sharing_v1_t {
 
 __attribute__((deprecated)) snapshot_sharing_v1_t *snapshot_sharing_v1_create(
     corellium_api_snapshot_sharing_v1_SHARINGTYPE_e sharing_type,
-    snapshot_owner_t *shared_by,
+    snapshot_owner_v1_t *shared_by,
     list_t *members
 );
 
