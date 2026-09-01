@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 **identifier** | **char \*** | Storage device identifier. | 
 **device** | **char \*** | Device name. | 
 **fs_type** | **char \*** | Filesystem type. | 
-**fs_uuid** | **char \*** | Filesystem UUID. | 
+**fs_uuid** | **char \*** | Filesystem UUID. | [optional] 
 **label** | **char \*** | Volume label. | 
 **serial** | **char \*** | Device serial number. | 
 **vendor** | **char \*** | Device vendor. | 

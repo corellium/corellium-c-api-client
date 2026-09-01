@@ -178,10 +178,11 @@ cJSON *storage_device_convertToJSON(storage_device_t *storage_device) {
 
 
     // storage_device->fs_type
-    if(storage_device->fs_type) {
+    if (!storage_device->fs_type) {
+        goto fail;
+    }
     if(cJSON_AddStringToObject(item, "fsType", storage_device->fs_type) == NULL) {
     goto fail; //String
-    }
     }
 
 
@@ -194,34 +195,38 @@ cJSON *storage_device_convertToJSON(storage_device_t *storage_device) {
 
 
     // storage_device->label
-    if(storage_device->label) {
+    if (!storage_device->label) {
+        goto fail;
+    }
     if(cJSON_AddStringToObject(item, "label", storage_device->label) == NULL) {
     goto fail; //String
-    }
     }
 
 
     // storage_device->serial
-    if(storage_device->serial) {
+    if (!storage_device->serial) {
+        goto fail;
+    }
     if(cJSON_AddStringToObject(item, "serial", storage_device->serial) == NULL) {
     goto fail; //String
-    }
     }
 
 
     // storage_device->vendor
-    if(storage_device->vendor) {
+    if (!storage_device->vendor) {
+        goto fail;
+    }
     if(cJSON_AddStringToObject(item, "vendor", storage_device->vendor) == NULL) {
     goto fail; //String
-    }
     }
 
 
     // storage_device->model
-    if(storage_device->model) {
+    if (!storage_device->model) {
+        goto fail;
+    }
     if(cJSON_AddStringToObject(item, "model", storage_device->model) == NULL) {
     goto fail; //String
-    }
     }
 
 
@@ -309,11 +314,14 @@ storage_device_t *storage_device_parseFromJSON(cJSON *storage_deviceJSON){
     if (cJSON_IsNull(fs_type)) {
         fs_type = NULL;
     }
-    if (fs_type) { 
-    if(!cJSON_IsString(fs_type) && !cJSON_IsNull(fs_type))
+    if (!fs_type) {
+        goto end;
+    }
+
+    
+    if(!cJSON_IsString(fs_type))
     {
     goto end; //String
-    }
     }
 
     // storage_device->fs_uuid
@@ -333,11 +341,14 @@ storage_device_t *storage_device_parseFromJSON(cJSON *storage_deviceJSON){
     if (cJSON_IsNull(label)) {
         label = NULL;
     }
-    if (label) { 
-    if(!cJSON_IsString(label) && !cJSON_IsNull(label))
+    if (!label) {
+        goto end;
+    }
+
+    
+    if(!cJSON_IsString(label))
     {
     goto end; //String
-    }
     }
 
     // storage_device->serial
@@ -345,11 +356,14 @@ storage_device_t *storage_device_parseFromJSON(cJSON *storage_deviceJSON){
     if (cJSON_IsNull(serial)) {
         serial = NULL;
     }
-    if (serial) { 
-    if(!cJSON_IsString(serial) && !cJSON_IsNull(serial))
+    if (!serial) {
+        goto end;
+    }
+
+    
+    if(!cJSON_IsString(serial))
     {
     goto end; //String
-    }
     }
 
     // storage_device->vendor
@@ -357,11 +371,14 @@ storage_device_t *storage_device_parseFromJSON(cJSON *storage_deviceJSON){
     if (cJSON_IsNull(vendor)) {
         vendor = NULL;
     }
-    if (vendor) { 
-    if(!cJSON_IsString(vendor) && !cJSON_IsNull(vendor))
+    if (!vendor) {
+        goto end;
+    }
+
+    
+    if(!cJSON_IsString(vendor))
     {
     goto end; //String
-    }
     }
 
     // storage_device->model
@@ -369,11 +386,14 @@ storage_device_t *storage_device_parseFromJSON(cJSON *storage_deviceJSON){
     if (cJSON_IsNull(model)) {
         model = NULL;
     }
-    if (model) { 
-    if(!cJSON_IsString(model) && !cJSON_IsNull(model))
+    if (!model) {
+        goto end;
+    }
+
+    
+    if(!cJSON_IsString(model))
     {
     goto end; //String
-    }
     }
 
     // storage_device->mount_policy
@@ -444,12 +464,12 @@ storage_device_t *storage_device_parseFromJSON(cJSON *storage_deviceJSON){
     storage_device_local_var = storage_device_create_internal (
         strdup(id->valuestring),
         strdup(device->valuestring),
-        fs_type && !cJSON_IsNull(fs_type) ? strdup(fs_type->valuestring) : NULL,
+        strdup(fs_type->valuestring),
         fs_uuid && !cJSON_IsNull(fs_uuid) ? strdup(fs_uuid->valuestring) : NULL,
-        label && !cJSON_IsNull(label) ? strdup(label->valuestring) : NULL,
-        serial && !cJSON_IsNull(serial) ? strdup(serial->valuestring) : NULL,
-        vendor && !cJSON_IsNull(vendor) ? strdup(vendor->valuestring) : NULL,
-        model && !cJSON_IsNull(model) ? strdup(model->valuestring) : NULL,
+        strdup(label->valuestring),
+        strdup(serial->valuestring),
+        strdup(vendor->valuestring),
+        strdup(model->valuestring),
         mount_policyVariable,
         statusVariable,
         strdup(created_at->valuestring),

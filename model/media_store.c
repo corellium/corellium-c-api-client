@@ -187,11 +187,10 @@ cJSON *media_store_convertToJSON(media_store_t *media_store) {
 
 
     // media_store->fs_uuid
-    if (!media_store->fs_uuid) {
-        goto fail;
-    }
+    if(media_store->fs_uuid) {
     if(cJSON_AddStringToObject(item, "fsUuid", media_store->fs_uuid) == NULL) {
     goto fail; //String
+    }
     }
 
 
@@ -330,14 +329,11 @@ media_store_t *media_store_parseFromJSON(cJSON *media_storeJSON){
     if (cJSON_IsNull(fs_uuid)) {
         fs_uuid = NULL;
     }
-    if (!fs_uuid) {
-        goto end;
-    }
-
-    
-    if(!cJSON_IsString(fs_uuid))
+    if (fs_uuid) { 
+    if(!cJSON_IsString(fs_uuid) && !cJSON_IsNull(fs_uuid))
     {
     goto end; //String
+    }
     }
 
     // media_store->label
@@ -469,7 +465,7 @@ media_store_t *media_store_parseFromJSON(cJSON *media_storeJSON){
         strdup(identifier->valuestring),
         strdup(device->valuestring),
         strdup(fs_type->valuestring),
-        strdup(fs_uuid->valuestring),
+        fs_uuid && !cJSON_IsNull(fs_uuid) ? strdup(fs_uuid->valuestring) : NULL,
         strdup(label->valuestring),
         strdup(serial->valuestring),
         strdup(vendor->valuestring),

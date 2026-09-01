@@ -382,9 +382,6 @@
 #define corellium_status_ready StatusAPI_v3Ready
 
 /* storage */
-#define corellium_storage_cluster_attach StorageV1API_v1AttachStorageCluster
-#define corellium_storage_cluster_eject StorageV1API_v1EjectStorageCluster
-#define corellium_storage_cluster_list StorageV1API_v1ListStorageCluster
 #define corellium_storage_list StorageAPI_v3ListStorage
 #define corellium_storage_listFiles StorageAPI_v3ListStorageFiles
 
@@ -458,6 +455,9 @@
 #define corellium_v1_cluster_snapshots_delete ClusterSnapshotsAPI_v1DeleteClusterSnapshot
 #define corellium_v1_cluster_snapshots_get ClusterSnapshotsAPI_v1GetClusterSnapshot
 #define corellium_v1_cluster_snapshots_list ClusterSnapshotsAPI_v1GetClusterSnapshots
+#define corellium_v1_cluster_storage_attach StorageV1API_v1AttachStorageCluster
+#define corellium_v1_cluster_storage_eject StorageV1API_v1EjectStorageCluster
+#define corellium_v1_cluster_storage_list StorageV1API_v1ListStorageCluster
 
 /* config */
 #define corellium_v1_config_get ConfigV1API_v1GetConfig
@@ -649,9 +649,6 @@
 #define corellium_v1_status_ready StatusV1API_v1Ready
 
 /* storage */
-#define corellium_v1_storage_cluster_attach StorageV1API_v1AttachStorageCluster
-#define corellium_v1_storage_cluster_eject StorageV1API_v1EjectStorageCluster
-#define corellium_v1_storage_cluster_list StorageV1API_v1ListStorageCluster
 #define corellium_v1_storage_list StorageV1API_v1ListStorage
 #define corellium_v1_storage_listFiles StorageV1API_v1ListStorageFiles
 
