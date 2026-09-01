@@ -4,30 +4,13 @@
 #include "hook.h"
 
 
-char* hook_patch_type_ToString(corellium_api_hook_PATCHTYPE_e patch_type) {
-    char* patch_typeArray[] =  { "NULL", "csmfcc", "csmfvm" };
-    return patch_typeArray[patch_type];
-}
-
-corellium_api_hook_PATCHTYPE_e hook_patch_type_FromString(char* patch_type){
-    int stringToReturn = 0;
-    char *patch_typeArray[] =  { "NULL", "csmfcc", "csmfvm" };
-    size_t sizeofArray = sizeof(patch_typeArray) / sizeof(patch_typeArray[0]);
-    while(stringToReturn < sizeofArray) {
-        if(strcmp(patch_type, patch_typeArray[stringToReturn]) == 0) {
-            return stringToReturn;
-        }
-        stringToReturn++;
-    }
-    return 0;
-}
 
 static hook_t *hook_create_internal(
     char *identifier,
     char *label,
     char *address,
     char *patch,
-    corellium_api_hook_PATCHTYPE_e patch_type,
+    corellium_api_hook_patch_type__e patch_type,
     int enabled,
     char *instance_id,
     char *created_at,
@@ -56,7 +39,7 @@ __attribute__((deprecated)) hook_t *hook_create(
     char *label,
     char *address,
     char *patch,
-    corellium_api_hook_PATCHTYPE_e patch_type,
+    corellium_api_hook_patch_type__e patch_type,
     int enabled,
     char *instance_id,
     char *created_at,
@@ -155,12 +138,16 @@ cJSON *hook_convertToJSON(hook_t *hook) {
 
 
     // hook->patch_type
-    if (corellium_api_hook_PATCHTYPE_NULL == hook->patch_type) {
+    if (corellium_api_hook_patch_type__NULL == hook->patch_type) {
         goto fail;
     }
-    if(cJSON_AddStringToObject(item, "patchType", hook_patch_type_ToString(hook->patch_type)) == NULL)
-    {
-    goto fail; //Enum
+    cJSON *patch_type_local_JSON = hook_patch_type_convertToJSON(hook->patch_type);
+    if(patch_type_local_JSON == NULL) {
+        goto fail; // custom
+    }
+    cJSON_AddItemToObject(item, "patchType", patch_type_local_JSON);
+    if(item->child == NULL) {
+        goto fail;
     }
 
 
@@ -210,6 +197,9 @@ fail:
 hook_t *hook_parseFromJSON(cJSON *hookJSON){
 
     hook_t *hook_local_var = NULL;
+
+    // define the local variable for hook->patch_type
+    corellium_api_hook_patch_type__e patch_type_local_nonprim = 0;
 
     // hook->identifier
     cJSON *identifier = cJSON_GetObjectItemCaseSensitive(hookJSON, "identifier");
@@ -280,13 +270,8 @@ hook_t *hook_parseFromJSON(cJSON *hookJSON){
         goto end;
     }
 
-    corellium_api_hook_PATCHTYPE_e patch_typeVariable;
     
-    if(!cJSON_IsString(patch_type))
-    {
-    goto end; //Enum
-    }
-    patch_typeVariable = hook_patch_type_FromString(patch_type->valuestring);
+    patch_type_local_nonprim = hook_patch_type_parseFromJSON(patch_type); //custom
 
     // hook->enabled
     cJSON *enabled = cJSON_GetObjectItemCaseSensitive(hookJSON, "enabled");
@@ -354,7 +339,7 @@ hook_t *hook_parseFromJSON(cJSON *hookJSON){
         strdup(label->valuestring),
         strdup(address->valuestring),
         strdup(patch->valuestring),
-        patch_typeVariable,
+        patch_type_local_nonprim,
         enabled->valueint,
         strdup(instance_id->valuestring),
         strdup(created_at->valuestring),
@@ -363,6 +348,9 @@ hook_t *hook_parseFromJSON(cJSON *hookJSON){
 
     return hook_local_var;
 end:
+    if (patch_type_local_nonprim) {
+        patch_type_local_nonprim = 0;
+    }
     return NULL;
 
 }

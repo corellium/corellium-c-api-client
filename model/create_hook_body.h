@@ -15,14 +15,7 @@
 
 typedef struct create_hook_body_t create_hook_body_t;
 
-
-// Enum PATCHTYPE for create_hook_body
-
-typedef enum  { corellium_api_create_hook_body_PATCHTYPE_NULL = 0, corellium_api_create_hook_body_PATCHTYPE_csmfcc, corellium_api_create_hook_body_PATCHTYPE_csmfvm } corellium_api_create_hook_body_PATCHTYPE_e;
-
-char* create_hook_body_patch_type_ToString(corellium_api_create_hook_body_PATCHTYPE_e patch_type);
-
-corellium_api_create_hook_body_PATCHTYPE_e create_hook_body_patch_type_FromString(char* patch_type);
+#include "hook_patch_type.h"
 
 
 
@@ -30,7 +23,7 @@ typedef struct create_hook_body_t {
     char *label; // string
     char *address; // string
     char *patch; // string
-    corellium_api_create_hook_body_PATCHTYPE_e patch_type; //enum
+    corellium_api_hook_patch_type__e patch_type; //referenced enum
     int enabled; //boolean
 
     int _library_owned; // Is the library responsible for freeing this object?
@@ -40,7 +33,7 @@ __attribute__((deprecated)) create_hook_body_t *create_hook_body_create(
     char *label,
     char *address,
     char *patch,
-    corellium_api_create_hook_body_PATCHTYPE_e patch_type,
+    corellium_api_hook_patch_type__e patch_type,
     int enabled
 );
 

@@ -15,14 +15,7 @@
 
 typedef struct hook_t hook_t;
 
-
-// Enum PATCHTYPE for hook
-
-typedef enum  { corellium_api_hook_PATCHTYPE_NULL = 0, corellium_api_hook_PATCHTYPE_csmfcc, corellium_api_hook_PATCHTYPE_csmfvm } corellium_api_hook_PATCHTYPE_e;
-
-char* hook_patch_type_ToString(corellium_api_hook_PATCHTYPE_e patch_type);
-
-corellium_api_hook_PATCHTYPE_e hook_patch_type_FromString(char* patch_type);
+#include "hook_patch_type.h"
 
 
 
@@ -31,7 +24,7 @@ typedef struct hook_t {
     char *label; // string
     char *address; // string
     char *patch; // string
-    corellium_api_hook_PATCHTYPE_e patch_type; //enum
+    corellium_api_hook_patch_type__e patch_type; //referenced enum
     int enabled; //boolean
     char *instance_id; // string
     char *created_at; //date time
@@ -45,7 +38,7 @@ __attribute__((deprecated)) hook_t *hook_create(
     char *label,
     char *address,
     char *patch,
-    corellium_api_hook_PATCHTYPE_e patch_type,
+    corellium_api_hook_patch_type__e patch_type,
     int enabled,
     char *instance_id,
     char *created_at,

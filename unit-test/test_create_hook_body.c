@@ -25,7 +25,7 @@ create_hook_body_t* instantiate_create_hook_body(int include_optional) {
       "0",
       "0",
       "0",
-      corellium_api_create_hook_body_PATCHTYPE_csmfcc,
+      corellium_api_create_hook_body__csmfcc,
       1
     );
   } else {
@@ -33,7 +33,7 @@ create_hook_body_t* instantiate_create_hook_body(int include_optional) {
       "0",
       "0",
       "0",
-      corellium_api_create_hook_body_PATCHTYPE_csmfcc,
+      corellium_api_create_hook_body__csmfcc,
       1
     );
   }

@@ -333,6 +333,7 @@ set(SRCS
     model/gpios_state_v1.c
     model/hook.c
     model/hook_list.c
+    model/hook_patch_type.c
     model/hook_v1.c
     model/image.c
     model/image_creation_options.c
@@ -1049,6 +1050,7 @@ set(HDRS
     model/gpios_state_v1.h
     model/hook.h
     model/hook_list.h
+    model/hook_patch_type.h
     model/hook_v1.h
     model/image.h
     model/image_creation_options.h

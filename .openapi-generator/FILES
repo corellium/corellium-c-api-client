@@ -486,6 +486,7 @@ docs/gpios_state.md
 docs/gpios_state_v1.md
 docs/hook.md
 docs/hook_list.md
+docs/hook_patch_type.md
 docs/hook_v1.md
 docs/image.md
 docs/image_creation_options.md
@@ -1419,6 +1420,8 @@ model/hook.c
 model/hook.h
 model/hook_list.c
 model/hook_list.h
+model/hook_patch_type.c
+model/hook_patch_type.h
 model/hook_v1.c
 model/hook_v1.h
 model/image.c
@@ -2419,6 +2422,7 @@ unit-test/test_gpios_state.c
 unit-test/test_gpios_state_v1.c
 unit-test/test_hook.c
 unit-test/test_hook_list.c
+unit-test/test_hook_patch_type.c
 unit-test/test_hook_v1.c
 unit-test/test_image.c
 unit-test/test_image_creation_options.c

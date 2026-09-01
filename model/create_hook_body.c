@@ -4,29 +4,12 @@
 #include "create_hook_body.h"
 
 
-char* create_hook_body_patch_type_ToString(corellium_api_create_hook_body_PATCHTYPE_e patch_type) {
-    char* patch_typeArray[] =  { "NULL", "csmfcc", "csmfvm" };
-    return patch_typeArray[patch_type];
-}
-
-corellium_api_create_hook_body_PATCHTYPE_e create_hook_body_patch_type_FromString(char* patch_type){
-    int stringToReturn = 0;
-    char *patch_typeArray[] =  { "NULL", "csmfcc", "csmfvm" };
-    size_t sizeofArray = sizeof(patch_typeArray) / sizeof(patch_typeArray[0]);
-    while(stringToReturn < sizeofArray) {
-        if(strcmp(patch_type, patch_typeArray[stringToReturn]) == 0) {
-            return stringToReturn;
-        }
-        stringToReturn++;
-    }
-    return 0;
-}
 
 static create_hook_body_t *create_hook_body_create_internal(
     char *label,
     char *address,
     char *patch,
-    corellium_api_create_hook_body_PATCHTYPE_e patch_type,
+    corellium_api_hook_patch_type__e patch_type,
     int enabled
     ) {
     create_hook_body_t *create_hook_body_local_var = malloc(sizeof(create_hook_body_t));
@@ -47,7 +30,7 @@ __attribute__((deprecated)) create_hook_body_t *create_hook_body_create(
     char *label,
     char *address,
     char *patch,
-    corellium_api_create_hook_body_PATCHTYPE_e patch_type,
+    corellium_api_hook_patch_type__e patch_type,
     int enabled
     ) {
     return create_hook_body_create_internal (
@@ -114,12 +97,16 @@ cJSON *create_hook_body_convertToJSON(create_hook_body_t *create_hook_body) {
 
 
     // create_hook_body->patch_type
-    if (corellium_api_create_hook_body_PATCHTYPE_NULL == create_hook_body->patch_type) {
+    if (corellium_api_hook_patch_type__NULL == create_hook_body->patch_type) {
         goto fail;
     }
-    if(cJSON_AddStringToObject(item, "patchType", create_hook_body_patch_type_ToString(create_hook_body->patch_type)) == NULL)
-    {
-    goto fail; //Enum
+    cJSON *patch_type_local_JSON = hook_patch_type_convertToJSON(create_hook_body->patch_type);
+    if(patch_type_local_JSON == NULL) {
+        goto fail; // custom
+    }
+    cJSON_AddItemToObject(item, "patchType", patch_type_local_JSON);
+    if(item->child == NULL) {
+        goto fail;
     }
 
 
@@ -141,6 +128,9 @@ fail:
 create_hook_body_t *create_hook_body_parseFromJSON(cJSON *create_hook_bodyJSON){
 
     create_hook_body_t *create_hook_body_local_var = NULL;
+
+    // define the local variable for create_hook_body->patch_type
+    corellium_api_hook_patch_type__e patch_type_local_nonprim = 0;
 
     // create_hook_body->label
     cJSON *label = cJSON_GetObjectItemCaseSensitive(create_hook_bodyJSON, "label");
@@ -196,13 +186,8 @@ create_hook_body_t *create_hook_body_parseFromJSON(cJSON *create_hook_bodyJSON){
         goto end;
     }
 
-    corellium_api_create_hook_body_PATCHTYPE_e patch_typeVariable;
     
-    if(!cJSON_IsString(patch_type))
-    {
-    goto end; //Enum
-    }
-    patch_typeVariable = create_hook_body_patch_type_FromString(patch_type->valuestring);
+    patch_type_local_nonprim = hook_patch_type_parseFromJSON(patch_type); //custom
 
     // create_hook_body->enabled
     cJSON *enabled = cJSON_GetObjectItemCaseSensitive(create_hook_bodyJSON, "enabled");
@@ -221,12 +206,15 @@ create_hook_body_t *create_hook_body_parseFromJSON(cJSON *create_hook_bodyJSON){
         strdup(label->valuestring),
         strdup(address->valuestring),
         strdup(patch->valuestring),
-        patch_typeVariable,
+        patch_type_local_nonprim,
         enabled ? enabled->valueint : 0
         );
 
     return create_hook_body_local_var;
 end:
+    if (patch_type_local_nonprim) {
+        patch_type_local_nonprim = 0;
+    }
     return NULL;
 
 }

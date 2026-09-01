@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **label** | **char \*** | Hook label. | 
 **address** | **char \*** | Memory address the hook is placed at. | 
 **patch** | **char \*** | Patch code to execute at the hook address. | 
-**patch_type** | **corellium_api_hook_PATCHTYPE_e** | Patch type. | 
+**patch_type** | **hook_patch_type_t \*** |  | 
 **enabled** | **int** | Whether the hook is active. | 
 **instance_id** | **char \*** | Owning instance identifier. | 
 **created_at** | **char \*** | Creation timestamp. | 
