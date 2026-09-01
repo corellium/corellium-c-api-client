@@ -461,6 +461,7 @@ set(SRCS
     model/model_software_v1.c
     model/model_v1.c
     model/netdump_filter.c
+    model/network_connection_config.c
     model/network_connection_pagination_result.c
     model/network_connection_provider.c
     model/network_connection_provider_pagination_result.c
@@ -486,6 +487,7 @@ set(SRCS
     model/paginated_assessments.c
     model/pagination.c
     model/partial_update_interconnect_request.c
+    model/partial_update_network_connection_body.c
     model/partial_update_network_connection_options.c
     model/password_change_body.c
     model/password_reset_body.c
@@ -645,6 +647,7 @@ set(SRCS
     model/update_hook_body.c
     model/update_interconnect_body.c
     model/update_interconnect_v3_body.c
+    model/update_network_connection_body.c
     model/update_network_connection_options.c
     model/update_network_connection_options_config.c
     model/update_team_body.c
@@ -666,9 +669,6 @@ set(SRCS
     model/v3_create_activity_export_201_response.c
     model/v3_delete_network_connection_request.c
     model/v3_get_activity_export_status_200_response.c
-    model/v3_partial_update_network_connection_request.c
-    model/v3_update_network_connection_request.c
-    model/v3_update_network_connection_request_config.c
     model/v3_update_snapshot_request.c
     model/validation_error.c
     model/vlan_config.c
@@ -1178,6 +1178,7 @@ set(HDRS
     model/model_software_v1.h
     model/model_v1.h
     model/netdump_filter.h
+    model/network_connection_config.h
     model/network_connection_pagination_result.h
     model/network_connection_provider.h
     model/network_connection_provider_pagination_result.h
@@ -1203,6 +1204,7 @@ set(HDRS
     model/paginated_assessments.h
     model/pagination.h
     model/partial_update_interconnect_request.h
+    model/partial_update_network_connection_body.h
     model/partial_update_network_connection_options.h
     model/password_change_body.h
     model/password_reset_body.h
@@ -1362,6 +1364,7 @@ set(HDRS
     model/update_hook_body.h
     model/update_interconnect_body.h
     model/update_interconnect_v3_body.h
+    model/update_network_connection_body.h
     model/update_network_connection_options.h
     model/update_network_connection_options_config.h
     model/update_team_body.h
@@ -1383,9 +1386,6 @@ set(HDRS
     model/v3_create_activity_export_201_response.h
     model/v3_delete_network_connection_request.h
     model/v3_get_activity_export_status_200_response.h
-    model/v3_partial_update_network_connection_request.h
-    model/v3_update_network_connection_request.h
-    model/v3_update_network_connection_request_config.h
     model/v3_update_snapshot_request.h
     model/validation_error.h
     model/vlan_config.h

@@ -12,10 +12,10 @@
 #include "../model/network_connections.h"
 #include "../model/network_interfaces.h"
 #include "../model/object.h"
+#include "../model/partial_update_network_connection_body.h"
+#include "../model/update_network_connection_body.h"
 #include "../model/user_error.h"
 #include "../model/v3_delete_network_connection_request.h"
-#include "../model/v3_partial_update_network_connection_request.h"
-#include "../model/v3_update_network_connection_request.h"
 
 
 // Create a new Network Connection
@@ -71,7 +71,7 @@ NetConnectAPI_v3ListNetworkProviders(apiClient_t *apiClient, double *limit, doub
 // Only updates the specified attributes. You must have the domain administrator role to update a network connection.
 //
 object_t*
-NetConnectAPI_v3PartialUpdateNetworkConnection(apiClient_t *apiClient, char *id, v3_partial_update_network_connection_request_t *v3_partial_update_network_connection_request);
+NetConnectAPI_v3PartialUpdateNetworkConnection(apiClient_t *apiClient, char *id, partial_update_network_connection_body_t *partial_update_network_connection_body);
 
 
 // Update Network Connection
@@ -79,6 +79,6 @@ NetConnectAPI_v3PartialUpdateNetworkConnection(apiClient_t *apiClient, char *id,
 // You must have the domain administrator role to update a network connection.
 //
 object_t*
-NetConnectAPI_v3UpdateNetworkConnection(apiClient_t *apiClient, char *id, v3_update_network_connection_request_t *v3_update_network_connection_request);
+NetConnectAPI_v3UpdateNetworkConnection(apiClient_t *apiClient, char *id, update_network_connection_body_t *update_network_connection_body);
 
 

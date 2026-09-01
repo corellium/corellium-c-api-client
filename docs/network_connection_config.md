@@ -1,4 +1,4 @@
-# v3_update_network_connection_request_config_t
+# network_connection_config_t
 
 ## Properties
 Name | Type | Description | Notes
@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **config** | **char \*** | OpenVPN connection configuration. | 
 **physical_interface** | **char \*** | Physical network interface to create VLAN on | 
 **vlan_id** | **double** | VLAN ID (1-4094) | 
-**dhcp_mode** | **corellium_api_v3_update_network_connection_request_config_DHCPMODE_e** | DHCP server mode | 
+**dhcp_mode** | **corellium_api_network_connection_config_DHCPMODE_e** | DHCP server mode | 
 **gateway** | **char \*** | Gateway IP address | [optional] 
 **network** | **char \*** | Network address | [optional] 
 **dns_servers** | **list_t \*** | List of DNS servers | [optional] 

@@ -40,6 +40,7 @@ Name | Type | Description | Notes
 **postmark_email_from** | **char \*** |  | [optional] 
 **postmark_email_template** | **char \*** |  | [optional] 
 **s3** | [**object_t**](.md) \* |  | [optional] 
+**ai_enabled** | **int** |  | [optional] 
 **ofac_api_key** | **char \*** |  | [optional] 
 **usb_media_queue_dir** | **char \*** |  | [optional] 
 **usb_media_access_enabled** | **int** |  | [optional] 

@@ -7,9 +7,9 @@
 #include "../include/binary.h"
 #include "../model/any_type.h"
 #include "../model/api_error_v1.h"
-#include "../model/cluster_configuration_payload.h"
 #include "../model/node_updates_failed.h"
 #include "../model/object.h"
+#include "../model/patch_cluster_config_body.h"
 
 
 // Get cluster configuration
@@ -21,6 +21,6 @@ ClusterAdministrationConfigAPI_v1GetClusterConfig(apiClient_t *apiClient);
 // Update cluster configuration
 //
 void
-ClusterAdministrationConfigAPI_v1PatchClusterConfig(apiClient_t *apiClient, body);
+ClusterAdministrationConfigAPI_v1PatchClusterConfig(apiClient_t *apiClient, patch_cluster_config_body_t *patch_cluster_config_body);
 
 

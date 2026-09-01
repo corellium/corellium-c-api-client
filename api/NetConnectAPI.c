@@ -672,7 +672,7 @@ end:
 // Only updates the specified attributes. You must have the domain administrator role to update a network connection.
 //
 object_t*
-NetConnectAPI_v3PartialUpdateNetworkConnection(apiClient_t *apiClient, char *id, v3_partial_update_network_connection_request_t *v3_partial_update_network_connection_request)
+NetConnectAPI_v3PartialUpdateNetworkConnection(apiClient_t *apiClient, char *id, partial_update_network_connection_body_t *partial_update_network_connection_body)
 {
     list_t    *localVarQueryParameters = NULL;
     list_t    *localVarHeaderParameters = NULL;
@@ -705,12 +705,12 @@ NetConnectAPI_v3PartialUpdateNetworkConnection(apiClient_t *apiClient, char *id,
 
 
     // Body Param
-    cJSON *localVarSingleItemJSON_v3_partial_update_network_connection_request = NULL;
-    if (v3_partial_update_network_connection_request != NULL)
+    cJSON *localVarSingleItemJSON_partial_update_network_connection_body = NULL;
+    if (partial_update_network_connection_body != NULL)
     {
         //not string, not binary
-        localVarSingleItemJSON_v3_partial_update_network_connection_request = v3_partial_update_network_connection_request_convertToJSON(v3_partial_update_network_connection_request);
-        localVarBodyParameters = cJSON_Print(localVarSingleItemJSON_v3_partial_update_network_connection_request);
+        localVarSingleItemJSON_partial_update_network_connection_body = partial_update_network_connection_body_convertToJSON(partial_update_network_connection_body);
+        localVarBodyParameters = cJSON_Print(localVarSingleItemJSON_partial_update_network_connection_body);
         localVarBodyLength = strlen(localVarBodyParameters);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -762,9 +762,9 @@ NetConnectAPI_v3PartialUpdateNetworkConnection(apiClient_t *apiClient, char *id,
     list_freeList(localVarContentType);
     free(localVarPath);
     free(localVarToReplace_id);
-    if (localVarSingleItemJSON_v3_partial_update_network_connection_request) {
-        cJSON_Delete(localVarSingleItemJSON_v3_partial_update_network_connection_request);
-        localVarSingleItemJSON_v3_partial_update_network_connection_request = NULL;
+    if (localVarSingleItemJSON_partial_update_network_connection_body) {
+        cJSON_Delete(localVarSingleItemJSON_partial_update_network_connection_body);
+        localVarSingleItemJSON_partial_update_network_connection_body = NULL;
     }
     free(localVarBodyParameters);
     return elementToReturn;
@@ -779,7 +779,7 @@ end:
 // You must have the domain administrator role to update a network connection.
 //
 object_t*
-NetConnectAPI_v3UpdateNetworkConnection(apiClient_t *apiClient, char *id, v3_update_network_connection_request_t *v3_update_network_connection_request)
+NetConnectAPI_v3UpdateNetworkConnection(apiClient_t *apiClient, char *id, update_network_connection_body_t *update_network_connection_body)
 {
     list_t    *localVarQueryParameters = NULL;
     list_t    *localVarHeaderParameters = NULL;
@@ -812,12 +812,12 @@ NetConnectAPI_v3UpdateNetworkConnection(apiClient_t *apiClient, char *id, v3_upd
 
 
     // Body Param
-    cJSON *localVarSingleItemJSON_v3_update_network_connection_request = NULL;
-    if (v3_update_network_connection_request != NULL)
+    cJSON *localVarSingleItemJSON_update_network_connection_body = NULL;
+    if (update_network_connection_body != NULL)
     {
         //not string, not binary
-        localVarSingleItemJSON_v3_update_network_connection_request = v3_update_network_connection_request_convertToJSON(v3_update_network_connection_request);
-        localVarBodyParameters = cJSON_Print(localVarSingleItemJSON_v3_update_network_connection_request);
+        localVarSingleItemJSON_update_network_connection_body = update_network_connection_body_convertToJSON(update_network_connection_body);
+        localVarBodyParameters = cJSON_Print(localVarSingleItemJSON_update_network_connection_body);
         localVarBodyLength = strlen(localVarBodyParameters);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
@@ -869,9 +869,9 @@ NetConnectAPI_v3UpdateNetworkConnection(apiClient_t *apiClient, char *id, v3_upd
     list_freeList(localVarContentType);
     free(localVarPath);
     free(localVarToReplace_id);
-    if (localVarSingleItemJSON_v3_update_network_connection_request) {
-        cJSON_Delete(localVarSingleItemJSON_v3_update_network_connection_request);
-        localVarSingleItemJSON_v3_update_network_connection_request = NULL;
+    if (localVarSingleItemJSON_update_network_connection_body) {
+        cJSON_Delete(localVarSingleItemJSON_update_network_connection_body);
+        localVarSingleItemJSON_update_network_connection_body = NULL;
     }
     free(localVarBodyParameters);
     return elementToReturn;

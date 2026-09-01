@@ -44,12 +44,10 @@ cluster_config_package_config_features_t* instantiate_cluster_config_package_con
       1,
       1,
       1,
-      1,
       1
     );
   } else {
     cluster_config_package_config_features = cluster_config_package_config_features_create(
-      1,
       1,
       1,
       1,

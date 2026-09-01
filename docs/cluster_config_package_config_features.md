@@ -24,7 +24,6 @@ Name | Type | Description | Notes
 **custom_kernel_patches** | **int** |  | [optional] 
 **mast** | **int** |  | [optional] 
 **charm_modules** | **int** |  | [optional] 
-**netdump** | **int** |  | [optional] 
 **sep** | **int** |  | [optional] 
 **custom_boot_loader** | **int** |  | [optional] 
 

@@ -40,7 +40,6 @@ typedef struct cluster_config_package_config_features_t {
     int custom_kernel_patches; //boolean
     int mast; //boolean
     int charm_modules; //boolean
-    int netdump; //boolean
     int sep; //boolean
     int custom_boot_loader; //boolean
 
@@ -69,7 +68,6 @@ __attribute__((deprecated)) cluster_config_package_config_features_t *cluster_co
     int custom_kernel_patches,
     int mast,
     int charm_modules,
-    int netdump,
     int sep,
     int custom_boot_loader
 );

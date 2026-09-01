@@ -209,7 +209,7 @@ Name | Type | Description  | Notes
 //
 // Only updates the specified attributes. You must have the domain administrator role to update a network connection.
 //
-object_t* NetConnectAPI_v3PartialUpdateNetworkConnection(apiClient_t *apiClient, char *id, v3_partial_update_network_connection_request_t *v3_partial_update_network_connection_request);
+object_t* NetConnectAPI_v3PartialUpdateNetworkConnection(apiClient_t *apiClient, char *id, partial_update_network_connection_body_t *partial_update_network_connection_body);
 ```
 
 ### Parameters
@@ -217,7 +217,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **id** | **char \*** | Network Connection Identifier. | 
-**v3_partial_update_network_connection_request** | **[v3_partial_update_network_connection_request_t](v3_partial_update_network_connection_request.md) \*** |  | [optional] 
+**partial_update_network_connection_body** | **[partial_update_network_connection_body_t](partial_update_network_connection_body.md) \*** |  | [optional] 
 
 ### Return type
 
@@ -241,7 +241,7 @@ Name | Type | Description  | Notes
 //
 // You must have the domain administrator role to update a network connection.
 //
-object_t* NetConnectAPI_v3UpdateNetworkConnection(apiClient_t *apiClient, char *id, v3_update_network_connection_request_t *v3_update_network_connection_request);
+object_t* NetConnectAPI_v3UpdateNetworkConnection(apiClient_t *apiClient, char *id, update_network_connection_body_t *update_network_connection_body);
 ```
 
 ### Parameters
@@ -249,7 +249,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **id** | **char \*** | Network Connection Identifier. | 
-**v3_update_network_connection_request** | **[v3_update_network_connection_request_t](v3_update_network_connection_request.md) \*** |  | 
+**update_network_connection_body** | **[update_network_connection_body_t](update_network_connection_body.md) \*** |  | 
 
 ### Return type
 

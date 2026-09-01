@@ -27,7 +27,6 @@ static cluster_config_package_config_features_t *cluster_config_package_config_f
     int custom_kernel_patches,
     int mast,
     int charm_modules,
-    int netdump,
     int sep,
     int custom_boot_loader
     ) {
@@ -56,7 +55,6 @@ static cluster_config_package_config_features_t *cluster_config_package_config_f
     cluster_config_package_config_features_local_var->custom_kernel_patches = custom_kernel_patches;
     cluster_config_package_config_features_local_var->mast = mast;
     cluster_config_package_config_features_local_var->charm_modules = charm_modules;
-    cluster_config_package_config_features_local_var->netdump = netdump;
     cluster_config_package_config_features_local_var->sep = sep;
     cluster_config_package_config_features_local_var->custom_boot_loader = custom_boot_loader;
 
@@ -86,7 +84,6 @@ __attribute__((deprecated)) cluster_config_package_config_features_t *cluster_co
     int custom_kernel_patches,
     int mast,
     int charm_modules,
-    int netdump,
     int sep,
     int custom_boot_loader
     ) {
@@ -112,7 +109,6 @@ __attribute__((deprecated)) cluster_config_package_config_features_t *cluster_co
         custom_kernel_patches,
         mast,
         charm_modules,
-        netdump,
         sep,
         custom_boot_loader
         );
@@ -296,14 +292,6 @@ cJSON *cluster_config_package_config_features_convertToJSON(cluster_config_packa
     // cluster_config_package_config_features->charm_modules
     if(cluster_config_package_config_features->charm_modules) {
     if(cJSON_AddBoolToObject(item, "CharmModules", cluster_config_package_config_features->charm_modules) == NULL) {
-    goto fail; //Bool
-    }
-    }
-
-
-    // cluster_config_package_config_features->netdump
-    if(cluster_config_package_config_features->netdump) {
-    if(cJSON_AddBoolToObject(item, "Netdump", cluster_config_package_config_features->netdump) == NULL) {
     goto fail; //Bool
     }
     }
@@ -588,18 +576,6 @@ cluster_config_package_config_features_t *cluster_config_package_config_features
     }
     }
 
-    // cluster_config_package_config_features->netdump
-    cJSON *netdump = cJSON_GetObjectItemCaseSensitive(cluster_config_package_config_featuresJSON, "Netdump");
-    if (cJSON_IsNull(netdump)) {
-        netdump = NULL;
-    }
-    if (netdump) { 
-    if(!cJSON_IsBool(netdump))
-    {
-    goto end; //Bool
-    }
-    }
-
     // cluster_config_package_config_features->sep
     cJSON *sep = cJSON_GetObjectItemCaseSensitive(cluster_config_package_config_featuresJSON, "SEP");
     if (cJSON_IsNull(sep)) {
@@ -647,7 +623,6 @@ cluster_config_package_config_features_t *cluster_config_package_config_features
         custom_kernel_patches ? custom_kernel_patches->valueint : 0,
         mast ? mast->valueint : 0,
         charm_modules ? charm_modules->valueint : 0,
-        netdump ? netdump->valueint : 0,
         sep ? sep->valueint : 0,
         custom_boot_loader ? custom_boot_loader->valueint : 0
         );
