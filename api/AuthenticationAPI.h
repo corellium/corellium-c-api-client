@@ -7,6 +7,7 @@
 #include "../include/binary.h"
 #include "../model/api_error.h"
 #include "../model/api_not_found_error.h"
+#include "../model/api_token_result.h"
 #include "../model/auth_provider_types_list_response.h"
 #include "../model/auth_providers_list_response.h"
 #include "../model/login_body.h"
@@ -30,12 +31,28 @@ void
 AuthenticationAPI_v3AuthLogout(apiClient_t *apiClient);
 
 
+// Delete API token
+//
+// Delete the authenticated user's currently saved API token.
+//
+void
+AuthenticationAPI_v3DeleteApiToken(apiClient_t *apiClient);
+
+
 // Fetch SAML metadata
 //
 // Fetch SAML metadata XML from a trusted provider URL. The URL must be HTTPS and from an allowed domain.
 //
 char*
 AuthenticationAPI_v3FetchAuthProviderMetadata(apiClient_t *apiClient, char *url);
+
+
+// Generate API token
+//
+// Generate a new API token for the authenticated user. The token is returned once and replaces any previously issued token.
+//
+api_token_result_t*
+AuthenticationAPI_v3GenerateApiToken(apiClient_t *apiClient);
 
 
 // Get provider authorization URL

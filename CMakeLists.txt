@@ -118,6 +118,7 @@ set(SRCS
     model/api_not_found_error.c
     model/api_not_found_error_v1.c
     model/api_token.c
+    model/api_token_result.c
     model/assessment.c
     model/assessment_bundle.c
     model/assessment_format.c
@@ -841,6 +842,7 @@ set(HDRS
     model/api_not_found_error.h
     model/api_not_found_error_v1.h
     model/api_token.h
+    model/api_token_result.h
     model/assessment.h
     model/assessment_bundle.h
     model/assessment_format.h

@@ -161,6 +161,66 @@ end:
 
 }
 
+// Delete API token
+//
+// Delete the authenticated user's currently saved API token.
+//
+void
+AuthenticationAPI_v3DeleteApiToken(apiClient_t *apiClient)
+{
+    list_t    *localVarQueryParameters = NULL;
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = NULL;
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/auth/apitoken");
+
+
+
+
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "DELETE");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 204) {
+    //    printf("%s\n","The API token was deleted.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","Permission denied.");
+    //}
+    //No return type
+end:
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    
+    
+    
+    list_freeList(localVarHeaderType);
+    
+    free(localVarPath);
+
+}
+
 // Fetch SAML metadata
 //
 // Fetch SAML metadata XML from a trusted provider URL. The URL must be HTTPS and from an allowed domain.
@@ -250,6 +310,80 @@ AuthenticationAPI_v3FetchAuthProviderMetadata(apiClient_t *apiClient, char *url)
         keyValuePair_free(keyPairQuery_url);
         keyPairQuery_url = NULL;
     }
+    return elementToReturn;
+end:
+    free(localVarPath);
+    return NULL;
+
+}
+
+// Generate API token
+//
+// Generate a new API token for the authenticated user. The token is returned once and replaces any previously issued token.
+//
+api_token_result_t*
+AuthenticationAPI_v3GenerateApiToken(apiClient_t *apiClient)
+{
+    list_t    *localVarQueryParameters = NULL;
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = NULL;
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/auth/apitoken");
+
+
+
+
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "POST");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 200) {
+    //    printf("%s\n","A freshly generated API token.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","Permission denied.");
+    //}
+    //nonprimitive not container
+    api_token_result_t *elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
+        cJSON *AuthenticationAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
+        elementToReturn = api_token_result_parseFromJSON(AuthenticationAPIlocalVarJSON);
+        cJSON_Delete(AuthenticationAPIlocalVarJSON);
+        if(elementToReturn == NULL) {
+            // return 0;
+        }
+    }
+
+    //return type
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    
+    
+    
+    list_freeList(localVarHeaderType);
+    
+    free(localVarPath);
     return elementToReturn;
 end:
     free(localVarPath);

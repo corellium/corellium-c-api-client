@@ -6,7 +6,9 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AuthenticationAPI_v3AuthLogin**](AuthenticationAPI.md#AuthenticationAPI_v3AuthLogin) | **POST** /v3/auth/login | Log in
 [**AuthenticationAPI_v3AuthLogout**](AuthenticationAPI.md#AuthenticationAPI_v3AuthLogout) | **POST** /v3/auth/logout | Log out
+[**AuthenticationAPI_v3DeleteApiToken**](AuthenticationAPI.md#AuthenticationAPI_v3DeleteApiToken) | **DELETE** /v3/auth/apitoken | Delete API token
 [**AuthenticationAPI_v3FetchAuthProviderMetadata**](AuthenticationAPI.md#AuthenticationAPI_v3FetchAuthProviderMetadata) | **GET** /v3/auth/providers/fetch-metadata | Fetch SAML metadata
+[**AuthenticationAPI_v3GenerateApiToken**](AuthenticationAPI.md#AuthenticationAPI_v3GenerateApiToken) | **POST** /v3/auth/apitoken | Generate API token
 [**AuthenticationAPI_v3GetAuthProviderAuthorizationUrl**](AuthenticationAPI.md#AuthenticationAPI_v3GetAuthProviderAuthorizationUrl) | **GET** /v3/auth/providers/{providerId}/authorization_url | Get provider authorization URL
 [**AuthenticationAPI_v3GetAuthProviderCallback**](AuthenticationAPI.md#AuthenticationAPI_v3GetAuthProviderCallback) | **GET** /v3/auth/providers/{providerId}/callback | Authentication provider callback (GET)
 [**AuthenticationAPI_v3GetAuthProviderSpMetadata**](AuthenticationAPI.md#AuthenticationAPI_v3GetAuthProviderSpMetadata) | **GET** /v3/auth/providers/{providerId}/spmetadata | Get service provider metadata
@@ -75,6 +77,35 @@ void
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **AuthenticationAPI_v3DeleteApiToken**
+```c
+// Delete API token
+//
+// Delete the authenticated user's currently saved API token.
+//
+void AuthenticationAPI_v3DeleteApiToken(apiClient_t *apiClient);
+```
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**apiClient** | **apiClient_t \*** | context containing the client configuration |
+
+### Return type
+
+void
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **AuthenticationAPI_v3FetchAuthProviderMetadata**
 ```c
 // Fetch SAML metadata
@@ -104,6 +135,36 @@ char*
 
  - **Content-Type**: Not defined
  - **Accept**: application/xml, application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **AuthenticationAPI_v3GenerateApiToken**
+```c
+// Generate API token
+//
+// Generate a new API token for the authenticated user. The token is returned once and replaces any previously issued token.
+//
+api_token_result_t* AuthenticationAPI_v3GenerateApiToken(apiClient_t *apiClient);
+```
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**apiClient** | **apiClient_t \*** | context containing the client configuration |
+
+### Return type
+
+[api_token_result_t](api_token_result.md) *
+
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -135,6 +135,8 @@
 #define corellium_agent_system_unlock AgentAPI_v3UnlockAgent
 
 /* auth */
+#define corellium_auth_apiToken_delete AuthenticationAPI_v3DeleteApiToken
+#define corellium_auth_apiToken_generate AuthenticationAPI_v3GenerateApiToken
 #define corellium_auth_login AuthenticationAPI_v3AuthLogin
 #define corellium_auth_logout AuthenticationAPI_v3AuthLogout
 #define corellium_auth_providers_fetchMetadata AuthenticationAPI_v3FetchAuthProviderMetadata
@@ -449,6 +451,8 @@
 #define corellium_v1_agent_system_unlock AgentV1API_v1AgentSystemUnlock
 
 /* auth */
+#define corellium_v1_auth_apiToken_delete AuthenticationV1API_v1DeleteApiToken
+#define corellium_v1_auth_apiToken_generate AuthenticationV1API_v1GenerateApiToken
 #define corellium_v1_auth_login AuthenticationV1API_v1AuthLogin
 
 /* cluster */
@@ -739,6 +743,8 @@
 #define corellium_v3_agent_system_unlock AgentAPI_v3UnlockAgent
 
 /* auth */
+#define corellium_v3_auth_apiToken_delete AuthenticationAPI_v3DeleteApiToken
+#define corellium_v3_auth_apiToken_generate AuthenticationAPI_v3GenerateApiToken
 #define corellium_v3_auth_login AuthenticationAPI_v3AuthLogin
 #define corellium_v3_auth_logout AuthenticationAPI_v3AuthLogout
 #define corellium_v3_auth_providers_fetchMetadata AuthenticationAPI_v3FetchAuthProviderMetadata

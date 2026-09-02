@@ -274,6 +274,7 @@ docs/api_internal_consistency_error.md
 docs/api_not_found_error.md
 docs/api_not_found_error_v1.md
 docs/api_token.md
+docs/api_token_result.md
 docs/assessment.md
 docs/assessment_bundle.md
 docs/assessment_format.md
@@ -998,6 +999,8 @@ model/api_not_found_error_v1.c
 model/api_not_found_error_v1.h
 model/api_token.c
 model/api_token.h
+model/api_token_result.c
+model/api_token_result.h
 model/assessment.c
 model/assessment.h
 model/assessment_bundle.c
@@ -2225,6 +2228,7 @@ unit-test/test_api_internal_consistency_error.c
 unit-test/test_api_not_found_error.c
 unit-test/test_api_not_found_error_v1.c
 unit-test/test_api_token.c
+unit-test/test_api_token_result.c
 unit-test/test_assessment.c
 unit-test/test_assessment_bundle.c
 unit-test/test_assessment_format.c

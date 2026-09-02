@@ -214,7 +214,9 @@ Category | Method | HTTP request | Description
 *AssessmentsV1API* | [**AssessmentsV1API_v1StopMonitoring**](docs/AssessmentsV1API.md#AssessmentsV1API_v1StopMonitoring) | **POST** /v1/services/matrix/{instanceId}/assessments/{assessmentId}/stop | Stop assessment monitoring.
 *AuthenticationAPI* | [**AuthenticationAPI_v3AuthLogin**](docs/AuthenticationAPI.md#AuthenticationAPI_v3AuthLogin) | **POST** /v3/auth/login | Log in
 *AuthenticationAPI* | [**AuthenticationAPI_v3AuthLogout**](docs/AuthenticationAPI.md#AuthenticationAPI_v3AuthLogout) | **POST** /v3/auth/logout | Log out
+*AuthenticationAPI* | [**AuthenticationAPI_v3DeleteApiToken**](docs/AuthenticationAPI.md#AuthenticationAPI_v3DeleteApiToken) | **DELETE** /v3/auth/apitoken | Delete API token
 *AuthenticationAPI* | [**AuthenticationAPI_v3FetchAuthProviderMetadata**](docs/AuthenticationAPI.md#AuthenticationAPI_v3FetchAuthProviderMetadata) | **GET** /v3/auth/providers/fetch-metadata | Fetch SAML metadata
+*AuthenticationAPI* | [**AuthenticationAPI_v3GenerateApiToken**](docs/AuthenticationAPI.md#AuthenticationAPI_v3GenerateApiToken) | **POST** /v3/auth/apitoken | Generate API token
 *AuthenticationAPI* | [**AuthenticationAPI_v3GetAuthProviderAuthorizationUrl**](docs/AuthenticationAPI.md#AuthenticationAPI_v3GetAuthProviderAuthorizationUrl) | **GET** /v3/auth/providers/{providerId}/authorization_url | Get provider authorization URL
 *AuthenticationAPI* | [**AuthenticationAPI_v3GetAuthProviderCallback**](docs/AuthenticationAPI.md#AuthenticationAPI_v3GetAuthProviderCallback) | **GET** /v3/auth/providers/{providerId}/callback | Authentication provider callback (GET)
 *AuthenticationAPI* | [**AuthenticationAPI_v3GetAuthProviderSpMetadata**](docs/AuthenticationAPI.md#AuthenticationAPI_v3GetAuthProviderSpMetadata) | **GET** /v3/auth/providers/{providerId}/spmetadata | Get service provider metadata
@@ -222,6 +224,8 @@ Category | Method | HTTP request | Description
 *AuthenticationAPI* | [**AuthenticationAPI_v3ListAuthProviders**](docs/AuthenticationAPI.md#AuthenticationAPI_v3ListAuthProviders) | **GET** /v3/auth/providers | List authentication providers
 *AuthenticationAPI* | [**AuthenticationAPI_v3PostAuthProviderCallback**](docs/AuthenticationAPI.md#AuthenticationAPI_v3PostAuthProviderCallback) | **POST** /v3/auth/providers/{providerId}/callback | Authentication provider callback (POST)
 *AuthenticationV1API* | [**AuthenticationV1API_v1AuthLogin**](docs/AuthenticationV1API.md#AuthenticationV1API_v1AuthLogin) | **POST** /v1/auth/login | Log In
+*AuthenticationV1API* | [**AuthenticationV1API_v1DeleteApiToken**](docs/AuthenticationV1API.md#AuthenticationV1API_v1DeleteApiToken) | **DELETE** /v1/auth/apitoken | Delete API token
+*AuthenticationV1API* | [**AuthenticationV1API_v1GenerateApiToken**](docs/AuthenticationV1API.md#AuthenticationV1API_v1GenerateApiToken) | **POST** /v1/auth/apitoken | Generate API token
 *BillingAPI* | [**BillingAPI_v3CancelSubscription**](docs/BillingAPI.md#BillingAPI_v3CancelSubscription) | **POST** /v3/billing/cancel | Cancel a subscription
 *BillingAPI* | [**BillingAPI_v3GetBillingSummary**](docs/BillingAPI.md#BillingAPI_v3GetBillingSummary) | **GET** /v3/billing/summary | Get billing summary
 *BillingAPI* | [**BillingAPI_v3GetDeviceUsage**](docs/BillingAPI.md#BillingAPI_v3GetDeviceUsage) | **GET** /v3/billing/usage | Get device usage
@@ -683,6 +687,7 @@ Category | Method | HTTP request | Description
  - [api_not_found_error_t](docs/api_not_found_error.md)
  - [api_not_found_error_v1_t](docs/api_not_found_error_v1.md)
  - [api_token_t](docs/api_token.md)
+ - [api_token_result_t](docs/api_token_result.md)
  - [assessment_t](docs/assessment.md)
  - [assessment_bundle_t](docs/assessment_bundle.md)
  - [assessment_format_t](docs/assessment_format.md)
