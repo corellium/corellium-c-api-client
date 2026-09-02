@@ -105,6 +105,8 @@ set(SRCS
     model/agent_value_return.c
     model/agreed_ack.c
     model/agreed_ack_v1.c
+    model/ai_tools_config.c
+    model/ai_tools_config_v1.c
     model/allowed_devices_filter_schema.c
     model/allowed_domains_response.c
     model/allowed_firmware_schema.c
@@ -184,6 +186,7 @@ set(SRCS
     model/cluster_config_setup_config.c
     model/cluster_config_stripe.c
     model/cluster_config_update_error.c
+    model/cluster_configuration_payload.c
     model/cluster_node.c
     model/cluster_node_available.c
     model/cluster_node_reserved.c
@@ -822,6 +825,8 @@ set(HDRS
     model/agent_value_return.h
     model/agreed_ack.h
     model/agreed_ack_v1.h
+    model/ai_tools_config.h
+    model/ai_tools_config_v1.h
     model/allowed_devices_filter_schema.h
     model/allowed_domains_response.h
     model/allowed_firmware_schema.h
@@ -901,6 +906,7 @@ set(HDRS
     model/cluster_config_setup_config.h
     model/cluster_config_stripe.h
     model/cluster_config_update_error.h
+    model/cluster_configuration_payload.h
     model/cluster_node.h
     model/cluster_node_available.h
     model/cluster_node_reserved.h

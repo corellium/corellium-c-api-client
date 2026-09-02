@@ -258,6 +258,8 @@ docs/agent_temp_file_response.md
 docs/agent_value_return.md
 docs/agreed_ack.md
 docs/agreed_ack_v1.md
+docs/ai_tools_config.md
+docs/ai_tools_config_v1.md
 docs/allowed_devices_filter_schema.md
 docs/allowed_domains_response.md
 docs/allowed_firmware_schema.md
@@ -337,6 +339,7 @@ docs/cluster_config_package_config_flavor_filters_inner_filter.md
 docs/cluster_config_setup_config.md
 docs/cluster_config_stripe.md
 docs/cluster_config_update_error.md
+docs/cluster_configuration_payload.md
 docs/cluster_node.md
 docs/cluster_node_available.md
 docs/cluster_node_reserved.md
@@ -963,6 +966,10 @@ model/agreed_ack.c
 model/agreed_ack.h
 model/agreed_ack_v1.c
 model/agreed_ack_v1.h
+model/ai_tools_config.c
+model/ai_tools_config.h
+model/ai_tools_config_v1.c
+model/ai_tools_config_v1.h
 model/allowed_devices_filter_schema.c
 model/allowed_devices_filter_schema.h
 model/allowed_domains_response.c
@@ -1122,6 +1129,8 @@ model/cluster_config_stripe.c
 model/cluster_config_stripe.h
 model/cluster_config_update_error.c
 model/cluster_config_update_error.h
+model/cluster_configuration_payload.c
+model/cluster_configuration_payload.h
 model/cluster_node.c
 model/cluster_node.h
 model/cluster_node_available.c
@@ -2194,6 +2203,8 @@ unit-test/test_agent_temp_file_response.c
 unit-test/test_agent_value_return.c
 unit-test/test_agreed_ack.c
 unit-test/test_agreed_ack_v1.c
+unit-test/test_ai_tools_config.c
+unit-test/test_ai_tools_config_v1.c
 unit-test/test_allowed_devices_filter_schema.c
 unit-test/test_allowed_domains_response.c
 unit-test/test_allowed_firmware_schema.c
@@ -2273,6 +2284,7 @@ unit-test/test_cluster_config_package_config_flavor_filters_inner_filter.c
 unit-test/test_cluster_config_setup_config.c
 unit-test/test_cluster_config_stripe.c
 unit-test/test_cluster_config_update_error.c
+unit-test/test_cluster_configuration_payload.c
 unit-test/test_cluster_node.c
 unit-test/test_cluster_node_available.c
 unit-test/test_cluster_node_reserved.c

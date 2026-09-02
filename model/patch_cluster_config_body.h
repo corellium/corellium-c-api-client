@@ -15,6 +15,7 @@
 
 typedef struct patch_cluster_config_body_t patch_cluster_config_body_t;
 
+#include "ai_tools_config.h"
 #include "coordinator_config.h"
 
 
@@ -22,6 +23,7 @@ typedef struct patch_cluster_config_body_t patch_cluster_config_body_t;
 typedef struct patch_cluster_config_body_t {
     double snapshot_limit; //numeric
     struct coordinator_config_t *coordinator_config; //model
+    struct ai_tools_config_t *ai_tools_config; //model
     char *originating_node; // string
 
     int _library_owned; // Is the library responsible for freeing this object?
@@ -30,6 +32,7 @@ typedef struct patch_cluster_config_body_t {
 __attribute__((deprecated)) patch_cluster_config_body_t *patch_cluster_config_body_create(
     double snapshot_limit,
     coordinator_config_t *coordinator_config,
+    ai_tools_config_t *ai_tools_config,
     char *originating_node
 );
 
