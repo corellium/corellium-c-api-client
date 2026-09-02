@@ -13,6 +13,8 @@ Method | HTTP request | Description
 ```c
 // Log In
 //
+// Authenticate with username/password or a persistent apiToken. On success returns a freshly-regenerated session token (JWT).
+//
 token_v1_t* AuthenticationV1API_v1AuthLogin(apiClient_t *apiClient, object_t *body);
 ```
 
