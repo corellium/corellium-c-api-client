@@ -6,10 +6,10 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**DomainAPI_v3CreateDomainWelcomeMessage**](DomainAPI.md#DomainAPI_v3CreateDomainWelcomeMessage) | **POST** /v3/domain/welcome | Create a welcome message for a domain
 [**DomainAPI_v3DeleteDomainWelcomeMessage**](DomainAPI.md#DomainAPI_v3DeleteDomainWelcomeMessage) | **DELETE** /v3/domain/welcome | Delete the welcome message for the authenticated user&#39;s domain
-[**DomainAPI_v3GetDomainImageUpload**](DomainAPI.md#DomainAPI_v3GetDomainImageUpload) | **GET** /v3/domain/image-upload/{type}/{imageId}/{name} | Get a domain-level image upload
+[**DomainAPI_v3GetDomainImageUpload**](DomainAPI.md#DomainAPI_v3GetDomainImageUpload) | **GET** /v3/domain/image-upload/{type}/{imageId}/{name} | Get image upload status
 [**DomainAPI_v3GetDomainWelcomeMessage**](DomainAPI.md#DomainAPI_v3GetDomainWelcomeMessage) | **GET** /v3/domain/welcome | Get the welcome message for the authenticated user&#39;s domain
 [**DomainAPI_v3PatchDomainWelcomeMessage**](DomainAPI.md#DomainAPI_v3PatchDomainWelcomeMessage) | **PATCH** /v3/domain/welcome | Update a welcome message for a domain
-[**DomainAPI_v3UploadDomainImage**](DomainAPI.md#DomainAPI_v3UploadDomainImage) | **PUT** /v3/domain/image-upload/{type}/{imageId}/{name} | Domain-wide file upload
+[**DomainAPI_v3PutDomainImageUpload**](DomainAPI.md#DomainAPI_v3PutDomainImageUpload) | **PUT** /v3/domain/image-upload/{type}/{imageId}/{name} | Upload image chunk
 
 
 # **DomainAPI_v3CreateDomainWelcomeMessage**
@@ -74,9 +74,9 @@ void
 
 # **DomainAPI_v3GetDomainImageUpload**
 ```c
-// Get a domain-level image upload
+// Get image upload status
 //
-// **Required role:** Domain administrator on on-site deployments; cloud administrator on cloud deployments.  Get a domain-level image upload.
+// **Required role:** Domain administrator on on-site deployments; cloud administrator on cloud deployments.  Check resumable upload status for a domain-wide image or download the image file.
 //
 binary_t** DomainAPI_v3GetDomainImageUpload(apiClient_t *apiClient, char *type, char *imageId, char *name, double *resumableChunkNumber);
 ```
@@ -85,10 +85,10 @@ binary_t** DomainAPI_v3GetDomainImageUpload(apiClient_t *apiClient, char *type, 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**type** | **char \*** | Image type (e.g. extension, firmware). | 
-**imageId** | **char \*** | Image identifier. | 
-**name** | **char \*** | Image filename. | 
-**resumableChunkNumber** | **double \*** | Resumable.js chunk number. When present, checks whether the chunk exists; returns 204 if not yet uploaded. | [optional] 
+**type** | **char \*** | Image type. | 
+**imageId** | **char \*** | Client-generated image identifier. The image record is created on the first chunk. | 
+**name** | **char \*** | URL-encoded image filename. | 
+**resumableChunkNumber** | **double \*** | Chunk number. When present the response reports whether that chunk was already stored (200) or still needs to be uploaded (204) instead of returning the image file. | [optional] 
 
 ### Return type
 
@@ -168,29 +168,34 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **DomainAPI_v3UploadDomainImage**
+# **DomainAPI_v3PutDomainImageUpload**
 ```c
-// Domain-wide file upload
+// Upload image chunk
 //
-// **Required role:** Domain administrator on on-site deployments; cloud administrator on cloud deployments.  Domain-wide file upload.
+// **Required role:** Domain administrator on on-site deployments; cloud administrator on cloud deployments.  Upload a chunk of a domain-wide image using the resumable upload protocol. Creates the image record on the first chunk if it does not yet exist.
 //
-void DomainAPI_v3UploadDomainImage(apiClient_t *apiClient, char *type, char *imageId, char *name, char *flavor, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, binary_t* body);
+void DomainAPI_v3PutDomainImageUpload(apiClient_t *apiClient, char *type, char *imageId, char *name, binary_t* body, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, char *corelliumChecksum, char *flavor, char *x_corellium_image_encoding, int *x_corellium_image_encapsulated, double *x_corellium_total_file_size, char *x_corellium_image_password);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**type** | **char \*** | Image type (e.g. extension, firmware). | 
-**imageId** | **char \*** | Image identifier. | 
-**name** | **char \*** | Image filename. | 
-**flavor** | **char \*** | Flavor identifier. | [optional] 
-**resumableChunkNumber** | **double \*** | Resumable.js chunk number (1-based). | [optional] 
-**resumableChunkSize** | **double \*** | Resumable.js size of each chunk in bytes. | [optional] 
-**resumableCurrentChunkSize** | **double \*** | Resumable.js size of the current chunk in bytes. | [optional] 
-**resumableTotalSize** | **double \*** | Resumable.js total file size in bytes. | [optional] 
-**resumableTotalChunks** | **double \*** | Resumable.js total number of chunks. | [optional] 
-**body** | **binary_t*** |  | [optional] 
+**type** | **char \*** | Image type. | 
+**imageId** | **char \*** | Client-generated image identifier. The image record is created on the first chunk. | 
+**name** | **char \*** | URL-encoded image filename. | 
+**body** | **binary_t*** |  | 
+**resumableChunkNumber** | **double \*** | chunk sequence number. | [optional] 
+**resumableChunkSize** | **double \*** | size of each chunk. | [optional] 
+**resumableCurrentChunkSize** | **double \*** | size of the chunk in this request. | [optional] 
+**resumableTotalSize** | **double \*** | total file size. | [optional] 
+**resumableTotalChunks** | **double \*** | total number of chunks. | [optional] 
+**corelliumChecksum** | **char \*** | Corellium chunked checksum of the whole file. When supplied, each chunk is re-hashed and the upload is rejected on mismatch. Required for firmware uploads in airgapped deployments. | [optional] 
+**flavor** | **char \*** | Flavor identifier to associate with the image. | [optional] 
+**x_corellium_image_encoding** | **char \*** | How the uploaded file is stored. Set on the first chunk, when the image record is created. | [optional] 
+**x_corellium_image_encapsulated** | **int \*** | Whether the uploaded file is an archive the coordinator should unpack. Set false to store the file as uploaded. Set on the first chunk, when the image record is created. | [optional] 
+**x_corellium_total_file_size** | **double \*** | Total size of the whole file in bytes. Preferred over Content-Length for the pre-flight image-pool space check on on-site clusters, which is what produces the 507 response. | [optional] 
+**x_corellium_image_password** | **char \*** | Password used to open a password-protected image during post-upload validation. | [optional] 
 
 ### Return type
 

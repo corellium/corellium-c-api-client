@@ -5,6 +5,7 @@
 #include "../external/cJSON.h"
 #include "../include/keyValuePair.h"
 #include "../include/binary.h"
+#include "../model/any_type.h"
 #include "../model/api_conflict_error.h"
 #include "../model/api_error.h"
 #include "../model/api_not_found_error.h"
@@ -14,6 +15,7 @@
 #include "../model/fetch_firmware_assets_response.h"
 #include "../model/insufficient_storage_error.h"
 #include "../model/network_status.h"
+#include "../model/object.h"
 #include "../model/patch_project_body.h"
 #include "../model/project.h"
 #include "../model/project_instance_list.h"
@@ -76,7 +78,7 @@ ProjectsAPI_v3GetProject(apiClient_t *apiClient, char *projectId);
 // Check resumable upload status for a project image or download the image file.
 //
 binary_t*
-ProjectsAPI_v3GetProjectImageUpload(apiClient_t *apiClient, char *projectId, char *type, char *imageId, char *name, char *resumableChunkNumber);
+ProjectsAPI_v3GetProjectImageUpload(apiClient_t *apiClient, char *projectId, char *type, char *imageId, char *name, double *resumableChunkNumber);
 
 
 // Get project network log
@@ -137,9 +139,9 @@ ProjectsAPI_v3PatchProject(apiClient_t *apiClient, char *projectId, patch_projec
 
 // Upload image chunk
 //
-// Upload a chunk of a project image using the resumable upload protocol. Creates the image record on the first chunk if it does not yet exist.
+// Upload a chunk of a project image using the resumable upload protocol. Creates the image record on the first chunk if it does not yet exist. This is the upload used while creating a device, before any instance exists to own the image.
 //
 void
-ProjectsAPI_v3PutProjectImageUpload(apiClient_t *apiClient, char *projectId, char *type, char *imageId, char *name, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, char *corelliumChecksum, char *flavor);
+ProjectsAPI_v3PutProjectImageUpload(apiClient_t *apiClient, char *projectId, char *type, char *imageId, char *name, binary_t* body, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, char *corelliumChecksum, char *flavor, char *x_corellium_image_encoding, int *x_corellium_image_encapsulated, double *x_corellium_total_file_size, char *x_corellium_image_password);
 
 

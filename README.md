@@ -271,10 +271,10 @@ Category | Method | HTTP request | Description
 *CoreTraceV1API* | [**CoreTraceV1API_v1StopCoreTrace**](docs/CoreTraceV1API.md#CoreTraceV1API_v1StopCoreTrace) | **POST** /v1/instances/{instanceId}/strace/disable | Stop CoreTrace on an instance.
 *DomainAPI* | [**DomainAPI_v3CreateDomainWelcomeMessage**](docs/DomainAPI.md#DomainAPI_v3CreateDomainWelcomeMessage) | **POST** /v3/domain/welcome | Create a welcome message for a domain
 *DomainAPI* | [**DomainAPI_v3DeleteDomainWelcomeMessage**](docs/DomainAPI.md#DomainAPI_v3DeleteDomainWelcomeMessage) | **DELETE** /v3/domain/welcome | Delete the welcome message for the authenticated user's domain
-*DomainAPI* | [**DomainAPI_v3GetDomainImageUpload**](docs/DomainAPI.md#DomainAPI_v3GetDomainImageUpload) | **GET** /v3/domain/image-upload/{type}/{imageId}/{name} | Get a domain-level image upload
+*DomainAPI* | [**DomainAPI_v3GetDomainImageUpload**](docs/DomainAPI.md#DomainAPI_v3GetDomainImageUpload) | **GET** /v3/domain/image-upload/{type}/{imageId}/{name} | Get image upload status
 *DomainAPI* | [**DomainAPI_v3GetDomainWelcomeMessage**](docs/DomainAPI.md#DomainAPI_v3GetDomainWelcomeMessage) | **GET** /v3/domain/welcome | Get the welcome message for the authenticated user's domain
 *DomainAPI* | [**DomainAPI_v3PatchDomainWelcomeMessage**](docs/DomainAPI.md#DomainAPI_v3PatchDomainWelcomeMessage) | **PATCH** /v3/domain/welcome | Update a welcome message for a domain
-*DomainAPI* | [**DomainAPI_v3UploadDomainImage**](docs/DomainAPI.md#DomainAPI_v3UploadDomainImage) | **PUT** /v3/domain/image-upload/{type}/{imageId}/{name} | Domain-wide file upload
+*DomainAPI* | [**DomainAPI_v3PutDomainImageUpload**](docs/DomainAPI.md#DomainAPI_v3PutDomainImageUpload) | **PUT** /v3/domain/image-upload/{type}/{imageId}/{name} | Upload image chunk
 *DomainAuthProviderAPI* | [**DomainAuthProviderAPI_v1CreateDomainAuthProvider**](docs/DomainAuthProviderAPI.md#DomainAuthProviderAPI_v1CreateDomainAuthProvider) | **POST** /v1/domain/{domainId}/auth | Create a new auth provider for a domain
 *DomainAuthProviderAPI* | [**DomainAuthProviderAPI_v1DeleteDomainAuthProvider**](docs/DomainAuthProviderAPI.md#DomainAuthProviderAPI_v1DeleteDomainAuthProvider) | **DELETE** /v1/domain/{domainId}/auth/{providerId} | Delete an auth provider from a domain
 *DomainAuthProviderAPI* | [**DomainAuthProviderAPI_v1GetDomainAuthProviders**](docs/DomainAuthProviderAPI.md#DomainAuthProviderAPI_v1GetDomainAuthProviders) | **GET** /v1/domain/{domainId}/auth | Return all configured auth providers for a domain (including globally configured providers)
@@ -362,11 +362,11 @@ Category | Method | HTTP request | Description
 *InstancesAPI* | [**InstancesAPI_v3DownloadNetdumpPcap**](docs/InstancesAPI.md#InstancesAPI_v3DownloadNetdumpPcap) | **GET** /v3/instances/{instanceId}/netdump.pcap | Download a netdump pcap file
 *InstancesAPI* | [**InstancesAPI_v3DownloadNetworkMonitorPcap**](docs/InstancesAPI.md#InstancesAPI_v3DownloadNetworkMonitorPcap) | **GET** /v3/instances/{instanceId}/networkMonitor.pcap | Download a Network Monitor pcap file
 *InstancesAPI* | [**InstancesAPI_v3EnableExposePort**](docs/InstancesAPI.md#InstancesAPI_v3EnableExposePort) | **POST** /v3/instances/{instanceId}/exposeport/enable | Enable an exposed port on an instance for device access.
-*InstancesAPI* | [**InstancesAPI_v3GetImageUpload**](docs/InstancesAPI.md#InstancesAPI_v3GetImageUpload) | **GET** /v3/instances/{instance}/image-upload/{type}/{image}/{name} | Get resumable image upload offset
 *InstancesAPI* | [**InstancesAPI_v3GetInstance**](docs/InstancesAPI.md#InstancesAPI_v3GetInstance) | **GET** /v3/instances/{instanceId} | Get Instance
 *InstancesAPI* | [**InstancesAPI_v3GetInstanceConsole**](docs/InstancesAPI.md#InstancesAPI_v3GetInstanceConsole) | **GET** /v3/instances/{instanceId}/console | Get console websocket URL
 *InstancesAPI* | [**InstancesAPI_v3GetInstanceConsoleLog**](docs/InstancesAPI.md#InstancesAPI_v3GetInstanceConsoleLog) | **GET** /v3/instances/{instanceId}/consoleLog | Get Console Log
 *InstancesAPI* | [**InstancesAPI_v3GetInstanceGpios**](docs/InstancesAPI.md#InstancesAPI_v3GetInstanceGpios) | **GET** /v3/instances/{instanceId}/gpios | Get Instance GPIOs
+*InstancesAPI* | [**InstancesAPI_v3GetInstanceImageUpload**](docs/InstancesAPI.md#InstancesAPI_v3GetInstanceImageUpload) | **GET** /v3/instances/{instance}/image-upload/{type}/{imageId}/{name} | Get image upload status
 *InstancesAPI* | [**InstancesAPI_v3GetInstancePanics**](docs/InstancesAPI.md#InstancesAPI_v3GetInstancePanics) | **GET** /v3/instances/{instanceId}/panics | Get Panics
 *InstancesAPI* | [**InstancesAPI_v3GetInstancePeripherals**](docs/InstancesAPI.md#InstancesAPI_v3GetInstancePeripherals) | **GET** /v3/instances/{instanceId}/peripherals | Get Instance Peripherals
 *InstancesAPI* | [**InstancesAPI_v3GetInstanceQuickConnectCommand**](docs/InstancesAPI.md#InstancesAPI_v3GetInstanceQuickConnectCommand) | **GET** /v3/instances/{instanceId}/quickConnectCommand | Recommended SSH Command for Quick Connect
@@ -380,7 +380,7 @@ Category | Method | HTTP request | Description
 *InstancesAPI* | [**InstancesAPI_v3PatchInstanceReadOnly**](docs/InstancesAPI.md#InstancesAPI_v3PatchInstanceReadOnly) | **PATCH** /v3/instances/{instanceId}/read-only | Update Instance Read Only
 *InstancesAPI* | [**InstancesAPI_v3PauseInstance**](docs/InstancesAPI.md#InstancesAPI_v3PauseInstance) | **POST** /v3/instances/{instanceId}/pause | Pause an Instance
 *InstancesAPI* | [**InstancesAPI_v3PostInstanceInput**](docs/InstancesAPI.md#InstancesAPI_v3PostInstanceInput) | **POST** /v3/instances/{instanceId}/input | Provide Instance Input
-*InstancesAPI* | [**InstancesAPI_v3PutImageUpload**](docs/InstancesAPI.md#InstancesAPI_v3PutImageUpload) | **PUT** /v3/instances/{instance}/image-upload/{type}/{image}/{name} | Upload an image chunk
+*InstancesAPI* | [**InstancesAPI_v3PutInstanceImageUpload**](docs/InstancesAPI.md#InstancesAPI_v3PutInstanceImageUpload) | **PUT** /v3/instances/{instance}/image-upload/{type}/{imageId}/{name} | Upload image chunk
 *InstancesAPI* | [**InstancesAPI_v3RebootInstance**](docs/InstancesAPI.md#InstancesAPI_v3RebootInstance) | **POST** /v3/instances/{instanceId}/reboot | Reboot an Instance
 *InstancesAPI* | [**InstancesAPI_v3RestoreBackup**](docs/InstancesAPI.md#InstancesAPI_v3RestoreBackup) | **POST** /v3/instances/{instanceId}/restoreBackup | Restore backup
 *InstancesAPI* | [**InstancesAPI_v3RotateInstance**](docs/InstancesAPI.md#InstancesAPI_v3RotateInstance) | **POST** /v3/instances/{instanceId}/rotate | Rotate device to specified orientation

@@ -810,140 +810,6 @@ end:
 
 }
 
-// Get resumable image upload offset
-//
-// Returns the current offset for a resumable image upload so the client knows where to continue.
-//
-object_t*
-InstancesAPI_v3GetImageUpload(apiClient_t *apiClient, char *instance, char *type, char *image, char *name)
-{
-    list_t    *localVarQueryParameters = NULL;
-    list_t    *localVarHeaderParameters = NULL;
-    list_t    *localVarFormParameters = NULL;
-    list_t *localVarHeaderType = list_createList();
-    list_t *localVarContentType = NULL;
-    char      *localVarBodyParameters = NULL;
-    size_t     localVarBodyLength = 0;
-
-    // clear the error code from the previous api call
-    apiClient->response_code = 0;
-
-    // create the path
-    char *localVarPath = strdup("/v3/instances/{instance}/image-upload/{type}/{image}/{name}");
-
-    if(!instance)
-        goto end;
-    if(!type)
-        goto end;
-    if(!image)
-        goto end;
-    if(!name)
-        goto end;
-
-
-    // Path Params
-    long sizeOfPathParams_instance = strlen(instance)+3 + strlen(type)+3 + strlen(image)+3 + strlen(name)+3 + sizeof("{ instance }") - 1;
-    if(instance == NULL) {
-        goto end;
-    }
-    char* localVarToReplace_instance = malloc(sizeOfPathParams_instance);
-    sprintf(localVarToReplace_instance, "{%s}", "instance");
-
-    localVarPath = strReplace(localVarPath, localVarToReplace_instance, instance);
-
-    // Path Params
-    long sizeOfPathParams_type = strlen(instance)+3 + strlen(type)+3 + strlen(image)+3 + strlen(name)+3 + sizeof("{ type }") - 1;
-    if(type == NULL) {
-        goto end;
-    }
-    char* localVarToReplace_type = malloc(sizeOfPathParams_type);
-    sprintf(localVarToReplace_type, "{%s}", "type");
-
-    localVarPath = strReplace(localVarPath, localVarToReplace_type, type);
-
-    // Path Params
-    long sizeOfPathParams_image = strlen(instance)+3 + strlen(type)+3 + strlen(image)+3 + strlen(name)+3 + sizeof("{ image }") - 1;
-    if(image == NULL) {
-        goto end;
-    }
-    char* localVarToReplace_image = malloc(sizeOfPathParams_image);
-    sprintf(localVarToReplace_image, "{%s}", "image");
-
-    localVarPath = strReplace(localVarPath, localVarToReplace_image, image);
-
-    // Path Params
-    long sizeOfPathParams_name = strlen(instance)+3 + strlen(type)+3 + strlen(image)+3 + strlen(name)+3 + sizeof("{ name }") - 1;
-    if(name == NULL) {
-        goto end;
-    }
-    char* localVarToReplace_name = malloc(sizeOfPathParams_name);
-    sprintf(localVarToReplace_name, "{%s}", "name");
-
-    localVarPath = strReplace(localVarPath, localVarToReplace_name, name);
-
-
-    list_addElement(localVarHeaderType,"application/json"); //produces
-    apiClient_invoke(apiClient,
-                    localVarPath,
-                    localVarQueryParameters,
-                    localVarHeaderParameters,
-                    localVarFormParameters,
-                    localVarHeaderType,
-                    localVarContentType,
-                    localVarBodyParameters,
-                    localVarBodyLength,
-                    "GET");
-
-    // uncomment below to debug the error response
-    //if (apiClient->response_code == 200) {
-    //    printf("%s\n","Upload state.");
-    //}
-    // uncomment below to debug the error response
-    //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
-    //}
-    // uncomment below to debug the error response
-    //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
-    //}
-    // uncomment below to debug the error response
-    //if (apiClient->response_code == 404) {
-    //    printf("%s\n","Instance not found.");
-    //}
-    //nonprimitive not container
-    object_t *elementToReturn = NULL;
-    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
-        cJSON *InstancesAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = object_parseFromJSON(InstancesAPIlocalVarJSON);
-        cJSON_Delete(InstancesAPIlocalVarJSON);
-        if(elementToReturn == NULL) {
-            // return 0;
-        }
-    }
-
-    //return type
-    if (apiClient->dataReceived) {
-        free(apiClient->dataReceived);
-        apiClient->dataReceived = NULL;
-        apiClient->dataReceivedLen = 0;
-    }
-    
-    
-    
-    list_freeList(localVarHeaderType);
-    
-    free(localVarPath);
-    free(localVarToReplace_instance);
-    free(localVarToReplace_type);
-    free(localVarToReplace_image);
-    free(localVarToReplace_name);
-    return elementToReturn;
-end:
-    free(localVarPath);
-    return NULL;
-
-}
-
 // Get Instance
 //
 instance_t*
@@ -1323,6 +1189,171 @@ InstancesAPI_v3GetInstanceGpios(apiClient_t *apiClient, char *instanceId)
     
     free(localVarPath);
     free(localVarToReplace_instanceId);
+    return elementToReturn;
+end:
+    free(localVarPath);
+    return NULL;
+
+}
+
+// Get image upload status
+//
+// Check resumable upload status for an instance image or download the image file.
+//
+binary_t*
+InstancesAPI_v3GetInstanceImageUpload(apiClient_t *apiClient, char *instance, char *type, char *imageId, char *name, double *resumableChunkNumber)
+{
+    list_t    *localVarQueryParameters = list_createList();
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = NULL;
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/instances/{instance}/image-upload/{type}/{imageId}/{name}");
+
+    if(!instance)
+        goto end;
+    if(!type)
+        goto end;
+    if(!imageId)
+        goto end;
+    if(!name)
+        goto end;
+
+
+    // Path Params
+    long sizeOfPathParams_instance = strlen(instance)+3 + strlen(type)+3 + strlen(imageId)+3 + strlen(name)+3 + sizeof("{ instance }") - 1;
+    if(instance == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_instance = malloc(sizeOfPathParams_instance);
+    sprintf(localVarToReplace_instance, "{%s}", "instance");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_instance, instance);
+
+    // Path Params
+    long sizeOfPathParams_type = strlen(instance)+3 + strlen(type)+3 + strlen(imageId)+3 + strlen(name)+3 + sizeof("{ type }") - 1;
+    if(type == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_type = malloc(sizeOfPathParams_type);
+    sprintf(localVarToReplace_type, "{%s}", "type");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_type, type);
+
+    // Path Params
+    long sizeOfPathParams_imageId = strlen(instance)+3 + strlen(type)+3 + strlen(imageId)+3 + strlen(name)+3 + sizeof("{ imageId }") - 1;
+    if(imageId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_imageId = malloc(sizeOfPathParams_imageId);
+    sprintf(localVarToReplace_imageId, "{%s}", "imageId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_imageId, imageId);
+
+    // Path Params
+    long sizeOfPathParams_name = strlen(instance)+3 + strlen(type)+3 + strlen(imageId)+3 + strlen(name)+3 + sizeof("{ name }") - 1;
+    if(name == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_name = malloc(sizeOfPathParams_name);
+    sprintf(localVarToReplace_name, "{%s}", "name");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_name, name);
+
+
+
+    // query parameters
+    char *keyQuery_resumableChunkNumber = NULL;
+    char * valueQuery_resumableChunkNumber = NULL;
+    keyValuePair_t *keyPairQuery_resumableChunkNumber = 0;
+    if (resumableChunkNumber)
+    {
+        keyQuery_resumableChunkNumber = strdup("resumableChunkNumber");
+        valueQuery_resumableChunkNumber = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_resumableChunkNumber, MAX_NUMBER_LENGTH, "%d", *resumableChunkNumber);
+        keyPairQuery_resumableChunkNumber = keyValuePair_create(keyQuery_resumableChunkNumber, valueQuery_resumableChunkNumber);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableChunkNumber);
+    }
+    list_addElement(localVarHeaderType,"application/octet-stream"); //produces
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "GET");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 200) {
+    //    printf("%s\n","An empty JSON object when a probed chunk is already stored, the image bytes when the file is stored locally, or the image metadata when no file has been stored yet.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 204) {
+    //    printf("%s\n","The probed chunk is not stored yet and still needs to be uploaded.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 302) {
+    //    printf("%s\n","The image is stored in S3; follow the Location header to download it.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 400) {
+    //    printf("%s\n","The image identifier is invalid or the image record is missing.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","Permission denied.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 404) {
+    //    printf("%s\n","No image with the given identifier.");
+    //}
+    //primitive return type simple binary
+    binary_t* elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300)
+        elementToReturn = instantiate_binary_t(apiClient->dataReceived, apiClient->dataReceivedLen);
+
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    list_freeList(localVarQueryParameters);
+    
+    
+    list_freeList(localVarHeaderType);
+    
+    free(localVarPath);
+    free(localVarToReplace_instance);
+    free(localVarToReplace_type);
+    free(localVarToReplace_imageId);
+    free(localVarToReplace_name);
+    if(keyQuery_resumableChunkNumber){
+        free(keyQuery_resumableChunkNumber);
+        keyQuery_resumableChunkNumber = NULL;
+    }
+    if(valueQuery_resumableChunkNumber){
+        free(valueQuery_resumableChunkNumber);
+        valueQuery_resumableChunkNumber = NULL;
+    }
+    if(keyPairQuery_resumableChunkNumber){
+        keyValuePair_free(keyPairQuery_resumableChunkNumber);
+        keyPairQuery_resumableChunkNumber = NULL;
+    }
     return elementToReturn;
 end:
     free(localVarPath);
@@ -2760,15 +2791,15 @@ end:
 
 }
 
-// Upload an image chunk
+// Upload image chunk
 //
-// Uploads a chunk of image data as part of a resumable image upload.
+// Upload a chunk of an instance image using the resumable upload protocol. Creates the image record on the first chunk if it does not yet exist.
 //
-object_t*
-InstancesAPI_v3PutImageUpload(apiClient_t *apiClient, char *instance, char *type, char *image, char *name, binary_t* body)
+void
+InstancesAPI_v3PutInstanceImageUpload(apiClient_t *apiClient, char *instance, char *type, char *imageId, char *name, binary_t* body, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, char *corelliumChecksum, char *flavor, char *x_corellium_image_encoding, int *x_corellium_image_encapsulated, double *x_corellium_total_file_size, char *x_corellium_image_password)
 {
-    list_t    *localVarQueryParameters = NULL;
-    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarQueryParameters = list_createList();
+    list_t    *localVarHeaderParameters = list_createList();
     list_t    *localVarFormParameters = NULL;
     list_t *localVarHeaderType = list_createList();
     list_t *localVarContentType = list_createList();
@@ -2779,20 +2810,20 @@ InstancesAPI_v3PutImageUpload(apiClient_t *apiClient, char *instance, char *type
     apiClient->response_code = 0;
 
     // create the path
-    char *localVarPath = strdup("/v3/instances/{instance}/image-upload/{type}/{image}/{name}");
+    char *localVarPath = strdup("/v3/instances/{instance}/image-upload/{type}/{imageId}/{name}");
 
     if(!instance)
         goto end;
     if(!type)
         goto end;
-    if(!image)
+    if(!imageId)
         goto end;
     if(!name)
         goto end;
 
 
     // Path Params
-    long sizeOfPathParams_instance = strlen(instance)+3 + strlen(type)+3 + strlen(image)+3 + strlen(name)+3 + sizeof("{ instance }") - 1;
+    long sizeOfPathParams_instance = strlen(instance)+3 + strlen(type)+3 + strlen(imageId)+3 + strlen(name)+3 + sizeof("{ instance }") - 1;
     if(instance == NULL) {
         goto end;
     }
@@ -2802,7 +2833,7 @@ InstancesAPI_v3PutImageUpload(apiClient_t *apiClient, char *instance, char *type
     localVarPath = strReplace(localVarPath, localVarToReplace_instance, instance);
 
     // Path Params
-    long sizeOfPathParams_type = strlen(instance)+3 + strlen(type)+3 + strlen(image)+3 + strlen(name)+3 + sizeof("{ type }") - 1;
+    long sizeOfPathParams_type = strlen(instance)+3 + strlen(type)+3 + strlen(imageId)+3 + strlen(name)+3 + sizeof("{ type }") - 1;
     if(type == NULL) {
         goto end;
     }
@@ -2812,17 +2843,17 @@ InstancesAPI_v3PutImageUpload(apiClient_t *apiClient, char *instance, char *type
     localVarPath = strReplace(localVarPath, localVarToReplace_type, type);
 
     // Path Params
-    long sizeOfPathParams_image = strlen(instance)+3 + strlen(type)+3 + strlen(image)+3 + strlen(name)+3 + sizeof("{ image }") - 1;
-    if(image == NULL) {
+    long sizeOfPathParams_imageId = strlen(instance)+3 + strlen(type)+3 + strlen(imageId)+3 + strlen(name)+3 + sizeof("{ imageId }") - 1;
+    if(imageId == NULL) {
         goto end;
     }
-    char* localVarToReplace_image = malloc(sizeOfPathParams_image);
-    sprintf(localVarToReplace_image, "{%s}", "image");
+    char* localVarToReplace_imageId = malloc(sizeOfPathParams_imageId);
+    sprintf(localVarToReplace_imageId, "{%s}", "imageId");
 
-    localVarPath = strReplace(localVarPath, localVarToReplace_image, image);
+    localVarPath = strReplace(localVarPath, localVarToReplace_imageId, imageId);
 
     // Path Params
-    long sizeOfPathParams_name = strlen(instance)+3 + strlen(type)+3 + strlen(image)+3 + strlen(name)+3 + sizeof("{ name }") - 1;
+    long sizeOfPathParams_name = strlen(instance)+3 + strlen(type)+3 + strlen(imageId)+3 + strlen(name)+3 + sizeof("{ name }") - 1;
     if(name == NULL) {
         goto end;
     }
@@ -2832,6 +2863,145 @@ InstancesAPI_v3PutImageUpload(apiClient_t *apiClient, char *instance, char *type
     localVarPath = strReplace(localVarPath, localVarToReplace_name, name);
 
 
+
+    // header parameters
+    char *keyHeader_x_corellium_image_encoding = NULL;
+    char * valueHeader_x_corellium_image_encoding = 0;
+    keyValuePair_t *keyPairHeader_x_corellium_image_encoding = 0;
+    if (x_corellium_image_encoding) {
+        keyHeader_x_corellium_image_encoding = strdup("x-corellium-image-encoding");
+        valueHeader_x_corellium_image_encoding = strdup((x_corellium_image_encoding));
+        keyPairHeader_x_corellium_image_encoding = keyValuePair_create(keyHeader_x_corellium_image_encoding, valueHeader_x_corellium_image_encoding);
+        list_addElement(localVarHeaderParameters,keyPairHeader_x_corellium_image_encoding);
+    }
+
+
+    // header parameters
+    char *keyHeader_x_corellium_image_encapsulated = NULL;
+    int valueHeader_x_corellium_image_encapsulated = 0;
+    keyValuePair_t *keyPairHeader_x_corellium_image_encapsulated = 0;
+    if (x_corellium_image_encapsulated) {
+        keyHeader_x_corellium_image_encapsulated = strdup("x-corellium-image-encapsulated");
+        valueHeader_x_corellium_image_encapsulated = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueHeader_x_corellium_image_encapsulated, MAX_NUMBER_LENGTH, "%d", *x_corellium_image_encapsulated);
+        keyPairHeader_x_corellium_image_encapsulated = keyValuePair_create(keyHeader_x_corellium_image_encapsulated, &valueHeader_x_corellium_image_encapsulated);
+        list_addElement(localVarHeaderParameters,keyPairHeader_x_corellium_image_encapsulated);
+    }
+
+
+    // header parameters
+    char *keyHeader_x_corellium_total_file_size = NULL;
+    double valueHeader_x_corellium_total_file_size = 0;
+    keyValuePair_t *keyPairHeader_x_corellium_total_file_size = 0;
+    if (x_corellium_total_file_size) {
+        keyHeader_x_corellium_total_file_size = strdup("x-corellium-total-file-size");
+        valueHeader_x_corellium_total_file_size = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueHeader_x_corellium_total_file_size, MAX_NUMBER_LENGTH, "%d", *x_corellium_total_file_size);
+        keyPairHeader_x_corellium_total_file_size = keyValuePair_create(keyHeader_x_corellium_total_file_size, &valueHeader_x_corellium_total_file_size);
+        list_addElement(localVarHeaderParameters,keyPairHeader_x_corellium_total_file_size);
+    }
+
+
+    // header parameters
+    char *keyHeader_x_corellium_image_password = NULL;
+    char * valueHeader_x_corellium_image_password = 0;
+    keyValuePair_t *keyPairHeader_x_corellium_image_password = 0;
+    if (x_corellium_image_password) {
+        keyHeader_x_corellium_image_password = strdup("x-corellium-image-password");
+        valueHeader_x_corellium_image_password = strdup((x_corellium_image_password));
+        keyPairHeader_x_corellium_image_password = keyValuePair_create(keyHeader_x_corellium_image_password, valueHeader_x_corellium_image_password);
+        list_addElement(localVarHeaderParameters,keyPairHeader_x_corellium_image_password);
+    }
+
+
+    // query parameters
+    char *keyQuery_resumableChunkNumber = NULL;
+    char * valueQuery_resumableChunkNumber = NULL;
+    keyValuePair_t *keyPairQuery_resumableChunkNumber = 0;
+    if (resumableChunkNumber)
+    {
+        keyQuery_resumableChunkNumber = strdup("resumableChunkNumber");
+        valueQuery_resumableChunkNumber = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_resumableChunkNumber, MAX_NUMBER_LENGTH, "%d", *resumableChunkNumber);
+        keyPairQuery_resumableChunkNumber = keyValuePair_create(keyQuery_resumableChunkNumber, valueQuery_resumableChunkNumber);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableChunkNumber);
+    }
+
+    // query parameters
+    char *keyQuery_resumableChunkSize = NULL;
+    char * valueQuery_resumableChunkSize = NULL;
+    keyValuePair_t *keyPairQuery_resumableChunkSize = 0;
+    if (resumableChunkSize)
+    {
+        keyQuery_resumableChunkSize = strdup("resumableChunkSize");
+        valueQuery_resumableChunkSize = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_resumableChunkSize, MAX_NUMBER_LENGTH, "%d", *resumableChunkSize);
+        keyPairQuery_resumableChunkSize = keyValuePair_create(keyQuery_resumableChunkSize, valueQuery_resumableChunkSize);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableChunkSize);
+    }
+
+    // query parameters
+    char *keyQuery_resumableCurrentChunkSize = NULL;
+    char * valueQuery_resumableCurrentChunkSize = NULL;
+    keyValuePair_t *keyPairQuery_resumableCurrentChunkSize = 0;
+    if (resumableCurrentChunkSize)
+    {
+        keyQuery_resumableCurrentChunkSize = strdup("resumableCurrentChunkSize");
+        valueQuery_resumableCurrentChunkSize = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_resumableCurrentChunkSize, MAX_NUMBER_LENGTH, "%d", *resumableCurrentChunkSize);
+        keyPairQuery_resumableCurrentChunkSize = keyValuePair_create(keyQuery_resumableCurrentChunkSize, valueQuery_resumableCurrentChunkSize);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableCurrentChunkSize);
+    }
+
+    // query parameters
+    char *keyQuery_resumableTotalSize = NULL;
+    char * valueQuery_resumableTotalSize = NULL;
+    keyValuePair_t *keyPairQuery_resumableTotalSize = 0;
+    if (resumableTotalSize)
+    {
+        keyQuery_resumableTotalSize = strdup("resumableTotalSize");
+        valueQuery_resumableTotalSize = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_resumableTotalSize, MAX_NUMBER_LENGTH, "%d", *resumableTotalSize);
+        keyPairQuery_resumableTotalSize = keyValuePair_create(keyQuery_resumableTotalSize, valueQuery_resumableTotalSize);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableTotalSize);
+    }
+
+    // query parameters
+    char *keyQuery_resumableTotalChunks = NULL;
+    char * valueQuery_resumableTotalChunks = NULL;
+    keyValuePair_t *keyPairQuery_resumableTotalChunks = 0;
+    if (resumableTotalChunks)
+    {
+        keyQuery_resumableTotalChunks = strdup("resumableTotalChunks");
+        valueQuery_resumableTotalChunks = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_resumableTotalChunks, MAX_NUMBER_LENGTH, "%d", *resumableTotalChunks);
+        keyPairQuery_resumableTotalChunks = keyValuePair_create(keyQuery_resumableTotalChunks, valueQuery_resumableTotalChunks);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableTotalChunks);
+    }
+
+    // query parameters
+    char *keyQuery_corelliumChecksum = NULL;
+    char * valueQuery_corelliumChecksum = NULL;
+    keyValuePair_t *keyPairQuery_corelliumChecksum = 0;
+    if (corelliumChecksum)
+    {
+        keyQuery_corelliumChecksum = strdup("corelliumChecksum");
+        valueQuery_corelliumChecksum = strdup((corelliumChecksum));
+        keyPairQuery_corelliumChecksum = keyValuePair_create(keyQuery_corelliumChecksum, valueQuery_corelliumChecksum);
+        list_addElement(localVarQueryParameters,keyPairQuery_corelliumChecksum);
+    }
+
+    // query parameters
+    char *keyQuery_flavor = NULL;
+    char * valueQuery_flavor = NULL;
+    keyValuePair_t *keyPairQuery_flavor = 0;
+    if (flavor)
+    {
+        keyQuery_flavor = strdup("flavor");
+        valueQuery_flavor = strdup((flavor));
+        keyPairQuery_flavor = keyValuePair_create(keyQuery_flavor, valueQuery_flavor);
+        list_addElement(localVarQueryParameters,keyPairQuery_flavor);
+    }
 
     // Body Param
     localVarBodyParameters = malloc(body->len);
@@ -2851,12 +3021,12 @@ InstancesAPI_v3PutImageUpload(apiClient_t *apiClient, char *instance, char *type
                     "PUT");
 
     // uncomment below to debug the error response
-    //if (apiClient->response_code == 200) {
-    //    printf("%s\n","Empty object on success; the handler responds with {}.");
+    //if (apiClient->response_code == 204) {
+    //    printf("%s\n","Chunk accepted.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","Invalid chunk or upload parameters, unreadable body, or a missing/mismatched corelliumChecksum for a firmware upload.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
@@ -2868,40 +3038,98 @@ InstancesAPI_v3PutImageUpload(apiClient_t *apiClient, char *instance, char *type
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
-    //    printf("%s\n","Instance not found.");
+    //    printf("%s\n","No image with the given identifier.");
     //}
-    //nonprimitive not container
-    object_t *elementToReturn = NULL;
-    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
-        cJSON *InstancesAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = object_parseFromJSON(InstancesAPIlocalVarJSON);
-        cJSON_Delete(InstancesAPIlocalVarJSON);
-        if(elementToReturn == NULL) {
-            // return 0;
-        }
-    }
-
-    //return type
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 507) {
+    //    printf("%s\n","The image pool does not have enough space for this upload.");
+    //}
+    //No return type
+end:
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
         apiClient->dataReceivedLen = 0;
     }
-    
-    
+    list_freeList(localVarQueryParameters);
+    list_freeList(localVarHeaderParameters);
     
     list_freeList(localVarHeaderType);
     list_freeList(localVarContentType);
     free(localVarPath);
     free(localVarToReplace_instance);
     free(localVarToReplace_type);
-    free(localVarToReplace_image);
+    free(localVarToReplace_imageId);
     free(localVarToReplace_name);
+    if (keyHeader_x_corellium_image_encoding) {
+        free(keyHeader_x_corellium_image_encoding);
+        keyHeader_x_corellium_image_encoding = NULL;
+    }
+    if (valueHeader_x_corellium_image_encoding) {
+        free(valueHeader_x_corellium_image_encoding);
+        valueHeader_x_corellium_image_encoding = NULL;
+    }
+    free(keyPairHeader_x_corellium_image_encoding);
+    if (keyHeader_x_corellium_image_encapsulated) {
+        free(keyHeader_x_corellium_image_encapsulated);
+        keyHeader_x_corellium_image_encapsulated = NULL;
+    }
+    free(keyPairHeader_x_corellium_image_encapsulated);
+    if (keyHeader_x_corellium_total_file_size) {
+        free(keyHeader_x_corellium_total_file_size);
+        keyHeader_x_corellium_total_file_size = NULL;
+    }
+    free(keyPairHeader_x_corellium_total_file_size);
+    if (keyHeader_x_corellium_image_password) {
+        free(keyHeader_x_corellium_image_password);
+        keyHeader_x_corellium_image_password = NULL;
+    }
+    if (valueHeader_x_corellium_image_password) {
+        free(valueHeader_x_corellium_image_password);
+        valueHeader_x_corellium_image_password = NULL;
+    }
+    free(keyPairHeader_x_corellium_image_password);
     free(localVarBodyParameters);
-    return elementToReturn;
-end:
-    free(localVarPath);
-    return NULL;
+    if(keyQuery_corelliumChecksum){
+        free(keyQuery_corelliumChecksum);
+        keyQuery_corelliumChecksum = NULL;
+    }
+    if(valueQuery_corelliumChecksum){
+        free(valueQuery_corelliumChecksum);
+        valueQuery_corelliumChecksum = NULL;
+    }
+    if(keyPairQuery_corelliumChecksum){
+        keyValuePair_free(keyPairQuery_corelliumChecksum);
+        keyPairQuery_corelliumChecksum = NULL;
+    }
+    if(keyQuery_corelliumChecksum){
+        free(keyQuery_corelliumChecksum);
+        keyQuery_corelliumChecksum = NULL;
+    }
+    if(keyPairQuery_corelliumChecksum){
+        keyValuePair_free(keyPairQuery_corelliumChecksum);
+        keyPairQuery_corelliumChecksum = NULL;
+    }
+    if(keyQuery_flavor){
+        free(keyQuery_flavor);
+        keyQuery_flavor = NULL;
+    }
+    if(valueQuery_flavor){
+        free(valueQuery_flavor);
+        valueQuery_flavor = NULL;
+    }
+    if(keyPairQuery_flavor){
+        keyValuePair_free(keyPairQuery_flavor);
+        keyPairQuery_flavor = NULL;
+    }
+    if(keyQuery_flavor){
+        free(keyQuery_flavor);
+        keyQuery_flavor = NULL;
+    }
+    if(keyPairQuery_flavor){
+        keyValuePair_free(keyPairQuery_flavor);
+        keyPairQuery_flavor = NULL;
+    }
 
 }
 

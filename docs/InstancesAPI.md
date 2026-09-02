@@ -13,11 +13,11 @@ Method | HTTP request | Description
 [**InstancesAPI_v3DownloadNetdumpPcap**](InstancesAPI.md#InstancesAPI_v3DownloadNetdumpPcap) | **GET** /v3/instances/{instanceId}/netdump.pcap | Download a netdump pcap file
 [**InstancesAPI_v3DownloadNetworkMonitorPcap**](InstancesAPI.md#InstancesAPI_v3DownloadNetworkMonitorPcap) | **GET** /v3/instances/{instanceId}/networkMonitor.pcap | Download a Network Monitor pcap file
 [**InstancesAPI_v3EnableExposePort**](InstancesAPI.md#InstancesAPI_v3EnableExposePort) | **POST** /v3/instances/{instanceId}/exposeport/enable | Enable an exposed port on an instance for device access.
-[**InstancesAPI_v3GetImageUpload**](InstancesAPI.md#InstancesAPI_v3GetImageUpload) | **GET** /v3/instances/{instance}/image-upload/{type}/{image}/{name} | Get resumable image upload offset
 [**InstancesAPI_v3GetInstance**](InstancesAPI.md#InstancesAPI_v3GetInstance) | **GET** /v3/instances/{instanceId} | Get Instance
 [**InstancesAPI_v3GetInstanceConsole**](InstancesAPI.md#InstancesAPI_v3GetInstanceConsole) | **GET** /v3/instances/{instanceId}/console | Get console websocket URL
 [**InstancesAPI_v3GetInstanceConsoleLog**](InstancesAPI.md#InstancesAPI_v3GetInstanceConsoleLog) | **GET** /v3/instances/{instanceId}/consoleLog | Get Console Log
 [**InstancesAPI_v3GetInstanceGpios**](InstancesAPI.md#InstancesAPI_v3GetInstanceGpios) | **GET** /v3/instances/{instanceId}/gpios | Get Instance GPIOs
+[**InstancesAPI_v3GetInstanceImageUpload**](InstancesAPI.md#InstancesAPI_v3GetInstanceImageUpload) | **GET** /v3/instances/{instance}/image-upload/{type}/{imageId}/{name} | Get image upload status
 [**InstancesAPI_v3GetInstancePanics**](InstancesAPI.md#InstancesAPI_v3GetInstancePanics) | **GET** /v3/instances/{instanceId}/panics | Get Panics
 [**InstancesAPI_v3GetInstancePeripherals**](InstancesAPI.md#InstancesAPI_v3GetInstancePeripherals) | **GET** /v3/instances/{instanceId}/peripherals | Get Instance Peripherals
 [**InstancesAPI_v3GetInstanceQuickConnectCommand**](InstancesAPI.md#InstancesAPI_v3GetInstanceQuickConnectCommand) | **GET** /v3/instances/{instanceId}/quickConnectCommand | Recommended SSH Command for Quick Connect
@@ -31,7 +31,7 @@ Method | HTTP request | Description
 [**InstancesAPI_v3PatchInstanceReadOnly**](InstancesAPI.md#InstancesAPI_v3PatchInstanceReadOnly) | **PATCH** /v3/instances/{instanceId}/read-only | Update Instance Read Only
 [**InstancesAPI_v3PauseInstance**](InstancesAPI.md#InstancesAPI_v3PauseInstance) | **POST** /v3/instances/{instanceId}/pause | Pause an Instance
 [**InstancesAPI_v3PostInstanceInput**](InstancesAPI.md#InstancesAPI_v3PostInstanceInput) | **POST** /v3/instances/{instanceId}/input | Provide Instance Input
-[**InstancesAPI_v3PutImageUpload**](InstancesAPI.md#InstancesAPI_v3PutImageUpload) | **PUT** /v3/instances/{instance}/image-upload/{type}/{image}/{name} | Upload an image chunk
+[**InstancesAPI_v3PutInstanceImageUpload**](InstancesAPI.md#InstancesAPI_v3PutInstanceImageUpload) | **PUT** /v3/instances/{instance}/image-upload/{type}/{imageId}/{name} | Upload image chunk
 [**InstancesAPI_v3RebootInstance**](InstancesAPI.md#InstancesAPI_v3RebootInstance) | **POST** /v3/instances/{instanceId}/reboot | Reboot an Instance
 [**InstancesAPI_v3RestoreBackup**](InstancesAPI.md#InstancesAPI_v3RestoreBackup) | **POST** /v3/instances/{instanceId}/restoreBackup | Restore backup
 [**InstancesAPI_v3RotateInstance**](InstancesAPI.md#InstancesAPI_v3RotateInstance) | **POST** /v3/instances/{instanceId}/rotate | Rotate device to specified orientation
@@ -314,40 +314,6 @@ void
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **InstancesAPI_v3GetImageUpload**
-```c
-// Get resumable image upload offset
-//
-// Returns the current offset for a resumable image upload so the client knows where to continue.
-//
-object_t* InstancesAPI_v3GetImageUpload(apiClient_t *apiClient, char *instance, char *type, char *image, char *name);
-```
-
-### Parameters
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**apiClient** | **apiClient_t \*** | context containing the client configuration |
-**instance** | **char \*** | Instance ID. | 
-**type** | **char \*** | Image type. | 
-**image** | **char \*** | Image identifier. | 
-**name** | **char \*** | File name. | 
-
-### Return type
-
-[object_t](object.md) *
-
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
 # **InstancesAPI_v3GetInstance**
 ```c
 // Get Instance
@@ -463,6 +429,42 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: Not defined
  - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **InstancesAPI_v3GetInstanceImageUpload**
+```c
+// Get image upload status
+//
+// Check resumable upload status for an instance image or download the image file.
+//
+binary_t** InstancesAPI_v3GetInstanceImageUpload(apiClient_t *apiClient, char *instance, char *type, char *imageId, char *name, double *resumableChunkNumber);
+```
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**apiClient** | **apiClient_t \*** | context containing the client configuration |
+**instance** | **char \*** | Instance ID. | 
+**type** | **char \*** | Image type. | 
+**imageId** | **char \*** | Client-generated image identifier. The image record is created on the first chunk. | 
+**name** | **char \*** | URL-encoded image filename. | 
+**resumableChunkNumber** | **double \*** | Chunk number. When present the response reports whether that chunk was already stored (200) or still needs to be uploaded (204) instead of returning the image file. | [optional] 
+
+### Return type
+
+binary_t**
+
+
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/octet-stream, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -860,13 +862,13 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **InstancesAPI_v3PutImageUpload**
+# **InstancesAPI_v3PutInstanceImageUpload**
 ```c
-// Upload an image chunk
+// Upload image chunk
 //
-// Uploads a chunk of image data as part of a resumable image upload.
+// Upload a chunk of an instance image using the resumable upload protocol. Creates the image record on the first chunk if it does not yet exist.
 //
-object_t* InstancesAPI_v3PutImageUpload(apiClient_t *apiClient, char *instance, char *type, char *image, char *name, binary_t* body);
+void InstancesAPI_v3PutInstanceImageUpload(apiClient_t *apiClient, char *instance, char *type, char *imageId, char *name, binary_t* body, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, char *corelliumChecksum, char *flavor, char *x_corellium_image_encoding, int *x_corellium_image_encapsulated, double *x_corellium_total_file_size, char *x_corellium_image_password);
 ```
 
 ### Parameters
@@ -875,14 +877,24 @@ Name | Type | Description  | Notes
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **instance** | **char \*** | Instance ID. | 
 **type** | **char \*** | Image type. | 
-**image** | **char \*** | Image identifier. | 
-**name** | **char \*** | File name. | 
+**imageId** | **char \*** | Client-generated image identifier. The image record is created on the first chunk. | 
+**name** | **char \*** | URL-encoded image filename. | 
 **body** | **binary_t*** |  | 
+**resumableChunkNumber** | **double \*** | chunk sequence number. | [optional] 
+**resumableChunkSize** | **double \*** | size of each chunk. | [optional] 
+**resumableCurrentChunkSize** | **double \*** | size of the chunk in this request. | [optional] 
+**resumableTotalSize** | **double \*** | total file size. | [optional] 
+**resumableTotalChunks** | **double \*** | total number of chunks. | [optional] 
+**corelliumChecksum** | **char \*** | Corellium chunked checksum of the whole file. When supplied, each chunk is re-hashed and the upload is rejected on mismatch. Required for firmware uploads in airgapped deployments. | [optional] 
+**flavor** | **char \*** | Flavor identifier to associate with the image. | [optional] 
+**x_corellium_image_encoding** | **char \*** | How the uploaded file is stored. Set on the first chunk, when the image record is created. | [optional] 
+**x_corellium_image_encapsulated** | **int \*** | Whether the uploaded file is an archive the coordinator should unpack. Set false to store the file as uploaded. Set on the first chunk, when the image record is created. | [optional] 
+**x_corellium_total_file_size** | **double \*** | Total size of the whole file in bytes. Preferred over Content-Length for the pre-flight image-pool space check on on-site clusters, which is what produces the 507 response. | [optional] 
+**x_corellium_image_password** | **char \*** | Password used to open a password-protected image during post-upload validation. | [optional] 
 
 ### Return type
 
-[object_t](object.md) *
-
+void
 
 ### Authorization
 

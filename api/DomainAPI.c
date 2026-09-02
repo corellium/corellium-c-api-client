@@ -173,9 +173,9 @@ end:
 
 }
 
-// Get a domain-level image upload
+// Get image upload status
 //
-// **Required role:** Domain administrator on on-site deployments; cloud administrator on cloud deployments.  Get a domain-level image upload.
+// **Required role:** Domain administrator on on-site deployments; cloud administrator on cloud deployments.  Check resumable upload status for a domain-wide image or download the image file.
 //
 binary_t*
 DomainAPI_v3GetDomainImageUpload(apiClient_t *apiClient, char *type, char *imageId, char *name, double *resumableChunkNumber)
@@ -261,11 +261,23 @@ DomainAPI_v3GetDomainImageUpload(apiClient_t *apiClient, char *type, char *image
 
     // uncomment below to debug the error response
     //if (apiClient->response_code == 200) {
-    //    printf("%s\n","Image file contents (binary stream) or image metadata (JSON). When resumableChunkNumber is present and the chunk exists, returns an empty JSON object.");
+    //    printf("%s\n","An empty JSON object when a probed chunk is already stored, the image bytes when the file is stored locally, or the image metadata when no file has been stored yet.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 204) {
-    //    printf("%s\n","Chunk not yet uploaded. Client should upload the chunk.");
+    //    printf("%s\n","The probed chunk is not stored yet and still needs to be uploaded.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 302) {
+    //    printf("%s\n","The image is stored in S3; follow the Location header to download it.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 400) {
+    //    printf("%s\n","The image identifier is invalid or the image record is missing.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
@@ -273,7 +285,7 @@ DomainAPI_v3GetDomainImageUpload(apiClient_t *apiClient, char *type, char *image
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
-    //    printf("%s\n","No image matching the given parameters.");
+    //    printf("%s\n","No image with the given identifier.");
     //}
     //primitive return type simple binary
     binary_t* elementToReturn = NULL;
@@ -497,15 +509,15 @@ end:
 
 }
 
-// Domain-wide file upload
+// Upload image chunk
 //
-// **Required role:** Domain administrator on on-site deployments; cloud administrator on cloud deployments.  Domain-wide file upload.
+// **Required role:** Domain administrator on on-site deployments; cloud administrator on cloud deployments.  Upload a chunk of a domain-wide image using the resumable upload protocol. Creates the image record on the first chunk if it does not yet exist.
 //
 void
-DomainAPI_v3UploadDomainImage(apiClient_t *apiClient, char *type, char *imageId, char *name, char *flavor, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, binary_t* body)
+DomainAPI_v3PutDomainImageUpload(apiClient_t *apiClient, char *type, char *imageId, char *name, binary_t* body, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, char *corelliumChecksum, char *flavor, char *x_corellium_image_encoding, int *x_corellium_image_encapsulated, double *x_corellium_total_file_size, char *x_corellium_image_password)
 {
     list_t    *localVarQueryParameters = list_createList();
-    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarHeaderParameters = list_createList();
     list_t    *localVarFormParameters = NULL;
     list_t *localVarHeaderType = list_createList();
     list_t *localVarContentType = list_createList();
@@ -558,17 +570,55 @@ DomainAPI_v3UploadDomainImage(apiClient_t *apiClient, char *type, char *imageId,
 
 
 
-    // query parameters
-    char *keyQuery_flavor = NULL;
-    char * valueQuery_flavor = NULL;
-    keyValuePair_t *keyPairQuery_flavor = 0;
-    if (flavor)
-    {
-        keyQuery_flavor = strdup("flavor");
-        valueQuery_flavor = strdup((flavor));
-        keyPairQuery_flavor = keyValuePair_create(keyQuery_flavor, valueQuery_flavor);
-        list_addElement(localVarQueryParameters,keyPairQuery_flavor);
+    // header parameters
+    char *keyHeader_x_corellium_image_encoding = NULL;
+    char * valueHeader_x_corellium_image_encoding = 0;
+    keyValuePair_t *keyPairHeader_x_corellium_image_encoding = 0;
+    if (x_corellium_image_encoding) {
+        keyHeader_x_corellium_image_encoding = strdup("x-corellium-image-encoding");
+        valueHeader_x_corellium_image_encoding = strdup((x_corellium_image_encoding));
+        keyPairHeader_x_corellium_image_encoding = keyValuePair_create(keyHeader_x_corellium_image_encoding, valueHeader_x_corellium_image_encoding);
+        list_addElement(localVarHeaderParameters,keyPairHeader_x_corellium_image_encoding);
     }
+
+
+    // header parameters
+    char *keyHeader_x_corellium_image_encapsulated = NULL;
+    int valueHeader_x_corellium_image_encapsulated = 0;
+    keyValuePair_t *keyPairHeader_x_corellium_image_encapsulated = 0;
+    if (x_corellium_image_encapsulated) {
+        keyHeader_x_corellium_image_encapsulated = strdup("x-corellium-image-encapsulated");
+        valueHeader_x_corellium_image_encapsulated = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueHeader_x_corellium_image_encapsulated, MAX_NUMBER_LENGTH, "%d", *x_corellium_image_encapsulated);
+        keyPairHeader_x_corellium_image_encapsulated = keyValuePair_create(keyHeader_x_corellium_image_encapsulated, &valueHeader_x_corellium_image_encapsulated);
+        list_addElement(localVarHeaderParameters,keyPairHeader_x_corellium_image_encapsulated);
+    }
+
+
+    // header parameters
+    char *keyHeader_x_corellium_total_file_size = NULL;
+    double valueHeader_x_corellium_total_file_size = 0;
+    keyValuePair_t *keyPairHeader_x_corellium_total_file_size = 0;
+    if (x_corellium_total_file_size) {
+        keyHeader_x_corellium_total_file_size = strdup("x-corellium-total-file-size");
+        valueHeader_x_corellium_total_file_size = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueHeader_x_corellium_total_file_size, MAX_NUMBER_LENGTH, "%d", *x_corellium_total_file_size);
+        keyPairHeader_x_corellium_total_file_size = keyValuePair_create(keyHeader_x_corellium_total_file_size, &valueHeader_x_corellium_total_file_size);
+        list_addElement(localVarHeaderParameters,keyPairHeader_x_corellium_total_file_size);
+    }
+
+
+    // header parameters
+    char *keyHeader_x_corellium_image_password = NULL;
+    char * valueHeader_x_corellium_image_password = 0;
+    keyValuePair_t *keyPairHeader_x_corellium_image_password = 0;
+    if (x_corellium_image_password) {
+        keyHeader_x_corellium_image_password = strdup("x-corellium-image-password");
+        valueHeader_x_corellium_image_password = strdup((x_corellium_image_password));
+        keyPairHeader_x_corellium_image_password = keyValuePair_create(keyHeader_x_corellium_image_password, valueHeader_x_corellium_image_password);
+        list_addElement(localVarHeaderParameters,keyPairHeader_x_corellium_image_password);
+    }
+
 
     // query parameters
     char *keyQuery_resumableChunkNumber = NULL;
@@ -635,6 +685,30 @@ DomainAPI_v3UploadDomainImage(apiClient_t *apiClient, char *type, char *imageId,
         list_addElement(localVarQueryParameters,keyPairQuery_resumableTotalChunks);
     }
 
+    // query parameters
+    char *keyQuery_corelliumChecksum = NULL;
+    char * valueQuery_corelliumChecksum = NULL;
+    keyValuePair_t *keyPairQuery_corelliumChecksum = 0;
+    if (corelliumChecksum)
+    {
+        keyQuery_corelliumChecksum = strdup("corelliumChecksum");
+        valueQuery_corelliumChecksum = strdup((corelliumChecksum));
+        keyPairQuery_corelliumChecksum = keyValuePair_create(keyQuery_corelliumChecksum, valueQuery_corelliumChecksum);
+        list_addElement(localVarQueryParameters,keyPairQuery_corelliumChecksum);
+    }
+
+    // query parameters
+    char *keyQuery_flavor = NULL;
+    char * valueQuery_flavor = NULL;
+    keyValuePair_t *keyPairQuery_flavor = 0;
+    if (flavor)
+    {
+        keyQuery_flavor = strdup("flavor");
+        valueQuery_flavor = strdup((flavor));
+        keyPairQuery_flavor = keyValuePair_create(keyQuery_flavor, valueQuery_flavor);
+        list_addElement(localVarQueryParameters,keyPairQuery_flavor);
+    }
+
     // Body Param
     localVarBodyParameters = malloc(body->len);
     memcpy(localVarBodyParameters, body->data, body->len);
@@ -654,15 +728,27 @@ DomainAPI_v3UploadDomainImage(apiClient_t *apiClient, char *type, char *imageId,
 
     // uncomment below to debug the error response
     //if (apiClient->response_code == 204) {
-    //    printf("%s\n","File uploaded.");
+    //    printf("%s\n","Chunk accepted.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","File missing or unable to read file.");
+    //    printf("%s\n","Invalid chunk or upload parameters, unreadable body, or a missing/mismatched corelliumChecksum for a firmware upload.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
     //    printf("%s\n","Domain administrator permissions required on on-site deployments; cloud administrator permissions required on cloud deployments.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 404) {
+    //    printf("%s\n","No image with the given identifier.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 507) {
+    //    printf("%s\n","The image pool does not have enough space for this upload.");
     //}
     //No return type
 end:
@@ -672,7 +758,7 @@ end:
         apiClient->dataReceivedLen = 0;
     }
     list_freeList(localVarQueryParameters);
-    
+    list_freeList(localVarHeaderParameters);
     
     list_freeList(localVarHeaderType);
     list_freeList(localVarContentType);
@@ -680,7 +766,55 @@ end:
     free(localVarToReplace_type);
     free(localVarToReplace_imageId);
     free(localVarToReplace_name);
+    if (keyHeader_x_corellium_image_encoding) {
+        free(keyHeader_x_corellium_image_encoding);
+        keyHeader_x_corellium_image_encoding = NULL;
+    }
+    if (valueHeader_x_corellium_image_encoding) {
+        free(valueHeader_x_corellium_image_encoding);
+        valueHeader_x_corellium_image_encoding = NULL;
+    }
+    free(keyPairHeader_x_corellium_image_encoding);
+    if (keyHeader_x_corellium_image_encapsulated) {
+        free(keyHeader_x_corellium_image_encapsulated);
+        keyHeader_x_corellium_image_encapsulated = NULL;
+    }
+    free(keyPairHeader_x_corellium_image_encapsulated);
+    if (keyHeader_x_corellium_total_file_size) {
+        free(keyHeader_x_corellium_total_file_size);
+        keyHeader_x_corellium_total_file_size = NULL;
+    }
+    free(keyPairHeader_x_corellium_total_file_size);
+    if (keyHeader_x_corellium_image_password) {
+        free(keyHeader_x_corellium_image_password);
+        keyHeader_x_corellium_image_password = NULL;
+    }
+    if (valueHeader_x_corellium_image_password) {
+        free(valueHeader_x_corellium_image_password);
+        valueHeader_x_corellium_image_password = NULL;
+    }
+    free(keyPairHeader_x_corellium_image_password);
     free(localVarBodyParameters);
+    if(keyQuery_corelliumChecksum){
+        free(keyQuery_corelliumChecksum);
+        keyQuery_corelliumChecksum = NULL;
+    }
+    if(valueQuery_corelliumChecksum){
+        free(valueQuery_corelliumChecksum);
+        valueQuery_corelliumChecksum = NULL;
+    }
+    if(keyPairQuery_corelliumChecksum){
+        keyValuePair_free(keyPairQuery_corelliumChecksum);
+        keyPairQuery_corelliumChecksum = NULL;
+    }
+    if(keyQuery_corelliumChecksum){
+        free(keyQuery_corelliumChecksum);
+        keyQuery_corelliumChecksum = NULL;
+    }
+    if(keyPairQuery_corelliumChecksum){
+        keyValuePair_free(keyPairQuery_corelliumChecksum);
+        keyPairQuery_corelliumChecksum = NULL;
+    }
     if(keyQuery_flavor){
         free(keyQuery_flavor);
         keyQuery_flavor = NULL;

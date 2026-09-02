@@ -622,7 +622,7 @@ end:
 // Check resumable upload status for a project image or download the image file.
 //
 binary_t*
-ProjectsAPI_v3GetProjectImageUpload(apiClient_t *apiClient, char *projectId, char *type, char *imageId, char *name, char *resumableChunkNumber)
+ProjectsAPI_v3GetProjectImageUpload(apiClient_t *apiClient, char *projectId, char *type, char *imageId, char *name, double *resumableChunkNumber)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -697,7 +697,8 @@ ProjectsAPI_v3GetProjectImageUpload(apiClient_t *apiClient, char *projectId, cha
     if (resumableChunkNumber)
     {
         keyQuery_resumableChunkNumber = strdup("resumableChunkNumber");
-        valueQuery_resumableChunkNumber = strdup((resumableChunkNumber));
+        valueQuery_resumableChunkNumber = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_resumableChunkNumber, MAX_NUMBER_LENGTH, "%d", *resumableChunkNumber);
         keyPairQuery_resumableChunkNumber = keyValuePair_create(keyQuery_resumableChunkNumber, valueQuery_resumableChunkNumber);
         list_addElement(localVarQueryParameters,keyPairQuery_resumableChunkNumber);
     }
@@ -716,15 +717,15 @@ ProjectsAPI_v3GetProjectImageUpload(apiClient_t *apiClient, char *projectId, cha
 
     // uncomment below to debug the error response
     //if (apiClient->response_code == 200) {
-    //    printf("%s\n","Chunk is present (when resumableChunkNumber supplied) or the image file stream.");
+    //    printf("%s\n","An empty JSON object when a probed chunk is already stored, the image bytes when the file is stored locally, or the image metadata when no file has been stored yet.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 204) {
-    //    printf("%s\n","Chunk is missing and still needs to be uploaded.");
+    //    printf("%s\n","The probed chunk is not stored yet and still needs to be uploaded.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 302) {
-    //    printf("%s\n","Image is stored in S3; follow the Location header to download it.");
+    //    printf("%s\n","The image is stored in S3; follow the Location header to download it.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
@@ -1654,16 +1655,16 @@ end:
 
 // Upload image chunk
 //
-// Upload a chunk of a project image using the resumable upload protocol. Creates the image record on the first chunk if it does not yet exist.
+// Upload a chunk of a project image using the resumable upload protocol. Creates the image record on the first chunk if it does not yet exist. This is the upload used while creating a device, before any instance exists to own the image.
 //
 void
-ProjectsAPI_v3PutProjectImageUpload(apiClient_t *apiClient, char *projectId, char *type, char *imageId, char *name, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, char *corelliumChecksum, char *flavor)
+ProjectsAPI_v3PutProjectImageUpload(apiClient_t *apiClient, char *projectId, char *type, char *imageId, char *name, binary_t* body, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, char *corelliumChecksum, char *flavor, char *x_corellium_image_encoding, int *x_corellium_image_encapsulated, double *x_corellium_total_file_size, char *x_corellium_image_password)
 {
     list_t    *localVarQueryParameters = list_createList();
-    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarHeaderParameters = list_createList();
     list_t    *localVarFormParameters = NULL;
     list_t *localVarHeaderType = list_createList();
-    list_t *localVarContentType = NULL;
+    list_t *localVarContentType = list_createList();
     char      *localVarBodyParameters = NULL;
     size_t     localVarBodyLength = 0;
 
@@ -1723,6 +1724,56 @@ ProjectsAPI_v3PutProjectImageUpload(apiClient_t *apiClient, char *projectId, cha
 
     localVarPath = strReplace(localVarPath, localVarToReplace_name, name);
 
+
+
+    // header parameters
+    char *keyHeader_x_corellium_image_encoding = NULL;
+    char * valueHeader_x_corellium_image_encoding = 0;
+    keyValuePair_t *keyPairHeader_x_corellium_image_encoding = 0;
+    if (x_corellium_image_encoding) {
+        keyHeader_x_corellium_image_encoding = strdup("x-corellium-image-encoding");
+        valueHeader_x_corellium_image_encoding = strdup((x_corellium_image_encoding));
+        keyPairHeader_x_corellium_image_encoding = keyValuePair_create(keyHeader_x_corellium_image_encoding, valueHeader_x_corellium_image_encoding);
+        list_addElement(localVarHeaderParameters,keyPairHeader_x_corellium_image_encoding);
+    }
+
+
+    // header parameters
+    char *keyHeader_x_corellium_image_encapsulated = NULL;
+    int valueHeader_x_corellium_image_encapsulated = 0;
+    keyValuePair_t *keyPairHeader_x_corellium_image_encapsulated = 0;
+    if (x_corellium_image_encapsulated) {
+        keyHeader_x_corellium_image_encapsulated = strdup("x-corellium-image-encapsulated");
+        valueHeader_x_corellium_image_encapsulated = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueHeader_x_corellium_image_encapsulated, MAX_NUMBER_LENGTH, "%d", *x_corellium_image_encapsulated);
+        keyPairHeader_x_corellium_image_encapsulated = keyValuePair_create(keyHeader_x_corellium_image_encapsulated, &valueHeader_x_corellium_image_encapsulated);
+        list_addElement(localVarHeaderParameters,keyPairHeader_x_corellium_image_encapsulated);
+    }
+
+
+    // header parameters
+    char *keyHeader_x_corellium_total_file_size = NULL;
+    double valueHeader_x_corellium_total_file_size = 0;
+    keyValuePair_t *keyPairHeader_x_corellium_total_file_size = 0;
+    if (x_corellium_total_file_size) {
+        keyHeader_x_corellium_total_file_size = strdup("x-corellium-total-file-size");
+        valueHeader_x_corellium_total_file_size = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueHeader_x_corellium_total_file_size, MAX_NUMBER_LENGTH, "%d", *x_corellium_total_file_size);
+        keyPairHeader_x_corellium_total_file_size = keyValuePair_create(keyHeader_x_corellium_total_file_size, &valueHeader_x_corellium_total_file_size);
+        list_addElement(localVarHeaderParameters,keyPairHeader_x_corellium_total_file_size);
+    }
+
+
+    // header parameters
+    char *keyHeader_x_corellium_image_password = NULL;
+    char * valueHeader_x_corellium_image_password = 0;
+    keyValuePair_t *keyPairHeader_x_corellium_image_password = 0;
+    if (x_corellium_image_password) {
+        keyHeader_x_corellium_image_password = strdup("x-corellium-image-password");
+        valueHeader_x_corellium_image_password = strdup((x_corellium_image_password));
+        keyPairHeader_x_corellium_image_password = keyValuePair_create(keyHeader_x_corellium_image_password, valueHeader_x_corellium_image_password);
+        list_addElement(localVarHeaderParameters,keyPairHeader_x_corellium_image_password);
+    }
 
 
     // query parameters
@@ -1813,7 +1864,13 @@ ProjectsAPI_v3PutProjectImageUpload(apiClient_t *apiClient, char *projectId, cha
         keyPairQuery_flavor = keyValuePair_create(keyQuery_flavor, valueQuery_flavor);
         list_addElement(localVarQueryParameters,keyPairQuery_flavor);
     }
+
+    // Body Param
+    localVarBodyParameters = malloc(body->len);
+    memcpy(localVarBodyParameters, body->data, body->len);
+    localVarBodyLength = body->len;
     list_addElement(localVarHeaderType,"application/json"); //produces
+    list_addElement(localVarContentType,"application/octet-stream"); //consumes
     apiClient_invoke(apiClient,
                     localVarPath,
                     localVarQueryParameters,
@@ -1831,7 +1888,7 @@ ProjectsAPI_v3PutProjectImageUpload(apiClient_t *apiClient, char *projectId, cha
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid chunk or upload parameters or missing required checksum in airgapped deployments.");
+    //    printf("%s\n","Invalid chunk or upload parameters, unreadable body, or a missing/mismatched corelliumChecksum for a firmware upload.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
@@ -1857,15 +1914,44 @@ end:
         apiClient->dataReceivedLen = 0;
     }
     list_freeList(localVarQueryParameters);
-    
+    list_freeList(localVarHeaderParameters);
     
     list_freeList(localVarHeaderType);
-    
+    list_freeList(localVarContentType);
     free(localVarPath);
     free(localVarToReplace_projectId);
     free(localVarToReplace_type);
     free(localVarToReplace_imageId);
     free(localVarToReplace_name);
+    if (keyHeader_x_corellium_image_encoding) {
+        free(keyHeader_x_corellium_image_encoding);
+        keyHeader_x_corellium_image_encoding = NULL;
+    }
+    if (valueHeader_x_corellium_image_encoding) {
+        free(valueHeader_x_corellium_image_encoding);
+        valueHeader_x_corellium_image_encoding = NULL;
+    }
+    free(keyPairHeader_x_corellium_image_encoding);
+    if (keyHeader_x_corellium_image_encapsulated) {
+        free(keyHeader_x_corellium_image_encapsulated);
+        keyHeader_x_corellium_image_encapsulated = NULL;
+    }
+    free(keyPairHeader_x_corellium_image_encapsulated);
+    if (keyHeader_x_corellium_total_file_size) {
+        free(keyHeader_x_corellium_total_file_size);
+        keyHeader_x_corellium_total_file_size = NULL;
+    }
+    free(keyPairHeader_x_corellium_total_file_size);
+    if (keyHeader_x_corellium_image_password) {
+        free(keyHeader_x_corellium_image_password);
+        keyHeader_x_corellium_image_password = NULL;
+    }
+    if (valueHeader_x_corellium_image_password) {
+        free(valueHeader_x_corellium_image_password);
+        valueHeader_x_corellium_image_password = NULL;
+    }
+    free(keyPairHeader_x_corellium_image_password);
+    free(localVarBodyParameters);
     if(keyQuery_corelliumChecksum){
         free(keyQuery_corelliumChecksum);
         keyQuery_corelliumChecksum = NULL;

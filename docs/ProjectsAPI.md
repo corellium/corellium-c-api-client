@@ -214,7 +214,7 @@ Name | Type | Description  | Notes
 //
 // Check resumable upload status for a project image or download the image file.
 //
-binary_t** ProjectsAPI_v3GetProjectImageUpload(apiClient_t *apiClient, char *projectId, char *type, char *imageId, char *name, char *resumableChunkNumber);
+binary_t** ProjectsAPI_v3GetProjectImageUpload(apiClient_t *apiClient, char *projectId, char *type, char *imageId, char *name, double *resumableChunkNumber);
 ```
 
 ### Parameters
@@ -223,9 +223,9 @@ Name | Type | Description  | Notes
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **projectId** | **char \*** | Project identifier. | 
 **type** | **char \*** | Image type. | 
-**imageId** | **char \*** | Image identifier. | 
+**imageId** | **char \*** | Client-generated image identifier. The image record is created on the first chunk. | 
 **name** | **char \*** | URL-encoded image filename. | 
-**resumableChunkNumber** | **char \*** | Resumable chunk number. | [optional] 
+**resumableChunkNumber** | **double \*** | Chunk number. When present the response reports whether that chunk was already stored (200) or still needs to be uploaded (204) instead of returning the image file. | [optional] 
 
 ### Return type
 
@@ -476,9 +476,9 @@ Name | Type | Description  | Notes
 ```c
 // Upload image chunk
 //
-// Upload a chunk of a project image using the resumable upload protocol. Creates the image record on the first chunk if it does not yet exist.
+// Upload a chunk of a project image using the resumable upload protocol. Creates the image record on the first chunk if it does not yet exist. This is the upload used while creating a device, before any instance exists to own the image.
 //
-void ProjectsAPI_v3PutProjectImageUpload(apiClient_t *apiClient, char *projectId, char *type, char *imageId, char *name, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, char *corelliumChecksum, char *flavor);
+void ProjectsAPI_v3PutProjectImageUpload(apiClient_t *apiClient, char *projectId, char *type, char *imageId, char *name, binary_t* body, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, char *corelliumChecksum, char *flavor, char *x_corellium_image_encoding, int *x_corellium_image_encapsulated, double *x_corellium_total_file_size, char *x_corellium_image_password);
 ```
 
 ### Parameters
@@ -487,15 +487,20 @@ Name | Type | Description  | Notes
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **projectId** | **char \*** | Project identifier. | 
 **type** | **char \*** | Image type. | 
-**imageId** | **char \*** | Image identifier. | 
+**imageId** | **char \*** | Client-generated image identifier. The image record is created on the first chunk. | 
 **name** | **char \*** | URL-encoded image filename. | 
-**resumableChunkNumber** | **double \*** | Chunk sequence number (1-based). | [optional] 
-**resumableChunkSize** | **double \*** | Size of each chunk in bytes. | [optional] 
-**resumableCurrentChunkSize** | **double \*** | Size of the current chunk in bytes. | [optional] 
-**resumableTotalSize** | **double \*** | Total file size in bytes. | [optional] 
-**resumableTotalChunks** | **double \*** | Total number of chunks. | [optional] 
-**corelliumChecksum** | **char \*** | Corellium checksum. Required for firmware uploads in airgapped deployments. | [optional] 
+**body** | **binary_t*** |  | 
+**resumableChunkNumber** | **double \*** | chunk sequence number. | [optional] 
+**resumableChunkSize** | **double \*** | size of each chunk. | [optional] 
+**resumableCurrentChunkSize** | **double \*** | size of the chunk in this request. | [optional] 
+**resumableTotalSize** | **double \*** | total file size. | [optional] 
+**resumableTotalChunks** | **double \*** | total number of chunks. | [optional] 
+**corelliumChecksum** | **char \*** | Corellium chunked checksum of the whole file. When supplied, each chunk is re-hashed and the upload is rejected on mismatch. Required for firmware uploads in airgapped deployments. | [optional] 
 **flavor** | **char \*** | Flavor identifier to associate with the image. | [optional] 
+**x_corellium_image_encoding** | **char \*** | How the uploaded file is stored. Set on the first chunk, when the image record is created. | [optional] 
+**x_corellium_image_encapsulated** | **int \*** | Whether the uploaded file is an archive the coordinator should unpack. Set false to store the file as uploaded. Set on the first chunk, when the image record is created. | [optional] 
+**x_corellium_total_file_size** | **double \*** | Total size of the whole file in bytes. Preferred over Content-Length for the pre-flight image-pool space check on on-site clusters, which is what produces the 507 response. | [optional] 
+**x_corellium_image_password** | **char \*** | Password used to open a password-protected image during post-upload validation. | [optional] 
 
 ### Return type
 
@@ -507,7 +512,7 @@ void
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/octet-stream
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

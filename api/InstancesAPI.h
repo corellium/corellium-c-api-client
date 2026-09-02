@@ -24,6 +24,7 @@
 #include "../model/instance_state.h"
 #include "../model/instance_upgrade_body.h"
 #include "../model/instance_upgrade_response.h"
+#include "../model/insufficient_storage_error.h"
 #include "../model/media_play_body.h"
 #include "../model/message_body.h"
 #include "../model/object.h"
@@ -98,14 +99,6 @@ void
 InstancesAPI_v3EnableExposePort(apiClient_t *apiClient, char *instanceId);
 
 
-// Get resumable image upload offset
-//
-// Returns the current offset for a resumable image upload so the client knows where to continue.
-//
-object_t*
-InstancesAPI_v3GetImageUpload(apiClient_t *apiClient, char *instance, char *type, char *image, char *name);
-
-
 // Get Instance
 //
 instance_t*
@@ -128,6 +121,14 @@ InstancesAPI_v3GetInstanceConsoleLog(apiClient_t *apiClient, char *instanceId);
 //
 gpios_state_t*
 InstancesAPI_v3GetInstanceGpios(apiClient_t *apiClient, char *instanceId);
+
+
+// Get image upload status
+//
+// Check resumable upload status for an instance image or download the image file.
+//
+binary_t*
+InstancesAPI_v3GetInstanceImageUpload(apiClient_t *apiClient, char *instance, char *type, char *imageId, char *name, double *resumableChunkNumber);
 
 
 // Get Panics
@@ -216,12 +217,12 @@ input_response_t*
 InstancesAPI_v3PostInstanceInput(apiClient_t *apiClient, char *instanceId, list_t *instance_input_body);
 
 
-// Upload an image chunk
+// Upload image chunk
 //
-// Uploads a chunk of image data as part of a resumable image upload.
+// Upload a chunk of an instance image using the resumable upload protocol. Creates the image record on the first chunk if it does not yet exist.
 //
-object_t*
-InstancesAPI_v3PutImageUpload(apiClient_t *apiClient, char *instance, char *type, char *image, char *name, binary_t* body);
+void
+InstancesAPI_v3PutInstanceImageUpload(apiClient_t *apiClient, char *instance, char *type, char *imageId, char *name, binary_t* body, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, char *corelliumChecksum, char *flavor, char *x_corellium_image_encoding, int *x_corellium_image_encapsulated, double *x_corellium_total_file_size, char *x_corellium_image_password);
 
 
 // Reboot an Instance
