@@ -46,6 +46,7 @@
 #include "api/FlavorsAPI.h"
 #include "api/HyperTraceAPI.h"
 #include "api/HyperTraceV1API.h"
+#include "api/HypertuneAPI.h"
 #include "api/HypervisorHooksAPI.h"
 #include "api/HypervisorHooksV1API.h"
 #include "api/ImagesAPI.h"
@@ -227,6 +228,10 @@
 #define corellium_hyperTrace_preauthorize HyperTraceAPI_v3BtracePreauthorize
 #define corellium_hyperTrace_start HyperTraceAPI_v3StartHyperTrace
 #define corellium_hyperTrace_stop HyperTraceAPI_v3StopHyperTrace
+
+/* hypertune */
+#define corellium_hypertune_hash HypertuneAPI_v3HypertuneHash
+#define corellium_hypertune_init HypertuneAPI_v3HypertuneInit
 
 /* images */
 #define corellium_images_create ImagesAPI_v3CreateImage
@@ -827,6 +832,10 @@
 #define corellium_v3_hyperTrace_preauthorize HyperTraceAPI_v3BtracePreauthorize
 #define corellium_v3_hyperTrace_start HyperTraceAPI_v3StartHyperTrace
 #define corellium_v3_hyperTrace_stop HyperTraceAPI_v3StopHyperTrace
+
+/* hypertune */
+#define corellium_v3_hypertune_hash HypertuneAPI_v3HypertuneHash
+#define corellium_v3_hypertune_init HypertuneAPI_v3HypertuneInit
 
 /* images */
 #define corellium_v3_images_create ImagesAPI_v3CreateImage

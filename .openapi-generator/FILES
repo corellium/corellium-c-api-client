@@ -61,6 +61,8 @@ api/HyperTraceAPI.c
 api/HyperTraceAPI.h
 api/HyperTraceV1API.c
 api/HyperTraceV1API.h
+api/HypertuneAPI.c
+api/HypertuneAPI.h
 api/HypervisorHooksAPI.c
 api/HypervisorHooksAPI.h
 api/HypervisorHooksV1API.c
@@ -164,6 +166,7 @@ docs/FirmwareServiceAPI.md
 docs/FlavorsAPI.md
 docs/HyperTraceAPI.md
 docs/HyperTraceV1API.md
+docs/HypertuneAPI.md
 docs/HypervisorHooksAPI.md
 docs/HypervisorHooksV1API.md
 docs/ImagesAPI.md
@@ -491,6 +494,8 @@ docs/hook.md
 docs/hook_list.md
 docs/hook_patch_type.md
 docs/hook_v1.md
+docs/hypertune_hash_response.md
+docs/hypertune_init_response.md
 docs/image.md
 docs/image_creation_options.md
 docs/image_encoding.md
@@ -1433,6 +1438,10 @@ model/hook_patch_type.c
 model/hook_patch_type.h
 model/hook_v1.c
 model/hook_v1.h
+model/hypertune_hash_response.c
+model/hypertune_hash_response.h
+model/hypertune_init_response.c
+model/hypertune_init_response.h
 model/image.c
 model/image.h
 model/image_creation_options.c
@@ -2436,6 +2445,8 @@ unit-test/test_hook.c
 unit-test/test_hook_list.c
 unit-test/test_hook_patch_type.c
 unit-test/test_hook_v1.c
+unit-test/test_hypertune_hash_response.c
+unit-test/test_hypertune_init_response.c
 unit-test/test_image.c
 unit-test/test_image_creation_options.c
 unit-test/test_image_encoding.c

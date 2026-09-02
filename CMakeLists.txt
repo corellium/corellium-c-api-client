@@ -338,6 +338,8 @@ set(SRCS
     model/hook_list.c
     model/hook_patch_type.c
     model/hook_v1.c
+    model/hypertune_hash_response.c
+    model/hypertune_init_response.c
     model/image.c
     model/image_creation_options.c
     model/image_encoding.c
@@ -720,6 +722,7 @@ set(SRCS
     api/FlavorsAPI.c
     api/HyperTraceAPI.c
     api/HyperTraceV1API.c
+    api/HypertuneAPI.c
     api/HypervisorHooksAPI.c
     api/HypervisorHooksV1API.c
     api/ImagesAPI.c
@@ -1058,6 +1061,8 @@ set(HDRS
     model/hook_list.h
     model/hook_patch_type.h
     model/hook_v1.h
+    model/hypertune_hash_response.h
+    model/hypertune_init_response.h
     model/image.h
     model/image_creation_options.h
     model/image_encoding.h
@@ -1440,6 +1445,7 @@ set(HDRS
     api/FlavorsAPI.h
     api/HyperTraceAPI.h
     api/HyperTraceV1API.h
+    api/HypertuneAPI.h
     api/HypervisorHooksAPI.h
     api/HypervisorHooksV1API.h
     api/ImagesAPI.h
@@ -1587,6 +1593,7 @@ set(HDRS "")
 #    unit-tests/manual-FlavorsAPI.c
 #    unit-tests/manual-HyperTraceAPI.c
 #    unit-tests/manual-HyperTraceV1API.c
+#    unit-tests/manual-HypertuneAPI.c
 #    unit-tests/manual-HypervisorHooksAPI.c
 #    unit-tests/manual-HypervisorHooksV1API.c
 #    unit-tests/manual-ImagesAPI.c

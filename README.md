@@ -327,6 +327,8 @@ Category | Method | HTTP request | Description
 *HyperTraceV1API* | [**HyperTraceV1API_v1Kcrange**](docs/HyperTraceV1API.md#HyperTraceV1API_v1Kcrange) | **GET** /v1/instances/{instanceId}/btrace-kcrange | Get Kernel extension ranges
 *HyperTraceV1API* | [**HyperTraceV1API_v1StartHyperTrace**](docs/HyperTraceV1API.md#HyperTraceV1API_v1StartHyperTrace) | **POST** /v1/instances/{instanceId}/btrace/enable | Start HyperTrace on an instance
 *HyperTraceV1API* | [**HyperTraceV1API_v1StopHyperTrace**](docs/HyperTraceV1API.md#HyperTraceV1API_v1StopHyperTrace) | **POST** /v1/instances/{instanceId}/btrace/disable | Stop HyperTrace on an instance.
+*HypertuneAPI* | [**HypertuneAPI_v3HypertuneHash**](docs/HypertuneAPI.md#HypertuneAPI_v3HypertuneHash) | **GET** /v3/hypertune/hash | Get Hypertune state hash
+*HypertuneAPI* | [**HypertuneAPI_v3HypertuneInit**](docs/HypertuneAPI.md#HypertuneAPI_v3HypertuneInit) | **GET** /v3/hypertune/init | Get Hypertune initialization data
 *HypervisorHooksAPI* | [**HypervisorHooksAPI_v3ClearHyperTraceHooks**](docs/HypervisorHooksAPI.md#HypervisorHooksAPI_v3ClearHyperTraceHooks) | **POST** /v3/instances/{instanceId}/hooks/clear | Clear Hooks on an instance
 *HypervisorHooksAPI* | [**HypervisorHooksAPI_v3CreateHook**](docs/HypervisorHooksAPI.md#HypervisorHooksAPI_v3CreateHook) | **POST** /v3/instances/{instanceId}/hooks | Create a hypervisor hook for an instance
 *HypervisorHooksAPI* | [**HypervisorHooksAPI_v3DeleteHook**](docs/HypervisorHooksAPI.md#HypervisorHooksAPI_v3DeleteHook) | **DELETE** /v3/hooks/{hookId} | Delete a hypervisor hook
@@ -901,6 +903,8 @@ Category | Method | HTTP request | Description
  - [hook_list_t](docs/hook_list.md)
  - [hook_patch_type_t](docs/hook_patch_type.md)
  - [hook_v1_t](docs/hook_v1.md)
+ - [hypertune_hash_response_t](docs/hypertune_hash_response.md)
+ - [hypertune_init_response_t](docs/hypertune_init_response.md)
  - [image_t](docs/image.md)
  - [image_creation_options_t](docs/image_creation_options.md)
  - [image_encoding_t](docs/image_encoding.md)
