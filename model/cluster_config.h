@@ -16,6 +16,7 @@
 typedef struct cluster_config_t cluster_config_t;
 
 #include "any_type.h"
+#include "cluster_config_ai_tools_config.h"
 #include "cluster_config_coordinator_config.h"
 #include "cluster_config_coordinator_config_auth_providers_inner.h"
 #include "cluster_config_firmware_service_config.h"
@@ -109,6 +110,7 @@ typedef struct cluster_config_t {
     double domain_image_upload_quota; //numeric
     list_t *ipsw_filters; //nonprimitive container
     struct cluster_config_firmware_service_config_t *firmware_service_config; //model
+    struct cluster_config_ai_tools_config_t *ai_tools_config; //model
 
     int _library_owned; // Is the library responsible for freeing this object?
 } cluster_config_t;
@@ -183,7 +185,8 @@ __attribute__((deprecated)) cluster_config_t *cluster_config_create(
     char *service_user,
     double domain_image_upload_quota,
     list_t *ipsw_filters,
-    cluster_config_firmware_service_config_t *firmware_service_config
+    cluster_config_firmware_service_config_t *firmware_service_config,
+    cluster_config_ai_tools_config_t *ai_tools_config
 );
 
 void cluster_config_free(cluster_config_t *cluster_config);

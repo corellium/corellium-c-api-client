@@ -158,6 +158,7 @@ set(SRCS
     model/cloud_notification_item.c
     model/cloud_notification_list.c
     model/cluster_config.c
+    model/cluster_config_ai_tools_config.c
     model/cluster_config_coordinator_config.c
     model/cluster_config_coordinator_config_auth_providers_inner.c
     model/cluster_config_coordinator_config_auth_providers_inner_any_of.c
@@ -205,6 +206,7 @@ set(SRCS
     model/cluster_snapshot_v1.c
     model/config_auth_provider.c
     model/config_response.c
+    model/config_response_ai_tools_config.c
     model/config_response_coordinator_config.c
     model/config_response_maintenance.c
     model/config_response_v1.c
@@ -882,6 +884,7 @@ set(HDRS
     model/cloud_notification_item.h
     model/cloud_notification_list.h
     model/cluster_config.h
+    model/cluster_config_ai_tools_config.h
     model/cluster_config_coordinator_config.h
     model/cluster_config_coordinator_config_auth_providers_inner.h
     model/cluster_config_coordinator_config_auth_providers_inner_any_of.h
@@ -929,6 +932,7 @@ set(HDRS
     model/cluster_snapshot_v1.h
     model/config_auth_provider.h
     model/config_response.h
+    model/config_response_ai_tools_config.h
     model/config_response_coordinator_config.h
     model/config_response_maintenance.h
     model/config_response_v1.h

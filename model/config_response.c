@@ -59,7 +59,8 @@ static config_response_t *config_response_create_internal(
     int aws_marketplace,
     char *open_g_apps_binary,
     int air_gapped,
-    config_response_coordinator_config_t *coordinator_config
+    config_response_coordinator_config_t *coordinator_config,
+    config_response_ai_tools_config_t *ai_tools_config
     ) {
     config_response_t *config_response_local_var = malloc(sizeof(config_response_t));
     if (!config_response_local_var) {
@@ -102,6 +103,7 @@ static config_response_t *config_response_create_internal(
     config_response_local_var->open_g_apps_binary = open_g_apps_binary;
     config_response_local_var->air_gapped = air_gapped;
     config_response_local_var->coordinator_config = coordinator_config;
+    config_response_local_var->ai_tools_config = ai_tools_config;
 
     config_response_local_var->_library_owned = 1;
     return config_response_local_var;
@@ -144,7 +146,8 @@ __attribute__((deprecated)) config_response_t *config_response_create(
     int aws_marketplace,
     char *open_g_apps_binary,
     int air_gapped,
-    config_response_coordinator_config_t *coordinator_config
+    config_response_coordinator_config_t *coordinator_config,
+    config_response_ai_tools_config_t *ai_tools_config
     ) {
     return config_response_create_internal (
         on_site,
@@ -183,7 +186,8 @@ __attribute__((deprecated)) config_response_t *config_response_create(
         aws_marketplace,
         open_g_apps_binary,
         air_gapped,
-        coordinator_config
+        coordinator_config,
+        ai_tools_config
         );
 }
 
@@ -289,6 +293,10 @@ void config_response_free(config_response_t *config_response) {
     if (config_response->coordinator_config) {
         config_response_coordinator_config_free(config_response->coordinator_config);
         config_response->coordinator_config = NULL;
+    }
+    if (config_response->ai_tools_config) {
+        config_response_ai_tools_config_free(config_response->ai_tools_config);
+        config_response->ai_tools_config = NULL;
     }
     free(config_response);
 }
@@ -650,6 +658,19 @@ cJSON *config_response_convertToJSON(config_response_t *config_response) {
     goto fail;
     }
 
+
+    // config_response->ai_tools_config
+    if(config_response->ai_tools_config) {
+    cJSON *ai_tools_config_local_JSON = config_response_ai_tools_config_convertToJSON(config_response->ai_tools_config);
+    if(ai_tools_config_local_JSON == NULL) {
+    goto fail; //model
+    }
+    cJSON_AddItemToObject(item, "aiToolsConfig", ai_tools_config_local_JSON);
+    if(item->child == NULL) {
+    goto fail;
+    }
+    }
+
     return item;
 fail:
     if (item) {
@@ -679,6 +700,9 @@ config_response_t *config_response_parseFromJSON(cJSON *config_responseJSON){
 
     // define the local variable for config_response->coordinator_config
     config_response_coordinator_config_t *coordinator_config_local_nonprim = NULL;
+
+    // define the local variable for config_response->ai_tools_config
+    config_response_ai_tools_config_t *ai_tools_config_local_nonprim = NULL;
 
     // config_response->on_site
     cJSON *on_site = cJSON_GetObjectItemCaseSensitive(config_responseJSON, "onSite");
@@ -1187,6 +1211,15 @@ config_response_t *config_response_parseFromJSON(cJSON *config_responseJSON){
     
     coordinator_config_local_nonprim = config_response_coordinator_config_parseFromJSON(coordinator_config); //nonprimitive
 
+    // config_response->ai_tools_config
+    cJSON *ai_tools_config = cJSON_GetObjectItemCaseSensitive(config_responseJSON, "aiToolsConfig");
+    if (cJSON_IsNull(ai_tools_config)) {
+        ai_tools_config = NULL;
+    }
+    if (ai_tools_config) { 
+    ai_tools_config_local_nonprim = config_response_ai_tools_config_parseFromJSON(ai_tools_config); //nonprimitive
+    }
+
 
     config_response_local_var = config_response_create_internal (
         on_site->valueint,
@@ -1225,7 +1258,8 @@ config_response_t *config_response_parseFromJSON(cJSON *config_responseJSON){
         aws_marketplace ? aws_marketplace->valueint : 0,
         open_g_apps_binary && !cJSON_IsNull(open_g_apps_binary) ? strdup(open_g_apps_binary->valuestring) : NULL,
         air_gapped ? air_gapped->valueint : 0,
-        coordinator_config_local_nonprim
+        coordinator_config_local_nonprim,
+        ai_tools_config ? ai_tools_config_local_nonprim : NULL
         );
 
     return config_response_local_var;
@@ -1263,6 +1297,10 @@ end:
     if (coordinator_config_local_nonprim) {
         config_response_coordinator_config_free(coordinator_config_local_nonprim);
         coordinator_config_local_nonprim = NULL;
+    }
+    if (ai_tools_config_local_nonprim) {
+        config_response_ai_tools_config_free(ai_tools_config_local_nonprim);
+        ai_tools_config_local_nonprim = NULL;
     }
     return NULL;
 

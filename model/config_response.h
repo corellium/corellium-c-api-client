@@ -16,6 +16,7 @@
 typedef struct config_response_t config_response_t;
 
 #include "config_auth_provider.h"
+#include "config_response_ai_tools_config.h"
 #include "config_response_coordinator_config.h"
 #include "config_response_maintenance.h"
 #include "logging.h"
@@ -69,6 +70,7 @@ typedef struct config_response_t {
     char *open_g_apps_binary; // string
     int air_gapped; //boolean
     struct config_response_coordinator_config_t *coordinator_config; //model
+    struct config_response_ai_tools_config_t *ai_tools_config; //model
 
     int _library_owned; // Is the library responsible for freeing this object?
 } config_response_t;
@@ -110,7 +112,8 @@ __attribute__((deprecated)) config_response_t *config_response_create(
     int aws_marketplace,
     char *open_g_apps_binary,
     int air_gapped,
-    config_response_coordinator_config_t *coordinator_config
+    config_response_coordinator_config_t *coordinator_config,
+    config_response_ai_tools_config_t *ai_tools_config
 );
 
 void config_response_free(config_response_t *config_response);

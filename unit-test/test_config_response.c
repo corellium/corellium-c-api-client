@@ -20,6 +20,7 @@ config_response_t* instantiate_config_response(int include_optional);
 #include "test_logging.c"
 #include "test_trial.c"
 #include "test_config_response_coordinator_config.c"
+#include "test_config_response_ai_tools_config.c"
 
 
 config_response_t* instantiate_config_response(int include_optional) {
@@ -65,7 +66,9 @@ config_response_t* instantiate_config_response(int include_optional) {
       1,
       "0",
       1,
-      null
+      null,
+       // false, not to have infinite recursion
+      instantiate_config_response_ai_tools_config(0)
     );
   } else {
     config_response = config_response_create(
@@ -105,7 +108,8 @@ config_response_t* instantiate_config_response(int include_optional) {
       1,
       "0",
       1,
-      null
+      null,
+      NULL
     );
   }
 

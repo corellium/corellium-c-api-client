@@ -40,6 +40,7 @@ Name | Type | Description | Notes
 **open_g_apps_binary** | **char \*** | OpenGApps binary location. | [optional] 
 **air_gapped** | **int** | Whether the deployment is airgapped. | [optional] 
 **coordinator_config** | [**config_response_coordinator_config_t**](config_response_coordinator_config.md) \* |  | 
+**ai_tools_config** | [**config_response_ai_tools_config_t**](config_response_ai_tools_config.md) \* |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
