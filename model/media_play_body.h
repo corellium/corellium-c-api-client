@@ -1,7 +1,7 @@
 /*
  * media_play_body.h
  *
- * 
+ * Media source. Provide exactly one of imageId or url.
  */
 
 #ifndef _media_play_body_H_
@@ -15,6 +15,8 @@
 
 typedef struct media_play_body_t media_play_body_t;
 
+#include "media_play_by_image.h"
+#include "media_play_by_url.h"
 
 
 

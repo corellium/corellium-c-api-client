@@ -456,6 +456,8 @@ set(SRCS
     model/matrix_error.c
     model/media_play_body.c
     model/media_play_body_v1.c
+    model/media_play_by_image.c
+    model/media_play_by_url.c
     model/media_store.c
     model/media_store_v1.c
     model/message_body.c
@@ -1182,6 +1184,8 @@ set(HDRS
     model/matrix_error.h
     model/media_play_body.h
     model/media_play_body_v1.h
+    model/media_play_by_image.h
+    model/media_play_by_url.h
     model/media_store.h
     model/media_store_v1.h
     model/message_body.h

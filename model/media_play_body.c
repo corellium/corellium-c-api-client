@@ -54,18 +54,20 @@ cJSON *media_play_body_convertToJSON(media_play_body_t *media_play_body) {
     cJSON *item = cJSON_CreateObject();
 
     // media_play_body->image_id
-    if(media_play_body->image_id) {
+    if (!media_play_body->image_id) {
+        goto fail;
+    }
     if(cJSON_AddStringToObject(item, "imageId", media_play_body->image_id) == NULL) {
     goto fail; //String
-    }
     }
 
 
     // media_play_body->url
-    if(media_play_body->url) {
+    if (!media_play_body->url) {
+        goto fail;
+    }
     if(cJSON_AddStringToObject(item, "url", media_play_body->url) == NULL) {
     goto fail; //String
-    }
     }
 
     return item;
@@ -85,11 +87,14 @@ media_play_body_t *media_play_body_parseFromJSON(cJSON *media_play_bodyJSON){
     if (cJSON_IsNull(image_id)) {
         image_id = NULL;
     }
-    if (image_id) { 
-    if(!cJSON_IsString(image_id) && !cJSON_IsNull(image_id))
+    if (!image_id) {
+        goto end;
+    }
+
+    
+    if(!cJSON_IsString(image_id))
     {
     goto end; //String
-    }
     }
 
     // media_play_body->url
@@ -97,17 +102,20 @@ media_play_body_t *media_play_body_parseFromJSON(cJSON *media_play_bodyJSON){
     if (cJSON_IsNull(url)) {
         url = NULL;
     }
-    if (url) { 
-    if(!cJSON_IsString(url) && !cJSON_IsNull(url))
+    if (!url) {
+        goto end;
+    }
+
+    
+    if(!cJSON_IsString(url))
     {
     goto end; //String
-    }
     }
 
 
     media_play_body_local_var = media_play_body_create_internal (
-        image_id && !cJSON_IsNull(image_id) ? strdup(image_id->valuestring) : NULL,
-        url && !cJSON_IsNull(url) ? strdup(url->valuestring) : NULL
+        strdup(image_id->valuestring),
+        strdup(url->valuestring)
         );
 
     return media_play_body_local_var;

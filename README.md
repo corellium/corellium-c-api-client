@@ -1025,6 +1025,8 @@ Category | Method | HTTP request | Description
  - [matrix_error_t](docs/matrix_error.md)
  - [media_play_body_t](docs/media_play_body.md)
  - [media_play_body_v1_t](docs/media_play_body_v1.md)
+ - [media_play_by_image_t](docs/media_play_by_image.md)
+ - [media_play_by_url_t](docs/media_play_by_url.md)
  - [media_store_t](docs/media_store.md)
  - [media_store_v1_t](docs/media_store_v1.md)
  - [message_body_t](docs/message_body.md)

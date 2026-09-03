@@ -612,6 +612,8 @@ docs/maintenance.md
 docs/matrix_error.md
 docs/media_play_body.md
 docs/media_play_body_v1.md
+docs/media_play_by_image.md
+docs/media_play_by_url.md
 docs/media_store.md
 docs/media_store_v1.md
 docs/message_body.md
@@ -1677,6 +1679,10 @@ model/media_play_body.c
 model/media_play_body.h
 model/media_play_body_v1.c
 model/media_play_body_v1.h
+model/media_play_by_image.c
+model/media_play_by_image.h
+model/media_play_by_url.c
+model/media_play_by_url.h
 model/media_store.c
 model/media_store.h
 model/media_store_v1.c
@@ -2572,6 +2578,8 @@ unit-test/test_maintenance.c
 unit-test/test_matrix_error.c
 unit-test/test_media_play_body.c
 unit-test/test_media_play_body_v1.c
+unit-test/test_media_play_by_image.c
+unit-test/test_media_play_by_url.c
 unit-test/test_media_store.c
 unit-test/test_media_store_v1.c
 unit-test/test_message_body.c
