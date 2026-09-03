@@ -11,7 +11,7 @@
 #include "../model/hook.h"
 #include "../model/hook_list.h"
 #include "../model/update_hook_body.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 
 
 // Clear Hooks on an instance

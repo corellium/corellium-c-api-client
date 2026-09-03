@@ -420,6 +420,7 @@ set(SRCS
     model/interconnect_protocol.c
     model/interconnect_response.c
     model/interfaces_schema_inner.c
+    model/invalid_totp_error.c
     model/invitation.c
     model/invitation_by_token.c
     model/invitation_v1.c
@@ -668,7 +669,11 @@ set(SRCS
     model/user_create_return.c
     model/user_created.c
     model/user_error.c
+    model/user_error_item.c
+    model/user_error_response.c
     model/user_error_v1.c
+    model/user_errors.c
+    model/user_errors_v1.c
     model/user_snapshots.c
     model/user_update.c
     model/v1_check_subdomain_existence_parameters.c
@@ -1148,6 +1153,7 @@ set(HDRS
     model/interconnect_protocol.h
     model/interconnect_response.h
     model/interfaces_schema_inner.h
+    model/invalid_totp_error.h
     model/invitation.h
     model/invitation_by_token.h
     model/invitation_v1.h
@@ -1396,7 +1402,11 @@ set(HDRS
     model/user_create_return.h
     model/user_created.h
     model/user_error.h
+    model/user_error_item.h
+    model/user_error_response.h
     model/user_error_v1.h
+    model/user_errors.h
+    model/user_errors_v1.h
     model/user_snapshots.h
     model/user_update.h
     model/v1_check_subdomain_existence_parameters.h

@@ -10,7 +10,7 @@
 #include "../model/create_snapshot_body.h"
 #include "../model/instance_snapshots_list.h"
 #include "../model/snapshot.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 #include "../model/v3_update_snapshot_request.h"
 
 

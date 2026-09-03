@@ -36,7 +36,7 @@
 #include "../model/start_instance_body.h"
 #include "../model/stop_instance_body.h"
 #include "../model/token_validate_body.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 
 
 // Attach I/O Interface

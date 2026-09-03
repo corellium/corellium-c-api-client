@@ -576,6 +576,7 @@ docs/interconnect_list.md
 docs/interconnect_protocol.md
 docs/interconnect_response.md
 docs/interfaces_schema_inner.md
+docs/invalid_totp_error.md
 docs/invitation.md
 docs/invitation_by_token.md
 docs/invitation_v1.md
@@ -824,7 +825,11 @@ docs/user_create.md
 docs/user_create_return.md
 docs/user_created.md
 docs/user_error.md
+docs/user_error_item.md
+docs/user_error_response.md
 docs/user_error_v1.md
+docs/user_errors.md
+docs/user_errors_v1.md
 docs/user_snapshots.md
 docs/user_update.md
 docs/v1_check_subdomain_existence_parameters.md
@@ -1607,6 +1612,8 @@ model/interconnect_response.c
 model/interconnect_response.h
 model/interfaces_schema_inner.c
 model/interfaces_schema_inner.h
+model/invalid_totp_error.c
+model/invalid_totp_error.h
 model/invitation.c
 model/invitation.h
 model/invitation_by_token.c
@@ -2105,8 +2112,16 @@ model/user_created.c
 model/user_created.h
 model/user_error.c
 model/user_error.h
+model/user_error_item.c
+model/user_error_item.h
+model/user_error_response.c
+model/user_error_response.h
 model/user_error_v1.c
 model/user_error_v1.h
+model/user_errors.c
+model/user_errors.h
+model/user_errors_v1.c
+model/user_errors_v1.h
 model/user_snapshots.c
 model/user_snapshots.h
 model/user_update.c
@@ -2542,6 +2557,7 @@ unit-test/test_interconnect_list.c
 unit-test/test_interconnect_protocol.c
 unit-test/test_interconnect_response.c
 unit-test/test_interfaces_schema_inner.c
+unit-test/test_invalid_totp_error.c
 unit-test/test_invitation.c
 unit-test/test_invitation_by_token.c
 unit-test/test_invitation_v1.c
@@ -2790,7 +2806,11 @@ unit-test/test_user_create.c
 unit-test/test_user_create_return.c
 unit-test/test_user_created.c
 unit-test/test_user_error.c
+unit-test/test_user_error_item.c
+unit-test/test_user_error_response.c
 unit-test/test_user_error_v1.c
+unit-test/test_user_errors.c
+unit-test/test_user_errors_v1.c
 unit-test/test_user_snapshots.c
 unit-test/test_user_update.c
 unit-test/test_v1_check_subdomain_existence_parameters.c

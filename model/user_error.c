@@ -26,6 +26,7 @@ static user_error_t *user_error_create_internal(
     char *error,
     corellium_api_user_error_ERRORID_e error_id,
     char *field,
+    char *validator,
     list_t *project_ids,
     list_t *missing_fw_assets
     ) {
@@ -36,6 +37,7 @@ static user_error_t *user_error_create_internal(
     user_error_local_var->error = error;
     user_error_local_var->error_id = error_id;
     user_error_local_var->field = field;
+    user_error_local_var->validator = validator;
     user_error_local_var->project_ids = project_ids;
     user_error_local_var->missing_fw_assets = missing_fw_assets;
 
@@ -47,6 +49,7 @@ __attribute__((deprecated)) user_error_t *user_error_create(
     char *error,
     corellium_api_user_error_ERRORID_e error_id,
     char *field,
+    char *validator,
     list_t *project_ids,
     list_t *missing_fw_assets
     ) {
@@ -54,6 +57,7 @@ __attribute__((deprecated)) user_error_t *user_error_create(
         error,
         error_id,
         field,
+        validator,
         project_ids,
         missing_fw_assets
         );
@@ -75,6 +79,10 @@ void user_error_free(user_error_t *user_error) {
     if (user_error->field) {
         free(user_error->field);
         user_error->field = NULL;
+    }
+    if (user_error->validator) {
+        free(user_error->validator);
+        user_error->validator = NULL;
     }
     if (user_error->project_ids) {
         list_ForEach(listEntry, user_error->project_ids) {
@@ -118,6 +126,14 @@ cJSON *user_error_convertToJSON(user_error_t *user_error) {
     // user_error->field
     if(user_error->field) {
     if(cJSON_AddStringToObject(item, "field", user_error->field) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // user_error->validator
+    if(user_error->validator) {
+    if(cJSON_AddStringToObject(item, "validator", user_error->validator) == NULL) {
     goto fail; //String
     }
     }
@@ -218,6 +234,18 @@ user_error_t *user_error_parseFromJSON(cJSON *user_errorJSON){
     }
     }
 
+    // user_error->validator
+    cJSON *validator = cJSON_GetObjectItemCaseSensitive(user_errorJSON, "validator");
+    if (cJSON_IsNull(validator)) {
+        validator = NULL;
+    }
+    if (validator) { 
+    if(!cJSON_IsString(validator) && !cJSON_IsNull(validator))
+    {
+    goto end; //String
+    }
+    }
+
     // user_error->project_ids
     cJSON *project_ids = cJSON_GetObjectItemCaseSensitive(user_errorJSON, "projectIds");
     if (cJSON_IsNull(project_ids)) {
@@ -267,6 +295,7 @@ user_error_t *user_error_parseFromJSON(cJSON *user_errorJSON){
         strdup(error->valuestring),
         error_idVariable,
         field && !cJSON_IsNull(field) ? strdup(field->valuestring) : NULL,
+        validator && !cJSON_IsNull(validator) ? strdup(validator->valuestring) : NULL,
         project_ids ? project_idsList : NULL,
         missing_fw_assets ? missing_fw_assetsList : NULL
         );

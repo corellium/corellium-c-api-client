@@ -11,7 +11,7 @@
 #include "../model/interconnect_list.h"
 #include "../model/patch_interconnect_body.h"
 #include "../model/update_interconnect_v3_body.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 
 
 // Create I/O Interconnect

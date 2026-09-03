@@ -15,10 +15,12 @@
 
 typedef struct user_error_v1_t user_error_v1_t;
 
+#include "user_error_item.h"
+#include "user_errors_v1.h"
 
 // Enum ERRORID for user_error_v1
 
-typedef enum  { corellium_api_user_error_v1_ERRORID_NULL = 0, corellium_api_user_error_v1_ERRORID_UserError } corellium_api_user_error_v1_ERRORID_e;
+typedef enum  { corellium_api_user_error_v1_ERRORID_NULL = 0, corellium_api_user_error_v1_ERRORID_UserErrors } corellium_api_user_error_v1_ERRORID_e;
 
 char* user_error_v1_error_id_ToString(corellium_api_user_error_v1_ERRORID_e error_id);
 
@@ -30,7 +32,9 @@ typedef struct user_error_v1_t {
     char *error; // string
     corellium_api_user_error_v1_ERRORID_e error_id; //enum
     char *field; // string
+    char *validator; // string
     list_t *project_ids; //primitive container
+    list_t *errors; //nonprimitive container
 
     int _library_owned; // Is the library responsible for freeing this object?
 } user_error_v1_t;
@@ -39,7 +43,9 @@ __attribute__((deprecated)) user_error_v1_t *user_error_v1_create(
     char *error,
     corellium_api_user_error_v1_ERRORID_e error_id,
     char *field,
-    list_t *project_ids
+    char *validator,
+    list_t *project_ids,
+    list_t *errors
 );
 
 void user_error_v1_free(user_error_v1_t *user_error_v1);

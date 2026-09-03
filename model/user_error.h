@@ -30,6 +30,7 @@ typedef struct user_error_t {
     char *error; // string
     corellium_api_user_error_ERRORID_e error_id; //enum
     char *field; // string
+    char *validator; // string
     list_t *project_ids; //primitive container
     list_t *missing_fw_assets; //primitive container
 
@@ -40,6 +41,7 @@ __attribute__((deprecated)) user_error_t *user_error_create(
     char *error,
     corellium_api_user_error_ERRORID_e error_id,
     char *field,
+    char *validator,
     list_t *project_ids,
     list_t *missing_fw_assets
 );

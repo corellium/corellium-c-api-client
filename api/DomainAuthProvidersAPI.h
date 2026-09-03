@@ -12,7 +12,7 @@
 #include "../model/domain_auth_provider_response.h"
 #include "../model/domain_auth_providers_list.h"
 #include "../model/patch_domain_auth_provider_body.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 
 
 // Create a new auth provider for a domain

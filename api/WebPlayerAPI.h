@@ -8,7 +8,7 @@
 #include "../model/api_error.h"
 #include "../model/api_not_found_error.h"
 #include "../model/create_web_player_session_body.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 #include "../model/web_player_allowed_domains.h"
 #include "../model/web_player_created_session.h"
 #include "../model/web_player_session.h"

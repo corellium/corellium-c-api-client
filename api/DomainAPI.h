@@ -13,7 +13,7 @@
 #include "../model/object.h"
 #include "../model/patch_domain_welcome_message_body.h"
 #include "../model/set_domain_welcome_message_body.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 
 
 // Create a welcome message for a domain

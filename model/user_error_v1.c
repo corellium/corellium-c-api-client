@@ -5,13 +5,13 @@
 
 
 char* user_error_v1_error_id_ToString(corellium_api_user_error_v1_ERRORID_e error_id) {
-    char* error_idArray[] =  { "NULL", "UserError" };
+    char* error_idArray[] =  { "NULL", "UserErrors" };
     return error_idArray[error_id];
 }
 
 corellium_api_user_error_v1_ERRORID_e user_error_v1_error_id_FromString(char* error_id){
     int stringToReturn = 0;
-    char *error_idArray[] =  { "NULL", "UserError" };
+    char *error_idArray[] =  { "NULL", "UserErrors" };
     size_t sizeofArray = sizeof(error_idArray) / sizeof(error_idArray[0]);
     while(stringToReturn < sizeofArray) {
         if(strcmp(error_id, error_idArray[stringToReturn]) == 0) {
@@ -26,7 +26,9 @@ static user_error_v1_t *user_error_v1_create_internal(
     char *error,
     corellium_api_user_error_v1_ERRORID_e error_id,
     char *field,
-    list_t *project_ids
+    char *validator,
+    list_t *project_ids,
+    list_t *errors
     ) {
     user_error_v1_t *user_error_v1_local_var = malloc(sizeof(user_error_v1_t));
     if (!user_error_v1_local_var) {
@@ -35,7 +37,9 @@ static user_error_v1_t *user_error_v1_create_internal(
     user_error_v1_local_var->error = error;
     user_error_v1_local_var->error_id = error_id;
     user_error_v1_local_var->field = field;
+    user_error_v1_local_var->validator = validator;
     user_error_v1_local_var->project_ids = project_ids;
+    user_error_v1_local_var->errors = errors;
 
     user_error_v1_local_var->_library_owned = 1;
     return user_error_v1_local_var;
@@ -45,13 +49,17 @@ __attribute__((deprecated)) user_error_v1_t *user_error_v1_create(
     char *error,
     corellium_api_user_error_v1_ERRORID_e error_id,
     char *field,
-    list_t *project_ids
+    char *validator,
+    list_t *project_ids,
+    list_t *errors
     ) {
     return user_error_v1_create_internal (
         error,
         error_id,
         field,
-        project_ids
+        validator,
+        project_ids,
+        errors
         );
 }
 
@@ -72,12 +80,23 @@ void user_error_v1_free(user_error_v1_t *user_error_v1) {
         free(user_error_v1->field);
         user_error_v1->field = NULL;
     }
+    if (user_error_v1->validator) {
+        free(user_error_v1->validator);
+        user_error_v1->validator = NULL;
+    }
     if (user_error_v1->project_ids) {
         list_ForEach(listEntry, user_error_v1->project_ids) {
             free(listEntry->data);
         }
         list_freeList(user_error_v1->project_ids);
         user_error_v1->project_ids = NULL;
+    }
+    if (user_error_v1->errors) {
+        list_ForEach(listEntry, user_error_v1->errors) {
+            user_error_item_free(listEntry->data);
+        }
+        list_freeList(user_error_v1->errors);
+        user_error_v1->errors = NULL;
     }
     free(user_error_v1);
 }
@@ -112,6 +131,14 @@ cJSON *user_error_v1_convertToJSON(user_error_v1_t *user_error_v1) {
     }
 
 
+    // user_error_v1->validator
+    if(user_error_v1->validator) {
+    if(cJSON_AddStringToObject(item, "validator", user_error_v1->validator) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
     // user_error_v1->project_ids
     if(user_error_v1->project_ids) {
     cJSON *project_ids = cJSON_AddArrayToObject(item, "projectIds");
@@ -125,6 +152,27 @@ cJSON *user_error_v1_convertToJSON(user_error_v1_t *user_error_v1) {
     {
         goto fail;
     }
+    }
+    }
+
+
+    // user_error_v1->errors
+    if (!user_error_v1->errors) {
+        goto fail;
+    }
+    cJSON *errors = cJSON_AddArrayToObject(item, "errors");
+    if(errors == NULL) {
+    goto fail; //nonprimitive container
+    }
+
+    listEntry_t *errorsListEntry;
+    if (user_error_v1->errors) {
+    list_ForEach(errorsListEntry, user_error_v1->errors) {
+    cJSON *itemLocal = user_error_item_convertToJSON(errorsListEntry->data);
+    if(itemLocal == NULL) {
+    goto fail;
+    }
+    cJSON_AddItemToArray(errors, itemLocal);
     }
     }
 
@@ -142,6 +190,9 @@ user_error_v1_t *user_error_v1_parseFromJSON(cJSON *user_error_v1JSON){
 
     // define the local list for user_error_v1->project_ids
     list_t *project_idsList = NULL;
+
+    // define the local list for user_error_v1->errors
+    list_t *errorsList = NULL;
 
     // user_error_v1->error
     cJSON *error = cJSON_GetObjectItemCaseSensitive(user_error_v1JSON, "error");
@@ -187,6 +238,18 @@ user_error_v1_t *user_error_v1_parseFromJSON(cJSON *user_error_v1JSON){
     }
     }
 
+    // user_error_v1->validator
+    cJSON *validator = cJSON_GetObjectItemCaseSensitive(user_error_v1JSON, "validator");
+    if (cJSON_IsNull(validator)) {
+        validator = NULL;
+    }
+    if (validator) { 
+    if(!cJSON_IsString(validator) && !cJSON_IsNull(validator))
+    {
+    goto end; //String
+    }
+    }
+
     // user_error_v1->project_ids
     cJSON *project_ids = cJSON_GetObjectItemCaseSensitive(user_error_v1JSON, "projectIds");
     if (cJSON_IsNull(project_ids)) {
@@ -209,12 +272,41 @@ user_error_v1_t *user_error_v1_parseFromJSON(cJSON *user_error_v1JSON){
     }
     }
 
+    // user_error_v1->errors
+    cJSON *errors = cJSON_GetObjectItemCaseSensitive(user_error_v1JSON, "errors");
+    if (cJSON_IsNull(errors)) {
+        errors = NULL;
+    }
+    if (!errors) {
+        goto end;
+    }
+
+    
+    cJSON *errors_local_nonprimitive = NULL;
+    if(!cJSON_IsArray(errors)){
+        goto end; //nonprimitive container
+    }
+
+    errorsList = list_createList();
+
+    cJSON_ArrayForEach(errors_local_nonprimitive,errors )
+    {
+        if(!cJSON_IsObject(errors_local_nonprimitive)){
+            goto end;
+        }
+        user_error_item_t *errorsItem = user_error_item_parseFromJSON(errors_local_nonprimitive);
+
+        list_addElement(errorsList, errorsItem);
+    }
+
 
     user_error_v1_local_var = user_error_v1_create_internal (
         strdup(error->valuestring),
         error_idVariable,
         field && !cJSON_IsNull(field) ? strdup(field->valuestring) : NULL,
-        project_ids ? project_idsList : NULL
+        validator && !cJSON_IsNull(validator) ? strdup(validator->valuestring) : NULL,
+        project_ids ? project_idsList : NULL,
+        errorsList
         );
 
     return user_error_v1_local_var;
@@ -227,6 +319,15 @@ end:
         }
         list_freeList(project_idsList);
         project_idsList = NULL;
+    }
+    if (errorsList) {
+        listEntry_t *listEntry = NULL;
+        list_ForEach(listEntry, errorsList) {
+            user_error_item_free(listEntry->data);
+            listEntry->data = NULL;
+        }
+        list_freeList(errorsList);
+        errorsList = NULL;
     }
     return NULL;
 

@@ -9,12 +9,13 @@
 #include "../model/api_error.h"
 #include "../model/change_password_body.h"
 #include "../model/create_user_body.h"
+#include "../model/invalid_totp_error.h"
 #include "../model/patch_user_body.h"
 #include "../model/reset_link_info.h"
 #include "../model/reset_password_body.h"
 #include "../model/send_reset_link_body.h"
 #include "../model/user_created.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 
 
 // Agree to terms

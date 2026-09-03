@@ -14,7 +14,7 @@
 #include "../model/object.h"
 #include "../model/partial_update_network_connection_body.h"
 #include "../model/update_network_connection_body.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 #include "../model/v3_delete_network_connection_request.h"
 
 

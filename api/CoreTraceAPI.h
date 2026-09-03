@@ -7,7 +7,7 @@
 #include "../include/binary.h"
 #include "../model/api_error.h"
 #include "../model/kernel_task.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 
 
 // Clear CoreTrace logs

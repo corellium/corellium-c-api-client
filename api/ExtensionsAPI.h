@@ -13,7 +13,7 @@
 #include "../model/load_extension_body.h"
 #include "../model/object.h"
 #include "../model/update_extension_body.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 
 
 // Delete an existing extension

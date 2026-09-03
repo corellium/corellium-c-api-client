@@ -18,7 +18,7 @@
 #include "../model/object.h"
 #include "../model/revoke_invites_body.h"
 #include "../model/revoke_invites_response.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 
 
 // Create invites

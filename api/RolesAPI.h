@@ -8,7 +8,7 @@
 #include "../model/api_error.h"
 #include "../model/api_not_found_error.h"
 #include "../model/roles_list_response.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 
 
 // Add team role to deployment

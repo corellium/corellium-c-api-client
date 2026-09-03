@@ -579,6 +579,10 @@ UsersAPI_v3ResetPassword(apiClient_t *apiClient, reset_password_body_t *reset_pa
     //    printf("%s\n","Password reset token must be supplied.");
     //}
     // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","The one-time code supplied is incorrect.");
+    //}
+    // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
     //    printf("%s\n","Permission denied.");
     //}

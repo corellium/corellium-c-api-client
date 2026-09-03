@@ -8,7 +8,7 @@
 #include "../model/api_conflict_error.h"
 #include "../model/api_error.h"
 #include "../model/token.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 
 
 // Clear RAM Dump

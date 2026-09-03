@@ -15,7 +15,7 @@
 #include "../model/subscribe_to_trial_body.h"
 #include "../model/subscription.h"
 #include "../model/uncancel_subscription_body.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 
 
 // Cancel a subscription

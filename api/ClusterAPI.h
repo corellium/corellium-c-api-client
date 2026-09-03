@@ -15,7 +15,7 @@
 #include "../model/node_information.h"
 #include "../model/node_list.h"
 #include "../model/patch_cluster_config_body.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 
 
 // Delete cluster snapshot

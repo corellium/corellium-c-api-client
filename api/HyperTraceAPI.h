@@ -10,7 +10,7 @@
 #include "../model/enable_btrace_body.h"
 #include "../model/kcrange.h"
 #include "../model/token.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 
 
 // Pre-authorize a btrace download

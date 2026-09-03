@@ -11,7 +11,7 @@
 #include "../model/team_created.h"
 #include "../model/teams_list_response.h"
 #include "../model/update_team_body.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 
 
 // Add a user to a team

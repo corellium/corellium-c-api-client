@@ -18,7 +18,7 @@
 #include "../model/install_firmware_body.h"
 #include "../model/install_firmware_response.h"
 #include "../model/install_firmware_status_response.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 
 
 // Create an image

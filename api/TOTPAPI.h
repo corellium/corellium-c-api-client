@@ -11,7 +11,7 @@
 #include "../model/totp_enable_body.h"
 #include "../model/totp_generate_response.h"
 #include "../model/totp_status_response.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 
 
 // Disable TOTP for this user

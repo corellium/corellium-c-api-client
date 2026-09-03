@@ -12,7 +12,7 @@
 #include "../model/auth_providers_list_response.h"
 #include "../model/login_body.h"
 #include "../model/login_result.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 
 
 // Log in

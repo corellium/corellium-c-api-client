@@ -11,7 +11,7 @@
 #include "../model/api_error.h"
 #include "../model/api_not_found_error.h"
 #include "../model/create_activity_export_body.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 #include "../model/v3_create_activity_export_201_response.h"
 #include "../model/v3_get_activity_export_status_200_response.h"
 

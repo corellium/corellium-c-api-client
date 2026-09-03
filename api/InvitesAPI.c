@@ -560,7 +560,7 @@ InvitesAPI_v3SignupFromInvite(apiClient_t *apiClient, invite_signup_body_t *invi
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","Invalid signup parameters.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {

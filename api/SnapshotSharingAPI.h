@@ -12,7 +12,7 @@
 #include "../model/share_snapshot_body.h"
 #include "../model/shared_snapshots_response.h"
 #include "../model/snapshot.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 
 
 // Accept a shared snapshot

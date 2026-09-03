@@ -18,7 +18,7 @@
 #include "../model/firmware_service_settings.h"
 #include "../model/object.h"
 #include "../model/patch_firmware_service_config_body.h"
-#include "../model/user_error.h"
+#include "../model/user_error_response.h"
 
 
 // Add firmware assets
