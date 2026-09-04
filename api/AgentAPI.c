@@ -2178,6 +2178,225 @@ end:
 
 }
 
+// Pre-authorize an archive download from VM
+//
+// Return a token for downloading selected files and directories as a server-generated ZIP archive.
+//
+agent_file_download_token_t*
+AgentAPI_v3PreauthorizeFileArchiveDownloadAgent(apiClient_t *apiClient, char *instanceId, agent_file_archive_download_body_t *agent_file_archive_download_body)
+{
+    list_t    *localVarQueryParameters = NULL;
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = list_createList();
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/instances/{instanceId}/agent-authorize/v1/file/download");
+
+    if(!instanceId)
+        goto end;
+
+
+    // Path Params
+    long sizeOfPathParams_instanceId = strlen(instanceId)+3 + sizeof("{ instanceId }") - 1;
+    if(instanceId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_instanceId = malloc(sizeOfPathParams_instanceId);
+    sprintf(localVarToReplace_instanceId, "{%s}", "instanceId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_instanceId, instanceId);
+
+
+
+    // Body Param
+    cJSON *localVarSingleItemJSON_agent_file_archive_download_body = NULL;
+    if (agent_file_archive_download_body != NULL)
+    {
+        //not string, not binary
+        localVarSingleItemJSON_agent_file_archive_download_body = agent_file_archive_download_body_convertToJSON(agent_file_archive_download_body);
+        localVarBodyParameters = cJSON_Print(localVarSingleItemJSON_agent_file_archive_download_body);
+        localVarBodyLength = strlen(localVarBodyParameters);
+    }
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    list_addElement(localVarContentType,"application/json"); //consumes
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "POST");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 200) {
+    //    printf("%s\n","Preauthorized archive download token.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 400) {
+    //    printf("%s\n","Invalid request.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","Permission denied.");
+    //}
+    //nonprimitive not container
+    agent_file_download_token_t *elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
+        cJSON *AgentAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
+        elementToReturn = agent_file_download_token_parseFromJSON(AgentAPIlocalVarJSON);
+        cJSON_Delete(AgentAPIlocalVarJSON);
+        if(elementToReturn == NULL) {
+            // return 0;
+        }
+    }
+
+    //return type
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    
+    
+    
+    list_freeList(localVarHeaderType);
+    list_freeList(localVarContentType);
+    free(localVarPath);
+    free(localVarToReplace_instanceId);
+    if (localVarSingleItemJSON_agent_file_archive_download_body) {
+        cJSON_Delete(localVarSingleItemJSON_agent_file_archive_download_body);
+        localVarSingleItemJSON_agent_file_archive_download_body = NULL;
+    }
+    free(localVarBodyParameters);
+    return elementToReturn;
+end:
+    free(localVarPath);
+    return NULL;
+
+}
+
+// Pre-authorize a file download from VM
+//
+// Return a token for downloading a file directly without buffering it in the SDK client.
+//
+agent_file_download_token_t*
+AgentAPI_v3PreauthorizeFileDownloadAgent(apiClient_t *apiClient, char *instanceId, char *filePath)
+{
+    list_t    *localVarQueryParameters = NULL;
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = NULL;
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/instances/{instanceId}/agent-authorize/v1/file/device/{filePath}");
+
+    if(!instanceId)
+        goto end;
+    if(!filePath)
+        goto end;
+
+
+    // Path Params
+    long sizeOfPathParams_instanceId = strlen(instanceId)+3 + strlen(filePath)+3 + sizeof("{ instanceId }") - 1;
+    if(instanceId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_instanceId = malloc(sizeOfPathParams_instanceId);
+    sprintf(localVarToReplace_instanceId, "{%s}", "instanceId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_instanceId, instanceId);
+
+    // Path Params
+    long sizeOfPathParams_filePath = strlen(instanceId)+3 + strlen(filePath)+3 + sizeof("{ filePath }") - 1;
+    if(filePath == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_filePath = malloc(sizeOfPathParams_filePath);
+    sprintf(localVarToReplace_filePath, "{%s}", "filePath");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_filePath, filePath);
+
+
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "POST");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 200) {
+    //    printf("%s\n","Preauthorized download token.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 400) {
+    //    printf("%s\n","Invalid request.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","Permission denied.");
+    //}
+    //nonprimitive not container
+    agent_file_download_token_t *elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
+        cJSON *AgentAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
+        elementToReturn = agent_file_download_token_parseFromJSON(AgentAPIlocalVarJSON);
+        cJSON_Delete(AgentAPIlocalVarJSON);
+        if(elementToReturn == NULL) {
+            // return 0;
+        }
+    }
+
+    //return type
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    
+    
+    
+    list_freeList(localVarHeaderType);
+    
+    free(localVarPath);
+    free(localVarToReplace_instanceId);
+    free(localVarToReplace_filePath);
+    return elementToReturn;
+end:
+    free(localVarPath);
+    return NULL;
+
+}
+
 // Run an app
 //
 // Run an installed app on the VM.

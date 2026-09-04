@@ -26,6 +26,8 @@ Method | HTTP request | Description
 [**AgentAPI_v3ListFridaProcessesAgent**](AgentAPI.md#AgentAPI_v3ListFridaProcessesAgent) | **POST** /v3/instances/{instanceId}/agent/v1/frida/run-frida-ps | List Frida processes
 [**AgentAPI_v3ListProfilesAgent**](AgentAPI.md#AgentAPI_v3ListProfilesAgent) | **GET** /v3/instances/{instanceId}/agent/v1/profile/profiles | List profiles
 [**AgentAPI_v3LockAgent**](AgentAPI.md#AgentAPI_v3LockAgent) | **POST** /v3/instances/{instanceId}/agent/v1/system/lock | Lock device
+[**AgentAPI_v3PreauthorizeFileArchiveDownloadAgent**](AgentAPI.md#AgentAPI_v3PreauthorizeFileArchiveDownloadAgent) | **POST** /v3/instances/{instanceId}/agent-authorize/v1/file/download | Pre-authorize an archive download from VM
+[**AgentAPI_v3PreauthorizeFileDownloadAgent**](AgentAPI.md#AgentAPI_v3PreauthorizeFileDownloadAgent) | **POST** /v3/instances/{instanceId}/agent-authorize/v1/file/device/{filePath} | Pre-authorize a file download from VM
 [**AgentAPI_v3RunAppAgent**](AgentAPI.md#AgentAPI_v3RunAppAgent) | **POST** /v3/instances/{instanceId}/agent/v1/app/apps/{bundleId}/run | Run an app
 [**AgentAPI_v3RunFridaAgent**](AgentAPI.md#AgentAPI_v3RunFridaAgent) | **POST** /v3/instances/{instanceId}/agent/v1/frida/run-frida | Run Frida
 [**AgentAPI_v3SetAdbAuthAgent**](AgentAPI.md#AgentAPI_v3SetAdbAuthAgent) | **PUT** /v3/instances/{instanceId}/agent/v1/system/adbauth | Set ADB auth setting
@@ -720,6 +722,70 @@ Name | Type | Description  | Notes
 ### Return type
 
 void
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **AgentAPI_v3PreauthorizeFileArchiveDownloadAgent**
+```c
+// Pre-authorize an archive download from VM
+//
+// Return a token for downloading selected files and directories as a server-generated ZIP archive.
+//
+agent_file_download_token_t* AgentAPI_v3PreauthorizeFileArchiveDownloadAgent(apiClient_t *apiClient, char *instanceId, agent_file_archive_download_body_t *agent_file_archive_download_body);
+```
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**apiClient** | **apiClient_t \*** | context containing the client configuration |
+**instanceId** | **char \*** | Instance ID. | 
+**agent_file_archive_download_body** | **[agent_file_archive_download_body_t](agent_file_archive_download_body.md) \*** |  | 
+
+### Return type
+
+[agent_file_download_token_t](agent_file_download_token.md) *
+
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **AgentAPI_v3PreauthorizeFileDownloadAgent**
+```c
+// Pre-authorize a file download from VM
+//
+// Return a token for downloading a file directly without buffering it in the SDK client.
+//
+agent_file_download_token_t* AgentAPI_v3PreauthorizeFileDownloadAgent(apiClient_t *apiClient, char *instanceId, char *filePath);
+```
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**apiClient** | **apiClient_t \*** | context containing the client configuration |
+**instanceId** | **char \*** | Instance ID. | 
+**filePath** | **char \*** | Path to the file on the VM filesystem. | 
+
+### Return type
+
+[agent_file_download_token_t](agent_file_download_token.md) *
+
 
 ### Authorization
 

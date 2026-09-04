@@ -78,7 +78,9 @@ set(SRCS
     model/agent_container_list.c
     model/agent_error.c
     model/agent_error_v1.c
+    model/agent_file_archive_download_body.c
     model/agent_file_attributes_body.c
+    model/agent_file_download_token.c
     model/agent_frida_process_list.c
     model/agent_frida_process_list_attached.c
     model/agent_frida_response.c
@@ -811,7 +813,9 @@ set(HDRS
     model/agent_container_list.h
     model/agent_error.h
     model/agent_error_v1.h
+    model/agent_file_archive_download_body.h
     model/agent_file_attributes_body.h
+    model/agent_file_download_token.h
     model/agent_frida_process_list.h
     model/agent_frida_process_list_attached.h
     model/agent_frida_response.h

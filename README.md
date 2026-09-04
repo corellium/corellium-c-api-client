@@ -148,6 +148,8 @@ Category | Method | HTTP request | Description
 *AgentAPI* | [**AgentAPI_v3ListFridaProcessesAgent**](docs/AgentAPI.md#AgentAPI_v3ListFridaProcessesAgent) | **POST** /v3/instances/{instanceId}/agent/v1/frida/run-frida-ps | List Frida processes
 *AgentAPI* | [**AgentAPI_v3ListProfilesAgent**](docs/AgentAPI.md#AgentAPI_v3ListProfilesAgent) | **GET** /v3/instances/{instanceId}/agent/v1/profile/profiles | List profiles
 *AgentAPI* | [**AgentAPI_v3LockAgent**](docs/AgentAPI.md#AgentAPI_v3LockAgent) | **POST** /v3/instances/{instanceId}/agent/v1/system/lock | Lock device
+*AgentAPI* | [**AgentAPI_v3PreauthorizeFileArchiveDownloadAgent**](docs/AgentAPI.md#AgentAPI_v3PreauthorizeFileArchiveDownloadAgent) | **POST** /v3/instances/{instanceId}/agent-authorize/v1/file/download | Pre-authorize an archive download from VM
+*AgentAPI* | [**AgentAPI_v3PreauthorizeFileDownloadAgent**](docs/AgentAPI.md#AgentAPI_v3PreauthorizeFileDownloadAgent) | **POST** /v3/instances/{instanceId}/agent-authorize/v1/file/device/{filePath} | Pre-authorize a file download from VM
 *AgentAPI* | [**AgentAPI_v3RunAppAgent**](docs/AgentAPI.md#AgentAPI_v3RunAppAgent) | **POST** /v3/instances/{instanceId}/agent/v1/app/apps/{bundleId}/run | Run an app
 *AgentAPI* | [**AgentAPI_v3RunFridaAgent**](docs/AgentAPI.md#AgentAPI_v3RunFridaAgent) | **POST** /v3/instances/{instanceId}/agent/v1/frida/run-frida | Run Frida
 *AgentAPI* | [**AgentAPI_v3SetAdbAuthAgent**](docs/AgentAPI.md#AgentAPI_v3SetAdbAuthAgent) | **PUT** /v3/instances/{instanceId}/agent/v1/system/adbauth | Set ADB auth setting
@@ -647,7 +649,9 @@ Category | Method | HTTP request | Description
  - [agent_container_list_t](docs/agent_container_list.md)
  - [agent_error_t](docs/agent_error.md)
  - [agent_error_v1_t](docs/agent_error_v1.md)
+ - [agent_file_archive_download_body_t](docs/agent_file_archive_download_body.md)
  - [agent_file_attributes_body_t](docs/agent_file_attributes_body.md)
+ - [agent_file_download_token_t](docs/agent_file_download_token.md)
  - [agent_frida_process_list_t](docs/agent_frida_process_list.md)
  - [agent_frida_process_list_attached_t](docs/agent_frida_process_list_attached.md)
  - [agent_frida_response_t](docs/agent_frida_response.md)

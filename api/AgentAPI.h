@@ -11,7 +11,9 @@
 #include "../model/agent_container_health.h"
 #include "../model/agent_container_list.h"
 #include "../model/agent_error.h"
+#include "../model/agent_file_archive_download_body.h"
 #include "../model/agent_file_attributes_body.h"
+#include "../model/agent_file_download_token.h"
 #include "../model/agent_frida_process_list.h"
 #include "../model/agent_frida_response.h"
 #include "../model/agent_frida_run_body.h"
@@ -30,6 +32,7 @@
 #include "../model/agent_temp_file_response.h"
 #include "../model/api_error.h"
 #include "../model/api_not_found_error.h"
+#include "../model/user_error_response.h"
 
 
 // Delete a file on VM
@@ -206,6 +209,22 @@ AgentAPI_v3ListProfilesAgent(apiClient_t *apiClient, char *instanceId);
 //
 void
 AgentAPI_v3LockAgent(apiClient_t *apiClient, char *instanceId);
+
+
+// Pre-authorize an archive download from VM
+//
+// Return a token for downloading selected files and directories as a server-generated ZIP archive.
+//
+agent_file_download_token_t*
+AgentAPI_v3PreauthorizeFileArchiveDownloadAgent(apiClient_t *apiClient, char *instanceId, agent_file_archive_download_body_t *agent_file_archive_download_body);
+
+
+// Pre-authorize a file download from VM
+//
+// Return a token for downloading a file directly without buffering it in the SDK client.
+//
+agent_file_download_token_t*
+AgentAPI_v3PreauthorizeFileDownloadAgent(apiClient_t *apiClient, char *instanceId, char *filePath);
 
 
 // Run an app

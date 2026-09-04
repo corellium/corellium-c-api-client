@@ -234,7 +234,9 @@ docs/agent_container_health.md
 docs/agent_container_list.md
 docs/agent_error.md
 docs/agent_error_v1.md
+docs/agent_file_archive_download_body.md
 docs/agent_file_attributes_body.md
+docs/agent_file_download_token.md
 docs/agent_frida_process_list.md
 docs/agent_frida_process_list_attached.md
 docs/agent_frida_response.md
@@ -927,8 +929,12 @@ model/agent_error.c
 model/agent_error.h
 model/agent_error_v1.c
 model/agent_error_v1.h
+model/agent_file_archive_download_body.c
+model/agent_file_archive_download_body.h
 model/agent_file_attributes_body.c
 model/agent_file_attributes_body.h
+model/agent_file_download_token.c
+model/agent_file_download_token.h
 model/agent_frida_process_list.c
 model/agent_frida_process_list.h
 model/agent_frida_process_list_attached.c
@@ -2215,7 +2221,9 @@ unit-test/test_agent_container_health.c
 unit-test/test_agent_container_list.c
 unit-test/test_agent_error.c
 unit-test/test_agent_error_v1.c
+unit-test/test_agent_file_archive_download_body.c
 unit-test/test_agent_file_attributes_body.c
+unit-test/test_agent_file_download_token.c
 unit-test/test_agent_frida_process_list.c
 unit-test/test_agent_frida_process_list_attached.c
 unit-test/test_agent_frida_response.c
