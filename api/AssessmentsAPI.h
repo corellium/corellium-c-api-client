@@ -70,7 +70,7 @@ AssessmentsAPI_v3GetAssessmentById(apiClient_t *apiClient, char *instanceId, cha
 // Returns a paginated list of assessments for the given instance.
 //
 paginated_assessments_t*
-AssessmentsAPI_v3GetAssessmentsByInstanceId(apiClient_t *apiClient, char *instanceId, char *targetInstanceId, double *limit, double *offset, char *sort);
+AssessmentsAPI_v3GetAssessmentsByInstanceId(apiClient_t *apiClient, char *instanceId, char *targetInstanceId, double *limit, double *offset, char *sort, char *name, char *version, char *status, char *createdBy, char *wordlist, char *frida, char *corelliumVersion, char *createdAt);
 
 
 // Update an assessment status.

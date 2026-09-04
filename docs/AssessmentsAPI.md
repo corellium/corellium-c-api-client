@@ -218,7 +218,7 @@ Name | Type | Description  | Notes
 //
 // Returns a paginated list of assessments for the given instance.
 //
-paginated_assessments_t* AssessmentsAPI_v3GetAssessmentsByInstanceId(apiClient_t *apiClient, char *instanceId, char *targetInstanceId, double *limit, double *offset, char *sort);
+paginated_assessments_t* AssessmentsAPI_v3GetAssessmentsByInstanceId(apiClient_t *apiClient, char *instanceId, char *targetInstanceId, double *limit, double *offset, char *sort, char *name, char *version, char *status, char *createdBy, char *wordlist, char *frida, char *corelliumVersion, char *createdAt);
 ```
 
 ### Parameters
@@ -229,7 +229,15 @@ Name | Type | Description  | Notes
 **targetInstanceId** | **char \*** | Identifier of the instance whose assessments are listed. | 
 **limit** | **double \*** | Maximum number of assessments to return. Defaults to 100. | [optional] [default to 100]
 **offset** | **double \*** | Number of assessments to skip before returning results. Defaults to 0. | [optional] [default to 0]
-**sort** | **char \*** | Comma-separated fields to order by; prefix a field with \&quot;-\&quot; for descending. Allowed fields: createdAt, status. Defaults to \&quot;-createdAt\&quot;. | [optional] 
+**sort** | **char \*** | Comma-separated fields to order by; prefix a field with \&quot;-\&quot; for descending. Allowed fields: createdAt, status, name, version, score, wordlist, frida, corelliumVersion. Defaults to \&quot;-createdAt\&quot;. | [optional] 
+**name** | **char \*** | Filter by app name (exact match). | [optional] 
+**version** | **char \*** | Filter by app version (exact match). | [optional] 
+**status** | **char \*** | Filter by assessment status. | [optional] 
+**createdBy** | **char \*** | Filter by the user ID that created the assessment. | [optional] 
+**wordlist** | **char \*** | Filter by wordlist name. Use \&quot;None\&quot; to return assessments without a wordlist. | [optional] 
+**frida** | **char \*** | Filter by Frida script name. Use \&quot;None\&quot; to return assessments without a Frida script. | [optional] 
+**corelliumVersion** | **char \*** | Filter by Corellium version (exact match). | [optional] 
+**createdAt** | **char \*** | Filter by test date. Accepts a single date (MM/DD/YYYY), a range (MM/DD/YYYY-MM/DD/YYYY), or a comma-separated list of dates and ranges. Dates are matched inclusive of the full day in UTC. | [optional] 
 
 ### Return type
 

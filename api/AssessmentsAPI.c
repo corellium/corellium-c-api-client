@@ -743,7 +743,7 @@ end:
 // Returns a paginated list of assessments for the given instance.
 //
 paginated_assessments_t*
-AssessmentsAPI_v3GetAssessmentsByInstanceId(apiClient_t *apiClient, char *instanceId, char *targetInstanceId, double *limit, double *offset, char *sort)
+AssessmentsAPI_v3GetAssessmentsByInstanceId(apiClient_t *apiClient, char *instanceId, char *targetInstanceId, double *limit, double *offset, char *sort, char *name, char *version, char *status, char *createdBy, char *wordlist, char *frida, char *corelliumVersion, char *createdAt)
 {
     list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
@@ -823,6 +823,102 @@ AssessmentsAPI_v3GetAssessmentsByInstanceId(apiClient_t *apiClient, char *instan
         valueQuery_sort = strdup((sort));
         keyPairQuery_sort = keyValuePair_create(keyQuery_sort, valueQuery_sort);
         list_addElement(localVarQueryParameters,keyPairQuery_sort);
+    }
+
+    // query parameters
+    char *keyQuery_name = NULL;
+    char * valueQuery_name = NULL;
+    keyValuePair_t *keyPairQuery_name = 0;
+    if (name)
+    {
+        keyQuery_name = strdup("name");
+        valueQuery_name = strdup((name));
+        keyPairQuery_name = keyValuePair_create(keyQuery_name, valueQuery_name);
+        list_addElement(localVarQueryParameters,keyPairQuery_name);
+    }
+
+    // query parameters
+    char *keyQuery_version = NULL;
+    char * valueQuery_version = NULL;
+    keyValuePair_t *keyPairQuery_version = 0;
+    if (version)
+    {
+        keyQuery_version = strdup("version");
+        valueQuery_version = strdup((version));
+        keyPairQuery_version = keyValuePair_create(keyQuery_version, valueQuery_version);
+        list_addElement(localVarQueryParameters,keyPairQuery_version);
+    }
+
+    // query parameters
+    char *keyQuery_status = NULL;
+    char * valueQuery_status = NULL;
+    keyValuePair_t *keyPairQuery_status = 0;
+    if (status)
+    {
+        keyQuery_status = strdup("status");
+        valueQuery_status = strdup((status));
+        keyPairQuery_status = keyValuePair_create(keyQuery_status, valueQuery_status);
+        list_addElement(localVarQueryParameters,keyPairQuery_status);
+    }
+
+    // query parameters
+    char *keyQuery_createdBy = NULL;
+    char * valueQuery_createdBy = NULL;
+    keyValuePair_t *keyPairQuery_createdBy = 0;
+    if (createdBy)
+    {
+        keyQuery_createdBy = strdup("createdBy");
+        valueQuery_createdBy = strdup((createdBy));
+        keyPairQuery_createdBy = keyValuePair_create(keyQuery_createdBy, valueQuery_createdBy);
+        list_addElement(localVarQueryParameters,keyPairQuery_createdBy);
+    }
+
+    // query parameters
+    char *keyQuery_wordlist = NULL;
+    char * valueQuery_wordlist = NULL;
+    keyValuePair_t *keyPairQuery_wordlist = 0;
+    if (wordlist)
+    {
+        keyQuery_wordlist = strdup("wordlist");
+        valueQuery_wordlist = strdup((wordlist));
+        keyPairQuery_wordlist = keyValuePair_create(keyQuery_wordlist, valueQuery_wordlist);
+        list_addElement(localVarQueryParameters,keyPairQuery_wordlist);
+    }
+
+    // query parameters
+    char *keyQuery_frida = NULL;
+    char * valueQuery_frida = NULL;
+    keyValuePair_t *keyPairQuery_frida = 0;
+    if (frida)
+    {
+        keyQuery_frida = strdup("frida");
+        valueQuery_frida = strdup((frida));
+        keyPairQuery_frida = keyValuePair_create(keyQuery_frida, valueQuery_frida);
+        list_addElement(localVarQueryParameters,keyPairQuery_frida);
+    }
+
+    // query parameters
+    char *keyQuery_corelliumVersion = NULL;
+    char * valueQuery_corelliumVersion = NULL;
+    keyValuePair_t *keyPairQuery_corelliumVersion = 0;
+    if (corelliumVersion)
+    {
+        keyQuery_corelliumVersion = strdup("corelliumVersion");
+        valueQuery_corelliumVersion = strdup((corelliumVersion));
+        keyPairQuery_corelliumVersion = keyValuePair_create(keyQuery_corelliumVersion, valueQuery_corelliumVersion);
+        list_addElement(localVarQueryParameters,keyPairQuery_corelliumVersion);
+    }
+
+    // query parameters
+    char *keyQuery_createdAt = NULL;
+    char * valueQuery_createdAt = NULL;
+    keyValuePair_t *keyPairQuery_createdAt = 0;
+    if (createdAt)
+    {
+        keyQuery_createdAt = strdup("createdAt");
+        valueQuery_createdAt = strdup((createdAt));
+        keyPairQuery_createdAt = keyValuePair_create(keyQuery_createdAt, valueQuery_createdAt);
+        list_addElement(localVarQueryParameters,keyPairQuery_createdAt);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -904,6 +1000,102 @@ AssessmentsAPI_v3GetAssessmentsByInstanceId(apiClient_t *apiClient, char *instan
     if(keyPairQuery_sort){
         keyValuePair_free(keyPairQuery_sort);
         keyPairQuery_sort = NULL;
+    }
+    if(keyQuery_name){
+        free(keyQuery_name);
+        keyQuery_name = NULL;
+    }
+    if(valueQuery_name){
+        free(valueQuery_name);
+        valueQuery_name = NULL;
+    }
+    if(keyPairQuery_name){
+        keyValuePair_free(keyPairQuery_name);
+        keyPairQuery_name = NULL;
+    }
+    if(keyQuery_version){
+        free(keyQuery_version);
+        keyQuery_version = NULL;
+    }
+    if(valueQuery_version){
+        free(valueQuery_version);
+        valueQuery_version = NULL;
+    }
+    if(keyPairQuery_version){
+        keyValuePair_free(keyPairQuery_version);
+        keyPairQuery_version = NULL;
+    }
+    if(keyQuery_status){
+        free(keyQuery_status);
+        keyQuery_status = NULL;
+    }
+    if(valueQuery_status){
+        free(valueQuery_status);
+        valueQuery_status = NULL;
+    }
+    if(keyPairQuery_status){
+        keyValuePair_free(keyPairQuery_status);
+        keyPairQuery_status = NULL;
+    }
+    if(keyQuery_createdBy){
+        free(keyQuery_createdBy);
+        keyQuery_createdBy = NULL;
+    }
+    if(valueQuery_createdBy){
+        free(valueQuery_createdBy);
+        valueQuery_createdBy = NULL;
+    }
+    if(keyPairQuery_createdBy){
+        keyValuePair_free(keyPairQuery_createdBy);
+        keyPairQuery_createdBy = NULL;
+    }
+    if(keyQuery_wordlist){
+        free(keyQuery_wordlist);
+        keyQuery_wordlist = NULL;
+    }
+    if(valueQuery_wordlist){
+        free(valueQuery_wordlist);
+        valueQuery_wordlist = NULL;
+    }
+    if(keyPairQuery_wordlist){
+        keyValuePair_free(keyPairQuery_wordlist);
+        keyPairQuery_wordlist = NULL;
+    }
+    if(keyQuery_frida){
+        free(keyQuery_frida);
+        keyQuery_frida = NULL;
+    }
+    if(valueQuery_frida){
+        free(valueQuery_frida);
+        valueQuery_frida = NULL;
+    }
+    if(keyPairQuery_frida){
+        keyValuePair_free(keyPairQuery_frida);
+        keyPairQuery_frida = NULL;
+    }
+    if(keyQuery_corelliumVersion){
+        free(keyQuery_corelliumVersion);
+        keyQuery_corelliumVersion = NULL;
+    }
+    if(valueQuery_corelliumVersion){
+        free(valueQuery_corelliumVersion);
+        valueQuery_corelliumVersion = NULL;
+    }
+    if(keyPairQuery_corelliumVersion){
+        keyValuePair_free(keyPairQuery_corelliumVersion);
+        keyPairQuery_corelliumVersion = NULL;
+    }
+    if(keyQuery_createdAt){
+        free(keyQuery_createdAt);
+        keyQuery_createdAt = NULL;
+    }
+    if(valueQuery_createdAt){
+        free(valueQuery_createdAt);
+        valueQuery_createdAt = NULL;
+    }
+    if(keyPairQuery_createdAt){
+        keyValuePair_free(keyPairQuery_createdAt);
+        keyPairQuery_createdAt = NULL;
     }
     return elementToReturn;
 end:
