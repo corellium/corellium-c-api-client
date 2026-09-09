@@ -489,6 +489,8 @@ docs/flavor_frame_home.md
 docs/flavor_frame_inner.md
 docs/get_firmware_info_body.md
 docs/get_interconnects_response.md
+docs/get_invite_by_token_body.md
+docs/get_reset_link_info_body.md
 docs/get_storage_response.md
 docs/gpio_state_definition.md
 docs/gpio_state_definition_banks_inner_inner.md
@@ -1440,6 +1442,10 @@ model/get_firmware_info_body.c
 model/get_firmware_info_body.h
 model/get_interconnects_response.c
 model/get_interconnects_response.h
+model/get_invite_by_token_body.c
+model/get_invite_by_token_body.h
+model/get_reset_link_info_body.c
+model/get_reset_link_info_body.h
 model/get_storage_response.c
 model/get_storage_response.h
 model/gpio_state_definition.c
@@ -2476,6 +2482,8 @@ unit-test/test_flavor_frame_home.c
 unit-test/test_flavor_frame_inner.c
 unit-test/test_get_firmware_info_body.c
 unit-test/test_get_interconnects_response.c
+unit-test/test_get_invite_by_token_body.c
+unit-test/test_get_reset_link_info_body.c
 unit-test/test_get_storage_response.c
 unit-test/test_gpio_state_definition.c
 unit-test/test_gpio_state_definition_banks_inner_inner.c

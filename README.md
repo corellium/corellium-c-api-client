@@ -457,7 +457,7 @@ Category | Method | HTTP request | Description
 *InterconnectsV1API* | [**InterconnectsV1API_v1UpdateInterconnect**](docs/InterconnectsV1API.md#InterconnectsV1API_v1UpdateInterconnect) | **PUT** /v1/interconnects/{interconnectId} | Update Interconnect
 *InvitesAPI* | [**InvitesAPI_v3CreateInvites**](docs/InvitesAPI.md#InvitesAPI_v3CreateInvites) | **POST** /v3/invites | Create invites
 *InvitesAPI* | [**InvitesAPI_v3EditInvites**](docs/InvitesAPI.md#InvitesAPI_v3EditInvites) | **POST** /v3/invites/edit | Edit invites
-*InvitesAPI* | [**InvitesAPI_v3GetInviteByToken**](docs/InvitesAPI.md#InvitesAPI_v3GetInviteByToken) | **GET** /v3/invites-by-token | Get an invite by token
+*InvitesAPI* | [**InvitesAPI_v3GetInviteByToken**](docs/InvitesAPI.md#InvitesAPI_v3GetInviteByToken) | **POST** /v3/invites-by-token | Get an invite by token
 *InvitesAPI* | [**InvitesAPI_v3ListInvites**](docs/InvitesAPI.md#InvitesAPI_v3ListInvites) | **GET** /v3/invites | List invites
 *InvitesAPI* | [**InvitesAPI_v3RevokeInvites**](docs/InvitesAPI.md#InvitesAPI_v3RevokeInvites) | **POST** /v3/invites/revoke | Revoke invites
 *InvitesAPI* | [**InvitesAPI_v3SignupFromInvite**](docs/InvitesAPI.md#InvitesAPI_v3SignupFromInvite) | **POST** /v3/invites/signup | Sign up from an invite
@@ -592,7 +592,7 @@ Category | Method | HTTP request | Description
 *UsersAPI* | [**UsersAPI_v3ChangePassword**](docs/UsersAPI.md#UsersAPI_v3ChangePassword) | **POST** /v3/users/change-password | Change password
 *UsersAPI* | [**UsersAPI_v3CreateUser**](docs/UsersAPI.md#UsersAPI_v3CreateUser) | **POST** /v3/users | Create a user
 *UsersAPI* | [**UsersAPI_v3DeleteUser**](docs/UsersAPI.md#UsersAPI_v3DeleteUser) | **DELETE** /v3/users/{userId} | Delete a user
-*UsersAPI* | [**UsersAPI_v3GetResetLinkInfo**](docs/UsersAPI.md#UsersAPI_v3GetResetLinkInfo) | **GET** /v3/users/reset-link-info | Get reset link info
+*UsersAPI* | [**UsersAPI_v3GetResetLinkInfo**](docs/UsersAPI.md#UsersAPI_v3GetResetLinkInfo) | **POST** /v3/users/reset-link-info | Get reset link info
 *UsersAPI* | [**UsersAPI_v3PatchUser**](docs/UsersAPI.md#UsersAPI_v3PatchUser) | **PATCH** /v3/users/{userId} | Update a user
 *UsersAPI* | [**UsersAPI_v3ResetPassword**](docs/UsersAPI.md#UsersAPI_v3ResetPassword) | **POST** /v3/users/reset-password | Reset password
 *UsersAPI* | [**UsersAPI_v3SendResetLink**](docs/UsersAPI.md#UsersAPI_v3SendResetLink) | **POST** /v3/users/send-reset-link | Send a password reset link
@@ -904,6 +904,8 @@ Category | Method | HTTP request | Description
  - [flavor_frame_inner_t](docs/flavor_frame_inner.md)
  - [get_firmware_info_body_t](docs/get_firmware_info_body.md)
  - [get_interconnects_response_t](docs/get_interconnects_response.md)
+ - [get_invite_by_token_body_t](docs/get_invite_by_token_body.md)
+ - [get_reset_link_info_body_t](docs/get_reset_link_info_body.md)
  - [get_storage_response_t](docs/get_storage_response.md)
  - [gpio_state_definition_t](docs/gpio_state_definition.md)
  - [gpio_state_definition_banks_inner_inner_t](docs/gpio_state_definition_banks_inner_inner.md)

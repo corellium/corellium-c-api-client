@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**InvitesAPI_v3CreateInvites**](InvitesAPI.md#InvitesAPI_v3CreateInvites) | **POST** /v3/invites | Create invites
 [**InvitesAPI_v3EditInvites**](InvitesAPI.md#InvitesAPI_v3EditInvites) | **POST** /v3/invites/edit | Edit invites
-[**InvitesAPI_v3GetInviteByToken**](InvitesAPI.md#InvitesAPI_v3GetInviteByToken) | **GET** /v3/invites-by-token | Get an invite by token
+[**InvitesAPI_v3GetInviteByToken**](InvitesAPI.md#InvitesAPI_v3GetInviteByToken) | **POST** /v3/invites-by-token | Get an invite by token
 [**InvitesAPI_v3ListInvites**](InvitesAPI.md#InvitesAPI_v3ListInvites) | **GET** /v3/invites | List invites
 [**InvitesAPI_v3RevokeInvites**](InvitesAPI.md#InvitesAPI_v3RevokeInvites) | **POST** /v3/invites/revoke | Revoke invites
 [**InvitesAPI_v3SignupFromInvite**](InvitesAPI.md#InvitesAPI_v3SignupFromInvite) | **POST** /v3/invites/signup | Sign up from an invite
@@ -80,14 +80,14 @@ Name | Type | Description  | Notes
 //
 // Look up an invitation by its token. Public endpoint used during signup.
 //
-invitation_by_token_t* InvitesAPI_v3GetInviteByToken(apiClient_t *apiClient, char *token);
+invitation_by_token_t* InvitesAPI_v3GetInviteByToken(apiClient_t *apiClient, get_invite_by_token_body_t *get_invite_by_token_body);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**token** | **char \*** | Invite token. | 
+**get_invite_by_token_body** | **[get_invite_by_token_body_t](get_invite_by_token_body.md) \*** |  | 
 
 ### Return type
 
@@ -100,7 +100,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

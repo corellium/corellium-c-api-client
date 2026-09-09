@@ -333,13 +333,13 @@ end:
 // Return account info associated with a password reset token.
 //
 reset_link_info_t*
-UsersAPI_v3GetResetLinkInfo(apiClient_t *apiClient, char *token)
+UsersAPI_v3GetResetLinkInfo(apiClient_t *apiClient, get_reset_link_info_body_t *get_reset_link_info_body)
 {
-    list_t    *localVarQueryParameters = list_createList();
+    list_t    *localVarQueryParameters = NULL;
     list_t    *localVarHeaderParameters = NULL;
     list_t    *localVarFormParameters = NULL;
     list_t *localVarHeaderType = list_createList();
-    list_t *localVarContentType = NULL;
+    list_t *localVarContentType = list_createList();
     char      *localVarBodyParameters = NULL;
     size_t     localVarBodyLength = 0;
 
@@ -353,18 +353,17 @@ UsersAPI_v3GetResetLinkInfo(apiClient_t *apiClient, char *token)
 
 
 
-    // query parameters
-    char *keyQuery_token = NULL;
-    char * valueQuery_token = NULL;
-    keyValuePair_t *keyPairQuery_token = 0;
-    if (token)
+    // Body Param
+    cJSON *localVarSingleItemJSON_get_reset_link_info_body = NULL;
+    if (get_reset_link_info_body != NULL)
     {
-        keyQuery_token = strdup("token");
-        valueQuery_token = strdup((token));
-        keyPairQuery_token = keyValuePair_create(keyQuery_token, valueQuery_token);
-        list_addElement(localVarQueryParameters,keyPairQuery_token);
+        //not string, not binary
+        localVarSingleItemJSON_get_reset_link_info_body = get_reset_link_info_body_convertToJSON(get_reset_link_info_body);
+        localVarBodyParameters = cJSON_Print(localVarSingleItemJSON_get_reset_link_info_body);
+        localVarBodyLength = strlen(localVarBodyParameters);
     }
     list_addElement(localVarHeaderType,"application/json"); //produces
+    list_addElement(localVarContentType,"application/json"); //consumes
     apiClient_invoke(apiClient,
                     localVarPath,
                     localVarQueryParameters,
@@ -374,7 +373,7 @@ UsersAPI_v3GetResetLinkInfo(apiClient_t *apiClient, char *token)
                     localVarContentType,
                     localVarBodyParameters,
                     localVarBodyLength,
-                    "GET");
+                    "POST");
 
     // uncomment below to debug the error response
     //if (apiClient->response_code == 200) {
@@ -405,24 +404,17 @@ UsersAPI_v3GetResetLinkInfo(apiClient_t *apiClient, char *token)
         apiClient->dataReceived = NULL;
         apiClient->dataReceivedLen = 0;
     }
-    list_freeList(localVarQueryParameters);
+    
     
     
     list_freeList(localVarHeaderType);
-    
+    list_freeList(localVarContentType);
     free(localVarPath);
-    if(keyQuery_token){
-        free(keyQuery_token);
-        keyQuery_token = NULL;
+    if (localVarSingleItemJSON_get_reset_link_info_body) {
+        cJSON_Delete(localVarSingleItemJSON_get_reset_link_info_body);
+        localVarSingleItemJSON_get_reset_link_info_body = NULL;
     }
-    if(valueQuery_token){
-        free(valueQuery_token);
-        valueQuery_token = NULL;
-    }
-    if(keyPairQuery_token){
-        keyValuePair_free(keyPairQuery_token);
-        keyPairQuery_token = NULL;
-    }
+    free(localVarBodyParameters);
     return elementToReturn;
 end:
     free(localVarPath);

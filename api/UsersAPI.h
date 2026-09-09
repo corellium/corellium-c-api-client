@@ -9,6 +9,7 @@
 #include "../model/api_error.h"
 #include "../model/change_password_body.h"
 #include "../model/create_user_body.h"
+#include "../model/get_reset_link_info_body.h"
 #include "../model/invalid_totp_error.h"
 #include "../model/patch_user_body.h"
 #include "../model/reset_link_info.h"
@@ -55,7 +56,7 @@ UsersAPI_v3DeleteUser(apiClient_t *apiClient, char *userId);
 // Return account info associated with a password reset token.
 //
 reset_link_info_t*
-UsersAPI_v3GetResetLinkInfo(apiClient_t *apiClient, char *token);
+UsersAPI_v3GetResetLinkInfo(apiClient_t *apiClient, get_reset_link_info_body_t *get_reset_link_info_body);
 
 
 // Update a user

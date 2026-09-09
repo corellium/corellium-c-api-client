@@ -10,6 +10,7 @@
 #include "../model/api_not_found_error.h"
 #include "../model/create_invites_body.h"
 #include "../model/edit_invites_body.h"
+#include "../model/get_invite_by_token_body.h"
 #include "../model/invitation.h"
 #include "../model/invitation_by_token.h"
 #include "../model/invite_signup_body.h"
@@ -42,7 +43,7 @@ InvitesAPI_v3EditInvites(apiClient_t *apiClient, edit_invites_body_t *edit_invit
 // Look up an invitation by its token. Public endpoint used during signup.
 //
 invitation_by_token_t*
-InvitesAPI_v3GetInviteByToken(apiClient_t *apiClient, char *token);
+InvitesAPI_v3GetInviteByToken(apiClient_t *apiClient, get_invite_by_token_body_t *get_invite_by_token_body);
 
 
 // List invites

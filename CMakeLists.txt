@@ -333,6 +333,8 @@ set(SRCS
     model/flavor_frame_inner.c
     model/get_firmware_info_body.c
     model/get_interconnects_response.c
+    model/get_invite_by_token_body.c
+    model/get_reset_link_info_body.c
     model/get_storage_response.c
     model/gpio_state_definition.c
     model/gpio_state_definition_banks_inner_inner.c
@@ -1068,6 +1070,8 @@ set(HDRS
     model/flavor_frame_inner.h
     model/get_firmware_info_body.h
     model/get_interconnects_response.h
+    model/get_invite_by_token_body.h
+    model/get_reset_link_info_body.h
     model/get_storage_response.h
     model/gpio_state_definition.h
     model/gpio_state_definition_banks_inner_inner.h

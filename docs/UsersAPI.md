@@ -8,7 +8,7 @@ Method | HTTP request | Description
 [**UsersAPI_v3ChangePassword**](UsersAPI.md#UsersAPI_v3ChangePassword) | **POST** /v3/users/change-password | Change password
 [**UsersAPI_v3CreateUser**](UsersAPI.md#UsersAPI_v3CreateUser) | **POST** /v3/users | Create a user
 [**UsersAPI_v3DeleteUser**](UsersAPI.md#UsersAPI_v3DeleteUser) | **DELETE** /v3/users/{userId} | Delete a user
-[**UsersAPI_v3GetResetLinkInfo**](UsersAPI.md#UsersAPI_v3GetResetLinkInfo) | **GET** /v3/users/reset-link-info | Get reset link info
+[**UsersAPI_v3GetResetLinkInfo**](UsersAPI.md#UsersAPI_v3GetResetLinkInfo) | **POST** /v3/users/reset-link-info | Get reset link info
 [**UsersAPI_v3PatchUser**](UsersAPI.md#UsersAPI_v3PatchUser) | **PATCH** /v3/users/{userId} | Update a user
 [**UsersAPI_v3ResetPassword**](UsersAPI.md#UsersAPI_v3ResetPassword) | **POST** /v3/users/reset-password | Reset password
 [**UsersAPI_v3SendResetLink**](UsersAPI.md#UsersAPI_v3SendResetLink) | **POST** /v3/users/send-reset-link | Send a password reset link
@@ -141,14 +141,14 @@ void
 //
 // Return account info associated with a password reset token.
 //
-reset_link_info_t* UsersAPI_v3GetResetLinkInfo(apiClient_t *apiClient, char *token);
+reset_link_info_t* UsersAPI_v3GetResetLinkInfo(apiClient_t *apiClient, get_reset_link_info_body_t *get_reset_link_info_body);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**token** | **char \*** | Password reset token. | 
+**get_reset_link_info_body** | **[get_reset_link_info_body_t](get_reset_link_info_body.md) \*** |  | 
 
 ### Return type
 
@@ -161,7 +161,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
