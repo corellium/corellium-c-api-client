@@ -668,6 +668,7 @@ set(SRCS
     model/update_team_body.c
     model/update_trial_request_body.c
     model/update_trial_request_params.c
+    model/upload_size_error.c
     model/user.c
     model/user_create.c
     model/user_create_return.c
@@ -1405,6 +1406,7 @@ set(HDRS
     model/update_team_body.h
     model/update_trial_request_body.h
     model/update_trial_request_params.h
+    model/upload_size_error.h
     model/user.h
     model/user_create.h
     model/user_create_return.h

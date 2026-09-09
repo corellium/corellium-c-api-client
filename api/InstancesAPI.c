@@ -2795,7 +2795,7 @@ end:
 //
 // Upload a chunk of an instance image using the resumable upload protocol. Creates the image record on the first chunk if it does not yet exist.
 //
-void
+object_t*
 InstancesAPI_v3PutInstanceImageUpload(apiClient_t *apiClient, char *instance, char *type, char *imageId, char *name, binary_t* body, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, char *corelliumChecksum, char *flavor, char *x_corellium_image_encoding, int *x_corellium_image_encapsulated, double *x_corellium_total_file_size, char *x_corellium_image_password)
 {
     list_t    *localVarQueryParameters = list_createList();
@@ -3021,8 +3021,8 @@ InstancesAPI_v3PutInstanceImageUpload(apiClient_t *apiClient, char *instance, ch
                     "PUT");
 
     // uncomment below to debug the error response
-    //if (apiClient->response_code == 204) {
-    //    printf("%s\n","Chunk accepted.");
+    //if (apiClient->response_code == 200) {
+    //    printf("%s\n","Chunk accepted. The body is an empty JSON object.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
@@ -3044,8 +3044,18 @@ InstancesAPI_v3PutInstanceImageUpload(apiClient_t *apiClient, char *instance, ch
     //if (apiClient->response_code == 507) {
     //    printf("%s\n","The image pool does not have enough space for this upload.");
     //}
-    //No return type
-end:
+    //nonprimitive not container
+    object_t *elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
+        cJSON *InstancesAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
+        elementToReturn = object_parseFromJSON(InstancesAPIlocalVarJSON);
+        cJSON_Delete(InstancesAPIlocalVarJSON);
+        if(elementToReturn == NULL) {
+            // return 0;
+        }
+    }
+
+    //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
@@ -3090,6 +3100,66 @@ end:
     }
     free(keyPairHeader_x_corellium_image_password);
     free(localVarBodyParameters);
+    if(keyQuery_resumableChunkNumber){
+        free(keyQuery_resumableChunkNumber);
+        keyQuery_resumableChunkNumber = NULL;
+    }
+    if(valueQuery_resumableChunkNumber){
+        free(valueQuery_resumableChunkNumber);
+        valueQuery_resumableChunkNumber = NULL;
+    }
+    if(keyPairQuery_resumableChunkNumber){
+        keyValuePair_free(keyPairQuery_resumableChunkNumber);
+        keyPairQuery_resumableChunkNumber = NULL;
+    }
+    if(keyQuery_resumableChunkSize){
+        free(keyQuery_resumableChunkSize);
+        keyQuery_resumableChunkSize = NULL;
+    }
+    if(valueQuery_resumableChunkSize){
+        free(valueQuery_resumableChunkSize);
+        valueQuery_resumableChunkSize = NULL;
+    }
+    if(keyPairQuery_resumableChunkSize){
+        keyValuePair_free(keyPairQuery_resumableChunkSize);
+        keyPairQuery_resumableChunkSize = NULL;
+    }
+    if(keyQuery_resumableCurrentChunkSize){
+        free(keyQuery_resumableCurrentChunkSize);
+        keyQuery_resumableCurrentChunkSize = NULL;
+    }
+    if(valueQuery_resumableCurrentChunkSize){
+        free(valueQuery_resumableCurrentChunkSize);
+        valueQuery_resumableCurrentChunkSize = NULL;
+    }
+    if(keyPairQuery_resumableCurrentChunkSize){
+        keyValuePair_free(keyPairQuery_resumableCurrentChunkSize);
+        keyPairQuery_resumableCurrentChunkSize = NULL;
+    }
+    if(keyQuery_resumableTotalSize){
+        free(keyQuery_resumableTotalSize);
+        keyQuery_resumableTotalSize = NULL;
+    }
+    if(valueQuery_resumableTotalSize){
+        free(valueQuery_resumableTotalSize);
+        valueQuery_resumableTotalSize = NULL;
+    }
+    if(keyPairQuery_resumableTotalSize){
+        keyValuePair_free(keyPairQuery_resumableTotalSize);
+        keyPairQuery_resumableTotalSize = NULL;
+    }
+    if(keyQuery_resumableTotalChunks){
+        free(keyQuery_resumableTotalChunks);
+        keyQuery_resumableTotalChunks = NULL;
+    }
+    if(valueQuery_resumableTotalChunks){
+        free(valueQuery_resumableTotalChunks);
+        valueQuery_resumableTotalChunks = NULL;
+    }
+    if(keyPairQuery_resumableTotalChunks){
+        keyValuePair_free(keyPairQuery_resumableTotalChunks);
+        keyPairQuery_resumableTotalChunks = NULL;
+    }
     if(keyQuery_corelliumChecksum){
         free(keyQuery_corelliumChecksum);
         keyQuery_corelliumChecksum = NULL;
@@ -3097,14 +3167,6 @@ end:
     if(valueQuery_corelliumChecksum){
         free(valueQuery_corelliumChecksum);
         valueQuery_corelliumChecksum = NULL;
-    }
-    if(keyPairQuery_corelliumChecksum){
-        keyValuePair_free(keyPairQuery_corelliumChecksum);
-        keyPairQuery_corelliumChecksum = NULL;
-    }
-    if(keyQuery_corelliumChecksum){
-        free(keyQuery_corelliumChecksum);
-        keyQuery_corelliumChecksum = NULL;
     }
     if(keyPairQuery_corelliumChecksum){
         keyValuePair_free(keyPairQuery_corelliumChecksum);
@@ -3122,14 +3184,10 @@ end:
         keyValuePair_free(keyPairQuery_flavor);
         keyPairQuery_flavor = NULL;
     }
-    if(keyQuery_flavor){
-        free(keyQuery_flavor);
-        keyQuery_flavor = NULL;
-    }
-    if(keyPairQuery_flavor){
-        keyValuePair_free(keyPairQuery_flavor);
-        keyPairQuery_flavor = NULL;
-    }
+    return elementToReturn;
+end:
+    free(localVarPath);
+    return NULL;
 
 }
 

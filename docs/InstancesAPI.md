@@ -868,7 +868,7 @@ Name | Type | Description  | Notes
 //
 // Upload a chunk of an instance image using the resumable upload protocol. Creates the image record on the first chunk if it does not yet exist.
 //
-void InstancesAPI_v3PutInstanceImageUpload(apiClient_t *apiClient, char *instance, char *type, char *imageId, char *name, binary_t* body, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, char *corelliumChecksum, char *flavor, char *x_corellium_image_encoding, int *x_corellium_image_encapsulated, double *x_corellium_total_file_size, char *x_corellium_image_password);
+object_t* InstancesAPI_v3PutInstanceImageUpload(apiClient_t *apiClient, char *instance, char *type, char *imageId, char *name, binary_t* body, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, char *corelliumChecksum, char *flavor, char *x_corellium_image_encoding, int *x_corellium_image_encapsulated, double *x_corellium_total_file_size, char *x_corellium_image_password);
 ```
 
 ### Parameters
@@ -880,12 +880,12 @@ Name | Type | Description  | Notes
 **imageId** | **char \*** | Client-generated image identifier. The image record is created on the first chunk. | 
 **name** | **char \*** | URL-encoded image filename. | 
 **body** | **binary_t*** |  | 
-**resumableChunkNumber** | **double \*** | chunk sequence number. | [optional] 
-**resumableChunkSize** | **double \*** | size of each chunk. | [optional] 
-**resumableCurrentChunkSize** | **double \*** | size of the chunk in this request. | [optional] 
-**resumableTotalSize** | **double \*** | total file size. | [optional] 
-**resumableTotalChunks** | **double \*** | total number of chunks. | [optional] 
-**corelliumChecksum** | **char \*** | Corellium chunked checksum of the whole file. When supplied, each chunk is re-hashed and the upload is rejected on mismatch. Required for firmware uploads in airgapped deployments. | [optional] 
+**resumableChunkNumber** | **double \*** | Chunk sequence number. | [optional] 
+**resumableChunkSize** | **double \*** | Size of each chunk. | [optional] 
+**resumableCurrentChunkSize** | **double \*** | Size of the current chunk. | [optional] 
+**resumableTotalSize** | **double \*** | Total file size. | [optional] 
+**resumableTotalChunks** | **double \*** | Total number of chunks. | [optional] 
+**corelliumChecksum** | **char \*** | Corellium checksum. Required for firmware uploads in airgapped deployments. | [optional] 
 **flavor** | **char \*** | Flavor identifier to associate with the image. | [optional] 
 **x_corellium_image_encoding** | **char \*** | How the uploaded file is stored. Set on the first chunk, when the image record is created. | [optional] 
 **x_corellium_image_encapsulated** | **int \*** | Whether the uploaded file is an archive the coordinator should unpack. Set false to store the file as uploaded. Set on the first chunk, when the image record is created. | [optional] 
@@ -894,7 +894,8 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void
+[object_t](object.md) *
+
 
 ### Authorization
 

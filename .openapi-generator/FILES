@@ -824,6 +824,7 @@ docs/update_network_connection_options_config.md
 docs/update_team_body.md
 docs/update_trial_request_body.md
 docs/update_trial_request_params.md
+docs/upload_size_error.md
 docs/user.md
 docs/user_create.md
 docs/user_create_return.md
@@ -2114,6 +2115,8 @@ model/update_trial_request_body.c
 model/update_trial_request_body.h
 model/update_trial_request_params.c
 model/update_trial_request_params.h
+model/upload_size_error.c
+model/upload_size_error.h
 model/user.c
 model/user.h
 model/user_create.c
@@ -2817,6 +2820,7 @@ unit-test/test_update_network_connection_options_config.c
 unit-test/test_update_team_body.c
 unit-test/test_update_trial_request_body.c
 unit-test/test_update_trial_request_params.c
+unit-test/test_upload_size_error.c
 unit-test/test_user.c
 unit-test/test_user_create.c
 unit-test/test_user_create_return.c

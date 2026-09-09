@@ -352,11 +352,13 @@ Category | Method | HTTP request | Description
 *ImagesAPI* | [**ImagesAPI_v3CreateImage**](docs/ImagesAPI.md#ImagesAPI_v3CreateImage) | **POST** /v3/images | Create an image
 *ImagesAPI* | [**ImagesAPI_v3DeleteImage**](docs/ImagesAPI.md#ImagesAPI_v3DeleteImage) | **DELETE** /v3/images/{imageId} | Delete an image
 *ImagesAPI* | [**ImagesAPI_v3GetImage**](docs/ImagesAPI.md#ImagesAPI_v3GetImage) | **GET** /v3/images/{imageId} | Get image metadata
+*ImagesAPI* | [**ImagesAPI_v3GetImageChunk**](docs/ImagesAPI.md#ImagesAPI_v3GetImageChunk) | **GET** /v3/images/{imageId}/file | Check whether an image chunk was already uploaded
 *ImagesAPI* | [**ImagesAPI_v3GetImageFirmwareInfo**](docs/ImagesAPI.md#ImagesAPI_v3GetImageFirmwareInfo) | **POST** /v3/images/{imageId}/fwinfo | Get firmware info embedded in an image
 *ImagesAPI* | [**ImagesAPI_v3GetInstallFirmwareStatus**](docs/ImagesAPI.md#ImagesAPI_v3GetInstallFirmwareStatus) | **GET** /v3/images/install-firmware/{taskId} | Get install-firmware task status
 *ImagesAPI* | [**ImagesAPI_v3InstallFirmware**](docs/ImagesAPI.md#ImagesAPI_v3InstallFirmware) | **POST** /v3/images/install-firmware | Install firmware cluster-wide
 *ImagesAPI* | [**ImagesAPI_v3InstallFirmwareAssets**](docs/ImagesAPI.md#ImagesAPI_v3InstallFirmwareAssets) | **POST** /v3/images/install-firmware-assets | Install firmware assets cluster-wide
 *ImagesAPI* | [**ImagesAPI_v3ListImages**](docs/ImagesAPI.md#ImagesAPI_v3ListImages) | **GET** /v3/images | List image metadata
+*ImagesAPI* | [**ImagesAPI_v3UploadImageChunk**](docs/ImagesAPI.md#ImagesAPI_v3UploadImageChunk) | **PUT** /v3/images/{imageId}/file | Upload one chunk of an image file
 *ImagesAPI* | [**ImagesAPI_v3UploadImageData**](docs/ImagesAPI.md#ImagesAPI_v3UploadImageData) | **POST** /v3/images/{imageId} | Upload image file contents
 *ImagesV1API* | [**ImagesV1API_v1GetImage**](docs/ImagesV1API.md#ImagesV1API_v1GetImage) | **GET** /v1/images/{imageId} | Get Image Metadata
 *ImagesV1API* | [**ImagesV1API_v1GetImages**](docs/ImagesV1API.md#ImagesV1API_v1GetImages) | **GET** /v1/images | Get all Images Metadata
@@ -1239,6 +1241,7 @@ Category | Method | HTTP request | Description
  - [update_team_body_t](docs/update_team_body.md)
  - [update_trial_request_body_t](docs/update_trial_request_body.md)
  - [update_trial_request_params_t](docs/update_trial_request_params.md)
+ - [upload_size_error_t](docs/upload_size_error.md)
  - [user_t](docs/user.md)
  - [user_create_t](docs/user_create.md)
  - [user_create_return_t](docs/user_create_return.md)

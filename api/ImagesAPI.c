@@ -273,6 +273,184 @@ end:
 
 }
 
+// Check whether an image chunk was already uploaded
+//
+// Probes whether a single chunk of a chunked upload is already stored, so an interrupted upload can resume without re-sending data. Used together with [`uploadImageChunk`](#operation/uploadImageChunk).   Returns 200 when the chunk is present and 204 when it still needs to be uploaded. The chunk is identified exactly as in the upload request, by `resumableChunkNumber`, `resumableChunkSize` and `resumableCurrentChunkSize`, all of which are required. The image must already exist; an unknown `imageId` is a 404 rather than a 204.
+//
+object_t*
+ImagesAPI_v3GetImageChunk(apiClient_t *apiClient, char *imageId, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize)
+{
+    list_t    *localVarQueryParameters = list_createList();
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = NULL;
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/images/{imageId}/file");
+
+    if(!imageId)
+        goto end;
+
+
+    // Path Params
+    long sizeOfPathParams_imageId = strlen(imageId)+3 + sizeof("{ imageId }") - 1;
+    if(imageId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_imageId = malloc(sizeOfPathParams_imageId);
+    sprintf(localVarToReplace_imageId, "{%s}", "imageId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_imageId, imageId);
+
+
+
+    // query parameters
+    char *keyQuery_resumableChunkNumber = NULL;
+    char * valueQuery_resumableChunkNumber = NULL;
+    keyValuePair_t *keyPairQuery_resumableChunkNumber = 0;
+    if (resumableChunkNumber)
+    {
+        keyQuery_resumableChunkNumber = strdup("resumableChunkNumber");
+        valueQuery_resumableChunkNumber = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_resumableChunkNumber, MAX_NUMBER_LENGTH, "%d", *resumableChunkNumber);
+        keyPairQuery_resumableChunkNumber = keyValuePair_create(keyQuery_resumableChunkNumber, valueQuery_resumableChunkNumber);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableChunkNumber);
+    }
+
+    // query parameters
+    char *keyQuery_resumableChunkSize = NULL;
+    char * valueQuery_resumableChunkSize = NULL;
+    keyValuePair_t *keyPairQuery_resumableChunkSize = 0;
+    if (resumableChunkSize)
+    {
+        keyQuery_resumableChunkSize = strdup("resumableChunkSize");
+        valueQuery_resumableChunkSize = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_resumableChunkSize, MAX_NUMBER_LENGTH, "%d", *resumableChunkSize);
+        keyPairQuery_resumableChunkSize = keyValuePair_create(keyQuery_resumableChunkSize, valueQuery_resumableChunkSize);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableChunkSize);
+    }
+
+    // query parameters
+    char *keyQuery_resumableCurrentChunkSize = NULL;
+    char * valueQuery_resumableCurrentChunkSize = NULL;
+    keyValuePair_t *keyPairQuery_resumableCurrentChunkSize = 0;
+    if (resumableCurrentChunkSize)
+    {
+        keyQuery_resumableCurrentChunkSize = strdup("resumableCurrentChunkSize");
+        valueQuery_resumableCurrentChunkSize = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_resumableCurrentChunkSize, MAX_NUMBER_LENGTH, "%d", *resumableCurrentChunkSize);
+        keyPairQuery_resumableCurrentChunkSize = keyValuePair_create(keyQuery_resumableCurrentChunkSize, valueQuery_resumableCurrentChunkSize);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableCurrentChunkSize);
+    }
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "GET");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 200) {
+    //    printf("%s\n","The chunk is already stored; empty JSON body.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 204) {
+    //    printf("%s\n","The chunk is missing and still needs to be uploaded.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 400) {
+    //    printf("%s\n","Invalid or missing chunk parameters.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","No permission for the image&#39;s project, or the image is site-wide and the caller is not a domain (on-site) or cloud administrator.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 404) {
+    //    printf("%s\n","No image with the given imageId.");
+    //}
+    //nonprimitive not container
+    object_t *elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
+        cJSON *ImagesAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
+        elementToReturn = object_parseFromJSON(ImagesAPIlocalVarJSON);
+        cJSON_Delete(ImagesAPIlocalVarJSON);
+        if(elementToReturn == NULL) {
+            // return 0;
+        }
+    }
+
+    //return type
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    list_freeList(localVarQueryParameters);
+    
+    
+    list_freeList(localVarHeaderType);
+    
+    free(localVarPath);
+    free(localVarToReplace_imageId);
+    if(keyQuery_resumableChunkNumber){
+        free(keyQuery_resumableChunkNumber);
+        keyQuery_resumableChunkNumber = NULL;
+    }
+    if(valueQuery_resumableChunkNumber){
+        free(valueQuery_resumableChunkNumber);
+        valueQuery_resumableChunkNumber = NULL;
+    }
+    if(keyPairQuery_resumableChunkNumber){
+        keyValuePair_free(keyPairQuery_resumableChunkNumber);
+        keyPairQuery_resumableChunkNumber = NULL;
+    }
+    if(keyQuery_resumableChunkSize){
+        free(keyQuery_resumableChunkSize);
+        keyQuery_resumableChunkSize = NULL;
+    }
+    if(valueQuery_resumableChunkSize){
+        free(valueQuery_resumableChunkSize);
+        valueQuery_resumableChunkSize = NULL;
+    }
+    if(keyPairQuery_resumableChunkSize){
+        keyValuePair_free(keyPairQuery_resumableChunkSize);
+        keyPairQuery_resumableChunkSize = NULL;
+    }
+    if(keyQuery_resumableCurrentChunkSize){
+        free(keyQuery_resumableCurrentChunkSize);
+        keyQuery_resumableCurrentChunkSize = NULL;
+    }
+    if(valueQuery_resumableCurrentChunkSize){
+        free(valueQuery_resumableCurrentChunkSize);
+        valueQuery_resumableCurrentChunkSize = NULL;
+    }
+    if(keyPairQuery_resumableCurrentChunkSize){
+        keyValuePair_free(keyPairQuery_resumableCurrentChunkSize);
+        keyPairQuery_resumableCurrentChunkSize = NULL;
+    }
+    return elementToReturn;
+end:
+    free(localVarPath);
+    return NULL;
+
+}
+
 // Get firmware info embedded in an image
 //
 // Extracts and returns the firmware metadata embedded in an uploaded image (IPSW, COREIMG, CLBI, UFD, or extension). For an encrypted image, supply `password` to decrypt it. Set `extended` to also resolve the matching supported device model.
@@ -831,9 +1009,355 @@ end:
 
 }
 
+// Upload one chunk of an image file
+//
+// Uploads a single chunk of an Image previously created via [`createImage`](#operation/createImage), using the resumable upload protocol. This is the recommended way to upload large images: the transfer survives interruptions, because any chunk can be re-sent and already-stored chunks can be skipped.   **Chunked upload workflow:**   1. [`createImage`](#operation/createImage) with `{ name, type, encoding }` → returns an `imageId`.   2. Split the file into fixed-size chunks and **`uploadImageChunk`** each one with the      `resumable*` query parameters describing it. Chunks may be uploaded in any order and      concurrently.   3. Optionally probe a chunk with [`getImageChunk`](#operation/getImageChunk) before      (re-)sending it, so an interrupted upload only re-sends what is missing.   The image is finalized automatically by the request that completes the chunk set, so the last chunk to arrive also validates `corelliumChecksum` (when supplied) and runs the firmware post-processing. Re-sending a chunk that was already stored is safe. If the upload fails for any reason other than a retryable transport error, the partially uploaded image is deleted, so the client must create a new image record before retrying.   The image's `encoding` and `encapsulated` settings are fixed when the record is created by [`createImage`](#operation/createImage) and cannot be changed by a chunk request.
+//
+void
+ImagesAPI_v3UploadImageChunk(apiClient_t *apiClient, char *imageId, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, binary_t* body, char *resumableIdentifier, char *resumableFilename, char *resumableRelativePath, char *resumableType, char *corelliumChecksum, char *x_corellium_total_file_size)
+{
+    list_t    *localVarQueryParameters = list_createList();
+    list_t    *localVarHeaderParameters = list_createList();
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = list_createList();
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/images/{imageId}/file");
+
+    if(!imageId)
+        goto end;
+
+
+    // Path Params
+    long sizeOfPathParams_imageId = strlen(imageId)+3 + sizeof("{ imageId }") - 1;
+    if(imageId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_imageId = malloc(sizeOfPathParams_imageId);
+    sprintf(localVarToReplace_imageId, "{%s}", "imageId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_imageId, imageId);
+
+
+
+    // header parameters
+    char *keyHeader_x_corellium_total_file_size = NULL;
+    char * valueHeader_x_corellium_total_file_size = 0;
+    keyValuePair_t *keyPairHeader_x_corellium_total_file_size = 0;
+    if (x_corellium_total_file_size) {
+        keyHeader_x_corellium_total_file_size = strdup("x-corellium-total-file-size");
+        valueHeader_x_corellium_total_file_size = strdup((x_corellium_total_file_size));
+        keyPairHeader_x_corellium_total_file_size = keyValuePair_create(keyHeader_x_corellium_total_file_size, valueHeader_x_corellium_total_file_size);
+        list_addElement(localVarHeaderParameters,keyPairHeader_x_corellium_total_file_size);
+    }
+
+
+    // query parameters
+    char *keyQuery_resumableChunkNumber = NULL;
+    char * valueQuery_resumableChunkNumber = NULL;
+    keyValuePair_t *keyPairQuery_resumableChunkNumber = 0;
+    if (resumableChunkNumber)
+    {
+        keyQuery_resumableChunkNumber = strdup("resumableChunkNumber");
+        valueQuery_resumableChunkNumber = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_resumableChunkNumber, MAX_NUMBER_LENGTH, "%d", *resumableChunkNumber);
+        keyPairQuery_resumableChunkNumber = keyValuePair_create(keyQuery_resumableChunkNumber, valueQuery_resumableChunkNumber);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableChunkNumber);
+    }
+
+    // query parameters
+    char *keyQuery_resumableChunkSize = NULL;
+    char * valueQuery_resumableChunkSize = NULL;
+    keyValuePair_t *keyPairQuery_resumableChunkSize = 0;
+    if (resumableChunkSize)
+    {
+        keyQuery_resumableChunkSize = strdup("resumableChunkSize");
+        valueQuery_resumableChunkSize = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_resumableChunkSize, MAX_NUMBER_LENGTH, "%d", *resumableChunkSize);
+        keyPairQuery_resumableChunkSize = keyValuePair_create(keyQuery_resumableChunkSize, valueQuery_resumableChunkSize);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableChunkSize);
+    }
+
+    // query parameters
+    char *keyQuery_resumableCurrentChunkSize = NULL;
+    char * valueQuery_resumableCurrentChunkSize = NULL;
+    keyValuePair_t *keyPairQuery_resumableCurrentChunkSize = 0;
+    if (resumableCurrentChunkSize)
+    {
+        keyQuery_resumableCurrentChunkSize = strdup("resumableCurrentChunkSize");
+        valueQuery_resumableCurrentChunkSize = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_resumableCurrentChunkSize, MAX_NUMBER_LENGTH, "%d", *resumableCurrentChunkSize);
+        keyPairQuery_resumableCurrentChunkSize = keyValuePair_create(keyQuery_resumableCurrentChunkSize, valueQuery_resumableCurrentChunkSize);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableCurrentChunkSize);
+    }
+
+    // query parameters
+    char *keyQuery_resumableTotalSize = NULL;
+    char * valueQuery_resumableTotalSize = NULL;
+    keyValuePair_t *keyPairQuery_resumableTotalSize = 0;
+    if (resumableTotalSize)
+    {
+        keyQuery_resumableTotalSize = strdup("resumableTotalSize");
+        valueQuery_resumableTotalSize = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_resumableTotalSize, MAX_NUMBER_LENGTH, "%d", *resumableTotalSize);
+        keyPairQuery_resumableTotalSize = keyValuePair_create(keyQuery_resumableTotalSize, valueQuery_resumableTotalSize);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableTotalSize);
+    }
+
+    // query parameters
+    char *keyQuery_resumableTotalChunks = NULL;
+    char * valueQuery_resumableTotalChunks = NULL;
+    keyValuePair_t *keyPairQuery_resumableTotalChunks = 0;
+    if (resumableTotalChunks)
+    {
+        keyQuery_resumableTotalChunks = strdup("resumableTotalChunks");
+        valueQuery_resumableTotalChunks = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_resumableTotalChunks, MAX_NUMBER_LENGTH, "%d", *resumableTotalChunks);
+        keyPairQuery_resumableTotalChunks = keyValuePair_create(keyQuery_resumableTotalChunks, valueQuery_resumableTotalChunks);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableTotalChunks);
+    }
+
+    // query parameters
+    char *keyQuery_resumableIdentifier = NULL;
+    char * valueQuery_resumableIdentifier = NULL;
+    keyValuePair_t *keyPairQuery_resumableIdentifier = 0;
+    if (resumableIdentifier)
+    {
+        keyQuery_resumableIdentifier = strdup("resumableIdentifier");
+        valueQuery_resumableIdentifier = strdup((resumableIdentifier));
+        keyPairQuery_resumableIdentifier = keyValuePair_create(keyQuery_resumableIdentifier, valueQuery_resumableIdentifier);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableIdentifier);
+    }
+
+    // query parameters
+    char *keyQuery_resumableFilename = NULL;
+    char * valueQuery_resumableFilename = NULL;
+    keyValuePair_t *keyPairQuery_resumableFilename = 0;
+    if (resumableFilename)
+    {
+        keyQuery_resumableFilename = strdup("resumableFilename");
+        valueQuery_resumableFilename = strdup((resumableFilename));
+        keyPairQuery_resumableFilename = keyValuePair_create(keyQuery_resumableFilename, valueQuery_resumableFilename);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableFilename);
+    }
+
+    // query parameters
+    char *keyQuery_resumableRelativePath = NULL;
+    char * valueQuery_resumableRelativePath = NULL;
+    keyValuePair_t *keyPairQuery_resumableRelativePath = 0;
+    if (resumableRelativePath)
+    {
+        keyQuery_resumableRelativePath = strdup("resumableRelativePath");
+        valueQuery_resumableRelativePath = strdup((resumableRelativePath));
+        keyPairQuery_resumableRelativePath = keyValuePair_create(keyQuery_resumableRelativePath, valueQuery_resumableRelativePath);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableRelativePath);
+    }
+
+    // query parameters
+    char *keyQuery_resumableType = NULL;
+    char * valueQuery_resumableType = NULL;
+    keyValuePair_t *keyPairQuery_resumableType = 0;
+    if (resumableType)
+    {
+        keyQuery_resumableType = strdup("resumableType");
+        valueQuery_resumableType = strdup((resumableType));
+        keyPairQuery_resumableType = keyValuePair_create(keyQuery_resumableType, valueQuery_resumableType);
+        list_addElement(localVarQueryParameters,keyPairQuery_resumableType);
+    }
+
+    // query parameters
+    char *keyQuery_corelliumChecksum = NULL;
+    char * valueQuery_corelliumChecksum = NULL;
+    keyValuePair_t *keyPairQuery_corelliumChecksum = 0;
+    if (corelliumChecksum)
+    {
+        keyQuery_corelliumChecksum = strdup("corelliumChecksum");
+        valueQuery_corelliumChecksum = strdup((corelliumChecksum));
+        keyPairQuery_corelliumChecksum = keyValuePair_create(keyQuery_corelliumChecksum, valueQuery_corelliumChecksum);
+        list_addElement(localVarQueryParameters,keyPairQuery_corelliumChecksum);
+    }
+
+    // Body Param
+    localVarBodyParameters = malloc(body->len);
+    memcpy(localVarBodyParameters, body->data, body->len);
+    localVarBodyLength = body->len;
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    list_addElement(localVarContentType,"application/octet-stream"); //consumes
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "PUT");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 204) {
+    //    printf("%s\n","Chunk stored; empty body.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 400) {
+    //    printf("%s\n","Invalid chunk parameters, checksum mismatch, chunk size differing from the block size of corelliumChecksum, or a missing corelliumChecksum for an airgapped firmware upload.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","No permission for the image&#39;s project, or the image is site-wide and the caller is not a domain (on-site) or cloud administrator.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 404) {
+    //    printf("%s\n","No image with the given imageId; create it before uploading chunks.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 413) {
+    //    printf("%s\n","The upload exceeds the project&#39;s storage quota, or the size limit for this image type (ramdisk, kernel).");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 507) {
+    //    printf("%s\n","The local image pool does not have enough free space for this upload.");
+    //}
+    //No return type
+end:
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    list_freeList(localVarQueryParameters);
+    list_freeList(localVarHeaderParameters);
+    
+    list_freeList(localVarHeaderType);
+    list_freeList(localVarContentType);
+    free(localVarPath);
+    free(localVarToReplace_imageId);
+    if (keyHeader_x_corellium_total_file_size) {
+        free(keyHeader_x_corellium_total_file_size);
+        keyHeader_x_corellium_total_file_size = NULL;
+    }
+    if (valueHeader_x_corellium_total_file_size) {
+        free(valueHeader_x_corellium_total_file_size);
+        valueHeader_x_corellium_total_file_size = NULL;
+    }
+    free(keyPairHeader_x_corellium_total_file_size);
+    free(localVarBodyParameters);
+    if(keyQuery_resumableIdentifier){
+        free(keyQuery_resumableIdentifier);
+        keyQuery_resumableIdentifier = NULL;
+    }
+    if(valueQuery_resumableIdentifier){
+        free(valueQuery_resumableIdentifier);
+        valueQuery_resumableIdentifier = NULL;
+    }
+    if(keyPairQuery_resumableIdentifier){
+        keyValuePair_free(keyPairQuery_resumableIdentifier);
+        keyPairQuery_resumableIdentifier = NULL;
+    }
+    if(keyQuery_resumableIdentifier){
+        free(keyQuery_resumableIdentifier);
+        keyQuery_resumableIdentifier = NULL;
+    }
+    if(keyPairQuery_resumableIdentifier){
+        keyValuePair_free(keyPairQuery_resumableIdentifier);
+        keyPairQuery_resumableIdentifier = NULL;
+    }
+    if(keyQuery_resumableFilename){
+        free(keyQuery_resumableFilename);
+        keyQuery_resumableFilename = NULL;
+    }
+    if(valueQuery_resumableFilename){
+        free(valueQuery_resumableFilename);
+        valueQuery_resumableFilename = NULL;
+    }
+    if(keyPairQuery_resumableFilename){
+        keyValuePair_free(keyPairQuery_resumableFilename);
+        keyPairQuery_resumableFilename = NULL;
+    }
+    if(keyQuery_resumableFilename){
+        free(keyQuery_resumableFilename);
+        keyQuery_resumableFilename = NULL;
+    }
+    if(keyPairQuery_resumableFilename){
+        keyValuePair_free(keyPairQuery_resumableFilename);
+        keyPairQuery_resumableFilename = NULL;
+    }
+    if(keyQuery_resumableRelativePath){
+        free(keyQuery_resumableRelativePath);
+        keyQuery_resumableRelativePath = NULL;
+    }
+    if(valueQuery_resumableRelativePath){
+        free(valueQuery_resumableRelativePath);
+        valueQuery_resumableRelativePath = NULL;
+    }
+    if(keyPairQuery_resumableRelativePath){
+        keyValuePair_free(keyPairQuery_resumableRelativePath);
+        keyPairQuery_resumableRelativePath = NULL;
+    }
+    if(keyQuery_resumableRelativePath){
+        free(keyQuery_resumableRelativePath);
+        keyQuery_resumableRelativePath = NULL;
+    }
+    if(keyPairQuery_resumableRelativePath){
+        keyValuePair_free(keyPairQuery_resumableRelativePath);
+        keyPairQuery_resumableRelativePath = NULL;
+    }
+    if(keyQuery_resumableType){
+        free(keyQuery_resumableType);
+        keyQuery_resumableType = NULL;
+    }
+    if(valueQuery_resumableType){
+        free(valueQuery_resumableType);
+        valueQuery_resumableType = NULL;
+    }
+    if(keyPairQuery_resumableType){
+        keyValuePair_free(keyPairQuery_resumableType);
+        keyPairQuery_resumableType = NULL;
+    }
+    if(keyQuery_resumableType){
+        free(keyQuery_resumableType);
+        keyQuery_resumableType = NULL;
+    }
+    if(keyPairQuery_resumableType){
+        keyValuePair_free(keyPairQuery_resumableType);
+        keyPairQuery_resumableType = NULL;
+    }
+    if(keyQuery_corelliumChecksum){
+        free(keyQuery_corelliumChecksum);
+        keyQuery_corelliumChecksum = NULL;
+    }
+    if(valueQuery_corelliumChecksum){
+        free(valueQuery_corelliumChecksum);
+        valueQuery_corelliumChecksum = NULL;
+    }
+    if(keyPairQuery_corelliumChecksum){
+        keyValuePair_free(keyPairQuery_corelliumChecksum);
+        keyPairQuery_corelliumChecksum = NULL;
+    }
+    if(keyQuery_corelliumChecksum){
+        free(keyQuery_corelliumChecksum);
+        keyQuery_corelliumChecksum = NULL;
+    }
+    if(keyPairQuery_corelliumChecksum){
+        keyValuePair_free(keyPairQuery_corelliumChecksum);
+        keyPairQuery_corelliumChecksum = NULL;
+    }
+
+}
+
 // Upload image file contents
 //
-// Uploads file contents into an Image previously created via [`createImage`](#operation/createImage). The image's owning project must have sufficient remaining quota. Accepts multipart/form-data; the optional `corelliumChecksum` query parameter, when supplied, is verified against the upload.
+// Uploads file contents into an Image previously created via [`createImage`](#operation/createImage). The image's owning project must have sufficient remaining quota. Accepts multipart/form-data; the optional `corelliumChecksum` query parameter, when supplied, is verified against the upload.   This endpoint uploads the whole file in a single request. For large images (firmware in particular) upload the file in chunks instead — see [`uploadImageChunk`](#operation/uploadImageChunk).
 //
 image_t*
 ImagesAPI_v3UploadImageData(apiClient_t *apiClient, char *imageId, binary_t* file, char *corelliumChecksum)

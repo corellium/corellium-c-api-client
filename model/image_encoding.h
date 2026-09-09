@@ -1,7 +1,7 @@
 /*
  * image_encoding.h
  *
- * How the file is stored. Absent for generated artifacts.
+ * How the file is stored.
  */
 
 #ifndef _image_encoding_H_

@@ -141,7 +141,7 @@ ProjectsAPI_v3PatchProject(apiClient_t *apiClient, char *projectId, patch_projec
 //
 // Upload a chunk of a project image using the resumable upload protocol. Creates the image record on the first chunk if it does not yet exist. This is the upload used while creating a device, before any instance exists to own the image.
 //
-void
+object_t*
 ProjectsAPI_v3PutProjectImageUpload(apiClient_t *apiClient, char *projectId, char *type, char *imageId, char *name, binary_t* body, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, char *corelliumChecksum, char *flavor, char *x_corellium_image_encoding, int *x_corellium_image_encapsulated, double *x_corellium_total_file_size, char *x_corellium_image_password);
 
 

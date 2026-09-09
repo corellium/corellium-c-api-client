@@ -7,11 +7,13 @@ Method | HTTP request | Description
 [**ImagesAPI_v3CreateImage**](ImagesAPI.md#ImagesAPI_v3CreateImage) | **POST** /v3/images | Create an image
 [**ImagesAPI_v3DeleteImage**](ImagesAPI.md#ImagesAPI_v3DeleteImage) | **DELETE** /v3/images/{imageId} | Delete an image
 [**ImagesAPI_v3GetImage**](ImagesAPI.md#ImagesAPI_v3GetImage) | **GET** /v3/images/{imageId} | Get image metadata
+[**ImagesAPI_v3GetImageChunk**](ImagesAPI.md#ImagesAPI_v3GetImageChunk) | **GET** /v3/images/{imageId}/file | Check whether an image chunk was already uploaded
 [**ImagesAPI_v3GetImageFirmwareInfo**](ImagesAPI.md#ImagesAPI_v3GetImageFirmwareInfo) | **POST** /v3/images/{imageId}/fwinfo | Get firmware info embedded in an image
 [**ImagesAPI_v3GetInstallFirmwareStatus**](ImagesAPI.md#ImagesAPI_v3GetInstallFirmwareStatus) | **GET** /v3/images/install-firmware/{taskId} | Get install-firmware task status
 [**ImagesAPI_v3InstallFirmware**](ImagesAPI.md#ImagesAPI_v3InstallFirmware) | **POST** /v3/images/install-firmware | Install firmware cluster-wide
 [**ImagesAPI_v3InstallFirmwareAssets**](ImagesAPI.md#ImagesAPI_v3InstallFirmwareAssets) | **POST** /v3/images/install-firmware-assets | Install firmware assets cluster-wide
 [**ImagesAPI_v3ListImages**](ImagesAPI.md#ImagesAPI_v3ListImages) | **GET** /v3/images | List image metadata
+[**ImagesAPI_v3UploadImageChunk**](ImagesAPI.md#ImagesAPI_v3UploadImageChunk) | **PUT** /v3/images/{imageId}/file | Upload one chunk of an image file
 [**ImagesAPI_v3UploadImageData**](ImagesAPI.md#ImagesAPI_v3UploadImageData) | **POST** /v3/images/{imageId} | Upload image file contents
 
 
@@ -94,6 +96,40 @@ Name | Type | Description  | Notes
 ### Return type
 
 [image_t](image.md) *
+
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ImagesAPI_v3GetImageChunk**
+```c
+// Check whether an image chunk was already uploaded
+//
+// Probes whether a single chunk of a chunked upload is already stored, so an interrupted upload can resume without re-sending data. Used together with [`uploadImageChunk`](#operation/uploadImageChunk).   Returns 200 when the chunk is present and 204 when it still needs to be uploaded. The chunk is identified exactly as in the upload request, by `resumableChunkNumber`, `resumableChunkSize` and `resumableCurrentChunkSize`, all of which are required. The image must already exist; an unknown `imageId` is a 404 rather than a 204.
+//
+object_t* ImagesAPI_v3GetImageChunk(apiClient_t *apiClient, char *imageId, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize);
+```
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**apiClient** | **apiClient_t \*** | context containing the client configuration |
+**imageId** | **char \*** |  | 
+**resumableChunkNumber** | **double \*** | Chunk sequence number. | 
+**resumableChunkSize** | **double \*** | Size of each chunk. | 
+**resumableCurrentChunkSize** | **double \*** | Size of the current chunk. | 
+
+### Return type
+
+[object_t](object.md) *
 
 
 ### Authorization
@@ -265,11 +301,53 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **ImagesAPI_v3UploadImageChunk**
+```c
+// Upload one chunk of an image file
+//
+// Uploads a single chunk of an Image previously created via [`createImage`](#operation/createImage), using the resumable upload protocol. This is the recommended way to upload large images: the transfer survives interruptions, because any chunk can be re-sent and already-stored chunks can be skipped.   **Chunked upload workflow:**   1. [`createImage`](#operation/createImage) with `{ name, type, encoding }` → returns an `imageId`.   2. Split the file into fixed-size chunks and **`uploadImageChunk`** each one with the      `resumable*` query parameters describing it. Chunks may be uploaded in any order and      concurrently.   3. Optionally probe a chunk with [`getImageChunk`](#operation/getImageChunk) before      (re-)sending it, so an interrupted upload only re-sends what is missing.   The image is finalized automatically by the request that completes the chunk set, so the last chunk to arrive also validates `corelliumChecksum` (when supplied) and runs the firmware post-processing. Re-sending a chunk that was already stored is safe. If the upload fails for any reason other than a retryable transport error, the partially uploaded image is deleted, so the client must create a new image record before retrying.   The image's `encoding` and `encapsulated` settings are fixed when the record is created by [`createImage`](#operation/createImage) and cannot be changed by a chunk request.
+//
+void ImagesAPI_v3UploadImageChunk(apiClient_t *apiClient, char *imageId, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, binary_t* body, char *resumableIdentifier, char *resumableFilename, char *resumableRelativePath, char *resumableType, char *corelliumChecksum, char *x_corellium_total_file_size);
+```
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**apiClient** | **apiClient_t \*** | context containing the client configuration |
+**imageId** | **char \*** |  | 
+**resumableChunkNumber** | **double \*** | Chunk sequence number. | 
+**resumableChunkSize** | **double \*** | Size of each chunk. | 
+**resumableCurrentChunkSize** | **double \*** | Size of the current chunk. | 
+**resumableTotalSize** | **double \*** | Total file size. | 
+**resumableTotalChunks** | **double \*** | Total number of chunks. | 
+**body** | **binary_t*** |  | 
+**resumableIdentifier** | **char \*** | Client-side identifier of the file being uploaded. | [optional] 
+**resumableFilename** | **char \*** | Original filename. | [optional] 
+**resumableRelativePath** | **char \*** | Relative path. | [optional] 
+**resumableType** | **char \*** | MIME type. | [optional] 
+**corelliumChecksum** | **char \*** | Expected Corellium checksum of the complete file, formatted &#x60;algorithm$blockSize$hash&#x60;. When supplied, every chunk is re-hashed and the upload is rejected (and the image removed) unless the recomputed checksum matches. The chunk size used for the upload must equal the block size embedded in the checksum. Required for &#x60;fw&#x60; uploads on airgapped deployments. | [optional] 
+**x_corellium_total_file_size** | **char \*** | Total size of the whole file in bytes. Send it on every chunk so the image-pool pre-flight check sees the full upload size rather than the size of a single chunk. | [optional] 
+
+### Return type
+
+void
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/octet-stream
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **ImagesAPI_v3UploadImageData**
 ```c
 // Upload image file contents
 //
-// Uploads file contents into an Image previously created via [`createImage`](#operation/createImage). The image's owning project must have sufficient remaining quota. Accepts multipart/form-data; the optional `corelliumChecksum` query parameter, when supplied, is verified against the upload.
+// Uploads file contents into an Image previously created via [`createImage`](#operation/createImage). The image's owning project must have sufficient remaining quota. Accepts multipart/form-data; the optional `corelliumChecksum` query parameter, when supplied, is verified against the upload.   This endpoint uploads the whole file in a single request. For large images (firmware in particular) upload the file in chunks instead — see [`uploadImageChunk`](#operation/uploadImageChunk).
 //
 image_t* ImagesAPI_v3UploadImageData(apiClient_t *apiClient, char *imageId, binary_t* file, char *corelliumChecksum);
 ```

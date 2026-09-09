@@ -5,6 +5,7 @@
 #include "../external/cJSON.h"
 #include "../include/keyValuePair.h"
 #include "../include/binary.h"
+#include "../model/any_type.h"
 #include "../model/api_conflict_error.h"
 #include "../model/api_error.h"
 #include "../model/api_not_found_error.h"
@@ -18,6 +19,9 @@
 #include "../model/install_firmware_body.h"
 #include "../model/install_firmware_response.h"
 #include "../model/install_firmware_status_response.h"
+#include "../model/insufficient_storage_error.h"
+#include "../model/object.h"
+#include "../model/upload_size_error.h"
 #include "../model/user_error_response.h"
 
 
@@ -43,6 +47,14 @@ ImagesAPI_v3DeleteImage(apiClient_t *apiClient, char *imageId);
 //
 image_t*
 ImagesAPI_v3GetImage(apiClient_t *apiClient, char *imageId);
+
+
+// Check whether an image chunk was already uploaded
+//
+// Probes whether a single chunk of a chunked upload is already stored, so an interrupted upload can resume without re-sending data. Used together with [`uploadImageChunk`](#operation/uploadImageChunk).   Returns 200 when the chunk is present and 204 when it still needs to be uploaded. The chunk is identified exactly as in the upload request, by `resumableChunkNumber`, `resumableChunkSize` and `resumableCurrentChunkSize`, all of which are required. The image must already exist; an unknown `imageId` is a 404 rather than a 204.
+//
+object_t*
+ImagesAPI_v3GetImageChunk(apiClient_t *apiClient, char *imageId, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize);
 
 
 // Get firmware info embedded in an image
@@ -85,9 +97,17 @@ image_list_t*
 ImagesAPI_v3ListImages(apiClient_t *apiClient, double *limit, double *offset, char *projectId);
 
 
+// Upload one chunk of an image file
+//
+// Uploads a single chunk of an Image previously created via [`createImage`](#operation/createImage), using the resumable upload protocol. This is the recommended way to upload large images: the transfer survives interruptions, because any chunk can be re-sent and already-stored chunks can be skipped.   **Chunked upload workflow:**   1. [`createImage`](#operation/createImage) with `{ name, type, encoding }` → returns an `imageId`.   2. Split the file into fixed-size chunks and **`uploadImageChunk`** each one with the      `resumable*` query parameters describing it. Chunks may be uploaded in any order and      concurrently.   3. Optionally probe a chunk with [`getImageChunk`](#operation/getImageChunk) before      (re-)sending it, so an interrupted upload only re-sends what is missing.   The image is finalized automatically by the request that completes the chunk set, so the last chunk to arrive also validates `corelliumChecksum` (when supplied) and runs the firmware post-processing. Re-sending a chunk that was already stored is safe. If the upload fails for any reason other than a retryable transport error, the partially uploaded image is deleted, so the client must create a new image record before retrying.   The image's `encoding` and `encapsulated` settings are fixed when the record is created by [`createImage`](#operation/createImage) and cannot be changed by a chunk request.
+//
+void
+ImagesAPI_v3UploadImageChunk(apiClient_t *apiClient, char *imageId, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, binary_t* body, char *resumableIdentifier, char *resumableFilename, char *resumableRelativePath, char *resumableType, char *corelliumChecksum, char *x_corellium_total_file_size);
+
+
 // Upload image file contents
 //
-// Uploads file contents into an Image previously created via [`createImage`](#operation/createImage). The image's owning project must have sufficient remaining quota. Accepts multipart/form-data; the optional `corelliumChecksum` query parameter, when supplied, is verified against the upload.
+// Uploads file contents into an Image previously created via [`createImage`](#operation/createImage). The image's owning project must have sufficient remaining quota. Accepts multipart/form-data; the optional `corelliumChecksum` query parameter, when supplied, is verified against the upload.   This endpoint uploads the whole file in a single request. For large images (firmware in particular) upload the file in chunks instead — see [`uploadImageChunk`](#operation/uploadImageChunk).
 //
 image_t*
 ImagesAPI_v3UploadImageData(apiClient_t *apiClient, char *imageId, binary_t* file, char *corelliumChecksum);
