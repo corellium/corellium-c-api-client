@@ -277,6 +277,7 @@ docs/api_not_found_error.md
 docs/api_not_found_error_v1.md
 docs/api_token.md
 docs/api_token_result.md
+docs/artifacts_path.md
 docs/assessment.md
 docs/assessment_bundle.md
 docs/assessment_format.md
@@ -362,6 +363,8 @@ docs/cluster_snapshot_metadata.md
 docs/cluster_snapshot_metadata_boot_options.md
 docs/cluster_snapshot_status.md
 docs/cluster_snapshot_v1.md
+docs/compute_node_file.md
+docs/compute_node_file_list.md
 docs/config_auth_provider.md
 docs/config_response.md
 docs/config_response_ai_tools_config.md
@@ -1019,6 +1022,8 @@ model/api_token.c
 model/api_token.h
 model/api_token_result.c
 model/api_token_result.h
+model/artifacts_path.c
+model/artifacts_path.h
 model/assessment.c
 model/assessment.h
 model/assessment_bundle.c
@@ -1189,6 +1194,10 @@ model/cluster_snapshot_status.c
 model/cluster_snapshot_status.h
 model/cluster_snapshot_v1.c
 model/cluster_snapshot_v1.h
+model/compute_node_file.c
+model/compute_node_file.h
+model/compute_node_file_list.c
+model/compute_node_file_list.h
 model/config_auth_provider.c
 model/config_auth_provider.h
 model/config_response.c
@@ -2273,6 +2282,7 @@ unit-test/test_api_not_found_error.c
 unit-test/test_api_not_found_error_v1.c
 unit-test/test_api_token.c
 unit-test/test_api_token_result.c
+unit-test/test_artifacts_path.c
 unit-test/test_assessment.c
 unit-test/test_assessment_bundle.c
 unit-test/test_assessment_format.c
@@ -2358,6 +2368,8 @@ unit-test/test_cluster_snapshot_metadata.c
 unit-test/test_cluster_snapshot_metadata_boot_options.c
 unit-test/test_cluster_snapshot_status.c
 unit-test/test_cluster_snapshot_v1.c
+unit-test/test_compute_node_file.c
+unit-test/test_compute_node_file_list.c
 unit-test/test_config_auth_provider.c
 unit-test/test_config_response.c
 unit-test/test_config_response_ai_tools_config.c

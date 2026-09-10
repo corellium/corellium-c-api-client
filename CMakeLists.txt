@@ -121,6 +121,7 @@ set(SRCS
     model/api_not_found_error_v1.c
     model/api_token.c
     model/api_token_result.c
+    model/artifacts_path.c
     model/assessment.c
     model/assessment_bundle.c
     model/assessment_format.c
@@ -206,6 +207,8 @@ set(SRCS
     model/cluster_snapshot_metadata_boot_options.c
     model/cluster_snapshot_status.c
     model/cluster_snapshot_v1.c
+    model/compute_node_file.c
+    model/compute_node_file_list.c
     model/config_auth_provider.c
     model/config_response.c
     model/config_response_ai_tools_config.c
@@ -859,6 +862,7 @@ set(HDRS
     model/api_not_found_error_v1.h
     model/api_token.h
     model/api_token_result.h
+    model/artifacts_path.h
     model/assessment.h
     model/assessment_bundle.h
     model/assessment_format.h
@@ -944,6 +948,8 @@ set(HDRS
     model/cluster_snapshot_metadata_boot_options.h
     model/cluster_snapshot_status.h
     model/cluster_snapshot_v1.h
+    model/compute_node_file.h
+    model/compute_node_file_list.h
     model/config_auth_provider.h
     model/config_response.h
     model/config_response_ai_tools_config.h
