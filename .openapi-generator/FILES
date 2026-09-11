@@ -717,6 +717,7 @@ docs/reset_link_body.md
 docs/reset_link_info.md
 docs/reset_link_info_return.md
 docs/reset_password_body.md
+docs/reset_unauthorized_response.md
 docs/restore_backup_body.md
 docs/restore_backup_data.md
 docs/revoke_invites_body.md
@@ -809,6 +810,7 @@ docs/trial_request_list_response.md
 docs/trial_request_metadata.md
 docs/trial_request_options.md
 docs/trial_v1.md
+docs/unauthorized_error.md
 docs/uncancel_subscription_body.md
 docs/update_assessment_input.md
 docs/update_domain_settings_response.md
@@ -1904,6 +1906,8 @@ model/reset_link_info_return.c
 model/reset_link_info_return.h
 model/reset_password_body.c
 model/reset_password_body.h
+model/reset_unauthorized_response.c
+model/reset_unauthorized_response.h
 model/restore_backup_body.c
 model/restore_backup_body.h
 model/restore_backup_data.c
@@ -2088,6 +2092,8 @@ model/trial_request_options.c
 model/trial_request_options.h
 model/trial_v1.c
 model/trial_v1.h
+model/unauthorized_error.c
+model/unauthorized_error.h
 model/uncancel_subscription_body.c
 model/uncancel_subscription_body.h
 model/update_assessment_input.c
@@ -2722,6 +2728,7 @@ unit-test/test_reset_link_body.c
 unit-test/test_reset_link_info.c
 unit-test/test_reset_link_info_return.c
 unit-test/test_reset_password_body.c
+unit-test/test_reset_unauthorized_response.c
 unit-test/test_restore_backup_body.c
 unit-test/test_restore_backup_data.c
 unit-test/test_revoke_invites_body.c
@@ -2814,6 +2821,7 @@ unit-test/test_trial_request_list_response.c
 unit-test/test_trial_request_metadata.c
 unit-test/test_trial_request_options.c
 unit-test/test_trial_v1.c
+unit-test/test_unauthorized_error.c
 unit-test/test_uncancel_subscription_body.c
 unit-test/test_update_assessment_input.c
 unit-test/test_update_domain_settings_response.c

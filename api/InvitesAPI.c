@@ -243,6 +243,10 @@ InvitesAPI_v3GetInviteByToken(apiClient_t *apiClient, get_invite_by_token_body_t
     //    printf("%s\n","Missing or invalid token.");
     //}
     // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","The invite has expired, its token does not match, or its domain is disabled.");
+    //}
+    // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
     //    printf("%s\n","No invite with the given token.");
     //}

@@ -561,6 +561,7 @@ set(SRCS
     model/reset_link_info.c
     model/reset_link_info_return.c
     model/reset_password_body.c
+    model/reset_unauthorized_response.c
     model/restore_backup_body.c
     model/restore_backup_data.c
     model/revoke_invites_body.c
@@ -653,6 +654,7 @@ set(SRCS
     model/trial_request_metadata.c
     model/trial_request_options.c
     model/trial_v1.c
+    model/unauthorized_error.c
     model/uncancel_subscription_body.c
     model/update_assessment_input.c
     model/update_domain_settings_response.c
@@ -1302,6 +1304,7 @@ set(HDRS
     model/reset_link_info.h
     model/reset_link_info_return.h
     model/reset_password_body.h
+    model/reset_unauthorized_response.h
     model/restore_backup_body.h
     model/restore_backup_data.h
     model/revoke_invites_body.h
@@ -1394,6 +1397,7 @@ set(HDRS
     model/trial_request_metadata.h
     model/trial_request_options.h
     model/trial_v1.h
+    model/unauthorized_error.h
     model/uncancel_subscription_body.h
     model/update_assessment_input.h
     model/update_domain_settings_response.h

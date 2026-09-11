@@ -48,6 +48,10 @@ UsersAPI_v3AgreeToTerms(apiClient_t *apiClient)
     //    printf("%s\n","Terms accepted.");
     //}
     // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","The session token is missing, invalid, or expired.");
+    //}
+    // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
     //    printf("%s\n","Permission denied.");
     //}
@@ -381,7 +385,11 @@ UsersAPI_v3GetResetLinkInfo(apiClient_t *apiClient, get_reset_link_info_body_t *
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Expired, invalid, or missing token.");
+    //    printf("%s\n","Token was not supplied, or is not a password reset token.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","The reset token failed verification: malformed, tampered with, or expired.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
@@ -572,7 +580,7 @@ UsersAPI_v3ResetPassword(apiClient_t *apiClient, reset_password_body_t *reset_pa
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","The one-time code supplied is incorrect.");
+    //    printf("%s\n","The one-time code is incorrect, or the reset token failed verification.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
@@ -649,6 +657,10 @@ UsersAPI_v3SendResetLink(apiClient_t *apiClient, send_reset_link_body_t *send_re
     // uncomment below to debug the error response
     //if (apiClient->response_code == 204) {
     //    printf("%s\n","Reset link sent (if the email matched an account).");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 400) {
+    //    printf("%s\n","The request body failed validation.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
