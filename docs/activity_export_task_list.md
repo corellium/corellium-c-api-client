@@ -1,9 +1,9 @@
-# activity_export_tasks_list_t
+# activity_export_task_list_t
 
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**results** | [**list_t**](activity_export_tasks.md) \* | List of export tasks. | 
+**results** | [**list_t**](activity_export_task.md) \* | List of export tasks. | 
 **count** | **double** | Number of results in this response. | 
 **total** | **double** | Total number of results across all pages. | 
 **limit** | **double** | Limit used for pagination. | 

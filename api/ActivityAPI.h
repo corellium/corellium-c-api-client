@@ -5,22 +5,21 @@
 #include "../external/cJSON.h"
 #include "../include/keyValuePair.h"
 #include "../include/binary.h"
-#include "../model/activity_download.h"
-#include "../model/activity_export_tasks_list.h"
+#include "../model/activity_export_status.h"
+#include "../model/activity_export_task_list.h"
 #include "../model/activity_list_response.h"
 #include "../model/api_error.h"
 #include "../model/api_not_found_error.h"
 #include "../model/create_activity_export_body.h"
+#include "../model/create_activity_export_response.h"
 #include "../model/user_error_response.h"
-#include "../model/v3_create_activity_export_201_response.h"
-#include "../model/v3_get_activity_export_status_200_response.h"
 
 
 // Start activity export
 //
 // **Required role:** Domain administrator.  Start activity export.
 //
-v3_create_activity_export_201_response_t*
+create_activity_export_response_t*
 ActivityAPI_v3CreateActivityExport(apiClient_t *apiClient, char *accept, create_activity_export_body_t *create_activity_export_body);
 
 
@@ -28,7 +27,7 @@ ActivityAPI_v3CreateActivityExport(apiClient_t *apiClient, char *accept, create_
 //
 // **Required role:** Domain administrator.  Download activity for a given task.
 //
-activity_download_t*
+binary_t*
 ActivityAPI_v3DownloadActivity(apiClient_t *apiClient, char *taskId);
 
 
@@ -36,7 +35,7 @@ ActivityAPI_v3DownloadActivity(apiClient_t *apiClient, char *taskId);
 //
 // **Required role:** Domain administrator.  Get export task status.
 //
-v3_get_activity_export_status_200_response_t*
+activity_export_status_t*
 ActivityAPI_v3GetActivityExportStatus(apiClient_t *apiClient, char *taskId);
 
 
@@ -44,7 +43,7 @@ ActivityAPI_v3GetActivityExportStatus(apiClient_t *apiClient, char *taskId);
 //
 // **Required role:** Domain administrator.  Get all export tasks for user.
 //
-activity_export_tasks_list_t*
+activity_export_task_list_t*
 ActivityAPI_v3GetActivityExportTasks(apiClient_t *apiClient, double *limit, double *offset);
 
 

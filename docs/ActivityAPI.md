@@ -17,19 +17,19 @@ Method | HTTP request | Description
 //
 // **Required role:** Domain administrator.  Start activity export.
 //
-v3_create_activity_export_201_response_t* ActivityAPI_v3CreateActivityExport(apiClient_t *apiClient, char *accept, create_activity_export_body_t *create_activity_export_body);
+create_activity_export_response_t* ActivityAPI_v3CreateActivityExport(apiClient_t *apiClient, char *accept, create_activity_export_body_t *create_activity_export_body);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**accept** | **char \*** | Specifies the preferred media type for the response. | 
+**accept** | **char \*** | Specifies the activity export file format. | 
 **create_activity_export_body** | **[create_activity_export_body_t](create_activity_export_body.md) \*** |  | [optional] 
 
 ### Return type
 
-[v3_create_activity_export_201_response_t](v3_create_activity_export_201_response.md) *
+[create_activity_export_response_t](create_activity_export_response.md) *
 
 
 ### Authorization
@@ -49,7 +49,7 @@ Name | Type | Description  | Notes
 //
 // **Required role:** Domain administrator.  Download activity for a given task.
 //
-activity_download_t* ActivityAPI_v3DownloadActivity(apiClient_t *apiClient, char *taskId);
+binary_t** ActivityAPI_v3DownloadActivity(apiClient_t *apiClient, char *taskId);
 ```
 
 ### Parameters
@@ -60,7 +60,8 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[activity_download_t](activity_download.md) *
+binary_t**
+
 
 
 ### Authorization
@@ -80,7 +81,7 @@ Name | Type | Description  | Notes
 //
 // **Required role:** Domain administrator.  Get export task status.
 //
-v3_get_activity_export_status_200_response_t* ActivityAPI_v3GetActivityExportStatus(apiClient_t *apiClient, char *taskId);
+activity_export_status_t* ActivityAPI_v3GetActivityExportStatus(apiClient_t *apiClient, char *taskId);
 ```
 
 ### Parameters
@@ -91,7 +92,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[v3_get_activity_export_status_200_response_t](v3_get_activity_export_status_200_response.md) *
+[activity_export_status_t](activity_export_status.md) *
 
 
 ### Authorization
@@ -111,7 +112,7 @@ Name | Type | Description  | Notes
 //
 // **Required role:** Domain administrator.  Get all export tasks for user.
 //
-activity_export_tasks_list_t* ActivityAPI_v3GetActivityExportTasks(apiClient_t *apiClient, double *limit, double *offset);
+activity_export_task_list_t* ActivityAPI_v3GetActivityExportTasks(apiClient_t *apiClient, double *limit, double *offset);
 ```
 
 ### Parameters
@@ -123,7 +124,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[activity_export_tasks_list_t](activity_export_tasks_list.md) *
+[activity_export_task_list_t](activity_export_task_list.md) *
 
 
 ### Authorization
@@ -148,10 +149,10 @@ activity_list_response_t* ActivityAPI_v3ListActivities(apiClient_t *apiClient, c
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**resource** | **char \*** | Resource filter. | [optional] 
+**resource** | **char \*** | Resource equality or LHS prefix filter. Examples: &#x60;resource&#x3D;value&#x60;, &#x60;resource[startsWith]&#x3D;value&#x60;, and &#x60;resource[!startsWith]&#x3D;value&#x60;. | [optional] 
 **limit** | **double \*** | Number of entries to return. | [optional] [default to 10]
 **offset** | **double \*** | Number of results to skip. | [optional] [default to 0]
-**orderBy** | **char \*** | Sorting order (&#39;-createdAt&#39; or &#39;createdAt&#39;). | [optional] [default to &#39;-createdAt&#39;]
+**orderBy** | **char \*** | Activity model attribute to sort by. | [optional] [default to &#39;-createdAt&#39;]
 **instanceId** | **char \*** | Instance identifier used to filter instance resources. | [optional] 
 **projectId** | **char \*** | Project identifier used to filter instance resources. | [optional] 
 **actor** | **char \*** | Actor identifier used to filter actor resources. | [optional] 

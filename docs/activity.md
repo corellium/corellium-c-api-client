@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **event** | **char \*** | Resource associated with the activity. | 
 **outcome** | **corellium_api_activity_OUTCOME_e** | The outcome of the activity. | 
 **metadata** | [**object_t**](.md) \* | Related information that pertains to the activity. | [optional] 
-**corellium_version** | **char \*** | The Corellium version this activity occurred in. | 
+**corellium_version** | **char \*** | The Corellium version this activity occurred in. | [optional] 
 **project_id** | **char \*** | Unique identifier for project if applicable. | [optional] 
 **instance_id** | **char \*** | Unique identifier for instance if applicable. | [optional] 
 **created_at** | **char \*** | Timestamp of when the activity was created. | 

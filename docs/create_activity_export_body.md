@@ -3,9 +3,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**resource** | [**object_t**](.md) \* | Resource filter. | [optional] 
+**resource** | [**object_t**](.md) \* | Resource equality or LHS prefix filter. Examples: &#x60;resource&#x3D;value&#x60;, &#x60;resource[startsWith]&#x3D;value&#x60;, and &#x60;resource[!startsWith]&#x3D;value&#x60;. | [optional] 
 **offset** | **double** | Number of results to skip. | [optional] [default to 0]
-**order_by** | **char \*** | Sorting order (&#39;-createdAt&#39; or &#39;createdAt&#39;). | [optional] [default to '-createdAt']
+**order_by** | **char \*** | Activity model attribute to sort by. | [optional] [default to '-createdAt']
 **instance_id** | **char \*** | Instance identifier used to filter instance resources. | [optional] 
 **project_id** | **char \*** | Project identifier used to filter instance resources. | [optional] 
 **actor** | **char \*** | Actor identifier used to filter actor resources. | [optional] 

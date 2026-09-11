@@ -198,11 +198,10 @@ cJSON *activity_convertToJSON(activity_t *activity) {
 
 
     // activity->corellium_version
-    if (!activity->corellium_version) {
-        goto fail;
-    }
+    if(activity->corellium_version) {
     if(cJSON_AddStringToObject(item, "corelliumVersion", activity->corellium_version) == NULL) {
     goto fail; //String
+    }
     }
 
 
@@ -343,14 +342,11 @@ activity_t *activity_parseFromJSON(cJSON *activityJSON){
     if (cJSON_IsNull(corellium_version)) {
         corellium_version = NULL;
     }
-    if (!corellium_version) {
-        goto end;
-    }
-
-    
-    if(!cJSON_IsString(corellium_version))
+    if (corellium_version) { 
+    if(!cJSON_IsString(corellium_version) && !cJSON_IsNull(corellium_version))
     {
     goto end; //String
+    }
     }
 
     // activity->project_id
@@ -415,7 +411,7 @@ activity_t *activity_parseFromJSON(cJSON *activityJSON){
         strdup(event->valuestring),
         outcomeVariable,
         metadata ? metadata_local_object : NULL,
-        strdup(corellium_version->valuestring),
+        corellium_version && !cJSON_IsNull(corellium_version) ? strdup(corellium_version->valuestring) : NULL,
         project_id && !cJSON_IsNull(project_id) ? strdup(project_id->valuestring) : NULL,
         instance_id && !cJSON_IsNull(instance_id) ? strdup(instance_id->valuestring) : NULL,
         strdup(created_at->valuestring),

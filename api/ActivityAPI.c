@@ -11,7 +11,7 @@
 //
 // **Required role:** Domain administrator.  Start activity export.
 //
-v3_create_activity_export_201_response_t*
+create_activity_export_response_t*
 ActivityAPI_v3CreateActivityExport(apiClient_t *apiClient, char *accept, create_activity_export_body_t *create_activity_export_body)
 {
     list_t    *localVarQueryParameters = NULL;
@@ -79,10 +79,10 @@ ActivityAPI_v3CreateActivityExport(apiClient_t *apiClient, char *accept, create_
     //    printf("%s\n","Domain administrator permissions required.");
     //}
     //nonprimitive not container
-    v3_create_activity_export_201_response_t *elementToReturn = NULL;
+    create_activity_export_response_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
         cJSON *ActivityAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = v3_create_activity_export_201_response_parseFromJSON(ActivityAPIlocalVarJSON);
+        elementToReturn = create_activity_export_response_parseFromJSON(ActivityAPIlocalVarJSON);
         cJSON_Delete(ActivityAPIlocalVarJSON);
         if(elementToReturn == NULL) {
             // return 0;
@@ -126,7 +126,7 @@ end:
 //
 // **Required role:** Domain administrator.  Download activity for a given task.
 //
-activity_download_t*
+binary_t*
 ActivityAPI_v3DownloadActivity(apiClient_t *apiClient, char *taskId)
 {
     list_t    *localVarQueryParameters = NULL;
@@ -187,18 +187,11 @@ ActivityAPI_v3DownloadActivity(apiClient_t *apiClient, char *taskId)
     //if (apiClient->response_code == 404) {
     //    printf("%s\n","Task not found.");
     //}
-    //nonprimitive not container
-    activity_download_t *elementToReturn = NULL;
-    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
-        cJSON *ActivityAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = activity_download_parseFromJSON(ActivityAPIlocalVarJSON);
-        cJSON_Delete(ActivityAPIlocalVarJSON);
-        if(elementToReturn == NULL) {
-            // return 0;
-        }
-    }
+    //primitive return type simple binary
+    binary_t* elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300)
+        elementToReturn = instantiate_binary_t(apiClient->dataReceived, apiClient->dataReceivedLen);
 
-    //return type
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
@@ -222,7 +215,7 @@ end:
 //
 // **Required role:** Domain administrator.  Get export task status.
 //
-v3_get_activity_export_status_200_response_t*
+activity_export_status_t*
 ActivityAPI_v3GetActivityExportStatus(apiClient_t *apiClient, char *taskId)
 {
     list_t    *localVarQueryParameters = NULL;
@@ -275,10 +268,10 @@ ActivityAPI_v3GetActivityExportStatus(apiClient_t *apiClient, char *taskId)
     //    printf("%s\n","Domain administrator permissions required.");
     //}
     //nonprimitive not container
-    v3_get_activity_export_status_200_response_t *elementToReturn = NULL;
+    activity_export_status_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
         cJSON *ActivityAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = v3_get_activity_export_status_200_response_parseFromJSON(ActivityAPIlocalVarJSON);
+        elementToReturn = activity_export_status_parseFromJSON(ActivityAPIlocalVarJSON);
         cJSON_Delete(ActivityAPIlocalVarJSON);
         if(elementToReturn == NULL) {
             // return 0;
@@ -309,7 +302,7 @@ end:
 //
 // **Required role:** Domain administrator.  Get all export tasks for user.
 //
-activity_export_tasks_list_t*
+activity_export_task_list_t*
 ActivityAPI_v3GetActivityExportTasks(apiClient_t *apiClient, double *limit, double *offset)
 {
     list_t    *localVarQueryParameters = list_createList();
@@ -376,10 +369,10 @@ ActivityAPI_v3GetActivityExportTasks(apiClient_t *apiClient, double *limit, doub
     //    printf("%s\n","Domain administrator permissions required.");
     //}
     //nonprimitive not container
-    activity_export_tasks_list_t *elementToReturn = NULL;
+    activity_export_task_list_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
         cJSON *ActivityAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = activity_export_tasks_list_parseFromJSON(ActivityAPIlocalVarJSON);
+        elementToReturn = activity_export_task_list_parseFromJSON(ActivityAPIlocalVarJSON);
         cJSON_Delete(ActivityAPIlocalVarJSON);
         if(elementToReturn == NULL) {
             // return 0;

@@ -52,15 +52,16 @@ set(SRCS
     model/accept_snapshot_request_payload.c
     model/account_setup_response.c
     model/activity.c
-    model/activity_download.c
     model/activity_export_dto.c
     model/activity_export_response.c
-    model/activity_export_tasks.c
-    model/activity_export_tasks_list.c
+    model/activity_export_status.c
+    model/activity_export_task.c
+    model/activity_export_task_list.c
     model/activity_list.c
     model/activity_list_response.c
-    model/activity_query_options.c
     model/activity_request.c
+    model/activity_resource_not_starts_with_filter.c
+    model/activity_resource_starts_with_filter.c
     model/activity_v1.c
     model/address.c
     model/agent_app.c
@@ -219,6 +220,7 @@ set(SRCS
     model/coordinator_config_v1.c
     model/coupon_options.c
     model/create_activity_export_body.c
+    model/create_activity_export_response.c
     model/create_assessment_input.c
     model/create_cloud_admin_trial_request_body.c
     model/create_domain_auth_provider_body.c
@@ -698,9 +700,7 @@ set(SRCS
     model/v1_load_extension_parameters.c
     model/v1_set_state_body.c
     model/v1_update_hook_parameters.c
-    model/v3_create_activity_export_201_response.c
     model/v3_delete_network_connection_request.c
-    model/v3_get_activity_export_status_200_response.c
     model/v3_update_snapshot_request.c
     model/validation_error.c
     model/vlan_config.c
@@ -802,15 +802,16 @@ set(HDRS
     model/accept_snapshot_request_payload.h
     model/account_setup_response.h
     model/activity.h
-    model/activity_download.h
     model/activity_export_dto.h
     model/activity_export_response.h
-    model/activity_export_tasks.h
-    model/activity_export_tasks_list.h
+    model/activity_export_status.h
+    model/activity_export_task.h
+    model/activity_export_task_list.h
     model/activity_list.h
     model/activity_list_response.h
-    model/activity_query_options.h
     model/activity_request.h
+    model/activity_resource_not_starts_with_filter.h
+    model/activity_resource_starts_with_filter.h
     model/activity_v1.h
     model/address.h
     model/agent_app.h
@@ -969,6 +970,7 @@ set(HDRS
     model/coordinator_config_v1.h
     model/coupon_options.h
     model/create_activity_export_body.h
+    model/create_activity_export_response.h
     model/create_assessment_input.h
     model/create_cloud_admin_trial_request_body.h
     model/create_domain_auth_provider_body.h
@@ -1448,9 +1450,7 @@ set(HDRS
     model/v1_load_extension_parameters.h
     model/v1_set_state_body.h
     model/v1_update_hook_parameters.h
-    model/v3_create_activity_export_201_response.h
     model/v3_delete_network_connection_request.h
-    model/v3_get_activity_export_status_200_response.h
     model/v3_update_snapshot_request.h
     model/validation_error.h
     model/vlan_config.h
