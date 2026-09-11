@@ -9,7 +9,7 @@
 
 // Log in
 //
-// Authenticate and receive a session token. Supply one of three credential types; when more than one is present they are resolved in this fixed order of precedence: (1) `username` + `password` (plus `totpToken` when two-factor is enabled); (2) `token` — an existing session token, renewed for a fresh one; (3) `apiToken` — a persistent API key created by the user (in the web UI or via `POST /v3/auth/apitoken`), not issued by login. The first credential type present wins and the rest are ignored. For example, sending both username/password and an apiToken authenticates via username/password. On success the response always contains a newly-regenerated session token (JWT); the apiToken is never returned.
+// Authenticate and receive a session token. Supply one of three credential types; when more than one is present they are resolved in this fixed order of precedence: (1) `username` + `password` (plus `totpToken` when two-factor is enabled); (2) `token` — an existing session token, renewed for a fresh one; (3) `apiToken` — a persistent API key created by the user (in the web UI or via `POST /v3/auth/apitoken`), not issued by login. The first credential type present wins and the rest are ignored. For example, sending both username/password and an apiToken authenticates via username/password. On success the response contains a newly-regenerated session token (JWT), its expiration, and the session itself — the authenticated user and their domain. The apiToken is never returned. Renewing a Webplayer token instead returns the Webplayer session `identifier` and no `user`.
 //
 login_result_t*
 AuthenticationAPI_v3AuthLogin(apiClient_t *apiClient, login_body_t *login_body)

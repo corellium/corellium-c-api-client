@@ -18,7 +18,7 @@ domain_config_t* instantiate_domain_config(int include_optional);
 
 #include "test_domain_config_trial.c"
 #include "test_domain_config_webplayer.c"
-#include "test_domain_config_snapshot_sharing_permissions.c"
+#include "test_login_result_domain_snapshot_sharing_permissions.c"
 
 
 domain_config_t* instantiate_domain_config(int include_optional) {
@@ -41,7 +41,7 @@ domain_config_t* instantiate_domain_config(int include_optional) {
        // false, not to have infinite recursion
       instantiate_domain_config_webplayer(0),
        // false, not to have infinite recursion
-      instantiate_domain_config_snapshot_sharing_permissions(0)
+      instantiate_login_result_domain_snapshot_sharing_permissions(0)
     );
   } else {
     domain_config = domain_config_create(

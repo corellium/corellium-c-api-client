@@ -266,7 +266,6 @@ set(SRCS
     model/domain_config_input_snapshot_sharing_permissions.c
     model/domain_config_input_trial.c
     model/domain_config_input_webplayer.c
-    model/domain_config_snapshot_sharing_permissions.c
     model/domain_config_trial.c
     model/domain_config_trial_end_action.c
     model/domain_config_trial_extension.c
@@ -460,6 +459,14 @@ set(SRCS
     model/logging_v1.c
     model/login_body.c
     model/login_result.c
+    model/login_result_disabled.c
+    model/login_result_domain.c
+    model/login_result_domain_device_auto_shutdown.c
+    model/login_result_domain_disabled.c
+    model/login_result_domain_snapshot_sharing_permissions.c
+    model/login_result_domain_trial.c
+    model/login_result_domain_webplayer.c
+    model/login_result_user.c
     model/maintenance.c
     model/matrix_error.c
     model/media_play_body.c
@@ -1009,7 +1016,6 @@ set(HDRS
     model/domain_config_input_snapshot_sharing_permissions.h
     model/domain_config_input_trial.h
     model/domain_config_input_webplayer.h
-    model/domain_config_snapshot_sharing_permissions.h
     model/domain_config_trial.h
     model/domain_config_trial_end_action.h
     model/domain_config_trial_extension.h
@@ -1203,6 +1209,14 @@ set(HDRS
     model/logging_v1.h
     model/login_body.h
     model/login_result.h
+    model/login_result_disabled.h
+    model/login_result_domain.h
+    model/login_result_domain_device_auto_shutdown.h
+    model/login_result_domain_disabled.h
+    model/login_result_domain_snapshot_sharing_permissions.h
+    model/login_result_domain_trial.h
+    model/login_result_domain_webplayer.h
+    model/login_result_user.h
     model/maintenance.h
     model/matrix_error.h
     model/media_play_body.h

@@ -16,6 +16,9 @@
 #include "../model/login_result.h"
 login_result_t* instantiate_login_result(int include_optional);
 
+#include "test_login_result_user.c"
+#include "test_login_result_domain.c"
+#include "test_login_result_disabled.c"
 
 
 login_result_t* instantiate_login_result(int include_optional) {
@@ -23,12 +26,27 @@ login_result_t* instantiate_login_result(int include_optional) {
   if (include_optional) {
     login_result = login_result_create(
       "0",
-      "2013-10-20T19:20:30+01:00"
+      "2013-10-20T19:20:30+01:00",
+       // false, not to have infinite recursion
+      instantiate_login_result_user(0),
+       // false, not to have infinite recursion
+      instantiate_login_result_domain(0),
+      1.337,
+      "0",
+       // false, not to have infinite recursion
+      instantiate_login_result_disabled(0),
+      1
     );
   } else {
     login_result = login_result_create(
       "0",
-      "2013-10-20T19:20:30+01:00"
+      "2013-10-20T19:20:30+01:00",
+      NULL,
+      NULL,
+      1.337,
+      "0",
+      NULL,
+      1
     );
   }
 

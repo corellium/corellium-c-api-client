@@ -1,4 +1,4 @@
-# domain_config_snapshot_sharing_permissions_t
+# login_result_domain_snapshot_sharing_permissions_t
 
 ## Properties
 Name | Type | Description | Notes
