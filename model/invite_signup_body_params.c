@@ -8,7 +8,8 @@
 static invite_signup_body_params_t *invite_signup_body_params_create_internal(
     char *email,
     char *password,
-    char *label
+    char *label,
+    int agreed
     ) {
     invite_signup_body_params_t *invite_signup_body_params_local_var = malloc(sizeof(invite_signup_body_params_t));
     if (!invite_signup_body_params_local_var) {
@@ -17,6 +18,7 @@ static invite_signup_body_params_t *invite_signup_body_params_create_internal(
     invite_signup_body_params_local_var->email = email;
     invite_signup_body_params_local_var->password = password;
     invite_signup_body_params_local_var->label = label;
+    invite_signup_body_params_local_var->agreed = agreed;
 
     invite_signup_body_params_local_var->_library_owned = 1;
     return invite_signup_body_params_local_var;
@@ -25,12 +27,14 @@ static invite_signup_body_params_t *invite_signup_body_params_create_internal(
 __attribute__((deprecated)) invite_signup_body_params_t *invite_signup_body_params_create(
     char *email,
     char *password,
-    char *label
+    char *label,
+    int agreed
     ) {
     return invite_signup_body_params_create_internal (
         email,
         password,
-        label
+        label,
+        agreed
         );
 }
 
@@ -84,6 +88,15 @@ cJSON *invite_signup_body_params_convertToJSON(invite_signup_body_params_t *invi
     }
     if(cJSON_AddStringToObject(item, "label", invite_signup_body_params->label) == NULL) {
     goto fail; //String
+    }
+
+
+    // invite_signup_body_params->agreed
+    if (!invite_signup_body_params->agreed) {
+        goto fail;
+    }
+    if(cJSON_AddBoolToObject(item, "agreed", invite_signup_body_params->agreed) == NULL) {
+    goto fail; //Bool
     }
 
     return item;
@@ -140,11 +153,27 @@ invite_signup_body_params_t *invite_signup_body_params_parseFromJSON(cJSON *invi
     goto end; //String
     }
 
+    // invite_signup_body_params->agreed
+    cJSON *agreed = cJSON_GetObjectItemCaseSensitive(invite_signup_body_paramsJSON, "agreed");
+    if (cJSON_IsNull(agreed)) {
+        agreed = NULL;
+    }
+    if (!agreed) {
+        goto end;
+    }
+
+    
+    if(!cJSON_IsBool(agreed))
+    {
+    goto end; //Bool
+    }
+
 
     invite_signup_body_params_local_var = invite_signup_body_params_create_internal (
         email && !cJSON_IsNull(email) ? strdup(email->valuestring) : NULL,
         strdup(password->valuestring),
-        strdup(label->valuestring)
+        strdup(label->valuestring),
+        agreed->valueint
         );
 
     return invite_signup_body_params_local_var;

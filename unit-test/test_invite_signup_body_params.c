@@ -24,13 +24,15 @@ invite_signup_body_params_t* instantiate_invite_signup_body_params(int include_o
     invite_signup_body_params = invite_signup_body_params_create(
       "0",
       "0",
-      "0"
+      "0",
+      1
     );
   } else {
     invite_signup_body_params = invite_signup_body_params_create(
       "0",
       "0",
-      "0"
+      "0",
+      1
     );
   }
 
