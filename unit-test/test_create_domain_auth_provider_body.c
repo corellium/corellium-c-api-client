@@ -16,7 +16,7 @@
 #include "../model/create_domain_auth_provider_body.h"
 create_domain_auth_provider_body_t* instantiate_create_domain_auth_provider_body(int include_optional);
 
-#include "test_open_id_config.c"
+#include "test_domain_auth_provider_config.c"
 
 
 create_domain_auth_provider_body_t* instantiate_create_domain_auth_provider_body(int include_optional) {
@@ -26,15 +26,14 @@ create_domain_auth_provider_body_t* instantiate_create_domain_auth_provider_body
       "0",
       1,
       "0",
-       // false, not to have infinite recursion
-      instantiate_open_id_config(0)
+      null
     );
   } else {
     create_domain_auth_provider_body = create_domain_auth_provider_body_create(
       "0",
       1,
       "0",
-      NULL
+      null
     );
   }
 

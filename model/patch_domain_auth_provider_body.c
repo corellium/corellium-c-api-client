@@ -9,7 +9,7 @@ static patch_domain_auth_provider_body_t *patch_domain_auth_provider_body_create
     char *provider_type,
     int enabled,
     char *label,
-    open_id_config_t *config
+    domain_auth_provider_config_t *config
     ) {
     patch_domain_auth_provider_body_t *patch_domain_auth_provider_body_local_var = malloc(sizeof(patch_domain_auth_provider_body_t));
     if (!patch_domain_auth_provider_body_local_var) {
@@ -28,7 +28,7 @@ __attribute__((deprecated)) patch_domain_auth_provider_body_t *patch_domain_auth
     char *provider_type,
     int enabled,
     char *label,
-    open_id_config_t *config
+    domain_auth_provider_config_t *config
     ) {
     return patch_domain_auth_provider_body_create_internal (
         provider_type,
@@ -56,7 +56,7 @@ void patch_domain_auth_provider_body_free(patch_domain_auth_provider_body_t *pat
         patch_domain_auth_provider_body->label = NULL;
     }
     if (patch_domain_auth_provider_body->config) {
-        open_id_config_free(patch_domain_auth_provider_body->config);
+        domain_auth_provider_config_free(patch_domain_auth_provider_body->config);
         patch_domain_auth_provider_body->config = NULL;
     }
     free(patch_domain_auth_provider_body);
@@ -91,7 +91,7 @@ cJSON *patch_domain_auth_provider_body_convertToJSON(patch_domain_auth_provider_
 
     // patch_domain_auth_provider_body->config
     if(patch_domain_auth_provider_body->config) {
-    cJSON *config_local_JSON = open_id_config_convertToJSON(patch_domain_auth_provider_body->config);
+    cJSON *config_local_JSON = domain_auth_provider_config_convertToJSON(patch_domain_auth_provider_body->config);
     if(config_local_JSON == NULL) {
     goto fail; //model
     }
@@ -114,7 +114,7 @@ patch_domain_auth_provider_body_t *patch_domain_auth_provider_body_parseFromJSON
     patch_domain_auth_provider_body_t *patch_domain_auth_provider_body_local_var = NULL;
 
     // define the local variable for patch_domain_auth_provider_body->config
-    open_id_config_t *config_local_nonprim = NULL;
+    domain_auth_provider_config_t *config_local_nonprim = NULL;
 
     // patch_domain_auth_provider_body->provider_type
     cJSON *provider_type = cJSON_GetObjectItemCaseSensitive(patch_domain_auth_provider_bodyJSON, "providerType");
@@ -158,7 +158,7 @@ patch_domain_auth_provider_body_t *patch_domain_auth_provider_body_parseFromJSON
         config = NULL;
     }
     if (config) { 
-    config_local_nonprim = open_id_config_parseFromJSON(config); //nonprimitive
+    config_local_nonprim = domain_auth_provider_config_parseFromJSON(config); //nonprimitive
     }
 
 
@@ -172,7 +172,7 @@ patch_domain_auth_provider_body_t *patch_domain_auth_provider_body_parseFromJSON
     return patch_domain_auth_provider_body_local_var;
 end:
     if (config_local_nonprim) {
-        open_id_config_free(config_local_nonprim);
+        domain_auth_provider_config_free(config_local_nonprim);
         config_local_nonprim = NULL;
     }
     return NULL;

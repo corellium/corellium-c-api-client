@@ -15,7 +15,7 @@
 
 typedef struct patch_domain_auth_provider_body_t patch_domain_auth_provider_body_t;
 
-#include "open_id_config.h"
+#include "domain_auth_provider_config.h"
 
 
 
@@ -23,7 +23,7 @@ typedef struct patch_domain_auth_provider_body_t {
     char *provider_type; // string
     int enabled; //boolean
     char *label; // string
-    struct open_id_config_t *config; //model
+    struct domain_auth_provider_config_t *config; //model
 
     int _library_owned; // Is the library responsible for freeing this object?
 } patch_domain_auth_provider_body_t;
@@ -32,7 +32,7 @@ __attribute__((deprecated)) patch_domain_auth_provider_body_t *patch_domain_auth
     char *provider_type,
     int enabled,
     char *label,
-    open_id_config_t *config
+    domain_auth_provider_config_t *config
 );
 
 void patch_domain_auth_provider_body_free(patch_domain_auth_provider_body_t *patch_domain_auth_provider_body);

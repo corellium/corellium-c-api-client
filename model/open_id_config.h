@@ -1,7 +1,7 @@
 /*
  * open_id_config.h
  *
- * Optional configuration.
+ * 
  */
 
 #ifndef _open_id_config_H_

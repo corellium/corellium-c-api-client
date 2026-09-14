@@ -16,7 +16,7 @@
 #include "../model/patch_domain_auth_provider_body.h"
 patch_domain_auth_provider_body_t* instantiate_patch_domain_auth_provider_body(int include_optional);
 
-#include "test_open_id_config.c"
+#include "test_domain_auth_provider_config.c"
 
 
 patch_domain_auth_provider_body_t* instantiate_patch_domain_auth_provider_body(int include_optional) {
@@ -26,15 +26,14 @@ patch_domain_auth_provider_body_t* instantiate_patch_domain_auth_provider_body(i
       "0",
       1,
       "0",
-       // false, not to have infinite recursion
-      instantiate_open_id_config(0)
+      null
     );
   } else {
     patch_domain_auth_provider_body = patch_domain_auth_provider_body_create(
       "0",
       1,
       "0",
-      NULL
+      null
     );
   }
 

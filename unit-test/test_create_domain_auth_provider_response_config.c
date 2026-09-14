@@ -16,23 +16,51 @@
 #include "../model/create_domain_auth_provider_response_config.h"
 create_domain_auth_provider_response_config_t* instantiate_create_domain_auth_provider_response_config(int include_optional);
 
+#include "test_saml_identity_provider_config.c"
+#include "test_saml_service_provider_config.c"
+#include "test_ldap_user_attribute_mapping.c"
+#include "test_ldap_server_connection_details.c"
+#include "test_ldap_authentication_credentials.c"
+#include "test_ldap_user_search_configuration.c"
 
 
 create_domain_auth_provider_response_config_t* instantiate_create_domain_auth_provider_response_config(int include_optional) {
   create_domain_auth_provider_response_config_t* create_domain_auth_provider_response_config = NULL;
   if (include_optional) {
     create_domain_auth_provider_response_config = create_domain_auth_provider_response_config_create(
+       // false, not to have infinite recursion
+      instantiate_saml_identity_provider_config(0),
+       // false, not to have infinite recursion
+      instantiate_saml_service_provider_config(0),
+       // false, not to have infinite recursion
+      instantiate_ldap_user_attribute_mapping(0),
+      list_createList(),
       "0",
       "0",
       "0",
-      1
+      1,
+       // false, not to have infinite recursion
+      instantiate_ldap_server_connection_details(0),
+       // false, not to have infinite recursion
+      instantiate_ldap_authentication_credentials(0),
+       // false, not to have infinite recursion
+      instantiate_ldap_user_search_configuration(0),
+      list_createList()
     );
   } else {
     create_domain_auth_provider_response_config = create_domain_auth_provider_response_config_create(
+      NULL,
+      NULL,
+      NULL,
+      list_createList(),
       "0",
       "0",
       "0",
-      1
+      1,
+      NULL,
+      NULL,
+      NULL,
+      list_createList()
     );
   }
 

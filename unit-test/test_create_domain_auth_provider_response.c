@@ -24,8 +24,7 @@ create_domain_auth_provider_response_t* instantiate_create_domain_auth_provider_
   if (include_optional) {
     create_domain_auth_provider_response = create_domain_auth_provider_response_create(
       "0",
-       // false, not to have infinite recursion
-      instantiate_create_domain_auth_provider_response_config(0),
+      null,
       "0",
       "0",
       1,
@@ -37,7 +36,7 @@ create_domain_auth_provider_response_t* instantiate_create_domain_auth_provider_
   } else {
     create_domain_auth_provider_response = create_domain_auth_provider_response_create(
       "0",
-      NULL,
+      null,
       "0",
       "0",
       1,

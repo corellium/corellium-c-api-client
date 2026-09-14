@@ -259,6 +259,7 @@ set(SRCS
     model/device.c
     model/device_auto_shutdown_schema.c
     model/device_usage.c
+    model/domain_auth_provider_config.c
     model/domain_auth_provider_request.c
     model/domain_auth_provider_response.c
     model/domain_auth_provider_response_v1.c
@@ -456,6 +457,12 @@ set(SRCS
     model/kernel_thread.c
     model/kernel_thread_v1.c
     model/layout_schema.c
+    model/ldap_authentication_credentials.c
+    model/ldap_config.c
+    model/ldap_group_search_configuration.c
+    model/ldap_server_connection_details.c
+    model/ldap_user_attribute_mapping.c
+    model/ldap_user_search_configuration.c
     model/load_extension_body.c
     model/logging.c
     model/logging_v1.c
@@ -581,6 +588,11 @@ set(SRCS
     model/roles_list_response.c
     model/rotate_body.c
     model/rotate_body_v1.c
+    model/saml_config.c
+    model/saml_group_mapping.c
+    model/saml_identity_provider_config.c
+    model/saml_service_provider_config.c
+    model/saml_user_attribute_mapping.c
     model/send_reset_link_body.c
     model/service_endpoint_schema.c
     model/service_status_request_body.c
@@ -1009,6 +1021,7 @@ set(HDRS
     model/device.h
     model/device_auto_shutdown_schema.h
     model/device_usage.h
+    model/domain_auth_provider_config.h
     model/domain_auth_provider_request.h
     model/domain_auth_provider_response.h
     model/domain_auth_provider_response_v1.h
@@ -1206,6 +1219,12 @@ set(HDRS
     model/kernel_thread.h
     model/kernel_thread_v1.h
     model/layout_schema.h
+    model/ldap_authentication_credentials.h
+    model/ldap_config.h
+    model/ldap_group_search_configuration.h
+    model/ldap_server_connection_details.h
+    model/ldap_user_attribute_mapping.h
+    model/ldap_user_search_configuration.h
     model/load_extension_body.h
     model/logging.h
     model/logging_v1.h
@@ -1331,6 +1350,11 @@ set(HDRS
     model/roles_list_response.h
     model/rotate_body.h
     model/rotate_body_v1.h
+    model/saml_config.h
+    model/saml_group_mapping.h
+    model/saml_identity_provider_config.h
+    model/saml_service_provider_config.h
+    model/saml_user_attribute_mapping.h
     model/send_reset_link_body.h
     model/service_endpoint_schema.h
     model/service_status_request_body.h
