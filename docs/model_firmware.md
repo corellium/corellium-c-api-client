@@ -3,8 +3,8 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**os_version** | **char \*** | OS version. | [optional] 
-**os_build** | **char \*** | OS build. | [optional] 
+**os_version** | **char \*** | OS version. | 
+**os_build** | **char \*** | OS build identifier. | [optional] 
 **android_flavor** | **char \*** | Android-only flavor. | [optional] 
 **api_version** | **char \*** | Android-only API version. | [optional] 
 **sha256sum** | **char \*** | SHA-256 checksum. | [optional] 

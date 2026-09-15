@@ -158,10 +158,11 @@ cJSON *model_firmware_convertToJSON(model_firmware_t *model_firmware) {
     cJSON *item = cJSON_CreateObject();
 
     // model_firmware->os_version
-    if(model_firmware->os_version) {
+    if (!model_firmware->os_version) {
+        goto fail;
+    }
     if(cJSON_AddStringToObject(item, "osVersion", model_firmware->os_version) == NULL) {
     goto fail; //String
-    }
     }
 
 
@@ -306,11 +307,14 @@ model_firmware_t *model_firmware_parseFromJSON(cJSON *model_firmwareJSON){
     if (cJSON_IsNull(os_version)) {
         os_version = NULL;
     }
-    if (os_version) { 
-    if(!cJSON_IsString(os_version) && !cJSON_IsNull(os_version))
+    if (!os_version) {
+        goto end;
+    }
+
+    
+    if(!cJSON_IsString(os_version))
     {
     goto end; //String
-    }
     }
 
     // model_firmware->os_build
@@ -493,7 +497,7 @@ model_firmware_t *model_firmware_parseFromJSON(cJSON *model_firmwareJSON){
 
 
     model_firmware_local_var = model_firmware_create_internal (
-        os_version && !cJSON_IsNull(os_version) ? strdup(os_version->valuestring) : NULL,
+        strdup(os_version->valuestring),
         os_build && !cJSON_IsNull(os_build) ? strdup(os_build->valuestring) : NULL,
         android_flavor && !cJSON_IsNull(android_flavor) ? strdup(android_flavor->valuestring) : NULL,
         api_version && !cJSON_IsNull(api_version) ? strdup(api_version->valuestring) : NULL,
