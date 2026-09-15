@@ -1108,6 +1108,7 @@ Category | Method | HTTP request | Description
  - [password_change_body_t](docs/password_change_body.md)
  - [password_reset_body_t](docs/password_reset_body.md)
  - [patch_cluster_config_body_t](docs/patch_cluster_config_body.md)
+ - [patch_cluster_config_body_ai_tools_config_t](docs/patch_cluster_config_body_ai_tools_config.md)
  - [patch_domain_auth_provider_body_t](docs/patch_domain_auth_provider_body.md)
  - [patch_domain_body_t](docs/patch_domain_body.md)
  - [patch_domain_body_webplayer_t](docs/patch_domain_body_webplayer.md)

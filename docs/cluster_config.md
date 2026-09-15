@@ -73,6 +73,7 @@ Name | Type | Description | Notes
 **domain_image_upload_quota** | **double** |  | [optional] 
 **ipsw_filters** | [**list_t**](cluster_config_ipsw_filters_inner.md) \* |  | [optional] 
 **firmware_service_config** | [**cluster_config_firmware_service_config_t**](cluster_config_firmware_service_config.md) \* |  | [optional] 
+**ai_tools_config** | [**ai_tools_config_t**](ai_tools_config.md) \* |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -24,6 +24,7 @@ cluster_config_t* instantiate_cluster_config(int include_optional);
 #include "test_cluster_config_node_specific_config.c"
 #include "test_cluster_config_package_config.c"
 #include "test_cluster_config_firmware_service_config.c"
+#include "test_ai_tools_config.c"
 
 
 cluster_config_t* instantiate_cluster_config(int include_optional) {
@@ -107,7 +108,9 @@ cluster_config_t* instantiate_cluster_config(int include_optional) {
       1.337,
       list_createList(),
        // false, not to have infinite recursion
-      instantiate_cluster_config_firmware_service_config(0)
+      instantiate_cluster_config_firmware_service_config(0),
+       // false, not to have infinite recursion
+      instantiate_ai_tools_config(0)
     );
   } else {
     cluster_config = cluster_config_create(
@@ -180,6 +183,7 @@ cluster_config_t* instantiate_cluster_config(int include_optional) {
       "0",
       1.337,
       list_createList(),
+      NULL,
       NULL
     );
   }

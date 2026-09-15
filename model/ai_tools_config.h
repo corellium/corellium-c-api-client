@@ -1,7 +1,7 @@
 /*
  * ai_tools_config.h
  *
- * Partial AI tools configuration to update.
+ * Cluster-hosted AI configuration.
  */
 
 #ifndef _ai_tools_config_H_

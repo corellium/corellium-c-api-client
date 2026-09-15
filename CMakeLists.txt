@@ -534,6 +534,7 @@ set(SRCS
     model/password_change_body.c
     model/password_reset_body.c
     model/patch_cluster_config_body.c
+    model/patch_cluster_config_body_ai_tools_config.c
     model/patch_domain_auth_provider_body.c
     model/patch_domain_body.c
     model/patch_domain_body_webplayer.c
@@ -1304,6 +1305,7 @@ set(HDRS
     model/password_change_body.h
     model/password_reset_body.h
     model/patch_cluster_config_body.h
+    model/patch_cluster_config_body_ai_tools_config.h
     model/patch_domain_auth_provider_body.h
     model/patch_domain_body.h
     model/patch_domain_body_webplayer.h
