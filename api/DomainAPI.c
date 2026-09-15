@@ -407,6 +407,138 @@ end:
 
 }
 
+// List domain-level firmware images
+//
+// **Required role:** Domain administrator.  Returns a paginated list of firmware images that are not scoped to a project or instance, one entry per flavor an image applies to. The list is filtered for the caller: it covers images held by this coordinator, and it honours the caller's domain device and firmware restrictions, so two domains can see different entries. Use [`deleteImage`](#operation/v3DeleteImage) to remove an upload.
+//
+domain_software_list_t*
+DomainAPI_v3ListDomainSoftware(apiClient_t *apiClient, double *limit, double *offset)
+{
+    list_t    *localVarQueryParameters = list_createList();
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = NULL;
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/domain/software");
+
+
+
+
+
+    // query parameters
+    char *keyQuery_limit = NULL;
+    char * valueQuery_limit = NULL;
+    keyValuePair_t *keyPairQuery_limit = 0;
+    if (limit)
+    {
+        keyQuery_limit = strdup("limit");
+        valueQuery_limit = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_limit, MAX_NUMBER_LENGTH, "%d", *limit);
+        keyPairQuery_limit = keyValuePair_create(keyQuery_limit, valueQuery_limit);
+        list_addElement(localVarQueryParameters,keyPairQuery_limit);
+    }
+
+    // query parameters
+    char *keyQuery_offset = NULL;
+    char * valueQuery_offset = NULL;
+    keyValuePair_t *keyPairQuery_offset = 0;
+    if (offset)
+    {
+        keyQuery_offset = strdup("offset");
+        valueQuery_offset = calloc(1,MAX_NUMBER_LENGTH);
+        snprintf(valueQuery_offset, MAX_NUMBER_LENGTH, "%d", *offset);
+        keyPairQuery_offset = keyValuePair_create(keyQuery_offset, valueQuery_offset);
+        list_addElement(localVarQueryParameters,keyPairQuery_offset);
+    }
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "GET");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 200) {
+    //    printf("%s\n","Paginated list of domain firmware uploads.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 400) {
+    //    printf("%s\n","Invalid limit or offset. The body carries &#x60;errorID: \&quot;ValidationError\&quot;&#x60;.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","Domain administrator permissions required.");
+    //}
+    //nonprimitive not container
+    domain_software_list_t *elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
+        cJSON *DomainAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
+        elementToReturn = domain_software_list_parseFromJSON(DomainAPIlocalVarJSON);
+        cJSON_Delete(DomainAPIlocalVarJSON);
+        if(elementToReturn == NULL) {
+            // return 0;
+        }
+    }
+
+    //return type
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    list_freeList(localVarQueryParameters);
+    
+    
+    list_freeList(localVarHeaderType);
+    
+    free(localVarPath);
+    if(keyQuery_limit){
+        free(keyQuery_limit);
+        keyQuery_limit = NULL;
+    }
+    if(valueQuery_limit){
+        free(valueQuery_limit);
+        valueQuery_limit = NULL;
+    }
+    if(keyPairQuery_limit){
+        keyValuePair_free(keyPairQuery_limit);
+        keyPairQuery_limit = NULL;
+    }
+    if(keyQuery_offset){
+        free(keyQuery_offset);
+        keyQuery_offset = NULL;
+    }
+    if(valueQuery_offset){
+        free(valueQuery_offset);
+        valueQuery_offset = NULL;
+    }
+    if(keyPairQuery_offset){
+        keyValuePair_free(keyPairQuery_offset);
+        keyPairQuery_offset = NULL;
+    }
+    return elementToReturn;
+end:
+    free(localVarPath);
+    return NULL;
+
+}
+
 // Update a welcome message for a domain
 //
 // **Required role:** Domain administrator.  Updates a new welcome message for the authenticated user's domain admin, or updates the existing one. The message is sanitized to prevent XSS.

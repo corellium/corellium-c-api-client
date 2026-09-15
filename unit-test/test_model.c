@@ -16,7 +16,8 @@
 #include "../model/model.h"
 model_t* instantiate_model(int include_optional);
 
-#include "test_model_quotas.c"
+#include "test_model_frame.c"
+#include "test_model_product_image.c"
 
 
 model_t* instantiate_model(int include_optional) {
@@ -29,11 +30,43 @@ model_t* instantiate_model(int include_optional) {
       "0",
       "0",
       "0",
+      "0",
+      1.337,
+      1.337,
+      "0",
+      1,
+      1,
+      1,
+      1,
+      1,
+      "0",
+      1.337,
+      1.337,
+      1.337,
+      1.337,
+      list_createList(),
+      1.337,
       1.337,
       1.337,
       1,
+      list_createList(),
        // false, not to have infinite recursion
-      instantiate_model_quotas(0)
+      instantiate_model_frame(0),
+       // false, not to have infinite recursion
+      instantiate_model_product_image(0),
+      1,
+      list_createList(),
+      1,
+      list_createList(),
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
     );
   } else {
     model = model_create(
@@ -43,10 +76,41 @@ model_t* instantiate_model(int include_optional) {
       "0",
       "0",
       "0",
+      "0",
+      1.337,
+      1.337,
+      "0",
+      1,
+      1,
+      1,
+      1,
+      1,
+      "0",
+      1.337,
+      1.337,
+      1.337,
+      1.337,
+      list_createList(),
+      1.337,
       1.337,
       1.337,
       1,
-      NULL
+      list_createList(),
+      NULL,
+      NULL,
+      1,
+      list_createList(),
+      1,
+      list_createList(),
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
     );
   }
 

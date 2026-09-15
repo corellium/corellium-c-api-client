@@ -66,6 +66,7 @@ typedef struct cluster_config_coordinator_config_t {
     char *postmark_email_from; // string
     char *postmark_email_template; // string
     object_t *s3; //object
+    int ai_enabled; //boolean
     char *ofac_api_key; // string
     char *usb_media_queue_dir; // string
     int usb_media_access_enabled; //boolean
@@ -113,6 +114,7 @@ __attribute__((deprecated)) cluster_config_coordinator_config_t *cluster_config_
     char *postmark_email_from,
     char *postmark_email_template,
     object_t *s3,
+    int ai_enabled,
     char *ofac_api_key,
     char *usb_media_queue_dir,
     int usb_media_access_enabled,

@@ -12,6 +12,8 @@ Method | HTTP request | Description
 ```c
 // Get Software for Model
 //
+// Get software for model. The `model` path parameter is resolved as a flavor ID first and as a product identifier second. Addressing a flavor ID additionally returns `springboardSnapshot` for the builds that have a rapid-start snapshot, which a product identifier cannot report because several flavors can share one product.
+//
 list_t* ModelsAPI_v3GetModelSoftware(apiClient_t *apiClient, char *model);
 ```
 
@@ -19,7 +21,7 @@ list_t* ModelsAPI_v3GetModelSoftware(apiClient_t *apiClient, char *model);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**model** | **char \*** | Model to list available software for. | 
+**model** | **char \*** | Model to list available software for. Accepts either a flavor ID (as published by &#x60;GET /v3/models&#x60; as &#x60;flavor&#x60;) or a product identifier; the flavor ID is resolved first. | 
 
 ### Return type
 
@@ -41,13 +43,16 @@ Name | Type | Description  | Notes
 ```c
 // Get Supported Models
 //
-list_t* ModelsAPI_v3GetModels(apiClient_t *apiClient);
+// Get supported models. The response carries an `ETag`; repeating the request with that value in `If-None-Match` returns 304 when the catalog is unchanged.
+//
+list_t* ModelsAPI_v3GetModels(apiClient_t *apiClient, char *if_none_match);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
+**if_none_match** | **char \*** | An ETag a previous response carried, quotes included. | [optional] 
 
 ### Return type
 

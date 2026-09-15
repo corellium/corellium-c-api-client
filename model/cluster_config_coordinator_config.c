@@ -43,6 +43,7 @@ static cluster_config_coordinator_config_t *cluster_config_coordinator_config_cr
     char *postmark_email_from,
     char *postmark_email_template,
     object_t *s3,
+    int ai_enabled,
     char *ofac_api_key,
     char *usb_media_queue_dir,
     int usb_media_access_enabled,
@@ -90,6 +91,7 @@ static cluster_config_coordinator_config_t *cluster_config_coordinator_config_cr
     cluster_config_coordinator_config_local_var->postmark_email_from = postmark_email_from;
     cluster_config_coordinator_config_local_var->postmark_email_template = postmark_email_template;
     cluster_config_coordinator_config_local_var->s3 = s3;
+    cluster_config_coordinator_config_local_var->ai_enabled = ai_enabled;
     cluster_config_coordinator_config_local_var->ofac_api_key = ofac_api_key;
     cluster_config_coordinator_config_local_var->usb_media_queue_dir = usb_media_queue_dir;
     cluster_config_coordinator_config_local_var->usb_media_access_enabled = usb_media_access_enabled;
@@ -138,6 +140,7 @@ __attribute__((deprecated)) cluster_config_coordinator_config_t *cluster_config_
     char *postmark_email_from,
     char *postmark_email_template,
     object_t *s3,
+    int ai_enabled,
     char *ofac_api_key,
     char *usb_media_queue_dir,
     int usb_media_access_enabled,
@@ -182,6 +185,7 @@ __attribute__((deprecated)) cluster_config_coordinator_config_t *cluster_config_
         postmark_email_from,
         postmark_email_template,
         s3,
+        ai_enabled,
         ofac_api_key,
         usb_media_queue_dir,
         usb_media_access_enabled,
@@ -722,6 +726,14 @@ cJSON *cluster_config_coordinator_config_convertToJSON(cluster_config_coordinato
     cJSON_AddItemToObject(item, "s3", s3_object);
     if(item->child == NULL) {
     goto fail;
+    }
+    }
+
+
+    // cluster_config_coordinator_config->ai_enabled
+    if(cluster_config_coordinator_config->ai_enabled) {
+    if(cJSON_AddBoolToObject(item, "aiEnabled", cluster_config_coordinator_config->ai_enabled) == NULL) {
+    goto fail; //Bool
     }
     }
 
@@ -1302,6 +1314,18 @@ cluster_config_coordinator_config_t *cluster_config_coordinator_config_parseFrom
     s3_local_object = object_parseFromJSON(s3); //object
     }
 
+    // cluster_config_coordinator_config->ai_enabled
+    cJSON *ai_enabled = cJSON_GetObjectItemCaseSensitive(cluster_config_coordinator_configJSON, "aiEnabled");
+    if (cJSON_IsNull(ai_enabled)) {
+        ai_enabled = NULL;
+    }
+    if (ai_enabled) { 
+    if(!cJSON_IsBool(ai_enabled))
+    {
+    goto end; //Bool
+    }
+    }
+
     // cluster_config_coordinator_config->ofac_api_key
     cJSON *ofac_api_key = cJSON_GetObjectItemCaseSensitive(cluster_config_coordinator_configJSON, "ofacApiKey");
     if (cJSON_IsNull(ofac_api_key)) {
@@ -1401,6 +1425,7 @@ cluster_config_coordinator_config_t *cluster_config_coordinator_config_parseFrom
         postmark_email_from && !cJSON_IsNull(postmark_email_from) ? strdup(postmark_email_from->valuestring) : NULL,
         postmark_email_template && !cJSON_IsNull(postmark_email_template) ? strdup(postmark_email_template->valuestring) : NULL,
         s3 ? s3_local_object : NULL,
+        ai_enabled ? ai_enabled->valueint : 0,
         ofac_api_key && !cJSON_IsNull(ofac_api_key) ? strdup(ofac_api_key->valuestring) : NULL,
         usb_media_queue_dir && !cJSON_IsNull(usb_media_queue_dir) ? strdup(usb_media_queue_dir->valuestring) : NULL,
         usb_media_access_enabled ? usb_media_access_enabled->valueint : 0,
