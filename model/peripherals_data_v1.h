@@ -16,6 +16,22 @@
 typedef struct peripherals_data_v1_t peripherals_data_v1_t;
 
 
+// Enum BATTERYSTATUS for peripherals_data_v1
+
+typedef enum  { corellium_api_peripherals_data_v1_BATTERYSTATUS_NULL = 0, corellium_api_peripherals_data_v1_BATTERYSTATUS_charging, corellium_api_peripherals_data_v1_BATTERYSTATUS_discharging, corellium_api_peripherals_data_v1_BATTERYSTATUS_not_charging } corellium_api_peripherals_data_v1_BATTERYSTATUS_e;
+
+char* peripherals_data_v1_battery_status_ToString(corellium_api_peripherals_data_v1_BATTERYSTATUS_e battery_status);
+
+corellium_api_peripherals_data_v1_BATTERYSTATUS_e peripherals_data_v1_battery_status_FromString(char* battery_status);
+
+// Enum BATTERYHEALTH for peripherals_data_v1
+
+typedef enum  { corellium_api_peripherals_data_v1_BATTERYHEALTH_NULL = 0, corellium_api_peripherals_data_v1_BATTERYHEALTH_good, corellium_api_peripherals_data_v1_BATTERYHEALTH_overheat, corellium_api_peripherals_data_v1_BATTERYHEALTH_dead, corellium_api_peripherals_data_v1_BATTERYHEALTH_overvolt, corellium_api_peripherals_data_v1_BATTERYHEALTH_failure } corellium_api_peripherals_data_v1_BATTERYHEALTH_e;
+
+char* peripherals_data_v1_battery_health_ToString(corellium_api_peripherals_data_v1_BATTERYHEALTH_e battery_health);
+
+corellium_api_peripherals_data_v1_BATTERYHEALTH_e peripherals_data_v1_battery_health_FromString(char* battery_health);
+
 
 
 typedef struct peripherals_data_v1_t {
@@ -34,9 +50,10 @@ typedef struct peripherals_data_v1_t {
     double gps_toffs; //numeric
     double ac_online; //numeric
     double battery_present; //numeric
-    char *battery_status; // string
-    char *battery_health; // string
+    corellium_api_peripherals_data_v1_BATTERYSTATUS_e battery_status; //enum
+    corellium_api_peripherals_data_v1_BATTERYHEALTH_e battery_health; //enum
     double battery_capacity; //numeric
+    double biometric_pass; //numeric
 
     int _library_owned; // Is the library responsible for freeing this object?
 } peripherals_data_v1_t;
@@ -57,9 +74,10 @@ __attribute__((deprecated)) peripherals_data_v1_t *peripherals_data_v1_create(
     double gps_toffs,
     double ac_online,
     double battery_present,
-    char *battery_status,
-    char *battery_health,
-    double battery_capacity
+    corellium_api_peripherals_data_v1_BATTERYSTATUS_e battery_status,
+    corellium_api_peripherals_data_v1_BATTERYHEALTH_e battery_health,
+    double battery_capacity,
+    double biometric_pass
 );
 
 void peripherals_data_v1_free(peripherals_data_v1_t *peripherals_data_v1);

@@ -318,7 +318,6 @@ docs/check_subdomain_response_v1.md
 docs/cloud_notification_item.md
 docs/cloud_notification_list.md
 docs/cluster_config.md
-docs/cluster_config_ai_tools_config.md
 docs/cluster_config_coordinator_config.md
 docs/cluster_config_coordinator_config_auth_providers_inner.md
 docs/cluster_config_coordinator_config_auth_providers_inner_any_of.md
@@ -682,6 +681,7 @@ docs/partial_update_network_connection_options.md
 docs/password_change_body.md
 docs/password_reset_body.md
 docs/patch_cluster_config_body.md
+docs/patch_cluster_config_body_ai_tools_config.md
 docs/patch_domain_auth_provider_body.md
 docs/patch_domain_body.md
 docs/patch_domain_body_webplayer.md
@@ -1125,8 +1125,6 @@ model/cloud_notification_list.c
 model/cloud_notification_list.h
 model/cluster_config.c
 model/cluster_config.h
-model/cluster_config_ai_tools_config.c
-model/cluster_config_ai_tools_config.h
 model/cluster_config_coordinator_config.c
 model/cluster_config_coordinator_config.h
 model/cluster_config_coordinator_config_auth_providers_inner.c
@@ -1855,6 +1853,8 @@ model/password_reset_body.c
 model/password_reset_body.h
 model/patch_cluster_config_body.c
 model/patch_cluster_config_body.h
+model/patch_cluster_config_body_ai_tools_config.c
+model/patch_cluster_config_body_ai_tools_config.h
 model/patch_domain_auth_provider_body.c
 model/patch_domain_auth_provider_body.h
 model/patch_domain_body.c
@@ -2386,7 +2386,6 @@ unit-test/test_check_subdomain_response_v1.c
 unit-test/test_cloud_notification_item.c
 unit-test/test_cloud_notification_list.c
 unit-test/test_cluster_config.c
-unit-test/test_cluster_config_ai_tools_config.c
 unit-test/test_cluster_config_coordinator_config.c
 unit-test/test_cluster_config_coordinator_config_auth_providers_inner.c
 unit-test/test_cluster_config_coordinator_config_auth_providers_inner_any_of.c
@@ -2750,6 +2749,7 @@ unit-test/test_partial_update_network_connection_options.c
 unit-test/test_password_change_body.c
 unit-test/test_password_reset_body.c
 unit-test/test_patch_cluster_config_body.c
+unit-test/test_patch_cluster_config_body_ai_tools_config.c
 unit-test/test_patch_domain_auth_provider_body.c
 unit-test/test_patch_domain_body.c
 unit-test/test_patch_domain_body_webplayer.c

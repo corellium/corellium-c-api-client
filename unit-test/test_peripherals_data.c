@@ -35,11 +35,12 @@ peripherals_data_t* instantiate_peripherals_data(int include_optional) {
       1.337,
       1.337,
       1.337,
+      corellium_api_peripherals_data_ACONLINE_0,
+      corellium_api_peripherals_data_BATTERYPRESENT_0,
+      corellium_api_peripherals_data_BATTERYSTATUS_charging,
+      corellium_api_peripherals_data_BATTERYHEALTH_good,
       1.337,
-      1.337,
-      "0",
-      "0",
-      1.337
+      corellium_api_peripherals_data_BIOMETRICPASS_0
     );
   } else {
     peripherals_data = peripherals_data_create(
@@ -56,11 +57,12 @@ peripherals_data_t* instantiate_peripherals_data(int include_optional) {
       1.337,
       1.337,
       1.337,
+      corellium_api_peripherals_data_ACONLINE_0,
+      corellium_api_peripherals_data_BATTERYPRESENT_0,
+      corellium_api_peripherals_data_BATTERYSTATUS_charging,
+      corellium_api_peripherals_data_BATTERYHEALTH_good,
       1.337,
-      1.337,
-      "0",
-      "0",
-      1.337
+      corellium_api_peripherals_data_BIOMETRICPASS_0
     );
   }
 

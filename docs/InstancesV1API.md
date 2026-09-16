@@ -32,7 +32,7 @@ Method | HTTP request | Description
 [**InstancesV1API_v1RestoreBackup**](InstancesV1API.md#InstancesV1API_v1RestoreBackup) | **POST** /v1/instances/{instanceId}/restoreBackup | Restore backup
 [**InstancesV1API_v1RotateInstance**](InstancesV1API.md#InstancesV1API_v1RotateInstance) | **POST** /v1/instances/{instanceId}/rotate | Rotate device to specified orientation
 [**InstancesV1API_v1SetInstanceGpios**](InstancesV1API.md#InstancesV1API_v1SetInstanceGpios) | **PUT** /v1/instances/{instanceId}/gpios | Set Instance GPIOs
-[**InstancesV1API_v1SetInstancePeripherals**](InstancesV1API.md#InstancesV1API_v1SetInstancePeripherals) | **PUT** /v1/instances/{instanceId}/peripherals | Set Instance Peripherals
+[**InstancesV1API_v1SetInstancePeripherals**](InstancesV1API.md#InstancesV1API_v1SetInstancePeripherals) | **PUT** /v1/instances/{instanceId}/peripherals | Update Instance Peripherals
 [**InstancesV1API_v1SetInstanceState**](InstancesV1API.md#InstancesV1API_v1SetInstanceState) | **PUT** /v1/instances/{instanceId}/state | Set state of Instance
 [**InstancesV1API_v1StartInstance**](InstancesV1API.md#InstancesV1API_v1StartInstance) | **POST** /v1/instances/{instanceId}/start | Start an Instance
 [**InstancesV1API_v1StartNetdump**](InstancesV1API.md#InstancesV1API_v1StartNetdump) | **POST** /v1/instances/{instanceId}/netdump/enable | Start Enhanced Network Monitor on an instance.
@@ -874,7 +874,7 @@ Name | Type | Description  | Notes
 
 # **InstancesV1API_v1SetInstancePeripherals**
 ```c
-// Set Instance Peripherals
+// Update Instance Peripherals
 //
 peripherals_data_v1_t* InstancesV1API_v1SetInstancePeripherals(apiClient_t *apiClient, char *instanceId, peripherals_data_v1_t *peripherals_data_v1);
 ```

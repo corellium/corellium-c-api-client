@@ -4,6 +4,91 @@
 #include "peripherals_data.h"
 
 
+char* peripherals_data_ac_online_ToString(corellium_api_peripherals_data_ACONLINE_e ac_online) {
+    char* ac_onlineArray[] =  { "NULL", "0", "1" };
+    return ac_onlineArray[ac_online];
+}
+
+corellium_api_peripherals_data_ACONLINE_e peripherals_data_ac_online_FromString(char* ac_online){
+    int stringToReturn = 0;
+    char *ac_onlineArray[] =  { "NULL", "0", "1" };
+    size_t sizeofArray = sizeof(ac_onlineArray) / sizeof(ac_onlineArray[0]);
+    while(stringToReturn < sizeofArray) {
+        if(strcmp(ac_online, ac_onlineArray[stringToReturn]) == 0) {
+            return stringToReturn;
+        }
+        stringToReturn++;
+    }
+    return 0;
+}
+char* peripherals_data_battery_present_ToString(corellium_api_peripherals_data_BATTERYPRESENT_e battery_present) {
+    char* battery_presentArray[] =  { "NULL", "0", "1" };
+    return battery_presentArray[battery_present];
+}
+
+corellium_api_peripherals_data_BATTERYPRESENT_e peripherals_data_battery_present_FromString(char* battery_present){
+    int stringToReturn = 0;
+    char *battery_presentArray[] =  { "NULL", "0", "1" };
+    size_t sizeofArray = sizeof(battery_presentArray) / sizeof(battery_presentArray[0]);
+    while(stringToReturn < sizeofArray) {
+        if(strcmp(battery_present, battery_presentArray[stringToReturn]) == 0) {
+            return stringToReturn;
+        }
+        stringToReturn++;
+    }
+    return 0;
+}
+char* peripherals_data_battery_status_ToString(corellium_api_peripherals_data_BATTERYSTATUS_e battery_status) {
+    char* battery_statusArray[] =  { "NULL", "charging", "discharging", "not-charging" };
+    return battery_statusArray[battery_status];
+}
+
+corellium_api_peripherals_data_BATTERYSTATUS_e peripherals_data_battery_status_FromString(char* battery_status){
+    int stringToReturn = 0;
+    char *battery_statusArray[] =  { "NULL", "charging", "discharging", "not-charging" };
+    size_t sizeofArray = sizeof(battery_statusArray) / sizeof(battery_statusArray[0]);
+    while(stringToReturn < sizeofArray) {
+        if(strcmp(battery_status, battery_statusArray[stringToReturn]) == 0) {
+            return stringToReturn;
+        }
+        stringToReturn++;
+    }
+    return 0;
+}
+char* peripherals_data_battery_health_ToString(corellium_api_peripherals_data_BATTERYHEALTH_e battery_health) {
+    char* battery_healthArray[] =  { "NULL", "good", "overheat", "dead", "overvolt", "failure" };
+    return battery_healthArray[battery_health];
+}
+
+corellium_api_peripherals_data_BATTERYHEALTH_e peripherals_data_battery_health_FromString(char* battery_health){
+    int stringToReturn = 0;
+    char *battery_healthArray[] =  { "NULL", "good", "overheat", "dead", "overvolt", "failure" };
+    size_t sizeofArray = sizeof(battery_healthArray) / sizeof(battery_healthArray[0]);
+    while(stringToReturn < sizeofArray) {
+        if(strcmp(battery_health, battery_healthArray[stringToReturn]) == 0) {
+            return stringToReturn;
+        }
+        stringToReturn++;
+    }
+    return 0;
+}
+char* peripherals_data_biometric_pass_ToString(corellium_api_peripherals_data_BIOMETRICPASS_e biometric_pass) {
+    char* biometric_passArray[] =  { "NULL", "0", "1" };
+    return biometric_passArray[biometric_pass];
+}
+
+corellium_api_peripherals_data_BIOMETRICPASS_e peripherals_data_biometric_pass_FromString(char* biometric_pass){
+    int stringToReturn = 0;
+    char *biometric_passArray[] =  { "NULL", "0", "1" };
+    size_t sizeofArray = sizeof(biometric_passArray) / sizeof(biometric_passArray[0]);
+    while(stringToReturn < sizeofArray) {
+        if(strcmp(biometric_pass, biometric_passArray[stringToReturn]) == 0) {
+            return stringToReturn;
+        }
+        stringToReturn++;
+    }
+    return 0;
+}
 
 static peripherals_data_t *peripherals_data_create_internal(
     list_t *acceleration,
@@ -21,9 +106,10 @@ static peripherals_data_t *peripherals_data_create_internal(
     double gps_toffs,
     double ac_online,
     double battery_present,
-    char *battery_status,
-    char *battery_health,
-    double battery_capacity
+    corellium_api_peripherals_data_BATTERYSTATUS_e battery_status,
+    corellium_api_peripherals_data_BATTERYHEALTH_e battery_health,
+    double battery_capacity,
+    double biometric_pass
     ) {
     peripherals_data_t *peripherals_data_local_var = malloc(sizeof(peripherals_data_t));
     if (!peripherals_data_local_var) {
@@ -47,6 +133,7 @@ static peripherals_data_t *peripherals_data_create_internal(
     peripherals_data_local_var->battery_status = battery_status;
     peripherals_data_local_var->battery_health = battery_health;
     peripherals_data_local_var->battery_capacity = battery_capacity;
+    peripherals_data_local_var->biometric_pass = biometric_pass;
 
     peripherals_data_local_var->_library_owned = 1;
     return peripherals_data_local_var;
@@ -68,9 +155,10 @@ __attribute__((deprecated)) peripherals_data_t *peripherals_data_create(
     double gps_toffs,
     double ac_online,
     double battery_present,
-    char *battery_status,
-    char *battery_health,
-    double battery_capacity
+    corellium_api_peripherals_data_BATTERYSTATUS_e battery_status,
+    corellium_api_peripherals_data_BATTERYHEALTH_e battery_health,
+    double battery_capacity,
+    double biometric_pass
     ) {
     return peripherals_data_create_internal (
         acceleration,
@@ -90,7 +178,8 @@ __attribute__((deprecated)) peripherals_data_t *peripherals_data_create(
         battery_present,
         battery_status,
         battery_health,
-        battery_capacity
+        battery_capacity,
+        biometric_pass
         );
 }
 
@@ -130,14 +219,6 @@ void peripherals_data_free(peripherals_data_t *peripherals_data) {
         }
         list_freeList(peripherals_data->orientation);
         peripherals_data->orientation = NULL;
-    }
-    if (peripherals_data->battery_status) {
-        free(peripherals_data->battery_status);
-        peripherals_data->battery_status = NULL;
-    }
-    if (peripherals_data->battery_health) {
-        free(peripherals_data->battery_health);
-        peripherals_data->battery_health = NULL;
     }
     free(peripherals_data);
 }
@@ -286,7 +367,7 @@ cJSON *peripherals_data_convertToJSON(peripherals_data_t *peripherals_data) {
 
 
     // peripherals_data->ac_online
-    if(peripherals_data->ac_online) {
+    if(peripherals_data->ac_online != corellium_api_peripherals_data_ACONLINE_NULL) {
     if(cJSON_AddNumberToObject(item, "acOnline", peripherals_data->ac_online) == NULL) {
     goto fail; //Numeric
     }
@@ -294,7 +375,7 @@ cJSON *peripherals_data_convertToJSON(peripherals_data_t *peripherals_data) {
 
 
     // peripherals_data->battery_present
-    if(peripherals_data->battery_present) {
+    if(peripherals_data->battery_present != corellium_api_peripherals_data_BATTERYPRESENT_NULL) {
     if(cJSON_AddNumberToObject(item, "batteryPresent", peripherals_data->battery_present) == NULL) {
     goto fail; //Numeric
     }
@@ -302,17 +383,19 @@ cJSON *peripherals_data_convertToJSON(peripherals_data_t *peripherals_data) {
 
 
     // peripherals_data->battery_status
-    if(peripherals_data->battery_status) {
-    if(cJSON_AddStringToObject(item, "batteryStatus", peripherals_data->battery_status) == NULL) {
-    goto fail; //String
+    if(peripherals_data->battery_status != corellium_api_peripherals_data_BATTERYSTATUS_NULL) {
+    if(cJSON_AddStringToObject(item, "batteryStatus", peripherals_data_battery_status_ToString(peripherals_data->battery_status)) == NULL)
+    {
+    goto fail; //Enum
     }
     }
 
 
     // peripherals_data->battery_health
-    if(peripherals_data->battery_health) {
-    if(cJSON_AddStringToObject(item, "batteryHealth", peripherals_data->battery_health) == NULL) {
-    goto fail; //String
+    if(peripherals_data->battery_health != corellium_api_peripherals_data_BATTERYHEALTH_NULL) {
+    if(cJSON_AddStringToObject(item, "batteryHealth", peripherals_data_battery_health_ToString(peripherals_data->battery_health)) == NULL)
+    {
+    goto fail; //Enum
     }
     }
 
@@ -320,6 +403,14 @@ cJSON *peripherals_data_convertToJSON(peripherals_data_t *peripherals_data) {
     // peripherals_data->battery_capacity
     if(peripherals_data->battery_capacity) {
     if(cJSON_AddNumberToObject(item, "batteryCapacity", peripherals_data->battery_capacity) == NULL) {
+    goto fail; //Numeric
+    }
+    }
+
+
+    // peripherals_data->biometric_pass
+    if(peripherals_data->biometric_pass != corellium_api_peripherals_data_BIOMETRICPASS_NULL) {
+    if(cJSON_AddNumberToObject(item, "biometricPass", peripherals_data->biometric_pass) == NULL) {
     goto fail; //Numeric
     }
     }
@@ -597,11 +688,13 @@ peripherals_data_t *peripherals_data_parseFromJSON(cJSON *peripherals_dataJSON){
     if (cJSON_IsNull(battery_status)) {
         battery_status = NULL;
     }
+    corellium_api_peripherals_data_BATTERYSTATUS_e battery_statusVariable;
     if (battery_status) { 
-    if(!cJSON_IsString(battery_status) && !cJSON_IsNull(battery_status))
+    if(!cJSON_IsString(battery_status))
     {
-    goto end; //String
+    goto end; //Enum
     }
+    battery_statusVariable = peripherals_data_battery_status_FromString(battery_status->valuestring);
     }
 
     // peripherals_data->battery_health
@@ -609,11 +702,13 @@ peripherals_data_t *peripherals_data_parseFromJSON(cJSON *peripherals_dataJSON){
     if (cJSON_IsNull(battery_health)) {
         battery_health = NULL;
     }
+    corellium_api_peripherals_data_BATTERYHEALTH_e battery_healthVariable;
     if (battery_health) { 
-    if(!cJSON_IsString(battery_health) && !cJSON_IsNull(battery_health))
+    if(!cJSON_IsString(battery_health))
     {
-    goto end; //String
+    goto end; //Enum
     }
+    battery_healthVariable = peripherals_data_battery_health_FromString(battery_health->valuestring);
     }
 
     // peripherals_data->battery_capacity
@@ -623,6 +718,18 @@ peripherals_data_t *peripherals_data_parseFromJSON(cJSON *peripherals_dataJSON){
     }
     if (battery_capacity) { 
     if(!cJSON_IsNumber(battery_capacity))
+    {
+    goto end; //Numeric
+    }
+    }
+
+    // peripherals_data->biometric_pass
+    cJSON *biometric_pass = cJSON_GetObjectItemCaseSensitive(peripherals_dataJSON, "biometricPass");
+    if (cJSON_IsNull(biometric_pass)) {
+        biometric_pass = NULL;
+    }
+    if (biometric_pass) { 
+    if(!cJSON_IsNumber(biometric_pass))
     {
     goto end; //Numeric
     }
@@ -645,9 +752,10 @@ peripherals_data_t *peripherals_data_parseFromJSON(cJSON *peripherals_dataJSON){
         gps_toffs ? gps_toffs->valuedouble : 0,
         ac_online ? ac_online->valuedouble : 0,
         battery_present ? battery_present->valuedouble : 0,
-        battery_status && !cJSON_IsNull(battery_status) ? strdup(battery_status->valuestring) : NULL,
-        battery_health && !cJSON_IsNull(battery_health) ? strdup(battery_health->valuestring) : NULL,
-        battery_capacity ? battery_capacity->valuedouble : 0
+        battery_status ? battery_statusVariable : corellium_api_peripherals_data_BATTERYSTATUS_NULL,
+        battery_health ? battery_healthVariable : corellium_api_peripherals_data_BATTERYHEALTH_NULL,
+        battery_capacity ? battery_capacity->valuedouble : 0,
+        biometric_pass ? biometric_pass->valuedouble : 0
         );
 
     return peripherals_data_local_var;

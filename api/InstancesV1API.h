@@ -212,7 +212,7 @@ gpios_state_v1_t*
 InstancesV1API_v1SetInstanceGpios(apiClient_t *apiClient, char *instanceId, gpios_state_v1_t *gpios_state_v1);
 
 
-// Set Instance Peripherals
+// Update Instance Peripherals
 //
 peripherals_data_v1_t*
 InstancesV1API_v1SetInstancePeripherals(apiClient_t *apiClient, char *instanceId, peripherals_data_v1_t *peripherals_data_v1);

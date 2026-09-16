@@ -162,7 +162,6 @@ set(SRCS
     model/cloud_notification_item.c
     model/cloud_notification_list.c
     model/cluster_config.c
-    model/cluster_config_ai_tools_config.c
     model/cluster_config_coordinator_config.c
     model/cluster_config_coordinator_config_auth_providers_inner.c
     model/cluster_config_coordinator_config_auth_providers_inner_any_of.c
@@ -526,6 +525,7 @@ set(SRCS
     model/password_change_body.c
     model/password_reset_body.c
     model/patch_cluster_config_body.c
+    model/patch_cluster_config_body_ai_tools_config.c
     model/patch_domain_auth_provider_body.c
     model/patch_domain_body.c
     model/patch_domain_body_webplayer.c
@@ -924,7 +924,6 @@ set(HDRS
     model/cloud_notification_item.h
     model/cloud_notification_list.h
     model/cluster_config.h
-    model/cluster_config_ai_tools_config.h
     model/cluster_config_coordinator_config.h
     model/cluster_config_coordinator_config_auth_providers_inner.h
     model/cluster_config_coordinator_config_auth_providers_inner_any_of.h
@@ -1288,6 +1287,7 @@ set(HDRS
     model/password_change_body.h
     model/password_reset_body.h
     model/patch_cluster_config_body.h
+    model/patch_cluster_config_body_ai_tools_config.h
     model/patch_domain_auth_provider_body.h
     model/patch_domain_body.h
     model/patch_domain_body_webplayer.h

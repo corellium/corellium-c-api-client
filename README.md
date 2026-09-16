@@ -395,7 +395,7 @@ Category | Method | HTTP request | Description
 *InstancesAPI* | [**InstancesAPI_v3RestoreBackup**](docs/InstancesAPI.md#InstancesAPI_v3RestoreBackup) | **POST** /v3/instances/{instanceId}/restoreBackup | Restore backup
 *InstancesAPI* | [**InstancesAPI_v3RotateInstance**](docs/InstancesAPI.md#InstancesAPI_v3RotateInstance) | **POST** /v3/instances/{instanceId}/rotate | Rotate device to specified orientation
 *InstancesAPI* | [**InstancesAPI_v3SetInstanceGpios**](docs/InstancesAPI.md#InstancesAPI_v3SetInstanceGpios) | **PUT** /v3/instances/{instanceId}/gpios | Set Instance GPIOs
-*InstancesAPI* | [**InstancesAPI_v3SetInstancePeripherals**](docs/InstancesAPI.md#InstancesAPI_v3SetInstancePeripherals) | **PUT** /v3/instances/{instanceId}/peripherals | Set Instance Peripherals
+*InstancesAPI* | [**InstancesAPI_v3SetInstancePeripherals**](docs/InstancesAPI.md#InstancesAPI_v3SetInstancePeripherals) | **PUT** /v3/instances/{instanceId}/peripherals | Update Instance Peripherals
 *InstancesAPI* | [**InstancesAPI_v3StartInstance**](docs/InstancesAPI.md#InstancesAPI_v3StartInstance) | **POST** /v3/instances/{instanceId}/start | Start an Instance
 *InstancesAPI* | [**InstancesAPI_v3StartNetdump**](docs/InstancesAPI.md#InstancesAPI_v3StartNetdump) | **POST** /v3/instances/{instanceId}/netdump/enable | Start Enhanced Network Monitor on an instance.
 *InstancesAPI* | [**InstancesAPI_v3StartNetworkMonitor**](docs/InstancesAPI.md#InstancesAPI_v3StartNetworkMonitor) | **POST** /v3/instances/{instanceId}/sslsplit/enable | Start Network Monitor on an instance.
@@ -433,7 +433,7 @@ Category | Method | HTTP request | Description
 *InstancesV1API* | [**InstancesV1API_v1RestoreBackup**](docs/InstancesV1API.md#InstancesV1API_v1RestoreBackup) | **POST** /v1/instances/{instanceId}/restoreBackup | Restore backup
 *InstancesV1API* | [**InstancesV1API_v1RotateInstance**](docs/InstancesV1API.md#InstancesV1API_v1RotateInstance) | **POST** /v1/instances/{instanceId}/rotate | Rotate device to specified orientation
 *InstancesV1API* | [**InstancesV1API_v1SetInstanceGpios**](docs/InstancesV1API.md#InstancesV1API_v1SetInstanceGpios) | **PUT** /v1/instances/{instanceId}/gpios | Set Instance GPIOs
-*InstancesV1API* | [**InstancesV1API_v1SetInstancePeripherals**](docs/InstancesV1API.md#InstancesV1API_v1SetInstancePeripherals) | **PUT** /v1/instances/{instanceId}/peripherals | Set Instance Peripherals
+*InstancesV1API* | [**InstancesV1API_v1SetInstancePeripherals**](docs/InstancesV1API.md#InstancesV1API_v1SetInstancePeripherals) | **PUT** /v1/instances/{instanceId}/peripherals | Update Instance Peripherals
 *InstancesV1API* | [**InstancesV1API_v1SetInstanceState**](docs/InstancesV1API.md#InstancesV1API_v1SetInstanceState) | **PUT** /v1/instances/{instanceId}/state | Set state of Instance
 *InstancesV1API* | [**InstancesV1API_v1StartInstance**](docs/InstancesV1API.md#InstancesV1API_v1StartInstance) | **POST** /v1/instances/{instanceId}/start | Start an Instance
 *InstancesV1API* | [**InstancesV1API_v1StartNetdump**](docs/InstancesV1API.md#InstancesV1API_v1StartNetdump) | **POST** /v1/instances/{instanceId}/netdump/enable | Start Enhanced Network Monitor on an instance.
@@ -735,7 +735,6 @@ Category | Method | HTTP request | Description
  - [cloud_notification_item_t](docs/cloud_notification_item.md)
  - [cloud_notification_list_t](docs/cloud_notification_list.md)
  - [cluster_config_t](docs/cluster_config.md)
- - [cluster_config_ai_tools_config_t](docs/cluster_config_ai_tools_config.md)
  - [cluster_config_coordinator_config_t](docs/cluster_config_coordinator_config.md)
  - [cluster_config_coordinator_config_auth_providers_inner_t](docs/cluster_config_coordinator_config_auth_providers_inner.md)
  - [cluster_config_coordinator_config_auth_providers_inner_any_of_t](docs/cluster_config_coordinator_config_auth_providers_inner_any_of.md)
@@ -1099,6 +1098,7 @@ Category | Method | HTTP request | Description
  - [password_change_body_t](docs/password_change_body.md)
  - [password_reset_body_t](docs/password_reset_body.md)
  - [patch_cluster_config_body_t](docs/patch_cluster_config_body.md)
+ - [patch_cluster_config_body_ai_tools_config_t](docs/patch_cluster_config_body_ai_tools_config.md)
  - [patch_domain_auth_provider_body_t](docs/patch_domain_auth_provider_body.md)
  - [patch_domain_body_t](docs/patch_domain_body.md)
  - [patch_domain_body_webplayer_t](docs/patch_domain_body_webplayer.md)

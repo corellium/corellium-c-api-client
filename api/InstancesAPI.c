@@ -3571,7 +3571,7 @@ end:
 
 }
 
-// Set Instance Peripherals
+// Update Instance Peripherals
 //
 peripherals_data_t*
 InstancesAPI_v3SetInstancePeripherals(apiClient_t *apiClient, char *instanceId, peripherals_data_t *peripherals_data)
