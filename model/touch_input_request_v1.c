@@ -65,9 +65,7 @@ cJSON *touch_input_request_v1_convertToJSON(touch_input_request_v1_t *touch_inpu
     cJSON *item = cJSON_CreateObject();
 
     // touch_input_request_v1->position
-    if (!touch_input_request_v1->position) {
-        goto fail;
-    }
+    if(touch_input_request_v1->position) {
     cJSON *position_object = object_convertToJSON(touch_input_request_v1->position);
     if(position_object == NULL) {
     goto fail; //model
@@ -75,6 +73,7 @@ cJSON *touch_input_request_v1_convertToJSON(touch_input_request_v1_t *touch_inpu
     cJSON_AddItemToObject(item, "position", position_object);
     if(item->child == NULL) {
     goto fail;
+    }
     }
 
 
@@ -133,13 +132,10 @@ touch_input_request_v1_t *touch_input_request_v1_parseFromJSON(cJSON *touch_inpu
     if (cJSON_IsNull(position)) {
         position = NULL;
     }
-    if (!position) {
-        goto end;
-    }
-
     object_t *position_local_object = NULL;
-    
+    if (position) { 
     position_local_object = object_parseFromJSON(position); //object
+    }
 
     // touch_input_request_v1->buttons
     cJSON *buttons = cJSON_GetObjectItemCaseSensitive(touch_input_request_v1JSON, "buttons");
@@ -191,7 +187,7 @@ touch_input_request_v1_t *touch_input_request_v1_parseFromJSON(cJSON *touch_inpu
 
 
     touch_input_request_v1_local_var = touch_input_request_v1_create_internal (
-        position_local_object,
+        position ? position_local_object : NULL,
         buttons ? buttonsList : NULL,
         normalized ? normalized->valueint : 0,
         wait ? wait->valuedouble : 0

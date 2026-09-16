@@ -21,9 +21,7 @@ static model_firmware_t *model_firmware_create_internal(
     char *url,
     char *orig_url,
     char *filename,
-    int rooted,
-    int _signed,
-    model_firmware_springboard_snapshot_t *springboard_snapshot
+    int rooted
     ) {
     model_firmware_t *model_firmware_local_var = malloc(sizeof(model_firmware_t));
     if (!model_firmware_local_var) {
@@ -45,8 +43,6 @@ static model_firmware_t *model_firmware_create_internal(
     model_firmware_local_var->orig_url = orig_url;
     model_firmware_local_var->filename = filename;
     model_firmware_local_var->rooted = rooted;
-    model_firmware_local_var->_signed = _signed;
-    model_firmware_local_var->springboard_snapshot = springboard_snapshot;
 
     model_firmware_local_var->_library_owned = 1;
     return model_firmware_local_var;
@@ -68,9 +64,7 @@ __attribute__((deprecated)) model_firmware_t *model_firmware_create(
     char *url,
     char *orig_url,
     char *filename,
-    int rooted,
-    int _signed,
-    model_firmware_springboard_snapshot_t *springboard_snapshot
+    int rooted
     ) {
     return model_firmware_create_internal (
         os_version,
@@ -88,9 +82,7 @@ __attribute__((deprecated)) model_firmware_t *model_firmware_create(
         url,
         orig_url,
         filename,
-        rooted,
-        _signed,
-        springboard_snapshot
+        rooted
         );
 }
 
@@ -159,10 +151,6 @@ void model_firmware_free(model_firmware_t *model_firmware) {
         free(model_firmware->filename);
         model_firmware->filename = NULL;
     }
-    if (model_firmware->springboard_snapshot) {
-        model_firmware_springboard_snapshot_free(model_firmware->springboard_snapshot);
-        model_firmware->springboard_snapshot = NULL;
-    }
     free(model_firmware);
 }
 
@@ -170,10 +158,11 @@ cJSON *model_firmware_convertToJSON(model_firmware_t *model_firmware) {
     cJSON *item = cJSON_CreateObject();
 
     // model_firmware->os_version
-    if(model_firmware->os_version) {
+    if (!model_firmware->os_version) {
+        goto fail;
+    }
     if(cJSON_AddStringToObject(item, "osVersion", model_firmware->os_version) == NULL) {
     goto fail; //String
-    }
     }
 
 
@@ -301,27 +290,6 @@ cJSON *model_firmware_convertToJSON(model_firmware_t *model_firmware) {
     }
     }
 
-
-    // model_firmware->_signed
-    if(model_firmware->_signed) {
-    if(cJSON_AddBoolToObject(item, "signed", model_firmware->_signed) == NULL) {
-    goto fail; //Bool
-    }
-    }
-
-
-    // model_firmware->springboard_snapshot
-    if(model_firmware->springboard_snapshot) {
-    cJSON *springboard_snapshot_local_JSON = model_firmware_springboard_snapshot_convertToJSON(model_firmware->springboard_snapshot);
-    if(springboard_snapshot_local_JSON == NULL) {
-    goto fail; //model
-    }
-    cJSON_AddItemToObject(item, "springboardSnapshot", springboard_snapshot_local_JSON);
-    if(item->child == NULL) {
-    goto fail;
-    }
-    }
-
     return item;
 fail:
     if (item) {
@@ -334,19 +302,19 @@ model_firmware_t *model_firmware_parseFromJSON(cJSON *model_firmwareJSON){
 
     model_firmware_t *model_firmware_local_var = NULL;
 
-    // define the local variable for model_firmware->springboard_snapshot
-    model_firmware_springboard_snapshot_t *springboard_snapshot_local_nonprim = NULL;
-
     // model_firmware->os_version
     cJSON *os_version = cJSON_GetObjectItemCaseSensitive(model_firmwareJSON, "osVersion");
     if (cJSON_IsNull(os_version)) {
         os_version = NULL;
     }
-    if (os_version) { 
-    if(!cJSON_IsString(os_version) && !cJSON_IsNull(os_version))
+    if (!os_version) {
+        goto end;
+    }
+
+    
+    if(!cJSON_IsString(os_version))
     {
     goto end; //String
-    }
     }
 
     // model_firmware->os_build
@@ -527,30 +495,9 @@ model_firmware_t *model_firmware_parseFromJSON(cJSON *model_firmwareJSON){
     }
     }
 
-    // model_firmware->_signed
-    cJSON *_signed = cJSON_GetObjectItemCaseSensitive(model_firmwareJSON, "signed");
-    if (cJSON_IsNull(_signed)) {
-        _signed = NULL;
-    }
-    if (_signed) { 
-    if(!cJSON_IsBool(_signed))
-    {
-    goto end; //Bool
-    }
-    }
-
-    // model_firmware->springboard_snapshot
-    cJSON *springboard_snapshot = cJSON_GetObjectItemCaseSensitive(model_firmwareJSON, "springboardSnapshot");
-    if (cJSON_IsNull(springboard_snapshot)) {
-        springboard_snapshot = NULL;
-    }
-    if (springboard_snapshot) { 
-    springboard_snapshot_local_nonprim = model_firmware_springboard_snapshot_parseFromJSON(springboard_snapshot); //nonprimitive
-    }
-
 
     model_firmware_local_var = model_firmware_create_internal (
-        os_version && !cJSON_IsNull(os_version) ? strdup(os_version->valuestring) : NULL,
+        strdup(os_version->valuestring),
         os_build && !cJSON_IsNull(os_build) ? strdup(os_build->valuestring) : NULL,
         android_flavor && !cJSON_IsNull(android_flavor) ? strdup(android_flavor->valuestring) : NULL,
         api_version && !cJSON_IsNull(api_version) ? strdup(api_version->valuestring) : NULL,
@@ -565,17 +512,11 @@ model_firmware_t *model_firmware_parseFromJSON(cJSON *model_firmwareJSON){
         url && !cJSON_IsNull(url) ? strdup(url->valuestring) : NULL,
         orig_url && !cJSON_IsNull(orig_url) ? strdup(orig_url->valuestring) : NULL,
         filename && !cJSON_IsNull(filename) ? strdup(filename->valuestring) : NULL,
-        rooted ? rooted->valueint : 0,
-        _signed ? _signed->valueint : 0,
-        springboard_snapshot ? springboard_snapshot_local_nonprim : NULL
+        rooted ? rooted->valueint : 0
         );
 
     return model_firmware_local_var;
 end:
-    if (springboard_snapshot_local_nonprim) {
-        model_firmware_springboard_snapshot_free(springboard_snapshot_local_nonprim);
-        springboard_snapshot_local_nonprim = NULL;
-    }
     return NULL;
 
 }

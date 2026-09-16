@@ -139,9 +139,7 @@ cJSON *instance_input_body_convertToJSON(instance_input_body_t *instance_input_b
     cJSON *item = cJSON_CreateObject();
 
     // instance_input_body->position
-    if (!instance_input_body->position) {
-        goto fail;
-    }
+    if(instance_input_body->position) {
     cJSON *position = cJSON_AddArrayToObject(item, "position");
     if(position == NULL) {
         goto fail; //primitive container
@@ -149,6 +147,7 @@ cJSON *instance_input_body_convertToJSON(instance_input_body_t *instance_input_b
 
     listEntry_t *positionListEntry;
     list_ForEach(positionListEntry, instance_input_body->position) {
+    }
     }
 
 
@@ -324,11 +323,7 @@ instance_input_body_t *instance_input_body_parseFromJSON(cJSON *instance_input_b
     if (cJSON_IsNull(position)) {
         position = NULL;
     }
-    if (!position) {
-        goto end;
-    }
-
-    
+    if (position) { 
     cJSON *position_local = NULL;
     if(!cJSON_IsArray(position)) {
         goto end;//primitive container
@@ -337,6 +332,7 @@ instance_input_body_t *instance_input_body_parseFromJSON(cJSON *instance_input_b
 
     cJSON_ArrayForEach(position_local, position)
     {
+    }
     }
 
     // instance_input_body->buttons
@@ -533,7 +529,7 @@ instance_input_body_t *instance_input_body_parseFromJSON(cJSON *instance_input_b
 
 
     instance_input_body_local_var = instance_input_body_create_internal (
-        positionList,
+        position ? positionList : NULL,
         buttons ? buttonsList : NULL,
         normalized ? normalized->valueint : 0,
         wait ? wait->valuedouble : 0,

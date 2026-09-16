@@ -18,7 +18,7 @@ typedef struct button_t button_t;
 
 // Enum  for button
 
-typedef enum { corellium_api_button__NULL = 0, corellium_api_button__finger, corellium_api_button__homeButton, corellium_api_button__holdButton, corellium_api_button__volumeUp, corellium_api_button__volumeDown, corellium_api_button__ringerSwitch, corellium_api_button__backButton, corellium_api_button__overviewButton } corellium_api_button__e;
+typedef enum { corellium_api_button__NULL = 0, corellium_api_button__finger, corellium_api_button__homeButton, corellium_api_button__holdButton, corellium_api_button__volumeUp, corellium_api_button__volumeDown, corellium_api_button__backButton, corellium_api_button__overviewButton } corellium_api_button__e;
 
 char* button_button_ToString(corellium_api_button__e button);
 

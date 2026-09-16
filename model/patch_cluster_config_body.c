@@ -8,7 +8,7 @@
 static patch_cluster_config_body_t *patch_cluster_config_body_create_internal(
     double snapshot_limit,
     coordinator_config_t *coordinator_config,
-    patch_cluster_config_body_ai_tools_config_t *ai_tools_config,
+    ai_tools_config_t *ai_tools_config,
     char *originating_node
     ) {
     patch_cluster_config_body_t *patch_cluster_config_body_local_var = malloc(sizeof(patch_cluster_config_body_t));
@@ -27,7 +27,7 @@ static patch_cluster_config_body_t *patch_cluster_config_body_create_internal(
 __attribute__((deprecated)) patch_cluster_config_body_t *patch_cluster_config_body_create(
     double snapshot_limit,
     coordinator_config_t *coordinator_config,
-    patch_cluster_config_body_ai_tools_config_t *ai_tools_config,
+    ai_tools_config_t *ai_tools_config,
     char *originating_node
     ) {
     return patch_cluster_config_body_create_internal (
@@ -52,7 +52,7 @@ void patch_cluster_config_body_free(patch_cluster_config_body_t *patch_cluster_c
         patch_cluster_config_body->coordinator_config = NULL;
     }
     if (patch_cluster_config_body->ai_tools_config) {
-        patch_cluster_config_body_ai_tools_config_free(patch_cluster_config_body->ai_tools_config);
+        ai_tools_config_free(patch_cluster_config_body->ai_tools_config);
         patch_cluster_config_body->ai_tools_config = NULL;
     }
     if (patch_cluster_config_body->originating_node) {
@@ -88,7 +88,7 @@ cJSON *patch_cluster_config_body_convertToJSON(patch_cluster_config_body_t *patc
 
     // patch_cluster_config_body->ai_tools_config
     if(patch_cluster_config_body->ai_tools_config) {
-    cJSON *ai_tools_config_local_JSON = patch_cluster_config_body_ai_tools_config_convertToJSON(patch_cluster_config_body->ai_tools_config);
+    cJSON *ai_tools_config_local_JSON = ai_tools_config_convertToJSON(patch_cluster_config_body->ai_tools_config);
     if(ai_tools_config_local_JSON == NULL) {
     goto fail; //model
     }
@@ -122,7 +122,7 @@ patch_cluster_config_body_t *patch_cluster_config_body_parseFromJSON(cJSON *patc
     coordinator_config_t *coordinator_config_local_nonprim = NULL;
 
     // define the local variable for patch_cluster_config_body->ai_tools_config
-    patch_cluster_config_body_ai_tools_config_t *ai_tools_config_local_nonprim = NULL;
+    ai_tools_config_t *ai_tools_config_local_nonprim = NULL;
 
     // patch_cluster_config_body->snapshot_limit
     cJSON *snapshot_limit = cJSON_GetObjectItemCaseSensitive(patch_cluster_config_bodyJSON, "snapshotLimit");
@@ -151,7 +151,7 @@ patch_cluster_config_body_t *patch_cluster_config_body_parseFromJSON(cJSON *patc
         ai_tools_config = NULL;
     }
     if (ai_tools_config) { 
-    ai_tools_config_local_nonprim = patch_cluster_config_body_ai_tools_config_parseFromJSON(ai_tools_config); //nonprimitive
+    ai_tools_config_local_nonprim = ai_tools_config_parseFromJSON(ai_tools_config); //nonprimitive
     }
 
     // patch_cluster_config_body->originating_node
@@ -181,7 +181,7 @@ end:
         coordinator_config_local_nonprim = NULL;
     }
     if (ai_tools_config_local_nonprim) {
-        patch_cluster_config_body_ai_tools_config_free(ai_tools_config_local_nonprim);
+        ai_tools_config_free(ai_tools_config_local_nonprim);
         ai_tools_config_local_nonprim = NULL;
     }
     return NULL;

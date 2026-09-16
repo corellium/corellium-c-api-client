@@ -130,9 +130,7 @@ cJSON *instance_input_request_convertToJSON(instance_input_request_t *instance_i
     cJSON *item = cJSON_CreateObject();
 
     // instance_input_request->position
-    if (!instance_input_request->position) {
-        goto fail;
-    }
+    if(instance_input_request->position) {
     cJSON *position_object = object_convertToJSON(instance_input_request->position);
     if(position_object == NULL) {
     goto fail; //model
@@ -140,6 +138,7 @@ cJSON *instance_input_request_convertToJSON(instance_input_request_t *instance_i
     cJSON_AddItemToObject(item, "position", position_object);
     if(item->child == NULL) {
     goto fail;
+    }
     }
 
 
@@ -322,13 +321,10 @@ instance_input_request_t *instance_input_request_parseFromJSON(cJSON *instance_i
     if (cJSON_IsNull(position)) {
         position = NULL;
     }
-    if (!position) {
-        goto end;
-    }
-
     object_t *position_local_object = NULL;
-    
+    if (position) { 
     position_local_object = object_parseFromJSON(position); //object
+    }
 
     // instance_input_request->buttons
     cJSON *buttons = cJSON_GetObjectItemCaseSensitive(instance_input_requestJSON, "buttons");
@@ -523,7 +519,7 @@ instance_input_request_t *instance_input_request_parseFromJSON(cJSON *instance_i
 
 
     instance_input_request_local_var = instance_input_request_create_internal (
-        position_local_object,
+        position ? position_local_object : NULL,
         buttons ? buttonsList : NULL,
         normalized ? normalized->valueint : 0,
         wait ? wait->valuedouble : 0,

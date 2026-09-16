@@ -162,6 +162,7 @@ set(SRCS
     model/cloud_notification_item.c
     model/cloud_notification_list.c
     model/cluster_config.c
+    model/cluster_config_ai_tools_config.c
     model/cluster_config_coordinator_config.c
     model/cluster_config_coordinator_config_auth_providers_inner.c
     model/cluster_config_coordinator_config_auth_providers_inner_any_of.c
@@ -293,8 +294,6 @@ set(SRCS
     model/domain_list_item_users_info_inner.c
     model/domain_list_usage.c
     model/domain_options.c
-    model/domain_software.c
-    model/domain_software_list.c
     model/domain_welcome_message_response.c
     model/domain_welcome_message_response_v1.c
     model/edit_invites_body.c
@@ -492,14 +491,7 @@ set(SRCS
     model/metered_subscription_usage_v1.c
     model/model.c
     model/model_firmware.c
-    model/model_firmware_springboard_snapshot.c
-    model/model_firmware_springboard_snapshot_volumes_inner.c
-    model/model_frame.c
-    model/model_frame_home.c
-    model/model_partition.c
-    model/model_product_image.c
-    model/model_product_image_inner.c
-    model/model_rect.c
+    model/model_quotas.c
     model/model_software_v1.c
     model/model_v1.c
     model/netdump_filter.c
@@ -534,7 +526,6 @@ set(SRCS
     model/password_change_body.c
     model/password_reset_body.c
     model/patch_cluster_config_body.c
-    model/patch_cluster_config_body_ai_tools_config.c
     model/patch_domain_auth_provider_body.c
     model/patch_domain_body.c
     model/patch_domain_body_webplayer.c
@@ -933,6 +924,7 @@ set(HDRS
     model/cloud_notification_item.h
     model/cloud_notification_list.h
     model/cluster_config.h
+    model/cluster_config_ai_tools_config.h
     model/cluster_config_coordinator_config.h
     model/cluster_config_coordinator_config_auth_providers_inner.h
     model/cluster_config_coordinator_config_auth_providers_inner_any_of.h
@@ -1064,8 +1056,6 @@ set(HDRS
     model/domain_list_item_users_info_inner.h
     model/domain_list_usage.h
     model/domain_options.h
-    model/domain_software.h
-    model/domain_software_list.h
     model/domain_welcome_message_response.h
     model/domain_welcome_message_response_v1.h
     model/edit_invites_body.h
@@ -1263,14 +1253,7 @@ set(HDRS
     model/metered_subscription_usage_v1.h
     model/model.h
     model/model_firmware.h
-    model/model_firmware_springboard_snapshot.h
-    model/model_firmware_springboard_snapshot_volumes_inner.h
-    model/model_frame.h
-    model/model_frame_home.h
-    model/model_partition.h
-    model/model_product_image.h
-    model/model_product_image_inner.h
-    model/model_rect.h
+    model/model_quotas.h
     model/model_software_v1.h
     model/model_v1.h
     model/netdump_filter.h
@@ -1305,7 +1288,6 @@ set(HDRS
     model/password_change_body.h
     model/password_reset_body.h
     model/patch_cluster_config_body.h
-    model/patch_cluster_config_body_ai_tools_config.h
     model/patch_domain_auth_provider_body.h
     model/patch_domain_body.h
     model/patch_domain_body_webplayer.h

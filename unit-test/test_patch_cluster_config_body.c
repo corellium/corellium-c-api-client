@@ -17,7 +17,7 @@
 patch_cluster_config_body_t* instantiate_patch_cluster_config_body(int include_optional);
 
 #include "test_coordinator_config.c"
-#include "test_patch_cluster_config_body_ai_tools_config.c"
+#include "test_ai_tools_config.c"
 
 
 patch_cluster_config_body_t* instantiate_patch_cluster_config_body(int include_optional) {
@@ -27,14 +27,15 @@ patch_cluster_config_body_t* instantiate_patch_cluster_config_body(int include_o
       0,
        // false, not to have infinite recursion
       instantiate_coordinator_config(0),
-      null,
+       // false, not to have infinite recursion
+      instantiate_ai_tools_config(0),
       "0"
     );
   } else {
     patch_cluster_config_body = patch_cluster_config_body_create(
       0,
       NULL,
-      null,
+      NULL,
       "0"
     );
   }

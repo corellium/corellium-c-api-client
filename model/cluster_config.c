@@ -93,7 +93,7 @@ static cluster_config_t *cluster_config_create_internal(
     double domain_image_upload_quota,
     list_t *ipsw_filters,
     cluster_config_firmware_service_config_t *firmware_service_config,
-    ai_tools_config_t *ai_tools_config
+    cluster_config_ai_tools_config_t *ai_tools_config
     ) {
     cluster_config_t *cluster_config_local_var = malloc(sizeof(cluster_config_t));
     if (!cluster_config_local_var) {
@@ -246,7 +246,7 @@ __attribute__((deprecated)) cluster_config_t *cluster_config_create(
     double domain_image_upload_quota,
     list_t *ipsw_filters,
     cluster_config_firmware_service_config_t *firmware_service_config,
-    ai_tools_config_t *ai_tools_config
+    cluster_config_ai_tools_config_t *ai_tools_config
     ) {
     return cluster_config_create_internal (
         last_config_keys,
@@ -535,7 +535,7 @@ void cluster_config_free(cluster_config_t *cluster_config) {
         cluster_config->firmware_service_config = NULL;
     }
     if (cluster_config->ai_tools_config) {
-        ai_tools_config_free(cluster_config->ai_tools_config);
+        cluster_config_ai_tools_config_free(cluster_config->ai_tools_config);
         cluster_config->ai_tools_config = NULL;
     }
     free(cluster_config);
@@ -1222,16 +1222,15 @@ cJSON *cluster_config_convertToJSON(cluster_config_t *cluster_config) {
 
 
     // cluster_config->ai_tools_config
-    if (!cluster_config->ai_tools_config) {
-        goto fail;
-    }
-    cJSON *ai_tools_config_local_JSON = ai_tools_config_convertToJSON(cluster_config->ai_tools_config);
+    if(cluster_config->ai_tools_config) {
+    cJSON *ai_tools_config_local_JSON = cluster_config_ai_tools_config_convertToJSON(cluster_config->ai_tools_config);
     if(ai_tools_config_local_JSON == NULL) {
     goto fail; //model
     }
     cJSON_AddItemToObject(item, "aiToolsConfig", ai_tools_config_local_JSON);
     if(item->child == NULL) {
     goto fail;
+    }
     }
 
     return item;
@@ -1289,7 +1288,7 @@ cluster_config_t *cluster_config_parseFromJSON(cJSON *cluster_configJSON){
     cluster_config_firmware_service_config_t *firmware_service_config_local_nonprim = NULL;
 
     // define the local variable for cluster_config->ai_tools_config
-    ai_tools_config_t *ai_tools_config_local_nonprim = NULL;
+    cluster_config_ai_tools_config_t *ai_tools_config_local_nonprim = NULL;
 
     // cluster_config->last_config_keys
     cJSON *last_config_keys = cJSON_GetObjectItemCaseSensitive(cluster_configJSON, "lastConfigKeys");
@@ -2209,12 +2208,9 @@ cluster_config_t *cluster_config_parseFromJSON(cJSON *cluster_configJSON){
     if (cJSON_IsNull(ai_tools_config)) {
         ai_tools_config = NULL;
     }
-    if (!ai_tools_config) {
-        goto end;
+    if (ai_tools_config) { 
+    ai_tools_config_local_nonprim = cluster_config_ai_tools_config_parseFromJSON(ai_tools_config); //nonprimitive
     }
-
-    
-    ai_tools_config_local_nonprim = ai_tools_config_parseFromJSON(ai_tools_config); //nonprimitive
 
 
     cluster_config_local_var = cluster_config_create_internal (
@@ -2288,7 +2284,7 @@ cluster_config_t *cluster_config_parseFromJSON(cJSON *cluster_configJSON){
         domain_image_upload_quota ? domain_image_upload_quota->valuedouble : 0,
         ipsw_filters ? ipsw_filtersList : NULL,
         firmware_service_config ? firmware_service_config_local_nonprim : NULL,
-        ai_tools_config_local_nonprim
+        ai_tools_config ? ai_tools_config_local_nonprim : NULL
         );
 
     return cluster_config_local_var;
@@ -2380,7 +2376,7 @@ end:
         firmware_service_config_local_nonprim = NULL;
     }
     if (ai_tools_config_local_nonprim) {
-        ai_tools_config_free(ai_tools_config_local_nonprim);
+        cluster_config_ai_tools_config_free(ai_tools_config_local_nonprim);
         ai_tools_config_local_nonprim = NULL;
     }
     return NULL;

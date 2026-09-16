@@ -5,13 +5,13 @@
 
 
 char* button_button_ToString(corellium_api_button__e button) {
-    char *buttonArray[] =  { "NULL", "finger", "homeButton", "holdButton", "volumeUp", "volumeDown", "ringerSwitch", "backButton", "overviewButton" };
+    char *buttonArray[] =  { "NULL", "finger", "homeButton", "holdButton", "volumeUp", "volumeDown", "backButton", "overviewButton" };
     return buttonArray[button];
 }
 
 corellium_api_button__e button_button_FromString(char* button) {
     int stringToReturn = 0;
-    char *buttonArray[] =  { "NULL", "finger", "homeButton", "holdButton", "volumeUp", "volumeDown", "ringerSwitch", "backButton", "overviewButton" };
+    char *buttonArray[] =  { "NULL", "finger", "homeButton", "holdButton", "volumeUp", "volumeDown", "backButton", "overviewButton" };
     size_t sizeofArray = sizeof(buttonArray) / sizeof(buttonArray[0]);
     while(stringToReturn < sizeofArray) {
         if(strcmp(button, buttonArray[stringToReturn]) == 0) {

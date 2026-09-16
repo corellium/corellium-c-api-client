@@ -68,9 +68,7 @@ cJSON *touch_input_request_convertToJSON(touch_input_request_t *touch_input_requ
     cJSON *item = cJSON_CreateObject();
 
     // touch_input_request->position
-    if (!touch_input_request->position) {
-        goto fail;
-    }
+    if(touch_input_request->position) {
     cJSON *position = cJSON_AddArrayToObject(item, "position");
     if(position == NULL) {
         goto fail; //primitive container
@@ -78,6 +76,7 @@ cJSON *touch_input_request_convertToJSON(touch_input_request_t *touch_input_requ
 
     listEntry_t *positionListEntry;
     list_ForEach(positionListEntry, touch_input_request->position) {
+    }
     }
 
 
@@ -136,11 +135,7 @@ touch_input_request_t *touch_input_request_parseFromJSON(cJSON *touch_input_requ
     if (cJSON_IsNull(position)) {
         position = NULL;
     }
-    if (!position) {
-        goto end;
-    }
-
-    
+    if (position) { 
     cJSON *position_local = NULL;
     if(!cJSON_IsArray(position)) {
         goto end;//primitive container
@@ -149,6 +144,7 @@ touch_input_request_t *touch_input_request_parseFromJSON(cJSON *touch_input_requ
 
     cJSON_ArrayForEach(position_local, position)
     {
+    }
     }
 
     // touch_input_request->buttons
@@ -199,7 +195,7 @@ touch_input_request_t *touch_input_request_parseFromJSON(cJSON *touch_input_requ
 
 
     touch_input_request_local_var = touch_input_request_create_internal (
-        positionList,
+        position ? positionList : NULL,
         buttons ? buttonsList : NULL,
         normalized ? normalized->valueint : 0,
         wait ? wait->valuedouble : 0

@@ -16,7 +16,6 @@
 typedef struct model_firmware_t model_firmware_t;
 
 #include "any_type.h"
-#include "model_firmware_springboard_snapshot.h"
 #include "object.h"
 
 
@@ -38,8 +37,6 @@ typedef struct model_firmware_t {
     char *orig_url; // string
     char *filename; // string
     int rooted; //boolean
-    int _signed; //boolean
-    struct model_firmware_springboard_snapshot_t *springboard_snapshot; //model
 
     int _library_owned; // Is the library responsible for freeing this object?
 } model_firmware_t;
@@ -60,9 +57,7 @@ __attribute__((deprecated)) model_firmware_t *model_firmware_create(
     char *url,
     char *orig_url,
     char *filename,
-    int rooted,
-    int _signed,
-    model_firmware_springboard_snapshot_t *springboard_snapshot
+    int rooted
 );
 
 void model_firmware_free(model_firmware_t *model_firmware);

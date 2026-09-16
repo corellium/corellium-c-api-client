@@ -55,7 +55,7 @@ Name | Type | Description | Notes
 **created_by** | [**created_by_t**](created_by.md) \* |  | [optional] 
 **uefi_bootloader** | [**instance_uefi_bootloader_t**](instance_uefi_bootloader.md) \* |  | [optional] 
 **orientation** | **double** | Device orientation. | [optional] 
-**mast** | **int** | Whether MATRIX security testing is supported. | [optional] 
+**mast** | **int** | Whether the device has a mast. | [optional] 
 **wan_access** | **int** | Whether WAN access is enabled. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
