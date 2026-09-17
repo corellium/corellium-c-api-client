@@ -23,6 +23,7 @@
 #include "../model/project_key_list.h"
 #include "../model/project_list.h"
 #include "../model/user_error_response.h"
+#include "../model/vpn_config_preauthorization.h"
 
 
 // Create a project
@@ -99,7 +100,7 @@ ProjectsAPI_v3GetProjectNetworkStatus(apiClient_t *apiClient, char *projectId);
 
 // Get project VPN configuration
 //
-// Retrieve the project VPN configuration. A project VPN allows a client (e.g. a researcher's computer) to connect into the virtual devices within the project.
+// Retrieve the project VPN configuration. A project VPN allows a client (e.g. a researcher's computer) to connect into the virtual devices within the project. The response media type follows the requested format: 'ovpn' returns a text OpenVPN profile, any other value returns a binary Tunnelblick zip.
 //
 char*
 ProjectsAPI_v3GetProjectVpnConfig(apiClient_t *apiClient, char *projectId, char *format);
@@ -135,6 +136,14 @@ ProjectsAPI_v3ListProjects(apiClient_t *apiClient, double *limit, double *offset
 //
 project_t*
 ProjectsAPI_v3PatchProject(apiClient_t *apiClient, char *projectId, patch_project_body_t *patch_project_body);
+
+
+// Pre-authorize a VPN configuration download
+//
+// Pre-authorize a VPN configuration download. Returns a short-lived signed token that authorizes the download without an Authorization header, so it can be embedded in a plain download URL: GET /v1/preauthed-vpn-configs/{token}/{filename}. The token carries the client identifier and the format, and expires with the calling session token.
+//
+vpn_config_preauthorization_t*
+ProjectsAPI_v3PreauthVpnConfig(apiClient_t *apiClient, char *projectId, char *filename);
 
 
 // Upload image chunk

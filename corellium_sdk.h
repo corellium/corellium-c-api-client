@@ -355,6 +355,7 @@
 #define corellium_projects_listInstances ProjectsAPI_v3ListProjectInstances
 #define corellium_projects_patch ProjectsAPI_v3PatchProject
 #define corellium_projects_patchSettings ProjectsV1API_v1UpdateProjectSettings
+#define corellium_projects_preauthorizeVpnConfig ProjectsAPI_v3PreauthVpnConfig
 #define corellium_projects_putImageUpload ProjectsAPI_v3PutProjectImageUpload
 
 /* ramDump */
@@ -966,6 +967,7 @@
 #define corellium_v3_projects_list ProjectsAPI_v3ListProjects
 #define corellium_v3_projects_listInstances ProjectsAPI_v3ListProjectInstances
 #define corellium_v3_projects_patch ProjectsAPI_v3PatchProject
+#define corellium_v3_projects_preauthorizeVpnConfig ProjectsAPI_v3PreauthVpnConfig
 #define corellium_v3_projects_putImageUpload ProjectsAPI_v3PutProjectImageUpload
 
 /* ramDump */

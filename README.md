@@ -502,6 +502,7 @@ Category | Method | HTTP request | Description
 *ProjectsAPI* | [**ProjectsAPI_v3ListProjectKeys**](docs/ProjectsAPI.md#ProjectsAPI_v3ListProjectKeys) | **GET** /v3/projects/{projectId}/keys | List project keys
 *ProjectsAPI* | [**ProjectsAPI_v3ListProjects**](docs/ProjectsAPI.md#ProjectsAPI_v3ListProjects) | **GET** /v3/projects | List projects
 *ProjectsAPI* | [**ProjectsAPI_v3PatchProject**](docs/ProjectsAPI.md#ProjectsAPI_v3PatchProject) | **PATCH** /v3/projects/{projectId} | Update a project
+*ProjectsAPI* | [**ProjectsAPI_v3PreauthVpnConfig**](docs/ProjectsAPI.md#ProjectsAPI_v3PreauthVpnConfig) | **POST** /v3/projects/{projectId}/preauth-vpn-config/{filename} | Pre-authorize a VPN configuration download
 *ProjectsAPI* | [**ProjectsAPI_v3PutProjectImageUpload**](docs/ProjectsAPI.md#ProjectsAPI_v3PutProjectImageUpload) | **PUT** /v3/projects/{projectId}/image-upload/{type}/{imageId}/{name} | Upload image chunk
 *ProjectsV1API* | [**ProjectsV1API_v1AddProjectKey**](docs/ProjectsV1API.md#ProjectsV1API_v1AddProjectKey) | **POST** /v1/projects/{projectId}/keys | Add Project Authorized Key
 *ProjectsV1API* | [**ProjectsV1API_v1CreateProject**](docs/ProjectsV1API.md#ProjectsV1API_v1CreateProject) | **POST** /v1/projects | Create a Project
@@ -1306,6 +1307,7 @@ Category | Method | HTTP request | Description
  - [vlan_network_connection_v1_t](docs/vlan_network_connection_v1.md)
  - [volume_options_t](docs/volume_options.md)
  - [volume_options_v1_t](docs/volume_options_v1.md)
+ - [vpn_config_preauthorization_t](docs/vpn_config_preauthorization.md)
  - [vpn_definition_t](docs/vpn_definition.md)
  - [vpn_definition_v1_t](docs/vpn_definition_v1.md)
  - [vpn_schema_t](docs/vpn_schema.md)

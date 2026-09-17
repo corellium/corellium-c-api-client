@@ -731,6 +731,7 @@ set(SRCS
     model/vlan_network_connection_v1.c
     model/volume_options.c
     model/volume_options_v1.c
+    model/vpn_config_preauthorization.c
     model/vpn_definition.c
     model/vpn_definition_v1.c
     model/vpn_schema.c
@@ -1503,6 +1504,7 @@ set(HDRS
     model/vlan_network_connection_v1.h
     model/volume_options.h
     model/volume_options_v1.h
+    model/vpn_config_preauthorization.h
     model/vpn_definition.h
     model/vpn_definition_v1.h
     model/vpn_schema.h

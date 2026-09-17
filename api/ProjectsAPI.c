@@ -968,7 +968,7 @@ end:
 
 // Get project VPN configuration
 //
-// Retrieve the project VPN configuration. A project VPN allows a client (e.g. a researcher's computer) to connect into the virtual devices within the project.
+// Retrieve the project VPN configuration. A project VPN allows a client (e.g. a researcher's computer) to connect into the virtual devices within the project. The response media type follows the requested format: 'ovpn' returns a text OpenVPN profile, any other value returns a binary Tunnelblick zip.
 //
 char*
 ProjectsAPI_v3GetProjectVpnConfig(apiClient_t *apiClient, char *projectId, char *format)
@@ -1014,7 +1014,8 @@ ProjectsAPI_v3GetProjectVpnConfig(apiClient_t *apiClient, char *projectId, char 
     localVarPath = strReplace(localVarPath, localVarToReplace_format, format);
 
 
-    list_addElement(localVarHeaderType,"text/plain"); //produces
+    list_addElement(localVarHeaderType,"application/x-openvpn-profile"); //produces
+    list_addElement(localVarHeaderType,"application/zip"); //produces
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
                     localVarPath,
@@ -1029,7 +1030,7 @@ ProjectsAPI_v3GetProjectVpnConfig(apiClient_t *apiClient, char *projectId, char 
 
     // uncomment below to debug the error response
     //if (apiClient->response_code == 200) {
-    //    printf("%s\n","The OpenVPN configuration.");
+    //    printf("%s\n","The VPN configuration, as a text OpenVPN profile or a binary Tunnelblick zip.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
@@ -1646,6 +1647,118 @@ ProjectsAPI_v3PatchProject(apiClient_t *apiClient, char *projectId, patch_projec
         localVarSingleItemJSON_patch_project_body = NULL;
     }
     free(localVarBodyParameters);
+    return elementToReturn;
+end:
+    free(localVarPath);
+    return NULL;
+
+}
+
+// Pre-authorize a VPN configuration download
+//
+// Pre-authorize a VPN configuration download. Returns a short-lived signed token that authorizes the download without an Authorization header, so it can be embedded in a plain download URL: GET /v1/preauthed-vpn-configs/{token}/{filename}. The token carries the client identifier and the format, and expires with the calling session token.
+//
+vpn_config_preauthorization_t*
+ProjectsAPI_v3PreauthVpnConfig(apiClient_t *apiClient, char *projectId, char *filename)
+{
+    list_t    *localVarQueryParameters = NULL;
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = NULL;
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/projects/{projectId}/preauth-vpn-config/{filename}");
+
+    if(!projectId)
+        goto end;
+    if(!filename)
+        goto end;
+
+
+    // Path Params
+    long sizeOfPathParams_projectId = strlen(projectId)+3 + strlen(filename)+3 + sizeof("{ projectId }") - 1;
+    if(projectId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_projectId = malloc(sizeOfPathParams_projectId);
+    sprintf(localVarToReplace_projectId, "{%s}", "projectId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_projectId, projectId);
+
+    // Path Params
+    long sizeOfPathParams_filename = strlen(projectId)+3 + strlen(filename)+3 + sizeof("{ filename }") - 1;
+    if(filename == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_filename = malloc(sizeOfPathParams_filename);
+    sprintf(localVarToReplace_filename, "{%s}", "filename");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_filename, filename);
+
+
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "POST");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 200) {
+    //    printf("%s\n","A short-lived signed token.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 400) {
+    //    printf("%s\n","The project does not have an active VPN IP or port.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","Permission denied.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 404) {
+    //    printf("%s\n","No project with the given identifier.");
+    //}
+    //nonprimitive not container
+    vpn_config_preauthorization_t *elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
+        cJSON *ProjectsAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
+        elementToReturn = vpn_config_preauthorization_parseFromJSON(ProjectsAPIlocalVarJSON);
+        cJSON_Delete(ProjectsAPIlocalVarJSON);
+        if(elementToReturn == NULL) {
+            // return 0;
+        }
+    }
+
+    //return type
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    
+    
+    
+    list_freeList(localVarHeaderType);
+    
+    free(localVarPath);
+    free(localVarToReplace_projectId);
+    free(localVarToReplace_filename);
     return elementToReturn;
 end:
     free(localVarPath);

@@ -18,6 +18,7 @@ Method | HTTP request | Description
 [**ProjectsAPI_v3ListProjectKeys**](ProjectsAPI.md#ProjectsAPI_v3ListProjectKeys) | **GET** /v3/projects/{projectId}/keys | List project keys
 [**ProjectsAPI_v3ListProjects**](ProjectsAPI.md#ProjectsAPI_v3ListProjects) | **GET** /v3/projects | List projects
 [**ProjectsAPI_v3PatchProject**](ProjectsAPI.md#ProjectsAPI_v3PatchProject) | **PATCH** /v3/projects/{projectId} | Update a project
+[**ProjectsAPI_v3PreauthVpnConfig**](ProjectsAPI.md#ProjectsAPI_v3PreauthVpnConfig) | **POST** /v3/projects/{projectId}/preauth-vpn-config/{filename} | Pre-authorize a VPN configuration download
 [**ProjectsAPI_v3PutProjectImageUpload**](ProjectsAPI.md#ProjectsAPI_v3PutProjectImageUpload) | **PUT** /v3/projects/{projectId}/image-upload/{type}/{imageId}/{name} | Upload image chunk
 
 
@@ -311,7 +312,7 @@ Name | Type | Description  | Notes
 ```c
 // Get project VPN configuration
 //
-// Retrieve the project VPN configuration. A project VPN allows a client (e.g. a researcher's computer) to connect into the virtual devices within the project.
+// Retrieve the project VPN configuration. A project VPN allows a client (e.g. a researcher's computer) to connect into the virtual devices within the project. The response media type follows the requested format: 'ovpn' returns a text OpenVPN profile, any other value returns a binary Tunnelblick zip.
 //
 char* ProjectsAPI_v3GetProjectVpnConfig(apiClient_t *apiClient, char *projectId, char *format);
 ```
@@ -336,7 +337,7 @@ char*
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: text/plain, application/json
+ - **Accept**: application/x-openvpn-profile, application/zip, application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -468,6 +469,38 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **ProjectsAPI_v3PreauthVpnConfig**
+```c
+// Pre-authorize a VPN configuration download
+//
+// Pre-authorize a VPN configuration download. Returns a short-lived signed token that authorizes the download without an Authorization header, so it can be embedded in a plain download URL: GET /v1/preauthed-vpn-configs/{token}/{filename}. The token carries the client identifier and the format, and expires with the calling session token.
+//
+vpn_config_preauthorization_t* ProjectsAPI_v3PreauthVpnConfig(apiClient_t *apiClient, char *projectId, char *filename);
+```
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**apiClient** | **apiClient_t \*** | context containing the client configuration |
+**projectId** | **char \*** | Project identifier. | 
+**filename** | **char \*** | VPN configuration filename, as &#39;&lt;clientId&gt;.&lt;format&gt;&#39;. The client identifier becomes the common name of the issued client certificate; a format of &#39;ovpn&#39; yields an OpenVPN profile and any other value yields a Tunnelblick zip. | 
+
+### Return type
+
+[vpn_config_preauthorization_t](vpn_config_preauthorization.md) *
+
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

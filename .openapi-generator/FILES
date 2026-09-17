@@ -887,6 +887,7 @@ docs/vlan_network_connection.md
 docs/vlan_network_connection_v1.md
 docs/volume_options.md
 docs/volume_options_v1.md
+docs/vpn_config_preauthorization.md
 docs/vpn_definition.md
 docs/vpn_definition_v1.md
 docs/vpn_schema.md
@@ -2275,6 +2276,8 @@ model/volume_options.c
 model/volume_options.h
 model/volume_options_v1.c
 model/volume_options_v1.h
+model/vpn_config_preauthorization.c
+model/vpn_config_preauthorization.h
 model/vpn_definition.c
 model/vpn_definition.h
 model/vpn_definition_v1.c
@@ -2985,6 +2988,7 @@ unit-test/test_vlan_network_connection.c
 unit-test/test_vlan_network_connection_v1.c
 unit-test/test_volume_options.c
 unit-test/test_volume_options_v1.c
+unit-test/test_vpn_config_preauthorization.c
 unit-test/test_vpn_definition.c
 unit-test/test_vpn_definition_v1.c
 unit-test/test_vpn_schema.c
