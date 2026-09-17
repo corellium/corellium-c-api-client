@@ -8,6 +8,7 @@
 #include "../model/any_type.h"
 #include "../model/api_error.h"
 #include "../model/api_not_found_error.h"
+#include "../model/domain_software_list.h"
 #include "../model/domain_welcome_message_response.h"
 #include "../model/insufficient_storage_error.h"
 #include "../model/object.h"
@@ -46,6 +47,14 @@ DomainAPI_v3GetDomainImageUpload(apiClient_t *apiClient, char *type, char *image
 //
 domain_welcome_message_response_t*
 DomainAPI_v3GetDomainWelcomeMessage(apiClient_t *apiClient);
+
+
+// List domain-level firmware images
+//
+// **Required role:** Domain administrator.  Lists firmware images that are not in a project or an instance, one entry for each flavor. The server filters the list for your domain.
+//
+domain_software_list_t*
+DomainAPI_v3ListDomainSoftware(apiClient_t *apiClient, double *limit, double *offset);
 
 
 // Update a welcome message for a domain

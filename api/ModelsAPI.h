@@ -13,6 +13,8 @@
 
 // Get Software for Model
 //
+// Gets the software for a model. Only a flavor identifier returns `springboardSnapshot`.
+//
 list_t*
 ModelsAPI_v3GetModelSoftware(apiClient_t *apiClient, char *model);
 
@@ -20,6 +22,6 @@ ModelsAPI_v3GetModelSoftware(apiClient_t *apiClient, char *model);
 // Get Supported Models
 //
 list_t*
-ModelsAPI_v3GetModels(apiClient_t *apiClient);
+ModelsAPI_v3GetModels(apiClient_t *apiClient, char *if_none_match);
 
 

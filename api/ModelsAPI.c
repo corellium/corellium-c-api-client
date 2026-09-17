@@ -9,6 +9,8 @@
 
 // Get Software for Model
 //
+// Gets the software for a model. Only a flavor identifier returns `springboardSnapshot`.
+//
 list_t*
 ModelsAPI_v3GetModelSoftware(apiClient_t *apiClient, char *model)
 {
@@ -113,10 +115,10 @@ end:
 // Get Supported Models
 //
 list_t*
-ModelsAPI_v3GetModels(apiClient_t *apiClient)
+ModelsAPI_v3GetModels(apiClient_t *apiClient, char *if_none_match)
 {
     list_t    *localVarQueryParameters = NULL;
-    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarHeaderParameters = list_createList();
     list_t    *localVarFormParameters = NULL;
     list_t *localVarHeaderType = list_createList();
     list_t *localVarContentType = NULL;
@@ -131,6 +133,18 @@ ModelsAPI_v3GetModels(apiClient_t *apiClient)
 
 
 
+
+
+    // header parameters
+    char *keyHeader_if_none_match = NULL;
+    char * valueHeader_if_none_match = 0;
+    keyValuePair_t *keyPairHeader_if_none_match = 0;
+    if (if_none_match) {
+        keyHeader_if_none_match = strdup("if-none-match");
+        valueHeader_if_none_match = strdup((if_none_match));
+        keyPairHeader_if_none_match = keyValuePair_create(keyHeader_if_none_match, valueHeader_if_none_match);
+        list_addElement(localVarHeaderParameters,keyPairHeader_if_none_match);
+    }
 
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
@@ -147,6 +161,10 @@ ModelsAPI_v3GetModels(apiClient_t *apiClient)
     // uncomment below to debug the error response
     //if (apiClient->response_code == 200) {
     //    printf("%s\n","Supported device configurations.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 304) {
+    //    printf("%s\n","The resource is unchanged since the ETag given in If-None-Match.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
@@ -184,11 +202,20 @@ ModelsAPI_v3GetModels(apiClient_t *apiClient)
         apiClient->dataReceivedLen = 0;
     }
     
-    
+    list_freeList(localVarHeaderParameters);
     
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
+    if (keyHeader_if_none_match) {
+        free(keyHeader_if_none_match);
+        keyHeader_if_none_match = NULL;
+    }
+    if (valueHeader_if_none_match) {
+        free(valueHeader_if_none_match);
+        valueHeader_if_none_match = NULL;
+    }
+    free(keyPairHeader_if_none_match);
     return elementToReturn;
 end:
     free(localVarPath);

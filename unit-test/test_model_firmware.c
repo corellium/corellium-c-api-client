@@ -16,6 +16,7 @@
 #include "../model/model_firmware.h"
 model_firmware_t* instantiate_model_firmware(int include_optional);
 
+#include "test_model_firmware_springboard_snapshot.c"
 
 
 model_firmware_t* instantiate_model_firmware(int include_optional) {
@@ -29,6 +30,8 @@ model_firmware_t* instantiate_model_firmware(int include_optional) {
       "0",
       "0",
       "0",
+      "0",
+      1,
       1.337,
       "0",
       0,
@@ -37,7 +40,10 @@ model_firmware_t* instantiate_model_firmware(int include_optional) {
       "0",
       "0",
       "0",
-      1
+      1,
+      1,
+       // false, not to have infinite recursion
+      instantiate_model_firmware_springboard_snapshot(0)
     );
   } else {
     model_firmware = model_firmware_create(
@@ -48,6 +54,8 @@ model_firmware_t* instantiate_model_firmware(int include_optional) {
       "0",
       "0",
       "0",
+      "0",
+      1,
       1.337,
       "0",
       0,
@@ -56,7 +64,9 @@ model_firmware_t* instantiate_model_firmware(int include_optional) {
       "0",
       "0",
       "0",
-      1
+      1,
+      1,
+      NULL
     );
   }
 

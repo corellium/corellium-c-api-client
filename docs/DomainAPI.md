@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**DomainAPI_v3DeleteDomainWelcomeMessage**](DomainAPI.md#DomainAPI_v3DeleteDomainWelcomeMessage) | **DELETE** /v3/domain/welcome | Delete the welcome message for the authenticated user&#39;s domain
 [**DomainAPI_v3GetDomainImageUpload**](DomainAPI.md#DomainAPI_v3GetDomainImageUpload) | **GET** /v3/domain/image-upload/{type}/{imageId}/{name} | Get image upload status
 [**DomainAPI_v3GetDomainWelcomeMessage**](DomainAPI.md#DomainAPI_v3GetDomainWelcomeMessage) | **GET** /v3/domain/welcome | Get the welcome message for the authenticated user&#39;s domain
+[**DomainAPI_v3ListDomainSoftware**](DomainAPI.md#DomainAPI_v3ListDomainSoftware) | **GET** /v3/domain/software | List domain-level firmware images
 [**DomainAPI_v3PatchDomainWelcomeMessage**](DomainAPI.md#DomainAPI_v3PatchDomainWelcomeMessage) | **PATCH** /v3/domain/welcome | Update a welcome message for a domain
 [**DomainAPI_v3PutDomainImageUpload**](DomainAPI.md#DomainAPI_v3PutDomainImageUpload) | **PUT** /v3/domain/image-upload/{type}/{imageId}/{name} | Upload image chunk
 
@@ -124,6 +125,38 @@ Name | Type | Description  | Notes
 ### Return type
 
 [domain_welcome_message_response_t](domain_welcome_message_response.md) *
+
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **DomainAPI_v3ListDomainSoftware**
+```c
+// List domain-level firmware images
+//
+// **Required role:** Domain administrator.  Lists firmware images that are not in a project or an instance, one entry for each flavor. The server filters the list for your domain.
+//
+domain_software_list_t* DomainAPI_v3ListDomainSoftware(apiClient_t *apiClient, double *limit, double *offset);
+```
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**apiClient** | **apiClient_t \*** | context containing the client configuration |
+**limit** | **double \*** | Maximum number of results to return. | [optional] [default to 100]
+**offset** | **double \*** | Number of results to skip. | [optional] [default to 0]
+
+### Return type
+
+[domain_software_list_t](domain_software_list.md) *
 
 
 ### Authorization

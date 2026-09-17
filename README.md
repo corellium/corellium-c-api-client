@@ -279,6 +279,7 @@ Category | Method | HTTP request | Description
 *DomainAPI* | [**DomainAPI_v3DeleteDomainWelcomeMessage**](docs/DomainAPI.md#DomainAPI_v3DeleteDomainWelcomeMessage) | **DELETE** /v3/domain/welcome | Delete the welcome message for the authenticated user's domain
 *DomainAPI* | [**DomainAPI_v3GetDomainImageUpload**](docs/DomainAPI.md#DomainAPI_v3GetDomainImageUpload) | **GET** /v3/domain/image-upload/{type}/{imageId}/{name} | Get image upload status
 *DomainAPI* | [**DomainAPI_v3GetDomainWelcomeMessage**](docs/DomainAPI.md#DomainAPI_v3GetDomainWelcomeMessage) | **GET** /v3/domain/welcome | Get the welcome message for the authenticated user's domain
+*DomainAPI* | [**DomainAPI_v3ListDomainSoftware**](docs/DomainAPI.md#DomainAPI_v3ListDomainSoftware) | **GET** /v3/domain/software | List domain-level firmware images
 *DomainAPI* | [**DomainAPI_v3PatchDomainWelcomeMessage**](docs/DomainAPI.md#DomainAPI_v3PatchDomainWelcomeMessage) | **PATCH** /v3/domain/welcome | Update a welcome message for a domain
 *DomainAPI* | [**DomainAPI_v3PutDomainImageUpload**](docs/DomainAPI.md#DomainAPI_v3PutDomainImageUpload) | **PUT** /v3/domain/image-upload/{type}/{imageId}/{name} | Upload image chunk
 *DomainAuthProviderAPI* | [**DomainAuthProviderAPI_v1CreateDomainAuthProvider**](docs/DomainAuthProviderAPI.md#DomainAuthProviderAPI_v1CreateDomainAuthProvider) | **POST** /v1/domain/{domainId}/auth | Create a new auth provider for a domain
@@ -866,6 +867,8 @@ Category | Method | HTTP request | Description
  - [domain_list_item_users_info_inner_t](docs/domain_list_item_users_info_inner.md)
  - [domain_list_usage_t](docs/domain_list_usage.md)
  - [domain_options_t](docs/domain_options.md)
+ - [domain_software_t](docs/domain_software.md)
+ - [domain_software_list_t](docs/domain_software_list.md)
  - [domain_welcome_message_response_t](docs/domain_welcome_message_response.md)
  - [domain_welcome_message_response_v1_t](docs/domain_welcome_message_response_v1.md)
  - [edit_invites_body_t](docs/edit_invites_body.md)
@@ -1063,7 +1066,14 @@ Category | Method | HTTP request | Description
  - [metered_subscription_usage_v1_t](docs/metered_subscription_usage_v1.md)
  - [model_t](docs/model.md)
  - [model_firmware_t](docs/model_firmware.md)
- - [model_quotas_t](docs/model_quotas.md)
+ - [model_firmware_springboard_snapshot_t](docs/model_firmware_springboard_snapshot.md)
+ - [model_firmware_springboard_snapshot_volumes_inner_t](docs/model_firmware_springboard_snapshot_volumes_inner.md)
+ - [model_frame_t](docs/model_frame.md)
+ - [model_frame_home_t](docs/model_frame_home.md)
+ - [model_partition_t](docs/model_partition.md)
+ - [model_product_image_t](docs/model_product_image.md)
+ - [model_product_image_inner_t](docs/model_product_image_inner.md)
+ - [model_rect_t](docs/model_rect.md)
  - [model_software_v1_t](docs/model_software_v1.md)
  - [model_v1_t](docs/model_v1.md)
  - [netdump_filter_t](docs/netdump_filter.md)

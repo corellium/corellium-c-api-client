@@ -12,6 +12,8 @@ Method | HTTP request | Description
 ```c
 // Get Software for Model
 //
+// Gets the software for a model. Only a flavor identifier returns `springboardSnapshot`.
+//
 list_t* ModelsAPI_v3GetModelSoftware(apiClient_t *apiClient, char *model);
 ```
 
@@ -19,7 +21,7 @@ list_t* ModelsAPI_v3GetModelSoftware(apiClient_t *apiClient, char *model);
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**model** | **char \*** | Model to list available software for. | 
+**model** | **char \*** | Flavor identifier or product identifier. The server tries the flavor identifier first. | 
 
 ### Return type
 
@@ -41,13 +43,14 @@ Name | Type | Description  | Notes
 ```c
 // Get Supported Models
 //
-list_t* ModelsAPI_v3GetModels(apiClient_t *apiClient);
+list_t* ModelsAPI_v3GetModels(apiClient_t *apiClient, char *if_none_match);
 ```
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
+**if_none_match** | **char \*** | An ETag a previous response carried, quotes included. | [optional] 
 
 ### Return type
 

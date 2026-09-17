@@ -13,6 +13,8 @@ static model_firmware_t *model_firmware_create_internal(
     char *sha256sum,
     char *sha1sum,
     char *md5sum,
+    char *corellium_checksum,
+    int installed,
     double size,
     char *unique_id,
     object_t *metadata,
@@ -21,7 +23,9 @@ static model_firmware_t *model_firmware_create_internal(
     char *url,
     char *orig_url,
     char *filename,
-    int rooted
+    int rooted,
+    int _signed,
+    model_firmware_springboard_snapshot_t *springboard_snapshot
     ) {
     model_firmware_t *model_firmware_local_var = malloc(sizeof(model_firmware_t));
     if (!model_firmware_local_var) {
@@ -34,6 +38,8 @@ static model_firmware_t *model_firmware_create_internal(
     model_firmware_local_var->sha256sum = sha256sum;
     model_firmware_local_var->sha1sum = sha1sum;
     model_firmware_local_var->md5sum = md5sum;
+    model_firmware_local_var->corellium_checksum = corellium_checksum;
+    model_firmware_local_var->installed = installed;
     model_firmware_local_var->size = size;
     model_firmware_local_var->unique_id = unique_id;
     model_firmware_local_var->metadata = metadata;
@@ -43,6 +49,8 @@ static model_firmware_t *model_firmware_create_internal(
     model_firmware_local_var->orig_url = orig_url;
     model_firmware_local_var->filename = filename;
     model_firmware_local_var->rooted = rooted;
+    model_firmware_local_var->_signed = _signed;
+    model_firmware_local_var->springboard_snapshot = springboard_snapshot;
 
     model_firmware_local_var->_library_owned = 1;
     return model_firmware_local_var;
@@ -56,6 +64,8 @@ __attribute__((deprecated)) model_firmware_t *model_firmware_create(
     char *sha256sum,
     char *sha1sum,
     char *md5sum,
+    char *corellium_checksum,
+    int installed,
     double size,
     char *unique_id,
     object_t *metadata,
@@ -64,7 +74,9 @@ __attribute__((deprecated)) model_firmware_t *model_firmware_create(
     char *url,
     char *orig_url,
     char *filename,
-    int rooted
+    int rooted,
+    int _signed,
+    model_firmware_springboard_snapshot_t *springboard_snapshot
     ) {
     return model_firmware_create_internal (
         os_version,
@@ -74,6 +86,8 @@ __attribute__((deprecated)) model_firmware_t *model_firmware_create(
         sha256sum,
         sha1sum,
         md5sum,
+        corellium_checksum,
+        installed,
         size,
         unique_id,
         metadata,
@@ -82,7 +96,9 @@ __attribute__((deprecated)) model_firmware_t *model_firmware_create(
         url,
         orig_url,
         filename,
-        rooted
+        rooted,
+        _signed,
+        springboard_snapshot
         );
 }
 
@@ -123,6 +139,10 @@ void model_firmware_free(model_firmware_t *model_firmware) {
         free(model_firmware->md5sum);
         model_firmware->md5sum = NULL;
     }
+    if (model_firmware->corellium_checksum) {
+        free(model_firmware->corellium_checksum);
+        model_firmware->corellium_checksum = NULL;
+    }
     if (model_firmware->unique_id) {
         free(model_firmware->unique_id);
         model_firmware->unique_id = NULL;
@@ -150,6 +170,10 @@ void model_firmware_free(model_firmware_t *model_firmware) {
     if (model_firmware->filename) {
         free(model_firmware->filename);
         model_firmware->filename = NULL;
+    }
+    if (model_firmware->springboard_snapshot) {
+        model_firmware_springboard_snapshot_free(model_firmware->springboard_snapshot);
+        model_firmware->springboard_snapshot = NULL;
     }
     free(model_firmware);
 }
@@ -210,6 +234,22 @@ cJSON *model_firmware_convertToJSON(model_firmware_t *model_firmware) {
     if(model_firmware->md5sum) {
     if(cJSON_AddStringToObject(item, "md5sum", model_firmware->md5sum) == NULL) {
     goto fail; //String
+    }
+    }
+
+
+    // model_firmware->corellium_checksum
+    if(model_firmware->corellium_checksum) {
+    if(cJSON_AddStringToObject(item, "corelliumChecksum", model_firmware->corellium_checksum) == NULL) {
+    goto fail; //String
+    }
+    }
+
+
+    // model_firmware->installed
+    if(model_firmware->installed) {
+    if(cJSON_AddBoolToObject(item, "installed", model_firmware->installed) == NULL) {
+    goto fail; //Bool
     }
     }
 
@@ -290,6 +330,27 @@ cJSON *model_firmware_convertToJSON(model_firmware_t *model_firmware) {
     }
     }
 
+
+    // model_firmware->_signed
+    if(model_firmware->_signed) {
+    if(cJSON_AddBoolToObject(item, "signed", model_firmware->_signed) == NULL) {
+    goto fail; //Bool
+    }
+    }
+
+
+    // model_firmware->springboard_snapshot
+    if(model_firmware->springboard_snapshot) {
+    cJSON *springboard_snapshot_local_JSON = model_firmware_springboard_snapshot_convertToJSON(model_firmware->springboard_snapshot);
+    if(springboard_snapshot_local_JSON == NULL) {
+    goto fail; //model
+    }
+    cJSON_AddItemToObject(item, "springboardSnapshot", springboard_snapshot_local_JSON);
+    if(item->child == NULL) {
+    goto fail;
+    }
+    }
+
     return item;
 fail:
     if (item) {
@@ -301,6 +362,9 @@ fail:
 model_firmware_t *model_firmware_parseFromJSON(cJSON *model_firmwareJSON){
 
     model_firmware_t *model_firmware_local_var = NULL;
+
+    // define the local variable for model_firmware->springboard_snapshot
+    model_firmware_springboard_snapshot_t *springboard_snapshot_local_nonprim = NULL;
 
     // model_firmware->os_version
     cJSON *os_version = cJSON_GetObjectItemCaseSensitive(model_firmwareJSON, "osVersion");
@@ -386,6 +450,30 @@ model_firmware_t *model_firmware_parseFromJSON(cJSON *model_firmwareJSON){
     if(!cJSON_IsString(md5sum) && !cJSON_IsNull(md5sum))
     {
     goto end; //String
+    }
+    }
+
+    // model_firmware->corellium_checksum
+    cJSON *corellium_checksum = cJSON_GetObjectItemCaseSensitive(model_firmwareJSON, "corelliumChecksum");
+    if (cJSON_IsNull(corellium_checksum)) {
+        corellium_checksum = NULL;
+    }
+    if (corellium_checksum) { 
+    if(!cJSON_IsString(corellium_checksum) && !cJSON_IsNull(corellium_checksum))
+    {
+    goto end; //String
+    }
+    }
+
+    // model_firmware->installed
+    cJSON *installed = cJSON_GetObjectItemCaseSensitive(model_firmwareJSON, "installed");
+    if (cJSON_IsNull(installed)) {
+        installed = NULL;
+    }
+    if (installed) { 
+    if(!cJSON_IsBool(installed))
+    {
+    goto end; //Bool
     }
     }
 
@@ -495,6 +583,27 @@ model_firmware_t *model_firmware_parseFromJSON(cJSON *model_firmwareJSON){
     }
     }
 
+    // model_firmware->_signed
+    cJSON *_signed = cJSON_GetObjectItemCaseSensitive(model_firmwareJSON, "signed");
+    if (cJSON_IsNull(_signed)) {
+        _signed = NULL;
+    }
+    if (_signed) { 
+    if(!cJSON_IsBool(_signed))
+    {
+    goto end; //Bool
+    }
+    }
+
+    // model_firmware->springboard_snapshot
+    cJSON *springboard_snapshot = cJSON_GetObjectItemCaseSensitive(model_firmwareJSON, "springboardSnapshot");
+    if (cJSON_IsNull(springboard_snapshot)) {
+        springboard_snapshot = NULL;
+    }
+    if (springboard_snapshot) { 
+    springboard_snapshot_local_nonprim = model_firmware_springboard_snapshot_parseFromJSON(springboard_snapshot); //nonprimitive
+    }
+
 
     model_firmware_local_var = model_firmware_create_internal (
         strdup(os_version->valuestring),
@@ -504,6 +613,8 @@ model_firmware_t *model_firmware_parseFromJSON(cJSON *model_firmwareJSON){
         sha256sum && !cJSON_IsNull(sha256sum) ? strdup(sha256sum->valuestring) : NULL,
         sha1sum && !cJSON_IsNull(sha1sum) ? strdup(sha1sum->valuestring) : NULL,
         md5sum && !cJSON_IsNull(md5sum) ? strdup(md5sum->valuestring) : NULL,
+        corellium_checksum && !cJSON_IsNull(corellium_checksum) ? strdup(corellium_checksum->valuestring) : NULL,
+        installed ? installed->valueint : 0,
         size ? size->valuedouble : 0,
         unique_id && !cJSON_IsNull(unique_id) ? strdup(unique_id->valuestring) : NULL,
         metadata ? metadata_local_object : NULL,
@@ -512,11 +623,17 @@ model_firmware_t *model_firmware_parseFromJSON(cJSON *model_firmwareJSON){
         url && !cJSON_IsNull(url) ? strdup(url->valuestring) : NULL,
         orig_url && !cJSON_IsNull(orig_url) ? strdup(orig_url->valuestring) : NULL,
         filename && !cJSON_IsNull(filename) ? strdup(filename->valuestring) : NULL,
-        rooted ? rooted->valueint : 0
+        rooted ? rooted->valueint : 0,
+        _signed ? _signed->valueint : 0,
+        springboard_snapshot ? springboard_snapshot_local_nonprim : NULL
         );
 
     return model_firmware_local_var;
 end:
+    if (springboard_snapshot_local_nonprim) {
+        model_firmware_springboard_snapshot_free(springboard_snapshot_local_nonprim);
+        springboard_snapshot_local_nonprim = NULL;
+    }
     return NULL;
 
 }
