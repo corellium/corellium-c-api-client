@@ -153,10 +153,6 @@ DomainAPI_v3DeleteDomainWelcomeMessage(apiClient_t *apiClient)
     //if (apiClient->response_code == 403) {
     //    printf("%s\n","Domain administrator permissions required.");
     //}
-    // uncomment below to debug the error response
-    //if (apiClient->response_code == 404) {
-    //    printf("%s\n","No welcome message exists for this domain.");
-    //}
     //No return type
 end:
     if (apiClient->dataReceived) {

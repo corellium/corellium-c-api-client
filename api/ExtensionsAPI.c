@@ -71,10 +71,6 @@ ExtensionsAPI_v3DeleteExtension(apiClient_t *apiClient, char *extensionId)
     //if (apiClient->response_code == 403) {
     //    printf("%s\n","Domain administrator permissions required.");
     //}
-    // uncomment below to debug the error response
-    //if (apiClient->response_code == 404) {
-    //    printf("%s\n","No extension with the given extension ID.");
-    //}
     //No return type
 end:
     if (apiClient->dataReceived) {

@@ -341,10 +341,6 @@ InstancesAPI_v3DeleteInstance(apiClient_t *apiClient, char *instanceId)
     //if (apiClient->response_code == 403) {
     //    printf("%s\n","Permission denied.");
     //}
-    // uncomment below to debug the error response
-    //if (apiClient->response_code == 404) {
-    //    printf("%s\n","Instance not found.");
-    //}
     //No return type
 end:
     if (apiClient->dataReceived) {
@@ -448,10 +444,6 @@ InstancesAPI_v3DetachInstanceInterface(apiClient_t *apiClient, char *instanceId,
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
     //    printf("%s\n","Permission denied.");
-    //}
-    // uncomment below to debug the error response
-    //if (apiClient->response_code == 404) {
-    //    printf("%s\n","Instance not found.");
     //}
     //No return type
 end:

@@ -48,7 +48,7 @@ Name | Type | Description  | Notes
 //
 // **Required role:** Domain administrator.  Deletes the webplayer session identified by the given sessionId.
 //
-list_t* WebPlayerAPI_v3DeleteWebPlayerSession(apiClient_t *apiClient, char *sessionId);
+void WebPlayerAPI_v3DeleteWebPlayerSession(apiClient_t *apiClient, char *sessionId);
 ```
 
 ### Parameters
@@ -59,11 +59,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-
-[list_t](char.md) *
-
-
-
+void
 
 ### Authorization
 

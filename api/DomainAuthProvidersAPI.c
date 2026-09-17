@@ -186,10 +186,6 @@ DomainAuthProvidersAPI_v3DeleteDomainAuthProvider(apiClient_t *apiClient, char *
     //if (apiClient->response_code == 403) {
     //    printf("%s\n","Domain administrator permissions required.");
     //}
-    // uncomment below to debug the error response
-    //if (apiClient->response_code == 404) {
-    //    printf("%s\n","Provider or domain ID not found.");
-    //}
     //No return type
 end:
     if (apiClient->dataReceived) {

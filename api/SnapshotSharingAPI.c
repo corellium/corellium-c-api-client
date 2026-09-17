@@ -107,7 +107,7 @@ end:
 //
 // Deletes one or more members from the list of members who have access to the snapshot.
 //
-snapshot_t*
+void
 SnapshotSharingAPI_v3DeleteSnapshotPermissions(apiClient_t *apiClient, char *snapshotId, set_snapshot_permissions_body_t *set_snapshot_permissions_body)
 {
     list_t    *localVarQueryParameters = NULL;
@@ -163,7 +163,7 @@ SnapshotSharingAPI_v3DeleteSnapshotPermissions(apiClient_t *apiClient, char *sna
                     "DELETE");
 
     // uncomment below to debug the error response
-    //if (apiClient->response_code == 200) {
+    //if (apiClient->response_code == 204) {
     //    printf("%s\n","Successfully deleted member(s) who had access to the snapshot.");
     //}
     // uncomment below to debug the error response
@@ -174,22 +174,8 @@ SnapshotSharingAPI_v3DeleteSnapshotPermissions(apiClient_t *apiClient, char *sna
     //if (apiClient->response_code == 403) {
     //    printf("%s\n","Permission denied.");
     //}
-    // uncomment below to debug the error response
-    //if (apiClient->response_code == 404) {
-    //    printf("%s\n","Snapshot not found.");
-    //}
-    //nonprimitive not container
-    snapshot_t *elementToReturn = NULL;
-    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
-        cJSON *SnapshotSharingAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = snapshot_parseFromJSON(SnapshotSharingAPIlocalVarJSON);
-        cJSON_Delete(SnapshotSharingAPIlocalVarJSON);
-        if(elementToReturn == NULL) {
-            // return 0;
-        }
-    }
-
-    //return type
+    //No return type
+end:
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
@@ -207,10 +193,6 @@ SnapshotSharingAPI_v3DeleteSnapshotPermissions(apiClient_t *apiClient, char *sna
         localVarSingleItemJSON_set_snapshot_permissions_body = NULL;
     }
     free(localVarBodyParameters);
-    return elementToReturn;
-end:
-    free(localVarPath);
-    return NULL;
 
 }
 

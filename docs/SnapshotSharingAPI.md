@@ -46,7 +46,7 @@ Name | Type | Description  | Notes
 //
 // Deletes one or more members from the list of members who have access to the snapshot.
 //
-snapshot_t* SnapshotSharingAPI_v3DeleteSnapshotPermissions(apiClient_t *apiClient, char *snapshotId, set_snapshot_permissions_body_t *set_snapshot_permissions_body);
+void SnapshotSharingAPI_v3DeleteSnapshotPermissions(apiClient_t *apiClient, char *snapshotId, set_snapshot_permissions_body_t *set_snapshot_permissions_body);
 ```
 
 ### Parameters
@@ -58,8 +58,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[snapshot_t](snapshot.md) *
-
+void
 
 ### Authorization
 

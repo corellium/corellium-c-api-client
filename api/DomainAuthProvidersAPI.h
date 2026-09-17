@@ -6,7 +6,6 @@
 #include "../include/keyValuePair.h"
 #include "../include/binary.h"
 #include "../model/api_error.h"
-#include "../model/api_not_found_error.h"
 #include "../model/create_domain_auth_provider_body.h"
 #include "../model/create_domain_auth_provider_response.h"
 #include "../model/domain_auth_provider_response.h"

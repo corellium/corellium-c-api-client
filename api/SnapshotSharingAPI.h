@@ -25,7 +25,7 @@ SnapshotSharingAPI_v3AcceptSharedSnapshot(apiClient_t *apiClient, accept_snapsho
 //
 // Deletes one or more members from the list of members who have access to the snapshot.
 //
-snapshot_t*
+void
 SnapshotSharingAPI_v3DeleteSnapshotPermissions(apiClient_t *apiClient, char *snapshotId, set_snapshot_permissions_body_t *set_snapshot_permissions_body);
 
 

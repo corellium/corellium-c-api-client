@@ -775,10 +775,6 @@ RolesAPI_v3RemoveTeamRoleFromDeployment(apiClient_t *apiClient, char *deployment
     //if (apiClient->response_code == 403) {
     //    printf("%s\n","Domain administrator permissions required.");
     //}
-    // uncomment below to debug the error response
-    //if (apiClient->response_code == 404) {
-    //    printf("%s\n","Deployment, team, or role not found.");
-    //}
     //No return type
 end:
     if (apiClient->dataReceived) {
@@ -881,10 +877,6 @@ RolesAPI_v3RemoveTeamRoleFromProject(apiClient_t *apiClient, char *projectId, ch
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
     //    printf("%s\n","Domain administrator or project administrator permissions required.");
-    //}
-    // uncomment below to debug the error response
-    //if (apiClient->response_code == 404) {
-    //    printf("%s\n","Project, team, or role not found.");
     //}
     //No return type
 end:
@@ -989,10 +981,6 @@ RolesAPI_v3RemoveUserRoleFromDeployment(apiClient_t *apiClient, char *deployment
     //if (apiClient->response_code == 403) {
     //    printf("%s\n","Domain administrator permissions required.");
     //}
-    // uncomment below to debug the error response
-    //if (apiClient->response_code == 404) {
-    //    printf("%s\n","Deployment, user, or role not found.");
-    //}
     //No return type
 end:
     if (apiClient->dataReceived) {
@@ -1095,10 +1083,6 @@ RolesAPI_v3RemoveUserRoleFromProject(apiClient_t *apiClient, char *projectId, ch
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
     //    printf("%s\n","Domain administrator or project administrator permissions required.");
-    //}
-    // uncomment below to debug the error response
-    //if (apiClient->response_code == 404) {
-    //    printf("%s\n","Project, user, or role not found.");
     //}
     //No return type
 end:

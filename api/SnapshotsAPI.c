@@ -175,10 +175,6 @@ SnapshotsAPI_v3DeleteInstanceSnapshot(apiClient_t *apiClient, char *instanceId, 
     //    printf("%s\n","Snapshot deleted.");
     //}
     // uncomment below to debug the error response
-    //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid snapshot ID.");
-    //}
-    // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
     //    printf("%s\n","Permission denied.");
     //}
@@ -255,10 +251,6 @@ SnapshotsAPI_v3DeleteSnapshot(apiClient_t *apiClient, char *snapshotId)
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
     //    printf("%s\n","Permission denied.");
-    //}
-    // uncomment below to debug the error response
-    //if (apiClient->response_code == 404) {
-    //    printf("%s\n","Snapshot not found.");
     //}
     //No return type
 end:

@@ -249,10 +249,6 @@ HypervisorHooksAPI_v3DeleteHook(apiClient_t *apiClient, char *hookId)
     //if (apiClient->response_code == 403) {
     //    printf("%s\n","Permission denied.");
     //}
-    // uncomment below to debug the error response
-    //if (apiClient->response_code == 404) {
-    //    printf("%s\n","No hook with the given hookId.");
-    //}
     //No return type
 end:
     if (apiClient->dataReceived) {

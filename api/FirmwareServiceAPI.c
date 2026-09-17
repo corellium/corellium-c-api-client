@@ -159,10 +159,6 @@ FirmwareServiceAPI_v3DeleteFirmware(apiClient_t *apiClient, char *filename)
     //    printf("%s\n","Cluster administrator permissions required.");
     //}
     // uncomment below to debug the error response
-    //if (apiClient->response_code == 404) {
-    //    printf("%s\n","Resource not found.");
-    //}
-    // uncomment below to debug the error response
     //if (apiClient->response_code == 409) {
     //    printf("%s\n","Resource conflict.");
     //}
@@ -242,10 +238,6 @@ FirmwareServiceAPI_v3DeleteFirmwareAsset(apiClient_t *apiClient, char *assetUrl)
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
     //    printf("%s\n","Cluster administrator permissions required.");
-    //}
-    // uncomment below to debug the error response
-    //if (apiClient->response_code == 404) {
-    //    printf("%s\n","Resource not found.");
     //}
     //No return type
 end:

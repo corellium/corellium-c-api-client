@@ -281,10 +281,6 @@ ProjectsAPI_v3DeleteProject(apiClient_t *apiClient, char *projectId)
     //    printf("%s\n","Domain administrator permissions required.");
     //}
     // uncomment below to debug the error response
-    //if (apiClient->response_code == 404) {
-    //    printf("%s\n","No project with the given identifier.");
-    //}
-    // uncomment below to debug the error response
     //if (apiClient->response_code == 409) {
     //    printf("%s\n","The project still contains devices and cannot be deleted.");
     //}
@@ -376,10 +372,6 @@ ProjectsAPI_v3DeleteProjectKey(apiClient_t *apiClient, char *projectId, char *ke
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
     //    printf("%s\n","Domain administrator or project administrator permissions required.");
-    //}
-    // uncomment below to debug the error response
-    //if (apiClient->response_code == 404) {
-    //    printf("%s\n","No authorized key with the given identifier exists for the project.");
     //}
     //No return type
 end:

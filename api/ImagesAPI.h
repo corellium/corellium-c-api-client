@@ -35,7 +35,7 @@ ImagesAPI_v3CreateImage(apiClient_t *apiClient, create_image_body_t *create_imag
 
 // Delete an image
 //
-// Permanently deletes the image. This action cannot be undone. Deleting an already-deleted image returns 404.
+// Permanently deletes the image. This action cannot be undone. Deleting an already-deleted image returns 204.
 //
 void
 ImagesAPI_v3DeleteImage(apiClient_t *apiClient, char *imageId);

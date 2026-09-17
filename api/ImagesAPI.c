@@ -111,7 +111,7 @@ end:
 
 // Delete an image
 //
-// Permanently deletes the image. This action cannot be undone. Deleting an already-deleted image returns 404.
+// Permanently deletes the image. This action cannot be undone. Deleting an already-deleted image returns 204.
 //
 void
 ImagesAPI_v3DeleteImage(apiClient_t *apiClient, char *imageId)
@@ -164,10 +164,6 @@ ImagesAPI_v3DeleteImage(apiClient_t *apiClient, char *imageId)
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
     //    printf("%s\n","Authentication required.");
-    //}
-    // uncomment below to debug the error response
-    //if (apiClient->response_code == 404) {
-    //    printf("%s\n","No image with the given imageId.");
     //}
     //No return type
 end:

@@ -109,7 +109,7 @@ end:
 //
 // **Required role:** Domain administrator.  Deletes the webplayer session identified by the given sessionId.
 //
-list_t*
+void
 WebPlayerAPI_v3DeleteWebPlayerSession(apiClient_t *apiClient, char *sessionId)
 {
     list_t    *localVarQueryParameters = NULL;
@@ -154,8 +154,8 @@ WebPlayerAPI_v3DeleteWebPlayerSession(apiClient_t *apiClient, char *sessionId)
                     "DELETE");
 
     // uncomment below to debug the error response
-    //if (apiClient->response_code == 200) {
-    //    printf("%s\n","Identifiers of destroyed sessions.");
+    //if (apiClient->response_code == 204) {
+    //    printf("%s\n","Session deleted.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
@@ -169,19 +169,8 @@ WebPlayerAPI_v3DeleteWebPlayerSession(apiClient_t *apiClient, char *sessionId)
     //if (apiClient->response_code == 403) {
     //    printf("%s\n","Domain administrator permissions required.");
     //}
-    //primitive return type not simple
-    list_t *elementToReturn = NULL;
-    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
-        cJSON *localVarJSON = cJSON_Parse(apiClient->dataReceived);
-        cJSON *VarJSON;
-        elementToReturn = list_createList();
-        cJSON_ArrayForEach(VarJSON, localVarJSON){
-            keyValuePair_t *keyPair = keyValuePair_create(strdup(VarJSON->string), cJSON_Print(VarJSON));
-            list_addElement(elementToReturn, keyPair);
-        }
-        cJSON_Delete(localVarJSON);
-    }
-
+    //No return type
+end:
     if (apiClient->dataReceived) {
         free(apiClient->dataReceived);
         apiClient->dataReceived = NULL;
@@ -194,10 +183,6 @@ WebPlayerAPI_v3DeleteWebPlayerSession(apiClient_t *apiClient, char *sessionId)
     
     free(localVarPath);
     free(localVarToReplace_sessionId);
-    return elementToReturn;
-end:
-    free(localVarPath);
-    return NULL;
 
 }
 

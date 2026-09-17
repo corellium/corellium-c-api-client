@@ -71,10 +71,6 @@ ClusterAPI_v3DeleteClusterSnapshot(apiClient_t *apiClient, char *snapshotId)
     //if (apiClient->response_code == 403) {
     //    printf("%s\n","Cluster administrator permissions required. The clusterSnapshotMgmt feature must be enabled.");
     //}
-    // uncomment below to debug the error response
-    //if (apiClient->response_code == 404) {
-    //    printf("%s\n","Snapshot not found.");
-    //}
     //No return type
 end:
     if (apiClient->dataReceived) {

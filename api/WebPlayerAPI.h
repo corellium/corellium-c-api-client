@@ -27,7 +27,7 @@ WebPlayerAPI_v3CreateWebPlayerSession(apiClient_t *apiClient, create_web_player_
 //
 // **Required role:** Domain administrator.  Deletes the webplayer session identified by the given sessionId.
 //
-list_t*
+void
 WebPlayerAPI_v3DeleteWebPlayerSession(apiClient_t *apiClient, char *sessionId);
 
 
