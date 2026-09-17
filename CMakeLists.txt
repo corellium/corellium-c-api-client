@@ -253,6 +253,7 @@ set(SRCS
     model/credentials.c
     model/delete_modification_input.c
     model/delete_network_connection_options.c
+    model/deployment_version.c
     model/detach_interface_body.c
     model/detach_interface_request.c
     model/device.c
@@ -1024,6 +1025,7 @@ set(HDRS
     model/credentials.h
     model/delete_modification_input.h
     model/delete_network_connection_options.h
+    model/deployment_version.h
     model/detach_interface_body.h
     model/detach_interface_request.h
     model/device.h

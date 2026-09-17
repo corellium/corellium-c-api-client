@@ -1031,12 +1031,20 @@
 #define corellium_v3_users_resetPassword UsersAPI_v3ResetPassword
 #define corellium_v3_users_sendResetLink UsersAPI_v3SendResetLink
 
+/* version */
+#define corellium_v3_version_get ConfigAPI_v3GetVersion
+
 /* webPlayer */
 #define corellium_v3_webPlayer_create WebPlayerAPI_v3CreateWebPlayerSession
 #define corellium_v3_webPlayer_delete WebPlayerAPI_v3DeleteWebPlayerSession
 #define corellium_v3_webPlayer_get WebPlayerAPI_v3GetWebPlayerSession
 #define corellium_v3_webPlayer_getAllowedDomains WebPlayerAPI_v3GetWebPlayerAllowedDomains
 #define corellium_v3_webPlayer_list WebPlayerAPI_v3ListWebPlayerSessions
+
+/* version */
+#define corellium_version_get ConfigAPI_v3GetVersion
+
+/* webPlayer */
 #define corellium_webPlayer_create WebPlayerAPI_v3CreateWebPlayerSession
 #define corellium_webPlayer_delete WebPlayerAPI_v3DeleteWebPlayerSession
 #define corellium_webPlayer_get WebPlayerAPI_v3GetWebPlayerSession

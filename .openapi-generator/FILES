@@ -409,6 +409,7 @@ docs/created_by.md
 docs/credentials.md
 docs/delete_modification_input.md
 docs/delete_network_connection_options.md
+docs/deployment_version.md
 docs/detach_interface_body.md
 docs/detach_interface_request.md
 docs/device.md
@@ -1316,6 +1317,8 @@ model/delete_modification_input.c
 model/delete_modification_input.h
 model/delete_network_connection_options.c
 model/delete_network_connection_options.h
+model/deployment_version.c
+model/deployment_version.h
 model/detach_interface_body.c
 model/detach_interface_body.h
 model/detach_interface_request.c
@@ -2504,6 +2507,7 @@ unit-test/test_created_by.c
 unit-test/test_credentials.c
 unit-test/test_delete_modification_input.c
 unit-test/test_delete_network_connection_options.c
+unit-test/test_deployment_version.c
 unit-test/test_detach_interface_body.c
 unit-test/test_detach_interface_request.c
 unit-test/test_device.c

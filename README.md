@@ -266,6 +266,7 @@ Category | Method | HTTP request | Description
 *ClusterSnapshotsAPI* | [**ClusterSnapshotsAPI_v1GetClusterSnapshot**](docs/ClusterSnapshotsAPI.md#ClusterSnapshotsAPI_v1GetClusterSnapshot) | **GET** /v1/cluster/snapshots/{snapshotId} | Get Cluster Snapshot
 *ClusterSnapshotsAPI* | [**ClusterSnapshotsAPI_v1GetClusterSnapshots**](docs/ClusterSnapshotsAPI.md#ClusterSnapshotsAPI_v1GetClusterSnapshots) | **GET** /v1/cluster/snapshots | Get Cluster Snapshots
 *ConfigAPI* | [**ConfigAPI_v3GetConfig**](docs/ConfigAPI.md#ConfigAPI_v3GetConfig) | **GET** /v3/config | Get all configs
+*ConfigAPI* | [**ConfigAPI_v3GetVersion**](docs/ConfigAPI.md#ConfigAPI_v3GetVersion) | **GET** /v3/version | Get Deployment Version
 *ConfigV1API* | [**ConfigV1API_v1GetConfig**](docs/ConfigV1API.md#ConfigV1API_v1GetConfig) | **GET** /v1/config | Get all configs
 *CoreTraceAPI* | [**CoreTraceAPI_v3ClearCoreTrace**](docs/CoreTraceAPI.md#CoreTraceAPI_v3ClearCoreTrace) | **DELETE** /v3/instances/{instanceId}/strace | Clear CoreTrace logs
 *CoreTraceAPI* | [**CoreTraceAPI_v3ListThreads**](docs/CoreTraceAPI.md#CoreTraceAPI_v3ListThreads) | **GET** /v3/instances/{instanceId}/strace/thread-list | Get Running Threads (CoreTrace)
@@ -827,6 +828,7 @@ Category | Method | HTTP request | Description
  - [credentials_t](docs/credentials.md)
  - [delete_modification_input_t](docs/delete_modification_input.md)
  - [delete_network_connection_options_t](docs/delete_network_connection_options.md)
+ - [deployment_version_t](docs/deployment_version.md)
  - [detach_interface_body_t](docs/detach_interface_body.md)
  - [detach_interface_request_t](docs/detach_interface_request.md)
  - [device_t](docs/device.md)
