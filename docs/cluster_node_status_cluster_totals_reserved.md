@@ -4,8 +4,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **cores** | **double** | Number of CPU cores. | [optional] 
-**ram** | **double** | RAM in MB. | [optional] 
-**disk** | **double** | Disk in GB. | [optional] 
+**ram** | **double** | RAM in MiB. | [optional] 
+**disk** | **double** | Disk in GiB. | [optional] 
 **slot** | **double** | Number of device slots. | [optional] 
 **gpu** | **double** | Number of GPUs. | [optional] 
 

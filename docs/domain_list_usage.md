@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **image_bytes** | **double** | Image storage used in bytes. | 
 **cores** | **double** | Cores in use. | 
 **instances** | **double** | Total instances. | 
-**ram** | **double** | RAM in use in MB. | 
+**ram** | **double** | RAM in use in MiB. | 
 **gpu** | **double** | GPUs in use. | 
 **reserved_cores** | **double** | Reserved cores. | [optional] 
 

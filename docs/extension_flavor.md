@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **flavor_id** | **char \*** | Flavor identifier. | [optional] 
 **product** | **char \*** | Product identifier. | [optional] 
 **cores** | **double** | Number of cores. | [optional] 
-**ram** | **double** | RAM in MB. | [optional] 
+**ram** | **double** | RAM in MiB. | [optional] 
 **supports_gdb** | **int** | Whether GDB is supported. | [optional] 
 **supports_serial_console** | **int** | Whether a serial console is supported. | [optional] 
 **supports_preset_boot_options** | **int** | Whether preset boot options are supported. | [optional] 

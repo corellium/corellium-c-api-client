@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **pac** | **int** | Enable PAC. | [optional] 
 **aprr** | **int** | Enable APRR. | [optional] 
 **cores** | **double** | Number of CPU cores. Supported only by models with dynamic hardware changes enabled. | [optional] 
-**ram** | **double** | Memory allocation in MB. Supported only by models with dynamic hardware changes enabled. | [optional] 
+**ram** | **double** | Memory allocation in MiB. Supported only by models with dynamic hardware changes enabled. | [optional] 
 **additional_tags** | **list_t \*** | Additional boot tags to apply to the instance. Each value must be one of the supported charm boot tags. | [optional] 
 **kernel** | [**instance_boot_options_kernel_t**](instance_boot_options_kernel.md) \* |  | [optional] 
 **pongo** | [**instance_boot_options_pongo_t**](instance_boot_options_pongo.md) \* |  | [optional] 

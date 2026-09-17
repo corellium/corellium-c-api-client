@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **ram_cpu** | **char \*** | RAM per CPU. | [optional] [default to '0']
 **node_map** | [**object_t**](.md) \* | Node map. | [optional] 
 **free_cores** | [**object_t**](.md) \* | Free cores list. | [optional] 
-**ram_core** | **double** | RAM per core in MB. | [optional] [default to 0]
+**ram_core** | **double** | RAM per core in MiB. | [optional] [default to 0]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

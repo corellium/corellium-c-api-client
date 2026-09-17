@@ -28,8 +28,8 @@ Name | Type | Description | Notes
 **auth_providers** | [**list_t**](config_auth_provider.md) \* | Auth providers. | 
 **welcome_message** | **char \*** | Domain welcome message, when enabled. | [optional] 
 **snapshot_limit** | **double** | Maximum number of snapshots to allow. | 
-**max_kernel_size** | **double** | The maximum size, in bytes, (default: 100 MB) that an uploaded kernel should be. | 
-**max_ramdisk_size** | **double** | The maximum size, in bytes, (default: 500 MB) that an uploaded ramdisk should be. | 
+**max_kernel_size** | **double** | The maximum size, in bytes, (default: 100 MiB) that an uploaded kernel should be. | 
+**max_ramdisk_size** | **double** | The maximum size, in bytes, (default: 500 MiB) that an uploaded ramdisk should be. | 
 **charm_sdk** | **int** | Denotes whether charmSDK is enabled. | [optional] 
 **trial** | [**trial_t**](trial.md) \* |  | 
 **sentry_url** | **char \*** | Sentry URL. | [optional] 

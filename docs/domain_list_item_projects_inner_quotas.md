@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **cores** | **double** | Core quota. | 
 **instances** | **double** | Instance quota. | 
-**ram** | **double** | RAM quota in MB. | 
+**ram** | **double** | RAM quota in MiB. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

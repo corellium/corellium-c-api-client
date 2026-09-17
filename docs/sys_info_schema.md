@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **cpu_avail** | [**object_t**](.md) \* | Available CPU. | [optional] 
 **slot** | **double** | Slot count. | [optional] [default to 0]
 **slot_avail** | **double** | Available slot count. | [optional] [default to 0]
-**ram** | **double** | Total RAM in MB. | [optional] [default to 0]
-**ram_avail** | **double** | Available RAM in MB. | [optional] [default to 0]
+**ram** | **double** | Total RAM in MiB. | [optional] [default to 0]
+**ram_avail** | **double** | Available RAM in MiB. | [optional] [default to 0]
 **vpn** | **double** | VPN count. | [optional] [default to 0]
 **vpn_avail** | **double** | Available VPN count. | [optional] [default to 0]
 **gpu** | **double** | GPU count. | [optional] [default to 0]
@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **arm_trace** | **char \*** | ARM trace capability. | [optional] [default to '0']
 **cores** | **double** | Total core count. | [optional] [default to 0]
 **cores_avail** | **double** | Available core count. | [optional] [default to 0]
-**ram_core** | **double** | RAM per core in MB. | [optional] [default to 0]
+**ram_core** | **double** | RAM per core in MiB. | [optional] [default to 0]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
