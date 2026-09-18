@@ -24,6 +24,7 @@ Method | HTTP request | Description
 [**InstancesAPI_v3GetInstanceScreenshot**](InstancesAPI.md#InstancesAPI_v3GetInstanceScreenshot) | **GET** /v3/instances/{instanceId}/screenshot.{format} | Get Instance Screenshot
 [**InstancesAPI_v3GetInstanceState**](InstancesAPI.md#InstancesAPI_v3GetInstanceState) | **GET** /v3/instances/{instanceId}/state | Get state of Instance
 [**InstancesAPI_v3InjectMessage**](InstancesAPI.md#InstancesAPI_v3InjectMessage) | **POST** /v3/instances/{instanceId}/message | Inject a message into an iOS VM
+[**InstancesAPI_v3KernelPreauthorize**](InstancesAPI.md#InstancesAPI_v3KernelPreauthorize) | **GET** /v3/instances/{instanceId}/kernel-authorize | Pre-authorize a kernel download
 [**InstancesAPI_v3ListInstances**](InstancesAPI.md#InstancesAPI_v3ListInstances) | **GET** /v3/instances | List Instances
 [**InstancesAPI_v3MediaPlay**](InstancesAPI.md#InstancesAPI_v3MediaPlay) | **POST** /v3/instances/{instanceId}/media/play | Start playing media
 [**InstancesAPI_v3MediaStop**](InstancesAPI.md#InstancesAPI_v3MediaStop) | **POST** /v3/instances/{instanceId}/media/stop | Stop playing media
@@ -645,6 +646,37 @@ void
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **InstancesAPI_v3KernelPreauthorize**
+```c
+// Pre-authorize a kernel download
+//
+// Pre-authorize a kernel download. Returns a token that authorizes the kernel download request.
+//
+token_t* InstancesAPI_v3KernelPreauthorize(apiClient_t *apiClient, char *instanceId);
+```
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**apiClient** | **apiClient_t \*** | context containing the client configuration |
+**instanceId** | **char \*** | Instance ID. | 
+
+### Return type
+
+[token_t](token.md) *
+
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

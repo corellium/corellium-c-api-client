@@ -8,6 +8,7 @@ Method | HTTP request | Description
 [**CoreTraceAPI_v3ListThreads**](CoreTraceAPI.md#CoreTraceAPI_v3ListThreads) | **GET** /v3/instances/{instanceId}/strace/thread-list | Get Running Threads (CoreTrace)
 [**CoreTraceAPI_v3StartCoreTrace**](CoreTraceAPI.md#CoreTraceAPI_v3StartCoreTrace) | **POST** /v3/instances/{instanceId}/strace/enable | Start CoreTrace on an instance
 [**CoreTraceAPI_v3StopCoreTrace**](CoreTraceAPI.md#CoreTraceAPI_v3StopCoreTrace) | **POST** /v3/instances/{instanceId}/strace/disable | Stop CoreTrace on an instance.
+[**CoreTraceAPI_v3StracePreauthorize**](CoreTraceAPI.md#CoreTraceAPI_v3StracePreauthorize) | **GET** /v3/instances/{instanceId}/strace-authorize | Pre-authorize a strace download
 
 
 # **CoreTraceAPI_v3ClearCoreTrace**
@@ -111,6 +112,35 @@ Name | Type | Description  | Notes
 ### Return type
 
 void
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **CoreTraceAPI_v3StracePreauthorize**
+```c
+// Pre-authorize a strace download
+//
+token_t* CoreTraceAPI_v3StracePreauthorize(apiClient_t *apiClient, char *instanceId);
+```
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**apiClient** | **apiClient_t \*** | context containing the client configuration |
+**instanceId** | **char \*** | Instance ID. | 
+
+### Return type
+
+[token_t](token.md) *
+
 
 ### Authorization
 

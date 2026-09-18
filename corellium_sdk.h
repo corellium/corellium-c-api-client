@@ -177,6 +177,7 @@
 /* coreTrace */
 #define corellium_coreTrace_clear CoreTraceAPI_v3ClearCoreTrace
 #define corellium_coreTrace_listThreads CoreTraceAPI_v3ListThreads
+#define corellium_coreTrace_preauthorize CoreTraceAPI_v3StracePreauthorize
 #define corellium_coreTrace_start CoreTraceAPI_v3StartCoreTrace
 #define corellium_coreTrace_stop CoreTraceAPI_v3StopCoreTrace
 
@@ -278,6 +279,7 @@
 #define corellium_instances_patch InstancesAPI_v3PatchInstance
 #define corellium_instances_patchReadOnly InstancesAPI_v3PatchInstanceReadOnly
 #define corellium_instances_pause InstancesAPI_v3PauseInstance
+#define corellium_instances_preauthorizeKernelDownload InstancesAPI_v3KernelPreauthorize
 #define corellium_instances_putImageUpload InstancesAPI_v3PutInstanceImageUpload
 #define corellium_instances_reboot InstancesAPI_v3RebootInstance
 #define corellium_instances_restoreBackup InstancesAPI_v3RestoreBackup
@@ -791,6 +793,7 @@
 /* coreTrace */
 #define corellium_v3_coreTrace_clear CoreTraceAPI_v3ClearCoreTrace
 #define corellium_v3_coreTrace_listThreads CoreTraceAPI_v3ListThreads
+#define corellium_v3_coreTrace_preauthorize CoreTraceAPI_v3StracePreauthorize
 #define corellium_v3_coreTrace_start CoreTraceAPI_v3StartCoreTrace
 #define corellium_v3_coreTrace_stop CoreTraceAPI_v3StopCoreTrace
 
@@ -892,6 +895,7 @@
 #define corellium_v3_instances_patch InstancesAPI_v3PatchInstance
 #define corellium_v3_instances_patchReadOnly InstancesAPI_v3PatchInstanceReadOnly
 #define corellium_v3_instances_pause InstancesAPI_v3PauseInstance
+#define corellium_v3_instances_preauthorizeKernelDownload InstancesAPI_v3KernelPreauthorize
 #define corellium_v3_instances_putImageUpload InstancesAPI_v3PutInstanceImageUpload
 #define corellium_v3_instances_reboot InstancesAPI_v3RebootInstance
 #define corellium_v3_instances_restoreBackup InstancesAPI_v3RestoreBackup

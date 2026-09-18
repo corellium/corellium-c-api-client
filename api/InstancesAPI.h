@@ -35,6 +35,7 @@
 #include "../model/rotate_body.h"
 #include "../model/start_instance_body.h"
 #include "../model/stop_instance_body.h"
+#include "../model/token.h"
 #include "../model/token_validate_body.h"
 #include "../model/user_error_response.h"
 
@@ -167,6 +168,14 @@ InstancesAPI_v3GetInstanceState(apiClient_t *apiClient, char *instanceId, char *
 //
 void
 InstancesAPI_v3InjectMessage(apiClient_t *apiClient, char *instanceId, message_body_t *message_body);
+
+
+// Pre-authorize a kernel download
+//
+// Pre-authorize a kernel download. Returns a token that authorizes the kernel download request.
+//
+token_t*
+InstancesAPI_v3KernelPreauthorize(apiClient_t *apiClient, char *instanceId);
 
 
 // List Instances

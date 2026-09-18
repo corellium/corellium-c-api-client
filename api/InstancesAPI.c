@@ -1979,6 +1979,101 @@ end:
 
 }
 
+// Pre-authorize a kernel download
+//
+// Pre-authorize a kernel download. Returns a token that authorizes the kernel download request.
+//
+token_t*
+InstancesAPI_v3KernelPreauthorize(apiClient_t *apiClient, char *instanceId)
+{
+    list_t    *localVarQueryParameters = NULL;
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = NULL;
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/instances/{instanceId}/kernel-authorize");
+
+    if(!instanceId)
+        goto end;
+
+
+    // Path Params
+    long sizeOfPathParams_instanceId = strlen(instanceId)+3 + sizeof("{ instanceId }") - 1;
+    if(instanceId == NULL) {
+        goto end;
+    }
+    char* localVarToReplace_instanceId = malloc(sizeOfPathParams_instanceId);
+    sprintf(localVarToReplace_instanceId, "{%s}", "instanceId");
+
+    localVarPath = strReplace(localVarPath, localVarToReplace_instanceId, instanceId);
+
+
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "GET");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 200) {
+    //    printf("%s\n","Token.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 400) {
+    //    printf("%s\n","Invalid request.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","Authentication required.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","Permission denied.");
+    //}
+    //nonprimitive not container
+    token_t *elementToReturn = NULL;
+    if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
+        cJSON *InstancesAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
+        elementToReturn = token_parseFromJSON(InstancesAPIlocalVarJSON);
+        cJSON_Delete(InstancesAPIlocalVarJSON);
+        if(elementToReturn == NULL) {
+            // return 0;
+        }
+    }
+
+    //return type
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    
+    
+    
+    list_freeList(localVarHeaderType);
+    
+    free(localVarPath);
+    free(localVarToReplace_instanceId);
+    return elementToReturn;
+end:
+    free(localVarPath);
+    return NULL;
+
+}
+
 // List Instances
 //
 instance_list_t*

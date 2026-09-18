@@ -7,6 +7,7 @@
 #include "../include/binary.h"
 #include "../model/api_error.h"
 #include "../model/kernel_task.h"
+#include "../model/token.h"
 #include "../model/user_error_response.h"
 
 
@@ -32,5 +33,11 @@ CoreTraceAPI_v3StartCoreTrace(apiClient_t *apiClient, char *instanceId);
 //
 void
 CoreTraceAPI_v3StopCoreTrace(apiClient_t *apiClient, char *instanceId);
+
+
+// Pre-authorize a strace download
+//
+token_t*
+CoreTraceAPI_v3StracePreauthorize(apiClient_t *apiClient, char *instanceId);
 
 

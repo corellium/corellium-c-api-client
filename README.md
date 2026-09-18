@@ -272,6 +272,7 @@ Category | Method | HTTP request | Description
 *CoreTraceAPI* | [**CoreTraceAPI_v3ListThreads**](docs/CoreTraceAPI.md#CoreTraceAPI_v3ListThreads) | **GET** /v3/instances/{instanceId}/strace/thread-list | Get Running Threads (CoreTrace)
 *CoreTraceAPI* | [**CoreTraceAPI_v3StartCoreTrace**](docs/CoreTraceAPI.md#CoreTraceAPI_v3StartCoreTrace) | **POST** /v3/instances/{instanceId}/strace/enable | Start CoreTrace on an instance
 *CoreTraceAPI* | [**CoreTraceAPI_v3StopCoreTrace**](docs/CoreTraceAPI.md#CoreTraceAPI_v3StopCoreTrace) | **POST** /v3/instances/{instanceId}/strace/disable | Stop CoreTrace on an instance.
+*CoreTraceAPI* | [**CoreTraceAPI_v3StracePreauthorize**](docs/CoreTraceAPI.md#CoreTraceAPI_v3StracePreauthorize) | **GET** /v3/instances/{instanceId}/strace-authorize | Pre-authorize a strace download
 *CoreTraceV1API* | [**CoreTraceV1API_v1ClearCoreTrace**](docs/CoreTraceV1API.md#CoreTraceV1API_v1ClearCoreTrace) | **DELETE** /v1/instances/{instanceId}/strace | Clear CoreTrace logs
 *CoreTraceV1API* | [**CoreTraceV1API_v1ListThreads**](docs/CoreTraceV1API.md#CoreTraceV1API_v1ListThreads) | **GET** /v1/instances/{instanceId}/strace/thread-list | Get Running Threads (CoreTrace)
 *CoreTraceV1API* | [**CoreTraceV1API_v1StartCoreTrace**](docs/CoreTraceV1API.md#CoreTraceV1API_v1StartCoreTrace) | **POST** /v1/instances/{instanceId}/strace/enable | Start CoreTrace on an instance
@@ -385,6 +386,7 @@ Category | Method | HTTP request | Description
 *InstancesAPI* | [**InstancesAPI_v3GetInstanceScreenshot**](docs/InstancesAPI.md#InstancesAPI_v3GetInstanceScreenshot) | **GET** /v3/instances/{instanceId}/screenshot.{format} | Get Instance Screenshot
 *InstancesAPI* | [**InstancesAPI_v3GetInstanceState**](docs/InstancesAPI.md#InstancesAPI_v3GetInstanceState) | **GET** /v3/instances/{instanceId}/state | Get state of Instance
 *InstancesAPI* | [**InstancesAPI_v3InjectMessage**](docs/InstancesAPI.md#InstancesAPI_v3InjectMessage) | **POST** /v3/instances/{instanceId}/message | Inject a message into an iOS VM
+*InstancesAPI* | [**InstancesAPI_v3KernelPreauthorize**](docs/InstancesAPI.md#InstancesAPI_v3KernelPreauthorize) | **GET** /v3/instances/{instanceId}/kernel-authorize | Pre-authorize a kernel download
 *InstancesAPI* | [**InstancesAPI_v3ListInstances**](docs/InstancesAPI.md#InstancesAPI_v3ListInstances) | **GET** /v3/instances | List Instances
 *InstancesAPI* | [**InstancesAPI_v3MediaPlay**](docs/InstancesAPI.md#InstancesAPI_v3MediaPlay) | **POST** /v3/instances/{instanceId}/media/play | Start playing media
 *InstancesAPI* | [**InstancesAPI_v3MediaStop**](docs/InstancesAPI.md#InstancesAPI_v3MediaStop) | **POST** /v3/instances/{instanceId}/media/stop | Stop playing media
