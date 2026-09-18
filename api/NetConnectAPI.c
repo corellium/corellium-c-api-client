@@ -545,7 +545,7 @@ end:
 
 // List available network providers
 //
-// Provides a list of registered network providers to be used when creating network connections via [`createNetworkConnection`](#operation/v3CreateNetworkConnection). You must have the domain administrator role to list network providers.
+// Provides a list of registered network providers to be used when creating network connections via [`createNetworkConnection`](#tag/netconnect/POST/v3/network/connections). You must have the domain administrator role to list network providers.
 //
 network_connection_providers_t*
 NetConnectAPI_v3ListNetworkProviders(apiClient_t *apiClient, double *limit, double *offset)
