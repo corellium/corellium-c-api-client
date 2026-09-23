@@ -23,20 +23,20 @@ firmware_device_list_t* instantiate_firmware_device_list(int include_optional) {
   if (include_optional) {
     firmware_device_list = firmware_device_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     firmware_device_list = firmware_device_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

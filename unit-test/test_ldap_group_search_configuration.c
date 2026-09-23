@@ -22,17 +22,17 @@ ldap_group_search_configuration_t* instantiate_ldap_group_search_configuration(i
   ldap_group_search_configuration_t* ldap_group_search_configuration = NULL;
   if (include_optional) {
     ldap_group_search_configuration = ldap_group_search_configuration_create(
-      "0",
-      "0",
-      "0",
-      "0"
+      "ou=groups,dc=example,dc=com",
+      "objectClass=groupOfNames",
+      "089c8ffd-ca4d-4d35-80ab-0847d18b7213",
+      "admin"
     );
   } else {
     ldap_group_search_configuration = ldap_group_search_configuration_create(
-      "0",
-      "0",
-      "0",
-      "0"
+      "ou=groups,dc=example,dc=com",
+      "objectClass=groupOfNames",
+      "089c8ffd-ca4d-4d35-80ab-0847d18b7213",
+      "admin"
     );
   }
 

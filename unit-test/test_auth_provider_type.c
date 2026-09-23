@@ -22,13 +22,13 @@ auth_provider_type_t* instantiate_auth_provider_type(int include_optional) {
   auth_provider_type_t* auth_provider_type = NULL;
   if (include_optional) {
     auth_provider_type = auth_provider_type_create(
-      "0",
-      0
+      "open-id-connect",
+      {"type":"object","properties":{"providerType":{"type":"string","const":"open-id-connect"},"enabled":{"type":"boolean"},"default":{"type":"boolean","readOnly":true},"label":{"type":["string","null"]},"config":{"type":"object","properties":{"discoveryUrl":{"type":"string","minLength":1},"clientId":{"type":"string","minLength":1},"clientSecret":{"type":"string","minLength":1},"invitedOnly":{"type":"boolean","default":false}},"required":["discoveryUrl","clientId","clientSecret"],"additionalProperties":false,"writeOnly":true}},"required":["providerType","enabled","config"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}
     );
   } else {
     auth_provider_type = auth_provider_type_create(
-      "0",
-      0
+      "open-id-connect",
+      {"type":"object","properties":{"providerType":{"type":"string","const":"open-id-connect"},"enabled":{"type":"boolean"},"default":{"type":"boolean","readOnly":true},"label":{"type":["string","null"]},"config":{"type":"object","properties":{"discoveryUrl":{"type":"string","minLength":1},"clientId":{"type":"string","minLength":1},"clientSecret":{"type":"string","minLength":1},"invitedOnly":{"type":"boolean","default":false}},"required":["discoveryUrl","clientId","clientSecret"],"additionalProperties":false,"writeOnly":true}},"required":["providerType","enabled","config"],"additionalProperties":false,"$schema":"http://json-schema.org/draft-07/schema#"}
     );
   }
 

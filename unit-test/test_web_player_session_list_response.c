@@ -23,20 +23,20 @@ web_player_session_list_response_t* instantiate_web_player_session_list_response
   if (include_optional) {
     web_player_session_list_response = web_player_session_list_response_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     web_player_session_list_response = web_player_session_list_response_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

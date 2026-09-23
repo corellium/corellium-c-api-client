@@ -22,21 +22,21 @@ billing_line_item_t* instantiate_billing_line_item(int include_optional) {
   billing_line_item_t* billing_line_item = NULL;
   if (include_optional) {
     billing_line_item = billing_line_item_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      1.337,
-      1.337
+      "On",
+      "iPhone 13 Pro on per hour",
+      "iPhone 13 Pro",
+      "my-device, OS version 17.5, OS build 21F79",
+      6.25,
+      8
     );
   } else {
     billing_line_item = billing_line_item_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      1.337,
-      1.337
+      "On",
+      "iPhone 13 Pro on per hour",
+      "iPhone 13 Pro",
+      "my-device, OS version 17.5, OS build 21F79",
+      6.25,
+      8
     );
   }
 

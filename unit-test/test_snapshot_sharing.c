@@ -24,8 +24,8 @@ snapshot_sharing_t* instantiate_snapshot_sharing(int include_optional) {
   if (include_optional) {
     snapshot_sharing = snapshot_sharing_create(
       corellium_api_snapshot_sharing__publicLink,
-      "0",
-      "2013-10-20T19:20:30+01:00",
+      "X7QK9P2M",
+      "2026-03-16T08:22:19Z",
        // false, not to have infinite recursion
       instantiate_snapshot_owner(0),
       list_createList()
@@ -33,8 +33,8 @@ snapshot_sharing_t* instantiate_snapshot_sharing(int include_optional) {
   } else {
     snapshot_sharing = snapshot_sharing_create(
       corellium_api_snapshot_sharing__publicLink,
-      "0",
-      "2013-10-20T19:20:30+01:00",
+      "X7QK9P2M",
+      "2026-03-16T08:22:19Z",
       NULL,
       list_createList()
     );

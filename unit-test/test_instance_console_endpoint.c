@@ -22,11 +22,11 @@ instance_console_endpoint_t* instantiate_instance_console_endpoint(int include_o
   instance_console_endpoint_t* instance_console_endpoint = NULL;
   if (include_optional) {
     instance_console_endpoint = instance_console_endpoint_create(
-      "0"
+      "wss://example.com/console/ws?token=<token>"
     );
   } else {
     instance_console_endpoint = instance_console_endpoint_create(
-      "0"
+      "wss://example.com/console/ws?token=<token>"
     );
   }
 

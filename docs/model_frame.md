@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **height** | **double** | Bezel image height. | 
 **inner** | [**model_rect_t**](model_rect.md) \* |  | [optional] 
 **home** | [**model_frame_home_t**](model_frame_home.md) \* |  | [optional] 
-**dimensions** | [**flavor_frame_dimensions_t**](flavor_frame_dimensions.md) \* |  | [optional] 
+**dimensions** | [**model_frame_dimensions_t**](model_frame_dimensions.md) \* |  | [optional] 
 **scale** | **double** | Display scale factor. | [optional] 
 **has_image** | **int** | Whether a bezel image is available for this model. | 
 

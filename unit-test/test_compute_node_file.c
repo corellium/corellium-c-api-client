@@ -22,15 +22,15 @@ compute_node_file_t* instantiate_compute_node_file(int include_optional) {
   compute_node_file_t* compute_node_file = NULL;
   if (include_optional) {
     compute_node_file = compute_node_file_create(
-      "0",
-      56,
-      "2013-10-20T19:20:30+01:00"
+      "/mnt/charm_f7f9832a-f824-416f-a5ea-4adfe34754b5_tmp/strace-0",
+      268435456,
+      "2026-03-17T11:41:05Z"
     );
   } else {
     compute_node_file = compute_node_file_create(
-      "0",
-      56,
-      "2013-10-20T19:20:30+01:00"
+      "/mnt/charm_f7f9832a-f824-416f-a5ea-4adfe34754b5_tmp/strace-0",
+      268435456,
+      "2026-03-17T11:41:05Z"
     );
   }
 

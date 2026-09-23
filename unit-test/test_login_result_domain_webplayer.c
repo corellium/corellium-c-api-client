@@ -22,13 +22,13 @@ login_result_domain_webplayer_t* instantiate_login_result_domain_webplayer(int i
   login_result_domain_webplayer_t* login_result_domain_webplayer = NULL;
   if (include_optional) {
     login_result_domain_webplayer = login_result_domain_webplayer_create(
-      1,
-      list_createList()
+      true,
+      ["example.com"]
     );
   } else {
     login_result_domain_webplayer = login_result_domain_webplayer_create(
-      1,
-      list_createList()
+      true,
+      ["example.com"]
     );
   }
 

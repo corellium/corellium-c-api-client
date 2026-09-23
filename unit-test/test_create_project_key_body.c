@@ -23,14 +23,14 @@ create_project_key_body_t* instantiate_create_project_key_body(int include_optio
   if (include_optional) {
     create_project_key_body = create_project_key_body_create(
       corellium_api_create_project_key_body_KIND_ssh,
-      "0",
-      "0"
+      "Build server key",
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJUlGdieyRXdiVIyQjqthDE1YzmwzH0ZeZuHkBuC9Gwr user@example.com"
     );
   } else {
     create_project_key_body = create_project_key_body_create(
       corellium_api_create_project_key_body_KIND_ssh,
-      "0",
-      "0"
+      "Build server key",
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJUlGdieyRXdiVIyQjqthDE1YzmwzH0ZeZuHkBuC9Gwr user@example.com"
     );
   }
 

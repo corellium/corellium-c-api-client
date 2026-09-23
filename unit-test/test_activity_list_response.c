@@ -23,20 +23,20 @@ activity_list_response_t* instantiate_activity_list_response(int include_optiona
   if (include_optional) {
     activity_list_response = activity_list_response_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     activity_list_response = activity_list_response_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

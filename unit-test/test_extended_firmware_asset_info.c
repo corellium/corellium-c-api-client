@@ -22,13 +22,13 @@ extended_firmware_asset_info_t* instantiate_extended_firmware_asset_info(int inc
   extended_firmware_asset_info_t* extended_firmware_asset_info = NULL;
   if (include_optional) {
     extended_firmware_asset_info = extended_firmware_asset_info_create(
-      list_createList(),
-      list_createList()
+      ["firmware.ipsw"],
+      ["f7f9832a-f824-416f-a5ea-4adfe34754b5"]
     );
   } else {
     extended_firmware_asset_info = extended_firmware_asset_info_create(
-      list_createList(),
-      list_createList()
+      ["firmware.ipsw"],
+      ["f7f9832a-f824-416f-a5ea-4adfe34754b5"]
     );
   }
 

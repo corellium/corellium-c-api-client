@@ -22,11 +22,11 @@ project_config_t* instantiate_project_config(int include_optional) {
   project_config_t* project_config = NULL;
   if (include_optional) {
     project_config = project_config_create(
-      56
+      4
     );
   } else {
     project_config = project_config_create(
-      56
+      4
     );
   }
 

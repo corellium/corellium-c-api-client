@@ -22,11 +22,11 @@ token_validate_body_t* instantiate_token_validate_body(int include_optional) {
   token_validate_body_t* token_validate_body = NULL;
   if (include_optional) {
     token_validate_body = token_validate_body_create(
-      "0"
+      "<redacted>"
     );
   } else {
     token_validate_body = token_validate_body_create(
-      "0"
+      "<redacted>"
     );
   }
 

@@ -22,13 +22,13 @@ update_trial_request_body_t* instantiate_update_trial_request_body(int include_o
   update_trial_request_body_t* update_trial_request_body = NULL;
   if (include_optional) {
     update_trial_request_body = update_trial_request_body_create(
-      1.337,
-      1.337
+      14,
+      24
     );
   } else {
     update_trial_request_body = update_trial_request_body_create(
-      1.337,
-      1.337
+      14,
+      24
     );
   }
 

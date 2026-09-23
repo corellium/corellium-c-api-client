@@ -22,21 +22,21 @@ vlan_config_t* instantiate_vlan_config(int include_optional) {
   vlan_config_t* vlan_config = NULL;
   if (include_optional) {
     vlan_config = vlan_config_create(
-      "0",
-      1,
+      "eth0",
+      42,
       corellium_api_vlan_config_DHCPMODE_internal,
-      "0",
-      "0",
-      list_createList()
+      "10.0.0.1",
+      "10.0.0.0/24",
+      ["1.1.1.1","8.8.8.8"]
     );
   } else {
     vlan_config = vlan_config_create(
-      "0",
-      1,
+      "eth0",
+      42,
       corellium_api_vlan_config_DHCPMODE_internal,
-      "0",
-      "0",
-      list_createList()
+      "10.0.0.1",
+      "10.0.0.0/24",
+      ["1.1.1.1","8.8.8.8"]
     );
   }
 

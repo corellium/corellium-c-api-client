@@ -22,13 +22,13 @@ cluster_snapshot_status_t* instantiate_cluster_snapshot_status(int include_optio
   cluster_snapshot_status_t* cluster_snapshot_status = NULL;
   if (include_optional) {
     cluster_snapshot_status = cluster_snapshot_status_create(
-      "0",
-      1
+      "creating",
+      false
     );
   } else {
     cluster_snapshot_status = cluster_snapshot_status_create(
-      "0",
-      1
+      "creating",
+      false
     );
   }
 

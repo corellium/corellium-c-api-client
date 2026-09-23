@@ -22,14 +22,14 @@ instance_trace_state_t* instantiate_instance_trace_state(int include_optional) {
   instance_trace_state_t* instance_trace_state = NULL;
   if (include_optional) {
     instance_trace_state = instance_trace_state_create(
-      1,
-      1.337,
+      true,
+      1048576,
       list_createList()
     );
   } else {
     instance_trace_state = instance_trace_state_create(
-      1,
-      1.337,
+      true,
+      1048576,
       list_createList()
     );
   }

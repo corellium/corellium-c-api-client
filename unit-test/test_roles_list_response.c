@@ -23,20 +23,20 @@ roles_list_response_t* instantiate_roles_list_response(int include_optional) {
   if (include_optional) {
     roles_list_response = roles_list_response_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     roles_list_response = roles_list_response_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

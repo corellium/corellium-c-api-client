@@ -22,23 +22,23 @@ enable_netdump_body_t* instantiate_enable_netdump_body(int include_optional) {
   enable_netdump_body_t* enable_netdump_body = NULL;
   if (include_optional) {
     enable_netdump_body = enable_netdump_body_create(
-      list_createList(),
-      list_createList(),
-      list_createList(),
-      list_createList(),
-      list_createList(),
-      list_createList(),
-      list_createList()
+      ["1024-65535"],
+      ["443"],
+      ["80","443"],
+      ["80","443"],
+      ["tcp","udp"],
+      ["Safari"],
+      ["192.0.2.10"]
     );
   } else {
     enable_netdump_body = enable_netdump_body_create(
-      list_createList(),
-      list_createList(),
-      list_createList(),
-      list_createList(),
-      list_createList(),
-      list_createList(),
-      list_createList()
+      ["1024-65535"],
+      ["443"],
+      ["80","443"],
+      ["80","443"],
+      ["tcp","udp"],
+      ["Safari"],
+      ["192.0.2.10"]
     );
   }
 

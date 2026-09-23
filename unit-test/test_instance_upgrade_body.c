@@ -22,13 +22,13 @@ instance_upgrade_body_t* instantiate_instance_upgrade_body(int include_optional)
   instance_upgrade_body_t* instance_upgrade_body = NULL;
   if (include_optional) {
     instance_upgrade_body = instance_upgrade_body_create(
-      "0",
-      "0"
+      "17.5",
+      "21F79"
     );
   } else {
     instance_upgrade_body = instance_upgrade_body_create(
-      "0",
-      "0"
+      "17.5",
+      "21F79"
     );
   }
 

@@ -22,11 +22,11 @@ ai_tools_config_t* instantiate_ai_tools_config(int include_optional) {
   ai_tools_config_t* ai_tools_config = NULL;
   if (include_optional) {
     ai_tools_config = ai_tools_config_create(
-      1
+      true
     );
   } else {
     ai_tools_config = ai_tools_config_create(
-      1
+      true
     );
   }
 

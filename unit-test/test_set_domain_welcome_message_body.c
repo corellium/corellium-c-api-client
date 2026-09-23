@@ -22,13 +22,13 @@ set_domain_welcome_message_body_t* instantiate_set_domain_welcome_message_body(i
   set_domain_welcome_message_body_t* set_domain_welcome_message_body = NULL;
   if (include_optional) {
     set_domain_welcome_message_body = set_domain_welcome_message_body_create(
-      "0",
-      1
+      "<p>Welcome to Acme Corp!</p>",
+      true
     );
   } else {
     set_domain_welcome_message_body = set_domain_welcome_message_body_create(
-      "0",
-      1
+      "<p>Welcome to Acme Corp!</p>",
+      true
     );
   }
 

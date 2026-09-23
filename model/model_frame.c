@@ -10,7 +10,7 @@ static model_frame_t *model_frame_create_internal(
     double height,
     model_rect_t *inner,
     model_frame_home_t *home,
-    flavor_frame_dimensions_t *dimensions,
+    model_frame_dimensions_t *dimensions,
     double scale,
     int has_image
     ) {
@@ -35,7 +35,7 @@ __attribute__((deprecated)) model_frame_t *model_frame_create(
     double height,
     model_rect_t *inner,
     model_frame_home_t *home,
-    flavor_frame_dimensions_t *dimensions,
+    model_frame_dimensions_t *dimensions,
     double scale,
     int has_image
     ) {
@@ -68,7 +68,7 @@ void model_frame_free(model_frame_t *model_frame) {
         model_frame->home = NULL;
     }
     if (model_frame->dimensions) {
-        flavor_frame_dimensions_free(model_frame->dimensions);
+        model_frame_dimensions_free(model_frame->dimensions);
         model_frame->dimensions = NULL;
     }
     free(model_frame);
@@ -123,7 +123,7 @@ cJSON *model_frame_convertToJSON(model_frame_t *model_frame) {
 
     // model_frame->dimensions
     if(model_frame->dimensions) {
-    cJSON *dimensions_local_JSON = flavor_frame_dimensions_convertToJSON(model_frame->dimensions);
+    cJSON *dimensions_local_JSON = model_frame_dimensions_convertToJSON(model_frame->dimensions);
     if(dimensions_local_JSON == NULL) {
     goto fail; //model
     }
@@ -169,7 +169,7 @@ model_frame_t *model_frame_parseFromJSON(cJSON *model_frameJSON){
     model_frame_home_t *home_local_nonprim = NULL;
 
     // define the local variable for model_frame->dimensions
-    flavor_frame_dimensions_t *dimensions_local_nonprim = NULL;
+    model_frame_dimensions_t *dimensions_local_nonprim = NULL;
 
     // model_frame->width
     cJSON *width = cJSON_GetObjectItemCaseSensitive(model_frameJSON, "width");
@@ -225,7 +225,7 @@ model_frame_t *model_frame_parseFromJSON(cJSON *model_frameJSON){
         dimensions = NULL;
     }
     if (dimensions) { 
-    dimensions_local_nonprim = flavor_frame_dimensions_parseFromJSON(dimensions); //nonprimitive
+    dimensions_local_nonprim = model_frame_dimensions_parseFromJSON(dimensions); //nonprimitive
     }
 
     // model_frame->scale
@@ -277,7 +277,7 @@ end:
         home_local_nonprim = NULL;
     }
     if (dimensions_local_nonprim) {
-        flavor_frame_dimensions_free(dimensions_local_nonprim);
+        model_frame_dimensions_free(dimensions_local_nonprim);
         dimensions_local_nonprim = NULL;
     }
     return NULL;

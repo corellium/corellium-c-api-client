@@ -22,13 +22,13 @@ attach_interface_body_t* instantiate_attach_interface_body(int include_optional)
   attach_interface_body_t* attach_interface_body = NULL;
   if (include_optional) {
     attach_interface_body = attach_interface_body_create(
-      "0",
-      "0"
+      "gpio/0",
+      "56494514-33f7-4fc2-9fdc-865e3957e6d3"
     );
   } else {
     attach_interface_body = attach_interface_body_create(
-      "0",
-      "0"
+      "gpio/0",
+      "56494514-33f7-4fc2-9fdc-865e3957e6d3"
     );
   }
 

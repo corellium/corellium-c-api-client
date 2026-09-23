@@ -22,11 +22,11 @@ create_activity_export_response_t* instantiate_create_activity_export_response(i
   create_activity_export_response_t* create_activity_export_response = NULL;
   if (include_optional) {
     create_activity_export_response = create_activity_export_response_create(
-      "activity-export/e85f2792-d9de-480e-80ca-a6b992e43619"
+      "activity-export/722cdce5-6f71-4f4a-b2b6-c00f11c015f6"
     );
   } else {
     create_activity_export_response = create_activity_export_response_create(
-      "activity-export/e85f2792-d9de-480e-80ca-a6b992e43619"
+      "activity-export/722cdce5-6f71-4f4a-b2b6-c00f11c015f6"
     );
   }
 

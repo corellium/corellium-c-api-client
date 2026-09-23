@@ -23,20 +23,20 @@ instance_snapshots_list_t* instantiate_instance_snapshots_list(int include_optio
   if (include_optional) {
     instance_snapshots_list = instance_snapshots_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     instance_snapshots_list = instance_snapshots_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

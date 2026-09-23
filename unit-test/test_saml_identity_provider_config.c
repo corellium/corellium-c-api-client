@@ -22,17 +22,21 @@ saml_identity_provider_config_t* instantiate_saml_identity_provider_config(int i
   saml_identity_provider_config_t* saml_identity_provider_config = NULL;
   if (include_optional) {
     saml_identity_provider_config = saml_identity_provider_config_create(
-      "0",
-      "0",
-      "0",
-      "0"
+      "https://idp.example.com/sso/saml",
+      "-----BEGIN CERTIFICATE-----
+<base64-encoded-x509-certificate>
+-----END CERTIFICATE-----",
+      "https://idp.example.com/saml/metadata",
+      "https://idp.example.com/slo/saml"
     );
   } else {
     saml_identity_provider_config = saml_identity_provider_config_create(
-      "0",
-      "0",
-      "0",
-      "0"
+      "https://idp.example.com/sso/saml",
+      "-----BEGIN CERTIFICATE-----
+<base64-encoded-x509-certificate>
+-----END CERTIFICATE-----",
+      "https://idp.example.com/saml/metadata",
+      "https://idp.example.com/slo/saml"
     );
   }
 

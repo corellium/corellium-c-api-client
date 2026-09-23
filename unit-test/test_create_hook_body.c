@@ -22,17 +22,17 @@ create_hook_body_t* instantiate_create_hook_body(int include_optional) {
   create_hook_body_t* create_hook_body = NULL;
   if (include_optional) {
     create_hook_body = create_hook_body_create(
-      "0",
-      "0",
-      "0",
+      "Bypass jailbreak detection",
+      "0x1000042a4",
+      "return 0;",
       corellium_api_create_hook_body__csmfcc,
       1
     );
   } else {
     create_hook_body = create_hook_body_create(
-      "0",
-      "0",
-      "0",
+      "Bypass jailbreak detection",
+      "0x1000042a4",
+      "return 0;",
       corellium_api_create_hook_body__csmfcc,
       1
     );

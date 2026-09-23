@@ -24,32 +24,32 @@ image_firmware_info_t* instantiate_image_firmware_info(int include_optional) {
   image_firmware_info_t* image_firmware_info = NULL;
   if (include_optional) {
     image_firmware_info = image_firmware_info_create(
-      "0",
-      "0",
-      "0",
-      list_createList(),
-      "0",
-      1.337,
-      1.337,
-      "0",
+      "ios",
+      "16.4",
+      "20E247",
+      ["iPhone12,1"],
+      "n104ap",
+      12,
+      32816,
+      "t8030",
        // false, not to have infinite recursion
       instantiate_image_firmware_info_boot_args(0),
-      list_createList(),
+      ["Customer Erase Install (IPSW)"],
        // false, not to have infinite recursion
       instantiate_firmware_info_device(0)
     );
   } else {
     image_firmware_info = image_firmware_info_create(
-      "0",
-      "0",
-      "0",
-      list_createList(),
-      "0",
-      1.337,
-      1.337,
-      "0",
+      "ios",
+      "16.4",
+      "20E247",
+      ["iPhone12,1"],
+      "n104ap",
+      12,
+      32816,
+      "t8030",
       NULL,
-      list_createList(),
+      ["Customer Erase Install (IPSW)"],
       NULL
     );
   }

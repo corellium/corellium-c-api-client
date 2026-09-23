@@ -22,11 +22,11 @@ agent_container_health_t* instantiate_agent_container_health(int include_optiona
   agent_container_health_t* agent_container_health = NULL;
   if (include_optional) {
     agent_container_health = agent_container_health_create(
-      1
+      true
     );
   } else {
     agent_container_health = agent_container_health_create(
-      1
+      true
     );
   }
 

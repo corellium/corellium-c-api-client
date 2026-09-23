@@ -27,8 +27,8 @@ project_t* instantiate_project(int include_optional) {
   project_t* project = NULL;
   if (include_optional) {
     project = project_create(
-      "0",
-      "0",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "Default Project",
        // false, not to have infinite recursion
       instantiate_project_settings(0),
        // false, not to have infinite recursion
@@ -42,8 +42,8 @@ project_t* instantiate_project(int include_optional) {
     );
   } else {
     project = project_create(
-      "0",
-      "0",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "Default Project",
       NULL,
       NULL,
       NULL,

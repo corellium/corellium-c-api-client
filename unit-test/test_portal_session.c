@@ -22,11 +22,11 @@ portal_session_t* instantiate_portal_session(int include_optional) {
   portal_session_t* portal_session = NULL;
   if (include_optional) {
     portal_session = portal_session_create(
-      "0"
+      "https://billing.stripe.com/p/session/test_xxxxxxxxxxxxxxxxxxxxxxxx"
     );
   } else {
     portal_session = portal_session_create(
-      "0"
+      "https://billing.stripe.com/p/session/test_xxxxxxxxxxxxxxxxxxxxxxxx"
     );
   }
 

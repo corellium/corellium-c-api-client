@@ -24,11 +24,11 @@ ensure_domain_settings_body_t* instantiate_ensure_domain_settings_body(int inclu
   ensure_domain_settings_body_t* ensure_domain_settings_body = NULL;
   if (include_optional) {
     ensure_domain_settings_body = ensure_domain_settings_body_create(
-      "0",
-      "0",
-      56,
-      "0",
-      "0",
+      "acme.corellium.com",
+      "acme",
+      12,
+      "<redacted>",
+      "<redacted>",
        // false, not to have infinite recursion
       instantiate_domain_config_input(0),
        // false, not to have infinite recursion
@@ -36,11 +36,11 @@ ensure_domain_settings_body_t* instantiate_ensure_domain_settings_body(int inclu
     );
   } else {
     ensure_domain_settings_body = ensure_domain_settings_body_create(
-      "0",
-      "0",
-      56,
-      "0",
-      "0",
+      "acme.corellium.com",
+      "acme",
+      12,
+      "<redacted>",
+      "<redacted>",
       NULL,
       NULL
     );

@@ -22,15 +22,15 @@ api_conflict_error_t* instantiate_api_conflict_error(int include_optional) {
   api_conflict_error_t* api_conflict_error = NULL;
   if (include_optional) {
     api_conflict_error = api_conflict_error_create(
-      "0",
+      "Conflict with existing resource",
       corellium_api_api_conflict_error_ERRORID_Conflict,
-      0
+      {"id":"1c41b1bc-4f53-48a8-b690-ad30611e1960","name":"Default Project"}
     );
   } else {
     api_conflict_error = api_conflict_error_create(
-      "0",
+      "Conflict with existing resource",
       corellium_api_api_conflict_error_ERRORID_Conflict,
-      0
+      {"id":"1c41b1bc-4f53-48a8-b690-ad30611e1960","name":"Default Project"}
     );
   }
 

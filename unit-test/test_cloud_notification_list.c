@@ -23,20 +23,20 @@ cloud_notification_list_t* instantiate_cloud_notification_list(int include_optio
   if (include_optional) {
     cloud_notification_list = cloud_notification_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     cloud_notification_list = cloud_notification_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

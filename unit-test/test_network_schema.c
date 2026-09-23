@@ -22,12 +22,12 @@ network_schema_t* instantiate_network_schema(int include_optional) {
   network_schema_t* network_schema = NULL;
   if (include_optional) {
     network_schema = network_schema_create(
-      list_createList(),
+      ["eth0","eth1"],
       list_createList()
     );
   } else {
     network_schema = network_schema_create(
-      list_createList(),
+      ["eth0","eth1"],
       list_createList()
     );
   }

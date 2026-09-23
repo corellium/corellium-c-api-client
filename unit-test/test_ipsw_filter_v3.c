@@ -28,15 +28,15 @@ ipsw_filter_v3_t* instantiate_ipsw_filter_v3(int include_optional) {
       instantiate_ipsw_filter_v3_version(0),
        // false, not to have infinite recursion
       instantiate_ipsw_filter_v3_device(0),
-      1,
-      1
+      false,
+      true
     );
   } else {
     ipsw_filter_v3 = ipsw_filter_v3_create(
       NULL,
       NULL,
-      1,
-      1
+      false,
+      true
     );
   }
 

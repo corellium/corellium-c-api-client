@@ -22,19 +22,19 @@ firmware_info_device_firmwares_inner_t* instantiate_firmware_info_device_firmwar
   firmware_info_device_firmwares_inner_t* firmware_info_device_firmwares_inner = NULL;
   if (include_optional) {
     firmware_info_device_firmwares_inner = firmware_info_device_firmwares_inner_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      "0"
+      "iPhone12,1_16.4_20E247_Restore.ipsw",
+      "16.4",
+      "20E247",
+      "https://example.com/download/iPhone12,1_16.4_20E247_Restore.ipsw",
+      "https://example.com/vendor/iPhone12,1_16.4_20E247_Restore.ipsw"
     );
   } else {
     firmware_info_device_firmwares_inner = firmware_info_device_firmwares_inner_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      "0"
+      "iPhone12,1_16.4_20E247_Restore.ipsw",
+      "16.4",
+      "20E247",
+      "https://example.com/download/iPhone12,1_16.4_20E247_Restore.ipsw",
+      "https://example.com/vendor/iPhone12,1_16.4_20E247_Restore.ipsw"
     );
   }
 

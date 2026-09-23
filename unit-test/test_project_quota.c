@@ -22,15 +22,15 @@ project_quota_t* instantiate_project_quota(int include_optional) {
   project_quota_t* project_quota = NULL;
   if (include_optional) {
     project_quota = project_quota_create(
-      0,
-      0,
-      0
+      30,
+      75,
+      184320
     );
   } else {
     project_quota = project_quota_create(
-      0,
-      0,
-      0
+      30,
+      75,
+      184320
     );
   }
 

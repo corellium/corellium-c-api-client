@@ -22,13 +22,13 @@ invite_settings_t* instantiate_invite_settings(int include_optional) {
   invite_settings_t* invite_settings = NULL;
   if (include_optional) {
     invite_settings = invite_settings_create(
-      list_createList(),
-      list_createList()
+      ["089c8ffd-ca4d-4d35-80ab-0847d18b7213"],
+      [["1c41b1bc-4f53-48a8-b690-ad30611e1960","admin"]]
     );
   } else {
     invite_settings = invite_settings_create(
-      list_createList(),
-      list_createList()
+      ["089c8ffd-ca4d-4d35-80ab-0847d18b7213"],
+      [["1c41b1bc-4f53-48a8-b690-ad30611e1960","admin"]]
     );
   }
 

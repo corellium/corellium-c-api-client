@@ -22,11 +22,11 @@ config_response_ai_tools_config_t* instantiate_config_response_ai_tools_config(i
   config_response_ai_tools_config_t* config_response_ai_tools_config = NULL;
   if (include_optional) {
     config_response_ai_tools_config = config_response_ai_tools_config_create(
-      1
+      true
     );
   } else {
     config_response_ai_tools_config = config_response_ai_tools_config_create(
-      1
+      true
     );
   }
 

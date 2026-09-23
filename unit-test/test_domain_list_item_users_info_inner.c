@@ -22,25 +22,25 @@ domain_list_item_users_info_inner_t* instantiate_domain_list_item_users_info_inn
   domain_list_item_users_info_inner_t* domain_list_item_users_info_inner = NULL;
   if (include_optional) {
     domain_list_item_users_info_inner = domain_list_item_users_info_inner_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      1,
-      1,
-      "2013-10-20T19:20:30+01:00",
-      56
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
+      "Jane Doe",
+      "jane.doe",
+      "jane.doe@example.com",
+      true,
+      false,
+      "2026-03-16T08:22:19Z",
+      2
     );
   } else {
     domain_list_item_users_info_inner = domain_list_item_users_info_inner_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      1,
-      1,
-      "2013-10-20T19:20:30+01:00",
-      56
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
+      "Jane Doe",
+      "jane.doe",
+      "jane.doe@example.com",
+      true,
+      false,
+      "2026-03-16T08:22:19Z",
+      2
     );
   }
 

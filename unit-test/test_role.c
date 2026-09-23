@@ -23,18 +23,18 @@ role_t* instantiate_role(int include_optional) {
   if (include_optional) {
     role = role_create(
       corellium_api_role__admin,
-      "0",
-      "0",
-      "0",
-      "0"
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "prod-us-east",
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
+      "089c8ffd-ca4d-4d35-80ab-0847d18b7213"
     );
   } else {
     role = role_create(
       corellium_api_role__admin,
-      "0",
-      "0",
-      "0",
-      "0"
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "prod-us-east",
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
+      "089c8ffd-ca4d-4d35-80ab-0847d18b7213"
     );
   }
 

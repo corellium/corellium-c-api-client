@@ -31,18 +31,18 @@ cluster_node_t* instantiate_cluster_node(int include_optional) {
       instantiate_cluster_node_total(0),
        // false, not to have infinite recursion
       instantiate_cluster_node_available(0),
-      "0",
-      "0",
-      "2013-10-20T19:20:30+01:00"
+      "node03.us-east-1.example.com",
+      "10.0.0.5:6666",
+      "2026-03-17T11:41:05Z"
     );
   } else {
     cluster_node = cluster_node_create(
       NULL,
       NULL,
       NULL,
-      "0",
-      "0",
-      "2013-10-20T19:20:30+01:00"
+      "node03.us-east-1.example.com",
+      "10.0.0.5:6666",
+      "2026-03-17T11:41:05Z"
     );
   }
 

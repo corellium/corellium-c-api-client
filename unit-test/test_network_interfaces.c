@@ -23,20 +23,20 @@ network_interfaces_t* instantiate_network_interfaces(int include_optional) {
   if (include_optional) {
     network_interfaces = network_interfaces_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     network_interfaces = network_interfaces_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

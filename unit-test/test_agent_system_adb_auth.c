@@ -22,11 +22,11 @@ agent_system_adb_auth_t* instantiate_agent_system_adb_auth(int include_optional)
   agent_system_adb_auth_t* agent_system_adb_auth = NULL;
   if (include_optional) {
     agent_system_adb_auth = agent_system_adb_auth_create(
-      1
+      true
     );
   } else {
     agent_system_adb_auth = agent_system_adb_auth_create(
-      1
+      true
     );
   }
 

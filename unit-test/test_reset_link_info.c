@@ -22,15 +22,15 @@ reset_link_info_t* instantiate_reset_link_info(int include_optional) {
   reset_link_info_t* reset_link_info = NULL;
   if (include_optional) {
     reset_link_info = reset_link_info_create(
-      "0",
-      "0",
-      "0"
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
+      "jane.doe",
+      "acme"
     );
   } else {
     reset_link_info = reset_link_info_create(
-      "0",
-      "0",
-      "0"
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
+      "jane.doe",
+      "acme"
     );
   }
 

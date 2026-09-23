@@ -22,11 +22,11 @@ restore_backup_body_t* instantiate_restore_backup_body(int include_optional) {
   restore_backup_body_t* restore_backup_body = NULL;
   if (include_optional) {
     restore_backup_body = restore_backup_body_create(
-      "0"
+      "<redacted>"
     );
   } else {
     restore_backup_body = restore_backup_body_create(
-      "0"
+      "<redacted>"
     );
   }
 

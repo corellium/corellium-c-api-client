@@ -22,18 +22,18 @@ billing_summary_pending_usage_based_t* instantiate_billing_summary_pending_usage
   billing_summary_pending_usage_based_t* billing_summary_pending_usage_based = NULL;
   if (include_optional) {
     billing_summary_pending_usage_based = billing_summary_pending_usage_based_create(
-      1.337,
-      1.337,
-      1.337,
-      "0",
+      1773479567000,
+      1774084367000,
+      100,
+      "49.99",
       list_createList()
     );
   } else {
     billing_summary_pending_usage_based = billing_summary_pending_usage_based_create(
-      1.337,
-      1.337,
-      1.337,
-      "0",
+      1773479567000,
+      1774084367000,
+      100,
+      "49.99",
       list_createList()
     );
   }

@@ -22,33 +22,33 @@ instance_input_body_t* instantiate_instance_input_body(int include_optional) {
   instance_input_body_t* instance_input_body = NULL;
   if (include_optional) {
     instance_input_body = instance_input_body_create(
-      list_createList(),
-      list_createList(),
-      1,
-      56,
-      list_createList(),
-      list_createList(),
-      list_createList(),
-      list_createList(),
-      list_createList(),
-      56,
-      "0",
-      56
+      [[100,200]],
+      [finger],
+      true,
+      100,
+      [[100,200]],
+      [[100,200]],
+      [[[150, 250]]],
+      [finger],
+      [finger],
+      250,
+      "Hello, world!",
+      150
     );
   } else {
     instance_input_body = instance_input_body_create(
-      list_createList(),
-      list_createList(),
-      1,
-      56,
-      list_createList(),
-      list_createList(),
-      list_createList(),
-      list_createList(),
-      list_createList(),
-      56,
-      "0",
-      56
+      [[100,200]],
+      [finger],
+      true,
+      100,
+      [[100,200]],
+      [[100,200]],
+      [[[150, 250]]],
+      [finger],
+      [finger],
+      250,
+      "Hello, world!",
+      150
     );
   }
 

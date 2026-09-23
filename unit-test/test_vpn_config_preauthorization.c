@@ -22,11 +22,11 @@ vpn_config_preauthorization_t* instantiate_vpn_config_preauthorization(int inclu
   vpn_config_preauthorization_t* vpn_config_preauthorization = NULL;
   if (include_optional) {
     vpn_config_preauthorization = vpn_config_preauthorization_create(
-      "0"
+      "<token>"
     );
   } else {
     vpn_config_preauthorization = vpn_config_preauthorization_create(
-      "0"
+      "<token>"
     );
   }
 

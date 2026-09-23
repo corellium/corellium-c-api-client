@@ -22,27 +22,27 @@ login_result_user_t* instantiate_login_result_user(int include_optional) {
   login_result_user_t* login_result_user = NULL;
   if (include_optional) {
     login_result_user = login_result_user_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      1,
-      "0",
-      "0",
-      "0",
-      0
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
+      "jane.doe",
+      "Jane Doe",
+      "jane.doe@example.com",
+      false,
+      "2026-03-17T11:41:05.000Z",
+      "jane.doe@example.com",
+      "<redacted>",
+      {"apiToken":{"prefix":"<token-prefix>","lastAuthDate":"2026-03-17T11:41:05.000Z","lastAddress":"10.0.10.5"},"lastVPNType":"ovpn"}
     );
   } else {
     login_result_user = login_result_user_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      1,
-      "0",
-      "0",
-      "0",
-      0
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
+      "jane.doe",
+      "Jane Doe",
+      "jane.doe@example.com",
+      false,
+      "2026-03-17T11:41:05.000Z",
+      "jane.doe@example.com",
+      "<redacted>",
+      {"apiToken":{"prefix":"<token-prefix>","lastAuthDate":"2026-03-17T11:41:05.000Z","lastAddress":"10.0.10.5"},"lastVPNType":"ovpn"}
     );
   }
 

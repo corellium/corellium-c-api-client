@@ -23,17 +23,21 @@ agent_frida_process_list_t* instantiate_agent_frida_process_list(int include_opt
   agent_frida_process_list_t* agent_frida_process_list = NULL;
   if (include_optional) {
     agent_frida_process_list = agent_frida_process_list_create(
-      1,
-      56,
-      "0",
+      true,
+      0,
+      "  PID  Name
+  1234  com.corellium.cafe
+",
        // false, not to have infinite recursion
       instantiate_agent_frida_process_list_attached(0)
     );
   } else {
     agent_frida_process_list = agent_frida_process_list_create(
-      1,
-      56,
-      "0",
+      true,
+      0,
+      "  PID  Name
+  1234  com.corellium.cafe
+",
       NULL
     );
   }

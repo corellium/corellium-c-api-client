@@ -22,11 +22,11 @@ load_extension_body_t* instantiate_load_extension_body(int include_optional) {
   load_extension_body_t* load_extension_body = NULL;
   if (include_optional) {
     load_extension_body = load_extension_body_create(
-      "0"
+      "3e1354a3-fb10-46c0-8b05-56e28edbde69"
     );
   } else {
     load_extension_body = load_extension_body_create(
-      "0"
+      "3e1354a3-fb10-46c0-8b05-56e28edbde69"
     );
   }
 

@@ -22,11 +22,11 @@ install_firmware_response_t* instantiate_install_firmware_response(int include_o
   install_firmware_response_t* install_firmware_response = NULL;
   if (include_optional) {
     install_firmware_response = install_firmware_response_create(
-      "0"
+      "722cdce5-6f71-4f4a-b2b6-c00f11c015f6"
     );
   } else {
     install_firmware_response = install_firmware_response_create(
-      "0"
+      "722cdce5-6f71-4f4a-b2b6-c00f11c015f6"
     );
   }
 

@@ -22,22 +22,22 @@ user_error_response_t* instantiate_user_error_response(int include_optional) {
   user_error_response_t* user_error_response = NULL;
   if (include_optional) {
     user_error_response = user_error_response_create(
-      "0",
+      "One or more fields were rejected",
       corellium_api_user_error_response_ERRORID_UserErrors,
-      "0",
-      "0",
-      list_createList(),
-      list_createList(),
+      "inputButtons",
+      "isIn",
+      [1c41b1bc-4f53-48a8-b690-ad30611e1960],
+      [https://example.com/firmware-assets/asset.bin],
       list_createList()
     );
   } else {
     user_error_response = user_error_response_create(
-      "0",
+      "One or more fields were rejected",
       corellium_api_user_error_response_ERRORID_UserErrors,
-      "0",
-      "0",
-      list_createList(),
-      list_createList(),
+      "inputButtons",
+      "isIn",
+      [1c41b1bc-4f53-48a8-b690-ad30611e1960],
+      [https://example.com/firmware-assets/asset.bin],
       list_createList()
     );
   }

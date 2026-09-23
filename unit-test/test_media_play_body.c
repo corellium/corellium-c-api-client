@@ -22,13 +22,13 @@ media_play_body_t* instantiate_media_play_body(int include_optional) {
   media_play_body_t* media_play_body = NULL;
   if (include_optional) {
     media_play_body = media_play_body_create(
-      "0",
-      "0"
+      "3e1354a3-fb10-46c0-8b05-56e28edbde69",
+      "https://example.com/media.mp4"
     );
   } else {
     media_play_body = media_play_body_create(
-      "0",
-      "0"
+      "3e1354a3-fb10-46c0-8b05-56e28edbde69",
+      "https://example.com/media.mp4"
     );
   }
 

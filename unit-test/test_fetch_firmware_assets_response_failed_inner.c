@@ -22,13 +22,13 @@ fetch_firmware_assets_response_failed_inner_t* instantiate_fetch_firmware_assets
   fetch_firmware_assets_response_failed_inner_t* fetch_firmware_assets_response_failed_inner = NULL;
   if (include_optional) {
     fetch_firmware_assets_response_failed_inner = fetch_firmware_assets_response_failed_inner_create(
-      "0",
-      "0"
+      "https://example.com/firmware/asset.ipsw",
+      "404 Not Found"
     );
   } else {
     fetch_firmware_assets_response_failed_inner = fetch_firmware_assets_response_failed_inner_create(
-      "0",
-      "0"
+      "https://example.com/firmware/asset.ipsw",
+      "404 Not Found"
     );
   }
 

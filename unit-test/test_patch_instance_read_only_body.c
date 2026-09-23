@@ -22,11 +22,11 @@ patch_instance_read_only_body_t* instantiate_patch_instance_read_only_body(int i
   patch_instance_read_only_body_t* patch_instance_read_only_body = NULL;
   if (include_optional) {
     patch_instance_read_only_body = patch_instance_read_only_body_create(
-      1
+      true
     );
   } else {
     patch_instance_read_only_body = patch_instance_read_only_body_create(
-      1
+      true
     );
   }
 

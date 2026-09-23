@@ -22,15 +22,15 @@ reset_password_body_t* instantiate_reset_password_body(int include_optional) {
   reset_password_body_t* reset_password_body = NULL;
   if (include_optional) {
     reset_password_body = reset_password_body_create(
-      "0",
-      "0",
-      "0"
+      "<token>",
+      "<redacted>",
+      "123456"
     );
   } else {
     reset_password_body = reset_password_body_create(
-      "0",
-      "0",
-      "0"
+      "<token>",
+      "<redacted>",
+      "123456"
     );
   }
 

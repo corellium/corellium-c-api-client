@@ -23,20 +23,20 @@ storage_device_list_t* instantiate_storage_device_list(int include_optional) {
   if (include_optional) {
     storage_device_list = storage_device_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     storage_device_list = storage_device_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

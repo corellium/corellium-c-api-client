@@ -23,14 +23,14 @@ create_vlan_network_connection_body_t* instantiate_create_vlan_network_connectio
   create_vlan_network_connection_body_t* create_vlan_network_connection_body = NULL;
   if (include_optional) {
     create_vlan_network_connection_body = create_vlan_network_connection_body_create(
-      "0",
+      "lab-vlan",
       corellium_api_create_vlan_network_connection_body_PROVIDER_vlan,
        // false, not to have infinite recursion
       instantiate_vlan_config(0)
     );
   } else {
     create_vlan_network_connection_body = create_vlan_network_connection_body_create(
-      "0",
+      "lab-vlan",
       corellium_api_create_vlan_network_connection_body_PROVIDER_vlan,
       NULL
     );

@@ -22,11 +22,11 @@ agent_file_archive_download_body_t* instantiate_agent_file_archive_download_body
   agent_file_archive_download_body_t* agent_file_archive_download_body = NULL;
   if (include_optional) {
     agent_file_archive_download_body = agent_file_archive_download_body_create(
-      list_createList()
+      ["/var/mobile/Media/DCIM/","/var/tmp/agent.log"]
     );
   } else {
     agent_file_archive_download_body = agent_file_archive_download_body_create(
-      list_createList()
+      ["/var/mobile/Media/DCIM/","/var/tmp/agent.log"]
     );
   }
 

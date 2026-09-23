@@ -23,20 +23,20 @@ storage_file_list_t* instantiate_storage_file_list(int include_optional) {
   if (include_optional) {
     storage_file_list = storage_file_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     storage_file_list = storage_file_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

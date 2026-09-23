@@ -24,49 +24,49 @@ create_instance_body_t* instantiate_create_instance_body(int include_optional) {
   create_instance_body_t* create_instance_body = NULL;
   if (include_optional) {
     create_instance_body = create_instance_body_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      list_createList(),
-      "0",
-      "0",
-      1,
-      "0",
-      1,
+      "c67af9c0-26cd-4233-9782-436c842b60db",
+      "<redacted>",
+      "My iPhone 13 Pro",
+      "<redacted>",
+      "iphone13p",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "17.5",
+      "21F79",
+      ["jailbroken"],
+      "https://example.com/firmware.ipsw",
+      "https://example.com/firmware.ipsw",
+      true,
+      "02:00:00:aa:bb:cc",
+      true,
        // false, not to have infinite recursion
       instantiate_volume_options(0),
-      "0",
+      "c67af9c0-26cd-4233-9782-436c842b60db",
        // false, not to have infinite recursion
       instantiate_instance_boot_options(0),
-      1,
-      list_createList()
+      true,
+      [{"charmd":"enabled"},{"strace-file-count":2},{"supportsVideoFile":true}]
     );
   } else {
     create_instance_body = create_instance_body_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      list_createList(),
-      "0",
-      "0",
-      1,
-      "0",
-      1,
+      "c67af9c0-26cd-4233-9782-436c842b60db",
+      "<redacted>",
+      "My iPhone 13 Pro",
+      "<redacted>",
+      "iphone13p",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "17.5",
+      "21F79",
+      ["jailbroken"],
+      "https://example.com/firmware.ipsw",
+      "https://example.com/firmware.ipsw",
+      true,
+      "02:00:00:aa:bb:cc",
+      true,
       NULL,
-      "0",
+      "c67af9c0-26cd-4233-9782-436c842b60db",
       NULL,
-      1,
-      list_createList()
+      true,
+      [{"charmd":"enabled"},{"strace-file-count":2},{"supportsVideoFile":true}]
     );
   }
 

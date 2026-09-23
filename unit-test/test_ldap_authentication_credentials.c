@@ -22,13 +22,13 @@ ldap_authentication_credentials_t* instantiate_ldap_authentication_credentials(i
   ldap_authentication_credentials_t* ldap_authentication_credentials = NULL;
   if (include_optional) {
     ldap_authentication_credentials = ldap_authentication_credentials_create(
-      "0",
-      "0"
+      "cn=admin,dc=example,dc=com",
+      "<redacted>"
     );
   } else {
     ldap_authentication_credentials = ldap_authentication_credentials_create(
-      "0",
-      "0"
+      "cn=admin,dc=example,dc=com",
+      "<redacted>"
     );
   }
 

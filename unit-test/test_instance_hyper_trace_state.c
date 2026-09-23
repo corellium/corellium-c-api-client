@@ -23,13 +23,13 @@ instance_hyper_trace_state_t* instantiate_instance_hyper_trace_state(int include
   if (include_optional) {
     instance_hyper_trace_state = instance_hyper_trace_state_create(
       corellium_api_instance_hyper_trace_state_ENABLED_enabling,
-      1.337,
+      1048576,
       list_createList()
     );
   } else {
     instance_hyper_trace_state = instance_hyper_trace_state_create(
       corellium_api_instance_hyper_trace_state_ENABLED_enabling,
-      1.337,
+      1048576,
       list_createList()
     );
   }

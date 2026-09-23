@@ -22,13 +22,13 @@ config_response_maintenance_t* instantiate_config_response_maintenance(int inclu
   config_response_maintenance_t* config_response_maintenance = NULL;
   if (include_optional) {
     config_response_maintenance = config_response_maintenance_create(
-      "0",
-      "0"
+      "The system is currently undergoing scheduled maintenance. Please check back soon.",
+      "Scheduled Maintenance"
     );
   } else {
     config_response_maintenance = config_response_maintenance_create(
-      "0",
-      "0"
+      "The system is currently undergoing scheduled maintenance. Please check back soon.",
+      "Scheduled Maintenance"
     );
   }
 

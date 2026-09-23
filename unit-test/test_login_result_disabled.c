@@ -22,17 +22,17 @@ login_result_disabled_t* instantiate_login_result_disabled(int include_optional)
   login_result_disabled_t* login_result_disabled = NULL;
   if (include_optional) {
     login_result_disabled = login_result_disabled_create(
-      "0",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      "SubscriptionCanceled",
+      "2026-03-18T16:05:33Z",
+      "2027-01-15T00:00Z",
+      "2026-03-18T16:05:33Z"
     );
   } else {
     login_result_disabled = login_result_disabled_create(
-      "0",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      "SubscriptionCanceled",
+      "2026-03-18T16:05:33Z",
+      "2027-01-15T00:00Z",
+      "2026-03-18T16:05:33Z"
     );
   }
 

@@ -22,15 +22,15 @@ change_password_body_t* instantiate_change_password_body(int include_optional) {
   change_password_body_t* change_password_body = NULL;
   if (include_optional) {
     change_password_body = change_password_body_create(
-      "0",
-      "0",
-      "0"
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
+      "<redacted>",
+      "<redacted>"
     );
   } else {
     change_password_body = change_password_body_create(
-      "0",
-      "0",
-      "0"
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
+      "<redacted>",
+      "<redacted>"
     );
   }
 

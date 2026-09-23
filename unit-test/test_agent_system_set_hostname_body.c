@@ -22,11 +22,11 @@ agent_system_set_hostname_body_t* instantiate_agent_system_set_hostname_body(int
   agent_system_set_hostname_body_t* agent_system_set_hostname_body = NULL;
   if (include_optional) {
     agent_system_set_hostname_body = agent_system_set_hostname_body_create(
-      "0"
+      "corellium-device-01"
     );
   } else {
     agent_system_set_hostname_body = agent_system_set_hostname_body_create(
-      "0"
+      "corellium-device-01"
     );
   }
 

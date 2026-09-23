@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **path** | **char \*** | New path to move/rename the file to. | [optional] 
-**mode** | **double** | New file mode (octal permission bits). | [optional] 
+**mode** | **double** | New file mode as a decimal integer (octal 0644 &#x3D; 420). | [optional] 
 **uid** | **double** | New owner UID. | [optional] 
 **gid** | **double** | New group GID. | [optional] 
 

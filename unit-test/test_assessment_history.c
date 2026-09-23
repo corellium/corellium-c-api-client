@@ -23,20 +23,20 @@ assessment_history_t* instantiate_assessment_history(int include_optional) {
   if (include_optional) {
     assessment_history = assessment_history_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     assessment_history = assessment_history_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

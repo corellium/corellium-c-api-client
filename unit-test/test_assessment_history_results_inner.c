@@ -22,15 +22,15 @@ assessment_history_results_inner_t* instantiate_assessment_history_results_inner
   assessment_history_results_inner_t* assessment_history_results_inner = NULL;
   if (include_optional) {
     assessment_history_results_inner = assessment_history_results_inner_create(
-      "a",
-      56,
-      56
+      "Jul 2025",
+      15,
+      3
     );
   } else {
     assessment_history_results_inner = assessment_history_results_inner_create(
-      "a",
-      56,
-      56
+      "Jul 2025",
+      15,
+      3
     );
   }
 

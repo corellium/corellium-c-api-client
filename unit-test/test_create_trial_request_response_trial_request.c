@@ -22,15 +22,15 @@ create_trial_request_response_trial_request_t* instantiate_create_trial_request_
   create_trial_request_response_trial_request_t* create_trial_request_response_trial_request = NULL;
   if (include_optional) {
     create_trial_request_response_trial_request = create_trial_request_response_trial_request_create(
-      "0",
-      "0",
-      "0"
+      "a1e77521-9267-4e6d-8888-180f3a83ea3a",
+      "jane.doe@example.com",
+      "Jane Doe"
     );
   } else {
     create_trial_request_response_trial_request = create_trial_request_response_trial_request_create(
-      "0",
-      "0",
-      "0"
+      "a1e77521-9267-4e6d-8888-180f3a83ea3a",
+      "jane.doe@example.com",
+      "Jane Doe"
     );
   }
 

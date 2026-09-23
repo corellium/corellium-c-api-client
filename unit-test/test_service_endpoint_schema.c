@@ -22,17 +22,17 @@ service_endpoint_schema_t* instantiate_service_endpoint_schema(int include_optio
   service_endpoint_schema_t* service_endpoint_schema = NULL;
   if (include_optional) {
     service_endpoint_schema = service_endpoint_schema_create(
-      "0",
-      "0",
-      "0",
-      list_createList()
+      "c3po",
+      "/v1/instances",
+      "GET",
+      ["cloud-administrator"]
     );
   } else {
     service_endpoint_schema = service_endpoint_schema_create(
-      "0",
-      "0",
-      "0",
-      list_createList()
+      "c3po",
+      "/v1/instances",
+      "GET",
+      ["cloud-administrator"]
     );
   }
 

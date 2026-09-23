@@ -22,11 +22,11 @@ send_reset_link_body_t* instantiate_send_reset_link_body(int include_optional) {
   send_reset_link_body_t* send_reset_link_body = NULL;
   if (include_optional) {
     send_reset_link_body = send_reset_link_body_create(
-      "0"
+      "jane.doe@example.com"
     );
   } else {
     send_reset_link_body = send_reset_link_body_create(
-      "0"
+      "jane.doe@example.com"
     );
   }
 

@@ -22,21 +22,25 @@ ldap_server_connection_details_t* instantiate_ldap_server_connection_details(int
   ldap_server_connection_details_t* ldap_server_connection_details = NULL;
   if (include_optional) {
     ldap_server_connection_details = ldap_server_connection_details_create(
-      "0",
-      "0",
-      "0",
-      1,
-      "0",
-      1
+      "ldap.example.com",
+      "389",
+      "5000",
+      false,
+      "-----BEGIN CERTIFICATE-----
+<base64-encoded-ca-certificate>
+-----END CERTIFICATE-----",
+      true
     );
   } else {
     ldap_server_connection_details = ldap_server_connection_details_create(
-      "0",
-      "0",
-      "0",
-      1,
-      "0",
-      1
+      "ldap.example.com",
+      "389",
+      "5000",
+      false,
+      "-----BEGIN CERTIFICATE-----
+<base64-encoded-ca-certificate>
+-----END CERTIFICATE-----",
+      true
     );
   }
 

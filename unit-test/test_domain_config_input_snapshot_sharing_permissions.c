@@ -22,19 +22,19 @@ domain_config_input_snapshot_sharing_permissions_t* instantiate_domain_config_in
   domain_config_input_snapshot_sharing_permissions_t* domain_config_input_snapshot_sharing_permissions = NULL;
   if (include_optional) {
     domain_config_input_snapshot_sharing_permissions = domain_config_input_snapshot_sharing_permissions_create(
-      1,
-      1,
-      1,
-      1,
-      1
+      true,
+      true,
+      true,
+      true,
+      true
     );
   } else {
     domain_config_input_snapshot_sharing_permissions = domain_config_input_snapshot_sharing_permissions_create(
-      1,
-      1,
-      1,
-      1,
-      1
+      true,
+      true,
+      true,
+      true,
+      true
     );
   }
 

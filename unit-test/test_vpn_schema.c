@@ -22,17 +22,17 @@ vpn_schema_t* instantiate_vpn_schema(int include_optional) {
   vpn_schema_t* vpn_schema = NULL;
   if (include_optional) {
     vpn_schema = vpn_schema_create(
-      "0",
-      "0",
-      "0",
-      0
+      "openvpn",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "connected",
+      {"error":"connection timed out"}
     );
   } else {
     vpn_schema = vpn_schema_create(
-      "0",
-      "0",
-      "0",
-      0
+      "openvpn",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "connected",
+      {"error":"connection timed out"}
     );
   }
 

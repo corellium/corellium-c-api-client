@@ -22,15 +22,15 @@ storage_attach_response_t* instantiate_storage_attach_response(int include_optio
   storage_attach_response_t* storage_attach_response = NULL;
   if (include_optional) {
     storage_attach_response = storage_attach_response_create(
-      "0",
-      "0",
-      "0"
+      "success",
+      "Mount job queued",
+      "73357171-23a0-4a3e-8661-216dbfbdd7ab"
     );
   } else {
     storage_attach_response = storage_attach_response_create(
-      "0",
-      "0",
-      "0"
+      "success",
+      "Mount job queued",
+      "73357171-23a0-4a3e-8661-216dbfbdd7ab"
     );
   }
 

@@ -22,33 +22,33 @@ storage_device_t* instantiate_storage_device(int include_optional) {
   storage_device_t* storage_device = NULL;
   if (include_optional) {
     storage_device = storage_device_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
+      "73357171-23a0-4a3e-8661-216dbfbdd7ab",
+      "/dev/sdb1",
+      "ext4",
+      "4a3f2e1d-8c7b-4a19-9e2f-6d5c4b3a2190",
+      "EXTERNAL_SSD",
+      "0123456789ABCDEF",
+      "SanDisk",
+      "Ultra USB 3.0",
       corellium_api_storage_device_MOUNTPOLICY_RO,
       corellium_api_storage_device_STATUS_mounted,
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   } else {
     storage_device = storage_device_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
+      "73357171-23a0-4a3e-8661-216dbfbdd7ab",
+      "/dev/sdb1",
+      "ext4",
+      "4a3f2e1d-8c7b-4a19-9e2f-6d5c4b3a2190",
+      "EXTERNAL_SSD",
+      "0123456789ABCDEF",
+      "SanDisk",
+      "Ultra USB 3.0",
       corellium_api_storage_device_MOUNTPOLICY_RO,
       corellium_api_storage_device_STATUS_mounted,
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   }
 

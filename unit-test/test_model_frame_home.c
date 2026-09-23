@@ -22,19 +22,19 @@ model_frame_home_t* instantiate_model_frame_home(int include_optional) {
   model_frame_home_t* model_frame_home = NULL;
   if (include_optional) {
     model_frame_home = model_frame_home_create(
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      1.337
+      10.29,
+      12.04,
+      275.91,
+      599.12,
+      0.12
     );
   } else {
     model_frame_home = model_frame_home_create(
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      1.337
+      10.29,
+      12.04,
+      275.91,
+      599.12,
+      0.12
     );
   }
 

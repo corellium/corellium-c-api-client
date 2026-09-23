@@ -22,25 +22,25 @@ config_auth_provider_t* instantiate_config_auth_provider(int include_optional) {
   config_auth_provider_t* config_auth_provider = NULL;
   if (include_optional) {
     config_auth_provider = config_auth_provider_create(
-      "0",
-      "0",
-      1,
-      "0",
-      1,
-      "0",
-      "0",
-      "0"
+      "Database",
+      "database",
+      true,
+      "database",
+      true,
+      "/api/v1/auth/providers/database/authorization_url",
+      "database",
+      "database"
     );
   } else {
     config_auth_provider = config_auth_provider_create(
-      "0",
-      "0",
-      1,
-      "0",
-      1,
-      "0",
-      "0",
-      "0"
+      "Database",
+      "database",
+      true,
+      "database",
+      true,
+      "/api/v1/auth/providers/database/authorization_url",
+      "database",
+      "database"
     );
   }
 

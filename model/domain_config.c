@@ -19,7 +19,7 @@ static domain_config_t *domain_config_create_internal(
     int enable_arm_devices,
     int enable_devices,
     domain_config_webplayer_t *webplayer,
-    login_result_domain_snapshot_sharing_permissions_t *snapshot_sharing_permissions
+    domain_config_snapshot_sharing_permissions_t *snapshot_sharing_permissions
     ) {
     domain_config_t *domain_config_local_var = malloc(sizeof(domain_config_t));
     if (!domain_config_local_var) {
@@ -58,7 +58,7 @@ __attribute__((deprecated)) domain_config_t *domain_config_create(
     int enable_arm_devices,
     int enable_devices,
     domain_config_webplayer_t *webplayer,
-    login_result_domain_snapshot_sharing_permissions_t *snapshot_sharing_permissions
+    domain_config_snapshot_sharing_permissions_t *snapshot_sharing_permissions
     ) {
     return domain_config_create_internal (
         android,
@@ -104,7 +104,7 @@ void domain_config_free(domain_config_t *domain_config) {
         domain_config->webplayer = NULL;
     }
     if (domain_config->snapshot_sharing_permissions) {
-        login_result_domain_snapshot_sharing_permissions_free(domain_config->snapshot_sharing_permissions);
+        domain_config_snapshot_sharing_permissions_free(domain_config->snapshot_sharing_permissions);
         domain_config->snapshot_sharing_permissions = NULL;
     }
     free(domain_config);
@@ -229,7 +229,7 @@ cJSON *domain_config_convertToJSON(domain_config_t *domain_config) {
 
     // domain_config->snapshot_sharing_permissions
     if(domain_config->snapshot_sharing_permissions) {
-    cJSON *snapshot_sharing_permissions_local_JSON = login_result_domain_snapshot_sharing_permissions_convertToJSON(domain_config->snapshot_sharing_permissions);
+    cJSON *snapshot_sharing_permissions_local_JSON = domain_config_snapshot_sharing_permissions_convertToJSON(domain_config->snapshot_sharing_permissions);
     if(snapshot_sharing_permissions_local_JSON == NULL) {
     goto fail; //model
     }
@@ -258,7 +258,7 @@ domain_config_t *domain_config_parseFromJSON(cJSON *domain_configJSON){
     domain_config_webplayer_t *webplayer_local_nonprim = NULL;
 
     // define the local variable for domain_config->snapshot_sharing_permissions
-    login_result_domain_snapshot_sharing_permissions_t *snapshot_sharing_permissions_local_nonprim = NULL;
+    domain_config_snapshot_sharing_permissions_t *snapshot_sharing_permissions_local_nonprim = NULL;
 
     // domain_config->android
     cJSON *android = cJSON_GetObjectItemCaseSensitive(domain_configJSON, "android");
@@ -416,7 +416,7 @@ domain_config_t *domain_config_parseFromJSON(cJSON *domain_configJSON){
         snapshot_sharing_permissions = NULL;
     }
     if (snapshot_sharing_permissions) { 
-    snapshot_sharing_permissions_local_nonprim = login_result_domain_snapshot_sharing_permissions_parseFromJSON(snapshot_sharing_permissions); //nonprimitive
+    snapshot_sharing_permissions_local_nonprim = domain_config_snapshot_sharing_permissions_parseFromJSON(snapshot_sharing_permissions); //nonprimitive
     }
 
 
@@ -448,7 +448,7 @@ end:
         webplayer_local_nonprim = NULL;
     }
     if (snapshot_sharing_permissions_local_nonprim) {
-        login_result_domain_snapshot_sharing_permissions_free(snapshot_sharing_permissions_local_nonprim);
+        domain_config_snapshot_sharing_permissions_free(snapshot_sharing_permissions_local_nonprim);
         snapshot_sharing_permissions_local_nonprim = NULL;
     }
     return NULL;

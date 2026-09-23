@@ -23,22 +23,22 @@ domain_list_item_subscription_history_inner_t* instantiate_domain_list_item_subs
   domain_list_item_subscription_history_inner_t* domain_list_item_subscription_history_inner = NULL;
   if (include_optional) {
     domain_list_item_subscription_history_inner = domain_list_item_subscription_history_inner_create(
-      "0",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00",
-      "0",
+      "Enterprise Annual",
+      "2026-03-14T09:12:47Z",
+      "2027-01-15T00:00Z",
+      "Active",
        // false, not to have infinite recursion
       instantiate_domain_list_item_subscription_history_inner_administrator(0),
-      "0"
+      "https://dashboard.stripe.com/subscriptions/sub_1ExampleSubscriptionId"
     );
   } else {
     domain_list_item_subscription_history_inner = domain_list_item_subscription_history_inner_create(
-      "0",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00",
-      "0",
+      "Enterprise Annual",
+      "2026-03-14T09:12:47Z",
+      "2027-01-15T00:00Z",
+      "Active",
       NULL,
-      "0"
+      "https://dashboard.stripe.com/subscriptions/sub_1ExampleSubscriptionId"
     );
   }
 

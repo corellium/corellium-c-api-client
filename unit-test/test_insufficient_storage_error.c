@@ -22,19 +22,19 @@ insufficient_storage_error_t* instantiate_insufficient_storage_error(int include
   insufficient_storage_error_t* insufficient_storage_error = NULL;
   if (include_optional) {
     insufficient_storage_error = insufficient_storage_error_create(
-      "0",
+      "There is not enough storage space to store the requested file",
       corellium_api_insufficient_storage_error_ERRORID_InsufficientStorage,
-      0,
-      0,
-      0
+      2199023255552,
+      1073741824,
+      3448156160
     );
   } else {
     insufficient_storage_error = insufficient_storage_error_create(
-      "0",
+      "There is not enough storage space to store the requested file",
       corellium_api_insufficient_storage_error_ERRORID_InsufficientStorage,
-      0,
-      0,
-      0
+      2199023255552,
+      1073741824,
+      3448156160
     );
   }
 

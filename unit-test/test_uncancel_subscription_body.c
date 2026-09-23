@@ -22,11 +22,11 @@ uncancel_subscription_body_t* instantiate_uncancel_subscription_body(int include
   uncancel_subscription_body_t* uncancel_subscription_body = NULL;
   if (include_optional) {
     uncancel_subscription_body = uncancel_subscription_body_create(
-      "0"
+      "c29762d1-45d7-489d-a3a2-9dadc43978ba"
     );
   } else {
     uncancel_subscription_body = uncancel_subscription_body_create(
-      "0"
+      "c29762d1-45d7-489d-a3a2-9dadc43978ba"
     );
   }
 

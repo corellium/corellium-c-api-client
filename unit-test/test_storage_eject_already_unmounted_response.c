@@ -22,11 +22,11 @@ storage_eject_already_unmounted_response_t* instantiate_storage_eject_already_un
   storage_eject_already_unmounted_response_t* storage_eject_already_unmounted_response = NULL;
   if (include_optional) {
     storage_eject_already_unmounted_response = storage_eject_already_unmounted_response_create(
-      "0"
+      "Device is already unmounted."
     );
   } else {
     storage_eject_already_unmounted_response = storage_eject_already_unmounted_response_create(
-      "0"
+      "Device is already unmounted."
     );
   }
 

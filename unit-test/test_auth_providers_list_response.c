@@ -23,20 +23,20 @@ auth_providers_list_response_t* instantiate_auth_providers_list_response(int inc
   if (include_optional) {
     auth_providers_list_response = auth_providers_list_response_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     auth_providers_list_response = auth_providers_list_response_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

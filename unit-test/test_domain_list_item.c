@@ -27,13 +27,13 @@ domain_list_item_t* instantiate_domain_list_item(int include_optional) {
   domain_list_item_t* domain_list_item = NULL;
   if (include_optional) {
     domain_list_item = domain_list_item_create(
-      "0",
-      "0",
+      "c29762d1-45d7-489d-a3a2-9dadc43978ba",
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
       list_createList(),
-      56,
+      2,
       list_createList(),
-      "0",
-      "0",
+      "acme.corellium.com",
+      "acme",
        // false, not to have infinite recursion
       instantiate_domain_list_item_disabled(0),
        // false, not to have infinite recursion
@@ -42,30 +42,30 @@ domain_list_item_t* instantiate_domain_list_item(int include_optional) {
       instantiate_domain_list_item_quotas(0),
        // false, not to have infinite recursion
       instantiate_domain_list_item_usage(0),
-      1.337,
+      1773479567000,
        // false, not to have infinite recursion
       instantiate_domain_list_item_subscription(0),
       list_createList(),
-      "0",
+      "Enterprise Annual",
       list_createList()
     );
   } else {
     domain_list_item = domain_list_item_create(
-      "0",
-      "0",
+      "c29762d1-45d7-489d-a3a2-9dadc43978ba",
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
       list_createList(),
-      56,
+      2,
       list_createList(),
-      "0",
-      "0",
+      "acme.corellium.com",
+      "acme",
       NULL,
       NULL,
       NULL,
       NULL,
-      1.337,
+      1773479567000,
       NULL,
       list_createList(),
-      "0",
+      "Enterprise Annual",
       list_createList()
     );
   }

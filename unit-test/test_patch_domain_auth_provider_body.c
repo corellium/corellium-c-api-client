@@ -23,16 +23,16 @@ patch_domain_auth_provider_body_t* instantiate_patch_domain_auth_provider_body(i
   patch_domain_auth_provider_body_t* patch_domain_auth_provider_body = NULL;
   if (include_optional) {
     patch_domain_auth_provider_body = patch_domain_auth_provider_body_create(
-      "0",
-      1,
-      "0",
+      "open-id-connect",
+      true,
+      "Log in with Okta",
       null
     );
   } else {
     patch_domain_auth_provider_body = patch_domain_auth_provider_body_create(
-      "0",
-      1,
-      "0",
+      "open-id-connect",
+      true,
+      "Log in with Okta",
       null
     );
   }

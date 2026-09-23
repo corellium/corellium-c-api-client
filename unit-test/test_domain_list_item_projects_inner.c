@@ -24,8 +24,8 @@ domain_list_item_projects_inner_t* instantiate_domain_list_item_projects_inner(i
   domain_list_item_projects_inner_t* domain_list_item_projects_inner = NULL;
   if (include_optional) {
     domain_list_item_projects_inner = domain_list_item_projects_inner_create(
-      "0",
-      "0",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "Default Project",
        // false, not to have infinite recursion
       instantiate_domain_list_item_projects_inner_quotas(0),
        // false, not to have infinite recursion
@@ -35,8 +35,8 @@ domain_list_item_projects_inner_t* instantiate_domain_list_item_projects_inner(i
     );
   } else {
     domain_list_item_projects_inner = domain_list_item_projects_inner_create(
-      "0",
-      "0",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "Default Project",
       NULL,
       NULL,
       list_createList(),

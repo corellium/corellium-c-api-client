@@ -23,12 +23,12 @@ share_snapshot_body_t* instantiate_share_snapshot_body(int include_optional) {
   if (include_optional) {
     share_snapshot_body = share_snapshot_body_create(
       corellium_api_share_snapshot_body__publicLink,
-      "0"
+      "<redacted>"
     );
   } else {
     share_snapshot_body = share_snapshot_body_create(
       corellium_api_share_snapshot_body__publicLink,
-      "0"
+      "<redacted>"
     );
   }
 

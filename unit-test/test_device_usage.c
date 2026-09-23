@@ -22,13 +22,13 @@ device_usage_t* instantiate_device_usage(int include_optional) {
   device_usage_t* device_usage = NULL;
   if (include_optional) {
     device_usage = device_usage_create(
-      1.337,
-      1.337
+      62.5,
+      100
     );
   } else {
     device_usage = device_usage_create(
-      1.337,
-      1.337
+      62.5,
+      100
     );
   }
 

@@ -22,17 +22,17 @@ trial_t* instantiate_trial(int include_optional) {
   trial_t* trial = NULL;
   if (include_optional) {
     trial = trial_create(
-      1.337,
-      1.337,
-      1.337,
-      1.337
+      30,
+      24,
+      24,
+      10
     );
   } else {
     trial = trial_create(
-      1.337,
-      1.337,
-      1.337,
-      1.337
+      30,
+      24,
+      24,
+      10
     );
   }
 

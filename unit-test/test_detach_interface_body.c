@@ -22,11 +22,11 @@ detach_interface_body_t* instantiate_detach_interface_body(int include_optional)
   detach_interface_body_t* detach_interface_body = NULL;
   if (include_optional) {
     detach_interface_body = detach_interface_body_create(
-      "0"
+      "56494514-33f7-4fc2-9fdc-865e3957e6d3"
     );
   } else {
     detach_interface_body = detach_interface_body_create(
-      "0"
+      "56494514-33f7-4fc2-9fdc-865e3957e6d3"
     );
   }
 

@@ -22,35 +22,35 @@ domain_software_t* instantiate_domain_software(int include_optional) {
   domain_software_t* domain_software = NULL;
   if (include_optional) {
     domain_software = domain_software_create(
-      "0",
+      "3e1354a3-fb10-46c0-8b05-56e28edbde69",
       "iphone17a",
       "iPhone Air",
       "iPhone18,4",
-      "0",
-      1,
-      "0",
-      "0",
-      "0",
-      1.337,
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00",
-      "0"
+      "t8101",
+      true,
+      "17.5",
+      "21F79",
+      "iPhone18,4_17.5_21F79_Restore.ipsw",
+      7516192768,
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z",
+      "https://example.com/firmware/iPhone18,4_17.5_21F79_Restore.ipsw?signature=<signature>"
     );
   } else {
     domain_software = domain_software_create(
-      "0",
+      "3e1354a3-fb10-46c0-8b05-56e28edbde69",
       "iphone17a",
       "iPhone Air",
       "iPhone18,4",
-      "0",
-      1,
-      "0",
-      "0",
-      "0",
-      1.337,
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00",
-      "0"
+      "t8101",
+      true,
+      "17.5",
+      "21F79",
+      "iPhone18,4_17.5_21F79_Restore.ipsw",
+      7516192768,
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z",
+      "https://example.com/firmware/iPhone18,4_17.5_21F79_Restore.ipsw?signature=<signature>"
     );
   }
 

@@ -22,17 +22,17 @@ project_settings_t* instantiate_project_settings(int include_optional) {
   project_settings_t* project_settings = NULL;
   if (include_optional) {
     project_settings = project_settings_create(
-      56,
       1,
-      1,
-      "0"
+      true,
+      true,
+      "0eb5d1e7-2c10-42b1-95fc-30e4e4885cd7"
     );
   } else {
     project_settings = project_settings_create(
-      56,
       1,
-      1,
-      "0"
+      true,
+      true,
+      "0eb5d1e7-2c10-42b1-95fc-30e4e4885cd7"
     );
   }
 

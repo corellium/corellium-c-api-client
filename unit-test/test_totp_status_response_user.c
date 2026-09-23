@@ -22,17 +22,17 @@ totp_status_response_user_t* instantiate_totp_status_response_user(int include_o
   totp_status_response_user_t* totp_status_response_user = NULL;
   if (include_optional) {
     totp_status_response_user = totp_status_response_user_create(
-      "0",
-      "0",
-      "0",
-      "0"
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
+      "jane.doe",
+      "Jane Doe",
+      "jane.doe@example.com"
     );
   } else {
     totp_status_response_user = totp_status_response_user_create(
-      "0",
-      "0",
-      "0",
-      "0"
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
+      "jane.doe",
+      "Jane Doe",
+      "jane.doe@example.com"
     );
   }
 

@@ -22,13 +22,13 @@ login_result_domain_device_auto_shutdown_t* instantiate_login_result_domain_devi
   login_result_domain_device_auto_shutdown_t* login_result_domain_device_auto_shutdown = NULL;
   if (include_optional) {
     login_result_domain_device_auto_shutdown = login_result_domain_device_auto_shutdown_create(
-      1,
-      56
+      true,
+      10
     );
   } else {
     login_result_domain_device_auto_shutdown = login_result_domain_device_auto_shutdown_create(
-      1,
-      56
+      true,
+      10
     );
   }
 

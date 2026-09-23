@@ -22,31 +22,31 @@ activity_t* instantiate_activity(int include_optional) {
   activity_t* activity = NULL;
   if (include_optional) {
     activity = activity_create(
-      "0",
-      "0",
-      "0",
+      "5927ac2a-fdd4-4ab5-860f-28eec3511028",
+      "c29762d1-45d7-489d-a3a2-9dadc43978ba",
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
       "0",
       corellium_api_activity_OUTCOME_success,
-      0,
-      "0",
-      "0",
-      "0",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      {"name":"My iPhone 13 Pro"},
+      "7.4.0-28212",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   } else {
     activity = activity_create(
-      "0",
-      "0",
-      "0",
+      "5927ac2a-fdd4-4ab5-860f-28eec3511028",
+      "c29762d1-45d7-489d-a3a2-9dadc43978ba",
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
       "0",
       corellium_api_activity_OUTCOME_success,
-      0,
-      "0",
-      "0",
-      "0",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      {"name":"My iPhone 13 Pro"},
+      "7.4.0-28212",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   }
 

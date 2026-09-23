@@ -23,15 +23,15 @@ invite_result_invite_t* instantiate_invite_result_invite(int include_optional) {
   invite_result_invite_t* invite_result_invite = NULL;
   if (include_optional) {
     invite_result_invite = invite_result_invite_create(
-      "0",
-      "0",
+      "5ac8f0be-616d-45b9-b0af-e586fc65ad19",
+      "jane.doe@example.com",
        // false, not to have infinite recursion
       instantiate_invite_settings(0)
     );
   } else {
     invite_result_invite = invite_result_invite_create(
-      "0",
-      "0",
+      "5ac8f0be-616d-45b9-b0af-e586fc65ad19",
+      "jane.doe@example.com",
       NULL
     );
   }

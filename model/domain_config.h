@@ -15,9 +15,9 @@
 
 typedef struct domain_config_t domain_config_t;
 
+#include "domain_config_snapshot_sharing_permissions.h"
 #include "domain_config_trial.h"
 #include "domain_config_webplayer.h"
-#include "login_result_domain_snapshot_sharing_permissions.h"
 
 
 
@@ -35,7 +35,7 @@ typedef struct domain_config_t {
     int enable_arm_devices; //boolean
     int enable_devices; //boolean
     struct domain_config_webplayer_t *webplayer; //model
-    struct login_result_domain_snapshot_sharing_permissions_t *snapshot_sharing_permissions; //model
+    struct domain_config_snapshot_sharing_permissions_t *snapshot_sharing_permissions; //model
 
     int _library_owned; // Is the library responsible for freeing this object?
 } domain_config_t;
@@ -54,7 +54,7 @@ __attribute__((deprecated)) domain_config_t *domain_config_create(
     int enable_arm_devices,
     int enable_devices,
     domain_config_webplayer_t *webplayer,
-    login_result_domain_snapshot_sharing_permissions_t *snapshot_sharing_permissions
+    domain_config_snapshot_sharing_permissions_t *snapshot_sharing_permissions
 );
 
 void domain_config_free(domain_config_t *domain_config);

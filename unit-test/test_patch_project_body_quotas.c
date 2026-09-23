@@ -22,15 +22,15 @@ patch_project_body_quotas_t* instantiate_patch_project_body_quotas(int include_o
   patch_project_body_quotas_t* patch_project_body_quotas = NULL;
   if (include_optional) {
     patch_project_body_quotas = patch_project_body_quotas_create(
-      0,
-      0,
-      0
+      8,
+      20,
+      49152
     );
   } else {
     patch_project_body_quotas = patch_project_body_quotas_create(
-      0,
-      0,
-      0
+      8,
+      20,
+      49152
     );
   }
 

@@ -22,15 +22,15 @@ storage_already_mounted_response_t* instantiate_storage_already_mounted_response
   storage_already_mounted_response_t* storage_already_mounted_response = NULL;
   if (include_optional) {
     storage_already_mounted_response = storage_already_mounted_response_create(
-      "0",
-      "0",
-      "0"
+      "Device is already mounted.",
+      "/mnt/usb1",
+      "/dev/sdb1"
     );
   } else {
     storage_already_mounted_response = storage_already_mounted_response_create(
-      "0",
-      "0",
-      "0"
+      "Device is already mounted.",
+      "/mnt/usb1",
+      "/dev/sdb1"
     );
   }
 

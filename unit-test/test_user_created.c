@@ -22,11 +22,11 @@ user_created_t* instantiate_user_created(int include_optional) {
   user_created_t* user_created = NULL;
   if (include_optional) {
     user_created = user_created_create(
-      "0"
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320"
     );
   } else {
     user_created = user_created_create(
-      "0"
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320"
     );
   }
 

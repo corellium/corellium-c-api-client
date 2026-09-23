@@ -22,11 +22,11 @@ api_token_result_t* instantiate_api_token_result(int include_optional) {
   api_token_result_t* api_token_result = NULL;
   if (include_optional) {
     api_token_result = api_token_result_create(
-      "0"
+      "<token>"
     );
   } else {
     api_token_result = api_token_result_create(
-      "0"
+      "<token>"
     );
   }
 

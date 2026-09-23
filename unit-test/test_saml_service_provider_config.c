@@ -22,15 +22,19 @@ saml_service_provider_config_t* instantiate_saml_service_provider_config(int inc
   saml_service_provider_config_t* saml_service_provider_config = NULL;
   if (include_optional) {
     saml_service_provider_config = saml_service_provider_config_create(
-      "0",
-      "0",
-      "0"
+      "https://acme-corp.example.com/api/v1/auth/providers/idp.example.com/callback",
+      "-----BEGIN CERTIFICATE-----
+<base64-encoded-x509-certificate>
+-----END CERTIFICATE-----",
+      "https://acme-corp.example.com/api/v1/auth/providers/idp.example.com/spmetadata"
     );
   } else {
     saml_service_provider_config = saml_service_provider_config_create(
-      "0",
-      "0",
-      "0"
+      "https://acme-corp.example.com/api/v1/auth/providers/idp.example.com/callback",
+      "-----BEGIN CERTIFICATE-----
+<base64-encoded-x509-certificate>
+-----END CERTIFICATE-----",
+      "https://acme-corp.example.com/api/v1/auth/providers/idp.example.com/spmetadata"
     );
   }
 

@@ -22,11 +22,11 @@ input_response_t* instantiate_input_response(int include_optional) {
   input_response_t* input_response = NULL;
   if (include_optional) {
     input_response = input_response_create(
-      1.337
+      250
     );
   } else {
     input_response = input_response_create(
-      1.337
+      250
     );
   }
 

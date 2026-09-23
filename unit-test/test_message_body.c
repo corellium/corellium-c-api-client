@@ -22,15 +22,15 @@ message_body_t* instantiate_message_body(int include_optional) {
   message_body_t* message_body = NULL;
   if (include_optional) {
     message_body = message_body_create(
-      "0",
-      "0",
-      "0"
+      "+15555550123",
+      "Hello from Corellium!",
+      "deadbeef"
     );
   } else {
     message_body = message_body_create(
-      "0",
-      "0",
-      "0"
+      "+15555550123",
+      "Hello from Corellium!",
+      "deadbeef"
     );
   }
 

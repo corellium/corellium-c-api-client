@@ -23,14 +23,14 @@ create_open_vpn_network_connection_body_t* instantiate_create_open_vpn_network_c
   create_open_vpn_network_connection_body_t* create_open_vpn_network_connection_body = NULL;
   if (include_optional) {
     create_open_vpn_network_connection_body = create_open_vpn_network_connection_body_create(
-      "0",
+      "office-vpn",
       corellium_api_create_open_vpn_network_connection_body_PROVIDER_openvpn,
        // false, not to have infinite recursion
       instantiate_open_vpn_config(0)
     );
   } else {
     create_open_vpn_network_connection_body = create_open_vpn_network_connection_body_create(
-      "0",
+      "office-vpn",
       corellium_api_create_open_vpn_network_connection_body_PROVIDER_openvpn,
       NULL
     );

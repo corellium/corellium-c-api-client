@@ -22,15 +22,47 @@ open_vpn_config_t* instantiate_open_vpn_config(int include_optional) {
   open_vpn_config_t* open_vpn_config = NULL;
   if (include_optional) {
     open_vpn_config = open_vpn_config_create(
-      "0",
-      "0",
-      "0"
+      "jane.doe",
+      "<redacted>",
+      "client
+dev tun
+proto udp
+remote vpn.example.com 1194
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+remote-cert-tls server
+cipher AES-256-CBC
+verb 3
+<ca>
+-----BEGIN CERTIFICATE-----
+<ca-certificate>
+-----END CERTIFICATE-----
+</ca>
+"
     );
   } else {
     open_vpn_config = open_vpn_config_create(
-      "0",
-      "0",
-      "0"
+      "jane.doe",
+      "<redacted>",
+      "client
+dev tun
+proto udp
+remote vpn.example.com 1194
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+remote-cert-tls server
+cipher AES-256-CBC
+verb 3
+<ca>
+-----BEGIN CERTIFICATE-----
+<ca-certificate>
+-----END CERTIFICATE-----
+</ca>
+"
     );
   }
 

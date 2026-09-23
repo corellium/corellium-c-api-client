@@ -22,11 +22,11 @@ install_firmware_assets_response_t* instantiate_install_firmware_assets_response
   install_firmware_assets_response_t* install_firmware_assets_response = NULL;
   if (include_optional) {
     install_firmware_assets_response = install_firmware_assets_response_create(
-      "0"
+      "Firmware assets installed successfully."
     );
   } else {
     install_firmware_assets_response = install_firmware_assets_response_create(
-      "0"
+      "Firmware assets installed successfully."
     );
   }
 

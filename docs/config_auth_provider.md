@@ -5,7 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **char \*** | Provider name for a given provider type. | 
 **provider_type** | **char \*** | Provider type. | 
-**_default** | **int** | Denotes whether it&#39;s the default. | 
+**_default** | **int** | Denotes whether or not this is the default auth provider. | 
 **label** | **char \*** | Provider label. | 
 **enabled** | **int** | Denotes whether they&#39;re enabled or not. | 
 **authorization_url** | **char \*** | URL for provider auth. | 

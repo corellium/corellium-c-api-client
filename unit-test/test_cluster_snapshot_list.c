@@ -23,20 +23,20 @@ cluster_snapshot_list_t* instantiate_cluster_snapshot_list(int include_optional)
   if (include_optional) {
     cluster_snapshot_list = cluster_snapshot_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     cluster_snapshot_list = cluster_snapshot_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

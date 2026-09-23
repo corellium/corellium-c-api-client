@@ -22,17 +22,17 @@ project_usage_t* instantiate_project_usage(int include_optional) {
   project_usage_t* project_usage = NULL;
   if (include_optional) {
     project_usage = project_usage_create(
-      0,
-      0,
-      0,
-      0
+      6,
+      3,
+      18432,
+      1
     );
   } else {
     project_usage = project_usage_create(
-      0,
-      0,
-      0,
-      0
+      6,
+      3,
+      18432,
+      1
     );
   }
 

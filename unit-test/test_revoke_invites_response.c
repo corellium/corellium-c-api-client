@@ -22,11 +22,11 @@ revoke_invites_response_t* instantiate_revoke_invites_response(int include_optio
   revoke_invites_response_t* revoke_invites_response = NULL;
   if (include_optional) {
     revoke_invites_response = revoke_invites_response_create(
-      56
+      1
     );
   } else {
     revoke_invites_response = revoke_invites_response_create(
-      56
+      1
     );
   }
 

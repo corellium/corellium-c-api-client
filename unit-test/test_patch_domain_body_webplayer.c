@@ -22,11 +22,11 @@ patch_domain_body_webplayer_t* instantiate_patch_domain_body_webplayer(int inclu
   patch_domain_body_webplayer_t* patch_domain_body_webplayer = NULL;
   if (include_optional) {
     patch_domain_body_webplayer = patch_domain_body_webplayer_create(
-      list_createList()
+      ["app.example.com"]
     );
   } else {
     patch_domain_body_webplayer = patch_domain_body_webplayer_create(
-      list_createList()
+      ["app.example.com"]
     );
   }
 

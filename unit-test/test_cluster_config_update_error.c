@@ -22,12 +22,12 @@ cluster_config_update_error_t* instantiate_cluster_config_update_error(int inclu
   cluster_config_update_error_t* cluster_config_update_error = NULL;
   if (include_optional) {
     cluster_config_update_error = cluster_config_update_error_create(
-      "0",
+      "Retry the request or apply the configuration change manually on the affected nodes.",
       list_createList()
     );
   } else {
     cluster_config_update_error = cluster_config_update_error_create(
-      "0",
+      "Retry the request or apply the configuration change manually on the affected nodes.",
       list_createList()
     );
   }

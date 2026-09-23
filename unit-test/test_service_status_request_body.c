@@ -26,11 +26,11 @@ service_status_request_body_t* instantiate_service_status_request_body(int inclu
   service_status_request_body_t* service_status_request_body = NULL;
   if (include_optional) {
     service_status_request_body = service_status_request_body_create(
-      1,
-      "0",
-      "0",
-      "0",
-      "0",
+      true,
+      "c3po",
+      "10.0.0.5:8080",
+      "c3po-01.internal",
+      "2x3ZOdu4pshouoY0kttRPoiIk5s",
        // false, not to have infinite recursion
       instantiate_sys_info_schema(0),
        // false, not to have infinite recursion
@@ -38,27 +38,27 @@ service_status_request_body_t* instantiate_service_status_request_body(int inclu
       list_createList(),
        // false, not to have infinite recursion
       instantiate_pool_usage_schema(0),
-      "0",
+      "us-east-1a",
        // false, not to have infinite recursion
       instantiate_network_schema(0),
       "0",
-      "0"
+      "boot"
     );
   } else {
     service_status_request_body = service_status_request_body_create(
-      1,
-      "0",
-      "0",
-      "0",
-      "0",
+      true,
+      "c3po",
+      "10.0.0.5:8080",
+      "c3po-01.internal",
+      "2x3ZOdu4pshouoY0kttRPoiIk5s",
       NULL,
       NULL,
       list_createList(),
       NULL,
-      "0",
+      "us-east-1a",
       NULL,
       "0",
-      "0"
+      "boot"
     );
   }
 

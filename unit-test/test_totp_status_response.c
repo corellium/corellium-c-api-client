@@ -24,8 +24,8 @@ totp_status_response_t* instantiate_totp_status_response(int include_optional) {
   totp_status_response_t* totp_status_response = NULL;
   if (include_optional) {
     totp_status_response = totp_status_response_create(
-      "0",
-      1.337,
+      "<token>",
+      1773747665000,
        // false, not to have infinite recursion
       instantiate_totp_status_response_user(0),
        // false, not to have infinite recursion
@@ -33,8 +33,8 @@ totp_status_response_t* instantiate_totp_status_response(int include_optional) {
     );
   } else {
     totp_status_response = totp_status_response_create(
-      "0",
-      1.337,
+      "<token>",
+      1773747665000,
       NULL,
       NULL
     );

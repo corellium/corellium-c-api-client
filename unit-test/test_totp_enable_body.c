@@ -22,15 +22,15 @@ totp_enable_body_t* instantiate_totp_enable_body(int include_optional) {
   totp_enable_body_t* totp_enable_body = NULL;
   if (include_optional) {
     totp_enable_body = totp_enable_body_create(
-      "0",
-      "0",
-      "0"
+      "<totp-secret>",
+      "123456",
+      "<redacted>"
     );
   } else {
     totp_enable_body = totp_enable_body_create(
-      "0",
-      "0",
-      "0"
+      "<totp-secret>",
+      "123456",
+      "<redacted>"
     );
   }
 

@@ -24,30 +24,30 @@ snapshot_t* instantiate_snapshot(int include_optional) {
   snapshot_t* snapshot = NULL;
   if (include_optional) {
     snapshot = snapshot_create(
-      "0",
-      "0",
-      "0",
+      "c67af9c0-26cd-4233-9782-436c842b60db",
+      "Clean boot",
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
        // false, not to have infinite recursion
       instantiate_snapshot_status(0),
-      1.337,
-      1,
-      1,
-      1,
-      "0",
+      1773479567000,
+      true,
+      false,
+      true,
+      "iPhone 13 Pro",
        // false, not to have infinite recursion
       instantiate_snapshot_sharing(0)
     );
   } else {
     snapshot = snapshot_create(
-      "0",
-      "0",
-      "0",
+      "c67af9c0-26cd-4233-9782-436c842b60db",
+      "Clean boot",
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
       NULL,
-      1.337,
-      1,
-      1,
-      1,
-      "0",
+      1773479567000,
+      true,
+      false,
+      true,
+      "iPhone 13 Pro",
       NULL
     );
   }

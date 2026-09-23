@@ -25,26 +25,26 @@ subscription_t* instantiate_subscription(int include_optional) {
     subscription = subscription_create(
        // false, not to have infinite recursion
       instantiate_subscription_trial(0),
-      "0",
-      "0",
-      "0",
-      "0",
-      1,
-      1,
-      1,
-      "0"
+      "active",
+      "usage",
+      "Viper Essentials",
+      "2027-01-15T00:00:00.000Z",
+      true,
+      false,
+      true,
+      "period_end"
     );
   } else {
     subscription = subscription_create(
       NULL,
-      "0",
-      "0",
-      "0",
-      "0",
-      1,
-      1,
-      1,
-      "0"
+      "active",
+      "usage",
+      "Viper Essentials",
+      "2027-01-15T00:00:00.000Z",
+      true,
+      false,
+      true,
+      "period_end"
     );
   }
 

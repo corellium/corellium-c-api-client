@@ -22,19 +22,19 @@ cluster_node_status_cluster_totals_reserved_t* instantiate_cluster_node_status_c
   cluster_node_status_cluster_totals_reserved_t* cluster_node_status_cluster_totals_reserved = NULL;
   if (include_optional) {
     cluster_node_status_cluster_totals_reserved = cluster_node_status_cluster_totals_reserved_create(
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      1.337
+      30,
+      32768,
+      2412.18,
+      32,
+      2
     );
   } else {
     cluster_node_status_cluster_totals_reserved = cluster_node_status_cluster_totals_reserved_create(
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      1.337
+      30,
+      32768,
+      2412.18,
+      32,
+      2
     );
   }
 

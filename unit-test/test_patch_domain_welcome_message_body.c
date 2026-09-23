@@ -22,13 +22,13 @@ patch_domain_welcome_message_body_t* instantiate_patch_domain_welcome_message_bo
   patch_domain_welcome_message_body_t* patch_domain_welcome_message_body = NULL;
   if (include_optional) {
     patch_domain_welcome_message_body = patch_domain_welcome_message_body_create(
-      "0",
-      1
+      "<p>Welcome to Acme Corp!</p>",
+      true
     );
   } else {
     patch_domain_welcome_message_body = patch_domain_welcome_message_body_create(
-      "0",
-      1
+      "<p>Welcome to Acme Corp!</p>",
+      true
     );
   }
 

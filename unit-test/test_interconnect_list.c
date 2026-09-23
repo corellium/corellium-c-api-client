@@ -23,20 +23,20 @@ interconnect_list_t* instantiate_interconnect_list(int include_optional) {
   if (include_optional) {
     interconnect_list = interconnect_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     interconnect_list = interconnect_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

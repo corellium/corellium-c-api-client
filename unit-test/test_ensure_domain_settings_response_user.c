@@ -22,13 +22,13 @@ ensure_domain_settings_response_user_t* instantiate_ensure_domain_settings_respo
   ensure_domain_settings_response_user_t* ensure_domain_settings_response_user = NULL;
   if (include_optional) {
     ensure_domain_settings_response_user = ensure_domain_settings_response_user_create(
-      "0",
-      1
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
+      false
     );
   } else {
     ensure_domain_settings_response_user = ensure_domain_settings_response_user_create(
-      "0",
-      1
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
+      false
     );
   }
 

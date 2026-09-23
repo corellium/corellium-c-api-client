@@ -22,21 +22,21 @@ instance_restore_status_t* instantiate_instance_restore_status(int include_optio
   instance_restore_status_t* instance_restore_status = NULL;
   if (include_optional) {
     instance_restore_status = instance_restore_status_create(
-      "0",
-      "0",
+      "1",
+      "download-images",
       0,
       0,
-      "0",
-      "0"
+      "Restoring device",
+      "Extracting firmware components"
     );
   } else {
     instance_restore_status = instance_restore_status_create(
-      "0",
-      "0",
+      "1",
+      "download-images",
       0,
       0,
-      "0",
-      "0"
+      "Restoring device",
+      "Extracting firmware components"
     );
   }
 

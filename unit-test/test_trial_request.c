@@ -22,39 +22,39 @@ trial_request_t* instantiate_trial_request(int include_optional) {
   trial_request_t* trial_request = NULL;
   if (include_optional) {
     trial_request = trial_request_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      1,
-      1,
-      "0",
-      "0",
-      "0",
-      "0",
-      0,
-      1.337,
-      1.337,
-      "0"
+      "jane.doe@example.com",
+      "Jane Doe",
+      "credit",
+      "cus_xxxxxxxxxxxxxx",
+      "TRIAL2026",
+      false,
+      true,
+      "+1-555-0100",
+      "United States",
+      "Acme Corp",
+      "enterprise",
+      {"name":"Jane Doe","company":"Acme Corp","malware":false,"research":true,"pentest":true},
+      1773479567000,
+      1773747665000,
+      "Awaiting activation"
     );
   } else {
     trial_request = trial_request_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      1,
-      1,
-      "0",
-      "0",
-      "0",
-      "0",
-      0,
-      1.337,
-      1.337,
-      "0"
+      "jane.doe@example.com",
+      "Jane Doe",
+      "credit",
+      "cus_xxxxxxxxxxxxxx",
+      "TRIAL2026",
+      false,
+      true,
+      "+1-555-0100",
+      "United States",
+      "Acme Corp",
+      "enterprise",
+      {"name":"Jane Doe","company":"Acme Corp","malware":false,"research":true,"pentest":true},
+      1773479567000,
+      1773747665000,
+      "Awaiting activation"
     );
   }
 

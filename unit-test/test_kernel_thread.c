@@ -22,15 +22,15 @@ kernel_thread_t* instantiate_kernel_thread(int include_optional) {
   kernel_thread_t* kernel_thread = NULL;
   if (include_optional) {
     kernel_thread = kernel_thread_create(
-      "0",
-      56,
-      list_createList()
+      "0xffffff8012345678",
+      1,
+      ["0xffffff8012345678","0xffffff8012345690"]
     );
   } else {
     kernel_thread = kernel_thread_create(
-      "0",
-      56,
-      list_createList()
+      "0xffffff8012345678",
+      1,
+      ["0xffffff8012345678","0xffffff8012345690"]
     );
   }
 

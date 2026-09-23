@@ -22,13 +22,13 @@ start_instance_body_t* instantiate_start_instance_body(int include_optional) {
   start_instance_body_t* start_instance_body = NULL;
   if (include_optional) {
     start_instance_body = start_instance_body_create(
-      1,
-      1
+      true,
+      true
     );
   } else {
     start_instance_body = start_instance_body_create(
-      1,
-      1
+      true,
+      true
     );
   }
 

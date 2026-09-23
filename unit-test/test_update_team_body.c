@@ -22,11 +22,11 @@ update_team_body_t* instantiate_update_team_body(int include_optional) {
   update_team_body_t* update_team_body = NULL;
   if (include_optional) {
     update_team_body = update_team_body_create(
-      "0"
+      "Mobile QA"
     );
   } else {
     update_team_body = update_team_body_create(
-      "0"
+      "Mobile QA"
     );
   }
 

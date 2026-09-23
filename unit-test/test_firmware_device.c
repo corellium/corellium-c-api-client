@@ -22,27 +22,27 @@ firmware_device_t* instantiate_firmware_device(int include_optional) {
   firmware_device_t* firmware_device = NULL;
   if (include_optional) {
     firmware_device = firmware_device_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      "ios",
+      "iPhone13,2",
+      "iPhone 12",
+      "t8101",
+      "d53gap",
+      "12",
+      "33025",
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   } else {
     firmware_device = firmware_device_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      "ios",
+      "iPhone13,2",
+      "iPhone 12",
+      "t8101",
+      "d53gap",
+      "12",
+      "33025",
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   }
 

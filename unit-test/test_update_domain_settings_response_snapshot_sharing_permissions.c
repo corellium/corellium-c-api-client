@@ -22,21 +22,21 @@ update_domain_settings_response_snapshot_sharing_permissions_t* instantiate_upda
   update_domain_settings_response_snapshot_sharing_permissions_t* update_domain_settings_response_snapshot_sharing_permissions = NULL;
   if (include_optional) {
     update_domain_settings_response_snapshot_sharing_permissions = update_domain_settings_response_snapshot_sharing_permissions_create(
-      1,
-      1,
-      1,
-      1,
-      1,
-      1
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
     );
   } else {
     update_domain_settings_response_snapshot_sharing_permissions = update_domain_settings_response_snapshot_sharing_permissions_create(
-      1,
-      1,
-      1,
-      1,
-      1,
-      1
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
     );
   }
 

@@ -22,13 +22,13 @@ get_firmware_info_body_t* instantiate_get_firmware_info_body(int include_optiona
   get_firmware_info_body_t* get_firmware_info_body = NULL;
   if (include_optional) {
     get_firmware_info_body = get_firmware_info_body_create(
-      "0",
-      1
+      "<redacted>",
+      true
     );
   } else {
     get_firmware_info_body = get_firmware_info_body_create(
-      "0",
-      1
+      "<redacted>",
+      true
     );
   }
 

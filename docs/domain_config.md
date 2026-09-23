@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **enable_arm_devices** | **int** | Whether ARM devices are enabled. | [optional] 
 **enable_devices** | **int** | Whether devices are enabled. | [optional] 
 **webplayer** | [**domain_config_webplayer_t**](domain_config_webplayer.md) \* |  | [optional] 
-**snapshot_sharing_permissions** | [**login_result_domain_snapshot_sharing_permissions_t**](login_result_domain_snapshot_sharing_permissions.md) \* |  | [optional] 
+**snapshot_sharing_permissions** | [**domain_config_snapshot_sharing_permissions_t**](domain_config_snapshot_sharing_permissions.md) \* |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

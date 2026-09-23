@@ -23,20 +23,20 @@ teams_list_response_t* instantiate_teams_list_response(int include_optional) {
   if (include_optional) {
     teams_list_response = teams_list_response_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     teams_list_response = teams_list_response_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

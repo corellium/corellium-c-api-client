@@ -25,26 +25,26 @@ login_result_t* instantiate_login_result(int include_optional) {
   login_result_t* login_result = NULL;
   if (include_optional) {
     login_result = login_result_create(
-      "0",
-      "2013-10-20T19:20:30+01:00",
+      "<token>",
+      "2027-01-15T00:00Z",
        // false, not to have infinite recursion
       instantiate_login_result_user(0),
        // false, not to have infinite recursion
       instantiate_login_result_domain(0),
-      1.337,
-      "0",
+      1773479567000,
+      "a3569608-10e1-41c7-99fa-1a7d1f336c58",
        // false, not to have infinite recursion
       instantiate_login_result_disabled(0),
       1
     );
   } else {
     login_result = login_result_create(
-      "0",
-      "2013-10-20T19:20:30+01:00",
+      "<token>",
+      "2027-01-15T00:00Z",
       NULL,
       NULL,
-      1.337,
-      "0",
+      1773479567000,
+      "a3569608-10e1-41c7-99fa-1a7d1f336c58",
       NULL,
       1
     );

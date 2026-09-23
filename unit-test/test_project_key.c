@@ -23,24 +23,24 @@ project_key_t* instantiate_project_key(int include_optional) {
   if (include_optional) {
     project_key = project_key_create(
       corellium_api_project_key_KIND_ssh,
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      "Build server key",
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJUlGdieyRXdiVIyQjqthDE1YzmwzH0ZeZuHkBuC9Gwr user@example.com",
+      "9c1098dc-e881-41fb-b3af-e2d5ddd55d86",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "82:af:e7:ec:8c:03:17:fa:32:89:d7:e3:93:e2:9e:72",
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   } else {
     project_key = project_key_create(
       corellium_api_project_key_KIND_ssh,
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      "Build server key",
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJUlGdieyRXdiVIyQjqthDE1YzmwzH0ZeZuHkBuC9Gwr user@example.com",
+      "9c1098dc-e881-41fb-b3af-e2d5ddd55d86",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "82:af:e7:ec:8c:03:17:fa:32:89:d7:e3:93:e2:9e:72",
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   }
 

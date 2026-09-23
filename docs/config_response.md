@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **invalid_build** | **int** | Denotes whether the build is invalid. | [optional] 
 **sep_sim** | **int** | Denotes whether sepSim is enabled. | 
 **installer_available** | **int** | Denotes whether installer is available. | 
-**invoiced_publishable_key** | **char \*** | API publishable key to use for Invoiced. | [optional] 
 **stripe_public_key** | **char \*** | Stripe public key. | [optional] 
 **intercom_id** | **char \*** | Intercom app ID, also known as workspace ID. | [optional] 
 **gtm_id** | **char \*** | Google Tag Manager ID. | [optional] 

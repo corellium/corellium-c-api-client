@@ -22,19 +22,19 @@ model_rect_t* instantiate_model_rect(int include_optional) {
   model_rect_t* model_rect = NULL;
   if (include_optional) {
     model_rect = model_rect_create(
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      1.337
+      10.29,
+      12.04,
+      275.91,
+      599.12,
+      0.12
     );
   } else {
     model_rect = model_rect_create(
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      1.337
+      10.29,
+      12.04,
+      275.91,
+      599.12,
+      0.12
     );
   }
 

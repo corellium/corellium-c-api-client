@@ -23,20 +23,20 @@ image_list_t* instantiate_image_list(int include_optional) {
   if (include_optional) {
     image_list = image_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     image_list = image_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

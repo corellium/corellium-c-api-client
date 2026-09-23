@@ -22,17 +22,17 @@ ldap_user_attribute_mapping_t* instantiate_ldap_user_attribute_mapping(int inclu
   ldap_user_attribute_mapping_t* ldap_user_attribute_mapping = NULL;
   if (include_optional) {
     ldap_user_attribute_mapping = ldap_user_attribute_mapping_create(
-      "0",
-      "0",
-      "0",
-      "0"
+      "uid",
+      "mail",
+      "givenName",
+      "sn"
     );
   } else {
     ldap_user_attribute_mapping = ldap_user_attribute_mapping_create(
-      "0",
-      "0",
-      "0",
-      "0"
+      "uid",
+      "mail",
+      "givenName",
+      "sn"
     );
   }
 

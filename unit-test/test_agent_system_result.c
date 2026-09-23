@@ -22,13 +22,13 @@ agent_system_result_t* instantiate_agent_system_result(int include_optional) {
   agent_system_result_t* agent_system_result = NULL;
   if (include_optional) {
     agent_system_result = agent_system_result_create(
-      0,
-      1
+      7,
+      true
     );
   } else {
     agent_system_result = agent_system_result_create(
-      0,
-      1
+      7,
+      true
     );
   }
 

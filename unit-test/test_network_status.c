@@ -22,17 +22,17 @@ network_status_t* instantiate_network_status(int include_optional) {
   network_status_t* network_status = NULL;
   if (include_optional) {
     network_status = network_status_create(
-      "0",
-      "0",
+      "openvpn",
+      "office-vpn",
       corellium_api_network_status_STATE_disconnected,
-      0
+      {"error":"connection timed out"}
     );
   } else {
     network_status = network_status_create(
-      "0",
-      "0",
+      "openvpn",
+      "office-vpn",
       corellium_api_network_status_STATE_disconnected,
-      0
+      {"error":"connection timed out"}
     );
   }
 

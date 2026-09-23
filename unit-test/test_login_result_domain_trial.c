@@ -22,13 +22,13 @@ login_result_domain_trial_t* instantiate_login_result_domain_trial(int include_o
   login_result_domain_trial_t* login_result_domain_trial = NULL;
   if (include_optional) {
     login_result_domain_trial = login_result_domain_trial_create(
-      1.337,
-      1.337
+      1773479567000,
+      1775207567000
     );
   } else {
     login_result_domain_trial = login_result_domain_trial_create(
-      1.337,
-      1.337
+      1773479567000,
+      1775207567000
     );
   }
 

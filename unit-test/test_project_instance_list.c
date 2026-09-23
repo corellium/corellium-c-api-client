@@ -23,20 +23,20 @@ project_instance_list_t* instantiate_project_instance_list(int include_optional)
   if (include_optional) {
     project_instance_list = project_instance_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     project_instance_list = project_instance_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

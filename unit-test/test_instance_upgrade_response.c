@@ -22,12 +22,12 @@ instance_upgrade_response_t* instantiate_instance_upgrade_response(int include_o
   instance_upgrade_response_t* instance_upgrade_response = NULL;
   if (include_optional) {
     instance_upgrade_response = instance_upgrade_response_create(
-      "0",
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
       corellium_api_instance_upgrade_response_STATE_updating
     );
   } else {
     instance_upgrade_response = instance_upgrade_response_create(
-      "0",
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
       corellium_api_instance_upgrade_response_STATE_updating
     );
   }

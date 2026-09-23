@@ -22,25 +22,29 @@ register_service_body_t* instantiate_register_service_body(int include_optional)
   register_service_body_t* register_service_body = NULL;
   if (include_optional) {
     register_service_body = register_service_body_create(
-      "0",
-      "0",
-      "0",
-      "0",
+      "<redacted>",
+      "2x3ZOdu4pshouoY0kttRPoiIk5s",
+      "10.0.0.5:8080",
+      "c3po",
       list_createList(),
-      "0",
-      "0",
-      "0"
+      "<redacted>",
+      "-----BEGIN CERTIFICATE-----
+MIIB...
+-----END CERTIFICATE-----",
+      "AB:CD:EF:12:34:56:78:90:AB:CD:EF:12:34:56:78:90:AB:CD:EF:12"
     );
   } else {
     register_service_body = register_service_body_create(
-      "0",
-      "0",
-      "0",
-      "0",
+      "<redacted>",
+      "2x3ZOdu4pshouoY0kttRPoiIk5s",
+      "10.0.0.5:8080",
+      "c3po",
       list_createList(),
-      "0",
-      "0",
-      "0"
+      "<redacted>",
+      "-----BEGIN CERTIFICATE-----
+MIIB...
+-----END CERTIFICATE-----",
+      "AB:CD:EF:12:34:56:78:90:AB:CD:EF:12:34:56:78:90:AB:CD:EF:12"
     );
   }
 

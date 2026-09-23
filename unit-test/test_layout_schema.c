@@ -24,23 +24,23 @@ layout_schema_t* instantiate_layout_schema(int include_optional) {
     layout_schema = layout_schema_create(
       0,
       0,
-      1.337,
-      1.337,
+      6,
+      2,
       "0",
       0,
       0,
-      1.337
+      4096
     );
   } else {
     layout_schema = layout_schema_create(
       0,
       0,
-      1.337,
-      1.337,
+      6,
+      2,
       "0",
       0,
       0,
-      1.337
+      4096
     );
   }
 

@@ -22,13 +22,13 @@ firmware_asset_filter_t* instantiate_firmware_asset_filter(int include_optional)
   firmware_asset_filter_t* firmware_asset_filter = NULL;
   if (include_optional) {
     firmware_asset_filter = firmware_asset_filter_create(
-      "0",
-      "0"
+      "https://example.com/firmware-assets/asset.bin",
+      "c29762d1-45d7-489d-a3a2-9dadc43978ba"
     );
   } else {
     firmware_asset_filter = firmware_asset_filter_create(
-      "0",
-      "0"
+      "https://example.com/firmware-assets/asset.bin",
+      "c29762d1-45d7-489d-a3a2-9dadc43978ba"
     );
   }
 

@@ -22,15 +22,15 @@ instance_boot_options_v_mmio_inner_t* instantiate_instance_boot_options_v_mmio_i
   instance_boot_options_v_mmio_inner_t* instance_boot_options_v_mmio_inner = NULL;
   if (include_optional) {
     instance_boot_options_v_mmio_inner = instance_boot_options_v_mmio_inner_create(
-      "0",
-      "0",
-      "0"
+      "0x9000000",
+      "0x1000",
+      "33-36"
     );
   } else {
     instance_boot_options_v_mmio_inner = instance_boot_options_v_mmio_inner_create(
-      "0",
-      "0",
-      "0"
+      "0x9000000",
+      "0x1000",
+      "33-36"
     );
   }
 

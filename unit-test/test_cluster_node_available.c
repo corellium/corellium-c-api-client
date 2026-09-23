@@ -22,19 +22,19 @@ cluster_node_available_t* instantiate_cluster_node_available(int include_optiona
   cluster_node_available_t* cluster_node_available = NULL;
   if (include_optional) {
     cluster_node_available = cluster_node_available_create(
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      1.337
+      30,
+      32768,
+      2412.18,
+      32,
+      2
     );
   } else {
     cluster_node_available = cluster_node_available_create(
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      1.337
+      30,
+      32768,
+      2412.18,
+      32,
+      2
     );
   }
 

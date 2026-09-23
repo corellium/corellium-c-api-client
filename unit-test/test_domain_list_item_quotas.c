@@ -22,15 +22,15 @@ domain_list_item_quotas_t* instantiate_domain_list_item_quotas(int include_optio
   domain_list_item_quotas_t* domain_list_item_quotas = NULL;
   if (include_optional) {
     domain_list_item_quotas = domain_list_item_quotas_create(
-      56,
-      56,
-      56
+      12,
+      30,
+      73728
     );
   } else {
     domain_list_item_quotas = domain_list_item_quotas_create(
-      56,
-      56,
-      56
+      12,
+      30,
+      73728
     );
   }
 

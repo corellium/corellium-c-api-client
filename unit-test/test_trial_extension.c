@@ -22,17 +22,17 @@ trial_extension_t* instantiate_trial_extension(int include_optional) {
   trial_extension_t* trial_extension = NULL;
   if (include_optional) {
     trial_extension = trial_extension_create(
-      56,
-      "0",
-      1,
-      "0"
+      7,
+      "Need more time to evaluate the platform.",
+      true,
+      "Trial already extended twice."
     );
   } else {
     trial_extension = trial_extension_create(
-      56,
-      "0",
-      1,
-      "0"
+      7,
+      "Need more time to evaluate the platform.",
+      true,
+      "Trial already extended twice."
     );
   }
 

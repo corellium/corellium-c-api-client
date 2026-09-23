@@ -22,13 +22,13 @@ aws_create_response_t* instantiate_aws_create_response(int include_optional) {
   aws_create_response_t* aws_create_response = NULL;
   if (include_optional) {
     aws_create_response = aws_create_response_create(
-      1,
-      1
+      true,
+      true
     );
   } else {
     aws_create_response = aws_create_response_create(
-      1,
-      1
+      true,
+      true
     );
   }
 

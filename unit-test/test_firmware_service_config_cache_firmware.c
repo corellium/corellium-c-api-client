@@ -22,19 +22,19 @@ firmware_service_config_cache_firmware_t* instantiate_firmware_service_config_ca
   firmware_service_config_cache_firmware_t* firmware_service_config_cache_firmware = NULL;
   if (include_optional) {
     firmware_service_config_cache_firmware = firmware_service_config_cache_firmware_create(
-      1,
-      "0",
-      "0",
-      "0",
-      "0"
+      true,
+      "checkbox",
+      "Cache firmware",
+      "Cache firmwares in /var/ipsw",
+      "boolean"
     );
   } else {
     firmware_service_config_cache_firmware = firmware_service_config_cache_firmware_create(
-      1,
-      "0",
-      "0",
-      "0",
-      "0"
+      true,
+      "checkbox",
+      "Cache firmware",
+      "Cache firmwares in /var/ipsw",
+      "boolean"
     );
   }
 

@@ -24,18 +24,18 @@ patch_cluster_config_body_t* instantiate_patch_cluster_config_body(int include_o
   patch_cluster_config_body_t* patch_cluster_config_body = NULL;
   if (include_optional) {
     patch_cluster_config_body = patch_cluster_config_body_create(
-      0,
+      10,
        // false, not to have infinite recursion
       instantiate_coordinator_config(0),
       null,
-      "0"
+      "10.0.0.12"
     );
   } else {
     patch_cluster_config_body = patch_cluster_config_body_create(
-      0,
+      10,
       NULL,
       null,
-      "0"
+      "10.0.0.12"
     );
   }
 

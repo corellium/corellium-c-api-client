@@ -22,11 +22,11 @@ update_extension_body_t* instantiate_update_extension_body(int include_optional)
   update_extension_body_t* update_extension_body = NULL;
   if (include_optional) {
     update_extension_body = update_extension_body_create(
-      1
+      false
     );
   } else {
     update_extension_body = update_extension_body_create(
-      1
+      false
     );
   }
 

@@ -22,11 +22,11 @@ instance_read_only_status_t* instantiate_instance_read_only_status(int include_o
   instance_read_only_status_t* instance_read_only_status = NULL;
   if (include_optional) {
     instance_read_only_status = instance_read_only_status_create(
-      "0"
+      "disabling"
     );
   } else {
     instance_read_only_status = instance_read_only_status_create(
-      "0"
+      "disabling"
     );
   }
 

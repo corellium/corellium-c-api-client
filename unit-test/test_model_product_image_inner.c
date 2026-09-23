@@ -22,19 +22,19 @@ model_product_image_inner_t* instantiate_model_product_image_inner(int include_o
   model_product_image_inner_t* model_product_image_inner = NULL;
   if (include_optional) {
     model_product_image_inner = model_product_image_inner_create(
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      1.337
+      10.29,
+      12.04,
+      275.91,
+      599.12,
+      0.12
     );
   } else {
     model_product_image_inner = model_product_image_inner_create(
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      1.337
+      10.29,
+      12.04,
+      275.91,
+      599.12,
+      0.12
     );
   }
 

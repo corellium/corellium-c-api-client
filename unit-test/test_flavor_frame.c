@@ -26,25 +26,24 @@ flavor_frame_t* instantiate_flavor_frame(int include_optional) {
   if (include_optional) {
     flavor_frame = flavor_frame_create(
       "frames/iphone8.png",
-      1.337,
-      1.337,
+      300,
+      611.7106773823191,
        // false, not to have infinite recursion
       instantiate_flavor_frame_inner(0),
-       // false, not to have infinite recursion
-      instantiate_flavor_frame_home(0),
+      {"top":544.8909299655568,"left":125.71756601607349,"width":48.220436280137775,"height":48.220436280137775},
        // false, not to have infinite recursion
       instantiate_flavor_frame_dimensions(0),
-      1.337
+      2
     );
   } else {
     flavor_frame = flavor_frame_create(
       "frames/iphone8.png",
-      1.337,
-      1.337,
+      300,
+      611.7106773823191,
       NULL,
+      {"top":544.8909299655568,"left":125.71756601607349,"width":48.220436280137775,"height":48.220436280137775},
       NULL,
-      NULL,
-      1.337
+      2
     );
   }
 

@@ -25,43 +25,43 @@ shared_snapshot_t* instantiate_shared_snapshot(int include_optional) {
   shared_snapshot_t* shared_snapshot = NULL;
   if (include_optional) {
     shared_snapshot = shared_snapshot_create(
-      "2013-10-20T19:20:30+01:00",
-      "0",
+      "2026-03-16T08:22:19Z",
+      "jane.doe@example.com",
       corellium_api_shared_snapshot__publicLink,
        // false, not to have infinite recursion
       instantiate_snapshot_owner(0),
-      "0",
-      1.337,
-      1.337,
-      "0",
+      "c67af9c0-26cd-4233-9782-436c842b60db",
+      1773479567000,
       1,
-      1,
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
+      false,
+      true,
       "0",
-      "0",
-      "0",
+      "ios",
+      "Clean boot",
        // false, not to have infinite recursion
       instantiate_snapshot_status(0),
-      1,
+      true,
        // false, not to have infinite recursion
       instantiate_snapshot_sharing(0)
     );
   } else {
     shared_snapshot = shared_snapshot_create(
-      "2013-10-20T19:20:30+01:00",
-      "0",
+      "2026-03-16T08:22:19Z",
+      "jane.doe@example.com",
       corellium_api_shared_snapshot__publicLink,
       NULL,
-      "0",
-      1.337,
-      1.337,
-      "0",
+      "c67af9c0-26cd-4233-9782-436c842b60db",
+      1773479567000,
       1,
-      1,
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
+      false,
+      true,
       "0",
-      "0",
-      "0",
+      "ios",
+      "Clean boot",
       NULL,
-      1,
+      true,
       NULL
     );
   }

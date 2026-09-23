@@ -22,19 +22,19 @@ update_hook_body_t* instantiate_update_hook_body(int include_optional) {
   update_hook_body_t* update_hook_body = NULL;
   if (include_optional) {
     update_hook_body = update_hook_body_create(
-      "0",
-      "0",
-      "0",
+      "Bypass jailbreak detection",
+      "0x1000042a4",
+      "return 0;",
       corellium_api_update_hook_body__csmfcc,
-      1
+      false
     );
   } else {
     update_hook_body = update_hook_body_create(
-      "0",
-      "0",
-      "0",
+      "Bypass jailbreak detection",
+      "0x1000042a4",
+      "return 0;",
       corellium_api_update_hook_body__csmfcc,
-      1
+      false
     );
   }
 

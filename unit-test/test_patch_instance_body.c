@@ -23,14 +23,14 @@ patch_instance_body_t* instantiate_patch_instance_body(int include_optional) {
   patch_instance_body_t* patch_instance_body = NULL;
   if (include_optional) {
     patch_instance_body = patch_instance_body_create(
-      "0",
+      "My iPhone 13 Pro",
       null,
       list_createList(),
       list_createList()
     );
   } else {
     patch_instance_body = patch_instance_body_create(
-      "0",
+      "My iPhone 13 Pro",
       null,
       list_createList(),
       list_createList()

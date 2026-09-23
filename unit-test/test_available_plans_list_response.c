@@ -23,20 +23,20 @@ available_plans_list_response_t* instantiate_available_plans_list_response(int i
   if (include_optional) {
     available_plans_list_response = available_plans_list_response_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     available_plans_list_response = available_plans_list_response_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

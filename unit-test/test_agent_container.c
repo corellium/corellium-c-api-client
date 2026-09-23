@@ -22,29 +22,29 @@ agent_container_t* instantiate_agent_container(int include_optional) {
   agent_container_t* agent_container = NULL;
   if (include_optional) {
     agent_container = agent_container_create(
+      "1",
+      "onboot",
+      "10.0.0.12",
+      "fe80::5054:ff:fe12:3456",
+      "container1",
+      "1234",
+      "52428800",
+      "RUNNING",
       "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0"
+      "1"
     );
   } else {
     agent_container = agent_container_create(
+      "1",
+      "onboot",
+      "10.0.0.12",
+      "fe80::5054:ff:fe12:3456",
+      "container1",
+      "1234",
+      "52428800",
+      "RUNNING",
       "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0"
+      "1"
     );
   }
 

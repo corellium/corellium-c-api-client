@@ -23,21 +23,21 @@ invitation_by_token_t* instantiate_invitation_by_token(int include_optional) {
   invitation_by_token_t* invitation_by_token = NULL;
   if (include_optional) {
     invitation_by_token = invitation_by_token_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      1,
+      "5ac8f0be-616d-45b9-b0af-e586fc65ad19",
+      "jane.doe@example.com",
+      "acme-corp",
+      "Acme Corp",
+      true,
        // false, not to have infinite recursion
       instantiate_invite_settings(0)
     );
   } else {
     invitation_by_token = invitation_by_token_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      1,
+      "5ac8f0be-616d-45b9-b0af-e586fc65ad19",
+      "jane.doe@example.com",
+      "acme-corp",
+      "Acme Corp",
+      true,
       NULL
     );
   }

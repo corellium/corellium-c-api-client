@@ -23,31 +23,31 @@ domain_auth_provider_response_t* instantiate_domain_auth_provider_response(int i
   domain_auth_provider_response_t* domain_auth_provider_response = NULL;
   if (include_optional) {
     domain_auth_provider_response = domain_auth_provider_response_create(
-      "0",
+      "8036ef76-8194-4a7c-95b2-42606a5d0171",
       null,
-      "0",
-      "0",
-      1,
-      "0",
-      1,
-      "0",
-      "0",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      "open-id-connect",
+      "Log in with Okta",
+      true,
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
+      false,
+      "/api/v3/auth/providers/sso.example.com/authorization_url",
+      "Okta",
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   } else {
     domain_auth_provider_response = domain_auth_provider_response_create(
-      "0",
+      "8036ef76-8194-4a7c-95b2-42606a5d0171",
       null,
-      "0",
-      "0",
-      1,
-      "0",
-      1,
-      "0",
-      "0",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      "open-id-connect",
+      "Log in with Okta",
+      true,
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
+      false,
+      "/api/v3/auth/providers/sso.example.com/authorization_url",
+      "Okta",
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   }
 

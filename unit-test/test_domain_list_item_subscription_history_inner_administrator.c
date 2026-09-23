@@ -22,13 +22,13 @@ domain_list_item_subscription_history_inner_administrator_t* instantiate_domain_
   domain_list_item_subscription_history_inner_administrator_t* domain_list_item_subscription_history_inner_administrator = NULL;
   if (include_optional) {
     domain_list_item_subscription_history_inner_administrator = domain_list_item_subscription_history_inner_administrator_create(
-      "0",
-      "0"
+      "Tom Smith",
+      "tom.smith@example.com"
     );
   } else {
     domain_list_item_subscription_history_inner_administrator = domain_list_item_subscription_history_inner_administrator_create(
-      "0",
-      "0"
+      "Tom Smith",
+      "tom.smith@example.com"
     );
   }
 

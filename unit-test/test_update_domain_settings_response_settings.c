@@ -22,11 +22,11 @@ update_domain_settings_response_settings_t* instantiate_update_domain_settings_r
   update_domain_settings_response_settings_t* update_domain_settings_response_settings = NULL;
   if (include_optional) {
     update_domain_settings_response_settings = update_domain_settings_response_settings_create(
-      1
+      true
     );
   } else {
     update_domain_settings_response_settings = update_domain_settings_response_settings_create(
-      1
+      true
     );
   }
 

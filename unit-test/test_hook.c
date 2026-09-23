@@ -22,27 +22,27 @@ hook_t* instantiate_hook(int include_optional) {
   hook_t* hook = NULL;
   if (include_optional) {
     hook = hook_create(
-      "0",
-      "0",
-      "0",
-      "0",
+      "2a1192e8-c7de-4981-bc11-c87fd1f12d13",
+      "Bypass jailbreak detection",
+      "0x1000042a4",
+      "return 0;",
       corellium_api_hook__csmfcc,
-      1,
-      "0",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      true,
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   } else {
     hook = hook_create(
-      "0",
-      "0",
-      "0",
-      "0",
+      "2a1192e8-c7de-4981-bc11-c87fd1f12d13",
+      "Bypass jailbreak detection",
+      "0x1000042a4",
+      "return 0;",
       corellium_api_hook__csmfcc,
-      1,
-      "0",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      true,
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   }
 

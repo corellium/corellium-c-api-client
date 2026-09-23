@@ -22,11 +22,11 @@ team_created_t* instantiate_team_created(int include_optional) {
   team_created_t* team_created = NULL;
   if (include_optional) {
     team_created = team_created_create(
-      "0"
+      "089c8ffd-ca4d-4d35-80ab-0847d18b7213"
     );
   } else {
     team_created = team_created_create(
-      "0"
+      "089c8ffd-ca4d-4d35-80ab-0847d18b7213"
     );
   }
 

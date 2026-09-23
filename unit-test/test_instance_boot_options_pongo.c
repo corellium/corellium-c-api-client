@@ -22,15 +22,15 @@ instance_boot_options_pongo_t* instantiate_instance_boot_options_pongo(int inclu
   instance_boot_options_pongo_t* instance_boot_options_pongo = NULL;
   if (include_optional) {
     instance_boot_options_pongo = instance_boot_options_pongo_create(
-      "0",
-      "0",
-      1.337
+      "3e1354a3-fb10-46c0-8b05-56e28edbde69",
+      "pongo.bin",
+      1048576
     );
   } else {
     instance_boot_options_pongo = instance_boot_options_pongo_create(
-      "0",
-      "0",
-      1.337
+      "3e1354a3-fb10-46c0-8b05-56e28edbde69",
+      "pongo.bin",
+      1048576
     );
   }
 

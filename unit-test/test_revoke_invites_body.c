@@ -22,11 +22,11 @@ revoke_invites_body_t* instantiate_revoke_invites_body(int include_optional) {
   revoke_invites_body_t* revoke_invites_body = NULL;
   if (include_optional) {
     revoke_invites_body = revoke_invites_body_create(
-      list_createList()
+      ["5ac8f0be-616d-45b9-b0af-e586fc65ad19"]
     );
   } else {
     revoke_invites_body = revoke_invites_body_create(
-      list_createList()
+      ["5ac8f0be-616d-45b9-b0af-e586fc65ad19"]
     );
   }
 

@@ -22,12 +22,12 @@ patch_interconnect_body_t* instantiate_patch_interconnect_body(int include_optio
   patch_interconnect_body_t* patch_interconnect_body = NULL;
   if (include_optional) {
     patch_interconnect_body = patch_interconnect_body_create(
-      "0",
+      "vpn-gateway",
       list_createList()
     );
   } else {
     patch_interconnect_body = patch_interconnect_body_create(
-      "0",
+      "vpn-gateway",
       list_createList()
     );
   }

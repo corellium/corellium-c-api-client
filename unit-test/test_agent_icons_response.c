@@ -22,15 +22,15 @@ agent_icons_response_t* instantiate_agent_icons_response(int include_optional) {
   agent_icons_response_t* agent_icons_response = NULL;
   if (include_optional) {
     agent_icons_response = agent_icons_response_create(
-      1,
-      0,
-      0
+      true,
+      7,
+      {"com.corellium.cafe":"iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9L"}
     );
   } else {
     agent_icons_response = agent_icons_response_create(
-      1,
-      0,
-      0
+      true,
+      7,
+      {"com.corellium.cafe":"iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9L"}
     );
   }
 

@@ -22,17 +22,17 @@ domain_list_item_projects_inner_instances_inner_images_inner_t* instantiate_doma
   domain_list_item_projects_inner_instances_inner_images_inner_t* domain_list_item_projects_inner_instances_inner_images_inner = NULL;
   if (include_optional) {
     domain_list_item_projects_inner_instances_inner_images_inner = domain_list_item_projects_inner_instances_inner_images_inner_create(
-      "0",
-      "0",
-      "0",
-      1.337
+      "3e1354a3-fb10-46c0-8b05-56e28edbde69",
+      "fw",
+      "iPhone_16.5_20F66_Restore.ipsw",
+      239380613
     );
   } else {
     domain_list_item_projects_inner_instances_inner_images_inner = domain_list_item_projects_inner_instances_inner_images_inner_create(
-      "0",
-      "0",
-      "0",
-      1.337
+      "3e1354a3-fb10-46c0-8b05-56e28edbde69",
+      "fw",
+      "iPhone_16.5_20F66_Restore.ipsw",
+      239380613
     );
   }
 

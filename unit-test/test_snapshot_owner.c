@@ -22,13 +22,13 @@ snapshot_owner_t* instantiate_snapshot_owner(int include_optional) {
   snapshot_owner_t* snapshot_owner = NULL;
   if (include_optional) {
     snapshot_owner = snapshot_owner_create(
-      "0",
-      "0"
+      "Jane Doe",
+      "jane.doe@example.com"
     );
   } else {
     snapshot_owner = snapshot_owner_create(
-      "0",
-      "0"
+      "Jane Doe",
+      "jane.doe@example.com"
     );
   }
 

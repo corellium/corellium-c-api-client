@@ -23,12 +23,12 @@ agent_remote_it_status_t* instantiate_agent_remote_it_status(int include_optiona
   if (include_optional) {
     agent_remote_it_status = agent_remote_it_status_create(
       corellium_api_agent_remote_it_status_REMOTEITSTATUS_unknown,
-      "0"
+      "a1b2c3d4e5f6"
     );
   } else {
     agent_remote_it_status = agent_remote_it_status_create(
       corellium_api_agent_remote_it_status_REMOTEITSTATUS_unknown,
-      "0"
+      "a1b2c3d4e5f6"
     );
   }
 

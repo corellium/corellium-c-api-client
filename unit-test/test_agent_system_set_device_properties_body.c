@@ -22,13 +22,13 @@ agent_system_set_device_properties_body_t* instantiate_agent_system_set_device_p
   agent_system_set_device_properties_body_t* agent_system_set_device_properties_body = NULL;
   if (include_optional) {
     agent_system_set_device_properties_body = agent_system_set_device_properties_body_create(
-      "0",
-      "0"
+      "SM-G973F",
+      "samsung"
     );
   } else {
     agent_system_set_device_properties_body = agent_system_set_device_properties_body_create(
-      "0",
-      "0"
+      "SM-G973F",
+      "samsung"
     );
   }
 

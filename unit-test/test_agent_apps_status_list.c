@@ -22,17 +22,17 @@ agent_apps_status_list_t* instantiate_agent_apps_status_list(int include_optiona
   agent_apps_status_list_t* agent_apps_status_list = NULL;
   if (include_optional) {
     agent_apps_status_list = agent_apps_status_list_create(
-      1,
-      0,
+      true,
+      7,
       list_createList(),
-      "0"
+      "com.corellium.cafe"
     );
   } else {
     agent_apps_status_list = agent_apps_status_list_create(
-      1,
-      0,
+      true,
+      7,
       list_createList(),
-      "0"
+      "com.corellium.cafe"
     );
   }
 

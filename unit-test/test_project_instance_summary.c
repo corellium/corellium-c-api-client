@@ -22,17 +22,17 @@ project_instance_summary_t* instantiate_project_instance_summary(int include_opt
   project_instance_summary_t* project_instance_summary = NULL;
   if (include_optional) {
     project_instance_summary = project_instance_summary_create(
-      "0",
-      "0",
-      "0",
-      "0"
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
+      "My Device",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "on"
     );
   } else {
     project_instance_summary = project_instance_summary_create(
-      "0",
-      "0",
-      "0",
-      "0"
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
+      "My Device",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "on"
     );
   }
 

@@ -22,15 +22,15 @@ agent_error_t* instantiate_agent_error(int include_optional) {
   agent_error_t* agent_error = NULL;
   if (include_optional) {
     agent_error = agent_error_create(
-      "0",
+      "Agent request timed out.",
       corellium_api_agent_error_ERRORID_AgentError,
-      0
+      {"name":"OperationFailed","message":"Agent request timed out."}
     );
   } else {
     agent_error = agent_error_create(
-      "0",
+      "Agent request timed out.",
       corellium_api_agent_error_ERRORID_AgentError,
-      0
+      {"name":"OperationFailed","message":"Agent request timed out."}
     );
   }
 

@@ -22,11 +22,11 @@ node_console_endpoint_t* instantiate_node_console_endpoint(int include_optional)
   node_console_endpoint_t* node_console_endpoint = NULL;
   if (include_optional) {
     node_console_endpoint = node_console_endpoint_create(
-      "0"
+      "wss://acme-corp.example.com/api/v3/cluster/nodes/2x3ZOdu4pshouoY0kttRPoiIk5s/console?token=<token>"
     );
   } else {
     node_console_endpoint = node_console_endpoint_create(
-      "0"
+      "wss://acme-corp.example.com/api/v3/cluster/nodes/2x3ZOdu4pshouoY0kttRPoiIk5s/console?token=<token>"
     );
   }
 

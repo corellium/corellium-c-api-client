@@ -22,22 +22,22 @@ extension_t* instantiate_extension(int include_optional) {
   extension_t* extension = NULL;
   if (include_optional) {
     extension = extension_create(
-      "0",
-      1,
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00",
-      "0",
-      "0",
+      "rpi4b",
+      true,
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z",
+      "3e1354a3-fb10-46c0-8b05-56e28edbde69",
+      "deleting",
       list_createList()
     );
   } else {
     extension = extension_create(
-      "0",
-      1,
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00",
-      "0",
-      "0",
+      "rpi4b",
+      true,
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z",
+      "3e1354a3-fb10-46c0-8b05-56e28edbde69",
+      "deleting",
       list_createList()
     );
   }

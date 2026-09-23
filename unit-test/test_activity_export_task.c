@@ -22,21 +22,21 @@ activity_export_task_t* instantiate_activity_export_task(int include_optional) {
   activity_export_task_t* activity_export_task = NULL;
   if (include_optional) {
     activity_export_task = activity_export_task_create(
-      "0",
-      "2013-10-20T19:20:30+01:00",
+      "activity-export/722cdce5-6f71-4f4a-b2b6-c00f11c015f6",
+      "2026-03-14T09:12:47Z",
       corellium_api_activity_export_task_STATUS_in-progress,
-      0,
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      {"handlerName":"activity-export","exportType":"text/csv","domainId":"c29762d1-45d7-489d-a3a2-9dadc43978ba","userId":"e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320","apiVersion":"v3"},
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   } else {
     activity_export_task = activity_export_task_create(
-      "0",
-      "2013-10-20T19:20:30+01:00",
+      "activity-export/722cdce5-6f71-4f4a-b2b6-c00f11c015f6",
+      "2026-03-14T09:12:47Z",
       corellium_api_activity_export_task_STATUS_in-progress,
-      0,
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      {"handlerName":"activity-export","exportType":"text/csv","domainId":"c29762d1-45d7-489d-a3a2-9dadc43978ba","userId":"e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320","apiVersion":"v3"},
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   }
 

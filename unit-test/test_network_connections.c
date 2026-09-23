@@ -23,20 +23,20 @@ network_connections_t* instantiate_network_connections(int include_optional) {
   if (include_optional) {
     network_connections = network_connections_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     network_connections = network_connections_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

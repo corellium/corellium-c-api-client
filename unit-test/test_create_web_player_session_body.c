@@ -23,20 +23,20 @@ create_web_player_session_body_t* instantiate_create_web_player_session_body(int
   create_web_player_session_body_t* create_web_player_session_body = NULL;
   if (include_optional) {
     create_web_player_session_body = create_web_player_session_body_create(
-      "0",
-      "0",
-      1800,
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
+      18000,
        // false, not to have infinite recursion
       instantiate_web_player_features(0),
-      "0"
+      "web-console-1234"
     );
   } else {
     create_web_player_session_body = create_web_player_session_body_create(
-      "0",
-      "0",
-      1800,
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
+      18000,
       NULL,
-      "0"
+      "web-console-1234"
     );
   }
 

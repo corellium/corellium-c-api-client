@@ -22,23 +22,23 @@ available_trial_plan_t* instantiate_available_trial_plan(int include_optional) {
   available_trial_plan_t* available_trial_plan = NULL;
   if (include_optional) {
     available_trial_plan = available_trial_plan_create(
-      "0",
-      "0",
-      "0",
+      "prod_ExampleProductId",
+      "Enterprise Trial",
+      "enterprise",
+      true,
+      12,
       1,
-      56,
-      56,
-      56
+      14
     );
   } else {
     available_trial_plan = available_trial_plan_create(
-      "0",
-      "0",
-      "0",
+      "prod_ExampleProductId",
+      "Enterprise Trial",
+      "enterprise",
+      true,
+      12,
       1,
-      56,
-      56,
-      56
+      14
     );
   }
 

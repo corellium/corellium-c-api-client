@@ -22,13 +22,13 @@ logging_t* instantiate_logging(int include_optional) {
   logging_t* logging = NULL;
   if (include_optional) {
     logging = logging_create(
-      1,
-      1
+      false,
+      false
     );
   } else {
     logging = logging_create(
-      1,
-      1
+      false,
+      false
     );
   }
 

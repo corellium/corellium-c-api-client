@@ -22,13 +22,13 @@ cancel_subscription_body_t* instantiate_cancel_subscription_body(int include_opt
   cancel_subscription_body_t* cancel_subscription_body = NULL;
   if (include_optional) {
     cancel_subscription_body = cancel_subscription_body_create(
-      "0",
-      1
+      "c29762d1-45d7-489d-a3a2-9dadc43978ba",
+      false
     );
   } else {
     cancel_subscription_body = cancel_subscription_body_create(
-      "0",
-      1
+      "c29762d1-45d7-489d-a3a2-9dadc43978ba",
+      false
     );
   }
 

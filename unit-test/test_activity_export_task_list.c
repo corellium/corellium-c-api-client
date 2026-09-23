@@ -23,20 +23,20 @@ activity_export_task_list_t* instantiate_activity_export_task_list(int include_o
   if (include_optional) {
     activity_export_task_list = activity_export_task_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     activity_export_task_list = activity_export_task_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

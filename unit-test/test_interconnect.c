@@ -22,29 +22,29 @@ interconnect_t* instantiate_interconnect(int include_optional) {
   interconnect_t* interconnect = NULL;
   if (include_optional) {
     interconnect = interconnect_create(
-      "0",
+      "vpn-gateway",
       corellium_api_interconnect_TYPE_hub,
-      "0",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
       list_createList(),
-      "0",
-      "0",
+      "56494514-33f7-4fc2-9fdc-865e3957e6d3",
+      "eth",
       corellium_api_interconnect_STATUS_attached,
-      0,
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      2,
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   } else {
     interconnect = interconnect_create(
-      "0",
+      "vpn-gateway",
       corellium_api_interconnect_TYPE_hub,
-      "0",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
       list_createList(),
-      "0",
-      "0",
+      "56494514-33f7-4fc2-9fdc-865e3957e6d3",
+      "eth",
       corellium_api_interconnect_STATUS_attached,
-      0,
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      2,
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   }
 

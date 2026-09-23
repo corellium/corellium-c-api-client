@@ -22,11 +22,11 @@ domain_config_trial_end_action_t* instantiate_domain_config_trial_end_action(int
   domain_config_trial_end_action_t* domain_config_trial_end_action = NULL;
   if (include_optional) {
     domain_config_trial_end_action = domain_config_trial_end_action_create(
-      "0"
+      "cancel"
     );
   } else {
     domain_config_trial_end_action = domain_config_trial_end_action_create(
-      "0"
+      "cancel"
     );
   }
 

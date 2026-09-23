@@ -22,12 +22,12 @@ create_instance_response_t* instantiate_create_instance_response(int include_opt
   create_instance_response_t* create_instance_response = NULL;
   if (include_optional) {
     create_instance_response = create_instance_response_create(
-      "0",
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
       corellium_api_create_instance_response_STATE_creating
     );
   } else {
     create_instance_response = create_instance_response_create(
-      "0",
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
       corellium_api_create_instance_response_STATE_creating
     );
   }

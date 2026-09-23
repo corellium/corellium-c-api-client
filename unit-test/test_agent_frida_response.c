@@ -22,13 +22,13 @@ agent_frida_response_t* instantiate_agent_frida_response(int include_optional) {
   agent_frida_response_t* agent_frida_response = NULL;
   if (include_optional) {
     agent_frida_response = agent_frida_response_create(
-      0,
-      1
+      7,
+      true
     );
   } else {
     agent_frida_response = agent_frida_response_create(
-      0,
-      1
+      7,
+      true
     );
   }
 

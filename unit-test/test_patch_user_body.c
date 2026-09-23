@@ -22,27 +22,27 @@ patch_user_body_t* instantiate_patch_user_body(int include_optional) {
   patch_user_body_t* patch_user_body = NULL;
   if (include_optional) {
     patch_user_body = patch_user_body_create(
-      "0",
-      "0",
-      "0",
-      1,
-      "0",
-      0,
-      1,
-      "0",
-      1
+      "jane.doe",
+      "Domain Administrator",
+      "jane.doe@example.com",
+      false,
+      "<redacted>",
+      {"lastVPNType":"ovpn"},
+      true,
+      "2026-05-22T13:58:34.000Z",
+      true
     );
   } else {
     patch_user_body = patch_user_body_create(
-      "0",
-      "0",
-      "0",
-      1,
-      "0",
-      0,
-      1,
-      "0",
-      1
+      "jane.doe",
+      "Domain Administrator",
+      "jane.doe@example.com",
+      false,
+      "<redacted>",
+      {"lastVPNType":"ovpn"},
+      true,
+      "2026-05-22T13:58:34.000Z",
+      true
     );
   }
 

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **next_bill** | **char \*** | ISO timestamp of next billing date. | [optional] 
 **usage_based** | **int** | Whether billing is usage-based. | 
 **last_usage_bill** | **char \*** | ISO timestamp of last usage bill. | [optional] 
-**last_payment_amount** | **double** | Last payment amount. | [optional] 
+**last_payment_amount** | **double** | Last payment amount, in cents. | [optional] 
 **usage_bill_interval_days** | **double** | Interval in days between usage bills. | [optional] 
 **usage_billing_threshold_dollars** | **double** | Dollar threshold that triggers a usage bill. | [optional] 
 **past_due** | **int** | Whether the subscription is past due. | [optional] 

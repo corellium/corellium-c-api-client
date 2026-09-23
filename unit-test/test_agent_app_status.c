@@ -22,13 +22,13 @@ agent_app_status_t* instantiate_agent_app_status(int include_optional) {
   agent_app_status_t* agent_app_status = NULL;
   if (include_optional) {
     agent_app_status = agent_app_status_create(
-      1,
-      "0"
+      true,
+      "com.corellium.cafe"
     );
   } else {
     agent_app_status = agent_app_status_create(
-      1,
-      "0"
+      true,
+      "com.corellium.cafe"
     );
   }
 

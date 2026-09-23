@@ -23,12 +23,12 @@ install_firmware_status_response_t* instantiate_install_firmware_status_response
   if (include_optional) {
     install_firmware_status_response = install_firmware_status_response_create(
       corellium_api_install_firmware_status_response__in-progress,
-      "0"
+      "https://example.com/download/iPhone12,1_16.4_20E247_Restore.ipsw"
     );
   } else {
     install_firmware_status_response = install_firmware_status_response_create(
       corellium_api_install_firmware_status_response__in-progress,
-      "0"
+      "https://example.com/download/iPhone12,1_16.4_20E247_Restore.ipsw"
     );
   }
 

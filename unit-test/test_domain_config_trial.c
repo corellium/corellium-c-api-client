@@ -25,8 +25,8 @@ domain_config_trial_t* instantiate_domain_config_trial(int include_optional) {
   domain_config_trial_t* domain_config_trial = NULL;
   if (include_optional) {
     domain_config_trial = domain_config_trial_create(
-      1.337,
-      1.337,
+      1773479567000,
+      1799971200000,
        // false, not to have infinite recursion
       instantiate_domain_config_trial_end_action(0),
        // false, not to have infinite recursion
@@ -35,8 +35,8 @@ domain_config_trial_t* instantiate_domain_config_trial(int include_optional) {
     );
   } else {
     domain_config_trial = domain_config_trial_create(
-      1.337,
-      1.337,
+      1773479567000,
+      1799971200000,
       NULL,
       NULL,
       null

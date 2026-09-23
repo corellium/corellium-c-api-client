@@ -22,13 +22,13 @@ totp_status_response_domain_t* instantiate_totp_status_response_domain(int inclu
   totp_status_response_domain_t* totp_status_response_domain = NULL;
   if (include_optional) {
     totp_status_response_domain = totp_status_response_domain_create(
-      "0",
-      "0"
+      "acme-corp",
+      "Acme Corp"
     );
   } else {
     totp_status_response_domain = totp_status_response_domain_create(
-      "0",
-      "0"
+      "acme-corp",
+      "Acme Corp"
     );
   }
 

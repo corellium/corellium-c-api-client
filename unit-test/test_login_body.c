@@ -22,21 +22,21 @@ login_body_t* instantiate_login_body(int include_optional) {
   login_body_t* login_body = NULL;
   if (include_optional) {
     login_body = login_body_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      1
+      "jane.doe",
+      "<redacted>",
+      "123456",
+      "<token>",
+      "<token>",
+      true
     );
   } else {
     login_body = login_body_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      1
+      "jane.doe",
+      "<redacted>",
+      "123456",
+      "<token>",
+      "<token>",
+      true
     );
   }
 

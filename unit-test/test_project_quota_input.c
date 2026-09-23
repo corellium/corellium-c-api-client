@@ -22,15 +22,15 @@ project_quota_input_t* instantiate_project_quota_input(int include_optional) {
   project_quota_input_t* project_quota_input = NULL;
   if (include_optional) {
     project_quota_input = project_quota_input_create(
-      0,
-      0,
-      0
+      8,
+      20,
+      49152
     );
   } else {
     project_quota_input = project_quota_input_create(
-      0,
-      0,
-      0
+      8,
+      20,
+      49152
     );
   }
 

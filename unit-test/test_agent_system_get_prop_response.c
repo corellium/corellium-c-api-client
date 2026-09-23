@@ -22,15 +22,15 @@ agent_system_get_prop_response_t* instantiate_agent_system_get_prop_response(int
   agent_system_get_prop_response_t* agent_system_get_prop_response = NULL;
   if (include_optional) {
     agent_system_get_prop_response = agent_system_get_prop_response_create(
-      0,
-      1,
-      "0"
+      7,
+      true,
+      "33"
     );
   } else {
     agent_system_get_prop_response = agent_system_get_prop_response_create(
-      0,
-      1,
-      "0"
+      7,
+      true,
+      "33"
     );
   }
 

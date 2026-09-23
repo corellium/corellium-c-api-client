@@ -22,25 +22,25 @@ model_partition_t* instantiate_model_partition(int include_optional) {
   model_partition_t* model_partition = NULL;
   if (include_optional) {
     model_partition = model_partition_create(
-      "0",
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      list_createList(),
-      1
+      "nand",
+      4096,
+      7812500,
+      7812500,
+      31250000,
+      1024,
+      [7812500,15625000,31250000],
+      false
     );
   } else {
     model_partition = model_partition_create(
-      "0",
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      list_createList(),
-      1
+      "nand",
+      4096,
+      7812500,
+      7812500,
+      31250000,
+      1024,
+      [7812500,15625000,31250000],
+      false
     );
   }
 

@@ -22,11 +22,11 @@ agent_app_ready_response_t* instantiate_agent_app_ready_response(int include_opt
   agent_app_ready_response_t* agent_app_ready_response = NULL;
   if (include_optional) {
     agent_app_ready_response = agent_app_ready_response_create(
-      1
+      true
     );
   } else {
     agent_app_ready_response = agent_app_ready_response_create(
-      1
+      true
     );
   }
 

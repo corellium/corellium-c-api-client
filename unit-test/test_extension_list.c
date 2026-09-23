@@ -23,20 +23,20 @@ extension_list_t* instantiate_extension_list(int include_optional) {
   if (include_optional) {
     extension_list = extension_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     extension_list = extension_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

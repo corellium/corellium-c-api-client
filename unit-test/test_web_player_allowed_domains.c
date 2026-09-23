@@ -22,11 +22,11 @@ web_player_allowed_domains_t* instantiate_web_player_allowed_domains(int include
   web_player_allowed_domains_t* web_player_allowed_domains = NULL;
   if (include_optional) {
     web_player_allowed_domains = web_player_allowed_domains_create(
-      list_createList()
+      ["example.com"]
     );
   } else {
     web_player_allowed_domains = web_player_allowed_domains_create(
-      list_createList()
+      ["example.com"]
     );
   }
 

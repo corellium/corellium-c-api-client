@@ -23,20 +23,20 @@ network_connection_providers_t* instantiate_network_connection_providers(int inc
   if (include_optional) {
     network_connection_providers = network_connection_providers_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     network_connection_providers = network_connection_providers_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

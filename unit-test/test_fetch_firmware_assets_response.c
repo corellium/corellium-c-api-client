@@ -22,14 +22,14 @@ fetch_firmware_assets_response_t* instantiate_fetch_firmware_assets_response(int
   fetch_firmware_assets_response_t* fetch_firmware_assets_response = NULL;
   if (include_optional) {
     fetch_firmware_assets_response = fetch_firmware_assets_response_create(
-      list_createList(),
-      list_createList(),
+      ["https://example.com/firmware/asset.ipsw"],
+      ["https://example.com/firmware/asset.ipsw"],
       list_createList()
     );
   } else {
     fetch_firmware_assets_response = fetch_firmware_assets_response_create(
-      list_createList(),
-      list_createList(),
+      ["https://example.com/firmware/asset.ipsw"],
+      ["https://example.com/firmware/asset.ipsw"],
       list_createList()
     );
   }

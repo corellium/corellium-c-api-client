@@ -23,22 +23,22 @@ web_player_created_session_t* instantiate_web_player_created_session(int include
   web_player_created_session_t* web_player_created_session = NULL;
   if (include_optional) {
     web_player_created_session = web_player_created_session_create(
-      "0",
-      "0",
-      "2013-10-20T19:20:30+01:00",
+      "a3569608-10e1-41c7-99fa-1a7d1f336c58",
+      "<token>",
+      "2027-01-15T00:00Z",
        // false, not to have infinite recursion
       instantiate_web_player_session_domain(0),
-      56,
-      1
+      1773479567000,
+      true
     );
   } else {
     web_player_created_session = web_player_created_session_create(
-      "0",
-      "0",
-      "2013-10-20T19:20:30+01:00",
+      "a3569608-10e1-41c7-99fa-1a7d1f336c58",
+      "<token>",
+      "2027-01-15T00:00Z",
       NULL,
-      56,
-      1
+      1773479567000,
+      true
     );
   }
 

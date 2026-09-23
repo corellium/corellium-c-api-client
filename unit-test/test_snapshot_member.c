@@ -22,19 +22,19 @@ snapshot_member_t* instantiate_snapshot_member(int include_optional) {
   snapshot_member_t* snapshot_member = NULL;
   if (include_optional) {
     snapshot_member = snapshot_member_create(
-      "0",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00",
-      "0",
-      "0"
+      "jane.doe@example.com",
+      "2026-03-16T08:22:19Z",
+      "2026-03-16T08:22:19Z",
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
+      "Jane Doe"
     );
   } else {
     snapshot_member = snapshot_member_create(
-      "0",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00",
-      "0",
-      "0"
+      "jane.doe@example.com",
+      "2026-03-16T08:22:19Z",
+      "2026-03-16T08:22:19Z",
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
+      "Jane Doe"
     );
   }
 

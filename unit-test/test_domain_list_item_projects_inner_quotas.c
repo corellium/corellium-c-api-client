@@ -22,15 +22,15 @@ domain_list_item_projects_inner_quotas_t* instantiate_domain_list_item_projects_
   domain_list_item_projects_inner_quotas_t* domain_list_item_projects_inner_quotas = NULL;
   if (include_optional) {
     domain_list_item_projects_inner_quotas = domain_list_item_projects_inner_quotas_create(
-      56,
-      56,
-      56
+      12,
+      30,
+      73728
     );
   } else {
     domain_list_item_projects_inner_quotas = domain_list_item_projects_inner_quotas_create(
-      56,
-      56,
-      56
+      12,
+      30,
+      73728
     );
   }
 

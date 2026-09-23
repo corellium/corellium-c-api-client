@@ -22,13 +22,13 @@ domain_config_input_trial_t* instantiate_domain_config_input_trial(int include_o
   domain_config_input_trial_t* domain_config_input_trial = NULL;
   if (include_optional) {
     domain_config_input_trial = domain_config_input_trial_create(
-      1.337,
-      1.337
+      1773479567000,
+      1799971200000
     );
   } else {
     domain_config_input_trial = domain_config_input_trial_create(
-      1.337,
-      1.337
+      1773479567000,
+      1799971200000
     );
   }
 

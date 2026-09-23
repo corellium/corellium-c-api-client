@@ -22,13 +22,13 @@ gpio_state_definition_t* instantiate_gpio_state_definition(int include_optional)
   gpio_state_definition_t* gpio_state_definition = NULL;
   if (include_optional) {
     gpio_state_definition = gpio_state_definition_create(
-      1.337,
-      list_createList()
+      8,
+      [[1,0,0,0,0,0,0,0]]
     );
   } else {
     gpio_state_definition = gpio_state_definition_create(
-      1.337,
-      list_createList()
+      8,
+      [[1,0,0,0,0,0,0,0]]
     );
   }
 

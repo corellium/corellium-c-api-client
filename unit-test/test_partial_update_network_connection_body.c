@@ -23,13 +23,13 @@ partial_update_network_connection_body_t* instantiate_partial_update_network_con
   partial_update_network_connection_body_t* partial_update_network_connection_body = NULL;
   if (include_optional) {
     partial_update_network_connection_body = partial_update_network_connection_body_create(
-      "0",
+      "office-vpn",
       null,
       1
     );
   } else {
     partial_update_network_connection_body = partial_update_network_connection_body_create(
-      "0",
+      "office-vpn",
       null,
       1
     );

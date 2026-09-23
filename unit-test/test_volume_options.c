@@ -22,13 +22,13 @@ volume_options_t* instantiate_volume_options(int include_optional) {
   volume_options_t* volume_options = NULL;
   if (include_optional) {
     volume_options = volume_options_create(
-      1.337,
-      "0"
+      5505024,
+      "userdata_img"
     );
   } else {
     volume_options = volume_options_create(
-      1.337,
-      "0"
+      5505024,
+      "userdata_img"
     );
   }
 

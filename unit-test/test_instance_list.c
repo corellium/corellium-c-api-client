@@ -23,20 +23,20 @@ instance_list_t* instantiate_instance_list(int include_optional) {
   if (include_optional) {
     instance_list = instance_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     instance_list = instance_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

@@ -22,11 +22,11 @@ enable_sslsplit_body_t* instantiate_enable_sslsplit_body(int include_optional) {
   enable_sslsplit_body_t* enable_sslsplit_body = NULL;
   if (include_optional) {
     enable_sslsplit_body = enable_sslsplit_body_create(
-      1
+      true
     );
   } else {
     enable_sslsplit_body = enable_sslsplit_body_create(
-      1
+      true
     );
   }
 

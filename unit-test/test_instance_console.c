@@ -22,19 +22,19 @@ instance_console_t* instantiate_instance_console(int include_optional) {
   instance_console_t* instance_console = NULL;
   if (include_optional) {
     instance_console = instance_console_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      "0"
+      "System Console",
+      "port-cons",
+      "2000",
+      "<redacted>",
+      "<redacted>"
     );
   } else {
     instance_console = instance_console_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      "0"
+      "System Console",
+      "port-cons",
+      "2000",
+      "<redacted>",
+      "<redacted>"
     );
   }
 

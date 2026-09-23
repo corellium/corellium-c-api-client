@@ -22,12 +22,12 @@ firmware_info_device_t* instantiate_firmware_info_device(int include_optional) {
   firmware_info_device_t* firmware_info_device = NULL;
   if (include_optional) {
     firmware_info_device = firmware_info_device_create(
-      "0",
+      "iphone11",
       list_createList()
     );
   } else {
     firmware_info_device = firmware_info_device_create(
-      "0",
+      "iphone11",
       list_createList()
     );
   }

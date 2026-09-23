@@ -22,21 +22,21 @@ create_user_body_t* instantiate_create_user_body(int include_optional) {
   create_user_body_t* create_user_body = NULL;
   if (include_optional) {
     create_user_body = create_user_body_create(
-      "0",
-      1,
-      "0",
-      "0",
-      "0",
-      1
+      "<redacted>",
+      true,
+      "jane.doe",
+      "Domain Administrator",
+      "jane.doe@example.com",
+      false
     );
   } else {
     create_user_body = create_user_body_create(
-      "0",
-      1,
-      "0",
-      "0",
-      "0",
-      1
+      "<redacted>",
+      true,
+      "jane.doe",
+      "Domain Administrator",
+      "jane.doe@example.com",
+      false
     );
   }
 

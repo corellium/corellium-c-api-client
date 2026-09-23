@@ -22,17 +22,17 @@ agent_file_attributes_body_t* instantiate_agent_file_attributes_body(int include
   agent_file_attributes_body_t* agent_file_attributes_body = NULL;
   if (include_optional) {
     agent_file_attributes_body = agent_file_attributes_body_create(
-      "0",
-      0,
-      0,
-      0
+      "/var/tmp/renamed.log",
+      420,
+      501,
+      501
     );
   } else {
     agent_file_attributes_body = agent_file_attributes_body_create(
-      "0",
-      0,
-      0,
-      0
+      "/var/tmp/renamed.log",
+      420,
+      501,
+      501
     );
   }
 

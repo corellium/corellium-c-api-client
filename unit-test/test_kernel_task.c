@@ -22,16 +22,16 @@ kernel_task_t* instantiate_kernel_task(int include_optional) {
   kernel_task_t* kernel_task = NULL;
   if (include_optional) {
     kernel_task = kernel_task_create(
-      "0",
-      "0",
-      56,
+      "0xffffff8012345000",
+      "launchd",
+      1,
       list_createList()
     );
   } else {
     kernel_task = kernel_task_create(
-      "0",
-      "0",
-      56,
+      "0xffffff8012345000",
+      "launchd",
+      1,
       list_createList()
     );
   }

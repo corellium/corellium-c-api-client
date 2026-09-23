@@ -22,14 +22,14 @@ team_t* instantiate_team(int include_optional) {
   team_t* team = NULL;
   if (include_optional) {
     team = team_create(
-      "0",
-      "0",
+      "089c8ffd-ca4d-4d35-80ab-0847d18b7213",
+      "Mobile QA",
       list_createList()
     );
   } else {
     team = team_create(
-      "0",
-      "0",
+      "089c8ffd-ca4d-4d35-80ab-0847d18b7213",
+      "Mobile QA",
       list_createList()
     );
   }

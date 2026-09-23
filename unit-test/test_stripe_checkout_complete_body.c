@@ -22,11 +22,11 @@ stripe_checkout_complete_body_t* instantiate_stripe_checkout_complete_body(int i
   stripe_checkout_complete_body_t* stripe_checkout_complete_body = NULL;
   if (include_optional) {
     stripe_checkout_complete_body = stripe_checkout_complete_body_create(
-      "0"
+      "cs_test_xxxxxxxxxxxxxxxxxxxxxxxx"
     );
   } else {
     stripe_checkout_complete_body = stripe_checkout_complete_body_create(
-      "0"
+      "cs_test_xxxxxxxxxxxxxxxxxxxxxxxx"
     );
   }
 

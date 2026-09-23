@@ -22,7 +22,7 @@ snapshot_sharing_permissions_request_schema_t* instantiate_snapshot_sharing_perm
   snapshot_sharing_permissions_request_schema_t* snapshot_sharing_permissions_request_schema = NULL;
   if (include_optional) {
     snapshot_sharing_permissions_request_schema = snapshot_sharing_permissions_request_schema_create(
-      1,
+      true,
       1,
       1,
       1,
@@ -30,7 +30,7 @@ snapshot_sharing_permissions_request_schema_t* instantiate_snapshot_sharing_perm
     );
   } else {
     snapshot_sharing_permissions_request_schema = snapshot_sharing_permissions_request_schema_create(
-      1,
+      true,
       1,
       1,
       1,

@@ -22,17 +22,17 @@ patch_instance_body_proxy_inner_t* instantiate_patch_instance_body_proxy_inner(i
   patch_instance_body_proxy_inner_t* patch_instance_body_proxy_inner = NULL;
   if (include_optional) {
     patch_instance_body_proxy_inner = patch_instance_body_proxy_inner_create(
-      1.337,
-      1,
-      1,
-      1.337
+      22,
+      true,
+      true,
+      22
     );
   } else {
     patch_instance_body_proxy_inner = patch_instance_body_proxy_inner_create(
-      1.337,
-      1,
-      1,
-      1.337
+      22,
+      true,
+      true,
+      22
     );
   }
 

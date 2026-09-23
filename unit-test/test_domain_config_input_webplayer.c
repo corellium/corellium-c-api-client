@@ -22,13 +22,13 @@ domain_config_input_webplayer_t* instantiate_domain_config_input_webplayer(int i
   domain_config_input_webplayer_t* domain_config_input_webplayer = NULL;
   if (include_optional) {
     domain_config_input_webplayer = domain_config_input_webplayer_create(
-      1,
-      list_createList()
+      true,
+      ["app.example.com"]
     );
   } else {
     domain_config_input_webplayer = domain_config_input_webplayer_create(
-      1,
-      list_createList()
+      true,
+      ["app.example.com"]
     );
   }
 

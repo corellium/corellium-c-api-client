@@ -22,11 +22,11 @@ v3_update_snapshot_request_t* instantiate_v3_update_snapshot_request(int include
   v3_update_snapshot_request_t* v3_update_snapshot_request = NULL;
   if (include_optional) {
     v3_update_snapshot_request = v3_update_snapshot_request_create(
-      "0"
+      "Clean boot"
     );
   } else {
     v3_update_snapshot_request = v3_update_snapshot_request_create(
-      "0"
+      "Clean boot"
     );
   }
 

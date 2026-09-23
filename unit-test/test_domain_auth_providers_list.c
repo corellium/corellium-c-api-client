@@ -23,20 +23,20 @@ domain_auth_providers_list_t* instantiate_domain_auth_providers_list(int include
   if (include_optional) {
     domain_auth_providers_list = domain_auth_providers_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     domain_auth_providers_list = domain_auth_providers_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

@@ -22,19 +22,19 @@ saml_user_attribute_mapping_t* instantiate_saml_user_attribute_mapping(int inclu
   saml_user_attribute_mapping_t* saml_user_attribute_mapping = NULL;
   if (include_optional) {
     saml_user_attribute_mapping = saml_user_attribute_mapping_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      "0"
+      "username",
+      "email",
+      "firstName",
+      "lastName",
+      "groups"
     );
   } else {
     saml_user_attribute_mapping = saml_user_attribute_mapping_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      "0"
+      "username",
+      "email",
+      "firstName",
+      "lastName",
+      "groups"
     );
   }
 

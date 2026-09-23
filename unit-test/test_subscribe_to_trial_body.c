@@ -22,25 +22,25 @@ subscribe_to_trial_body_t* instantiate_subscribe_to_trial_body(int include_optio
   subscribe_to_trial_body_t* subscribe_to_trial_body = NULL;
   if (include_optional) {
     subscribe_to_trial_body = subscribe_to_trial_body_create(
-      "0",
-      "0",
-      1,
-      "0",
-      1,
-      "0",
-      "0",
-      "0"
+      "TRIAL2026",
+      "<redacted>",
+      true,
+      "acme-corp",
+      false,
+      "jane.doe@example.com",
+      "Jane Doe",
+      "okta|00u1a2b3c4d5e6f7g8h9"
     );
   } else {
     subscribe_to_trial_body = subscribe_to_trial_body_create(
-      "0",
-      "0",
-      1,
-      "0",
-      1,
-      "0",
-      "0",
-      "0"
+      "TRIAL2026",
+      "<redacted>",
+      true,
+      "acme-corp",
+      false,
+      "jane.doe@example.com",
+      "Jane Doe",
+      "okta|00u1a2b3c4d5e6f7g8h9"
     );
   }
 

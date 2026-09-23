@@ -22,12 +22,12 @@ unauthorized_error_t* instantiate_unauthorized_error(int include_optional) {
   unauthorized_error_t* unauthorized_error = NULL;
   if (include_optional) {
     unauthorized_error = unauthorized_error_create(
-      "0",
+      "Access denied",
       corellium_api_unauthorized_error_ERRORID_Unauthorized
     );
   } else {
     unauthorized_error = unauthorized_error_create(
-      "0",
+      "Access denied",
       corellium_api_unauthorized_error_ERRORID_Unauthorized
     );
   }

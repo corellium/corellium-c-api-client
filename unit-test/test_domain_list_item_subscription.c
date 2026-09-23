@@ -22,41 +22,41 @@ domain_list_item_subscription_t* instantiate_domain_list_item_subscription(int i
   domain_list_item_subscription_t* domain_list_item_subscription = NULL;
   if (include_optional) {
     domain_list_item_subscription = domain_list_item_subscription_create(
-      0,
-      "0",
+      {"action":"cancel"},
+      "c29762d1-45d7-489d-a3a2-9dadc43978ba",
       corellium_api_domain_list_item_subscription_BILLINGTYPE_prepaid,
-      "0",
-      "0",
-      "2013-10-20T19:20:30+01:00",
+      "stripe",
+      "sub_1ExampleSubscriptionId",
+      "2027-01-15T00:00Z",
+      false,
+      "2026-03-16T08:22:19Z",
+      49900,
+      7,
+      5,
+      false,
       1,
-      "2013-10-20T19:20:30+01:00",
-      1.337,
-      1.337,
-      1.337,
-      1,
-      1.337,
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      "2026-03-16T08:22:19Z",
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   } else {
     domain_list_item_subscription = domain_list_item_subscription_create(
-      0,
-      "0",
+      {"action":"cancel"},
+      "c29762d1-45d7-489d-a3a2-9dadc43978ba",
       corellium_api_domain_list_item_subscription_BILLINGTYPE_prepaid,
-      "0",
-      "0",
-      "2013-10-20T19:20:30+01:00",
+      "stripe",
+      "sub_1ExampleSubscriptionId",
+      "2027-01-15T00:00Z",
+      false,
+      "2026-03-16T08:22:19Z",
+      49900,
+      7,
+      5,
+      false,
       1,
-      "2013-10-20T19:20:30+01:00",
-      1.337,
-      1.337,
-      1.337,
-      1,
-      1.337,
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      "2026-03-16T08:22:19Z",
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   }
 

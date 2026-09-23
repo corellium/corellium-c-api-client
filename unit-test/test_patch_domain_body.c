@@ -26,7 +26,7 @@ patch_domain_body_t* instantiate_patch_domain_body(int include_optional) {
   patch_domain_body_t* patch_domain_body = NULL;
   if (include_optional) {
     patch_domain_body = patch_domain_body_create(
-      1,
+      true,
        // false, not to have infinite recursion
       instantiate_trial_extension(0),
        // false, not to have infinite recursion
@@ -39,7 +39,7 @@ patch_domain_body_t* instantiate_patch_domain_body(int include_optional) {
     );
   } else {
     patch_domain_body = patch_domain_body_create(
-      1,
+      true,
       NULL,
       NULL,
       list_createList(),

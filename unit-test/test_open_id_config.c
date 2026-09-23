@@ -22,17 +22,17 @@ open_id_config_t* instantiate_open_id_config(int include_optional) {
   open_id_config_t* open_id_config = NULL;
   if (include_optional) {
     open_id_config = open_id_config_create(
-      "0",
-      "0",
-      "0",
-      1
+      "https://accounts.example.com/.well-known/openid-configuration",
+      "corellium-domain-client",
+      "<client-secret>",
+      false
     );
   } else {
     open_id_config = open_id_config_create(
-      "0",
-      "0",
-      "0",
-      1
+      "https://accounts.example.com/.well-known/openid-configuration",
+      "corellium-domain-client",
+      "<client-secret>",
+      false
     );
   }
 

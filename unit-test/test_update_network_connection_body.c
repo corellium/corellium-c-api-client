@@ -23,13 +23,13 @@ update_network_connection_body_t* instantiate_update_network_connection_body(int
   update_network_connection_body_t* update_network_connection_body = NULL;
   if (include_optional) {
     update_network_connection_body = update_network_connection_body_create(
-      "0",
+      "office-vpn",
       null,
       1
     );
   } else {
     update_network_connection_body = update_network_connection_body_create(
-      "0",
+      "office-vpn",
       null,
       1
     );

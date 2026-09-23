@@ -22,21 +22,21 @@ domain_welcome_message_response_t* instantiate_domain_welcome_message_response(i
   domain_welcome_message_response_t* domain_welcome_message_response = NULL;
   if (include_optional) {
     domain_welcome_message_response = domain_welcome_message_response_create(
-      "0",
-      "0",
-      "0",
-      1,
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      "b10bd74a-a906-46b9-a4f3-a45cccdc2576",
+      "c29762d1-45d7-489d-a3a2-9dadc43978ba",
+      "Welcome to Acme Corp! Get started by creating your first device.",
+      true,
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   } else {
     domain_welcome_message_response = domain_welcome_message_response_create(
-      "0",
-      "0",
-      "0",
-      1,
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      "b10bd74a-a906-46b9-a4f3-a45cccdc2576",
+      "c29762d1-45d7-489d-a3a2-9dadc43978ba",
+      "Welcome to Acme Corp! Get started by creating your first device.",
+      true,
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   }
 

@@ -22,15 +22,15 @@ upload_size_error_t* instantiate_upload_size_error(int include_optional) {
   upload_size_error_t* upload_size_error = NULL;
   if (include_optional) {
     upload_size_error = upload_size_error_create(
-      "0",
+      "Storage quota exceeded",
       corellium_api_upload_size_error_ERRORID_UploadSizeError,
-      "0"
+      "storageQuota"
     );
   } else {
     upload_size_error = upload_size_error_create(
-      "0",
+      "Storage quota exceeded",
       corellium_api_upload_size_error_ERRORID_UploadSizeError,
-      "0"
+      "storageQuota"
     );
   }
 

@@ -22,13 +22,13 @@ message_body_any_of_t* instantiate_message_body_any_of(int include_optional) {
   message_body_any_of_t* message_body_any_of = NULL;
   if (include_optional) {
     message_body_any_of = message_body_any_of_create(
-      "0",
-      "0"
+      "+15555550123",
+      "Hello from Corellium!"
     );
   } else {
     message_body_any_of = message_body_any_of_create(
-      "0",
-      "0"
+      "+15555550123",
+      "Hello from Corellium!"
     );
   }
 

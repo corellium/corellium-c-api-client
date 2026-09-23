@@ -22,17 +22,17 @@ ensure_domain_settings_body_admin_user_t* instantiate_ensure_domain_settings_bod
   ensure_domain_settings_body_admin_user_t* ensure_domain_settings_body_admin_user = NULL;
   if (include_optional) {
     ensure_domain_settings_body_admin_user = ensure_domain_settings_body_admin_user_create(
-      "0",
-      "0",
-      "0",
-      "0"
+      "jane.doe",
+      "jane.doe@example.com",
+      "Jane Doe",
+      "https://billing.example.com/portal"
     );
   } else {
     ensure_domain_settings_body_admin_user = ensure_domain_settings_body_admin_user_create(
-      "0",
-      "0",
-      "0",
-      "0"
+      "jane.doe",
+      "jane.doe@example.com",
+      "Jane Doe",
+      "https://billing.example.com/portal"
     );
   }
 

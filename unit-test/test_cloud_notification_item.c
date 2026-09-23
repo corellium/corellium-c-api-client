@@ -22,29 +22,29 @@ cloud_notification_item_t* instantiate_cloud_notification_item(int include_optio
   cloud_notification_item_t* cloud_notification_item = NULL;
   if (include_optional) {
     cloud_notification_item = cloud_notification_item_create(
-      "0",
+      "4f634e6a-189d-42eb-9bee-794df1f588d1",
+      true,
+      false,
+      "project.1c41b1bc-4f53-48a8-b690-ad30611e1960",
       1,
-      1,
-      "0",
-      56,
-      "0",
-      "0",
-      0,
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      "Trial ended for acme.corellium.com",
+      "The trial subscription for acme.corellium.com is now ended.",
+      {"tags":["billing"]},
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   } else {
     cloud_notification_item = cloud_notification_item_create(
-      "0",
+      "4f634e6a-189d-42eb-9bee-794df1f588d1",
+      true,
+      false,
+      "project.1c41b1bc-4f53-48a8-b690-ad30611e1960",
       1,
-      1,
-      "0",
-      56,
-      "0",
-      "0",
-      0,
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      "Trial ended for acme.corellium.com",
+      "The trial subscription for acme.corellium.com is now ended.",
+      {"tags":["billing"]},
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   }
 

@@ -22,23 +22,23 @@ auth_provider_t* instantiate_auth_provider(int include_optional) {
   auth_provider_t* auth_provider = NULL;
   if (include_optional) {
     auth_provider = auth_provider_create(
-      "0",
-      "0",
-      1,
-      1,
-      "0",
-      "0",
-      "0"
+      "sso.example.com",
+      "open-id-connect",
+      true,
+      false,
+      "Log in with Okta",
+      "Okta",
+      "/api/v3/auth/providers/sso.example.com/authorization_url"
     );
   } else {
     auth_provider = auth_provider_create(
-      "0",
-      "0",
-      1,
-      1,
-      "0",
-      "0",
-      "0"
+      "sso.example.com",
+      "open-id-connect",
+      true,
+      false,
+      "Log in with Okta",
+      "Okta",
+      "/api/v3/auth/providers/sso.example.com/authorization_url"
     );
   }
 

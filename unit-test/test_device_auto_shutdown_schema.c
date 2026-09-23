@@ -22,13 +22,13 @@ device_auto_shutdown_schema_t* instantiate_device_auto_shutdown_schema(int inclu
   device_auto_shutdown_schema_t* device_auto_shutdown_schema = NULL;
   if (include_optional) {
     device_auto_shutdown_schema = device_auto_shutdown_schema_create(
-      1,
-      0
+      true,
+      10
     );
   } else {
     device_auto_shutdown_schema = device_auto_shutdown_schema_create(
-      1,
-      0
+      true,
+      10
     );
   }
 

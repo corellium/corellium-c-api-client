@@ -22,11 +22,11 @@ ipsw_filter_v3_device_t* instantiate_ipsw_filter_v3_device(int include_optional)
   ipsw_filter_v3_device_t* ipsw_filter_v3_device = NULL;
   if (include_optional) {
     ipsw_filter_v3_device = ipsw_filter_v3_device_create(
-      "0"
+      "iPhone16,.*"
     );
   } else {
     ipsw_filter_v3_device = ipsw_filter_v3_device_create(
-      "0"
+      "iPhone16,.*"
     );
   }
 

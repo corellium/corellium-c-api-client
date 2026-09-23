@@ -22,13 +22,13 @@ interfaces_schema_inner_t* instantiate_interfaces_schema_inner(int include_optio
   interfaces_schema_inner_t* interfaces_schema_inner = NULL;
   if (include_optional) {
     interfaces_schema_inner = interfaces_schema_inner_create(
-      "0",
-      "a"
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
+      "eth0:1/2"
     );
   } else {
     interfaces_schema_inner = interfaces_schema_inner_create(
-      "0",
-      "a"
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
+      "eth0:1/2"
     );
   }
 

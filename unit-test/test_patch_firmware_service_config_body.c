@@ -22,21 +22,21 @@ patch_firmware_service_config_body_t* instantiate_patch_firmware_service_config_
   patch_firmware_service_config_body_t* patch_firmware_service_config_body = NULL;
   if (include_optional) {
     patch_firmware_service_config_body = patch_firmware_service_config_body_create(
-      1,
-      1,
-      1,
-      1,
-      1,
-      list_createList()
+      false,
+      false,
+      false,
+      true,
+      true,
+      [{"device":{"product":"iPhone16,.*"},"include":true}]
     );
   } else {
     patch_firmware_service_config_body = patch_firmware_service_config_body_create(
-      1,
-      1,
-      1,
-      1,
-      1,
-      list_createList()
+      false,
+      false,
+      false,
+      true,
+      true,
+      [{"device":{"product":"iPhone16,.*"},"include":true}]
     );
   }
 

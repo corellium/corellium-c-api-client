@@ -23,13 +23,13 @@ edit_invites_body_t* instantiate_edit_invites_body(int include_optional) {
   edit_invites_body_t* edit_invites_body = NULL;
   if (include_optional) {
     edit_invites_body = edit_invites_body_create(
-      list_createList(),
+      ["5ac8f0be-616d-45b9-b0af-e586fc65ad19"],
        // false, not to have infinite recursion
       instantiate_edit_invites_body_changes(0)
     );
   } else {
     edit_invites_body = edit_invites_body_create(
-      list_createList(),
+      ["5ac8f0be-616d-45b9-b0af-e586fc65ad19"],
       NULL
     );
   }

@@ -23,16 +23,16 @@ create_domain_auth_provider_body_t* instantiate_create_domain_auth_provider_body
   create_domain_auth_provider_body_t* create_domain_auth_provider_body = NULL;
   if (include_optional) {
     create_domain_auth_provider_body = create_domain_auth_provider_body_create(
-      "0",
-      1,
-      "0",
+      "open-id-connect",
+      true,
+      "Log in with Okta",
       null
     );
   } else {
     create_domain_auth_provider_body = create_domain_auth_provider_body_create(
-      "0",
-      1,
-      "0",
+      "open-id-connect",
+      true,
+      "Log in with Okta",
       null
     );
   }

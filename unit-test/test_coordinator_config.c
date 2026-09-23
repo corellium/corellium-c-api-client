@@ -22,11 +22,11 @@ coordinator_config_t* instantiate_coordinator_config(int include_optional) {
   coordinator_config_t* coordinator_config = NULL;
   if (include_optional) {
     coordinator_config = coordinator_config_create(
-      1
+      true
     );
   } else {
     coordinator_config = coordinator_config_create(
-      1
+      true
     );
   }
 

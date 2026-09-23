@@ -22,11 +22,11 @@ token_t* instantiate_token(int include_optional) {
   token_t* token = NULL;
   if (include_optional) {
     token = token_create(
-      "0"
+      "<token>"
     );
   } else {
     token = token_create(
-      "0"
+      "<token>"
     );
   }
 

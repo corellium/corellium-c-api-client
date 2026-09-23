@@ -31,7 +31,6 @@ static config_response_t *config_response_create_internal(
     int invalid_build,
     int sep_sim,
     int installer_available,
-    char *invoiced_publishable_key,
     char *stripe_public_key,
     char *intercom_id,
     char *gtm_id,
@@ -74,7 +73,6 @@ static config_response_t *config_response_create_internal(
     config_response_local_var->invalid_build = invalid_build;
     config_response_local_var->sep_sim = sep_sim;
     config_response_local_var->installer_available = installer_available;
-    config_response_local_var->invoiced_publishable_key = invoiced_publishable_key;
     config_response_local_var->stripe_public_key = stripe_public_key;
     config_response_local_var->intercom_id = intercom_id;
     config_response_local_var->gtm_id = gtm_id;
@@ -118,7 +116,6 @@ __attribute__((deprecated)) config_response_t *config_response_create(
     int invalid_build,
     int sep_sim,
     int installer_available,
-    char *invoiced_publishable_key,
     char *stripe_public_key,
     char *intercom_id,
     char *gtm_id,
@@ -158,7 +155,6 @@ __attribute__((deprecated)) config_response_t *config_response_create(
         invalid_build,
         sep_sim,
         installer_available,
-        invoiced_publishable_key,
         stripe_public_key,
         intercom_id,
         gtm_id,
@@ -210,10 +206,6 @@ void config_response_free(config_response_t *config_response) {
     if (config_response->version) {
         free(config_response->version);
         config_response->version = NULL;
-    }
-    if (config_response->invoiced_publishable_key) {
-        free(config_response->invoiced_publishable_key);
-        config_response->invoiced_publishable_key = NULL;
     }
     if (config_response->stripe_public_key) {
         free(config_response->stripe_public_key);
@@ -381,14 +373,6 @@ cJSON *config_response_convertToJSON(config_response_t *config_response) {
     }
     if(cJSON_AddBoolToObject(item, "installerAvailable", config_response->installer_available) == NULL) {
     goto fail; //Bool
-    }
-
-
-    // config_response->invoiced_publishable_key
-    if(config_response->invoiced_publishable_key) {
-    if(cJSON_AddStringToObject(item, "invoicedPublishableKey", config_response->invoiced_publishable_key) == NULL) {
-    goto fail; //String
-    }
     }
 
 
@@ -830,18 +814,6 @@ config_response_t *config_response_parseFromJSON(cJSON *config_responseJSON){
     goto end; //Bool
     }
 
-    // config_response->invoiced_publishable_key
-    cJSON *invoiced_publishable_key = cJSON_GetObjectItemCaseSensitive(config_responseJSON, "invoicedPublishableKey");
-    if (cJSON_IsNull(invoiced_publishable_key)) {
-        invoiced_publishable_key = NULL;
-    }
-    if (invoiced_publishable_key) { 
-    if(!cJSON_IsString(invoiced_publishable_key) && !cJSON_IsNull(invoiced_publishable_key))
-    {
-    goto end; //String
-    }
-    }
-
     // config_response->stripe_public_key
     cJSON *stripe_public_key = cJSON_GetObjectItemCaseSensitive(config_responseJSON, "stripePublicKey");
     if (cJSON_IsNull(stripe_public_key)) {
@@ -1230,7 +1202,6 @@ config_response_t *config_response_parseFromJSON(cJSON *config_responseJSON){
         invalid_build ? invalid_build->valueint : 0,
         sep_sim->valueint,
         installer_available->valueint,
-        invoiced_publishable_key && !cJSON_IsNull(invoiced_publishable_key) ? strdup(invoiced_publishable_key->valuestring) : NULL,
         stripe_public_key && !cJSON_IsNull(stripe_public_key) ? strdup(stripe_public_key->valuestring) : NULL,
         intercom_id && !cJSON_IsNull(intercom_id) ? strdup(intercom_id->valuestring) : NULL,
         gtm_id && !cJSON_IsNull(gtm_id) ? strdup(gtm_id->valuestring) : NULL,

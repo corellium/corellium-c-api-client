@@ -22,27 +22,59 @@ network_connection_config_t* instantiate_network_connection_config(int include_o
   network_connection_config_t* network_connection_config = NULL;
   if (include_optional) {
     network_connection_config = network_connection_config_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      1,
+      "jane.doe",
+      "<redacted>",
+      "client
+dev tun
+proto udp
+remote vpn.example.com 1194
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+remote-cert-tls server
+cipher AES-256-CBC
+verb 3
+<ca>
+-----BEGIN CERTIFICATE-----
+<ca-certificate>
+-----END CERTIFICATE-----
+</ca>
+",
+      "eth0",
+      42,
       corellium_api_network_connection_config_DHCPMODE_internal,
-      "0",
-      "0",
-      list_createList()
+      "10.0.0.1",
+      "10.0.0.0/24",
+      [1.1.1.1, 8.8.8.8]
     );
   } else {
     network_connection_config = network_connection_config_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      1,
+      "jane.doe",
+      "<redacted>",
+      "client
+dev tun
+proto udp
+remote vpn.example.com 1194
+resolv-retry infinite
+nobind
+persist-key
+persist-tun
+remote-cert-tls server
+cipher AES-256-CBC
+verb 3
+<ca>
+-----BEGIN CERTIFICATE-----
+<ca-certificate>
+-----END CERTIFICATE-----
+</ca>
+",
+      "eth0",
+      42,
       corellium_api_network_connection_config_DHCPMODE_internal,
-      "0",
-      "0",
-      list_createList()
+      "10.0.0.1",
+      "10.0.0.0/24",
+      [1.1.1.1, 8.8.8.8]
     );
   }
 

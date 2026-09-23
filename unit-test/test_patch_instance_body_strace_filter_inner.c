@@ -23,12 +23,12 @@ patch_instance_body_strace_filter_inner_t* instantiate_patch_instance_body_strac
   if (include_optional) {
     patch_instance_body_strace_filter_inner = patch_instance_body_strace_filter_inner_create(
       corellium_api_patch_instance_body_strace_filter_inner_TRAIT_name,
-      "0"
+      "1234"
     );
   } else {
     patch_instance_body_strace_filter_inner = patch_instance_body_strace_filter_inner_create(
       corellium_api_patch_instance_body_strace_filter_inner_TRAIT_name,
-      "0"
+      "1234"
     );
   }
 

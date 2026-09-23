@@ -22,15 +22,15 @@ ldap_user_search_configuration_t* instantiate_ldap_user_search_configuration(int
   ldap_user_search_configuration_t* ldap_user_search_configuration = NULL;
   if (include_optional) {
     ldap_user_search_configuration = ldap_user_search_configuration_create(
-      "0",
-      "0",
-      "0"
+      "dc=example,dc=com",
+      "ou=users",
+      "objectClass=inetOrgPerson"
     );
   } else {
     ldap_user_search_configuration = ldap_user_search_configuration_create(
-      "0",
-      "0",
-      "0"
+      "dc=example,dc=com",
+      "ou=users",
+      "objectClass=inetOrgPerson"
     );
   }
 

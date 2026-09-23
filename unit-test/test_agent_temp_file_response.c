@@ -22,11 +22,11 @@ agent_temp_file_response_t* instantiate_agent_temp_file_response(int include_opt
   agent_temp_file_response_t* agent_temp_file_response = NULL;
   if (include_optional) {
     agent_temp_file_response = agent_temp_file_response_create(
-      "0"
+      "/var/tmp/tmp3f8a21"
     );
   } else {
     agent_temp_file_response = agent_temp_file_response_create(
-      "0"
+      "/var/tmp/tmp3f8a21"
     );
   }
 

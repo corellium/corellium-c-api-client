@@ -22,11 +22,11 @@ get_invite_by_token_body_t* instantiate_get_invite_by_token_body(int include_opt
   get_invite_by_token_body_t* get_invite_by_token_body = NULL;
   if (include_optional) {
     get_invite_by_token_body = get_invite_by_token_body_create(
-      "0"
+      "<token>"
     );
   } else {
     get_invite_by_token_body = get_invite_by_token_body_create(
-      "0"
+      "<token>"
     );
   }
 

@@ -23,15 +23,15 @@ model_product_image_t* instantiate_model_product_image(int include_optional) {
   model_product_image_t* model_product_image = NULL;
   if (include_optional) {
     model_product_image = model_product_image_create(
-      1.337,
+      80,
       null,
-      1
+      true
     );
   } else {
     model_product_image = model_product_image_create(
-      1.337,
+      80,
       null,
-      1
+      true
     );
   }
 

@@ -22,17 +22,17 @@ domain_config_trial_extension_t* instantiate_domain_config_trial_extension(int i
   domain_config_trial_extension_t* domain_config_trial_extension = NULL;
   if (include_optional) {
     domain_config_trial_extension = domain_config_trial_extension_create(
-      56,
-      "0",
-      1,
-      "0"
+      7,
+      "Need more time to evaluate the platform.",
+      true,
+      "Trial already extended twice."
     );
   } else {
     domain_config_trial_extension = domain_config_trial_extension_create(
-      56,
-      "0",
-      1,
-      "0"
+      7,
+      "Need more time to evaluate the platform.",
+      true,
+      "Trial already extended twice."
     );
   }
 

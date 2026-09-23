@@ -22,13 +22,13 @@ allowed_firmware_schema_t* instantiate_allowed_firmware_schema(int include_optio
   allowed_firmware_schema_t* allowed_firmware_schema = NULL;
   if (include_optional) {
     allowed_firmware_schema = allowed_firmware_schema_create(
-      "0",
-      "0"
+      "17.4.1",
+      "21E236"
     );
   } else {
     allowed_firmware_schema = allowed_firmware_schema_create(
-      "0",
-      "0"
+      "17.4.1",
+      "21E236"
     );
   }
 

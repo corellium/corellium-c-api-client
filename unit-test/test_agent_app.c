@@ -22,31 +22,31 @@ agent_app_t* instantiate_agent_app(int include_optional) {
   agent_app_t* agent_app = NULL;
   if (include_optional) {
     agent_app = agent_app_create(
-      list_createList(),
-      1,
-      0,
-      0,
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      1,
-      "0"
+      ["Favorites"],
+      true,
+      41943040,
+      1773479567,
+      "User",
+      "Corellium Cafe",
+      "com.corellium.cafe",
+      "/var/containers/Bundle/Application/Cafe.app",
+      "/var/mobile/Containers/Data/Application/Cafe",
+      true,
+      "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9L"
     );
   } else {
     agent_app = agent_app_create(
-      list_createList(),
-      1,
-      0,
-      0,
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      1,
-      "0"
+      ["Favorites"],
+      true,
+      41943040,
+      1773479567,
+      "User",
+      "Corellium Cafe",
+      "com.corellium.cafe",
+      "/var/containers/Bundle/Application/Cafe.app",
+      "/var/mobile/Containers/Data/Application/Cafe",
+      true,
+      "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9L"
     );
   }
 

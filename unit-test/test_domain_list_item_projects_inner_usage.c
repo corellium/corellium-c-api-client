@@ -22,23 +22,23 @@ domain_list_item_projects_inner_usage_t* instantiate_domain_list_item_projects_i
   domain_list_item_projects_inner_usage_t* domain_list_item_projects_inner_usage = NULL;
   if (include_optional) {
     domain_list_item_projects_inner_usage = domain_list_item_projects_inner_usage_create(
-      56,
-      1.337,
-      56,
-      56,
-      56,
-      56,
-      56
+      2,
+      239380613,
+      8,
+      2,
+      10240,
+      1,
+      214
     );
   } else {
     domain_list_item_projects_inner_usage = domain_list_item_projects_inner_usage_create(
-      56,
-      1.337,
-      56,
-      56,
-      56,
-      56,
-      56
+      2,
+      239380613,
+      8,
+      2,
+      10240,
+      1,
+      214
     );
   }
 

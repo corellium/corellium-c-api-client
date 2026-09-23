@@ -22,12 +22,12 @@ reset_unauthorized_response_t* instantiate_reset_unauthorized_response(int inclu
   reset_unauthorized_response_t* reset_unauthorized_response = NULL;
   if (include_optional) {
     reset_unauthorized_response = reset_unauthorized_response_create(
-      "0",
+      "Access denied",
       corellium_api_reset_unauthorized_response_ERRORID_Unauthorized
     );
   } else {
     reset_unauthorized_response = reset_unauthorized_response_create(
-      "0",
+      "Access denied",
       corellium_api_reset_unauthorized_response_ERRORID_Unauthorized
     );
   }

@@ -22,13 +22,13 @@ stripe_webhook_ack_t* instantiate_stripe_webhook_ack(int include_optional) {
   stripe_webhook_ack_t* stripe_webhook_ack = NULL;
   if (include_optional) {
     stripe_webhook_ack = stripe_webhook_ack_create(
-      1,
-      "0"
+      true,
+      "Unhandled event type: customer.updated"
     );
   } else {
     stripe_webhook_ack = stripe_webhook_ack_create(
-      1,
-      "0"
+      true,
+      "Unhandled event type: customer.updated"
     );
   }
 

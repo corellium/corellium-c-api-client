@@ -22,11 +22,11 @@ agent_install_body_t* instantiate_agent_install_body(int include_optional) {
   agent_install_body_t* agent_install_body = NULL;
   if (include_optional) {
     agent_install_body = agent_install_body_create(
-      "0"
+      "/var/tmp/Cafe.ipa"
     );
   } else {
     agent_install_body = agent_install_body_create(
-      "0"
+      "/var/tmp/Cafe.ipa"
     );
   }
 

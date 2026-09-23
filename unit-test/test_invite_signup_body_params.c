@@ -22,17 +22,17 @@ invite_signup_body_params_t* instantiate_invite_signup_body_params(int include_o
   invite_signup_body_params_t* invite_signup_body_params = NULL;
   if (include_optional) {
     invite_signup_body_params = invite_signup_body_params_create(
-      "0",
-      "0",
-      "0",
-      1
+      "jane.doe@example.com",
+      "<redacted>",
+      "Jane Doe",
+      true
     );
   } else {
     invite_signup_body_params = invite_signup_body_params_create(
-      "0",
-      "0",
-      "0",
-      1
+      "jane.doe@example.com",
+      "<redacted>",
+      "Jane Doe",
+      true
     );
   }
 

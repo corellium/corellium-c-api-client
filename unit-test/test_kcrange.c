@@ -22,13 +22,13 @@ kcrange_t* instantiate_kcrange(int include_optional) {
   kcrange_t* kcrange = NULL;
   if (include_optional) {
     kcrange = kcrange_create(
-      "0",
-      list_createList()
+      "com.apple.driver.AppleMobileFileIntegrity",
+      ["0xfffffff007c88000","0xfffffff007d1c000"]
     );
   } else {
     kcrange = kcrange_create(
-      "0",
-      list_createList()
+      "com.apple.driver.AppleMobileFileIntegrity",
+      ["0xfffffff007c88000","0xfffffff007d1c000"]
     );
   }
 

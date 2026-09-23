@@ -22,13 +22,13 @@ user_errors_t* instantiate_user_errors(int include_optional) {
   user_errors_t* user_errors = NULL;
   if (include_optional) {
     user_errors = user_errors_create(
-      "0",
+      "One or more fields were rejected",
       corellium_api_user_errors_ERRORID_UserErrors,
       list_createList()
     );
   } else {
     user_errors = user_errors_create(
-      "0",
+      "One or more fields were rejected",
       corellium_api_user_errors_ERRORID_UserErrors,
       list_createList()
     );

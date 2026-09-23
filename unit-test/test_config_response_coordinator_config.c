@@ -22,11 +22,11 @@ config_response_coordinator_config_t* instantiate_config_response_coordinator_co
   config_response_coordinator_config_t* config_response_coordinator_config = NULL;
   if (include_optional) {
     config_response_coordinator_config = config_response_coordinator_config_create(
-      1
+      true
     );
   } else {
     config_response_coordinator_config = config_response_coordinator_config_create(
-      1
+      true
     );
   }
 

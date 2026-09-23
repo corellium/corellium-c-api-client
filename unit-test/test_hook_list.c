@@ -23,20 +23,20 @@ hook_list_t* instantiate_hook_list(int include_optional) {
   if (include_optional) {
     hook_list = hook_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     hook_list = hook_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

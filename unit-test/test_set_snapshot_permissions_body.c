@@ -22,11 +22,11 @@ set_snapshot_permissions_body_t* instantiate_set_snapshot_permissions_body(int i
   set_snapshot_permissions_body_t* set_snapshot_permissions_body = NULL;
   if (include_optional) {
     set_snapshot_permissions_body = set_snapshot_permissions_body_create(
-      list_createList()
+      ["jane.doe@example.com"]
     );
   } else {
     set_snapshot_permissions_body = set_snapshot_permissions_body_create(
-      list_createList()
+      ["jane.doe@example.com"]
     );
   }
 

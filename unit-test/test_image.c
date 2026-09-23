@@ -22,33 +22,33 @@ image_t* instantiate_image(int include_optional) {
   image_t* image = NULL;
   if (include_optional) {
     image = image_create(
-      "0",
-      "0",
-      "0",
+      "active",
+      "3e1354a3-fb10-46c0-8b05-56e28edbde69",
+      "firmware.ipsw",
       corellium_api_image__fwbinary,
-      1.337,
-      "0",
-      "0",
+      2147483648,
+      "9e107d9d372bb6826bd81d3542a419d6",
+      "sha256$1048576$e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       corellium_api_image__plain,
-      "0",
-      "0",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   } else {
     image = image_create(
-      "0",
-      "0",
-      "0",
+      "active",
+      "3e1354a3-fb10-46c0-8b05-56e28edbde69",
+      "firmware.ipsw",
       corellium_api_image__fwbinary,
-      1.337,
-      "0",
-      "0",
+      2147483648,
+      "9e107d9d372bb6826bd81d3542a419d6",
+      "sha256$1048576$e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
       corellium_api_image__plain,
-      "0",
-      "0",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   }
 

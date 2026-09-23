@@ -22,13 +22,13 @@ flavor_frame_dimensions_t* instantiate_flavor_frame_dimensions(int include_optio
   flavor_frame_dimensions_t* flavor_frame_dimensions = NULL;
   if (include_optional) {
     flavor_frame_dimensions = flavor_frame_dimensions_create(
-      1.337,
-      1.337
+      750,
+      1334
     );
   } else {
     flavor_frame_dimensions = flavor_frame_dimensions_create(
-      1.337,
-      1.337
+      750,
+      1334
     );
   }
 

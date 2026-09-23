@@ -23,15 +23,15 @@ ensure_domain_settings_response_t* instantiate_ensure_domain_settings_response(i
   ensure_domain_settings_response_t* ensure_domain_settings_response = NULL;
   if (include_optional) {
     ensure_domain_settings_response = ensure_domain_settings_response_create(
-      1,
-      "0",
+      false,
+      "c29762d1-45d7-489d-a3a2-9dadc43978ba",
        // false, not to have infinite recursion
       instantiate_ensure_domain_settings_response_user(0)
     );
   } else {
     ensure_domain_settings_response = ensure_domain_settings_response_create(
-      1,
-      "0",
+      false,
+      "c29762d1-45d7-489d-a3a2-9dadc43978ba",
       NULL
     );
   }

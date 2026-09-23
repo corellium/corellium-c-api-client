@@ -22,12 +22,12 @@ vpn_definition_t* instantiate_vpn_definition(int include_optional) {
   vpn_definition_t* vpn_definition = NULL;
   if (include_optional) {
     vpn_definition = vpn_definition_create(
-      list_createList(),
+      [{"devicePort":22,"routerPort":22,"status":"started"}],
       list_createList()
     );
   } else {
     vpn_definition = vpn_definition_create(
-      list_createList(),
+      [{"devicePort":22,"routerPort":22,"status":"started"}],
       list_createList()
     );
   }

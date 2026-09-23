@@ -22,15 +22,15 @@ storage_queue_error_t* instantiate_storage_queue_error(int include_optional) {
   storage_queue_error_t* storage_queue_error = NULL;
   if (include_optional) {
     storage_queue_error = storage_queue_error_create(
-      "0",
-      "0",
-      "0"
+      "Failed to queue mount job.",
+      "Connection to job queue timed out.",
+      "Retry the request in a few minutes."
     );
   } else {
     storage_queue_error = storage_queue_error_create(
-      "0",
-      "0",
-      "0"
+      "Failed to queue mount job.",
+      "Connection to job queue timed out.",
+      "Retry the request in a few minutes."
     );
   }
 

@@ -22,13 +22,13 @@ totp_disable_body_t* instantiate_totp_disable_body(int include_optional) {
   totp_disable_body_t* totp_disable_body = NULL;
   if (include_optional) {
     totp_disable_body = totp_disable_body_create(
-      "0",
-      "0"
+      "123456",
+      "<redacted>"
     );
   } else {
     totp_disable_body = totp_disable_body_create(
-      "0",
-      "0"
+      "123456",
+      "<redacted>"
     );
   }
 

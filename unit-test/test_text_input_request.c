@@ -22,13 +22,13 @@ text_input_request_t* instantiate_text_input_request(int include_optional) {
   text_input_request_t* text_input_request = NULL;
   if (include_optional) {
     text_input_request = text_input_request_create(
-      "0",
-      56
+      "Hello, world!",
+      150
     );
   } else {
     text_input_request = text_input_request_create(
-      "0",
-      56
+      "Hello, world!",
+      150
     );
   }
 

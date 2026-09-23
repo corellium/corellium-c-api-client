@@ -22,11 +22,11 @@ agent_system_network_response_t* instantiate_agent_system_network_response(int i
   agent_system_network_response_t* agent_system_network_response = NULL;
   if (include_optional) {
     agent_system_network_response = agent_system_network_response_create(
-      "0"
+      "10.0.0.12"
     );
   } else {
     agent_system_network_response = agent_system_network_response_create(
-      "0"
+      "10.0.0.12"
     );
   }
 

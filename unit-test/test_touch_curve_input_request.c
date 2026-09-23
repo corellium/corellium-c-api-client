@@ -22,25 +22,25 @@ touch_curve_input_request_t* instantiate_touch_curve_input_request(int include_o
   touch_curve_input_request_t* touch_curve_input_request = NULL;
   if (include_optional) {
     touch_curve_input_request = touch_curve_input_request_create(
-      list_createList(),
-      list_createList(),
-      list_createList(),
-      list_createList(),
-      list_createList(),
-      1,
-      56,
-      56
+      [[100,200]],
+      [[100,200]],
+      [[[150,250]]],
+      ["finger"],
+      ["finger"],
+      true,
+      100,
+      250
     );
   } else {
     touch_curve_input_request = touch_curve_input_request_create(
-      list_createList(),
-      list_createList(),
-      list_createList(),
-      list_createList(),
-      list_createList(),
-      1,
-      56,
-      56
+      [[100,200]],
+      [[100,200]],
+      [[[150,250]]],
+      ["finger"],
+      ["finger"],
+      true,
+      100,
+      250
     );
   }
 

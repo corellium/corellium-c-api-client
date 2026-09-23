@@ -22,21 +22,21 @@ firmware_service_settings_t* instantiate_firmware_service_settings(int include_o
   firmware_service_settings_t* firmware_service_settings = NULL;
   if (include_optional) {
     firmware_service_settings = firmware_service_settings_create(
-      1,
-      1,
-      1,
-      1,
-      1,
-      list_createList()
+      false,
+      false,
+      false,
+      true,
+      true,
+      [{"device":{"product":"iPhone16,.*"},"include":true}]
     );
   } else {
     firmware_service_settings = firmware_service_settings_create(
-      1,
-      1,
-      1,
-      1,
-      1,
-      list_createList()
+      false,
+      false,
+      false,
+      true,
+      true,
+      [{"device":{"product":"iPhone16,.*"},"include":true}]
     );
   }
 

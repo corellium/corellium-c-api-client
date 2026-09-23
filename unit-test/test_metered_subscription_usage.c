@@ -22,27 +22,27 @@ metered_subscription_usage_t* instantiate_metered_subscription_usage(int include
   metered_subscription_usage_t* metered_subscription_usage = NULL;
   if (include_optional) {
     metered_subscription_usage = metered_subscription_usage_create(
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      1.337
+      800,
+      100,
+      99500,
+      29600,
+      37,
+      9600,
+      12,
+      138700,
+      149
     );
   } else {
     metered_subscription_usage = metered_subscription_usage_create(
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      1.337,
-      1.337
+      800,
+      100,
+      99500,
+      29600,
+      37,
+      9600,
+      12,
+      138700,
+      149
     );
   }
 

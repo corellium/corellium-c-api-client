@@ -22,11 +22,11 @@ service_status_request_body_vms_inner_t* instantiate_service_status_request_body
   service_status_request_body_vms_inner_t* service_status_request_body_vms_inner = NULL;
   if (include_optional) {
     service_status_request_body_vms_inner = service_status_request_body_vms_inner_create(
-      "0"
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5"
     );
   } else {
     service_status_request_body_vms_inner = service_status_request_body_vms_inner_create(
-      "0"
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5"
     );
   }
 

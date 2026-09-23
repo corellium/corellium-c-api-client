@@ -22,11 +22,11 @@ invite_result_error_t* instantiate_invite_result_error(int include_optional) {
   invite_result_error_t* invite_result_error = NULL;
   if (include_optional) {
     invite_result_error = invite_result_error_create(
-      "0"
+      "An invite has already been sent to jane.doe@example.com for this domain"
     );
   } else {
     invite_result_error = invite_result_error_create(
-      "0"
+      "An invite has already been sent to jane.doe@example.com for this domain"
     );
   }
 

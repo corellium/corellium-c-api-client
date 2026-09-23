@@ -25,10 +25,10 @@ create_activity_export_body_t* instantiate_create_activity_export_body(int inclu
       0,
       0,
       "-createdAt",
-      "0",
-      "0",
-      "0",
-      "0",
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
+      "iPhone15,2",
       "2026-05-22T13:58:34Z",
       "2026-05-22T00:00Z"
     );
@@ -37,10 +37,10 @@ create_activity_export_body_t* instantiate_create_activity_export_body(int inclu
       0,
       0,
       "-createdAt",
-      "0",
-      "0",
-      "0",
-      "0",
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
+      "iPhone15,2",
       "2026-05-22T13:58:34Z",
       "2026-05-22T00:00Z"
     );

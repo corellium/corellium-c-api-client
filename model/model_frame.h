@@ -15,7 +15,7 @@
 
 typedef struct model_frame_t model_frame_t;
 
-#include "flavor_frame_dimensions.h"
+#include "model_frame_dimensions.h"
 #include "model_frame_home.h"
 #include "model_rect.h"
 
@@ -26,7 +26,7 @@ typedef struct model_frame_t {
     double height; //numeric
     struct model_rect_t *inner; //model
     struct model_frame_home_t *home; //model
-    struct flavor_frame_dimensions_t *dimensions; //model
+    struct model_frame_dimensions_t *dimensions; //model
     double scale; //numeric
     int has_image; //boolean
 
@@ -38,7 +38,7 @@ __attribute__((deprecated)) model_frame_t *model_frame_create(
     double height,
     model_rect_t *inner,
     model_frame_home_t *home,
-    flavor_frame_dimensions_t *dimensions,
+    model_frame_dimensions_t *dimensions,
     double scale,
     int has_image
 );

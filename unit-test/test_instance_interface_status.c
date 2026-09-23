@@ -22,14 +22,14 @@ instance_interface_status_t* instantiate_instance_interface_status(int include_o
   instance_interface_status_t* instance_interface_status = NULL;
   if (include_optional) {
     instance_interface_status = instance_interface_status_create(
-      "0",
-      "0",
+      "gpio/0",
+      "56494514-33f7-4fc2-9fdc-865e3957e6d3",
       corellium_api_instance_interface_status_STATUS_attached
     );
   } else {
     instance_interface_status = instance_interface_status_create(
-      "0",
-      "0",
+      "gpio/0",
+      "56494514-33f7-4fc2-9fdc-865e3957e6d3",
       corellium_api_instance_interface_status_STATUS_attached
     );
   }

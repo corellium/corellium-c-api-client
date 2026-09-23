@@ -22,18 +22,18 @@ update_interconnect_v3_body_t* instantiate_update_interconnect_v3_body(int inclu
   update_interconnect_v3_body_t* update_interconnect_v3_body = NULL;
   if (include_optional) {
     update_interconnect_v3_body = update_interconnect_v3_body_create(
-      "0",
+      "vpn-gateway",
       list_createList(),
       corellium_api_update_interconnect_v3_body_TYPE_hub,
-      "0",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
       corellium_api_update_interconnect_v3_body__can
     );
   } else {
     update_interconnect_v3_body = update_interconnect_v3_body_create(
-      "0",
+      "vpn-gateway",
       list_createList(),
       corellium_api_update_interconnect_v3_body_TYPE_hub,
-      "0",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
       corellium_api_update_interconnect_v3_body__can
     );
   }

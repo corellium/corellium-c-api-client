@@ -22,27 +22,27 @@ stripe_checkout_body_t* instantiate_stripe_checkout_body(int include_optional) {
   stripe_checkout_body_t* stripe_checkout_body = NULL;
   if (include_optional) {
     stripe_checkout_body = stripe_checkout_body_create(
-      1,
-      "0",
-      "0",
-      "0",
-      1.337,
-      "0",
-      1,
-      "0",
-      "0"
+      true,
+      "jane.doe@example.com",
+      "Jane Doe",
+      "acme-corp.corellium.com",
+      12,
+      "enterprise",
+      false,
+      "price_xxxxxxxxxxxxxx",
+      "SAVE20"
     );
   } else {
     stripe_checkout_body = stripe_checkout_body_create(
-      1,
-      "0",
-      "0",
-      "0",
-      1.337,
-      "0",
-      1,
-      "0",
-      "0"
+      true,
+      "jane.doe@example.com",
+      "Jane Doe",
+      "acme-corp.corellium.com",
+      12,
+      "enterprise",
+      false,
+      "price_xxxxxxxxxxxxxx",
+      "SAVE20"
     );
   }
 

@@ -22,15 +22,15 @@ domain_list_item_domain_usage_inner_t* instantiate_domain_list_item_domain_usage
   domain_list_item_domain_usage_inner_t* domain_list_item_domain_usage_inner = NULL;
   if (include_optional) {
     domain_list_item_domain_usage_inner = domain_list_item_domain_usage_inner_create(
-      "0",
-      "2013-10-20",
-      1.337
+      "c29762d1-45d7-489d-a3a2-9dadc43978ba",
+      "Sun Mar 01 00:00:00 UTC 2026",
+      129.61
     );
   } else {
     domain_list_item_domain_usage_inner = domain_list_item_domain_usage_inner_create(
-      "0",
-      "2013-10-20",
-      1.337
+      "c29762d1-45d7-489d-a3a2-9dadc43978ba",
+      "Sun Mar 01 00:00:00 UTC 2026",
+      129.61
     );
   }
 

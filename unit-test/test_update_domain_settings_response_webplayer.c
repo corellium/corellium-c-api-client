@@ -22,11 +22,11 @@ update_domain_settings_response_webplayer_t* instantiate_update_domain_settings_
   update_domain_settings_response_webplayer_t* update_domain_settings_response_webplayer = NULL;
   if (include_optional) {
     update_domain_settings_response_webplayer = update_domain_settings_response_webplayer_create(
-      list_createList()
+      ["app.example.com"]
     );
   } else {
     update_domain_settings_response_webplayer = update_domain_settings_response_webplayer_create(
-      list_createList()
+      ["app.example.com"]
     );
   }
 

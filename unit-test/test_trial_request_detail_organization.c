@@ -22,13 +22,13 @@ trial_request_detail_organization_t* instantiate_trial_request_detail_organizati
   trial_request_detail_organization_t* trial_request_detail_organization = NULL;
   if (include_optional) {
     trial_request_detail_organization = trial_request_detail_organization_create(
-      "0",
-      "0"
+      "Acme Corp",
+      "US"
     );
   } else {
     trial_request_detail_organization = trial_request_detail_organization_create(
-      "0",
-      "0"
+      "Acme Corp",
+      "US"
     );
   }
 

@@ -22,17 +22,17 @@ patch_project_body_settings_t* instantiate_patch_project_body_settings(int inclu
   patch_project_body_settings_t* patch_project_body_settings = NULL;
   if (include_optional) {
     patch_project_body_settings = patch_project_body_settings_create(
-      56,
       1,
-      1,
-      "0"
+      true,
+      true,
+      "0eb5d1e7-2c10-42b1-95fc-30e4e4885cd7"
     );
   } else {
     patch_project_body_settings = patch_project_body_settings_create(
-      56,
       1,
-      1,
-      "0"
+      true,
+      true,
+      "0eb5d1e7-2c10-42b1-95fc-30e4e4885cd7"
     );
   }
 

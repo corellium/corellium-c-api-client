@@ -22,15 +22,15 @@ saml_group_mapping_t* instantiate_saml_group_mapping(int include_optional) {
   saml_group_mapping_t* saml_group_mapping = NULL;
   if (include_optional) {
     saml_group_mapping = saml_group_mapping_create(
-      "0",
-      "0",
-      "0"
+      "Mobile-PenTesters",
+      "admin",
+      "089c8ffd-ca4d-4d35-80ab-0847d18b7213"
     );
   } else {
     saml_group_mapping = saml_group_mapping_create(
-      "0",
-      "0",
-      "0"
+      "Mobile-PenTesters",
+      "admin",
+      "089c8ffd-ca4d-4d35-80ab-0847d18b7213"
     );
   }
 

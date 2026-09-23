@@ -27,8 +27,8 @@ project_list_item_t* instantiate_project_list_item(int include_optional) {
   project_list_item_t* project_list_item = NULL;
   if (include_optional) {
     project_list_item = project_list_item_create(
-      "0",
-      "0",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "Default Project",
        // false, not to have infinite recursion
       instantiate_project_settings(0),
        // false, not to have infinite recursion
@@ -39,18 +39,18 @@ project_list_item_t* instantiate_project_list_item(int include_optional) {
       instantiate_network_status(0),
        // false, not to have infinite recursion
       instantiate_project_config(0),
-      0
+      2
     );
   } else {
     project_list_item = project_list_item_create(
-      "0",
-      "0",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "Default Project",
       NULL,
       NULL,
       NULL,
       NULL,
       NULL,
-      0
+      2
     );
   }
 

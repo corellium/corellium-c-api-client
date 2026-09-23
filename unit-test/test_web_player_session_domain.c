@@ -22,21 +22,21 @@ web_player_session_domain_t* instantiate_web_player_session_domain(int include_o
   web_player_session_domain_t* web_player_session_domain = NULL;
   if (include_optional) {
     web_player_session_domain = web_player_session_domain_create(
-      "0",
-      "0",
-      "0",
-      1.337,
-      1,
-      1
+      "acme-corp",
+      "Acme Corp",
+      "all-modal",
+      8,
+      false,
+      true
     );
   } else {
     web_player_session_domain = web_player_session_domain_create(
-      "0",
-      "0",
-      "0",
-      1.337,
-      1,
-      1
+      "acme-corp",
+      "Acme Corp",
+      "all-modal",
+      8,
+      false,
+      true
     );
   }
 

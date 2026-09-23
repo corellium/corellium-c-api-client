@@ -22,13 +22,13 @@ create_invites_body_settings_t* instantiate_create_invites_body_settings(int inc
   create_invites_body_settings_t* create_invites_body_settings = NULL;
   if (include_optional) {
     create_invites_body_settings = create_invites_body_settings_create(
-      list_createList(),
-      list_createList()
+      [089c8ffd-ca4d-4d35-80ab-0847d18b7213],
+      [[1c41b1bc-4f53-48a8-b690-ad30611e1960, admin]]
     );
   } else {
     create_invites_body_settings = create_invites_body_settings_create(
-      list_createList(),
-      list_createList()
+      [089c8ffd-ca4d-4d35-80ab-0847d18b7213],
+      [[1c41b1bc-4f53-48a8-b690-ad30611e1960, admin]]
     );
   }
 

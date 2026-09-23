@@ -269,6 +269,7 @@ set(SRCS
     model/domain_config_input_snapshot_sharing_permissions.c
     model/domain_config_input_trial.c
     model/domain_config_input_webplayer.c
+    model/domain_config_snapshot_sharing_permissions.c
     model/domain_config_trial.c
     model/domain_config_trial_end_action.c
     model/domain_config_trial_extension.c
@@ -496,6 +497,7 @@ set(SRCS
     model/model_firmware_springboard_snapshot.c
     model/model_firmware_springboard_snapshot_volumes_inner.c
     model/model_frame.c
+    model/model_frame_dimensions.c
     model/model_frame_home.c
     model/model_partition.c
     model/model_product_image.c
@@ -1042,6 +1044,7 @@ set(HDRS
     model/domain_config_input_snapshot_sharing_permissions.h
     model/domain_config_input_trial.h
     model/domain_config_input_webplayer.h
+    model/domain_config_snapshot_sharing_permissions.h
     model/domain_config_trial.h
     model/domain_config_trial_end_action.h
     model/domain_config_trial_extension.h
@@ -1269,6 +1272,7 @@ set(HDRS
     model/model_firmware_springboard_snapshot.h
     model/model_firmware_springboard_snapshot_volumes_inner.h
     model/model_frame.h
+    model/model_frame_dimensions.h
     model/model_frame_home.h
     model/model_partition.h
     model/model_product_image.h

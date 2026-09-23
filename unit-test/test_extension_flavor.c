@@ -22,27 +22,27 @@ extension_flavor_t* instantiate_extension_flavor(int include_optional) {
   extension_flavor_t* extension_flavor = NULL;
   if (include_optional) {
     extension_flavor = extension_flavor_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      1.337,
-      1.337,
-      1,
-      1,
-      1
+      "iot",
+      "Raspberry Pi 4B",
+      "rpi4b",
+      "rpi4b",
+      4,
+      4096,
+      true,
+      true,
+      true
     );
   } else {
     extension_flavor = extension_flavor_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      1.337,
-      1.337,
-      1,
-      1,
-      1
+      "iot",
+      "Raspberry Pi 4B",
+      "rpi4b",
+      "rpi4b",
+      4,
+      4096,
+      true,
+      true,
+      true
     );
   }
 

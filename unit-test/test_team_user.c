@@ -22,25 +22,25 @@ team_user_t* instantiate_team_user(int include_optional) {
   team_user_t* team_user = NULL;
   if (include_optional) {
     team_user = team_user_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      1,
-      1,
-      1,
-      1
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
+      "Jane Doe",
+      "jane.doe",
+      "jane.doe@example.com",
+      true,
+      true,
+      false,
+      false
     );
   } else {
     team_user = team_user_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      1,
-      1,
-      1,
-      1
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320",
+      "Jane Doe",
+      "jane.doe",
+      "jane.doe@example.com",
+      true,
+      true,
+      false,
+      false
     );
   }
 

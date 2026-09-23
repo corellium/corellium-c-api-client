@@ -22,29 +22,29 @@ firmware_asset_t* instantiate_firmware_asset(int include_optional) {
   firmware_asset_t* firmware_asset = NULL;
   if (include_optional) {
     firmware_asset = firmware_asset_create(
-      "0",
-      "0",
-      "0",
-      1.337,
-      "0",
-      "0",
-      "0",
-      "0",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      "c29762d1-45d7-489d-a3a2-9dadc43978ba",
+      "https://example.com/firmware-assets/asset.bin",
+      "aGVsbG8gd29ybGQ=",
+      324,
+      "5d41402abc4b2a76b9719d911017c592",
+      "aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d",
+      "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824",
+      "2026-05-22T13:58:34.000Z",
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   } else {
     firmware_asset = firmware_asset_create(
-      "0",
-      "0",
-      "0",
-      1.337,
-      "0",
-      "0",
-      "0",
-      "0",
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      "c29762d1-45d7-489d-a3a2-9dadc43978ba",
+      "https://example.com/firmware-assets/asset.bin",
+      "aGVsbG8gd29ybGQ=",
+      324,
+      "5d41402abc4b2a76b9719d911017c592",
+      "aaf4c61ddcc5e8a2dabede0f3b482cd9aea9434d",
+      "2cf24dba5fb0a30e26e83b2ac5b9e29e1b161e5c1fa7425e73043362938b9824",
+      "2026-05-22T13:58:34.000Z",
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   }
 

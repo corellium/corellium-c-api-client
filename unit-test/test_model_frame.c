@@ -18,32 +18,32 @@ model_frame_t* instantiate_model_frame(int include_optional);
 
 #include "test_model_rect.c"
 #include "test_model_frame_home.c"
-#include "test_flavor_frame_dimensions.c"
+#include "test_model_frame_dimensions.c"
 
 
 model_frame_t* instantiate_model_frame(int include_optional) {
   model_frame_t* model_frame = NULL;
   if (include_optional) {
     model_frame = model_frame_create(
-      1.337,
-      1.337,
+      300,
+      619.49,
        // false, not to have infinite recursion
       instantiate_model_rect(0),
       null,
        // false, not to have infinite recursion
-      instantiate_flavor_frame_dimensions(0),
-      1.337,
-      1
+      instantiate_model_frame_dimensions(0),
+      3,
+      true
     );
   } else {
     model_frame = model_frame_create(
-      1.337,
-      1.337,
+      300,
+      619.49,
       NULL,
       null,
       NULL,
-      1.337,
-      1
+      3,
+      true
     );
   }
 

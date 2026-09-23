@@ -22,19 +22,19 @@ storage_file_t* instantiate_storage_file(int include_optional) {
   storage_file_t* storage_file = NULL;
   if (include_optional) {
     storage_file = storage_file_create(
-      "0",
-      "0",
+      "firmware.ipsw",
+      "ipsw",
       corellium_api_storage_file_TYPE_file,
-      56,
-      "2013-10-20T19:20:30+01:00"
+      2147483648,
+      "2026-03-17T11:41:05Z"
     );
   } else {
     storage_file = storage_file_create(
-      "0",
-      "0",
+      "firmware.ipsw",
+      "ipsw",
       corellium_api_storage_file_TYPE_file,
-      56,
-      "2013-10-20T19:20:30+01:00"
+      2147483648,
+      "2026-03-17T11:41:05Z"
     );
   }
 

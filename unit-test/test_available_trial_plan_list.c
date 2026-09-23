@@ -23,20 +23,20 @@ available_trial_plan_list_t* instantiate_available_trial_plan_list(int include_o
   if (include_optional) {
     available_trial_plan_list = available_trial_plan_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     available_trial_plan_list = available_trial_plan_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

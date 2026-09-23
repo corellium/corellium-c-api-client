@@ -22,19 +22,19 @@ node_information_t* instantiate_node_information(int include_optional) {
   node_information_t* node_information = NULL;
   if (include_optional) {
     node_information = node_information_create(
-      "0",
-      "0",
-      "0",
-      1,
-      list_createList()
+      "2x3ZOdu4pshouoY0kttRPoiIk5s",
+      "10.0.0.12",
+      "node-01.example.com",
+      22,
+      ["controller","compute"]
     );
   } else {
     node_information = node_information_create(
-      "0",
-      "0",
-      "0",
-      1,
-      list_createList()
+      "2x3ZOdu4pshouoY0kttRPoiIk5s",
+      "10.0.0.12",
+      "node-01.example.com",
+      22,
+      ["controller","compute"]
     );
   }
 

@@ -24,31 +24,31 @@ cluster_snapshot_t* instantiate_cluster_snapshot(int include_optional) {
   cluster_snapshot_t* cluster_snapshot = NULL;
   if (include_optional) {
     cluster_snapshot = cluster_snapshot_create(
-      "0",
-      "0",
-      "0",
-      "0",
+      "c67af9c0-26cd-4233-9782-436c842b60db",
+      "pre-update-snapshot",
+      "b6f1c9d2-8e47-4b3a-9c5d-2f1e8a7b6c5d",
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
        // false, not to have infinite recursion
       instantiate_cluster_snapshot_status(0),
       corellium_api_cluster_snapshot_TYPE_iscsi,
-      "0",
+      "10.0.0.12:6666",
        // false, not to have infinite recursion
       instantiate_cluster_snapshot_metadata(0),
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   } else {
     cluster_snapshot = cluster_snapshot_create(
-      "0",
-      "0",
-      "0",
-      "0",
+      "c67af9c0-26cd-4233-9782-436c842b60db",
+      "pre-update-snapshot",
+      "b6f1c9d2-8e47-4b3a-9c5d-2f1e8a7b6c5d",
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
       NULL,
       corellium_api_cluster_snapshot_TYPE_iscsi,
-      "0",
+      "10.0.0.12:6666",
       NULL,
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00"
+      "2026-03-14T09:12:47Z",
+      "2026-03-17T11:41:05Z"
     );
   }
 

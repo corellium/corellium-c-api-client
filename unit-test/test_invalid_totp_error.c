@@ -22,12 +22,12 @@ invalid_totp_error_t* instantiate_invalid_totp_error(int include_optional) {
   invalid_totp_error_t* invalid_totp_error = NULL;
   if (include_optional) {
     invalid_totp_error = invalid_totp_error_create(
-      "0",
+      "Invalid TOTP.",
       corellium_api_invalid_totp_error_ERRORID_InvalidTOTP
     );
   } else {
     invalid_totp_error = invalid_totp_error_create(
-      "0",
+      "Invalid TOTP.",
       corellium_api_invalid_totp_error_ERRORID_InvalidTOTP
     );
   }

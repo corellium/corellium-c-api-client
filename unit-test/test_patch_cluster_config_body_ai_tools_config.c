@@ -22,11 +22,11 @@ patch_cluster_config_body_ai_tools_config_t* instantiate_patch_cluster_config_bo
   patch_cluster_config_body_ai_tools_config_t* patch_cluster_config_body_ai_tools_config = NULL;
   if (include_optional) {
     patch_cluster_config_body_ai_tools_config = patch_cluster_config_body_ai_tools_config_create(
-      1
+      true
     );
   } else {
     patch_cluster_config_body_ai_tools_config = patch_cluster_config_body_ai_tools_config_create(
-      1
+      true
     );
   }
 

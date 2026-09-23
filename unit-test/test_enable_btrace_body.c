@@ -22,11 +22,11 @@ enable_btrace_body_t* instantiate_enable_btrace_body(int include_optional) {
   enable_btrace_body_t* enable_btrace_body = NULL;
   if (include_optional) {
     enable_btrace_body = enable_btrace_body_create(
-      list_createList()
+      [["0xfffffff007c88000","0xfffffff007d1c000"]]
     );
   } else {
     enable_btrace_body = enable_btrace_body_create(
-      list_createList()
+      [["0xfffffff007c88000","0xfffffff007d1c000"]]
     );
   }
 

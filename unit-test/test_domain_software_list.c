@@ -23,20 +23,20 @@ domain_software_list_t* instantiate_domain_software_list(int include_optional) {
   if (include_optional) {
     domain_software_list = domain_software_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     domain_software_list = domain_software_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

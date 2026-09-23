@@ -23,31 +23,31 @@ cluster_snapshot_metadata_t* instantiate_cluster_snapshot_metadata(int include_o
   cluster_snapshot_metadata_t* cluster_snapshot_metadata = NULL;
   if (include_optional) {
     cluster_snapshot_metadata = cluster_snapshot_metadata_create(
+      true,
+      false,
       1,
-      1,
-      1.337,
-      1,
+      false,
       null,
-      0,
-      "0",
-      "0",
-      "0",
-      "0",
-      1.337
+      {"flavorId":"iphone13p","type":"ios","product":"iPhone14,2","model":"d63ap","cores":6},
+      "iphone13p",
+      "16.5",
+      "20F66",
+      "jailbroken",
+      33040
     );
   } else {
     cluster_snapshot_metadata = cluster_snapshot_metadata_create(
+      true,
+      false,
       1,
-      1,
-      1.337,
-      1,
+      false,
       null,
-      0,
-      "0",
-      "0",
-      "0",
-      "0",
-      1.337
+      {"flavorId":"iphone13p","type":"ios","product":"iPhone14,2","model":"d63ap","cores":6},
+      "iphone13p",
+      "16.5",
+      "20F66",
+      "jailbroken",
+      33040
     );
   }
 

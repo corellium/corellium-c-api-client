@@ -41,7 +41,6 @@ typedef struct config_response_t {
     int invalid_build; //boolean
     int sep_sim; //boolean
     int installer_available; //boolean
-    char *invoiced_publishable_key; // string
     char *stripe_public_key; // string
     char *intercom_id; // string
     char *gtm_id; // string
@@ -84,7 +83,6 @@ __attribute__((deprecated)) config_response_t *config_response_create(
     int invalid_build,
     int sep_sim,
     int installer_available,
-    char *invoiced_publishable_key,
     char *stripe_public_key,
     char *intercom_id,
     char *gtm_id,

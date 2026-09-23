@@ -24,16 +24,16 @@ create_project_body_t* instantiate_create_project_body(int include_optional) {
   create_project_body_t* create_project_body = NULL;
   if (include_optional) {
     create_project_body = create_project_body_create(
-      "0",
-      56,
+      "Default Project",
+      4,
       null,
        // false, not to have infinite recursion
       instantiate_project_quota_input(0)
     );
   } else {
     create_project_body = create_project_body_create(
-      "0",
-      56,
+      "Default Project",
+      4,
       null,
       NULL
     );

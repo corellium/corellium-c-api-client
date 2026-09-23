@@ -22,13 +22,13 @@ instance_uefi_bootloader_t* instantiate_instance_uefi_bootloader(int include_opt
   instance_uefi_bootloader_t* instance_uefi_bootloader = NULL;
   if (include_optional) {
     instance_uefi_bootloader = instance_uefi_bootloader_create(
-      "0",
-      "0"
+      "Enable UEFI boot",
+      "uefi.bin"
     );
   } else {
     instance_uefi_bootloader = instance_uefi_bootloader_create(
-      "0",
-      "0"
+      "Enable UEFI boot",
+      "uefi.bin"
     );
   }
 

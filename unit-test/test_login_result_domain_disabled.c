@@ -22,13 +22,13 @@ login_result_domain_disabled_t* instantiate_login_result_domain_disabled(int inc
   login_result_domain_disabled_t* login_result_domain_disabled = NULL;
   if (include_optional) {
     login_result_domain_disabled = login_result_domain_disabled_create(
-      "0",
-      "2013-10-20T19:20:30+01:00"
+      "SubscriptionCanceled",
+      "2026-03-18T16:05:33Z"
     );
   } else {
     login_result_domain_disabled = login_result_domain_disabled_create(
-      "0",
-      "2013-10-20T19:20:30+01:00"
+      "SubscriptionCanceled",
+      "2026-03-18T16:05:33Z"
     );
   }
 

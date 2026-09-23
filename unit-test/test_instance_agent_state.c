@@ -22,13 +22,13 @@ instance_agent_state_t* instantiate_instance_agent_state(int include_optional) {
   instance_agent_state_t* instance_agent_state = NULL;
   if (include_optional) {
     instance_agent_state = instance_agent_state_create(
-      "0",
-      "0"
+      "<redacted>",
+      "<redacted>"
     );
   } else {
     instance_agent_state = instance_agent_state_create(
-      "0",
-      "0"
+      "<redacted>",
+      "<redacted>"
     );
   }
 

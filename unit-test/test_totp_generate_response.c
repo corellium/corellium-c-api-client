@@ -22,13 +22,13 @@ totp_generate_response_t* instantiate_totp_generate_response(int include_optiona
   totp_generate_response_t* totp_generate_response = NULL;
   if (include_optional) {
     totp_generate_response = totp_generate_response_create(
-      "0",
-      "0"
+      "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAAAAAA6fptVAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=",
+      "<totp-secret>"
     );
   } else {
     totp_generate_response = totp_generate_response_create(
-      "0",
-      "0"
+      "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAAAAAA6fptVAAAAAXNSR0IArs4c6QAAAAtJREFUGFdjYAAAAAMAAWgmWQ0AAAAASUVORK5CYII=",
+      "<totp-secret>"
     );
   }
 

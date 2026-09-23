@@ -22,15 +22,15 @@ instance_netdump_state_t* instantiate_instance_netdump_state(int include_optiona
   instance_netdump_state_t* instance_netdump_state = NULL;
   if (include_optional) {
     instance_netdump_state = instance_netdump_state_create(
-      "0",
-      "0",
-      1
+      "<redacted>",
+      "<redacted>",
+      true
     );
   } else {
     instance_netdump_state = instance_netdump_state_create(
-      "0",
-      "0",
-      1
+      "<redacted>",
+      "<redacted>",
+      true
     );
   }
 

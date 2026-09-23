@@ -22,11 +22,11 @@ create_snapshot_body_t* instantiate_create_snapshot_body(int include_optional) {
   create_snapshot_body_t* create_snapshot_body = NULL;
   if (include_optional) {
     create_snapshot_body = create_snapshot_body_create(
-      "0"
+      "before-update"
     );
   } else {
     create_snapshot_body = create_snapshot_body_create(
-      "0"
+      "before-update"
     );
   }
 

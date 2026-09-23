@@ -22,17 +22,17 @@ create_project_body_settings_t* instantiate_create_project_body_settings(int inc
   create_project_body_settings_t* create_project_body_settings = NULL;
   if (include_optional) {
     create_project_body_settings = create_project_body_settings_create(
-      56,
       1,
-      1,
-      "0"
+      true,
+      true,
+      "0eb5d1e7-2c10-42b1-95fc-30e4e4885cd7"
     );
   } else {
     create_project_body_settings = create_project_body_settings_create(
-      56,
       1,
-      1,
-      "0"
+      true,
+      true,
+      "0eb5d1e7-2c10-42b1-95fc-30e4e4885cd7"
     );
   }
 

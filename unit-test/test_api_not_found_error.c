@@ -22,17 +22,17 @@ api_not_found_error_t* instantiate_api_not_found_error(int include_optional) {
   api_not_found_error_t* api_not_found_error = NULL;
   if (include_optional) {
     api_not_found_error = api_not_found_error_create(
-      "0",
-      "0",
-      "0",
-      0
+      "instance with instanceId=f7f9832a-f824-416f-a5ea-4adfe34754b5 not found",
+      "NotFound",
+      "instance",
+      {"instanceId":"f7f9832a-f824-416f-a5ea-4adfe34754b5"}
     );
   } else {
     api_not_found_error = api_not_found_error_create(
-      "0",
-      "0",
-      "0",
-      0
+      "instance with instanceId=f7f9832a-f824-416f-a5ea-4adfe34754b5 not found",
+      "NotFound",
+      "instance",
+      {"instanceId":"f7f9832a-f824-416f-a5ea-4adfe34754b5"}
     );
   }
 

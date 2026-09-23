@@ -23,18 +23,18 @@ firmware_service_config_download_ipsw_filters_t* instantiate_firmware_service_co
   if (include_optional) {
     firmware_service_config_download_ipsw_filters = firmware_service_config_download_ipsw_filters_create(
       list_createList(),
-      "0",
-      "0",
-      "0",
-      "0"
+      "checkbox",
+      "Cache firmware",
+      "Cache firmwares in /var/ipsw",
+      "boolean"
     );
   } else {
     firmware_service_config_download_ipsw_filters = firmware_service_config_download_ipsw_filters_create(
       list_createList(),
-      "0",
-      "0",
-      "0",
-      "0"
+      "checkbox",
+      "Cache firmware",
+      "Cache firmwares in /var/ipsw",
+      "boolean"
     );
   }
 

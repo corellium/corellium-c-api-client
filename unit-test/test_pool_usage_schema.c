@@ -22,17 +22,17 @@ pool_usage_schema_t* instantiate_pool_usage_schema(int include_optional) {
   pool_usage_schema_t* pool_usage_schema = NULL;
   if (include_optional) {
     pool_usage_schema = pool_usage_schema_create(
-      1.337,
-      1.337,
-      1.337,
-      1.337
+      1024,
+      4096,
+      3072,
+      37
     );
   } else {
     pool_usage_schema = pool_usage_schema_create(
-      1.337,
-      1.337,
-      1.337,
-      1.337
+      1024,
+      4096,
+      3072,
+      37
     );
   }
 

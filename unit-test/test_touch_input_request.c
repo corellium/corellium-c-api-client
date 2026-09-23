@@ -22,17 +22,17 @@ touch_input_request_t* instantiate_touch_input_request(int include_optional) {
   touch_input_request_t* touch_input_request = NULL;
   if (include_optional) {
     touch_input_request = touch_input_request_create(
-      list_createList(),
-      list_createList(),
-      1,
-      56
+      [[100,200]],
+      ["finger"],
+      true,
+      100
     );
   } else {
     touch_input_request = touch_input_request_create(
-      list_createList(),
-      list_createList(),
-      1,
-      56
+      [[100,200]],
+      ["finger"],
+      true,
+      100
     );
   }
 

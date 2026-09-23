@@ -23,13 +23,13 @@ invite_signup_body_t* instantiate_invite_signup_body(int include_optional) {
   invite_signup_body_t* invite_signup_body = NULL;
   if (include_optional) {
     invite_signup_body = invite_signup_body_create(
-      "0",
+      "<token>",
        // false, not to have infinite recursion
       instantiate_invite_signup_body_params(0)
     );
   } else {
     invite_signup_body = invite_signup_body_create(
-      "0",
+      "<token>",
       NULL
     );
   }

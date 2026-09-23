@@ -22,11 +22,11 @@ message_body_any_of_1_t* instantiate_message_body_any_of_1(int include_optional)
   message_body_any_of_1_t* message_body_any_of_1 = NULL;
   if (include_optional) {
     message_body_any_of_1 = message_body_any_of_1_create(
-      "0"
+      "deadbeef"
     );
   } else {
     message_body_any_of_1 = message_body_any_of_1_create(
-      "0"
+      "deadbeef"
     );
   }
 

@@ -22,11 +22,11 @@ media_play_by_url_t* instantiate_media_play_by_url(int include_optional) {
   media_play_by_url_t* media_play_by_url = NULL;
   if (include_optional) {
     media_play_by_url = media_play_by_url_create(
-      "0"
+      "https://example.com/media.mp4"
     );
   } else {
     media_play_by_url = media_play_by_url_create(
-      "0"
+      "https://example.com/media.mp4"
     );
   }
 

@@ -22,11 +22,11 @@ instance_boot_options_kernel_t* instantiate_instance_boot_options_kernel(int inc
   instance_boot_options_kernel_t* instance_boot_options_kernel = NULL;
   if (include_optional) {
     instance_boot_options_kernel = instance_boot_options_kernel_create(
-      "0"
+      "kernelcache"
     );
   } else {
     instance_boot_options_kernel = instance_boot_options_kernel_create(
-      "0"
+      "kernelcache"
     );
   }
 

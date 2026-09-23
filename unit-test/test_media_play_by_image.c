@@ -22,11 +22,11 @@ media_play_by_image_t* instantiate_media_play_by_image(int include_optional) {
   media_play_by_image_t* media_play_by_image = NULL;
   if (include_optional) {
     media_play_by_image = media_play_by_image_create(
-      "0"
+      "3e1354a3-fb10-46c0-8b05-56e28edbde69"
     );
   } else {
     media_play_by_image = media_play_by_image_create(
-      "0"
+      "3e1354a3-fb10-46c0-8b05-56e28edbde69"
     );
   }
 

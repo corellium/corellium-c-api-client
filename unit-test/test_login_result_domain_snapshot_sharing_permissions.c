@@ -22,21 +22,21 @@ login_result_domain_snapshot_sharing_permissions_t* instantiate_login_result_dom
   login_result_domain_snapshot_sharing_permissions_t* login_result_domain_snapshot_sharing_permissions = NULL;
   if (include_optional) {
     login_result_domain_snapshot_sharing_permissions = login_result_domain_snapshot_sharing_permissions_create(
-      1,
-      1,
-      1,
-      1,
-      1,
-      1
+      false,
+      true,
+      true,
+      true,
+      true,
+      true
     );
   } else {
     login_result_domain_snapshot_sharing_permissions = login_result_domain_snapshot_sharing_permissions_create(
-      1,
-      1,
-      1,
-      1,
-      1,
-      1
+      false,
+      true,
+      true,
+      true,
+      true,
+      true
     );
   }
 

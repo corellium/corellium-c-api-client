@@ -22,11 +22,11 @@ artifacts_path_t* instantiate_artifacts_path(int include_optional) {
   artifacts_path_t* artifacts_path = NULL;
   if (include_optional) {
     artifacts_path = artifacts_path_create(
-      "0"
+      "/mnt/charm_f7f9832a-f824-416f-a5ea-4adfe34754b5_artifacts"
     );
   } else {
     artifacts_path = artifacts_path_create(
-      "0"
+      "/mnt/charm_f7f9832a-f824-416f-a5ea-4adfe34754b5_artifacts"
     );
   }
 

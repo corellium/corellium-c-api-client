@@ -22,37 +22,37 @@ create_cloud_admin_trial_request_body_t* instantiate_create_cloud_admin_trial_re
   create_cloud_admin_trial_request_body_t* create_cloud_admin_trial_request_body = NULL;
   if (include_optional) {
     create_cloud_admin_trial_request_body = create_cloud_admin_trial_request_body_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      1,
-      1.337,
-      1.337,
-      1,
-      1.337
+      "jane.doe@example.com",
+      "Jane Doe",
+      "+1-555-123-4567",
+      "US",
+      "Acme Corp",
+      "Software",
+      "Security Engineer",
+      "Mobile App Security Testing",
+      "prod_ExampleProductId",
+      true,
+      12,
+      25,
+      true,
+      14
     );
   } else {
     create_cloud_admin_trial_request_body = create_cloud_admin_trial_request_body_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      "0",
-      1,
-      1.337,
-      1.337,
-      1,
-      1.337
+      "jane.doe@example.com",
+      "Jane Doe",
+      "+1-555-123-4567",
+      "US",
+      "Acme Corp",
+      "Software",
+      "Security Engineer",
+      "Mobile App Security Testing",
+      "prod_ExampleProductId",
+      true,
+      12,
+      25,
+      true,
+      14
     );
   }
 

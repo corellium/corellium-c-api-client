@@ -22,19 +22,19 @@ ipsw_filter_v3_version_t* instantiate_ipsw_filter_v3_version(int include_optiona
   ipsw_filter_v3_version_t* ipsw_filter_v3_version = NULL;
   if (include_optional) {
     ipsw_filter_v3_version = ipsw_filter_v3_version_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      "0"
+      "18.0",
+      "17.6",
+      "16.0",
+      "17.0",
+      "17.5"
     );
   } else {
     ipsw_filter_v3_version = ipsw_filter_v3_version_create(
-      "0",
-      "0",
-      "0",
-      "0",
-      "0"
+      "18.0",
+      "17.6",
+      "16.0",
+      "17.0",
+      "17.5"
     );
   }
 

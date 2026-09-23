@@ -23,20 +23,20 @@ node_list_t* instantiate_node_list(int include_optional) {
   if (include_optional) {
     node_list = node_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     node_list = node_list_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

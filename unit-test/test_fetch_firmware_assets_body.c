@@ -22,11 +22,11 @@ fetch_firmware_assets_body_t* instantiate_fetch_firmware_assets_body(int include
   fetch_firmware_assets_body_t* fetch_firmware_assets_body = NULL;
   if (include_optional) {
     fetch_firmware_assets_body = fetch_firmware_assets_body_create(
-      list_createList()
+      ["https://example.com/fcs-keys/ExampleKeyA="]
     );
   } else {
     fetch_firmware_assets_body = fetch_firmware_assets_body_create(
-      list_createList()
+      ["https://example.com/fcs-keys/ExampleKeyA="]
     );
   }
 

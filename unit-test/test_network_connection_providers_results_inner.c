@@ -22,13 +22,13 @@ network_connection_providers_results_inner_t* instantiate_network_connection_pro
   network_connection_providers_results_inner_t* network_connection_providers_results_inner = NULL;
   if (include_optional) {
     network_connection_providers_results_inner = network_connection_providers_results_inner_create(
-      "0",
-      "0"
+      "OpenVPN",
+      "openvpn"
     );
   } else {
     network_connection_providers_results_inner = network_connection_providers_results_inner_create(
-      "0",
-      "0"
+      "OpenVPN",
+      "openvpn"
     );
   }
 

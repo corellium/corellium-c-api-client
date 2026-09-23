@@ -22,11 +22,11 @@ agent_file_download_token_t* instantiate_agent_file_download_token(int include_o
   agent_file_download_token_t* agent_file_download_token = NULL;
   if (include_optional) {
     agent_file_download_token = agent_file_download_token_create(
-      "0"
+      "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6"
     );
   } else {
     agent_file_download_token = agent_file_download_token_create(
-      "0"
+      "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6"
     );
   }
 

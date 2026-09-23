@@ -22,21 +22,21 @@ user_error_t* instantiate_user_error(int include_optional) {
   user_error_t* user_error = NULL;
   if (include_optional) {
     user_error = user_error_create(
-      "0",
+      "Invalid button requested to be held",
       corellium_api_user_error_ERRORID_UserError,
-      "0",
-      "0",
-      list_createList(),
-      list_createList()
+      "inputButtons",
+      "isIn",
+      ["1c41b1bc-4f53-48a8-b690-ad30611e1960"],
+      ["https://example.com/firmware-assets/asset.bin"]
     );
   } else {
     user_error = user_error_create(
-      "0",
+      "Invalid button requested to be held",
       corellium_api_user_error_ERRORID_UserError,
-      "0",
-      "0",
-      list_createList(),
-      list_createList()
+      "inputButtons",
+      "isIn",
+      ["1c41b1bc-4f53-48a8-b690-ad30611e1960"],
+      ["https://example.com/firmware-assets/asset.bin"]
     );
   }
 

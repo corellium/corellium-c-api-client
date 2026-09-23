@@ -23,20 +23,20 @@ trial_request_list_response_t* instantiate_trial_request_list_response(int inclu
   if (include_optional) {
     trial_request_list_response = trial_request_list_response_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   } else {
     trial_request_list_response = trial_request_list_response_create(
       list_createList(),
+      25,
+      137,
+      25,
       0,
-      0,
-      0,
-      0,
-      1
+      true
     );
   }
 

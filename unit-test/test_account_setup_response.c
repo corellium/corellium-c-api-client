@@ -22,11 +22,11 @@ account_setup_response_t* instantiate_account_setup_response(int include_optiona
   account_setup_response_t* account_setup_response = NULL;
   if (include_optional) {
     account_setup_response = account_setup_response_create(
-      1
+      true
     );
   } else {
     account_setup_response = account_setup_response_create(
-      1
+      true
     );
   }
 

@@ -24,22 +24,22 @@ create_image_body_t* instantiate_create_image_body(int include_optional) {
     create_image_body = create_image_body_create(
       corellium_api_create_image_body__fwbinary,
       corellium_api_create_image_body__plain,
-      1,
-      "0",
-      "0",
-      "0",
-      "0",
+      false,
+      "firmware.ipsw",
+      "/data/uploads/firmware.ipsw",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
       instantiate_binary_t("blah", 5)
     );
   } else {
     create_image_body = create_image_body_create(
       corellium_api_create_image_body__fwbinary,
       corellium_api_create_image_body__plain,
-      1,
-      "0",
-      "0",
-      "0",
-      "0",
+      false,
+      "firmware.ipsw",
+      "/data/uploads/firmware.ipsw",
+      "1c41b1bc-4f53-48a8-b690-ad30611e1960",
+      "f7f9832a-f824-416f-a5ea-4adfe34754b5",
       instantiate_binary_t("blah", 5)
     );
   }

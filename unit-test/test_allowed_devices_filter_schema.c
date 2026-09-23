@@ -22,12 +22,12 @@ allowed_devices_filter_schema_t* instantiate_allowed_devices_filter_schema(int i
   allowed_devices_filter_schema_t* allowed_devices_filter_schema = NULL;
   if (include_optional) {
     allowed_devices_filter_schema = allowed_devices_filter_schema_create(
-      "0",
+      "iphone15",
       list_createList()
     );
   } else {
     allowed_devices_filter_schema = allowed_devices_filter_schema_create(
-      "0",
+      "iphone15",
       list_createList()
     );
   }

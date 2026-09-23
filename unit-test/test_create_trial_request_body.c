@@ -22,29 +22,29 @@ create_trial_request_body_t* instantiate_create_trial_request_body(int include_o
   create_trial_request_body_t* create_trial_request_body = NULL;
   if (include_optional) {
     create_trial_request_body = create_trial_request_body_create(
-      "0",
-      "0",
-      "0",
-      "0",
+      "jane.doe@example.com",
+      "Jane Doe",
+      "+1-555-0100",
+      "United States",
       corellium_api_create_trial_request_body_TYPE_individual,
-      "0",
-      "0",
-      "0",
-      "0",
-      "0"
+      "Acme Corp",
+      "Automotive",
+      "Security Engineer",
+      "Mobile App Security Testing",
+      "prod_RvHU7hO3XzhmRQ"
     );
   } else {
     create_trial_request_body = create_trial_request_body_create(
-      "0",
-      "0",
-      "0",
-      "0",
+      "jane.doe@example.com",
+      "Jane Doe",
+      "+1-555-0100",
+      "United States",
       corellium_api_create_trial_request_body_TYPE_individual,
-      "0",
-      "0",
-      "0",
-      "0",
-      "0"
+      "Acme Corp",
+      "Automotive",
+      "Security Engineer",
+      "Mobile App Security Testing",
+      "prod_RvHU7hO3XzhmRQ"
     );
   }
 

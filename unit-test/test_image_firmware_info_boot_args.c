@@ -22,13 +22,13 @@ image_firmware_info_boot_args_t* instantiate_image_firmware_info_boot_args(int i
   image_firmware_info_boot_args_t* image_firmware_info_boot_args = NULL;
   if (include_optional) {
     image_firmware_info_boot_args = image_firmware_info_boot_args_create(
-      "0",
-      "0"
+      "rd=md0 -progress -no-battery nand-enable-reformat=1",
+      "rd=md0 -restore -progress"
     );
   } else {
     image_firmware_info_boot_args = image_firmware_info_boot_args_create(
-      "0",
-      "0"
+      "rd=md0 -progress -no-battery nand-enable-reformat=1",
+      "rd=md0 -restore -progress"
     );
   }
 

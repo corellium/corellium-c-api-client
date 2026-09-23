@@ -22,11 +22,11 @@ check_subdomain_response_t* instantiate_check_subdomain_response(int include_opt
   check_subdomain_response_t* check_subdomain_response = NULL;
   if (include_optional) {
     check_subdomain_response = check_subdomain_response_create(
-      1
+      true
     );
   } else {
     check_subdomain_response = check_subdomain_response_create(
-      1
+      true
     );
   }
 

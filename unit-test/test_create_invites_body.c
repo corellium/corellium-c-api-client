@@ -23,14 +23,14 @@ create_invites_body_t* instantiate_create_invites_body(int include_optional) {
   create_invites_body_t* create_invites_body = NULL;
   if (include_optional) {
     create_invites_body = create_invites_body_create(
-      list_createList(),
-      1,
+      ["jane.doe@example.com"],
+      true,
       null
     );
   } else {
     create_invites_body = create_invites_body_create(
-      list_createList(),
-      1,
+      ["jane.doe@example.com"],
+      true,
       null
     );
   }

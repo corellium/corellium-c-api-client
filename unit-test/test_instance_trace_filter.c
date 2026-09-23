@@ -22,13 +22,13 @@ instance_trace_filter_t* instantiate_instance_trace_filter(int include_optional)
   instance_trace_filter_t* instance_trace_filter = NULL;
   if (include_optional) {
     instance_trace_filter = instance_trace_filter_create(
-      "0",
-      "0"
+      "pid",
+      "1234"
     );
   } else {
     instance_trace_filter = instance_trace_filter_create(
-      "0",
-      "0"
+      "pid",
+      "1234"
     );
   }
 

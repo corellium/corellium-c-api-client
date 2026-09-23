@@ -22,11 +22,11 @@ domain_config_trial_subscribe_action_t* instantiate_domain_config_trial_subscrib
   domain_config_trial_subscribe_action_t* domain_config_trial_subscribe_action = NULL;
   if (include_optional) {
     domain_config_trial_subscribe_action = domain_config_trial_subscribe_action_create(
-      "0"
+      "auto"
     );
   } else {
     domain_config_trial_subscribe_action = domain_config_trial_subscribe_action_create(
-      "0"
+      "auto"
     );
   }
 

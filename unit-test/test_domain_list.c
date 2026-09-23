@@ -23,18 +23,18 @@ domain_list_t* instantiate_domain_list(int include_optional) {
   domain_list_t* domain_list = NULL;
   if (include_optional) {
     domain_list = domain_list_create(
-      56,
-      56,
-      56,
+      37,
+      0,
+      50,
       list_createList(),
        // false, not to have infinite recursion
       instantiate_domain_list_usage(0)
     );
   } else {
     domain_list = domain_list_create(
-      56,
-      56,
-      56,
+      37,
+      0,
+      50,
       list_createList(),
       NULL
     );

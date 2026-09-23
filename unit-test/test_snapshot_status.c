@@ -22,13 +22,13 @@ snapshot_status_t* instantiate_snapshot_status(int include_optional) {
   snapshot_status_t* snapshot_status = NULL;
   if (include_optional) {
     snapshot_status = snapshot_status_create(
-      "0",
-      1
+      "none",
+      true
     );
   } else {
     snapshot_status = snapshot_status_create(
-      "0",
-      1
+      "none",
+      true
     );
   }
 

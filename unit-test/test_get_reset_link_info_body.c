@@ -22,11 +22,11 @@ get_reset_link_info_body_t* instantiate_get_reset_link_info_body(int include_opt
   get_reset_link_info_body_t* get_reset_link_info_body = NULL;
   if (include_optional) {
     get_reset_link_info_body = get_reset_link_info_body_create(
-      "0"
+      "<token>"
     );
   } else {
     get_reset_link_info_body = get_reset_link_info_body_create(
-      "0"
+      "<token>"
     );
   }
 

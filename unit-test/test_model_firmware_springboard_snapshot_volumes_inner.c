@@ -22,11 +22,11 @@ model_firmware_springboard_snapshot_volumes_inner_t* instantiate_model_firmware_
   model_firmware_springboard_snapshot_volumes_inner_t* model_firmware_springboard_snapshot_volumes_inner = NULL;
   if (include_optional) {
     model_firmware_springboard_snapshot_volumes_inner = model_firmware_springboard_snapshot_volumes_inner_create(
-      1.337
+      32000000000
     );
   } else {
     model_firmware_springboard_snapshot_volumes_inner = model_firmware_springboard_snapshot_volumes_inner_create(
-      1.337
+      32000000000
     );
   }
 

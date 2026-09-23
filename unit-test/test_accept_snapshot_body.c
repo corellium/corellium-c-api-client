@@ -22,13 +22,13 @@ accept_snapshot_body_t* instantiate_accept_snapshot_body(int include_optional) {
   accept_snapshot_body_t* accept_snapshot_body = NULL;
   if (include_optional) {
     accept_snapshot_body = accept_snapshot_body_create(
-      "0",
-      "0"
+      "X7QK9P2M",
+      "<redacted>"
     );
   } else {
     accept_snapshot_body = accept_snapshot_body_create(
-      "0",
-      "0"
+      "X7QK9P2M",
+      "<redacted>"
     );
   }
 

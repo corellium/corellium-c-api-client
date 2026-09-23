@@ -22,11 +22,11 @@ invite_signup_response_t* instantiate_invite_signup_response(int include_optiona
   invite_signup_response_t* invite_signup_response = NULL;
   if (include_optional) {
     invite_signup_response = invite_signup_response_create(
-      "0"
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320"
     );
   } else {
     invite_signup_response = invite_signup_response_create(
-      "0"
+      "e8c5b7ea-aa5f-4a4a-bdca-0c67060b5320"
     );
   }
 

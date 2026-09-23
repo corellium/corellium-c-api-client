@@ -22,17 +22,17 @@ flavor_frame_inner_t* instantiate_flavor_frame_inner(int include_optional) {
   flavor_frame_inner_t* flavor_frame_inner = NULL;
   if (include_optional) {
     flavor_frame_inner = flavor_frame_inner_create(
-      1.337,
-      1.337,
-      1.337,
-      1.337
+      75.43053960964409,
+      21.010332950631458,
+      258.3237657864524,
+      459.47187141216995
     );
   } else {
     flavor_frame_inner = flavor_frame_inner_create(
-      1.337,
-      1.337,
-      1.337,
-      1.337
+      75.43053960964409,
+      21.010332950631458,
+      258.3237657864524,
+      459.47187141216995
     );
   }
 

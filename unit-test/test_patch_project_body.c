@@ -24,13 +24,13 @@ patch_project_body_t* instantiate_patch_project_body(int include_optional) {
   patch_project_body_t* patch_project_body = NULL;
   if (include_optional) {
     patch_project_body = patch_project_body_create(
-      "0",
+      "Default Project",
       null,
       null
     );
   } else {
     patch_project_body = patch_project_body_create(
-      "0",
+      "Default Project",
       null,
       null
     );

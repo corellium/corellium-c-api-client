@@ -23,18 +23,18 @@ subscription_trial_t* instantiate_subscription_trial(int include_optional) {
   if (include_optional) {
     subscription_trial = subscription_trial_create(
       corellium_api_subscription_trial_STATUS_not_started,
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00",
-      0,
-      0
+      "2026-03-16T08:22:19Z",
+      "2027-01-15T00:00Z",
+      6,
+      24
     );
   } else {
     subscription_trial = subscription_trial_create(
       corellium_api_subscription_trial_STATUS_not_started,
-      "2013-10-20T19:20:30+01:00",
-      "2013-10-20T19:20:30+01:00",
-      0,
-      0
+      "2026-03-16T08:22:19Z",
+      "2027-01-15T00:00Z",
+      6,
+      24
     );
   }
 

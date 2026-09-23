@@ -22,15 +22,15 @@ agent_apps_list_t* instantiate_agent_apps_list(int include_optional) {
   agent_apps_list_t* agent_apps_list = NULL;
   if (include_optional) {
     agent_apps_list = agent_apps_list_create(
-      1,
+      true,
       list_createList(),
-      "0"
+      "com.corellium.cafe"
     );
   } else {
     agent_apps_list = agent_apps_list_create(
-      1,
+      true,
       list_createList(),
-      "0"
+      "com.corellium.cafe"
     );
   }
 
