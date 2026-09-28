@@ -468,8 +468,11 @@ Category | Method | HTTP request | Description
 *InvitesAPI* | [**InvitesAPI_v3RevokeInvites**](docs/InvitesAPI.md#InvitesAPI_v3RevokeInvites) | **POST** /v3/invites/revoke | Revoke invites
 *InvitesAPI* | [**InvitesAPI_v3SignupFromInvite**](docs/InvitesAPI.md#InvitesAPI_v3SignupFromInvite) | **POST** /v3/invites/signup | Sign up from an invite
 *InvitesV1API* | [**InvitesV1API_v1CreateUserInvites**](docs/InvitesV1API.md#InvitesV1API_v1CreateUserInvites) | **POST** /v1/invites | Create Invite
+*InvitesV1API* | [**InvitesV1API_v1EditInvites**](docs/InvitesV1API.md#InvitesV1API_v1EditInvites) | **POST** /v1/invites/edit | 
 *InvitesV1API* | [**InvitesV1API_v1Invites**](docs/InvitesV1API.md#InvitesV1API_v1Invites) | **GET** /v1/invites | Get Invites
+*InvitesV1API* | [**InvitesV1API_v1InvitesByToken**](docs/InvitesV1API.md#InvitesV1API_v1InvitesByToken) | **GET** /v1/invites-by-token | 
 *InvitesV1API* | [**InvitesV1API_v1RevokeUserInvite**](docs/InvitesV1API.md#InvitesV1API_v1RevokeUserInvite) | **POST** /v1/invites/revoke | Revoke Invite
+*InvitesV1API* | [**InvitesV1API_v1UserCreateFromInvite**](docs/InvitesV1API.md#InvitesV1API_v1UserCreateFromInvite) | **POST** /v1/invites/signup | 
 *ModelsAPI* | [**ModelsAPI_v3GetModelSoftware**](docs/ModelsAPI.md#ModelsAPI_v3GetModelSoftware) | **GET** /v3/models/{model}/software | Get Software for Model
 *ModelsAPI* | [**ModelsAPI_v3GetModels**](docs/ModelsAPI.md#ModelsAPI_v3GetModels) | **GET** /v3/models | Get Supported Models
 *ModelsV1API* | [**ModelsV1API_v1GetModelSoftware**](docs/ModelsV1API.md#ModelsV1API_v1GetModelSoftware) | **GET** /v1/models/{model}/software | Get Software for Model

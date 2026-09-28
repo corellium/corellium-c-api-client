@@ -5,8 +5,11 @@ All URIs are relative to *https://app.corellium.com/api*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**InvitesV1API_v1CreateUserInvites**](InvitesV1API.md#InvitesV1API_v1CreateUserInvites) | **POST** /v1/invites | Create Invite
+[**InvitesV1API_v1EditInvites**](InvitesV1API.md#InvitesV1API_v1EditInvites) | **POST** /v1/invites/edit | 
 [**InvitesV1API_v1Invites**](InvitesV1API.md#InvitesV1API_v1Invites) | **GET** /v1/invites | Get Invites
+[**InvitesV1API_v1InvitesByToken**](InvitesV1API.md#InvitesV1API_v1InvitesByToken) | **GET** /v1/invites-by-token | 
 [**InvitesV1API_v1RevokeUserInvite**](InvitesV1API.md#InvitesV1API_v1RevokeUserInvite) | **POST** /v1/invites/revoke | Revoke Invite
+[**InvitesV1API_v1UserCreateFromInvite**](InvitesV1API.md#InvitesV1API_v1UserCreateFromInvite) | **POST** /v1/invites/signup | 
 
 
 # **InvitesV1API_v1CreateUserInvites**
@@ -27,6 +30,33 @@ Name | Type | Description  | Notes
 
 [object_t](object.md) *
 
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **InvitesV1API_v1EditInvites**
+```c
+// 
+//
+void InvitesV1API_v1EditInvites(apiClient_t *apiClient);
+```
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**apiClient** | **apiClient_t \*** | context containing the client configuration |
+
+### Return type
+
+void
 
 ### Authorization
 
@@ -69,6 +99,33 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **InvitesV1API_v1InvitesByToken**
+```c
+// 
+//
+void InvitesV1API_v1InvitesByToken(apiClient_t *apiClient);
+```
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**apiClient** | **apiClient_t \*** | context containing the client configuration |
+
+### Return type
+
+void
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **InvitesV1API_v1RevokeUserInvite**
 ```c
 // Revoke Invite
@@ -93,6 +150,33 @@ void
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **InvitesV1API_v1UserCreateFromInvite**
+```c
+// 
+//
+void InvitesV1API_v1UserCreateFromInvite(apiClient_t *apiClient);
+```
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**apiClient** | **apiClient_t \*** | context containing the client configuration |
+
+### Return type
+
+void
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

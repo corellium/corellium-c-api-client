@@ -589,8 +589,11 @@
 
 /* invites */
 #define corellium_v1_invites_create InvitesV1API_v1CreateUserInvites
+#define corellium_v1_invites_edit InvitesV1API_v1EditInvites
+#define corellium_v1_invites_getByToken InvitesV1API_v1InvitesByToken
 #define corellium_v1_invites_list InvitesV1API_v1Invites
 #define corellium_v1_invites_revoke InvitesV1API_v1RevokeUserInvite
+#define corellium_v1_invites_signup InvitesV1API_v1UserCreateFromInvite
 
 /* matrix */
 #define corellium_v1_matrix_assessments_addReportModification AssessmentsV1API_v1CreateReportModification
