@@ -52,7 +52,7 @@ Name | Type | Description  | Notes
 ```c
 // Delete an image
 //
-// Permanently deletes the image. This action cannot be undone. Deleting an already-deleted image returns 204.
+// Permanently deletes the image. This action cannot be undone.  Deletion is synchronous. Deletes are idempotent: an unknown `imageId`, or an image that has already been deleted, is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing.
 //
 void ImagesAPI_v3DeleteImage(apiClient_t *apiClient, char *imageId);
 ```

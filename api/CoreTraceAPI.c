@@ -9,6 +9,8 @@
 
 // Clear CoreTrace logs
 //
+// Clear CoreTrace logs. An unknown `instanceId` is a successful no-op that returns 204.
+//
 void
 CoreTraceAPI_v3ClearCoreTrace(apiClient_t *apiClient, char *instanceId)
 {

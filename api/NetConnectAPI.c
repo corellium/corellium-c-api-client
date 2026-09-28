@@ -113,7 +113,7 @@ end:
 
 // Delete an existing Network Connection
 //
-// Delete an existing Network Connection. You must have the domain administrator role to delete a network connection.
+// Delete an existing Network Connection. You must have the domain administrator role to delete a network connection.  Deletes are idempotent: an unknown `id`, or a connection that was already deleted, is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing. A connection still attached to projects returns 400 unless `force` is set.
 //
 void
 NetConnectAPI_v3DeleteNetworkConnection(apiClient_t *apiClient, char *id, v3_delete_network_connection_request_t *v3_delete_network_connection_request)
@@ -176,7 +176,7 @@ NetConnectAPI_v3DeleteNetworkConnection(apiClient_t *apiClient, char *id, v3_del
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The network connection is still in use by one or more projects.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {

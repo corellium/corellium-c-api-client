@@ -116,7 +116,7 @@ end:
 
 // Delete an auth provider from a domain
 //
-// **Required role:** Domain administrator.  Delete an auth provider from a domain.
+// **Required role:** Domain administrator.  Delete an auth provider from a domain.  Deletes are idempotent: a `providerId` that is not attached to the domain, or an unknown `domainId`, is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing. The underlying provider record is only removed when no other domain still references it, and default providers are never removed.
 //
 void
 DomainAuthProvidersAPI_v3DeleteDomainAuthProvider(apiClient_t *apiClient, char *domainId, char *providerId)

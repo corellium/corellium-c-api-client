@@ -31,7 +31,7 @@ FirmwareServiceAPI_v3CreateFirmwareAssets(apiClient_t *apiClient, object_t *body
 
 // Delete a firmware
 //
-// **Required role:** Cluster administrator.  Deletes the firmware identified by the given filename from the cluster firmware service.
+// **Required role:** Cluster administrator.  Deletes the firmware identified by the given filename from the cluster firmware service.  This endpoint proxies the request to the firmware service. A filename the service no longer has is a successful no-op: both a successful upstream delete and an upstream \"not there\" answer 204, and repeated calls return 204 as well. A firmware-service outage or refusal is still reported as a failure.
 //
 void
 FirmwareServiceAPI_v3DeleteFirmware(apiClient_t *apiClient, char *filename);
@@ -39,7 +39,7 @@ FirmwareServiceAPI_v3DeleteFirmware(apiClient_t *apiClient, char *filename);
 
 // Delete a firmware asset
 //
-// **Required role:** Cluster administrator.  Deletes the firmware asset identified by the given asset URL from the cluster firmware service.
+// **Required role:** Cluster administrator.  Deletes the firmware asset identified by the given asset URL from the cluster firmware service.  This endpoint proxies the request to the firmware service. An asset the service no longer has is a successful no-op: both a successful upstream delete and an upstream \"not there\" answer 204, and repeated calls return 204 as well. A firmware-service outage or refusal is still reported as a failure.
 //
 void
 FirmwareServiceAPI_v3DeleteFirmwareAsset(apiClient_t *apiClient, char *assetUrl);

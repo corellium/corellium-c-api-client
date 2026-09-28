@@ -24,6 +24,8 @@ InterconnectsAPI_v3CreateInterconnect(apiClient_t *apiClient, create_interconnec
 
 // Delete I/O Interconnect
 //
+// Delete I/O Interconnect.  Deletes are idempotent: an unknown `interconnectId`, or one that is not visible to the caller, is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing.
+//
 void
 InterconnectsAPI_v3DeleteInterconnect(apiClient_t *apiClient, char *interconnectId);
 

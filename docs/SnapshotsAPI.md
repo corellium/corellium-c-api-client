@@ -49,6 +49,8 @@ Name | Type | Description  | Notes
 ```c
 // Delete an instance snapshot
 //
+// Delete an instance snapshot. Deletion is asynchronous: the snapshot is marked `deleting` and the call returns 204 before the underlying storage has been reclaimed.  Deletes are idempotent: an unknown `snapshotId`, or an unknown `instanceId`, is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing. A repeat therefore returns 204 both while the snapshot is still present in the `deleting` state and after it has disappeared.
+//
 void SnapshotsAPI_v3DeleteInstanceSnapshot(apiClient_t *apiClient, char *instanceId, char *snapshotId);
 ```
 
@@ -78,7 +80,7 @@ void
 ```c
 // Delete a snapshot
 //
-// Delete a snapshot by ID.
+// Delete a snapshot by ID. Deletion is asynchronous: the snapshot is marked `deleting` and the call returns 204 before the underlying storage has been reclaimed.  Deletes are idempotent: an unknown `snapshotId`, or a snapshot that was already deleted, is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing. A repeat therefore returns 204 both while the snapshot is still present in the `deleting` state and after it has disappeared.
 //
 void SnapshotsAPI_v3DeleteSnapshot(apiClient_t *apiClient, char *snapshotId);
 ```

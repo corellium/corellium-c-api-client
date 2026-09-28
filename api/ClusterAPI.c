@@ -9,7 +9,7 @@
 
 // Delete cluster snapshot
 //
-// **Required role:** Cluster administrator.  Deletes a cluster snapshot by ID. Requires the clusterSnapshotMgmt feature.
+// **Required role:** Cluster administrator.  Deletes a cluster snapshot by ID. Requires the clusterSnapshotMgmt feature.  Deletes are idempotent: an unknown `snapshotId`, or a snapshot that was already deleted, is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing.
 //
 void
 ClusterAPI_v3DeleteClusterSnapshot(apiClient_t *apiClient, char *snapshotId)

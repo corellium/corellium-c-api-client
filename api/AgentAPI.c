@@ -9,7 +9,7 @@
 
 // Delete a file on VM
 //
-// Delete a file from the VM filesystem.
+// Delete a file from the VM filesystem.  Deletes are idempotent: an unknown `instanceId`, or a path the on-device agent no longer has, is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing. Other agent-reported failures, and an unreachable agent, are still reported as failures.
 //
 void
 AgentAPI_v3DeleteFileAgent(apiClient_t *apiClient, char *instanceId, char *filePath)
@@ -3730,7 +3730,7 @@ end:
 
 // Uninstall a profile
 //
-// Uninstall a configuration profile from the VM.
+// Uninstall a configuration profile from the VM.  Deletes are idempotent: an unknown `instanceId`, or a profile that is not installed, is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing. Other agent-reported failures, and an unreachable agent, are still reported as failures.
 //
 void
 AgentAPI_v3UninstallProfileAgent(apiClient_t *apiClient, char *instanceId, char *profileId)

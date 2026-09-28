@@ -195,7 +195,7 @@ end:
 
 // Delete a hypervisor hook
 //
-// Deletes the hypervisor hook identified by the given hookId.
+// Deletes the hypervisor hook identified by the given hookId.  Deletes are idempotent: an unknown `hookId`, or a hook that was already deleted, is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing.
 //
 void
 HypervisorHooksAPI_v3DeleteHook(apiClient_t *apiClient, char *hookId)

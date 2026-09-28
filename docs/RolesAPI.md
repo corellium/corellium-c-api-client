@@ -212,7 +212,7 @@ Name | Type | Description  | Notes
 ```c
 // Remove team role from deployment
 //
-// **Required role:** Domain administrator.  Revokes a team role within a deployment. Available for Enterprise accounts only.
+// **Required role:** Domain administrator.  Revokes a team role within a deployment. Available for Enterprise accounts only.  Revocation is idempotent: if the team does not currently hold that role in the deployment, the call is a no-op and still returns 204. Repeated calls therefore also return 204. A `deploymentId` or `teamId` that does not exist is also a successful no-op that returns 204.
 //
 void RolesAPI_v3RemoveTeamRoleFromDeployment(apiClient_t *apiClient, char *deploymentId, char *teamId, char *roleId);
 ```
@@ -244,7 +244,7 @@ void
 ```c
 // Remove team role from project
 //
-// **Required role:** Domain administrator or project administrator.  Revokes a team role within a project. Available for Enterprise accounts only.
+// **Required role:** Domain administrator or project administrator.  Revokes a team role within a project. Available for Enterprise accounts only.  Revocation is idempotent: if the team does not currently hold that role in the project, the call is a no-op and still returns 204. Repeated calls therefore also return 204. A `projectId` or `teamId` that does not exist is also a successful no-op that returns 204. A project administrator acting on another project in their own domain receives 403. An unrecognized `roleId` returns 400.
 //
 void RolesAPI_v3RemoveTeamRoleFromProject(apiClient_t *apiClient, char *projectId, char *teamId, char *roleId);
 ```
@@ -276,7 +276,7 @@ void
 ```c
 // Remove user role from deployment
 //
-// **Required role:** Domain administrator.  Revokes a user role within a deployment. Available for Enterprise accounts only.
+// **Required role:** Domain administrator.  Revokes a user role within a deployment. Available for Enterprise accounts only.  Revocation is idempotent: if the user does not currently hold that role in the deployment, the call is a no-op and still returns 204. Repeated calls therefore also return 204. A `deploymentId` or `userId` that does not exist is also a successful no-op that returns 204.
 //
 void RolesAPI_v3RemoveUserRoleFromDeployment(apiClient_t *apiClient, char *deploymentId, char *userId, char *roleId);
 ```
@@ -308,7 +308,7 @@ void
 ```c
 // Remove user role from project
 //
-// **Required role:** Domain administrator or project administrator.  Revokes a user role within a project. Available for Enterprise accounts only.
+// **Required role:** Domain administrator or project administrator.  Revokes a user role within a project. Available for Enterprise accounts only.  Revocation is idempotent: if the user does not currently hold that role in the project, the call is a no-op and still returns 204. Repeated calls therefore also return 204. A `projectId` or `userId` that does not exist is also a successful no-op that returns 204. A project administrator acting on another project in their own domain receives 403. An unrecognized `roleId` returns 400.
 //
 void RolesAPI_v3RemoveUserRoleFromProject(apiClient_t *apiClient, char *projectId, char *userId, char *roleId);
 ```

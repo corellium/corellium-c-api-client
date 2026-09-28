@@ -114,6 +114,8 @@ end:
 
 // Delete an instance snapshot
 //
+// Delete an instance snapshot. Deletion is asynchronous: the snapshot is marked `deleting` and the call returns 204 before the underlying storage has been reclaimed.  Deletes are idempotent: an unknown `snapshotId`, or an unknown `instanceId`, is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing. A repeat therefore returns 204 both while the snapshot is still present in the `deleting` state and after it has disappeared.
+//
 void
 SnapshotsAPI_v3DeleteInstanceSnapshot(apiClient_t *apiClient, char *instanceId, char *snapshotId)
 {
@@ -172,7 +174,11 @@ SnapshotsAPI_v3DeleteInstanceSnapshot(apiClient_t *apiClient, char *instanceId, 
 
     // uncomment below to debug the error response
     //if (apiClient->response_code == 204) {
-    //    printf("%s\n","Snapshot deleted.");
+    //    printf("%s\n","Snapshot deleted; empty body.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 400) {
+    //    printf("%s\n","Malformed snapshot ID.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
@@ -198,7 +204,7 @@ end:
 
 // Delete a snapshot
 //
-// Delete a snapshot by ID.
+// Delete a snapshot by ID. Deletion is asynchronous: the snapshot is marked `deleting` and the call returns 204 before the underlying storage has been reclaimed.  Deletes are idempotent: an unknown `snapshotId`, or a snapshot that was already deleted, is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing. A repeat therefore returns 204 both while the snapshot is still present in the `deleting` state and after it has disappeared.
 //
 void
 SnapshotsAPI_v3DeleteSnapshot(apiClient_t *apiClient, char *snapshotId)
@@ -246,7 +252,11 @@ SnapshotsAPI_v3DeleteSnapshot(apiClient_t *apiClient, char *snapshotId)
 
     // uncomment below to debug the error response
     //if (apiClient->response_code == 204) {
-    //    printf("%s\n","Successfully deleted snapshot.");
+    //    printf("%s\n","Successfully deleted snapshot; empty body.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 400) {
+    //    printf("%s\n","Malformed snapshot ID.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {

@@ -16,7 +16,7 @@ Method | HTTP request | Description
 ```c
 // Delete an existing extension
 //
-// **Required role:** Domain administrator.  Deletes the extension identified by the given extension ID. Available on on-site deployments only.
+// **Required role:** Domain administrator.  Deletes the extension identified by the given extension ID. Available on on-site deployments only. Deletion is asynchronous: the extension is marked `deleting` and the call returns 204 before removal completes.  Deletes are idempotent: an unknown extension ID, or an extension that was already deleted, is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing. A repeat therefore returns 204 both while the record is still present in the `deleting` state and after it has disappeared.
 //
 void ExtensionsAPI_v3DeleteExtension(apiClient_t *apiClient, char *extensionId);
 ```

@@ -107,7 +107,7 @@ end:
 
 // Delete the welcome message for the authenticated user's domain
 //
-// **Required role:** Domain administrator.  Delete the welcome message for the authenticated user's domain.
+// **Required role:** Domain administrator.  Delete the welcome message for the authenticated user's domain.  Deletes are idempotent: a domain with no welcome message is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing.
 //
 void
 DomainAPI_v3DeleteDomainWelcomeMessage(apiClient_t *apiClient)

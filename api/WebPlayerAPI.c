@@ -107,7 +107,7 @@ end:
 
 // Delete a webplayer session
 //
-// **Required role:** Domain administrator.  Deletes the webplayer session identified by the given sessionId.
+// **Required role:** Domain administrator.  Deletes the webplayer session identified by the given sessionId.  Deletes are idempotent: an unknown `sessionId` is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing.
 //
 void
 WebPlayerAPI_v3DeleteWebPlayerSession(apiClient_t *apiClient, char *sessionId)
@@ -155,7 +155,7 @@ WebPlayerAPI_v3DeleteWebPlayerSession(apiClient_t *apiClient, char *sessionId)
 
     // uncomment below to debug the error response
     //if (apiClient->response_code == 204) {
-    //    printf("%s\n","Session deleted.");
+    //    printf("%s\n","Session torn down, or no such session; empty body.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {

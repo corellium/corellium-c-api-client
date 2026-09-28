@@ -105,7 +105,7 @@ end:
 
 // Delete member(s)
 //
-// Deletes one or more members from the list of members who have access to the snapshot.
+// Deletes one or more members from the list of members who have access to the snapshot.  Members that do not currently have access are ignored rather than reported as an error. Deletes are idempotent: an unknown `snapshotId` is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing.
 //
 void
 SnapshotSharingAPI_v3DeleteSnapshotPermissions(apiClient_t *apiClient, char *snapshotId, set_snapshot_permissions_body_t *set_snapshot_permissions_body)
@@ -164,11 +164,11 @@ SnapshotSharingAPI_v3DeleteSnapshotPermissions(apiClient_t *apiClient, char *sna
 
     // uncomment below to debug the error response
     //if (apiClient->response_code == 204) {
-    //    printf("%s\n","Successfully deleted member(s) who had access to the snapshot.");
+    //    printf("%s\n","Member(s) removed from the snapshot; empty body.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","Invalid request body, or malformed snapshot ID.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {

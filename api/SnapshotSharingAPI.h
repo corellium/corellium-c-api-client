@@ -23,7 +23,7 @@ SnapshotSharingAPI_v3AcceptSharedSnapshot(apiClient_t *apiClient, accept_snapsho
 
 // Delete member(s)
 //
-// Deletes one or more members from the list of members who have access to the snapshot.
+// Deletes one or more members from the list of members who have access to the snapshot.  Members that do not currently have access are ignored rather than reported as an error. Deletes are idempotent: an unknown `snapshotId` is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing.
 //
 void
 SnapshotSharingAPI_v3DeleteSnapshotPermissions(apiClient_t *apiClient, char *snapshotId, set_snapshot_permissions_body_t *set_snapshot_permissions_body);

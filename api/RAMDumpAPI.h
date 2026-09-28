@@ -13,6 +13,8 @@
 
 // Clear RAM Dump
 //
+// Clear RAM dump. An unknown `instanceId` is a successful no-op that returns 204.
+//
 void
 RAMDumpAPI_v3ClearRamDump(apiClient_t *apiClient, char *instanceId);
 

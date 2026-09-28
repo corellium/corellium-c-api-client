@@ -102,6 +102,8 @@ end:
 
 // Clear HyperTrace logs
 //
+// Clear HyperTrace logs. An unknown `instanceId` is a successful no-op that returns 204.
+//
 void
 HyperTraceAPI_v3ClearHyperTrace(apiClient_t *apiClient, char *instanceId)
 {

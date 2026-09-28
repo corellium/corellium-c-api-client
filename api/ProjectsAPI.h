@@ -44,7 +44,7 @@ ProjectsAPI_v3CreateProjectKey(apiClient_t *apiClient, char *projectId, create_p
 
 // Delete a project
 //
-// **Required role:** Domain administrator.  Delete a project. The project must contain no devices.
+// **Required role:** Domain administrator.  Delete a project. The project must contain no devices.  Deletes are idempotent: an unknown `projectId`, or a project that was already deleted, is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing.
 //
 void
 ProjectsAPI_v3DeleteProject(apiClient_t *apiClient, char *projectId);
@@ -52,7 +52,7 @@ ProjectsAPI_v3DeleteProject(apiClient_t *apiClient, char *projectId);
 
 // Delete a project key
 //
-// **Required role:** Domain administrator or project administrator.  Remove an authorized key from a project.
+// **Required role:** Domain administrator or project administrator.  Remove an authorized key from a project.  Deletes are idempotent: a `keyId` that is not present on the project, or an unknown `projectId`, is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing.
 //
 void
 ProjectsAPI_v3DeleteProjectKey(apiClient_t *apiClient, char *projectId, char *keyId);

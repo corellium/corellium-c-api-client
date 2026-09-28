@@ -81,7 +81,7 @@ void
 ```c
 // Delete API token
 //
-// Delete the authenticated user's currently saved API token.
+// Deletes the authenticated user's currently saved API token.  Deletes are idempotent: a request made when no API token is saved is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing.
 //
 void AuthenticationAPI_v3DeleteApiToken(apiClient_t *apiClient);
 ```

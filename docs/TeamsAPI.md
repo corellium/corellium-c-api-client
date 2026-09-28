@@ -78,7 +78,7 @@ Name | Type | Description  | Notes
 ```c
 // Delete a team
 //
-// **Required role:** Domain administrator.  Delete a team. Available for Enterprise accounts only.
+// **Required role:** Domain administrator.  Delete a team. Available for Enterprise accounts only.  Deletes are idempotent: a `teamId` that does not exist, including one that was already deleted, is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing.
 //
 void TeamsAPI_v3DeleteTeam(apiClient_t *apiClient, char *teamId);
 ```
@@ -140,7 +140,7 @@ Name | Type | Description  | Notes
 ```c
 // Remove a user from a team
 //
-// **Required role:** Domain administrator.  Remove a user from a team. Available for Enterprise accounts only.
+// **Required role:** Domain administrator.  Remove a user from a team. Available for Enterprise accounts only.  Removal is idempotent: if the user is not a member of the team, the call is a no-op and still returns 204. Repeated calls therefore also return 204. A `teamId` or `userId` that does not exist is also a successful no-op that returns 204.
 //
 void TeamsAPI_v3RemoveUserFromTeam(apiClient_t *apiClient, char *teamId, char *userId);
 ```

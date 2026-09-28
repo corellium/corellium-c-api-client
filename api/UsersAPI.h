@@ -46,7 +46,7 @@ UsersAPI_v3CreateUser(apiClient_t *apiClient, create_user_body_t *create_user_bo
 
 // Delete a user
 //
-// **Required role:** Domain administrator.  Deletes the user identified by the given userId.
+// **Required role:** Domain administrator.  Deletes the user identified by the given userId.  Deletes are idempotent: a `userId` that does not exist, including one that was already deleted, is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing.
 //
 void
 UsersAPI_v3DeleteUser(apiClient_t *apiClient, char *userId);

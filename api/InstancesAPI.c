@@ -110,6 +110,8 @@ end:
 
 // Clear Panics
 //
+// Clear panics. An unknown `instanceId` is a successful no-op that returns 204.
+//
 void
 InstancesAPI_v3ClearInstancePanics(apiClient_t *apiClient, char *instanceId)
 {
@@ -285,6 +287,8 @@ end:
 
 // Remove Instance
 //
+// Removes the instance. Deletion is asynchronous: the call schedules the teardown and returns 204 immediately, while the instance remains visible in a `deleting` state until teardown completes.  An `instanceId` that does not exist also returns 204. The API cannot tell a call with an invalid ID apart from a second call made to confirm an earlier delete succeeded, so both succeed. Repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing. A repeat therefore returns 204 both while the record is still present in the `deleting` state and after it has disappeared.
+//
 void
 InstancesAPI_v3DeleteInstance(apiClient_t *apiClient, char *instanceId)
 {
@@ -360,7 +364,7 @@ end:
 
 // Detach I/O Interface
 //
-// Detach an I/O interface from an I/O interconnect for the specified instance identifier.
+// Detach an I/O interface from an I/O interconnect for the specified instance identifier.  Deletes are idempotent: an unknown instance, interconnect or interface, including one that was already detached, is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing.
 //
 void
 InstancesAPI_v3DetachInstanceInterface(apiClient_t *apiClient, char *instanceId, char *interfaceId, detach_interface_body_t *detach_interface_body)
