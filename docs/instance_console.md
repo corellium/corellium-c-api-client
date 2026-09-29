@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **char \*** | Console display name. | 
-**id** | **char \*** | Console port identifier (e.g. port-cons). | 
+**id** | **char \*** | Console port identifier (e.g. port-cons). Used to select this console when getting the console websocket URL. | 
 **port** | **char \*** | TCP port number. | 
 **hash** | **char \*** | Hash for console authentication. | 
 **info** | **char \*** | Encrypted info for console authentication. | 

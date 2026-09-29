@@ -112,8 +112,10 @@ InstancesAPI_v3GetInstance(apiClient_t *apiClient, char *instanceId, char *retur
 
 // Get console websocket URL
 //
+// Get console WebSocket URL.  Instances can have more than one console. To connect to a specific console: 1. Call Get Instance and read the `consoles` array. 2. Take the `id` of the console you want and remove the `port-` prefix (e.g. `port-uart7-cons` becomes `uart7-cons`). 3. Pass that value as the `type` query parameter (e.g. `?type=uart7-cons`).  If `type` is omitted, the default console (`cons`) is used. Some models have no default console and require `type`.
+//
 instance_console_endpoint_t*
-InstancesAPI_v3GetInstanceConsole(apiClient_t *apiClient, char *instanceId);
+InstancesAPI_v3GetInstanceConsole(apiClient_t *apiClient, char *instanceId, char *type);
 
 
 // Get Console Log

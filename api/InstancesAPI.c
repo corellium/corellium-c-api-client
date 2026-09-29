@@ -925,10 +925,12 @@ end:
 
 // Get console websocket URL
 //
+// Get console WebSocket URL.  Instances can have more than one console. To connect to a specific console: 1. Call Get Instance and read the `consoles` array. 2. Take the `id` of the console you want and remove the `port-` prefix (e.g. `port-uart7-cons` becomes `uart7-cons`). 3. Pass that value as the `type` query parameter (e.g. `?type=uart7-cons`).  If `type` is omitted, the default console (`cons`) is used. Some models have no default console and require `type`.
+//
 instance_console_endpoint_t*
-InstancesAPI_v3GetInstanceConsole(apiClient_t *apiClient, char *instanceId)
+InstancesAPI_v3GetInstanceConsole(apiClient_t *apiClient, char *instanceId, char *type)
 {
-    list_t    *localVarQueryParameters = NULL;
+    list_t    *localVarQueryParameters = list_createList();
     list_t    *localVarHeaderParameters = NULL;
     list_t    *localVarFormParameters = NULL;
     list_t *localVarHeaderType = list_createList();
@@ -957,6 +959,18 @@ InstancesAPI_v3GetInstanceConsole(apiClient_t *apiClient, char *instanceId)
     localVarPath = strReplace(localVarPath, localVarToReplace_instanceId, instanceId);
 
 
+
+    // query parameters
+    char *keyQuery_type = NULL;
+    char * valueQuery_type = NULL;
+    keyValuePair_t *keyPairQuery_type = 0;
+    if (type)
+    {
+        keyQuery_type = strdup("type");
+        valueQuery_type = strdup((type));
+        keyPairQuery_type = keyValuePair_create(keyQuery_type, valueQuery_type);
+        list_addElement(localVarQueryParameters,keyPairQuery_type);
+    }
     list_addElement(localVarHeaderType,"application/json"); //produces
     apiClient_invoke(apiClient,
                     localVarPath,
@@ -972,6 +986,10 @@ InstancesAPI_v3GetInstanceConsole(apiClient_t *apiClient, char *instanceId)
     // uncomment below to debug the error response
     //if (apiClient->response_code == 200) {
     //    printf("%s\n","Success");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 400) {
+    //    printf("%s\n","Invalid console type, or type omitted on a model without a default console.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
@@ -1002,13 +1020,25 @@ InstancesAPI_v3GetInstanceConsole(apiClient_t *apiClient, char *instanceId)
         apiClient->dataReceived = NULL;
         apiClient->dataReceivedLen = 0;
     }
-    
+    list_freeList(localVarQueryParameters);
     
     
     list_freeList(localVarHeaderType);
     
     free(localVarPath);
     free(localVarToReplace_instanceId);
+    if(keyQuery_type){
+        free(keyQuery_type);
+        keyQuery_type = NULL;
+    }
+    if(valueQuery_type){
+        free(valueQuery_type);
+        valueQuery_type = NULL;
+    }
+    if(keyPairQuery_type){
+        keyValuePair_free(keyPairQuery_type);
+        keyPairQuery_type = NULL;
+    }
     return elementToReturn;
 end:
     free(localVarPath);
