@@ -30,7 +30,7 @@ assessment_id_status_t* AssessmentsV1API_v1CreateAssessment(apiClient_t *apiClie
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**instanceId** | **char \*** | Identifier of the instance, supplied as the MATRIX service-proxy path segment. | 
+**instanceId** | **char \*** | ID of the instance (virtual device) the assessment belongs to. The platform checks that you have access to this instance before the request reaches MATRIX, so use the ID of an instance in one of your projects. | 
 **create_assessment_input** | **[create_assessment_input_t](create_assessment_input.md) \*** |  | 
 
 ### Return type
@@ -62,7 +62,7 @@ list_t* AssessmentsV1API_v1CreateReportModification(apiClient_t *apiClient, char
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**instanceId** | **char \*** | Identifier of the instance, supplied as the MATRIX service-proxy path segment. | 
+**instanceId** | **char \*** | ID of the instance (virtual device) the assessment belongs to. The platform checks that you have access to this instance before the request reaches MATRIX, so use the ID of an instance in one of your projects. | 
 **assessmentId** | **char \*** | Identifier of the assessment. | 
 **report_modification_input** | **[list_t](report_modification_input.md) \*** |  | 
 
@@ -95,7 +95,7 @@ void AssessmentsV1API_v1DeleteAssessment(apiClient_t *apiClient, char *instanceI
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**instanceId** | **char \*** | Identifier of the instance, supplied as the MATRIX service-proxy path segment. | 
+**instanceId** | **char \*** | ID of the instance (virtual device) the assessment belongs to. The platform checks that you have access to this instance before the request reaches MATRIX, so use the ID of an instance in one of your projects. | 
 **assessmentId** | **char \*** | Identifier of the assessment. | 
 
 ### Return type
@@ -126,7 +126,7 @@ list_t* AssessmentsV1API_v1DeleteReportModification(apiClient_t *apiClient, char
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**instanceId** | **char \*** | Identifier of the instance, supplied as the MATRIX service-proxy path segment. | 
+**instanceId** | **char \*** | ID of the instance (virtual device) the assessment belongs to. The platform checks that you have access to this instance before the request reaches MATRIX, so use the ID of an instance in one of your projects. | 
 **assessmentId** | **char \*** | Identifier of the assessment. | 
 **delete_modification_input** | **[list_t](delete_modification_input.md) \*** |  | 
 
@@ -159,7 +159,7 @@ char* AssessmentsV1API_v1DownloadReport(apiClient_t *apiClient, char *instanceId
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**instanceId** | **char \*** | Identifier of the instance, supplied as the MATRIX service-proxy path segment. | 
+**instanceId** | **char \*** | ID of the instance (virtual device) the assessment belongs to. The platform checks that you have access to this instance before the request reaches MATRIX, so use the ID of an instance in one of your projects. | 
 **assessmentId** | **char \*** | Identifier of the assessment. | 
 **format** | **char \*** | Report download format. Defaults to \&quot;html\&quot;. | [optional] 
 
@@ -193,7 +193,7 @@ assessment_t* AssessmentsV1API_v1GetAssessmentById(apiClient_t *apiClient, char 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**instanceId** | **char \*** | Identifier of the instance, supplied as the MATRIX service-proxy path segment. | 
+**instanceId** | **char \*** | ID of the instance (virtual device) the assessment belongs to. The platform checks that you have access to this instance before the request reaches MATRIX, so use the ID of an instance in one of your projects. | 
 **assessmentId** | **char \*** | Identifier of the assessment. | 
 
 ### Return type
@@ -225,8 +225,8 @@ list_t* AssessmentsV1API_v1GetAssessmentsByInstanceId(apiClient_t *apiClient, ch
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**instanceId** | **char \*** | Identifier of the instance, supplied as the MATRIX service-proxy path segment. | 
-**targetInstanceId** | **char \*** | Identifier of the instance whose assessments are listed. | 
+**instanceId** | **char \*** | ID of the instance (virtual device) the assessment belongs to. The platform checks that you have access to this instance before the request reaches MATRIX, so use the ID of an instance in one of your projects. | 
+**targetInstanceId** | **char \*** | ID of the instance whose assessments you want to list. Set this to the same value as &#x60;instanceId&#x60;; the path contains the ID twice only because of how the MATRIX service is routed. | 
 
 ### Return type
 
@@ -257,7 +257,7 @@ assessment_t* AssessmentsV1API_v1PatchAssessment(apiClient_t *apiClient, char *i
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**instanceId** | **char \*** | Identifier of the instance, supplied as the MATRIX service-proxy path segment. | 
+**instanceId** | **char \*** | ID of the instance (virtual device) the assessment belongs to. The platform checks that you have access to this instance before the request reaches MATRIX, so use the ID of an instance in one of your projects. | 
 **assessmentId** | **char \*** | Identifier of the assessment. | 
 **update_assessment_input** | **[update_assessment_input_t](update_assessment_input.md) \*** |  | 
 
@@ -290,7 +290,7 @@ assessment_id_status_t* AssessmentsV1API_v1RunTests(apiClient_t *apiClient, char
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**instanceId** | **char \*** | Identifier of the instance, supplied as the MATRIX service-proxy path segment. | 
+**instanceId** | **char \*** | ID of the instance (virtual device) the assessment belongs to. The platform checks that you have access to this instance before the request reaches MATRIX, so use the ID of an instance in one of your projects. | 
 **assessmentId** | **char \*** | Identifier of the assessment. | 
 **test_assessment_input** | **[test_assessment_input_t](test_assessment_input.md) \*** |  | [optional] 
 
@@ -323,7 +323,7 @@ void AssessmentsV1API_v1StartMonitoring(apiClient_t *apiClient, char *instanceId
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**instanceId** | **char \*** | Identifier of the instance, supplied as the MATRIX service-proxy path segment. | 
+**instanceId** | **char \*** | ID of the instance (virtual device) the assessment belongs to. The platform checks that you have access to this instance before the request reaches MATRIX, so use the ID of an instance in one of your projects. | 
 **assessmentId** | **char \*** | Identifier of the assessment. | 
 
 ### Return type
@@ -354,7 +354,7 @@ void AssessmentsV1API_v1StopMonitoring(apiClient_t *apiClient, char *instanceId,
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**instanceId** | **char \*** | Identifier of the instance, supplied as the MATRIX service-proxy path segment. | 
+**instanceId** | **char \*** | ID of the instance (virtual device) the assessment belongs to. The platform checks that you have access to this instance before the request reaches MATRIX, so use the ID of an instance in one of your projects. | 
 **assessmentId** | **char \*** | Identifier of the assessment. | 
 
 ### Return type

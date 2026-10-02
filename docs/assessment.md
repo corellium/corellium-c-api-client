@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **results** | [**assessment_results_t**](assessment_results.md) \* |  | 
 **metadata** | [**assessment_metadata_t**](assessment_metadata.md) \* |  | 
 **severity_counts** | [**assessment_severity_counts_t**](assessment_severity_counts.md) \* |  | 
-**error** | **char \*** | Failure message if the assessment failed, otherwise null. | [optional] 
+**error** | **char \*** | Why the assessment failed, or null. Set only when monitoring fails, to one of: \&quot;Insufficient memory; increase device&#39;s RAM.\&quot;, \&quot;App closed too soon; keep open until report has generated.\&quot;, \&quot;App unable to launch; check compatibility.\&quot;, or \&quot;Unknown error.\&quot;. An assessment that fails while tests run has status &#x60;failed&#x60; with &#x60;error&#x60; null. | [optional] 
 **created_by** | **char \*** | Identifier of the user that created the assessment, or null. | [optional] 
 **created_at** | **char \*** | Creation timestamp. | [optional] 
 **updated_at** | **char \*** | Last-update timestamp. | [optional] 
