@@ -9,7 +9,7 @@
 
 // Create a webplayer session
 //
-// **Required role:** Domain administrator.  Creates a new webplayer session for the requested instance.
+// **Required role:** Domain administrator.  Creates a Web Player session: a limited token that lets someone use one device, embedded in your own web page, without giving them a Corellium account. Requires a domain administrator.  Choose the device (`projectId`, `instanceId`), how long the session lasts (`expiresIn`, at least 1800 seconds), and which parts of the device interface the viewer may use (`features`). Pass the returned `token` to the Web Player in your page. The website domains configured for embedding are listed by `v3GetWebPlayerAllowedDomains` and set with `webplayer.allowedDomains` on `PATCH /v3/domain`. End the session early with `v3DeleteWebPlayerSession`.
 //
 web_player_created_session_t*
 WebPlayerAPI_v3CreateWebPlayerSession(apiClient_t *apiClient, create_web_player_session_body_t *create_web_player_session_body)
@@ -60,15 +60,15 @@ WebPlayerAPI_v3CreateWebPlayerSession(apiClient_t *apiClient, create_web_player_
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Domain administrator permissions required.");
+    //    printf("%s\n","Domain administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     web_player_created_session_t *elementToReturn = NULL;
@@ -107,7 +107,7 @@ end:
 
 // Delete a webplayer session
 //
-// **Required role:** Domain administrator.  Deletes the webplayer session identified by the given sessionId.  Deletes are idempotent: an unknown `sessionId` is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing.
+// **Required role:** Domain administrator.  Ends a Web Player session: its token stops working, so the embedded viewer loses access to the device. Requires a domain administrator. The device itself is not affected.  Deletes are idempotent: an unknown `sessionId` is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing.
 //
 void
 WebPlayerAPI_v3DeleteWebPlayerSession(apiClient_t *apiClient, char *sessionId)
@@ -159,15 +159,15 @@ WebPlayerAPI_v3DeleteWebPlayerSession(apiClient_t *apiClient, char *sessionId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Domain administrator permissions required.");
+    //    printf("%s\n","Domain administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:
@@ -188,7 +188,7 @@ end:
 
 // Get allowed webplayer domains
 //
-// Returns the list of domains that webplayer sessions are permitted to access.
+// Returns the website domains configured for embedding the Web Player (`webplayer.allowedDomains` in your domain settings). Change the list with `PATCH /v3/domain`.
 //
 web_player_allowed_domains_t*
 WebPlayerAPI_v3GetWebPlayerAllowedDomains(apiClient_t *apiClient)
@@ -228,15 +228,15 @@ WebPlayerAPI_v3GetWebPlayerAllowedDomains(apiClient_t *apiClient)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     web_player_allowed_domains_t *elementToReturn = NULL;
@@ -270,7 +270,7 @@ end:
 
 // Get a webplayer session
 //
-// **Required role:** Domain administrator.  Returns the webplayer session identified by the given sessionId.
+// **Required role:** Domain administrator.  Returns one Web Player session, including its token and expiration. Requires a domain administrator.
 //
 list_t*
 WebPlayerAPI_v3GetWebPlayerSession(apiClient_t *apiClient, char *sessionId)
@@ -322,15 +322,15 @@ WebPlayerAPI_v3GetWebPlayerSession(apiClient_t *apiClient, char *sessionId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Domain administrator permissions required.");
+    //    printf("%s\n","Domain administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -379,7 +379,7 @@ end:
 
 // List webplayer sessions
 //
-// **Required role:** Domain administrator.  Returns a paginated list of webplayer sessions for the authenticated user.
+// **Required role:** Domain administrator.  Lists the Web Player sessions in your domain, with each session's ID, token and expiration. Requires a domain administrator. Results are paginated with `limit` and `offset`.
 //
 web_player_session_list_response_t*
 WebPlayerAPI_v3ListWebPlayerSessions(apiClient_t *apiClient, double *limit, double *offset)
@@ -445,15 +445,15 @@ WebPlayerAPI_v3ListWebPlayerSessions(apiClient_t *apiClient, double *limit, doub
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Domain administrator permissions required.");
+    //    printf("%s\n","Domain administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     web_player_session_list_response_t *elementToReturn = NULL;

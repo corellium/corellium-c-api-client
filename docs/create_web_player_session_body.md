@@ -3,9 +3,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**project_id** | **char \*** | Project identifier. | 
-**instance_id** | **char \*** | VM instance identifier. | 
-**expires_in** | **double** | Seconds the token remains valid (min 1800). | 
+**project_id** | **char \*** | Project the device is in. | 
+**instance_id** | **char \*** | The device (instance) the viewer will see and control. | 
+**expires_in** | **double** | How long the session token stays valid, in seconds. At least 1800 (30 minutes). Renewing the token keeps the same length. | 
 **features** | [**web_player_features_t**](web_player_features.md) \* |  | 
 **client_id** | **char \*** | Optional client-supplied tracking string. | [optional] 
 

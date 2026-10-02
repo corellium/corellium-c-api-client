@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**StorageAPI_v3AttachClusterStorage**](StorageAPI.md#StorageAPI_v3AttachClusterStorage) | **POST** /v3/cluster/storage/{id}/attach | Attach storage device
 [**StorageAPI_v3EjectClusterStorage**](StorageAPI.md#StorageAPI_v3EjectClusterStorage) | **POST** /v3/cluster/storage/{id}/eject | Eject storage device
 [**StorageAPI_v3ListClusterStorage**](StorageAPI.md#StorageAPI_v3ListClusterStorage) | **GET** /v3/cluster/storage | List cluster storage devices
-[**StorageAPI_v3ListStorage**](StorageAPI.md#StorageAPI_v3ListStorage) | **GET** /v3/storage | List storage devices
+[**StorageAPI_v3ListStorage**](StorageAPI.md#StorageAPI_v3ListStorage) | **GET** /v3/storage | List server-attached storage devices
 [**StorageAPI_v3ListStorageFiles**](StorageAPI.md#StorageAPI_v3ListStorageFiles) | **GET** /v3/storage/{id}/files/{path} | List storage files
 
 
@@ -15,7 +15,7 @@ Method | HTTP request | Description
 ```c
 // Attach storage device
 //
-// **Required role:** Cluster administrator.  Mounts a registered storage device. Returns 200 if already mounted, 202 if a mount job was queued. Requires the serverAttachedStorage feature.
+// **Required role:** Cluster administrator.  Mounts an attached storage device so its files can be used. Mounting runs in the background: returns 202 when the mount has been queued, or 200 if the device is already mounted. Browse its files with `GET /v3/storage/{id}/files/{path}`. Requires a cluster administrator. Requires the serverAttachedStorage feature. Not available on cloud installations.
 //
 storage_already_mounted_response_t* StorageAPI_v3AttachClusterStorage(apiClient_t *apiClient, char *id);
 ```
@@ -46,7 +46,7 @@ Name | Type | Description  | Notes
 ```c
 // Eject storage device
 //
-// **Required role:** Cluster administrator.  Unmounts a registered storage device. Returns 200 if already unmounted, 202 if an unmount job was queued. Requires the serverAttachedStorage feature.
+// **Required role:** Cluster administrator.  Unmounts an attached storage device so it can be unplugged safely. Unmounting runs in the background: returns 202 when the unmount has been queued, or 200 if the device is already unmounted. Requires a cluster administrator. Requires the serverAttachedStorage feature. Not available on cloud installations.
 //
 storage_eject_already_unmounted_response_t* StorageAPI_v3EjectClusterStorage(apiClient_t *apiClient, char *id);
 ```
@@ -77,7 +77,7 @@ Name | Type | Description  | Notes
 ```c
 // List cluster storage devices
 //
-// **Required role:** Cluster administrator.  Returns all attached storage devices. Requires the serverAttachedStorage feature.
+// **Required role:** Cluster administrator.  Lists the physical storage devices (for example USB drives) attached to the cluster's servers, for cluster administrators. Requires a cluster administrator. Requires the serverAttachedStorage feature. Not available on cloud installations.
 //
 storage_device_list_t* StorageAPI_v3ListClusterStorage(apiClient_t *apiClient, double *limit, double *offset, char *id, char *device, char *fsType, char *fsUuid, char *label, char *serial, char *vendor, char *model, char *mountPolicy, char *status, char *sort);
 ```
@@ -118,9 +118,9 @@ Name | Type | Description  | Notes
 
 # **StorageAPI_v3ListStorage**
 ```c
-// List storage devices
+// List server-attached storage devices
 //
-// List all attached storage devices visible to the authenticated user.
+// Lists the physical storage devices (for example USB drives or disks) plugged into an on-site Corellium server, with their name, filesystem, label, vendor, whether they are mounted, and whether they are mounted read-only (`RO`) or read-write (`RW`). Use a device's `id` with `v3ListStorageFiles` to browse its contents. For cluster administrators on on-site deployments; not available on cloud installations. Results are paginated and can be filtered and sorted with the query parameters.
 //
 storage_list_t* StorageAPI_v3ListStorage(apiClient_t *apiClient, double *limit, double *offset, char *sort, char *identifier, char *device, char *fsType, char *mountPolicy, char *status);
 ```
@@ -129,8 +129,8 @@ storage_list_t* StorageAPI_v3ListStorage(apiClient_t *apiClient, double *limit, 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**limit** | **double \*** | Maximum number of results to return. | [optional] [default to 100]
-**offset** | **double \*** | Number of results to skip. | [optional] [default to 0]
+**limit** | **double \*** | Most results to return in one page. Whole number from 1 to 1000; defaults to 100. A value outside that range is rejected with 400. | [optional] [default to 100]
+**offset** | **double \*** | How many results to skip before this page starts; defaults to 0. To get the next page, add &#x60;limit&#x60; to the previous &#x60;offset&#x60;. | [optional] [default to 0]
 **sort** | **char \*** | Sort order (prefix a field with \&quot;-\&quot; for descending). | [optional] 
 **identifier** | **char \*** | Filter by identifier (comma separated). | [optional] 
 **device** | **char \*** | Filter by device name (partial match). | [optional] 
@@ -158,7 +158,7 @@ Name | Type | Description  | Notes
 ```c
 // List storage files
 //
-// List files at a path within an attached storage device. The device is resolved by identifier and the filesystem contents are listed at the given path within the mount point.
+// Lists the files and folders at one path on a server-attached storage device (see `v3ListStorage`), with each entry's name, type, size and modification time. Use `/` to list the top level, then pass a folder's path to go deeper. The path must be a folder; a file path returns 400, and paths that try to leave the device (for example with `..`) are rejected. Returns 404 if the device or path does not exist.
 //
 storage_file_list_t* StorageAPI_v3ListStorageFiles(apiClient_t *apiClient, char *id, char *path, double *limit, double *offset, char *sort, char *name, char *type);
 ```
@@ -168,9 +168,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **id** | **char \*** | Storage device identifier. | 
-**path** | **char \*** | Path within the storage device to list. | 
-**limit** | **double \*** | Maximum number of results to return. | [optional] [default to 100]
-**offset** | **double \*** | Number of results to skip. | [optional] [default to 0]
+**path** | **char \*** | Folder to list, relative to the top of the storage device. Slashes are kept as path separators. | 
+**limit** | **double \*** | Most results to return in one page. Whole number from 1 to 1000; defaults to 100. A value outside that range is rejected with 400. | [optional] [default to 100]
+**offset** | **double \*** | How many results to skip before this page starts; defaults to 0. To get the next page, add &#x60;limit&#x60; to the previous &#x60;offset&#x60;. | [optional] [default to 0]
 **sort** | **char \*** | Sort order (prefix a field with \&quot;-\&quot; for descending). | [optional] 
 **name** | **char \*** | Filter by name (case-insensitive exact match, comma separated). | [optional] 
 **type** | **char \*** | Filter by type (case-insensitive partial match, e.g. \&quot;file\&quot; or \&quot;dir\&quot;). | [optional] 

@@ -3,10 +3,10 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**error** | **char \*** | Error text | 
-**error_id** | **char \*** | Error ID | 
-**name** | **char \*** | Name of the object requested | [optional] 
-**params** | [**object_t**](.md) \* | params provided by user | [optional] 
+**error** | **char \*** | Human-readable explanation of what was not found. | 
+**error_id** | **char \*** | Short machine-readable error name, usually &#x60;NotFound&#x60;. | 
+**name** | **char \*** | Kind of object that was not found, for example &#x60;instance&#x60;. | [optional] 
+**params** | [**object_t**](.md) \* | The identifiers from your request that were looked up. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

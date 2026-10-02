@@ -3,9 +3,9 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **char \*** | The name of the interconnect. | 
-**type** | **corellium_api_interconnect_TYPE_e** |  | 
-**project_id** | **char \*** | The UUID of the project. | 
+**name** | **char \*** | A name to recognise the interconnect by. | 
+**type** | **corellium_api_interconnect_TYPE_e** | How the interconnect behaves: &#x60;hub&#x60; passes every signal to every connected interface; &#x60;switch&#x60; routes traffic between endpoints. | 
+**project_id** | **char \*** | Project the interconnect belongs to. Every device listed in &#x60;interfaces&#x60; must be in this project, otherwise the request fails with 400. Cannot be changed later. | 
 **interfaces** | [**list_t**](interfaces_schema_inner.md) \* |  | 
 **id** | **char \*** | The interconnect identifier. | 
 **protocol** | **char \*** | The protocol used by the interconnect. | 

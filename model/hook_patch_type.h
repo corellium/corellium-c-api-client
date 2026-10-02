@@ -1,7 +1,7 @@
 /*
  * hook_patch_type.h
  *
- * Your selection of language (csmfcc for C-like or csmfvm for assembly-like) for the patch.
+ * Language the &#x60;patch&#x60; is written in: &#x60;csmfcc&#x60; for a C-like language, or &#x60;csmfvm&#x60; for an assembly-like language.
  */
 
 #ifndef _hook_patch_type_H_

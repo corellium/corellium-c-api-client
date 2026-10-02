@@ -9,7 +9,7 @@
 
 // Proxy a DELETE request to an external service
 //
-// Proxies the request to the external service identified by serviceName.
+// Forwards this request to an optional external service connected to the platform (named by `serviceName`, for example `apps`), passing along the rest of the path, and returns that service's response unchanged. What each path does is defined by the external service, not by this API. Returns 503 if the service is not available on this deployment or cannot be reached.
 //
 void
 ExternalServicesAPI_deleteExternalService(apiClient_t *apiClient, char *apiVersion, char *serviceName, char *path)
@@ -85,11 +85,11 @@ ExternalServicesAPI_deleteExternalService(apiClient_t *apiClient, char *apiVersi
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 503) {
@@ -116,7 +116,7 @@ end:
 
 // Proxy a GET request to an external service
 //
-// Proxies the request to the external service identified by serviceName.
+// Forwards this request to an optional external service connected to the platform (named by `serviceName`, for example `apps`), passing along the rest of the path, and returns that service's response unchanged. What each path does is defined by the external service, not by this API. Returns 503 if the service is not available on this deployment or cannot be reached.
 //
 void
 ExternalServicesAPI_getExternalService(apiClient_t *apiClient, char *apiVersion, char *serviceName, char *path)
@@ -192,11 +192,11 @@ ExternalServicesAPI_getExternalService(apiClient_t *apiClient, char *apiVersion,
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 503) {
@@ -223,7 +223,7 @@ end:
 
 // Proxy a PATCH request to an external service
 //
-// Proxies the request to the external service identified by serviceName.
+// Forwards this request to an optional external service connected to the platform (named by `serviceName`, for example `apps`), passing along the rest of the path, and returns that service's response unchanged. What each path does is defined by the external service, not by this API. Returns 503 if the service is not available on this deployment or cannot be reached.
 //
 void
 ExternalServicesAPI_patchExternalService(apiClient_t *apiClient, char *apiVersion, char *serviceName, char *path)
@@ -299,11 +299,11 @@ ExternalServicesAPI_patchExternalService(apiClient_t *apiClient, char *apiVersio
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 503) {
@@ -330,7 +330,7 @@ end:
 
 // Proxy a POST request to an external service
 //
-// Proxies the request to the external service identified by serviceName.
+// Forwards this request to an optional external service connected to the platform (named by `serviceName`, for example `apps`), passing along the rest of the path, and returns that service's response unchanged. What each path does is defined by the external service, not by this API. Returns 503 if the service is not available on this deployment or cannot be reached.
 //
 void
 ExternalServicesAPI_postExternalService(apiClient_t *apiClient, char *apiVersion, char *serviceName, char *path)
@@ -406,11 +406,11 @@ ExternalServicesAPI_postExternalService(apiClient_t *apiClient, char *apiVersion
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 503) {
@@ -437,7 +437,7 @@ end:
 
 // Proxy a PUT request to an external service
 //
-// Proxies the request to the external service identified by serviceName.
+// Forwards this request to an optional external service connected to the platform (named by `serviceName`, for example `apps`), passing along the rest of the path, and returns that service's response unchanged. What each path does is defined by the external service, not by this API. Returns 503 if the service is not available on this deployment or cannot be reached.
 //
 void
 ExternalServicesAPI_putExternalService(apiClient_t *apiClient, char *apiVersion, char *serviceName, char *path)
@@ -513,11 +513,11 @@ ExternalServicesAPI_putExternalService(apiClient_t *apiClient, char *apiVersion,
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 503) {

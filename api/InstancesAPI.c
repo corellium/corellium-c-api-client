@@ -7,9 +7,9 @@
 #define MAX_BUFFER_LENGTH 4096
 
 
-// Attach I/O Interface
+// Connect an I/O interface
 //
-// Attach an I/O interface to an I/O interconnect for the specified instance identifier.
+// Connects one of this device's I/O interfaces (for example a GPIO bank, `gpio/0`) to an I/O interconnect, a virtual wire that links interfaces on different devices so they can signal each other. Create the interconnect first with the Interconnects endpoints. Requires the configurable I/O license feature (403 otherwise).
 //
 void
 InstancesAPI_v3AttachInstanceInterface(apiClient_t *apiClient, char *instanceId, attach_interface_body_t *attach_interface_body)
@@ -72,15 +72,15 @@ InstancesAPI_v3AttachInstanceInterface(apiClient_t *apiClient, char *instanceId,
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -108,9 +108,9 @@ end:
 
 }
 
-// Clear Panics
+// Clear kernel panics
 //
-// Clear panics. An unknown `instanceId` is a successful no-op that returns 204.
+// Deletes the recorded kernel panics for this device, so the next `v3GetInstancePanics` shows only new ones. An unknown `instanceId` is a successful no-op that returns 204.
 //
 void
 InstancesAPI_v3ClearInstancePanics(apiClient_t *apiClient, char *instanceId)
@@ -162,11 +162,11 @@ InstancesAPI_v3ClearInstancePanics(apiClient_t *apiClient, char *instanceId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:
@@ -185,7 +185,9 @@ end:
 
 }
 
-// Create Instance
+// Create a device
+//
+// Creates a new virtual device (instance) in a project. This returns quickly with the new `id` and `state: \"creating\"`; the device is then built in the background, which can take several minutes. Poll `v3GetInstanceState` (or `v3GetInstance`) until the state is `on` before using it. If it becomes `error`, read the instance's `error` field.  **Minimum request:** `projectId`, `flavor`, and `osVersion` and/or `osBuild`.  **Typical steps:** 1. `GET /v3/models`: pick a model and note its `flavor`, allowed cores, and memory. 2. `GET /v3/models/{model}/software`: pick a build and note its `osVersion` and `osBuild`. 3. `POST /v3/instances` with `{ \"projectId\", \"flavor\", \"osVersion\", \"osBuild\" }`. Add `name` so you can find it later, and `bootOptions` (for example `cores`, `ram`) to change the defaults. 4. Poll the state until `on`.  **How the operating system is chosen.** With both `osVersion` and `osBuild`, that exact build is used. With only `osBuild`, the build with that ID is used. With only `osVersion`, the newest build of that version is used. To boot your own firmware file instead, set `fwPackage`.  Some options need license features (for example creating devices from custom firmware, or custom model definitions via `charmBootArgs`); using one your license lacks returns 403.
 //
 create_instance_response_t*
 InstancesAPI_v3CreateInstance(apiClient_t *apiClient, create_instance_body_t *create_instance_body)
@@ -240,11 +242,11 @@ InstancesAPI_v3CreateInstance(apiClient_t *apiClient, create_instance_body_t *cr
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 409) {
@@ -339,11 +341,11 @@ InstancesAPI_v3DeleteInstance(apiClient_t *apiClient, char *instanceId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:
@@ -362,9 +364,9 @@ end:
 
 }
 
-// Detach I/O Interface
+// Disconnect an I/O interface
 //
-// Detach an I/O interface from an I/O interconnect for the specified instance identifier.  Deletes are idempotent: an unknown instance, interconnect or interface, including one that was already detached, is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing.
+// Disconnects one of this device's I/O interfaces from an I/O interconnect. Requires the configurable I/O license feature.  Deletes are idempotent: an unknown instance, interconnect or interface, including one that was already detached, is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing.
 //
 void
 InstancesAPI_v3DetachInstanceInterface(apiClient_t *apiClient, char *instanceId, char *interfaceId, detach_interface_body_t *detach_interface_body)
@@ -439,15 +441,15 @@ InstancesAPI_v3DetachInstanceInterface(apiClient_t *apiClient, char *instanceId,
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:
@@ -472,7 +474,9 @@ end:
 
 }
 
-// Disable an exposed port on an instance for device access.
+// Stop exposing the device port
+//
+// Turns off the exposed port enabled with `v3EnableExposePort`. Runs as a background task on the device; returns 204 once it is scheduled.
 //
 void
 InstancesAPI_v3DisableExposePort(apiClient_t *apiClient, char *instanceId)
@@ -524,15 +528,15 @@ InstancesAPI_v3DisableExposePort(apiClient_t *apiClient, char *instanceId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:
@@ -551,7 +555,9 @@ end:
 
 }
 
-// Download a netdump pcap file
+// Download the Enhanced Network Monitor capture
+//
+// Downloads the packets recorded by Enhanced Network Monitor (see `v3StartNetdump`) as a pcapng file, which packet analyzers such as Wireshark open directly. Requires the Enhanced Network Monitor feature (403 otherwise).
 //
 binary_t*
 InstancesAPI_v3DownloadNetdumpPcap(apiClient_t *apiClient, char *instanceId)
@@ -604,15 +610,15 @@ InstancesAPI_v3DownloadNetdumpPcap(apiClient_t *apiClient, char *instanceId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //primitive return type simple binary
     binary_t* elementToReturn = NULL;
@@ -638,9 +644,9 @@ end:
 
 }
 
-// Download a Network Monitor pcap file
+// Download the Network Monitor capture
 //
-// Downloads the Network Monitor capture for the instance as a pcap file.
+// Downloads the traffic recorded by Network Monitor (see `v3StartNetworkMonitor`) as a pcap file. Save it with a `.pcap` extension and open it in a packet analyzer such as Wireshark. Download while monitoring runs or after stopping it.
 //
 binary_t*
 InstancesAPI_v3DownloadNetworkMonitorPcap(apiClient_t *apiClient, char *instanceId)
@@ -693,15 +699,15 @@ InstancesAPI_v3DownloadNetworkMonitorPcap(apiClient_t *apiClient, char *instance
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //primitive return type simple binary
     binary_t* elementToReturn = NULL;
@@ -727,7 +733,9 @@ end:
 
 }
 
-// Enable an exposed port on an instance for device access.
+// Expose the device port
+//
+// Turns on the exposed port for this device, for device access. This runs as a background task on the device; returns 204 once it is scheduled. Undo with `v3DisableExposePort`.
 //
 void
 InstancesAPI_v3EnableExposePort(apiClient_t *apiClient, char *instanceId)
@@ -779,15 +787,15 @@ InstancesAPI_v3EnableExposePort(apiClient_t *apiClient, char *instanceId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:
@@ -806,7 +814,9 @@ end:
 
 }
 
-// Get Instance
+// Get a device
+//
+// Returns everything about one device: its name, model, operating system, state, boot options, network details and consoles. Use `state` to see whether it is ready, and `error` to see why it failed. Pass `returnAttr` to get only some fields.
 //
 instance_t*
 InstancesAPI_v3GetInstance(apiClient_t *apiClient, char *instanceId, char *returnAttr)
@@ -870,11 +880,11 @@ InstancesAPI_v3GetInstance(apiClient_t *apiClient, char *instanceId, char *retur
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -993,11 +1003,11 @@ InstancesAPI_v3GetInstanceConsole(apiClient_t *apiClient, char *instanceId, char
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -1046,7 +1056,9 @@ end:
 
 }
 
-// Get Console Log
+// Read the console log
+//
+// Returns the text output of the device's main console (serial output from boot messages, the kernel and system services) as plain text. Useful for seeing why a device will not boot. For a live, interactive console, use `v3GetInstanceConsole` instead.
 //
 char*
 InstancesAPI_v3GetInstanceConsoleLog(apiClient_t *apiClient, char *instanceId)
@@ -1099,11 +1111,11 @@ InstancesAPI_v3GetInstanceConsoleLog(apiClient_t *apiClient, char *instanceId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //primitive return type simple string
     char* elementToReturn = NULL;
@@ -1129,7 +1141,9 @@ end:
 
 }
 
-// Get Instance GPIOs
+// Read board LEDs, buttons and switches
+//
+// Returns the current state of the simulated LEDs, buttons and switches (GPIO pins) on an IoT or embedded board model, for example whether an LED your firmware drives is lit. The device must be running. Phone models do not have these, and the request fails for them. See `GpiosState` for the format.
 //
 gpios_state_t*
 InstancesAPI_v3GetInstanceGpios(apiClient_t *apiClient, char *instanceId)
@@ -1181,11 +1195,11 @@ InstancesAPI_v3GetInstanceGpios(apiClient_t *apiClient, char *instanceId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -1224,7 +1238,7 @@ end:
 
 // Get image upload status
 //
-// Check resumable upload status for an instance image or download the image file.
+// Checks the progress of a chunked upload made with `v3PutInstanceImageUpload`, or downloads the finished file. With chunk parameters (`resumableChunkNumber` and friends) it returns 200 if that chunk is already stored and 204 if it still needs to be sent; without them it downloads the image file.
 //
 binary_t*
 InstancesAPI_v3GetInstanceImageUpload(apiClient_t *apiClient, char *instance, char *type, char *imageId, char *name, double *resumableChunkNumber)
@@ -1338,11 +1352,11 @@ InstancesAPI_v3GetInstanceImageUpload(apiClient_t *apiClient, char *instance, ch
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -1387,7 +1401,9 @@ end:
 
 }
 
-// Get Panics
+// List kernel panics
+//
+// Returns the kernel panics (crashes of the operating system itself) recorded on this device, as a list of panic records. An empty list means none have happened since the last clear. Clear them with `v3ClearInstancePanics`.
 //
 list_t*
 InstancesAPI_v3GetInstancePanics(apiClient_t *apiClient, char *instanceId)
@@ -1439,11 +1455,11 @@ InstancesAPI_v3GetInstancePanics(apiClient_t *apiClient, char *instanceId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     list_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
@@ -1486,7 +1502,9 @@ end:
 
 }
 
-// Get Instance Peripherals
+// Read simulated sensors
+//
+// Returns the current values of the device's simulated sensors and hardware: motion (accelerometer, gyroscope, compass), environment (temperature, light, pressure, humidity, proximity), GPS location, battery, and biometric bypass. Only values the device reports are included; a missing field does not mean zero. See `PeripheralsData`.
 //
 peripherals_data_t*
 InstancesAPI_v3GetInstancePeripherals(apiClient_t *apiClient, char *instanceId)
@@ -1538,11 +1556,11 @@ InstancesAPI_v3GetInstancePeripherals(apiClient_t *apiClient, char *instanceId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -1579,7 +1597,9 @@ end:
 
 }
 
-// Recommended SSH Command for Quick Connect
+// Get the SSH quick-connect command
+//
+// Returns a ready-to-paste SSH command for connecting to this device, as a JSON string. Run it in a terminal on a computer that can reach the device, for example one connected with the project VPN (`GET /v3/projects/{projectId}/vpnconfig/{format}`).
 //
 char*
 InstancesAPI_v3GetInstanceQuickConnectCommand(apiClient_t *apiClient, char *instanceId)
@@ -1631,15 +1651,15 @@ InstancesAPI_v3GetInstanceQuickConnectCommand(apiClient_t *apiClient, char *inst
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //primitive return type simple string
     char* elementToReturn = NULL;
@@ -1665,7 +1685,9 @@ end:
 
 }
 
-// Get Instance Screenshot
+// Take a screenshot
+//
+// Captures what the device's screen shows right now and returns it as an image. Choose the file type in the path: `screenshot.png` or `screenshot.jpeg`. Use `scale` to shrink it: `scale=2` returns half the width and height, `scale=4` a quarter; the default 1 is full size. The device must be running.
 //
 binary_t*
 InstancesAPI_v3GetInstanceScreenshot(apiClient_t *apiClient, char *instanceId, char *format, double *scale)
@@ -1744,11 +1766,11 @@ InstancesAPI_v3GetInstanceScreenshot(apiClient_t *apiClient, char *instanceId, c
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -1791,7 +1813,9 @@ end:
 
 }
 
-// Get state of Instance
+// Get a device's state
+//
+// Returns only the device's current state (for example `creating`, `on`, `off`), as a bare JSON string. This is the call to poll while waiting for a device to finish creating, starting, stopping or rebooting. See `InstanceState` for what each value means.
 //
 corellium_api_instance_state__e
 InstancesAPI_v3GetInstanceState(apiClient_t *apiClient, char *instanceId, char *returnAttr)
@@ -1855,15 +1879,15 @@ InstancesAPI_v3GetInstanceState(apiClient_t *apiClient, char *instanceId, char *
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -1871,7 +1895,7 @@ InstancesAPI_v3GetInstanceState(apiClient_t *apiClient, char *instanceId, char *
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 409) {
-    //    printf("%s\n","Resource conflict.");
+    //    printf("%s\n","The request conflicts with the current state of the resource.");
     //}
     //nonprimitive not container
     corellium_api_instance_state__e elementToReturn = 0;
@@ -1916,9 +1940,9 @@ end:
 
 }
 
-// Inject a message into an iOS VM
+// Send an SMS message to an iOS device
 //
-// Given a message and source phone number, place this message as an incoming SMS message on the iOS VM. A raw hex-encoded message body may also be sent.
+// Delivers a text message to an iOS device as if it arrived over the cellular network, so apps see a normal incoming SMS. Useful for testing one-time-password and verification-code flows. Send either `number` (the sender's phone number) and `message` (the text), or `raw` with the message bytes in hexadecimal for low-level testing. The device must be running.
 //
 void
 InstancesAPI_v3InjectMessage(apiClient_t *apiClient, char *instanceId, message_body_t *message_body)
@@ -1981,15 +2005,15 @@ InstancesAPI_v3InjectMessage(apiClient_t *apiClient, char *instanceId, message_b
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:
@@ -2013,9 +2037,9 @@ end:
 
 }
 
-// Pre-authorize a kernel download
+// Get a kernel download token
 //
-// Pre-authorize a kernel download. Returns a token that authorizes the kernel download request.
+// Returns a short-lived token that authorizes downloading this device's kernel file without an `Authorization` header, for loading into a disassembler or debugger. Download with `GET /v1/preauthed/{token}/{filename}`. The token works only for this device's kernel and expires when your current session token expires.
 //
 token_t*
 InstancesAPI_v3KernelPreauthorize(apiClient_t *apiClient, char *instanceId)
@@ -2067,15 +2091,15 @@ InstancesAPI_v3KernelPreauthorize(apiClient_t *apiClient, char *instanceId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     token_t *elementToReturn = NULL;
@@ -2109,6 +2133,8 @@ end:
 }
 
 // List Instances
+//
+// Lists the devices (instances) you can access across your projects. Results are paginated with `limit` and `offset`; use `name` to find a device by name. To list only one project's devices, use `GET /v3/projects/{projectId}/instances`.
 //
 instance_list_t*
 InstancesAPI_v3ListInstances(apiClient_t *apiClient, double *limit, double *offset, char *name, char *returnAttr)
@@ -2198,15 +2224,15 @@ InstancesAPI_v3ListInstances(apiClient_t *apiClient, double *limit, double *offs
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     instance_list_t *elementToReturn = NULL;
@@ -2286,7 +2312,9 @@ end:
 
 }
 
-// Start playing media
+// Play a video or audio file into the device
+//
+// Plays a media file into the device, so apps receive it as if it came from the device's camera (video) and microphone (audio). Use it to test camera or scanning features, for example feeding a QR code video to an app. Open the camera app on the device to see it.  Give exactly one source: `imageId` of a `media` image you uploaded with `POST /v3/images`, or a `url` the platform can download the file from. Returns 204 once playback starts. Call `v3MediaStop` to stop it.
 //
 void
 InstancesAPI_v3MediaPlay(apiClient_t *apiClient, char *instanceId, media_play_body_t *media_play_body)
@@ -2349,11 +2377,11 @@ InstancesAPI_v3MediaPlay(apiClient_t *apiClient, char *instanceId, media_play_bo
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -2361,7 +2389,7 @@ InstancesAPI_v3MediaPlay(apiClient_t *apiClient, char *instanceId, media_play_bo
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 409) {
-    //    printf("%s\n","Resource conflict.");
+    //    printf("%s\n","The request conflicts with the current state of the resource.");
     //}
     //No return type
 end:
@@ -2386,6 +2414,8 @@ end:
 }
 
 // Stop playing media
+//
+// Stops media started with `v3MediaPlay`.
 //
 void
 InstancesAPI_v3MediaStop(apiClient_t *apiClient, char *instanceId)
@@ -2437,11 +2467,11 @@ InstancesAPI_v3MediaStop(apiClient_t *apiClient, char *instanceId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -2464,9 +2494,9 @@ end:
 
 }
 
-// Update Instance
+// Change device settings
 //
-// Update instance configuration such as name, boot options, and proxy settings. To change an instance run state, use the start, stop, reboot, pause, and unpause action endpoints.
+// Changes a device's settings. Send only the fields you want to change: `name` (the label shown in lists), `bootOptions` (for example `cores`, `ram`, boot arguments), `proxy` (which device ports are forwarded, and whether they are reachable from outside the project), and `straceFilter` (which processes CoreTrace records, by name, process ID or thread ID; see `v3ListThreads`). Returns the updated device. This call does not turn the device on or off; use `v3StartInstance`, `v3StopInstance`, `v3RebootInstance`, `v3PauseInstance` and `v3UnpauseInstance` for that.
 //
 instance_t*
 InstancesAPI_v3PatchInstance(apiClient_t *apiClient, char *instanceId, patch_instance_body_t *patch_instance_body)
@@ -2529,15 +2559,15 @@ InstancesAPI_v3PatchInstance(apiClient_t *apiClient, char *instanceId, patch_ins
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -2581,7 +2611,7 @@ end:
 
 // Update Instance Read Only
 //
-// Updates the read-only state of the instance.
+// Turns read-only mode on or off for the device. Returns the updated device.
 //
 instance_t*
 InstancesAPI_v3PatchInstanceReadOnly(apiClient_t *apiClient, char *instanceId, patch_instance_read_only_body_t *patch_instance_read_only_body)
@@ -2644,15 +2674,15 @@ InstancesAPI_v3PatchInstanceReadOnly(apiClient_t *apiClient, char *instanceId, p
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -2694,7 +2724,9 @@ end:
 
 }
 
-// Pause an Instance
+// Pause a device
+//
+// Freezes a running device in place without shutting it down: it stops executing but keeps its memory and state, so `v3UnpauseInstance` resumes it exactly where it stopped. The state becomes `paused`.
 //
 void
 InstancesAPI_v3PauseInstance(apiClient_t *apiClient, char *instanceId)
@@ -2746,11 +2778,11 @@ InstancesAPI_v3PauseInstance(apiClient_t *apiClient, char *instanceId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -2862,11 +2894,11 @@ InstancesAPI_v3PostInstanceInput(apiClient_t *apiClient, char *instanceId, list_
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -2918,7 +2950,7 @@ end:
 
 // Upload image chunk
 //
-// Upload a chunk of an instance image using the resumable upload protocol. Creates the image record on the first chunk if it does not yet exist.
+// Uploads one chunk of a file attached to this device, using the same resumable protocol as `PUT /v3/images/{imageId}/file`. You choose the image ID (a new random UUID) and the image record is created on the first chunk; `type` and `name` in the path set the image type and name. Because the image is attached to the device, it replaces any image of the same `type` already attached (for `partition`, only the one with the same `name`), and it is deleted when the device is deleted. The web interface uses this route, for example to replace a kernel. For your own code, `POST /v3/images` with `instanceId` followed by `PUT /v3/images/{imageId}/file` is easier to follow. Returns 200 with an empty object for each stored chunk.
 //
 object_t*
 InstancesAPI_v3PutInstanceImageUpload(apiClient_t *apiClient, char *instance, char *type, char *imageId, char *name, binary_t* body, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, char *corelliumChecksum, char *flavor, char *x_corellium_image_encoding, int *x_corellium_image_encapsulated, double *x_corellium_total_file_size, char *x_corellium_image_password)
@@ -3147,7 +3179,7 @@ InstancesAPI_v3PutInstanceImageUpload(apiClient_t *apiClient, char *instance, ch
 
     // uncomment below to debug the error response
     //if (apiClient->response_code == 200) {
-    //    printf("%s\n","Chunk accepted. The body is an empty JSON object.");
+    //    printf("%s\n","Chunk stored. The body is an empty JSON object. Send the next chunk; the image is finished when the last chunk arrives.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
@@ -3155,11 +3187,11 @@ InstancesAPI_v3PutInstanceImageUpload(apiClient_t *apiClient, char *instance, ch
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -3316,7 +3348,9 @@ end:
 
 }
 
-// Reboot an Instance
+// Restart a device
+//
+// Restarts a running device. Returns 204 once the reboot is accepted; the state becomes `rebooting` and then `on`. Poll `v3GetInstanceState` to see when it is back.
 //
 void
 InstancesAPI_v3RebootInstance(apiClient_t *apiClient, char *instanceId)
@@ -3368,11 +3402,11 @@ InstancesAPI_v3RebootInstance(apiClient_t *apiClient, char *instanceId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -3395,7 +3429,9 @@ end:
 
 }
 
-// Restore backup
+// Restore a backup onto a device
+//
+// Restores the backup attached to this device, replacing the device's data with the backup's contents. First attach the backup file by uploading it with `POST /v3/images` using `type: \"backup\"` and `instanceId` set to this device. Returns 204 once the restore has been scheduled; it runs in the background, so poll `v3GetInstanceState` until the device settles.  Supply `password` if the backup is encrypted. Fails with 404 if no backup is attached. Requires the backup-restore license feature (403 otherwise).
 //
 void
 InstancesAPI_v3RestoreBackup(apiClient_t *apiClient, char *instanceId, restore_backup_body_t *restore_backup_body)
@@ -3458,15 +3494,15 @@ InstancesAPI_v3RestoreBackup(apiClient_t *apiClient, char *instanceId, restore_b
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:
@@ -3490,9 +3526,9 @@ end:
 
 }
 
-// Rotate device to specified orientation
+// Rotate the device
 //
-// Rotate device to orientation. 1=Portrait, 2=Portrait inverted, 3=Landscape (top left), 4=Landscape (top right).
+// Turns the device to a new orientation, as if you rotated the phone in your hand; apps receive the rotation event. `orientation` is 1 = portrait, 2 = portrait upside down, 3 = landscape (top of device on the left), 4 = landscape (top of device on the right).
 //
 void
 InstancesAPI_v3RotateInstance(apiClient_t *apiClient, char *instanceId, rotate_body_t *rotate_body)
@@ -3555,11 +3591,11 @@ InstancesAPI_v3RotateInstance(apiClient_t *apiClient, char *instanceId, rotate_b
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -3587,7 +3623,9 @@ end:
 
 }
 
-// Set Instance GPIOs
+// Press board buttons or flip switches
+//
+// Sets the state of the simulated buttons and switches (GPIO pins) on an IoT or embedded board model, as if you pressed a button or flipped a switch on real hardware; your firmware sees the change. Send the full bank layout you got from `v3GetInstanceGpios`, with the bits you want changed. Returns the state after the change. The device must be running.
 //
 gpios_state_t*
 InstancesAPI_v3SetInstanceGpios(apiClient_t *apiClient, char *instanceId, gpios_state_t *gpios_state)
@@ -3650,11 +3688,11 @@ InstancesAPI_v3SetInstanceGpios(apiClient_t *apiClient, char *instanceId, gpios_
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -3696,7 +3734,9 @@ end:
 
 }
 
-// Update Instance Peripherals
+// Change simulated sensors
+//
+// Changes what the device's simulated sensors report to apps, for example to fake a GPS location, a low battery, or a tilt. Send only the fields you want to change. The new values are saved with the device and then the current readings are returned.  A field is applied only if its feature is enabled for the device (motion, environment, location, battery, biometric bypass); values for disabled features are ignored silently, so check the response. `biometricPass: 1` makes fingerprint and face checks succeed.
 //
 peripherals_data_t*
 InstancesAPI_v3SetInstancePeripherals(apiClient_t *apiClient, char *instanceId, peripherals_data_t *peripherals_data)
@@ -3759,11 +3799,11 @@ InstancesAPI_v3SetInstancePeripherals(apiClient_t *apiClient, char *instanceId, 
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -3805,7 +3845,9 @@ end:
 
 }
 
-// Start an Instance
+// Turn a device on
+//
+// Turns on a device that is `off`. Returns 204 as soon as the start is accepted; the device then boots in the background. Poll `v3GetInstanceState` until it is `on`. Returns 409 if the device is already on.  **Starting paused (`paused: true`).** The device is powered on but no code runs until you call `v3UnpauseInstance` or resume it from a debugger. This is the standard way to debug a device from its very first instruction, for example custom or IoT firmware, or code that runs early in boot: 1. Upload your firmware and create the device (or stop an existing one). 2. `v3StartInstance` with `{ \"paused\": true }`. 3. Connect your debugger (for example GDB) to the device's debug port, shown in the device's connection details. 4. Load symbols from your firmware or kernel file, set breakpoints, or load code into memory. 5. Continue execution from the debugger (`c` in GDB).  Once a debugger is attached, pause and resume from the debugger rather than with `v3PauseInstance` / `v3UnpauseInstance`: GDB expects to control pausing itself, and pausing through the API can confuse its session.  **Network monitoring (`sockCap: true`).** Starts the device with process network monitoring enabled, so network activity can be attributed to the processes that made it.
 //
 void
 InstancesAPI_v3StartInstance(apiClient_t *apiClient, char *instanceId, start_instance_body_t *start_instance_body)
@@ -3868,11 +3910,11 @@ InstancesAPI_v3StartInstance(apiClient_t *apiClient, char *instanceId, start_ins
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -3904,7 +3946,9 @@ end:
 
 }
 
-// Start Enhanced Network Monitor on an instance.
+// Start Enhanced Network Monitor
+//
+// Starts Enhanced Network Monitor on this device. It captures raw network packets, and every filter in the body is optional: limit the capture to certain ports, protocols, hosts, or process names to keep it small. Download it with `v3DownloadNetdumpPcap`. Requires the Enhanced Network Monitor feature (403 otherwise).
 //
 void
 InstancesAPI_v3StartNetdump(apiClient_t *apiClient, char *instanceId, enable_netdump_body_t *enable_netdump_body)
@@ -3967,15 +4011,15 @@ InstancesAPI_v3StartNetdump(apiClient_t *apiClient, char *instanceId, enable_net
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:
@@ -3999,7 +4043,9 @@ end:
 
 }
 
-// Start Network Monitor on an instance.
+// Start Network Monitor
+//
+// Starts Network Monitor on this device. It records the device's network traffic, including HTTPS traffic decrypted by intercepting its encryption, so you can see what apps send and receive. Download the capture as a pcap file (open it with Wireshark) with `v3DownloadNetworkMonitorPcap`. Apps that pin their certificates may refuse the intercepted connections. Requires the Network Monitor license feature (403 otherwise).
 //
 void
 InstancesAPI_v3StartNetworkMonitor(apiClient_t *apiClient, char *instanceId, enable_sslsplit_body_t *enable_sslsplit_body)
@@ -4062,15 +4108,15 @@ InstancesAPI_v3StartNetworkMonitor(apiClient_t *apiClient, char *instanceId, ena
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:
@@ -4094,7 +4140,9 @@ end:
 
 }
 
-// Stop an Instance
+// Turn a device off
+//
+// Turns a running device off. By default (`soft: true`) the operating system is asked to shut down cleanly. Send `{ \"soft\": false }` to force an immediate stop instead; use it when a clean shutdown does not finish. Returns 204 once the stop is accepted; poll `v3GetInstanceState` until it is `off`. Returns 409 if the device is already off. A stopped device keeps its storage and can be turned on again with `v3StartInstance`.
 //
 void
 InstancesAPI_v3StopInstance(apiClient_t *apiClient, char *instanceId, stop_instance_body_t *stop_instance_body)
@@ -4157,11 +4205,11 @@ InstancesAPI_v3StopInstance(apiClient_t *apiClient, char *instanceId, stop_insta
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -4193,7 +4241,9 @@ end:
 
 }
 
-// Stop Enhanced Network Monitor on an instance.
+// Stop Enhanced Network Monitor
+//
+// Stops Enhanced Network Monitor on this device. The capture so far can still be downloaded with `v3DownloadNetdumpPcap`.
 //
 void
 InstancesAPI_v3StopNetdump(apiClient_t *apiClient, char *instanceId)
@@ -4245,15 +4295,15 @@ InstancesAPI_v3StopNetdump(apiClient_t *apiClient, char *instanceId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:
@@ -4272,7 +4322,9 @@ end:
 
 }
 
-// Stop Network Monitor on an instance.
+// Stop Network Monitor
+//
+// Stops Network Monitor on this device. The capture so far can still be downloaded with `v3DownloadNetworkMonitorPcap`. Requires the Network Monitor license feature.
 //
 void
 InstancesAPI_v3StopNetworkMonitor(apiClient_t *apiClient, char *instanceId)
@@ -4324,15 +4376,15 @@ InstancesAPI_v3StopNetworkMonitor(apiClient_t *apiClient, char *instanceId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:
@@ -4351,7 +4403,9 @@ end:
 
 }
 
-// Unpause an Instance
+// Resume a paused device
+//
+// Resumes a device that was paused with `v3PauseInstance`, or started with `paused: true`. It continues from exactly where it stopped.
 //
 void
 InstancesAPI_v3UnpauseInstance(apiClient_t *apiClient, char *instanceId)
@@ -4403,11 +4457,11 @@ InstancesAPI_v3UnpauseInstance(apiClient_t *apiClient, char *instanceId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -4430,7 +4484,9 @@ end:
 
 }
 
-// Upgrade iOS version
+// Upgrade the iOS version
+//
+// Upgrades an iOS device to a newer iOS version while keeping it as the same device. Returns 202 with `state: \"updating\"` once accepted; the upgrade runs in the background, so poll `v3GetInstanceState` until it is `on`. Pick the version from `GET /v3/models/{model}/software`. Use `osVersion`; the old `os` field is rejected. Requires the OS update license feature (403 otherwise).
 //
 instance_upgrade_response_t*
 InstancesAPI_v3UpgradeInstance(apiClient_t *apiClient, char *instanceId, instance_upgrade_body_t *instance_upgrade_body)
@@ -4493,15 +4549,15 @@ InstancesAPI_v3UpgradeInstance(apiClient_t *apiClient, char *instanceId, instanc
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     instance_upgrade_response_t *elementToReturn = NULL;
@@ -4539,9 +4595,9 @@ end:
 
 }
 
-// Validate instance token
+// Check a device connection token
 //
-// Validates a connection token for the instance.
+// Checks whether a connection token issued for this device is still valid. Returns 204 if it is. This call needs no `Authorization` header; the token in the body is what is checked.
 //
 void
 InstancesAPI_v3ValidateInstanceToken(apiClient_t *apiClient, char *instanceId, token_validate_body_t *token_validate_body)
@@ -4604,15 +4660,15 @@ InstancesAPI_v3ValidateInstanceToken(apiClient_t *apiClient, char *instanceId, t
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {

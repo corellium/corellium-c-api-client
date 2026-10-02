@@ -1,7 +1,7 @@
 /*
  * gpios_state.h
  *
- * Current state of GPIOs.
+ * State of the simulated LEDs, buttons and switches on an IoT or embedded board model. Each group (&#x60;led&#x60;, &#x60;button&#x60;, &#x60;switch&#x60;) has one or more banks, and each bank is a list of bits: 1 is on (pressed, lit), 0 is off. Only board models that wire these up report them; phones (iOS and Android) do not.
  */
 
 #ifndef _gpios_state_H_

@@ -24,13 +24,13 @@ api_error_t* instantiate_api_error(int include_optional) {
     api_error = api_error_create(
       "Access denied",
       "PermissionDenied",
-      "connect ECONNREFUSED 10.0.10.5:443"
+      "connect ECONNREFUSED 192.0.2.10:443"
     );
   } else {
     api_error = api_error_create(
       "Access denied",
       "PermissionDenied",
-      "connect ECONNREFUSED 10.0.10.5:443"
+      "connect ECONNREFUSED 192.0.2.10:443"
     );
   }
 

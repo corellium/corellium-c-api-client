@@ -21,7 +21,7 @@ Method | HTTP request | Description
 ```c
 // Create an image
 //
-// Creates a new Image record, optionally uploading file contents in the same request.   Two content types are supported:   - `application/json`: creates metadata only. The caller subsequently uploads the file via     [`uploadImageData`](#tag/images/POST/v3/images/{imageId}). Returns 201.   - `multipart/form-data`: creates metadata and uploads the file in a single request. Returns 200.   The `fullPath` field references a file already present on the server's local filesystem and bypasses the upload step entirely; this is intended for cluster-internal use.   For firmware images, this is step 1 of the install workflow — see [`installFirmware`](#tag/images/POST/v3/images/install-firmware) or [`installFirmwareAssets`](#tag/images/POST/v3/images/install-firmware-assets).
+// Creates an image: a stored file such as firmware, a kernel, a partition, or a MATRIX wordlist. Every upload starts here. The response is the new image, including its `id`.  **Choosing how to upload the file:**   - **Two steps (recommended).** Send this request as `application/json` without a file; it returns **201**. Then upload the contents with [`uploadImageData`](#tag/images/POST/v3/images/{imageId}) (one request) or [`uploadImageChunk`](#tag/images/PUT/v3/images/{imageId}/file) (in pieces, resumable, best for large files). This is the only way to have the server verify the file against a `corelliumChecksum`.   - **One step.** Send this request as `multipart/form-data` with the file in a `file` part; it returns **200** once the file is stored. Put the `type` field before the `file` part. Convenient for small files, but no checksum verification.  The response body is the same image in both cases; the status code (201 or 200) tells you whether the file was included.  **Where the image lives** depends on the optional IDs:   - `instanceId` set: attached to that device. Replaces the device's existing image of the same type.   - `projectId` set: stored in that project and counted against its quota.   - Neither: a domain-level image. Domain-level `fw` and `clbi` images are also offered when you create a device, in addition to installed firmware. See the `projectId` and `instanceId` fields for side effects.  Other upload endpoints (`PUT /v3/projects/{projectId}/image-upload/...`, `PUT /v3/instances/{instanceId}/image-upload/...`, `PUT /v3/domain/image-upload/...`) use the same chunked protocol but create the image on the first chunk instead of requiring this call. They exist mainly for the web interface; new code should use this endpoint followed by [`uploadImageChunk`](#tag/images/PUT/v3/images/{imageId}/file).  `name` is not unique; sending the same request twice creates two images. For firmware, continue with [`installFirmware`](#tag/images/POST/v3/images/install-firmware) or [`installFirmwareAssets`](#tag/images/POST/v3/images/install-firmware-assets).
 //
 image_t* ImagesAPI_v3CreateImage(apiClient_t *apiClient, create_image_body_t *create_image_body);
 ```
@@ -147,7 +147,7 @@ Name | Type | Description  | Notes
 ```c
 // Get firmware info embedded in an image
 //
-// Extracts and returns the firmware metadata embedded in an uploaded image (IPSW, COREIMG, CLBI, UFD, or extension). For an encrypted image, supply `password` to decrypt it. Set `extended` to also resolve the matching supported device model.
+// Reads the version information built into an uploaded firmware file, without installing it or creating a device. Use it to check what a file is before you install it or create a device from it: which operating-system version and build it contains, and which device models it supports.  Works on these kinds of uploaded files: an Apple iOS firmware file (IPSW), a Corellium firmware package (`.coreimg`), a Cellebrite firmware image, a Cellebrite extraction (UFD), and a Corellium extension. The image must be fully uploaded first; see [`createImage`](#tag/images/POST/v3/images).  The request body is optional:   - `password`: needed only if the file is encrypted. A wrong password returns 400.   - `extended`: set to `true` to also get chip and board details and the supported device model this firmware matches (`device`). Use the matched model's `flavor` when you create an instance.  Returns 404 if the image does not exist, or if the file contains no version information that can be read (for example, it is not firmware).
 //
 image_firmware_info_t* ImagesAPI_v3GetImageFirmwareInfo(apiClient_t *apiClient, char *imageId, get_firmware_info_body_t *get_firmware_info_body);
 ```
@@ -210,7 +210,7 @@ Name | Type | Description  | Notes
 ```c
 // Install firmware cluster-wide
 //
-// Installs an uploaded firmware image for cluster-wide use. On success the source Image is deleted from the Images store, since ownership transfers to the firmware service. Installation runs asynchronously; this endpoint returns a `taskId` that callers must poll via [`getInstallFirmwareStatus`](#tag/images/GET/v3/images/install-firmware/{taskId}).   **This is step 3 of the firmware-install workflow:**   1. [`createImage`](#tag/images/POST/v3/images) with `{ name, type: 'fw' }` → returns an `imageId`.   2. [`uploadImageData`](#tag/images/POST/v3/images/{imageId}) with the firmware file → uploads contents.   3. **`installFirmware`** with `{ imageId }` → returns a `taskId`.   4. [`getInstallFirmwareStatus`](#tag/images/GET/v3/images/install-firmware/{taskId}) → poll until `status` is `complete` or `error`.   Large firmware blobs (~10 GB) are supported; installation has a 45-minute server-side timeout.
+// Makes an uploaded `fw` image available for creating devices across the whole cluster. After it is installed, the firmware appears in `GET /v3/models/{model}/software` for the matching model and can be chosen when creating an instance.  **Workflow:**   1. [`createImage`](#tag/images/POST/v3/images) with `{ \"name\": \"...\", \"type\": \"fw\", \"encoding\": \"plain\" }` as JSON. Keep the returned `id`.   2. Upload the file with [`uploadImageData`](#tag/images/POST/v3/images/{imageId}) or, for large files, [`uploadImageChunk`](#tag/images/PUT/v3/images/{imageId}/file). Supplying `corelliumChecksum` there lets the server verify the file.   3. **`installFirmware`** with `{ \"imageId\": \"<id>\" }`. Returns a `taskId`.   4. Poll [`getInstallFirmwareStatus`](#tag/images/GET/v3/images/install-firmware/{taskId}) with the `taskId` until `status` is `complete` or `error`.  **What happens.** The server hands the file to the firmware service and returns 201 with a `taskId` as soon as the hand-off succeeds; installation continues in the background and can take a long time (up to 45 minutes for files around 10 GB). The source image is deleted from `/v3/images` at the moment of hand-off, before installation finishes. If installation then fails, upload the file again to retry.  A 400 can mean the firmware service rejected the image's checksum. Check that the file uploaded completely and, if you supplied `corelliumChecksum`, that it was correct.
 //
 install_firmware_response_t* ImagesAPI_v3InstallFirmware(apiClient_t *apiClient, install_firmware_body_t *install_firmware_body);
 ```
@@ -272,7 +272,7 @@ Name | Type | Description  | Notes
 ```c
 // List image metadata
 //
-// Returns metadata for all authenticated user images. Optionally filtered by project. File contents are not returned by this endpoint.
+// Lists the images you can see: images in your projects plus domain-level images. File contents are not included; use the download or upload endpoints for those.  Set `projectId` to list only one project's images. Results are paginated with `limit` and `offset`.  Installed firmware is not listed here: once `installFirmware` hands an image off, it disappears from this list and shows up in `GET /v3/models/{model}/software` instead.
 //
 image_list_t* ImagesAPI_v3ListImages(apiClient_t *apiClient, double *limit, double *offset, char *projectId);
 ```
@@ -281,8 +281,8 @@ image_list_t* ImagesAPI_v3ListImages(apiClient_t *apiClient, double *limit, doub
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**limit** | **double \*** | Maximum number of results to return. | [optional] [default to 100]
-**offset** | **double \*** | Number of results to skip. | [optional] [default to 0]
+**limit** | **double \*** | Most results to return in one page. Whole number from 1 to 1000; defaults to 100. A value outside that range is rejected with 400. | [optional] [default to 100]
+**offset** | **double \*** | How many results to skip before this page starts; defaults to 0. To get the next page, add &#x60;limit&#x60; to the previous &#x60;offset&#x60;. | [optional] [default to 0]
 **projectId** | **char \*** | Filter results to a single project. | [optional] 
 
 ### Return type
@@ -347,7 +347,7 @@ void
 ```c
 // Upload image file contents
 //
-// Uploads file contents into an Image previously created via [`createImage`](#tag/images/POST/v3/images). The image's owning project must have sufficient remaining quota. Accepts multipart/form-data; the optional `corelliumChecksum` query parameter, when supplied, is verified against the upload.   This endpoint uploads the whole file in a single request. For large images (firmware in particular) upload the file in chunks instead — see [`uploadImageChunk`](#tag/images/PUT/v3/images/{imageId}/file).
+// Uploads the whole file for an image created with [`createImage`](#tag/images/POST/v3/images), in a single `multipart/form-data` request with the file in the `file` part. Returns the updated image, whose `size` and checksums are now filled in.  Supply `corelliumChecksum` to have the server verify the file: if the uploaded contents do not match, the upload is rejected with 400 and the image is removed. Compute it with the same algorithm and block size you pass in the value (`algorithm$blockSize$hash`).  The upload counts against the owning project's storage quota. If the connection drops, the whole file must be sent again. For large images (firmware in particular) use [`uploadImageChunk`](#tag/images/PUT/v3/images/{imageId}/file), which can resume.
 //
 image_t* ImagesAPI_v3UploadImageData(apiClient_t *apiClient, char *imageId, binary_t* file, char *corelliumChecksum);
 ```
@@ -358,7 +358,7 @@ Name | Type | Description  | Notes
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **imageId** | **char \*** |  | 
 **file** | **binary_t*** |  | 
-**corelliumChecksum** | **char \*** | Expected Corellium hash checksum of the upload. | [optional] 
+**corelliumChecksum** | **char \*** | Optional. Expected Corellium checksum of the whole file, formatted &#x60;algorithm$blockSize$hash&#x60; (for example &#x60;sha256$1048576$&lt;hex&gt;&#x60;). When supplied, the upload is rejected and the image removed if the file does not match. | [optional] 
 
 ### Return type
 

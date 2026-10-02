@@ -265,14 +265,14 @@ Category | Method | HTTP request | Description
 *ClusterSnapshotsAPI* | [**ClusterSnapshotsAPI_v1DeleteClusterSnapshot**](docs/ClusterSnapshotsAPI.md#ClusterSnapshotsAPI_v1DeleteClusterSnapshot) | **DELETE** /v1/cluster/snapshots/{snapshotId} | Delete a Cluster Snapshot
 *ClusterSnapshotsAPI* | [**ClusterSnapshotsAPI_v1GetClusterSnapshot**](docs/ClusterSnapshotsAPI.md#ClusterSnapshotsAPI_v1GetClusterSnapshot) | **GET** /v1/cluster/snapshots/{snapshotId} | Get Cluster Snapshot
 *ClusterSnapshotsAPI* | [**ClusterSnapshotsAPI_v1GetClusterSnapshots**](docs/ClusterSnapshotsAPI.md#ClusterSnapshotsAPI_v1GetClusterSnapshots) | **GET** /v1/cluster/snapshots | Get Cluster Snapshots
-*ConfigAPI* | [**ConfigAPI_v3GetConfig**](docs/ConfigAPI.md#ConfigAPI_v3GetConfig) | **GET** /v3/config | Get all configs
-*ConfigAPI* | [**ConfigAPI_v3GetVersion**](docs/ConfigAPI.md#ConfigAPI_v3GetVersion) | **GET** /v3/version | Get Deployment Version
+*ConfigAPI* | [**ConfigAPI_v3GetConfig**](docs/ConfigAPI.md#ConfigAPI_v3GetConfig) | **GET** /v3/config | Get deployment configuration
+*ConfigAPI* | [**ConfigAPI_v3GetVersion**](docs/ConfigAPI.md#ConfigAPI_v3GetVersion) | **GET** /v3/version | Get the platform version
 *ConfigV1API* | [**ConfigV1API_v1GetConfig**](docs/ConfigV1API.md#ConfigV1API_v1GetConfig) | **GET** /v1/config | Get all configs
-*CoreTraceAPI* | [**CoreTraceAPI_v3ClearCoreTrace**](docs/CoreTraceAPI.md#CoreTraceAPI_v3ClearCoreTrace) | **DELETE** /v3/instances/{instanceId}/strace | Clear CoreTrace logs
-*CoreTraceAPI* | [**CoreTraceAPI_v3ListThreads**](docs/CoreTraceAPI.md#CoreTraceAPI_v3ListThreads) | **GET** /v3/instances/{instanceId}/strace/thread-list | Get Running Threads (CoreTrace)
-*CoreTraceAPI* | [**CoreTraceAPI_v3StartCoreTrace**](docs/CoreTraceAPI.md#CoreTraceAPI_v3StartCoreTrace) | **POST** /v3/instances/{instanceId}/strace/enable | Start CoreTrace on an instance
-*CoreTraceAPI* | [**CoreTraceAPI_v3StopCoreTrace**](docs/CoreTraceAPI.md#CoreTraceAPI_v3StopCoreTrace) | **POST** /v3/instances/{instanceId}/strace/disable | Stop CoreTrace on an instance.
-*CoreTraceAPI* | [**CoreTraceAPI_v3StracePreauthorize**](docs/CoreTraceAPI.md#CoreTraceAPI_v3StracePreauthorize) | **GET** /v3/instances/{instanceId}/strace-authorize | Pre-authorize a strace download
+*CoreTraceAPI* | [**CoreTraceAPI_v3ClearCoreTrace**](docs/CoreTraceAPI.md#CoreTraceAPI_v3ClearCoreTrace) | **DELETE** /v3/instances/{instanceId}/strace | Clear CoreTrace output
+*CoreTraceAPI* | [**CoreTraceAPI_v3ListThreads**](docs/CoreTraceAPI.md#CoreTraceAPI_v3ListThreads) | **GET** /v3/instances/{instanceId}/strace/thread-list | List running processes (CoreTrace)
+*CoreTraceAPI* | [**CoreTraceAPI_v3StartCoreTrace**](docs/CoreTraceAPI.md#CoreTraceAPI_v3StartCoreTrace) | **POST** /v3/instances/{instanceId}/strace/enable | Start CoreTrace
+*CoreTraceAPI* | [**CoreTraceAPI_v3StopCoreTrace**](docs/CoreTraceAPI.md#CoreTraceAPI_v3StopCoreTrace) | **POST** /v3/instances/{instanceId}/strace/disable | Stop CoreTrace
+*CoreTraceAPI* | [**CoreTraceAPI_v3StracePreauthorize**](docs/CoreTraceAPI.md#CoreTraceAPI_v3StracePreauthorize) | **GET** /v3/instances/{instanceId}/strace-authorize | Get a CoreTrace download token
 *CoreTraceV1API* | [**CoreTraceV1API_v1ClearCoreTrace**](docs/CoreTraceV1API.md#CoreTraceV1API_v1ClearCoreTrace) | **DELETE** /v1/instances/{instanceId}/strace | Clear CoreTrace logs
 *CoreTraceV1API* | [**CoreTraceV1API_v1ListThreads**](docs/CoreTraceV1API.md#CoreTraceV1API_v1ListThreads) | **GET** /v1/instances/{instanceId}/strace/thread-list | Get Running Threads (CoreTrace)
 *CoreTraceV1API* | [**CoreTraceV1API_v1StartCoreTrace**](docs/CoreTraceV1API.md#CoreTraceV1API_v1StartCoreTrace) | **POST** /v1/instances/{instanceId}/strace/enable | Start CoreTrace on an instance
@@ -323,14 +323,14 @@ Category | Method | HTTP request | Description
 *FirmwareServiceAPI* | [**FirmwareServiceAPI_v3ListFirmwareDevices**](docs/FirmwareServiceAPI.md#FirmwareServiceAPI_v3ListFirmwareDevices) | **GET** /v3/cluster/firmware-service/devices | List firmware service devices
 *FirmwareServiceAPI* | [**FirmwareServiceAPI_v3ListFirmwares**](docs/FirmwareServiceAPI.md#FirmwareServiceAPI_v3ListFirmwares) | **GET** /v3/cluster/firmware-service/firmwares | List firmwares
 *FirmwareServiceAPI* | [**FirmwareServiceAPI_v3PatchFirmwareServiceConfig**](docs/FirmwareServiceAPI.md#FirmwareServiceAPI_v3PatchFirmwareServiceConfig) | **PATCH** /v3/cluster/firmware-service/config | Update firmware service configuration
-*FlavorsAPI* | [**FlavorsAPI_v3GetFrame**](docs/FlavorsAPI.md#FlavorsAPI_v3GetFrame) | **GET** /v3/flavors/{flavorId} | Get frame for flavor
-*FlavorsAPI* | [**FlavorsAPI_v3GetFrameImage**](docs/FlavorsAPI.md#FlavorsAPI_v3GetFrameImage) | **GET** /v3/flavors/{flavorId}/image | Get frame image for flavor
-*FlavorsAPI* | [**FlavorsAPI_v3GetProductImage**](docs/FlavorsAPI.md#FlavorsAPI_v3GetProductImage) | **GET** /v3/flavors/{flavorId}/productimage | Get product image for flavor
-*HyperTraceAPI* | [**HyperTraceAPI_v3BtracePreauthorize**](docs/HyperTraceAPI.md#HyperTraceAPI_v3BtracePreauthorize) | **GET** /v3/instances/{instanceId}/btrace-authorize | Pre-authorize a btrace download
-*HyperTraceAPI* | [**HyperTraceAPI_v3ClearHyperTrace**](docs/HyperTraceAPI.md#HyperTraceAPI_v3ClearHyperTrace) | **DELETE** /v3/instances/{instanceId}/btrace | Clear HyperTrace logs
-*HyperTraceAPI* | [**HyperTraceAPI_v3GetInstanceKcrange**](docs/HyperTraceAPI.md#HyperTraceAPI_v3GetInstanceKcrange) | **GET** /v3/instances/{instanceId}/btrace-kcrange | Get Kernel extension ranges
-*HyperTraceAPI* | [**HyperTraceAPI_v3StartHyperTrace**](docs/HyperTraceAPI.md#HyperTraceAPI_v3StartHyperTrace) | **POST** /v3/instances/{instanceId}/btrace/enable | Start HyperTrace on an instance
-*HyperTraceAPI* | [**HyperTraceAPI_v3StopHyperTrace**](docs/HyperTraceAPI.md#HyperTraceAPI_v3StopHyperTrace) | **POST** /v3/instances/{instanceId}/btrace/disable | Stop HyperTrace on an instance.
+*FlavorsAPI* | [**FlavorsAPI_v3GetFrame**](docs/FlavorsAPI.md#FlavorsAPI_v3GetFrame) | **GET** /v3/flavors/{flavorId} | Get the device frame layout for a model
+*FlavorsAPI* | [**FlavorsAPI_v3GetFrameImage**](docs/FlavorsAPI.md#FlavorsAPI_v3GetFrameImage) | **GET** /v3/flavors/{flavorId}/image | Get the device frame image for a model
+*FlavorsAPI* | [**FlavorsAPI_v3GetProductImage**](docs/FlavorsAPI.md#FlavorsAPI_v3GetProductImage) | **GET** /v3/flavors/{flavorId}/productimage | Get the product image for a model
+*HyperTraceAPI* | [**HyperTraceAPI_v3BtracePreauthorize**](docs/HyperTraceAPI.md#HyperTraceAPI_v3BtracePreauthorize) | **GET** /v3/instances/{instanceId}/btrace-authorize | Get a HyperTrace download token
+*HyperTraceAPI* | [**HyperTraceAPI_v3ClearHyperTrace**](docs/HyperTraceAPI.md#HyperTraceAPI_v3ClearHyperTrace) | **DELETE** /v3/instances/{instanceId}/btrace | Clear HyperTrace output
+*HyperTraceAPI* | [**HyperTraceAPI_v3GetInstanceKcrange**](docs/HyperTraceAPI.md#HyperTraceAPI_v3GetInstanceKcrange) | **GET** /v3/instances/{instanceId}/btrace-kcrange | List kernel extension address ranges
+*HyperTraceAPI* | [**HyperTraceAPI_v3StartHyperTrace**](docs/HyperTraceAPI.md#HyperTraceAPI_v3StartHyperTrace) | **POST** /v3/instances/{instanceId}/btrace/enable | Start HyperTrace
+*HyperTraceAPI* | [**HyperTraceAPI_v3StopHyperTrace**](docs/HyperTraceAPI.md#HyperTraceAPI_v3StopHyperTrace) | **POST** /v3/instances/{instanceId}/btrace/disable | Stop HyperTrace
 *HyperTraceV1API* | [**HyperTraceV1API_v1BtracePreauthorize**](docs/HyperTraceV1API.md#HyperTraceV1API_v1BtracePreauthorize) | **GET** /v1/instances/{instanceId}/btrace-authorize | Pre-authorize an btrace download
 *HyperTraceV1API* | [**HyperTraceV1API_v1ClearHyperTrace**](docs/HyperTraceV1API.md#HyperTraceV1API_v1ClearHyperTrace) | **DELETE** /v1/instances/{instanceId}/btrace | Clear HyperTrace logs
 *HyperTraceV1API* | [**HyperTraceV1API_v1Kcrange**](docs/HyperTraceV1API.md#HyperTraceV1API_v1Kcrange) | **GET** /v1/instances/{instanceId}/btrace-kcrange | Get Kernel extension ranges
@@ -338,10 +338,10 @@ Category | Method | HTTP request | Description
 *HyperTraceV1API* | [**HyperTraceV1API_v1StopHyperTrace**](docs/HyperTraceV1API.md#HyperTraceV1API_v1StopHyperTrace) | **POST** /v1/instances/{instanceId}/btrace/disable | Stop HyperTrace on an instance.
 *HypertuneAPI* | [**HypertuneAPI_v3HypertuneHash**](docs/HypertuneAPI.md#HypertuneAPI_v3HypertuneHash) | **GET** /v3/hypertune/hash | Get Hypertune state hash
 *HypertuneAPI* | [**HypertuneAPI_v3HypertuneInit**](docs/HypertuneAPI.md#HypertuneAPI_v3HypertuneInit) | **GET** /v3/hypertune/init | Get Hypertune initialization data
-*HypervisorHooksAPI* | [**HypervisorHooksAPI_v3ClearHyperTraceHooks**](docs/HypervisorHooksAPI.md#HypervisorHooksAPI_v3ClearHyperTraceHooks) | **POST** /v3/instances/{instanceId}/hooks/clear | Clear Hooks on an instance
+*HypervisorHooksAPI* | [**HypervisorHooksAPI_v3ClearHyperTraceHooks**](docs/HypervisorHooksAPI.md#HypervisorHooksAPI_v3ClearHyperTraceHooks) | **POST** /v3/instances/{instanceId}/hooks/clear | Stop hypervisor hooks
 *HypervisorHooksAPI* | [**HypervisorHooksAPI_v3CreateHook**](docs/HypervisorHooksAPI.md#HypervisorHooksAPI_v3CreateHook) | **POST** /v3/instances/{instanceId}/hooks | Create a hypervisor hook for an instance
 *HypervisorHooksAPI* | [**HypervisorHooksAPI_v3DeleteHook**](docs/HypervisorHooksAPI.md#HypervisorHooksAPI_v3DeleteHook) | **DELETE** /v3/hooks/{hookId} | Delete a hypervisor hook
-*HypervisorHooksAPI* | [**HypervisorHooksAPI_v3ExecuteHyperTraceHooks**](docs/HypervisorHooksAPI.md#HypervisorHooksAPI_v3ExecuteHyperTraceHooks) | **POST** /v3/instances/{instanceId}/hooks/execute | Execute Hooks on an instance
+*HypervisorHooksAPI* | [**HypervisorHooksAPI_v3ExecuteHyperTraceHooks**](docs/HypervisorHooksAPI.md#HypervisorHooksAPI_v3ExecuteHyperTraceHooks) | **POST** /v3/instances/{instanceId}/hooks/execute | Run hypervisor hooks
 *HypervisorHooksAPI* | [**HypervisorHooksAPI_v3GetHook**](docs/HypervisorHooksAPI.md#HypervisorHooksAPI_v3GetHook) | **GET** /v3/hooks/{hookId} | Get a hypervisor hook by ID
 *HypervisorHooksAPI* | [**HypervisorHooksAPI_v3ListHooks**](docs/HypervisorHooksAPI.md#HypervisorHooksAPI_v3ListHooks) | **GET** /v3/instances/{instanceId}/hooks | List hypervisor hooks for an instance
 *HypervisorHooksAPI* | [**HypervisorHooksAPI_v3UpdateHook**](docs/HypervisorHooksAPI.md#HypervisorHooksAPI_v3UpdateHook) | **PUT** /v3/hooks/{hookId} | Update a hypervisor hook
@@ -366,49 +366,49 @@ Category | Method | HTTP request | Description
 *ImagesV1API* | [**ImagesV1API_v1GetImage**](docs/ImagesV1API.md#ImagesV1API_v1GetImage) | **GET** /v1/images/{imageId} | Get Image Metadata
 *ImagesV1API* | [**ImagesV1API_v1GetImages**](docs/ImagesV1API.md#ImagesV1API_v1GetImages) | **GET** /v1/images | Get all Images Metadata
 *ImagesV2API* | [**ImagesV2API_v1DeleteImage**](docs/ImagesV2API.md#ImagesV2API_v1DeleteImage) | **DELETE** /v2/images/{imageId} | Delete Image
-*InstancesAPI* | [**InstancesAPI_v3AttachInstanceInterface**](docs/InstancesAPI.md#InstancesAPI_v3AttachInstanceInterface) | **POST** /v3/instances/{instanceId}/interfaces | Attach I/O Interface
-*InstancesAPI* | [**InstancesAPI_v3ClearInstancePanics**](docs/InstancesAPI.md#InstancesAPI_v3ClearInstancePanics) | **DELETE** /v3/instances/{instanceId}/panics | Clear Panics
-*InstancesAPI* | [**InstancesAPI_v3CreateInstance**](docs/InstancesAPI.md#InstancesAPI_v3CreateInstance) | **POST** /v3/instances | Create Instance
+*InstancesAPI* | [**InstancesAPI_v3AttachInstanceInterface**](docs/InstancesAPI.md#InstancesAPI_v3AttachInstanceInterface) | **POST** /v3/instances/{instanceId}/interfaces | Connect an I/O interface
+*InstancesAPI* | [**InstancesAPI_v3ClearInstancePanics**](docs/InstancesAPI.md#InstancesAPI_v3ClearInstancePanics) | **DELETE** /v3/instances/{instanceId}/panics | Clear kernel panics
+*InstancesAPI* | [**InstancesAPI_v3CreateInstance**](docs/InstancesAPI.md#InstancesAPI_v3CreateInstance) | **POST** /v3/instances | Create a device
 *InstancesAPI* | [**InstancesAPI_v3DeleteInstance**](docs/InstancesAPI.md#InstancesAPI_v3DeleteInstance) | **DELETE** /v3/instances/{instanceId} | Remove Instance
-*InstancesAPI* | [**InstancesAPI_v3DetachInstanceInterface**](docs/InstancesAPI.md#InstancesAPI_v3DetachInstanceInterface) | **DELETE** /v3/instances/{instanceId}/interfaces/{interfaceId} | Detach I/O Interface
-*InstancesAPI* | [**InstancesAPI_v3DisableExposePort**](docs/InstancesAPI.md#InstancesAPI_v3DisableExposePort) | **POST** /v3/instances/{instanceId}/exposeport/disable | Disable an exposed port on an instance for device access.
-*InstancesAPI* | [**InstancesAPI_v3DownloadNetdumpPcap**](docs/InstancesAPI.md#InstancesAPI_v3DownloadNetdumpPcap) | **GET** /v3/instances/{instanceId}/netdump.pcap | Download a netdump pcap file
-*InstancesAPI* | [**InstancesAPI_v3DownloadNetworkMonitorPcap**](docs/InstancesAPI.md#InstancesAPI_v3DownloadNetworkMonitorPcap) | **GET** /v3/instances/{instanceId}/networkMonitor.pcap | Download a Network Monitor pcap file
-*InstancesAPI* | [**InstancesAPI_v3EnableExposePort**](docs/InstancesAPI.md#InstancesAPI_v3EnableExposePort) | **POST** /v3/instances/{instanceId}/exposeport/enable | Enable an exposed port on an instance for device access.
-*InstancesAPI* | [**InstancesAPI_v3GetInstance**](docs/InstancesAPI.md#InstancesAPI_v3GetInstance) | **GET** /v3/instances/{instanceId} | Get Instance
+*InstancesAPI* | [**InstancesAPI_v3DetachInstanceInterface**](docs/InstancesAPI.md#InstancesAPI_v3DetachInstanceInterface) | **DELETE** /v3/instances/{instanceId}/interfaces/{interfaceId} | Disconnect an I/O interface
+*InstancesAPI* | [**InstancesAPI_v3DisableExposePort**](docs/InstancesAPI.md#InstancesAPI_v3DisableExposePort) | **POST** /v3/instances/{instanceId}/exposeport/disable | Stop exposing the device port
+*InstancesAPI* | [**InstancesAPI_v3DownloadNetdumpPcap**](docs/InstancesAPI.md#InstancesAPI_v3DownloadNetdumpPcap) | **GET** /v3/instances/{instanceId}/netdump.pcap | Download the Enhanced Network Monitor capture
+*InstancesAPI* | [**InstancesAPI_v3DownloadNetworkMonitorPcap**](docs/InstancesAPI.md#InstancesAPI_v3DownloadNetworkMonitorPcap) | **GET** /v3/instances/{instanceId}/networkMonitor.pcap | Download the Network Monitor capture
+*InstancesAPI* | [**InstancesAPI_v3EnableExposePort**](docs/InstancesAPI.md#InstancesAPI_v3EnableExposePort) | **POST** /v3/instances/{instanceId}/exposeport/enable | Expose the device port
+*InstancesAPI* | [**InstancesAPI_v3GetInstance**](docs/InstancesAPI.md#InstancesAPI_v3GetInstance) | **GET** /v3/instances/{instanceId} | Get a device
 *InstancesAPI* | [**InstancesAPI_v3GetInstanceConsole**](docs/InstancesAPI.md#InstancesAPI_v3GetInstanceConsole) | **GET** /v3/instances/{instanceId}/console | Get console websocket URL
-*InstancesAPI* | [**InstancesAPI_v3GetInstanceConsoleLog**](docs/InstancesAPI.md#InstancesAPI_v3GetInstanceConsoleLog) | **GET** /v3/instances/{instanceId}/consoleLog | Get Console Log
-*InstancesAPI* | [**InstancesAPI_v3GetInstanceGpios**](docs/InstancesAPI.md#InstancesAPI_v3GetInstanceGpios) | **GET** /v3/instances/{instanceId}/gpios | Get Instance GPIOs
+*InstancesAPI* | [**InstancesAPI_v3GetInstanceConsoleLog**](docs/InstancesAPI.md#InstancesAPI_v3GetInstanceConsoleLog) | **GET** /v3/instances/{instanceId}/consoleLog | Read the console log
+*InstancesAPI* | [**InstancesAPI_v3GetInstanceGpios**](docs/InstancesAPI.md#InstancesAPI_v3GetInstanceGpios) | **GET** /v3/instances/{instanceId}/gpios | Read board LEDs, buttons and switches
 *InstancesAPI* | [**InstancesAPI_v3GetInstanceImageUpload**](docs/InstancesAPI.md#InstancesAPI_v3GetInstanceImageUpload) | **GET** /v3/instances/{instance}/image-upload/{type}/{imageId}/{name} | Get image upload status
-*InstancesAPI* | [**InstancesAPI_v3GetInstancePanics**](docs/InstancesAPI.md#InstancesAPI_v3GetInstancePanics) | **GET** /v3/instances/{instanceId}/panics | Get Panics
-*InstancesAPI* | [**InstancesAPI_v3GetInstancePeripherals**](docs/InstancesAPI.md#InstancesAPI_v3GetInstancePeripherals) | **GET** /v3/instances/{instanceId}/peripherals | Get Instance Peripherals
-*InstancesAPI* | [**InstancesAPI_v3GetInstanceQuickConnectCommand**](docs/InstancesAPI.md#InstancesAPI_v3GetInstanceQuickConnectCommand) | **GET** /v3/instances/{instanceId}/quickConnectCommand | Recommended SSH Command for Quick Connect
-*InstancesAPI* | [**InstancesAPI_v3GetInstanceScreenshot**](docs/InstancesAPI.md#InstancesAPI_v3GetInstanceScreenshot) | **GET** /v3/instances/{instanceId}/screenshot.{format} | Get Instance Screenshot
-*InstancesAPI* | [**InstancesAPI_v3GetInstanceState**](docs/InstancesAPI.md#InstancesAPI_v3GetInstanceState) | **GET** /v3/instances/{instanceId}/state | Get state of Instance
-*InstancesAPI* | [**InstancesAPI_v3InjectMessage**](docs/InstancesAPI.md#InstancesAPI_v3InjectMessage) | **POST** /v3/instances/{instanceId}/message | Inject a message into an iOS VM
-*InstancesAPI* | [**InstancesAPI_v3KernelPreauthorize**](docs/InstancesAPI.md#InstancesAPI_v3KernelPreauthorize) | **GET** /v3/instances/{instanceId}/kernel-authorize | Pre-authorize a kernel download
+*InstancesAPI* | [**InstancesAPI_v3GetInstancePanics**](docs/InstancesAPI.md#InstancesAPI_v3GetInstancePanics) | **GET** /v3/instances/{instanceId}/panics | List kernel panics
+*InstancesAPI* | [**InstancesAPI_v3GetInstancePeripherals**](docs/InstancesAPI.md#InstancesAPI_v3GetInstancePeripherals) | **GET** /v3/instances/{instanceId}/peripherals | Read simulated sensors
+*InstancesAPI* | [**InstancesAPI_v3GetInstanceQuickConnectCommand**](docs/InstancesAPI.md#InstancesAPI_v3GetInstanceQuickConnectCommand) | **GET** /v3/instances/{instanceId}/quickConnectCommand | Get the SSH quick-connect command
+*InstancesAPI* | [**InstancesAPI_v3GetInstanceScreenshot**](docs/InstancesAPI.md#InstancesAPI_v3GetInstanceScreenshot) | **GET** /v3/instances/{instanceId}/screenshot.{format} | Take a screenshot
+*InstancesAPI* | [**InstancesAPI_v3GetInstanceState**](docs/InstancesAPI.md#InstancesAPI_v3GetInstanceState) | **GET** /v3/instances/{instanceId}/state | Get a device's state
+*InstancesAPI* | [**InstancesAPI_v3InjectMessage**](docs/InstancesAPI.md#InstancesAPI_v3InjectMessage) | **POST** /v3/instances/{instanceId}/message | Send an SMS message to an iOS device
+*InstancesAPI* | [**InstancesAPI_v3KernelPreauthorize**](docs/InstancesAPI.md#InstancesAPI_v3KernelPreauthorize) | **GET** /v3/instances/{instanceId}/kernel-authorize | Get a kernel download token
 *InstancesAPI* | [**InstancesAPI_v3ListInstances**](docs/InstancesAPI.md#InstancesAPI_v3ListInstances) | **GET** /v3/instances | List Instances
-*InstancesAPI* | [**InstancesAPI_v3MediaPlay**](docs/InstancesAPI.md#InstancesAPI_v3MediaPlay) | **POST** /v3/instances/{instanceId}/media/play | Start playing media
+*InstancesAPI* | [**InstancesAPI_v3MediaPlay**](docs/InstancesAPI.md#InstancesAPI_v3MediaPlay) | **POST** /v3/instances/{instanceId}/media/play | Play a video or audio file into the device
 *InstancesAPI* | [**InstancesAPI_v3MediaStop**](docs/InstancesAPI.md#InstancesAPI_v3MediaStop) | **POST** /v3/instances/{instanceId}/media/stop | Stop playing media
-*InstancesAPI* | [**InstancesAPI_v3PatchInstance**](docs/InstancesAPI.md#InstancesAPI_v3PatchInstance) | **PATCH** /v3/instances/{instanceId} | Update Instance
+*InstancesAPI* | [**InstancesAPI_v3PatchInstance**](docs/InstancesAPI.md#InstancesAPI_v3PatchInstance) | **PATCH** /v3/instances/{instanceId} | Change device settings
 *InstancesAPI* | [**InstancesAPI_v3PatchInstanceReadOnly**](docs/InstancesAPI.md#InstancesAPI_v3PatchInstanceReadOnly) | **PATCH** /v3/instances/{instanceId}/read-only | Update Instance Read Only
-*InstancesAPI* | [**InstancesAPI_v3PauseInstance**](docs/InstancesAPI.md#InstancesAPI_v3PauseInstance) | **POST** /v3/instances/{instanceId}/pause | Pause an Instance
+*InstancesAPI* | [**InstancesAPI_v3PauseInstance**](docs/InstancesAPI.md#InstancesAPI_v3PauseInstance) | **POST** /v3/instances/{instanceId}/pause | Pause a device
 *InstancesAPI* | [**InstancesAPI_v3PostInstanceInput**](docs/InstancesAPI.md#InstancesAPI_v3PostInstanceInput) | **POST** /v3/instances/{instanceId}/input | Provide Instance Input
 *InstancesAPI* | [**InstancesAPI_v3PutInstanceImageUpload**](docs/InstancesAPI.md#InstancesAPI_v3PutInstanceImageUpload) | **PUT** /v3/instances/{instance}/image-upload/{type}/{imageId}/{name} | Upload image chunk
-*InstancesAPI* | [**InstancesAPI_v3RebootInstance**](docs/InstancesAPI.md#InstancesAPI_v3RebootInstance) | **POST** /v3/instances/{instanceId}/reboot | Reboot an Instance
-*InstancesAPI* | [**InstancesAPI_v3RestoreBackup**](docs/InstancesAPI.md#InstancesAPI_v3RestoreBackup) | **POST** /v3/instances/{instanceId}/restoreBackup | Restore backup
-*InstancesAPI* | [**InstancesAPI_v3RotateInstance**](docs/InstancesAPI.md#InstancesAPI_v3RotateInstance) | **POST** /v3/instances/{instanceId}/rotate | Rotate device to specified orientation
-*InstancesAPI* | [**InstancesAPI_v3SetInstanceGpios**](docs/InstancesAPI.md#InstancesAPI_v3SetInstanceGpios) | **PUT** /v3/instances/{instanceId}/gpios | Set Instance GPIOs
-*InstancesAPI* | [**InstancesAPI_v3SetInstancePeripherals**](docs/InstancesAPI.md#InstancesAPI_v3SetInstancePeripherals) | **PUT** /v3/instances/{instanceId}/peripherals | Update Instance Peripherals
-*InstancesAPI* | [**InstancesAPI_v3StartInstance**](docs/InstancesAPI.md#InstancesAPI_v3StartInstance) | **POST** /v3/instances/{instanceId}/start | Start an Instance
-*InstancesAPI* | [**InstancesAPI_v3StartNetdump**](docs/InstancesAPI.md#InstancesAPI_v3StartNetdump) | **POST** /v3/instances/{instanceId}/netdump/enable | Start Enhanced Network Monitor on an instance.
-*InstancesAPI* | [**InstancesAPI_v3StartNetworkMonitor**](docs/InstancesAPI.md#InstancesAPI_v3StartNetworkMonitor) | **POST** /v3/instances/{instanceId}/sslsplit/enable | Start Network Monitor on an instance.
-*InstancesAPI* | [**InstancesAPI_v3StopInstance**](docs/InstancesAPI.md#InstancesAPI_v3StopInstance) | **POST** /v3/instances/{instanceId}/stop | Stop an Instance
-*InstancesAPI* | [**InstancesAPI_v3StopNetdump**](docs/InstancesAPI.md#InstancesAPI_v3StopNetdump) | **POST** /v3/instances/{instanceId}/netdump/disable | Stop Enhanced Network Monitor on an instance.
-*InstancesAPI* | [**InstancesAPI_v3StopNetworkMonitor**](docs/InstancesAPI.md#InstancesAPI_v3StopNetworkMonitor) | **POST** /v3/instances/{instanceId}/sslsplit/disable | Stop Network Monitor on an instance.
-*InstancesAPI* | [**InstancesAPI_v3UnpauseInstance**](docs/InstancesAPI.md#InstancesAPI_v3UnpauseInstance) | **POST** /v3/instances/{instanceId}/unpause | Unpause an Instance
-*InstancesAPI* | [**InstancesAPI_v3UpgradeInstance**](docs/InstancesAPI.md#InstancesAPI_v3UpgradeInstance) | **POST** /v3/instances/{instanceId}/upgrade | Upgrade iOS version
-*InstancesAPI* | [**InstancesAPI_v3ValidateInstanceToken**](docs/InstancesAPI.md#InstancesAPI_v3ValidateInstanceToken) | **POST** /v3/instances/{instanceId}/token/validate | Validate instance token
+*InstancesAPI* | [**InstancesAPI_v3RebootInstance**](docs/InstancesAPI.md#InstancesAPI_v3RebootInstance) | **POST** /v3/instances/{instanceId}/reboot | Restart a device
+*InstancesAPI* | [**InstancesAPI_v3RestoreBackup**](docs/InstancesAPI.md#InstancesAPI_v3RestoreBackup) | **POST** /v3/instances/{instanceId}/restoreBackup | Restore a backup onto a device
+*InstancesAPI* | [**InstancesAPI_v3RotateInstance**](docs/InstancesAPI.md#InstancesAPI_v3RotateInstance) | **POST** /v3/instances/{instanceId}/rotate | Rotate the device
+*InstancesAPI* | [**InstancesAPI_v3SetInstanceGpios**](docs/InstancesAPI.md#InstancesAPI_v3SetInstanceGpios) | **PUT** /v3/instances/{instanceId}/gpios | Press board buttons or flip switches
+*InstancesAPI* | [**InstancesAPI_v3SetInstancePeripherals**](docs/InstancesAPI.md#InstancesAPI_v3SetInstancePeripherals) | **PUT** /v3/instances/{instanceId}/peripherals | Change simulated sensors
+*InstancesAPI* | [**InstancesAPI_v3StartInstance**](docs/InstancesAPI.md#InstancesAPI_v3StartInstance) | **POST** /v3/instances/{instanceId}/start | Turn a device on
+*InstancesAPI* | [**InstancesAPI_v3StartNetdump**](docs/InstancesAPI.md#InstancesAPI_v3StartNetdump) | **POST** /v3/instances/{instanceId}/netdump/enable | Start Enhanced Network Monitor
+*InstancesAPI* | [**InstancesAPI_v3StartNetworkMonitor**](docs/InstancesAPI.md#InstancesAPI_v3StartNetworkMonitor) | **POST** /v3/instances/{instanceId}/sslsplit/enable | Start Network Monitor
+*InstancesAPI* | [**InstancesAPI_v3StopInstance**](docs/InstancesAPI.md#InstancesAPI_v3StopInstance) | **POST** /v3/instances/{instanceId}/stop | Turn a device off
+*InstancesAPI* | [**InstancesAPI_v3StopNetdump**](docs/InstancesAPI.md#InstancesAPI_v3StopNetdump) | **POST** /v3/instances/{instanceId}/netdump/disable | Stop Enhanced Network Monitor
+*InstancesAPI* | [**InstancesAPI_v3StopNetworkMonitor**](docs/InstancesAPI.md#InstancesAPI_v3StopNetworkMonitor) | **POST** /v3/instances/{instanceId}/sslsplit/disable | Stop Network Monitor
+*InstancesAPI* | [**InstancesAPI_v3UnpauseInstance**](docs/InstancesAPI.md#InstancesAPI_v3UnpauseInstance) | **POST** /v3/instances/{instanceId}/unpause | Resume a paused device
+*InstancesAPI* | [**InstancesAPI_v3UpgradeInstance**](docs/InstancesAPI.md#InstancesAPI_v3UpgradeInstance) | **POST** /v3/instances/{instanceId}/upgrade | Upgrade the iOS version
+*InstancesAPI* | [**InstancesAPI_v3ValidateInstanceToken**](docs/InstancesAPI.md#InstancesAPI_v3ValidateInstanceToken) | **POST** /v3/instances/{instanceId}/token/validate | Check a device connection token
 *InstancesV1API* | [**InstancesV1API_v1AttachInstanceInterface**](docs/InstancesV1API.md#InstancesV1API_v1AttachInstanceInterface) | **POST** /v1/instances/{instanceId}/interfaces | Attach I/O Interface
 *InstancesV1API* | [**InstancesV1API_v1ClearInstancePanics**](docs/InstancesV1API.md#InstancesV1API_v1ClearInstancePanics) | **DELETE** /v1/instances/{instanceId}/panics | Clear Panics
 *InstancesV1API* | [**InstancesV1API_v1CreateInstance**](docs/InstancesV1API.md#InstancesV1API_v1CreateInstance) | **POST** /v1/instances | Create Instance
@@ -473,8 +473,8 @@ Category | Method | HTTP request | Description
 *InvitesV1API* | [**InvitesV1API_v1InvitesByToken**](docs/InvitesV1API.md#InvitesV1API_v1InvitesByToken) | **GET** /v1/invites-by-token | 
 *InvitesV1API* | [**InvitesV1API_v1RevokeUserInvite**](docs/InvitesV1API.md#InvitesV1API_v1RevokeUserInvite) | **POST** /v1/invites/revoke | Revoke Invite
 *InvitesV1API* | [**InvitesV1API_v1UserCreateFromInvite**](docs/InvitesV1API.md#InvitesV1API_v1UserCreateFromInvite) | **POST** /v1/invites/signup | 
-*ModelsAPI* | [**ModelsAPI_v3GetModelSoftware**](docs/ModelsAPI.md#ModelsAPI_v3GetModelSoftware) | **GET** /v3/models/{model}/software | Get Software for Model
-*ModelsAPI* | [**ModelsAPI_v3GetModels**](docs/ModelsAPI.md#ModelsAPI_v3GetModels) | **GET** /v3/models | Get Supported Models
+*ModelsAPI* | [**ModelsAPI_v3GetModelSoftware**](docs/ModelsAPI.md#ModelsAPI_v3GetModelSoftware) | **GET** /v3/models/{model}/software | List software for a model
+*ModelsAPI* | [**ModelsAPI_v3GetModels**](docs/ModelsAPI.md#ModelsAPI_v3GetModels) | **GET** /v3/models | List device models
 *ModelsV1API* | [**ModelsV1API_v1GetModelSoftware**](docs/ModelsV1API.md#ModelsV1API_v1GetModelSoftware) | **GET** /v1/models/{model}/software | Get Software for Model
 *ModelsV1API* | [**ModelsV1API_v1GetModels**](docs/ModelsV1API.md#ModelsV1API_v1GetModels) | **GET** /v1/models | Get Supported Models
 *NetConnectAPI* | [**NetConnectAPI_v3CreateNetworkConnection**](docs/NetConnectAPI.md#NetConnectAPI_v3CreateNetworkConnection) | **POST** /v3/network/connections | Create a new Network Connection
@@ -522,9 +522,9 @@ Category | Method | HTTP request | Description
 *ProjectsV1API* | [**ProjectsV1API_v1RemoveProjectKey**](docs/ProjectsV1API.md#ProjectsV1API_v1RemoveProjectKey) | **DELETE** /v1/projects/{projectId}/keys/{keyId} | Delete Project Authorized Key
 *ProjectsV1API* | [**ProjectsV1API_v1UpdateProject**](docs/ProjectsV1API.md#ProjectsV1API_v1UpdateProject) | **PATCH** /v1/projects/{projectId} | Update a Project
 *ProjectsV1API* | [**ProjectsV1API_v1UpdateProjectSettings**](docs/ProjectsV1API.md#ProjectsV1API_v1UpdateProjectSettings) | **PATCH** /v1/projects/{projectId}/settings | Change Project Settings
-*RAMDumpAPI* | [**RAMDumpAPI_v3ClearRamDump**](docs/RAMDumpAPI.md#RAMDumpAPI_v3ClearRamDump) | **DELETE** /v3/instances/{instanceId}/ramdump | Clear RAM Dump
-*RAMDumpAPI* | [**RAMDumpAPI_v3RamDumpPreauthorize**](docs/RAMDumpAPI.md#RAMDumpAPI_v3RamDumpPreauthorize) | **GET** /v3/instances/{instanceId}/ramdump-authorize | Pre-authorize a RAM Dump download
-*RAMDumpAPI* | [**RAMDumpAPI_v3StartRamDump**](docs/RAMDumpAPI.md#RAMDumpAPI_v3StartRamDump) | **POST** /v3/instances/{instanceId}/ramdump/start | Start a RAM Dump on an instance
+*RAMDumpAPI* | [**RAMDumpAPI_v3ClearRamDump**](docs/RAMDumpAPI.md#RAMDumpAPI_v3ClearRamDump) | **DELETE** /v3/instances/{instanceId}/ramdump | Delete a RAM dump
+*RAMDumpAPI* | [**RAMDumpAPI_v3RamDumpPreauthorize**](docs/RAMDumpAPI.md#RAMDumpAPI_v3RamDumpPreauthorize) | **GET** /v3/instances/{instanceId}/ramdump-authorize | Get a RAM dump download token
+*RAMDumpAPI* | [**RAMDumpAPI_v3StartRamDump**](docs/RAMDumpAPI.md#RAMDumpAPI_v3StartRamDump) | **POST** /v3/instances/{instanceId}/ramdump/start | Start a RAM dump
 *RAMDumpV1API* | [**RAMDumpV1API_v1ClearRamDump**](docs/RAMDumpV1API.md#RAMDumpV1API_v1ClearRamDump) | **DELETE** /v1/instances/{instanceId}/ramdump | Clear RAM Dump
 *RAMDumpV1API* | [**RAMDumpV1API_v1RAMDumpPreauthorize**](docs/RAMDumpV1API.md#RAMDumpV1API_v1RAMDumpPreauthorize) | **GET** /v1/instances/{instanceId}/ramdump-authorize | Pre-authorize a RAM Dump download
 *RAMDumpV1API* | [**RAMDumpV1API_v1StartRamDump**](docs/RAMDumpV1API.md#RAMDumpV1API_v1StartRamDump) | **POST** /v1/instances/{instanceId}/ramdump/start | Start a RAM Dump on an instance
@@ -571,12 +571,12 @@ Category | Method | HTTP request | Description
 *SnapshotsV1API* | [**SnapshotsV1API_v1RenameInstanceSnapshot**](docs/SnapshotsV1API.md#SnapshotsV1API_v1RenameInstanceSnapshot) | **PATCH** /v1/instances/{instanceId}/snapshots/{snapshotId} | Rename an Instance Snapshot
 *SnapshotsV1API* | [**SnapshotsV1API_v1RestoreInstanceSnapshot**](docs/SnapshotsV1API.md#SnapshotsV1API_v1RestoreInstanceSnapshot) | **POST** /v1/instances/{instanceId}/snapshots/{snapshotId}/restore | Restore an Instance Snapshot
 *SnapshotsV1API* | [**SnapshotsV1API_v1SnapshotRename**](docs/SnapshotsV1API.md#SnapshotsV1API_v1SnapshotRename) | **PATCH** /v1/snapshots/{snapshotId} | Rename a Snapshot
-*StatusAPI* | [**StatusAPI_v3Ready**](docs/StatusAPI.md#StatusAPI_v3Ready) | **GET** /v3/ready | API status
+*StatusAPI* | [**StatusAPI_v3Ready**](docs/StatusAPI.md#StatusAPI_v3Ready) | **GET** /v3/ready | Check that the API is ready
 *StatusV1API* | [**StatusV1API_v1Ready**](docs/StatusV1API.md#StatusV1API_v1Ready) | **GET** /v1/ready | API Status
 *StorageAPI* | [**StorageAPI_v3AttachClusterStorage**](docs/StorageAPI.md#StorageAPI_v3AttachClusterStorage) | **POST** /v3/cluster/storage/{id}/attach | Attach storage device
 *StorageAPI* | [**StorageAPI_v3EjectClusterStorage**](docs/StorageAPI.md#StorageAPI_v3EjectClusterStorage) | **POST** /v3/cluster/storage/{id}/eject | Eject storage device
 *StorageAPI* | [**StorageAPI_v3ListClusterStorage**](docs/StorageAPI.md#StorageAPI_v3ListClusterStorage) | **GET** /v3/cluster/storage | List cluster storage devices
-*StorageAPI* | [**StorageAPI_v3ListStorage**](docs/StorageAPI.md#StorageAPI_v3ListStorage) | **GET** /v3/storage | List storage devices
+*StorageAPI* | [**StorageAPI_v3ListStorage**](docs/StorageAPI.md#StorageAPI_v3ListStorage) | **GET** /v3/storage | List server-attached storage devices
 *StorageAPI* | [**StorageAPI_v3ListStorageFiles**](docs/StorageAPI.md#StorageAPI_v3ListStorageFiles) | **GET** /v3/storage/{id}/files/{path} | List storage files
 *StorageV1API* | [**StorageV1API_v1AttachStorageCluster**](docs/StorageV1API.md#StorageV1API_v1AttachStorageCluster) | **POST** /v1/cluster/storage/{id}/attach | Mount and attach a storage device
 *StorageV1API* | [**StorageV1API_v1EjectStorageCluster**](docs/StorageV1API.md#StorageV1API_v1EjectStorageCluster) | **POST** /v1/cluster/storage/{id}/eject | Eject/Unmount removable media

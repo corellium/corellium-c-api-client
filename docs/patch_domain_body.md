@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**totp_required** | **int** | If true, TOTP is required for all domain users. | [optional] 
+**totp_required** | **int** | If true, every user in the domain must set up two-factor sign-in with a time-based one-time password (TOTP) authenticator app before they can use the platform. | [optional] 
 **trial_extension** | [**trial_extension_t**](trial_extension.md) \* |  | [optional] 
 **device_auto_shutdown** | [**device_auto_shutdown_schema_t**](device_auto_shutdown_schema.md) \* |  | [optional] 
 **allowed_devices_filters** | [**list_t**](allowed_devices_filter_schema.md) \* | Device/firmware allowlist filters. | [optional] 

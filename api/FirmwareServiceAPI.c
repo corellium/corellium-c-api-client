@@ -9,7 +9,7 @@
 
 // Add firmware assets
 //
-// **Required role:** Cluster administrator.  Adds firmware assets to the cluster firmware service.
+// **Required role:** Cluster administrator.  Adds firmware assets to the cluster, so firmware that needs them can boot. Returns 201 with the firmware service's response message. Requires a cluster administrator. For a single project, `POST /v3/projects/{projectId}/firmware-assets` fetches missing assets by URL; on air-gapped deployments, upload them and use `POST /v3/images/install-firmware-assets`.
 //
 char*
 FirmwareServiceAPI_v3CreateFirmwareAssets(apiClient_t *apiClient, object_t *body)
@@ -60,15 +60,15 @@ FirmwareServiceAPI_v3CreateFirmwareAssets(apiClient_t *apiClient, object_t *body
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Cluster administrator permissions required.");
+    //    printf("%s\n","Cluster administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
-    //    printf("%s\n","Resource not found.");
+    //    printf("%s\n","The resource does not exist, or you cannot see it.");
     //}
     //primitive return type simple string
     char* elementToReturn = NULL;
@@ -100,7 +100,7 @@ end:
 
 // Delete a firmware
 //
-// **Required role:** Cluster administrator.  Deletes the firmware identified by the given filename from the cluster firmware service.  This endpoint proxies the request to the firmware service. A filename the service no longer has is a successful no-op: both a successful upstream delete and an upstream \"not there\" answer 204, and repeated calls return 204 as well. A firmware-service outage or refusal is still reported as a failure.
+// **Required role:** Cluster administrator.  Removes a firmware build from the cluster firmware catalog, so it can no longer be chosen when creating devices. Identify it by its filename from `v3ListFirmwares`. Requires a cluster administrator.  This endpoint proxies the request to the firmware service. A filename the service no longer has is a successful no-op: both a successful upstream delete and an upstream \"not there\" answer 204, and repeated calls return 204 as well. A firmware-service outage or refusal is still reported as a failure.
 //
 void
 FirmwareServiceAPI_v3DeleteFirmware(apiClient_t *apiClient, char *filename)
@@ -152,15 +152,15 @@ FirmwareServiceAPI_v3DeleteFirmware(apiClient_t *apiClient, char *filename)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Cluster administrator permissions required.");
+    //    printf("%s\n","Cluster administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 409) {
-    //    printf("%s\n","Resource conflict.");
+    //    printf("%s\n","The request conflicts with the current state of the resource.");
     //}
     //No return type
 end:
@@ -181,7 +181,7 @@ end:
 
 // Delete a firmware asset
 //
-// **Required role:** Cluster administrator.  Deletes the firmware asset identified by the given asset URL from the cluster firmware service.  This endpoint proxies the request to the firmware service. An asset the service no longer has is a successful no-op: both a successful upstream delete and an upstream \"not there\" answer 204, and repeated calls return 204 as well. A firmware-service outage or refusal is still reported as a failure.
+// **Required role:** Cluster administrator.  Removes a firmware asset from the cluster. Firmware that needs it can no longer boot until it is added again. Requires a cluster administrator.  This endpoint proxies the request to the firmware service. An asset the service no longer has is a successful no-op: both a successful upstream delete and an upstream \"not there\" answer 204, and repeated calls return 204 as well. A firmware-service outage or refusal is still reported as a failure.
 //
 void
 FirmwareServiceAPI_v3DeleteFirmwareAsset(apiClient_t *apiClient, char *assetUrl)
@@ -233,11 +233,11 @@ FirmwareServiceAPI_v3DeleteFirmwareAsset(apiClient_t *apiClient, char *assetUrl)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Cluster administrator permissions required.");
+    //    printf("%s\n","Cluster administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:
@@ -258,7 +258,7 @@ end:
 
 // Get extended firmware asset info
 //
-// **Required role:** Cluster administrator.  Returns the firmwares and instances associated with a firmware asset.
+// **Required role:** Cluster administrator.  Shows where a firmware asset is used: the firmware builds that need it and the devices using those builds. Check this before deleting an asset. Requires a cluster administrator.
 //
 extended_firmware_asset_info_t*
 FirmwareServiceAPI_v3GetFirmwareAssetExtended(apiClient_t *apiClient, char *assetUrl)
@@ -310,15 +310,15 @@ FirmwareServiceAPI_v3GetFirmwareAssetExtended(apiClient_t *apiClient, char *asse
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Cluster administrator permissions required.");
+    //    printf("%s\n","Cluster administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
-    //    printf("%s\n","Resource not found.");
+    //    printf("%s\n","The resource does not exist, or you cannot see it.");
     //}
     //nonprimitive not container
     extended_firmware_asset_info_t *elementToReturn = NULL;
@@ -353,7 +353,7 @@ end:
 
 // Get firmware service configuration
 //
-// **Required role:** Cluster administrator.  Returns the current configuration of the cluster firmware service.
+// **Required role:** Cluster administrator.  Returns the settings of the cluster firmware service: the cluster-wide catalog of operating-system builds that devices can be created from (what `GET /v3/models/{model}/software` lists). Settings control things such as whether firmware is downloaded and cached. Requires a cluster administrator. Change them with `v3PatchFirmwareServiceConfig`.
 //
 firmware_service_config_t*
 FirmwareServiceAPI_v3GetFirmwareServiceConfig(apiClient_t *apiClient)
@@ -393,11 +393,11 @@ FirmwareServiceAPI_v3GetFirmwareServiceConfig(apiClient_t *apiClient)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Cluster administrator permissions required.");
+    //    printf("%s\n","Cluster administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     firmware_service_config_t *elementToReturn = NULL;
@@ -431,7 +431,7 @@ end:
 
 // List firmware assets
 //
-// **Required role:** Cluster administrator.  Returns a paginated list of firmware assets available in the cluster firmware service.
+// **Required role:** Cluster administrator.  Lists the firmware assets stored in the cluster: side files some firmware needs in order to boot, such as Apple decryption keys. A firmware build lists the asset URLs it needs; device creation fails if one is missing. Requires a cluster administrator. Results are paginated.
 //
 firmware_asset_list_t*
 FirmwareServiceAPI_v3ListFirmwareAssets(apiClient_t *apiClient, double *limit, double *offset, char *search, char *order, firmware_asset_filter_t *filter)
@@ -533,15 +533,15 @@ FirmwareServiceAPI_v3ListFirmwareAssets(apiClient_t *apiClient, double *limit, d
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Cluster administrator permissions required.");
+    //    printf("%s\n","Cluster administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
-    //    printf("%s\n","Resource not found.");
+    //    printf("%s\n","The resource does not exist, or you cannot see it.");
     //}
     //nonprimitive not container
     firmware_asset_list_t *elementToReturn = NULL;
@@ -631,7 +631,7 @@ end:
 
 // List firmware service devices
 //
-// **Required role:** Cluster administrator.  Returns a paginated list of devices known to the cluster firmware service.
+// **Required role:** Cluster administrator.  Lists the device models the firmware service has firmware records for. Requires a cluster administrator. Results are paginated.
 //
 firmware_device_list_t*
 FirmwareServiceAPI_v3ListFirmwareDevices(apiClient_t *apiClient, double *limit, double *offset, char *search, char *order, char *type, char *model, char *name, char *platform, char *hwModel)
@@ -781,15 +781,15 @@ FirmwareServiceAPI_v3ListFirmwareDevices(apiClient_t *apiClient, double *limit, 
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Cluster administrator permissions required.");
+    //    printf("%s\n","Cluster administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
-    //    printf("%s\n","Resource not found.");
+    //    printf("%s\n","The resource does not exist, or you cannot see it.");
     //}
     //nonprimitive not container
     firmware_device_list_t *elementToReturn = NULL;
@@ -931,7 +931,7 @@ end:
 
 // List firmwares
 //
-// **Required role:** Cluster administrator.  Returns a paginated list of firmwares available in the cluster firmware service.
+// **Required role:** Cluster administrator.  Lists the firmware builds in the cluster firmware catalog, including builds installed with `POST /v3/images/install-firmware`. Requires a cluster administrator. Results are paginated. Users see the builds for one model with `GET /v3/models/{model}/software`.
 //
 firmware_list_t*
 FirmwareServiceAPI_v3ListFirmwares(apiClient_t *apiClient, double *limit, double *offset, char *search, char *order, char *filename, char *model, char *type, char *version, char *buildId, char *firmwareAssets, char *corelliumChecksum, int *installed)
@@ -1118,15 +1118,15 @@ FirmwareServiceAPI_v3ListFirmwares(apiClient_t *apiClient, double *limit, double
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Cluster administrator permissions required.");
+    //    printf("%s\n","Cluster administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
-    //    printf("%s\n","Resource not found.");
+    //    printf("%s\n","The resource does not exist, or you cannot see it.");
     //}
     //nonprimitive not container
     firmware_list_t *elementToReturn = NULL;
@@ -1304,7 +1304,7 @@ end:
 
 // Update firmware service configuration
 //
-// **Required role:** Cluster administrator.  Updates the cluster firmware service configuration and returns the merged result.
+// **Required role:** Cluster administrator.  Changes firmware service settings. Send only the settings you want to change; they are merged into the current settings, and the full result is returned. Requires a cluster administrator.
 //
 firmware_service_settings_t*
 FirmwareServiceAPI_v3PatchFirmwareServiceConfig(apiClient_t *apiClient, patch_firmware_service_config_body_t *patch_firmware_service_config_body)
@@ -1355,11 +1355,11 @@ FirmwareServiceAPI_v3PatchFirmwareServiceConfig(apiClient_t *apiClient, patch_fi
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Cluster administrator permissions required.");
+    //    printf("%s\n","Cluster administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     firmware_service_settings_t *elementToReturn = NULL;

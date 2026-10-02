@@ -9,7 +9,7 @@
 
 // Delete cluster snapshot
 //
-// **Required role:** Cluster administrator.  Deletes a cluster snapshot by ID. Requires the clusterSnapshotMgmt feature.  Deletes are idempotent: an unknown `snapshotId`, or a snapshot that was already deleted, is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing.
+// **Required role:** Cluster administrator.  Deletes a snapshot from the cluster, for example to free storage. Snapshots that are in use, still being created, or were just restored cannot be deleted (400). Requires a cluster administrator and the cluster snapshot management feature (`clusterSnapshotMgmt`).  Deletes are idempotent: an unknown `snapshotId`, or a snapshot that was already deleted, is a successful no-op that still returns 204, and repeated calls return 204 as well. A 404 means the request path did not match a delete route, not that the target was missing.
 //
 void
 ClusterAPI_v3DeleteClusterSnapshot(apiClient_t *apiClient, char *snapshotId)
@@ -65,7 +65,7 @@ ClusterAPI_v3DeleteClusterSnapshot(apiClient_t *apiClient, char *snapshotId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
@@ -90,7 +90,7 @@ end:
 
 // Get cluster configuration
 //
-// **Required role:** Cluster administrator.  Returns the current cluster configuration.
+// **Required role:** Cluster administrator.  Returns the settings that apply to the whole cluster. Requires a cluster administrator.
 //
 cluster_config_t*
 ClusterAPI_v3GetClusterConfig(apiClient_t *apiClient)
@@ -130,11 +130,11 @@ ClusterAPI_v3GetClusterConfig(apiClient_t *apiClient)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Cluster administrator permissions required.");
+    //    printf("%s\n","Cluster administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     cluster_config_t *elementToReturn = NULL;
@@ -168,7 +168,7 @@ end:
 
 // Get cluster node
 //
-// **Required role:** Cluster administrator.  Returns details for a specific node by ID.
+// **Required role:** Cluster administrator.  Returns details for one server (node) in the cluster, identified by the ID from `v3ListClusterNodes`. Requires a cluster administrator.
 //
 node_information_t*
 ClusterAPI_v3GetClusterNode(apiClient_t *apiClient, char *nodeId)
@@ -220,11 +220,11 @@ ClusterAPI_v3GetClusterNode(apiClient_t *apiClient, char *nodeId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Cluster administrator permissions required.");
+    //    printf("%s\n","Cluster administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -263,7 +263,7 @@ end:
 
 // Get node console websocket URL
 //
-// **Required role:** Cluster administrator.  Returns the WebSocket URL for accessing the node console via SSH. Connect to the returned URL to open the console stream.
+// **Required role:** Cluster administrator.  Returns a WebSocket URL for a terminal session on one cluster server (node), for maintenance and troubleshooting. Open the URL with a WebSocket client to get the console stream. Requires a cluster administrator.
 //
 node_console_endpoint_t*
 ClusterAPI_v3GetClusterNodeConsole(apiClient_t *apiClient, char *nodeId)
@@ -315,11 +315,11 @@ ClusterAPI_v3GetClusterNodeConsole(apiClient_t *apiClient, char *nodeId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Cluster administrator permissions required.");
+    //    printf("%s\n","Cluster administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -358,7 +358,7 @@ end:
 
 // Get cluster snapshot
 //
-// **Required role:** Cluster administrator.  Returns details for a specific cluster snapshot. Requires the clusterSnapshotMgmt feature.
+// **Required role:** Cluster administrator.  Returns one snapshot from the cluster-wide list. Requires a cluster administrator and the cluster snapshot management feature (`clusterSnapshotMgmt`).
 //
 cluster_snapshot_t*
 ClusterAPI_v3GetClusterSnapshot(apiClient_t *apiClient, char *snapshotId)
@@ -414,7 +414,7 @@ ClusterAPI_v3GetClusterSnapshot(apiClient_t *apiClient, char *snapshotId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
@@ -457,7 +457,7 @@ end:
 
 // List cluster nodes
 //
-// **Required role:** Cluster administrator.  Returns information about all nodes in the cluster.
+// **Required role:** Cluster administrator.  Lists the servers (nodes) that make up this Corellium cluster, with their status and resources. Use it to check cluster health or find a node before opening its console. Requires a cluster administrator. Results are paginated.
 //
 node_list_t*
 ClusterAPI_v3ListClusterNodes(apiClient_t *apiClient, double *limit, double *offset)
@@ -523,11 +523,11 @@ ClusterAPI_v3ListClusterNodes(apiClient_t *apiClient, double *limit, double *off
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Cluster administrator permissions required.");
+    //    printf("%s\n","Cluster administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     node_list_t *elementToReturn = NULL;
@@ -585,7 +585,7 @@ end:
 
 // List cluster snapshots
 //
-// **Required role:** Cluster administrator.  Returns a paginated list of cluster volume snapshots. Requires the clusterSnapshotMgmt feature.
+// **Required role:** Cluster administrator.  Lists device snapshots across the whole cluster, for administrators managing storage. Requires a cluster administrator and the cluster snapshot management feature (`clusterSnapshotMgmt`). Results are paginated. For one device's snapshots, use `GET /v3/instances/{instanceId}/snapshots` instead.
 //
 cluster_snapshot_list_t*
 ClusterAPI_v3ListClusterSnapshots(apiClient_t *apiClient, double *limit, double *offset, char *springboard, char *live, char *fresh, char *deviceName, char *task, char *search, char to, char from, char *orderBy)
@@ -763,7 +763,7 @@ ClusterAPI_v3ListClusterSnapshots(apiClient_t *apiClient, double *limit, double 
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
@@ -925,7 +925,7 @@ end:
 
 // Update cluster configuration
 //
-// **Required role:** Cluster administrator.  Applies configuration changes across all controller nodes.
+// **Required role:** Cluster administrator.  Changes cluster-wide settings and applies them on every controller node. Send only the settings you want to change. Requires a cluster administrator.
 //
 void
 ClusterAPI_v3PatchClusterConfig(apiClient_t *apiClient, patch_cluster_config_body_t *patch_cluster_config_body)
@@ -980,11 +980,11 @@ ClusterAPI_v3PatchClusterConfig(apiClient_t *apiClient, patch_cluster_config_bod
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Cluster administrator permissions required.");
+    //    printf("%s\n","Cluster administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 500) {

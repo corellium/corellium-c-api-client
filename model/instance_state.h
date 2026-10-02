@@ -1,7 +1,7 @@
 /*
  * instance_state.h
  *
- * Current instance state.
+ * What the device is doing right now. - &#x60;creating&#x60;: being built after &#x60;v3CreateInstance&#x60;. Not usable yet; poll until it changes. - &#x60;booting&#x60;: starting up. Wait for &#x60;on&#x60;. - &#x60;on&#x60;: running and usable. - &#x60;paused&#x60;: stopped mid-run and held in place; &#x60;v3UnpauseInstance&#x60; resumes it. - &#x60;rebooting&#x60;: restarting after &#x60;v3RebootInstance&#x60;. - &#x60;restoring&#x60;: being restored from a snapshot or backup. - &#x60;off&#x60;: shut down. &#x60;v3StartInstance&#x60; turns it on. - &#x60;deleting&#x60;: being removed after &#x60;v3DeleteInstance&#x60;. - &#x60;error&#x60;: something went wrong. See the instance&#39;s &#x60;error&#x60; field.
  */
 
 #ifndef _instance_state_H_

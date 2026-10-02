@@ -26,7 +26,7 @@ ExtensionsAPI_v3DeleteExtension(apiClient_t *apiClient, char *extensionId);
 
 // Get extension by ID
 //
-// **Required role:** Domain administrator.  Returns the extension identified by the given extension ID. Available on on-site deployments only.
+// **Required role:** Domain administrator.  Returns one installed extension, including whether it is enabled and the device models (flavors) it adds. Requires a domain administrator. Available on on-site deployments only.
 //
 extension_t*
 ExtensionsAPI_v3GetExtensionById(apiClient_t *apiClient, char *extensionId);
@@ -34,7 +34,7 @@ ExtensionsAPI_v3GetExtensionById(apiClient_t *apiClient, char *extensionId);
 
 // List all extensions
 //
-// **Required role:** Domain administrator.  Returns a paginated list of extensions available to the authenticated user. Available on on-site deployments only.
+// **Required role:** Domain administrator.  Lists the extensions installed on this deployment. An extension adds new device models (for example an IoT board such as a Raspberry Pi 4) that you can then create devices from; each one is defined by an `extension.json` file listing its models, CPU cores, memory and boot options. Requires a domain administrator. Available on on-site deployments only. The response carries an ETag; send it back as `If-None-Match` to get 304 when nothing changed.
 //
 extension_list_t*
 ExtensionsAPI_v3ListExtensions(apiClient_t *apiClient, double *limit, double *offset, char *if_none_match);
@@ -42,7 +42,7 @@ ExtensionsAPI_v3ListExtensions(apiClient_t *apiClient, double *limit, double *of
 
 // Load an extension
 //
-// **Required role:** Domain administrator.  Loads an extension from a previously uploaded image, identified by its image ID. The extension definition is read from the image (its extension.json), so only the image ID is supplied. Available on on-site deployments only.
+// **Required role:** Domain administrator.  Installs an extension so its device models become available. **Steps:** (1) optionally check your `extension.json` with `v3ParseExtensionJson`; (2) upload the extension file with `POST /v3/images` using `type: \"extension\"`; (3) call this with the returned `imageId`. The definition is read from the uploaded file, so only the image ID is sent. The new models then appear in `GET /v3/models`. Requires a domain administrator. Available on on-site deployments only.
 //
 extension_t*
 ExtensionsAPI_v3LoadExtension(apiClient_t *apiClient, load_extension_body_t *load_extension_body);
@@ -50,7 +50,7 @@ ExtensionsAPI_v3LoadExtension(apiClient_t *apiClient, load_extension_body_t *loa
 
 // Validates extension.json
 //
-// **Required role:** Domain administrator.  Validates and normalises an extension.json document, returning the parsed extension definition. Available on on-site deployments only.
+// **Required role:** Domain administrator.  Checks an `extension.json` document before you upload it, and returns the normalised definition the platform would use (with defaults filled in). Returns 400 with the problem if the document is invalid. Nothing is installed. Requires a domain administrator. Available on on-site deployments only.
 //
 object_t*
 ExtensionsAPI_v3ParseExtensionJson(apiClient_t *apiClient, object_t *body);
@@ -58,7 +58,7 @@ ExtensionsAPI_v3ParseExtensionJson(apiClient_t *apiClient, object_t *body);
 
 // Update an existing extension
 //
-// **Required role:** Domain administrator.  Updates the extension identified by the given extension ID with the supplied definition. Available on on-site deployments only.
+// **Required role:** Domain administrator.  Turns an installed extension on or off with `enabled`. While it is off, devices that use its models cannot be created or started. Requires a domain administrator. Available on on-site deployments only.
 //
 extension_t*
 ExtensionsAPI_v3UpdateExtension(apiClient_t *apiClient, char *extensionId, update_extension_body_t *update_extension_body);

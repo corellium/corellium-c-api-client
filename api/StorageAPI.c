@@ -9,7 +9,7 @@
 
 // Attach storage device
 //
-// **Required role:** Cluster administrator.  Mounts a registered storage device. Returns 200 if already mounted, 202 if a mount job was queued. Requires the serverAttachedStorage feature.
+// **Required role:** Cluster administrator.  Mounts an attached storage device so its files can be used. Mounting runs in the background: returns 202 when the mount has been queued, or 200 if the device is already mounted. Browse its files with `GET /v3/storage/{id}/files/{path}`. Requires a cluster administrator. Requires the serverAttachedStorage feature. Not available on cloud installations.
 //
 storage_already_mounted_response_t*
 StorageAPI_v3AttachClusterStorage(apiClient_t *apiClient, char *id)
@@ -69,7 +69,7 @@ StorageAPI_v3AttachClusterStorage(apiClient_t *apiClient, char *id)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
@@ -116,7 +116,7 @@ end:
 
 // Eject storage device
 //
-// **Required role:** Cluster administrator.  Unmounts a registered storage device. Returns 200 if already unmounted, 202 if an unmount job was queued. Requires the serverAttachedStorage feature.
+// **Required role:** Cluster administrator.  Unmounts an attached storage device so it can be unplugged safely. Unmounting runs in the background: returns 202 when the unmount has been queued, or 200 if the device is already unmounted. Requires a cluster administrator. Requires the serverAttachedStorage feature. Not available on cloud installations.
 //
 storage_eject_already_unmounted_response_t*
 StorageAPI_v3EjectClusterStorage(apiClient_t *apiClient, char *id)
@@ -176,7 +176,7 @@ StorageAPI_v3EjectClusterStorage(apiClient_t *apiClient, char *id)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
@@ -223,7 +223,7 @@ end:
 
 // List cluster storage devices
 //
-// **Required role:** Cluster administrator.  Returns all attached storage devices. Requires the serverAttachedStorage feature.
+// **Required role:** Cluster administrator.  Lists the physical storage devices (for example USB drives) attached to the cluster's servers, for cluster administrators. Requires a cluster administrator. Requires the serverAttachedStorage feature. Not available on cloud installations.
 //
 storage_device_list_t*
 StorageAPI_v3ListClusterStorage(apiClient_t *apiClient, double *limit, double *offset, char *id, char *device, char *fsType, char *fsUuid, char *label, char *serial, char *vendor, char *model, char *mountPolicy, char *status, char *sort)
@@ -425,7 +425,7 @@ StorageAPI_v3ListClusterStorage(apiClient_t *apiClient, double *limit, double *o
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
@@ -617,9 +617,9 @@ end:
 
 }
 
-// List storage devices
+// List server-attached storage devices
 //
-// List all attached storage devices visible to the authenticated user.
+// Lists the physical storage devices (for example USB drives or disks) plugged into an on-site Corellium server, with their name, filesystem, label, vendor, whether they are mounted, and whether they are mounted read-only (`RO`) or read-write (`RW`). Use a device's `id` with `v3ListStorageFiles` to browse its contents. For cluster administrators on on-site deployments; not available on cloud installations. Results are paginated and can be filtered and sorted with the query parameters.
 //
 storage_list_t*
 StorageAPI_v3ListStorage(apiClient_t *apiClient, double *limit, double *offset, char *sort, char *identifier, char *device, char *fsType, char *mountPolicy, char *status)
@@ -757,15 +757,15 @@ StorageAPI_v3ListStorage(apiClient_t *apiClient, double *limit, double *offset, 
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     storage_list_t *elementToReturn = NULL;
@@ -895,7 +895,7 @@ end:
 
 // List storage files
 //
-// List files at a path within an attached storage device. The device is resolved by identifier and the filesystem contents are listed at the given path within the mount point.
+// Lists the files and folders at one path on a server-attached storage device (see `v3ListStorage`), with each entry's name, type, size and modification time. Use `/` to list the top level, then pass a folder's path to go deeper. The path must be a folder; a file path returns 400, and paths that try to leave the device (for example with `..`) are rejected. Returns 404 if the device or path does not exist.
 //
 storage_file_list_t*
 StorageAPI_v3ListStorageFiles(apiClient_t *apiClient, char *id, char *path, double *limit, double *offset, char *sort, char *name, char *type)
@@ -1025,11 +1025,11 @@ StorageAPI_v3ListStorageFiles(apiClient_t *apiClient, char *id, char *path, doub
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {

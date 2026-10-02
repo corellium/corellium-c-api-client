@@ -1,7 +1,7 @@
 /*
  * interconnect_protocol.h
  *
- * The protocol used by the interconnect.
+ * Kind of signal the interconnect carries, for example &#x60;eth&#x60; for Ethernet. Choose the protocol that matches the interfaces you connect. Cannot be changed later.
  */
 
 #ifndef _interconnect_protocol_H_

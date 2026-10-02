@@ -88,8 +88,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
 **domainId** | **char \*** | Domain identifier. | 
-**limit** | **double \*** | Maximum number of results to return. | [optional] [default to 100]
-**offset** | **double \*** | Number of results to skip. | [optional] [default to 0]
+**limit** | **double \*** | Most results to return in one page. Whole number from 1 to 1000; defaults to 100. A value outside that range is rejected with 400. | [optional] [default to 100]
+**offset** | **double \*** | How many results to skip before this page starts; defaults to 0. To get the next page, add &#x60;limit&#x60; to the previous &#x60;offset&#x60;. | [optional] [default to 0]
 
 ### Return type
 

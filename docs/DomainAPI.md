@@ -77,7 +77,7 @@ void
 ```c
 // Get image upload status
 //
-// **Required role:** Domain administrator on on-site deployments; cloud administrator on cloud deployments.  Check resumable upload status for a domain-wide image or download the image file.
+// **Required role:** Domain administrator on on-site deployments; cloud administrator on cloud deployments.  Checks the progress of a chunked upload made with `v3PutDomainImageUpload`, or downloads the finished file. With chunk parameters (`resumableChunkNumber` and friends) it returns 200 if that chunk is already stored and 204 if it still needs to be sent; without them it downloads the image file.
 //
 binary_t** DomainAPI_v3GetDomainImageUpload(apiClient_t *apiClient, char *type, char *imageId, char *name, double *resumableChunkNumber);
 ```
@@ -86,9 +86,9 @@ binary_t** DomainAPI_v3GetDomainImageUpload(apiClient_t *apiClient, char *type, 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**type** | **char \*** | Image type. | 
-**imageId** | **char \*** | Client-generated image identifier. The image record is created on the first chunk. | 
-**name** | **char \*** | URL-encoded image filename. | 
+**type** | **char \*** | What kind of file this is, for example &#x60;fw&#x60; for firmware or &#x60;kernel&#x60;. Uses the same values as &#x60;type&#x60; on &#x60;POST /v3/images&#x60;; see &#x60;ImageType&#x60; for what each means. Types that need a license feature your license lacks are rejected with 403. | 
+**imageId** | **char \*** | An ID you choose for the new image: generate a random UUID once per file and use the same value for every chunk of that file. The image record is created with this ID when the first chunk arrives. Use a new UUID for each new upload. | 
+**name** | **char \*** | The file name to store, URL-encoded (for example &#x60;my%20firmware.ipsw&#x60;). Becomes the image &#x60;name&#x60;. | 
 **resumableChunkNumber** | **double \*** | Chunk number. When present the response reports whether that chunk was already stored (200) or still needs to be uploaded (204) instead of returning the image file. | [optional] 
 
 ### Return type
@@ -142,7 +142,7 @@ Name | Type | Description  | Notes
 ```c
 // List domain-level firmware images
 //
-// **Required role:** Domain administrator.  Lists firmware images that are not in a project or an instance, one entry for each flavor. The server filters the list for your domain.
+// **Required role:** Domain administrator.  Lists the firmware images uploaded at domain level (not in a project or instance), one entry per device model. Requires a domain administrator. Use it to find the `imageId` of a domain firmware upload, for example to delete it with `DELETE /v3/images/{imageId}`. These images also appear in `GET /v3/models/{model}/software` for the matching model.
 //
 domain_software_list_t* DomainAPI_v3ListDomainSoftware(apiClient_t *apiClient, double *limit, double *offset);
 ```
@@ -151,8 +151,8 @@ domain_software_list_t* DomainAPI_v3ListDomainSoftware(apiClient_t *apiClient, d
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**limit** | **double \*** | Maximum number of results to return. | [optional] [default to 100]
-**offset** | **double \*** | Number of results to skip. | [optional] [default to 0]
+**limit** | **double \*** | Most results to return in one page. Whole number from 1 to 1000; defaults to 100. A value outside that range is rejected with 400. | [optional] [default to 100]
+**offset** | **double \*** | How many results to skip before this page starts; defaults to 0. To get the next page, add &#x60;limit&#x60; to the previous &#x60;offset&#x60;. | [optional] [default to 0]
 
 ### Return type
 
@@ -205,7 +205,7 @@ Name | Type | Description  | Notes
 ```c
 // Upload image chunk
 //
-// **Required role:** Domain administrator on on-site deployments; cloud administrator on cloud deployments.  Upload a chunk of a domain-wide image using the resumable upload protocol. Creates the image record on the first chunk if it does not yet exist.
+// **Required role:** Domain administrator on on-site deployments; cloud administrator on cloud deployments.  Uploads one chunk of a file as a domain-level image: one that belongs to no project or instance and is available across your domain. Requires a domain administrator (on-site) or cloud administrator. Works like `v3PutProjectImageUpload`: you choose the image ID (a new random UUID), the record is created on the first chunk, and `type` and `name` in the path set the image type and name. A domain-level `fw` image is offered as a choice when anyone in the domain creates a device of the matching model, without an install step. The result is the same as `POST /v3/images` with no `projectId` or `instanceId` followed by `PUT /v3/images/{imageId}/file`, which applies the same administrator rule to chunk uploads.
 //
 object_t* DomainAPI_v3PutDomainImageUpload(apiClient_t *apiClient, char *type, char *imageId, char *name, binary_t* body, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, char *corelliumChecksum, char *flavor, char *x_corellium_image_encoding, int *x_corellium_image_encapsulated, double *x_corellium_total_file_size, char *x_corellium_image_password);
 ```
@@ -214,21 +214,21 @@ object_t* DomainAPI_v3PutDomainImageUpload(apiClient_t *apiClient, char *type, c
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**type** | **char \*** | Image type. | 
-**imageId** | **char \*** | Client-generated image identifier. The image record is created on the first chunk. | 
-**name** | **char \*** | URL-encoded image filename. | 
+**type** | **char \*** | What kind of file this is, for example &#x60;fw&#x60; for firmware or &#x60;kernel&#x60;. Uses the same values as &#x60;type&#x60; on &#x60;POST /v3/images&#x60;; see &#x60;ImageType&#x60; for what each means. Types that need a license feature your license lacks are rejected with 403. | 
+**imageId** | **char \*** | An ID you choose for the new image: generate a random UUID once per file and use the same value for every chunk of that file. The image record is created with this ID when the first chunk arrives. Use a new UUID for each new upload. | 
+**name** | **char \*** | The file name to store, URL-encoded (for example &#x60;my%20firmware.ipsw&#x60;). Becomes the image &#x60;name&#x60;. | 
 **body** | **binary_t*** |  | 
-**resumableChunkNumber** | **double \*** | Chunk sequence number. | [optional] 
-**resumableChunkSize** | **double \*** | Size of each chunk. | [optional] 
-**resumableCurrentChunkSize** | **double \*** | Size of the current chunk. | [optional] 
-**resumableTotalSize** | **double \*** | Total file size. | [optional] 
-**resumableTotalChunks** | **double \*** | Total number of chunks. | [optional] 
-**corelliumChecksum** | **char \*** | Corellium checksum. Required for firmware uploads in airgapped deployments. | [optional] 
-**flavor** | **char \*** | Flavor identifier to associate with the image. | [optional] 
-**x_corellium_image_encoding** | **char \*** | How the uploaded file is stored. Set on the first chunk, when the image record is created. | [optional] 
-**x_corellium_image_encapsulated** | **int \*** | Whether the uploaded file is an archive the coordinator should unpack. Set false to store the file as uploaded. Set on the first chunk, when the image record is created. | [optional] 
-**x_corellium_total_file_size** | **double \*** | Total size of the whole file in bytes. Preferred over Content-Length for the pre-flight image-pool space check on on-site clusters, which is what produces the 507 response. | [optional] 
-**x_corellium_image_password** | **char \*** | Password used to open a password-protected image during post-upload validation. | [optional] 
+**resumableChunkNumber** | **double \*** | Which chunk this is, counting from 1. | [optional] 
+**resumableChunkSize** | **double \*** | The size, in bytes, you split the file into. Use the same value for every chunk; only the last chunk may be smaller. If you send &#x60;corelliumChecksum&#x60;, this must equal the block size inside it. | [optional] 
+**resumableCurrentChunkSize** | **double \*** | Actual size in bytes of this chunk&#39;s body. | [optional] 
+**resumableTotalSize** | **double \*** | Size of the whole file in bytes. | [optional] 
+**resumableTotalChunks** | **double \*** | How many chunks the whole file is split into. The upload completes when the last one arrives. | [optional] 
+**corelliumChecksum** | **char \*** | Optional expected checksum of the whole file, formatted &#x60;algorithm$blockSize$hash&#x60;. When given, the finished upload is checked and rejected (and the image removed) if it does not match. Required for firmware (&#x60;fw&#x60;) uploads on air-gapped deployments. | [optional] 
+**flavor** | **char \*** | Device model (&#x60;flavor&#x60; from &#x60;GET /v3/models&#x60;) the image is for. Needed for &#x60;partition&#x60; uploads when the image is not attached to a device, so the partition name can be checked against that model. | [optional] 
+**x_corellium_image_encoding** | **char \*** | How the file is stored: &#x60;plain&#x60; (normal) or &#x60;encrypted&#x60;. Only read on the first chunk, when the image record is created; later chunks cannot change it. | [optional] 
+**x_corellium_image_encapsulated** | **int \*** | Whether the uploaded file is a ZIP wrapper the platform should unpack. Send false to store the file exactly as uploaded. Only read on the first chunk, when the image record is created. | [optional] 
+**x_corellium_total_file_size** | **double \*** | Size of the whole file in bytes. Send it on every chunk: the platform uses it to check up front that there is room for the entire file, and answers 507 if there is not, before storing any data. | [optional] 
+**x_corellium_image_password** | **char \*** | Password of a password-protected file (for example encrypted firmware), used to check the file after upload. Leave out for normal files. | [optional] 
 
 ### Return type
 

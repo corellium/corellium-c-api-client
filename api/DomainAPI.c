@@ -64,11 +64,11 @@ DomainAPI_v3CreateDomainWelcomeMessage(apiClient_t *apiClient, set_domain_welcom
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Domain administrator permissions required.");
+    //    printf("%s\n","Domain administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     domain_welcome_message_response_t *elementToReturn = NULL;
@@ -147,11 +147,11 @@ DomainAPI_v3DeleteDomainWelcomeMessage(apiClient_t *apiClient)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Domain administrator permissions required.");
+    //    printf("%s\n","Domain administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:
@@ -171,7 +171,7 @@ end:
 
 // Get image upload status
 //
-// **Required role:** Domain administrator on on-site deployments; cloud administrator on cloud deployments.  Check resumable upload status for a domain-wide image or download the image file.
+// **Required role:** Domain administrator on on-site deployments; cloud administrator on cloud deployments.  Checks the progress of a chunked upload made with `v3PutDomainImageUpload`, or downloads the finished file. With chunk parameters (`resumableChunkNumber` and friends) it returns 200 if that chunk is already stored and 204 if it still needs to be sent; without them it downloads the image file.
 //
 binary_t*
 DomainAPI_v3GetDomainImageUpload(apiClient_t *apiClient, char *type, char *imageId, char *name, double *resumableChunkNumber)
@@ -273,11 +273,11 @@ DomainAPI_v3GetDomainImageUpload(apiClient_t *apiClient, char *type, char *image
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Domain administrator permissions required on on-site deployments; cloud administrator permissions required on cloud deployments.");
+    //    printf("%s\n","Domain administrator permissions required on on-site deployments; cloud administrator permissions required on cloud deployments. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -363,11 +363,11 @@ DomainAPI_v3GetDomainWelcomeMessage(apiClient_t *apiClient)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -405,7 +405,7 @@ end:
 
 // List domain-level firmware images
 //
-// **Required role:** Domain administrator.  Lists firmware images that are not in a project or an instance, one entry for each flavor. The server filters the list for your domain.
+// **Required role:** Domain administrator.  Lists the firmware images uploaded at domain level (not in a project or instance), one entry per device model. Requires a domain administrator. Use it to find the `imageId` of a domain firmware upload, for example to delete it with `DELETE /v3/images/{imageId}`. These images also appear in `GET /v3/models/{model}/software` for the matching model.
 //
 domain_software_list_t*
 DomainAPI_v3ListDomainSoftware(apiClient_t *apiClient, double *limit, double *offset)
@@ -475,11 +475,11 @@ DomainAPI_v3ListDomainSoftware(apiClient_t *apiClient, double *limit, double *of
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Domain administrator permissions required.");
+    //    printf("%s\n","Domain administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     domain_software_list_t *elementToReturn = NULL;
@@ -592,11 +592,11 @@ DomainAPI_v3PatchDomainWelcomeMessage(apiClient_t *apiClient, patch_domain_welco
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Domain administrator permissions required.");
+    //    printf("%s\n","Domain administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -639,7 +639,7 @@ end:
 
 // Upload image chunk
 //
-// **Required role:** Domain administrator on on-site deployments; cloud administrator on cloud deployments.  Upload a chunk of a domain-wide image using the resumable upload protocol. Creates the image record on the first chunk if it does not yet exist.
+// **Required role:** Domain administrator on on-site deployments; cloud administrator on cloud deployments.  Uploads one chunk of a file as a domain-level image: one that belongs to no project or instance and is available across your domain. Requires a domain administrator (on-site) or cloud administrator. Works like `v3PutProjectImageUpload`: you choose the image ID (a new random UUID), the record is created on the first chunk, and `type` and `name` in the path set the image type and name. A domain-level `fw` image is offered as a choice when anyone in the domain creates a device of the matching model, without an install step. The result is the same as `POST /v3/images` with no `projectId` or `instanceId` followed by `PUT /v3/images/{imageId}/file`, which applies the same administrator rule to chunk uploads.
 //
 object_t*
 DomainAPI_v3PutDomainImageUpload(apiClient_t *apiClient, char *type, char *imageId, char *name, binary_t* body, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, char *corelliumChecksum, char *flavor, char *x_corellium_image_encoding, int *x_corellium_image_encapsulated, double *x_corellium_total_file_size, char *x_corellium_image_password)
@@ -856,7 +856,7 @@ DomainAPI_v3PutDomainImageUpload(apiClient_t *apiClient, char *type, char *image
 
     // uncomment below to debug the error response
     //if (apiClient->response_code == 200) {
-    //    printf("%s\n","Chunk accepted. The body is an empty JSON object.");
+    //    printf("%s\n","Chunk stored. The body is an empty JSON object. Send the next chunk; the image is finished when the last chunk arrives.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
@@ -864,11 +864,11 @@ DomainAPI_v3PutDomainImageUpload(apiClient_t *apiClient, char *type, char *image
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Domain administrator permissions required on on-site deployments; cloud administrator permissions required on cloud deployments.");
+    //    printf("%s\n","Domain administrator permissions required on on-site deployments; cloud administrator permissions required on cloud deployments. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {

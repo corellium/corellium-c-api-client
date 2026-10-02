@@ -35,7 +35,7 @@ DomainAPI_v3DeleteDomainWelcomeMessage(apiClient_t *apiClient);
 
 // Get image upload status
 //
-// **Required role:** Domain administrator on on-site deployments; cloud administrator on cloud deployments.  Check resumable upload status for a domain-wide image or download the image file.
+// **Required role:** Domain administrator on on-site deployments; cloud administrator on cloud deployments.  Checks the progress of a chunked upload made with `v3PutDomainImageUpload`, or downloads the finished file. With chunk parameters (`resumableChunkNumber` and friends) it returns 200 if that chunk is already stored and 204 if it still needs to be sent; without them it downloads the image file.
 //
 binary_t*
 DomainAPI_v3GetDomainImageUpload(apiClient_t *apiClient, char *type, char *imageId, char *name, double *resumableChunkNumber);
@@ -51,7 +51,7 @@ DomainAPI_v3GetDomainWelcomeMessage(apiClient_t *apiClient);
 
 // List domain-level firmware images
 //
-// **Required role:** Domain administrator.  Lists firmware images that are not in a project or an instance, one entry for each flavor. The server filters the list for your domain.
+// **Required role:** Domain administrator.  Lists the firmware images uploaded at domain level (not in a project or instance), one entry per device model. Requires a domain administrator. Use it to find the `imageId` of a domain firmware upload, for example to delete it with `DELETE /v3/images/{imageId}`. These images also appear in `GET /v3/models/{model}/software` for the matching model.
 //
 domain_software_list_t*
 DomainAPI_v3ListDomainSoftware(apiClient_t *apiClient, double *limit, double *offset);
@@ -67,7 +67,7 @@ DomainAPI_v3PatchDomainWelcomeMessage(apiClient_t *apiClient, patch_domain_welco
 
 // Upload image chunk
 //
-// **Required role:** Domain administrator on on-site deployments; cloud administrator on cloud deployments.  Upload a chunk of a domain-wide image using the resumable upload protocol. Creates the image record on the first chunk if it does not yet exist.
+// **Required role:** Domain administrator on on-site deployments; cloud administrator on cloud deployments.  Uploads one chunk of a file as a domain-level image: one that belongs to no project or instance and is available across your domain. Requires a domain administrator (on-site) or cloud administrator. Works like `v3PutProjectImageUpload`: you choose the image ID (a new random UUID), the record is created on the first chunk, and `type` and `name` in the path set the image type and name. A domain-level `fw` image is offered as a choice when anyone in the domain creates a device of the matching model, without an install step. The result is the same as `POST /v3/images` with no `projectId` or `instanceId` followed by `PUT /v3/images/{imageId}/file`, which applies the same administrator rule to chunk uploads.
 //
 object_t*
 DomainAPI_v3PutDomainImageUpload(apiClient_t *apiClient, char *type, char *imageId, char *name, binary_t* body, double *resumableChunkNumber, double *resumableChunkSize, double *resumableCurrentChunkSize, double *resumableTotalSize, double *resumableTotalChunks, char *corelliumChecksum, char *flavor, char *x_corellium_image_encoding, int *x_corellium_image_encapsulated, double *x_corellium_total_file_size, char *x_corellium_image_password);

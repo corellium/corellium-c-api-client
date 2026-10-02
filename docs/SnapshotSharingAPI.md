@@ -15,6 +15,8 @@ Method | HTTP request | Description
 ```c
 // Accept a shared snapshot
 //
+// Checks that you may use a snapshot someone shared with you, using the access code they gave you (and the password, for `passwordPublicLink`). Returns the snapshot.  To create a device from it, call `POST /v3/instances` with `sharedSnapshot` set to the snapshot's `id` (and `sharedSnapshotPassword` for password-protected shares). Returns 403 if the snapshot is not shared with you, for example it is limited to another domain or you are not on its member list.
+//
 snapshot_t* SnapshotSharingAPI_v3AcceptSharedSnapshot(apiClient_t *apiClient, accept_snapshot_body_t *accept_snapshot_body);
 ```
 
@@ -75,7 +77,7 @@ void
 ```c
 // Fetch shared snapshots
 //
-// Fetch snapshots shared with and shared by the requesting user.
+// Lists snapshots involving you: `sharedWithUser` holds snapshots other people shared with you, and `sharedByUser` holds snapshots you shared. Use it to find a snapshot to create a device from, or to review what you are sharing.
 //
 shared_snapshots_response_t* SnapshotSharingAPI_v3GetSharedSnapshots(apiClient_t *apiClient);
 ```
@@ -105,7 +107,7 @@ Name | Type | Description  | Notes
 ```c
 // Set member list
 //
-// Sets the list of members who have access to the snapshot.
+// Sets who may use a snapshot shared by email invitation: send the full list of members, by email address or user ID. The list replaces the previous one. If the snapshot was not shared yet, this shares it with sharing type `emailInvite`. Returns the snapshot with its updated `sharing` details.
 //
 snapshot_t* SnapshotSharingAPI_v3SetSnapshotPermissions(apiClient_t *apiClient, char *snapshotId, set_snapshot_permissions_body_t *set_snapshot_permissions_body);
 ```
@@ -137,7 +139,7 @@ Name | Type | Description  | Notes
 ```c
 // Create or update snapshot sharing
 //
-// Creates or updates the sharing configuration for a snapshot.
+// Shares one of your snapshots so other people can create devices from it, or stops sharing it. Choose who can use it with `sharingType` (see `SnapshotSharingType`); for `passwordPublicLink` also set `password`. The response is the snapshot with its `sharing` details, including the `accessCode` to give to the people you share with. Send `notShared` to stop sharing. Returns 403 if snapshot sharing, or that sharing type, is not enabled for your domain or license.
 //
 snapshot_t* SnapshotSharingAPI_v3ShareSnapshot(apiClient_t *apiClient, char *snapshotId, share_snapshot_body_t *share_snapshot_body);
 ```

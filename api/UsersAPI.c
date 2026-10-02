@@ -9,7 +9,7 @@
 
 // Agree to terms
 //
-// Consent to the current terms and conditions.
+// Records that you, the signed-in user, accept the current terms and conditions, and returns the time of agreement. The web interface calls this when it shows the terms; call it yourself if your domain requires agreement before using the platform.
 //
 agreed_ack_t*
 UsersAPI_v3AgreeToTerms(apiClient_t *apiClient)
@@ -53,7 +53,7 @@ UsersAPI_v3AgreeToTerms(apiClient_t *apiClient)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     agreed_ack_t *elementToReturn = NULL;
@@ -87,7 +87,7 @@ end:
 
 // Change password
 //
-// Change a password, authenticated solely by the old password.
+// Changes a password when you know the current one. Needs no sign-in: send the user's ID in `user`, the current password in `oldPassword`, and the new one in `newPassword`. Returns 204 on success and 403 if the old password is wrong. If you have forgotten the password, use the reset flow instead (`v3SendResetLink`).
 //
 void
 UsersAPI_v3ChangePassword(apiClient_t *apiClient, change_password_body_t *change_password_body)
@@ -138,11 +138,11 @@ UsersAPI_v3ChangePassword(apiClient_t *apiClient, change_password_body_t *change
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:
@@ -167,7 +167,7 @@ end:
 
 // Create a user
 //
-// **Required role:** Domain administrator.  Creates a new user in the caller's domain.
+// **Required role:** Domain administrator.  Creates a user account in your domain directly, with a username and password you choose, without sending an invitation. Requires a domain administrator. Returns 201 with the new user's ID. To let people set their own password instead, invite them with `POST /v3/invites`. A new user has no project access until you grant it with the Roles endpoints or add them to a team.
 //
 user_created_t*
 UsersAPI_v3CreateUser(apiClient_t *apiClient, create_user_body_t *create_user_body)
@@ -218,11 +218,11 @@ UsersAPI_v3CreateUser(apiClient_t *apiClient, create_user_body_t *create_user_bo
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Domain administrator permissions required.");
+    //    printf("%s\n","Domain administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     user_created_t *elementToReturn = NULL;
@@ -313,7 +313,7 @@ UsersAPI_v3DeleteUser(apiClient_t *apiClient, char *userId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Domain administrator permissions required.");
+    //    printf("%s\n","Domain administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:
@@ -334,7 +334,7 @@ end:
 
 // Get reset link info
 //
-// Return account info associated with a password reset token.
+// Step 2 (optional) of resetting a forgotten password: checks the token from a reset email and returns the account it belongs to (user ID, username and domain), so a reset page can show whose password is being changed. Needs no sign-in. Returns 400 or 401 if the token is missing, invalid or expired.
 //
 reset_link_info_t*
 UsersAPI_v3GetResetLinkInfo(apiClient_t *apiClient, get_reset_link_info_body_t *get_reset_link_info_body)
@@ -393,7 +393,7 @@ UsersAPI_v3GetResetLinkInfo(apiClient_t *apiClient, get_reset_link_info_body_t *
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     reset_link_info_t *elementToReturn = NULL;
@@ -432,7 +432,7 @@ end:
 
 // Update a user
 //
-// Updates a user. Only cluster administrators may set the clusterAdministrator flag.
+// Changes a user's account details, such as their name, display label, email or password. Send only the fields you want to change. Only cluster administrators may set or change `clusterAdministrator`, which gives a user control over the whole cluster.
 //
 void
 UsersAPI_v3PatchUser(apiClient_t *apiClient, char *userId, patch_user_body_t *patch_user_body)
@@ -495,11 +495,11 @@ UsersAPI_v3PatchUser(apiClient_t *apiClient, char *userId, patch_user_body_t *pa
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:
@@ -525,7 +525,7 @@ end:
 
 // Reset password
 //
-// Reset a password using a reset token.
+// Step 3 of resetting a forgotten password. Send the `token` from the reset email, the `newPassword`, and, if the account has two-factor sign-in turned on, a current six-digit code in `totpToken`. Returns 204 when the password has been changed; sign in with the new password.  **Reset flow:** 1. `v3SendResetLink` with the account's email address. 2. Optionally `v3GetResetLinkInfo` with the token from the email, to show which account is being reset. 3. `v3ResetPassword` (this call).  Returns 401 if the token is invalid or expired, or the two-factor code is wrong.
 //
 void
 UsersAPI_v3ResetPassword(apiClient_t *apiClient, reset_password_body_t *reset_password_body)
@@ -584,7 +584,7 @@ UsersAPI_v3ResetPassword(apiClient_t *apiClient, reset_password_body_t *reset_pa
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:
@@ -609,7 +609,7 @@ end:
 
 // Send a password reset link
 //
-// Sends a password reset link to the specified user.
+// Step 1 of resetting a forgotten password: emails a password reset link to the given address, if it belongs to an account in the domain you are calling. Needs no sign-in. Always returns 204, whether or not the address matched an account, so the response does not reveal which emails are registered. The link contains the token used by `v3ResetPassword`.
 //
 void
 UsersAPI_v3SendResetLink(apiClient_t *apiClient, send_reset_link_body_t *send_reset_link_body)
@@ -664,7 +664,7 @@ UsersAPI_v3SendResetLink(apiClient_t *apiClient, send_reset_link_body_t *send_re
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:

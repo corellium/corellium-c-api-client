@@ -11,7 +11,7 @@
 
 // Get Hypertune state hash
 //
-// Returns the current Hypertune state hash for the cluster.
+// Returns a short fingerprint of the current feature-flag settings for this cluster. The web interface compares it with its cached copy and downloads the full settings with `v3HypertuneInit` only when it changes. Most API clients do not need this.
 //
 hypertune_hash_response_t*
 HypertuneAPI_v3HypertuneHash(apiClient_t *apiClient, char *token, char *branch, char *body);
@@ -19,7 +19,7 @@ HypertuneAPI_v3HypertuneHash(apiClient_t *apiClient, char *token, char *branch, 
 
 // Get Hypertune initialization data
 //
-// Returns the Hypertune initialization data used by the SDK.
+// Returns the full feature-flag settings for this cluster, which the web interface uses to decide which features to show. Most API clients do not need this; use `GET /v3/config` to learn what a deployment supports.
 //
 hypertune_init_response_t*
 HypertuneAPI_v3HypertuneInit(apiClient_t *apiClient, char *token, char *branch, char *body);

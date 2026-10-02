@@ -9,6 +9,8 @@
 
 // Create instance snapshot
 //
+// Saves a snapshot of the device's current state, so you can return to it later with `v3RestoreInstanceSnapshot`. Take one before a risky change (an app install, a jailbreak step, an OS change) to be able to undo it.  **Running or off.** A device that is off can always be snapshotted. A running device can only be snapshotted if its model supports live snapshots; otherwise the request fails with 400, so stop the device first (`v3StopInstance`).  The snapshot is saved in the background: the response is the new snapshot with status `creating`. Poll `v3GetInstanceSnapshot` until it is ready. Each device can keep a limited number of snapshots (`snapshotLimit` in `GET /v3/config`); at the limit, delete an old one first.
+//
 snapshot_t*
 SnapshotsAPI_v3CreateInstanceSnapshot(apiClient_t *apiClient, char *instanceId, create_snapshot_body_t *create_snapshot_body)
 {
@@ -74,7 +76,7 @@ SnapshotsAPI_v3CreateInstanceSnapshot(apiClient_t *apiClient, char *instanceId, 
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     snapshot_t *elementToReturn = NULL;
@@ -182,7 +184,7 @@ SnapshotsAPI_v3DeleteInstanceSnapshot(apiClient_t *apiClient, char *instanceId, 
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:
@@ -260,7 +262,7 @@ SnapshotsAPI_v3DeleteSnapshot(apiClient_t *apiClient, char *snapshotId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:
@@ -281,7 +283,7 @@ end:
 
 // Get instance snapshot
 //
-// Get instance snapshot by ID.
+// Returns one snapshot of this device, including its status. Poll it after `v3CreateInstanceSnapshot` until the snapshot has finished `creating`.
 //
 snapshot_t*
 SnapshotsAPI_v3GetInstanceSnapshot(apiClient_t *apiClient, char *instanceId, char *snapshotId)
@@ -345,7 +347,7 @@ SnapshotsAPI_v3GetInstanceSnapshot(apiClient_t *apiClient, char *instanceId, cha
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -385,7 +387,7 @@ end:
 
 // Get snapshot
 //
-// Get snapshot by ID.
+// Returns one snapshot by its ID, including its status and sharing details. Works for snapshots of your devices; use `v3AcceptSharedSnapshot` for snapshots shared with you.
 //
 snapshot_t*
 SnapshotsAPI_v3GetSnapshot(apiClient_t *apiClient, char *snapshotId)
@@ -437,7 +439,7 @@ SnapshotsAPI_v3GetSnapshot(apiClient_t *apiClient, char *snapshotId)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -475,6 +477,8 @@ end:
 }
 
 // List instance snapshots
+//
+// Lists the snapshots saved for one device, with each snapshot's ID, name and status. A snapshot is a saved copy of the device's storage at a moment in time; restore it with `v3RestoreInstanceSnapshot` to put the device back to that state. Results are paginated with `limit` and `offset`.
 //
 instance_snapshots_list_t*
 SnapshotsAPI_v3ListInstanceSnapshots(apiClient_t *apiClient, char *instanceId, double *limit, double *offset)
@@ -552,7 +556,7 @@ SnapshotsAPI_v3ListInstanceSnapshots(apiClient_t *apiClient, char *instanceId, d
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
@@ -614,6 +618,8 @@ end:
 }
 
 // Update an instance snapshot
+//
+// Renames a snapshot. Send the new `name`. Returns the updated snapshot.
 //
 snapshot_t*
 SnapshotsAPI_v3PatchInstanceSnapshot(apiClient_t *apiClient, char *instanceId, char *snapshotId, create_snapshot_body_t *create_snapshot_body)
@@ -692,7 +698,7 @@ SnapshotsAPI_v3PatchInstanceSnapshot(apiClient_t *apiClient, char *instanceId, c
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     snapshot_t *elementToReturn = NULL;
@@ -733,7 +739,7 @@ end:
 
 // Restore instance snapshot
 //
-// Restore the specified instance to the given snapshot.
+// Puts the device back to the state saved in a snapshot, replacing its current storage. Anything changed since the snapshot was taken is lost; take a new snapshot first if you want to keep it. The restore runs in the background and starts the device from the snapshot; returns 204 once it has been accepted. Poll `v3GetInstanceState` until the device is `on`.
 //
 void
 SnapshotsAPI_v3RestoreInstanceSnapshot(apiClient_t *apiClient, char *instanceId, char *snapshotId)
@@ -801,7 +807,7 @@ SnapshotsAPI_v3RestoreInstanceSnapshot(apiClient_t *apiClient, char *instanceId,
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:
@@ -822,6 +828,8 @@ end:
 }
 
 // Update snapshot name
+//
+// Renames a snapshot. Send the new `name`. Returns the updated snapshot.
 //
 snapshot_t*
 SnapshotsAPI_v3UpdateSnapshot(apiClient_t *apiClient, char *snapshotId, v3_update_snapshot_request_t *v3_update_snapshot_request)
@@ -884,7 +892,7 @@ SnapshotsAPI_v3UpdateSnapshot(apiClient_t *apiClient, char *snapshotId, v3_updat
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {

@@ -53,7 +53,7 @@ AgentAPI_v3GetAdbAuthAgent(apiClient_t *apiClient, char *instanceId);
 
 // Check if app subsystem is ready
 //
-// Check if the app subsystem on the VM is ready.
+// Checks whether the device's agent is ready to manage apps. The agent is a helper service running inside the device that carries out the Agent calls (installing and running apps, reading and writing files, and so on). It starts after the device boots, so a device that just turned `on` may not be ready yet. Call this first and wait until it reports ready before using the other Agent endpoints.
 //
 agent_app_ready_response_t*
 AgentAPI_v3GetAppReadyAgent(apiClient_t *apiClient, char *instanceId);
@@ -69,7 +69,7 @@ AgentAPI_v3GetContainerHealthAgent(apiClient_t *apiClient, char *instanceId, cha
 
 // Download a file from VM
 //
-// Download a file from the VM filesystem.
+// Downloads one file from the device's filesystem, given its full path on the device (for example `/tmp/log.txt`). The response body is the raw file. For large files, use `v3PreauthorizeFileDownloadAgent` so the download does not have to pass through your SDK client.
 //
 binary_t*
 AgentAPI_v3GetFileAgent(apiClient_t *apiClient, char *instanceId, char *filePath);
@@ -101,7 +101,7 @@ AgentAPI_v3GetRemoteItStatusAgent(apiClient_t *apiClient, char *instanceId);
 
 // Get a temp file path on VM
 //
-// Returns a unique temporary file path on the VM filesystem guaranteed to be available at the time of invocation.
+// Returns an unused temporary file path on the device, free at the moment of the call. Use it as the target for `v3UploadFileAgent`, for example to stage an app package before `v3InstallAgent`.
 //
 agent_temp_file_response_t*
 AgentAPI_v3GetTempFileAgent(apiClient_t *apiClient, char *instanceId);
@@ -109,7 +109,7 @@ AgentAPI_v3GetTempFileAgent(apiClient_t *apiClient, char *instanceId);
 
 // Install app at path
 //
-// Installs the app located at path, which must be present on the VM filesystem.
+// Installs an app from a package file that is already on the device, for example an `.ipa` (iOS) or `.apk` (Android). Returns 204 once installed.  **Installing an app from your computer:** 1. `v3GetAppReadyAgent`: wait until the agent is ready. 2. `v3GetTempFileAgent`: get a free temporary path on the device. 3. `v3UploadFileAgent`: upload the package to that path. 4. `v3InstallAgent` (this call) with that `path`. 5. `v3ListAppsAgent` to find the app's bundle ID, then `v3RunAppAgent` to start it.
 //
 void
 AgentAPI_v3InstallAgent(apiClient_t *apiClient, char *instanceId, agent_install_body_t *agent_install_body);
@@ -141,7 +141,7 @@ AgentAPI_v3InstallRemoteItAgent(apiClient_t *apiClient, char *instanceId);
 
 // Kill an app
 //
-// Kill a running app on the VM.
+// Force-quits a running app on the device, identified by its bundle ID. The app stays installed; start it again with `v3RunAppAgent`.
 //
 void
 AgentAPI_v3KillAppAgent(apiClient_t *apiClient, char *instanceId, char *bundleId);
@@ -165,7 +165,7 @@ AgentAPI_v3ListAppIconsAgent(apiClient_t *apiClient, char *instanceId, char *bun
 
 // List apps
 //
-// List installed apps on the VM.
+// Lists the apps installed on the device, with each app's bundle ID (for example `com.android.egg`) and name. The bundle ID is what the run, kill and uninstall calls need.
 //
 agent_apps_list_t*
 AgentAPI_v3ListAppsAgent(apiClient_t *apiClient, char *instanceId, char *loadIcons);
@@ -173,7 +173,7 @@ AgentAPI_v3ListAppsAgent(apiClient_t *apiClient, char *instanceId, char *loadIco
 
 // List apps status
 //
-// List running status for all installed apps on the VM.
+// Returns, for every installed app, whether it is currently running. Use it to check that an app started after `v3RunAppAgent`, or stopped after `v3KillAppAgent`.
 //
 agent_apps_status_list_t*
 AgentAPI_v3ListAppsStatusAgent(apiClient_t *apiClient, char *instanceId);
@@ -213,7 +213,7 @@ AgentAPI_v3LockAgent(apiClient_t *apiClient, char *instanceId);
 
 // Pre-authorize an archive download from VM
 //
-// Return a token for downloading selected files and directories as a server-generated ZIP archive.
+// Returns a short-lived token for downloading several files and folders from the device as one ZIP archive, built on the server. List the paths to include in the body, then download with `GET /v1/preauthed/{token}/{filename}`. The token expires with your current session.
 //
 agent_file_download_token_t*
 AgentAPI_v3PreauthorizeFileArchiveDownloadAgent(apiClient_t *apiClient, char *instanceId, agent_file_archive_download_body_t *agent_file_archive_download_body);
@@ -221,7 +221,7 @@ AgentAPI_v3PreauthorizeFileArchiveDownloadAgent(apiClient_t *apiClient, char *in
 
 // Pre-authorize a file download from VM
 //
-// Return a token for downloading a file directly without buffering it in the SDK client.
+// Returns a short-lived token for downloading one device file directly (for example from a browser or download manager) without an `Authorization` header and without buffering it in your SDK client. Download it with `GET /v1/preauthed/{token}/{filename}`. The token works only for this file and expires with your current session.
 //
 agent_file_download_token_t*
 AgentAPI_v3PreauthorizeFileDownloadAgent(apiClient_t *apiClient, char *instanceId, char *filePath);
@@ -229,7 +229,7 @@ AgentAPI_v3PreauthorizeFileDownloadAgent(apiClient_t *apiClient, char *instanceI
 
 // Run an app
 //
-// Run an installed app on the VM.
+// Launches an installed app on the device, identified by its bundle ID from `v3ListAppsAgent`. Returns 204 once the launch has been requested; check `v3ListAppsStatusAgent` to confirm it is running.
 //
 void
 AgentAPI_v3RunAppAgent(apiClient_t *apiClient, char *instanceId, char *bundleId);
@@ -261,7 +261,7 @@ AgentAPI_v3SetDevicePropertiesAgent(apiClient_t *apiClient, char *instanceId, ag
 
 // Change attributes of a file on VM
 //
-// Change attributes (path, mode, ownership) of a file on the VM filesystem.
+// Changes a file on the device: move or rename it (`path`), change its permissions (`mode`), or change its owner. Send only what you want to change.
 //
 void
 AgentAPI_v3SetFileAttributesAgent(apiClient_t *apiClient, char *instanceId, char *filePath, agent_file_attributes_body_t *agent_file_attributes_body);
@@ -325,7 +325,7 @@ AgentAPI_v3StopContainerAppAgent(apiClient_t *apiClient, char *instanceId, char 
 
 // Uninstall an app
 //
-// Uninstall an app from the VM.
+// Removes an app from the device, identified by its bundle ID.
 //
 void
 AgentAPI_v3UninstallAppAgent(apiClient_t *apiClient, char *instanceId, char *bundleId);
@@ -357,7 +357,7 @@ AgentAPI_v3UnlockAgent(apiClient_t *apiClient, char *instanceId);
 
 // Upload a file to VM
 //
-// Upload a file to the VM filesystem at the specified path.
+// Writes a file onto the device's filesystem at the given full path, replacing any file already there. Send the raw file bytes as the body. Use `v3GetTempFileAgent` first if you just need somewhere to put a file, for example an app package to install.
 //
 void
 AgentAPI_v3UploadFileAgent(apiClient_t *apiClient, char *instanceId, char *filePath, binary_t* body);

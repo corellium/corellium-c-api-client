@@ -1,7 +1,7 @@
 /*
  * web_player_features.h
  *
- * Enabled UI features for the session.
+ * Which parts of the device interface the viewer may use, for example &#x60;apps&#x60;, &#x60;files&#x60; or &#x60;console&#x60;. Only features set to true are available in the session.
  */
 
 #ifndef _web_player_features_H_

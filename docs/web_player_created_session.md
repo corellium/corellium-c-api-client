@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **identifier** | **char \*** | Session identifier. | 
-**token** | **char \*** | Session JWT. | 
+**token** | **char \*** | Session token to hand to the Web Player in your page. It grants access only to this one device and only to the enabled features, until &#x60;expiration&#x60;. | 
 **expiration** | **char \*** | Session expiration timestamp. | 
 **domain** | [**web_player_session_domain_t**](web_player_session_domain.md) \* |  | [optional] 
 **time** | **double** | Server timestamp (ms) when the session was created. | [optional] 

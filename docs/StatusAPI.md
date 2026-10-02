@@ -4,14 +4,14 @@ All URIs are relative to *https://app.corellium.com/api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**StatusAPI_v3Ready**](StatusAPI.md#StatusAPI_v3Ready) | **GET** /v3/ready | API status
+[**StatusAPI_v3Ready**](StatusAPI.md#StatusAPI_v3Ready) | **GET** /v3/ready | Check that the API is ready
 
 
 # **StatusAPI_v3Ready**
 ```c
-// API status
+// Check that the API is ready
 //
-// Check if the API is ready for queries.
+// Health check. Returns 204 (no body) when the API is up and accepting requests, and 503 while it is shutting down. Needs no sign-in, so monitoring tools and scripts can call it before doing real work, for example to wait for a deployment to come back after an upgrade.
 //
 void StatusAPI_v3Ready(apiClient_t *apiClient);
 ```

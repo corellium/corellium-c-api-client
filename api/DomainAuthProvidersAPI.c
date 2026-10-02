@@ -76,7 +76,7 @@ DomainAuthProvidersAPI_v3CreateDomainAuthProvider(apiClient_t *apiClient, char *
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Domain administrator permissions required.");
+    //    printf("%s\n","Domain administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     create_domain_auth_provider_response_t *elementToReturn = NULL;
@@ -180,11 +180,11 @@ DomainAuthProvidersAPI_v3DeleteDomainAuthProvider(apiClient_t *apiClient, char *
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 401) {
-    //    printf("%s\n","Authentication required.");
+    //    printf("%s\n","Not signed in: the &#x60;Authorization: Bearer &lt;token&gt;&#x60; header is missing, or the token is invalid or expired. Get a new token and retry.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Domain administrator permissions required.");
+    //    printf("%s\n","Domain administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:
@@ -284,7 +284,7 @@ DomainAuthProvidersAPI_v3ListDomainAuthProviders(apiClient_t *apiClient, char *d
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Domain administrator permissions required.");
+    //    printf("%s\n","Domain administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     domain_auth_providers_list_t *elementToReturn = NULL;
@@ -422,7 +422,7 @@ DomainAuthProvidersAPI_v3PatchDomainAuthProvider(apiClient_t *apiClient, char *d
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Domain administrator permissions required.");
+    //    printf("%s\n","Domain administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     domain_auth_provider_response_t *elementToReturn = NULL;
@@ -542,7 +542,7 @@ DomainAuthProvidersAPI_v3UpdateDomainAuthProvider(apiClient_t *apiClient, char *
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Domain administrator permissions required.");
+    //    printf("%s\n","Domain administrator permissions required. Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     domain_auth_provider_response_t *elementToReturn = NULL;

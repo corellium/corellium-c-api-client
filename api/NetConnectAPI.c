@@ -9,7 +9,7 @@
 
 // Create a new Network Connection
 //
-// You must have the domain administrator role to create a network connection. VLAN networks are only supported in bridged networking mode.
+// Creates a network connection that projects can route their outbound device traffic through. Pick a provider type from `v3ListNetworkProviders` and supply its settings; for a VLAN, pick a physical interface from `v3ListNetworkInterfaces`. VLAN networks are only supported in bridged networking mode. Afterwards, attach it to a project by setting the project's `settings.connection`. You must have the domain administrator role to create a network connection.
 //
 list_t*
 NetConnectAPI_v3CreateNetworkConnection(apiClient_t *apiClient, object_t *body)
@@ -60,11 +60,11 @@ NetConnectAPI_v3CreateNetworkConnection(apiClient_t *apiClient, object_t *body)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     list_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
@@ -180,7 +180,7 @@ NetConnectAPI_v3DeleteNetworkConnection(apiClient_t *apiClient, char *id, v3_del
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //No return type
 end:
@@ -206,7 +206,7 @@ end:
 
 // Fetch an existing Network Connection
 //
-// Returns the configuration and per-project statuses for a single network connection. You must have the domain administrator or project administrator role to fetch a network connection.
+// Returns one network connection: its settings and, for each project using it, the connection's current state there. A network connection routes a project's outbound device traffic through a network you control, such as a VPN or a VLAN. You must have the domain administrator or project administrator role to fetch a network connection.
 //
 object_t*
 NetConnectAPI_v3GetNetworkConnection(apiClient_t *apiClient, char *id)
@@ -258,11 +258,11 @@ NetConnectAPI_v3GetNetworkConnection(apiClient_t *apiClient, char *id)
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 404) {
-    //    printf("%s\n","Resource not found.");
+    //    printf("%s\n","The resource does not exist, or you cannot see it.");
     //}
     //nonprimitive not container
     object_t *elementToReturn = NULL;
@@ -297,7 +297,7 @@ end:
 
 // List available network connections
 //
-// You must have the domain administrator or project administrator role to list network connections.
+// Lists the network connections set up in your domain. A network connection routes a project's outbound device traffic through a network you control, such as a VPN or a VLAN; a project uses one when its `settings.connection` is set to the connection's ID (see `PATCH /v3/projects/{projectId}`). You must have the domain administrator or project administrator role to list network connections.
 //
 network_connections_t*
 NetConnectAPI_v3ListNetworkConnections(apiClient_t *apiClient, double *limit, double *offset)
@@ -363,7 +363,7 @@ NetConnectAPI_v3ListNetworkConnections(apiClient_t *apiClient, double *limit, do
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     network_connections_t *elementToReturn = NULL;
@@ -421,7 +421,7 @@ end:
 
 // List available physical network interfaces
 //
-// Lists available physical network interfaces that can be used for VLAN configuration. You must have the domain administrator role to list network interfaces.
+// Lists the physical network ports on the server that can carry a VLAN network connection. Use one of these names when creating a VLAN connection. You must have the domain administrator role to list network interfaces.
 //
 network_interfaces_t*
 NetConnectAPI_v3ListNetworkInterfaces(apiClient_t *apiClient, double *limit, double *offset)
@@ -487,7 +487,7 @@ NetConnectAPI_v3ListNetworkInterfaces(apiClient_t *apiClient, double *limit, dou
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     network_interfaces_t *elementToReturn = NULL;
@@ -611,7 +611,7 @@ NetConnectAPI_v3ListNetworkProviders(apiClient_t *apiClient, double *limit, doub
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     network_connection_providers_t *elementToReturn = NULL;
@@ -732,11 +732,11 @@ NetConnectAPI_v3PartialUpdateNetworkConnection(apiClient_t *apiClient, char *id,
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     object_t *elementToReturn = NULL;
@@ -776,7 +776,7 @@ end:
 
 // Update Network Connection
 //
-// You must have the domain administrator role to update a network connection.
+// Replaces all of a network connection's settings. To change only some of them, use `v3PartialUpdateNetworkConnection`. You must have the domain administrator role to update a network connection.
 //
 object_t*
 NetConnectAPI_v3UpdateNetworkConnection(apiClient_t *apiClient, char *id, update_network_connection_body_t *update_network_connection_body)
@@ -839,11 +839,11 @@ NetConnectAPI_v3UpdateNetworkConnection(apiClient_t *apiClient, char *id, update
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 400) {
-    //    printf("%s\n","Invalid request.");
+    //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
-    //    printf("%s\n","Permission denied.");
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
     //nonprimitive not container
     object_t *elementToReturn = NULL;
