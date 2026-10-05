@@ -130,29 +130,26 @@ cJSON *agent_app_convertToJSON(agent_app_t *agent_app) {
 
 
     // agent_app->running
-    if (!agent_app->running) {
-        goto fail;
-    }
+    if(agent_app->running) {
     if(cJSON_AddBoolToObject(item, "running", agent_app->running) == NULL) {
     goto fail; //Bool
+    }
     }
 
 
     // agent_app->disk_usage
-    if (!agent_app->disk_usage) {
-        goto fail;
-    }
+    if(agent_app->disk_usage) {
     if(cJSON_AddNumberToObject(item, "diskUsage", agent_app->disk_usage) == NULL) {
     goto fail; //Numeric
+    }
     }
 
 
     // agent_app->date
-    if (!agent_app->date) {
-        goto fail;
-    }
+    if(agent_app->date) {
     if(cJSON_AddNumberToObject(item, "date", agent_app->date) == NULL) {
     goto fail; //Numeric
+    }
     }
 
 
@@ -183,20 +180,18 @@ cJSON *agent_app_convertToJSON(agent_app_t *agent_app) {
 
 
     // agent_app->bundle_path
-    if (!agent_app->bundle_path) {
-        goto fail;
-    }
+    if(agent_app->bundle_path) {
     if(cJSON_AddStringToObject(item, "bundlePath", agent_app->bundle_path) == NULL) {
     goto fail; //String
+    }
     }
 
 
     // agent_app->bundle_data_path
-    if (!agent_app->bundle_data_path) {
-        goto fail;
-    }
+    if(agent_app->bundle_data_path) {
     if(cJSON_AddStringToObject(item, "bundleDataPath", agent_app->bundle_data_path) == NULL) {
     goto fail; //String
+    }
     }
 
 
@@ -257,14 +252,11 @@ agent_app_t *agent_app_parseFromJSON(cJSON *agent_appJSON){
     if (cJSON_IsNull(running)) {
         running = NULL;
     }
-    if (!running) {
-        goto end;
-    }
-
-    
+    if (running) { 
     if(!cJSON_IsBool(running))
     {
     goto end; //Bool
+    }
     }
 
     // agent_app->disk_usage
@@ -272,14 +264,11 @@ agent_app_t *agent_app_parseFromJSON(cJSON *agent_appJSON){
     if (cJSON_IsNull(disk_usage)) {
         disk_usage = NULL;
     }
-    if (!disk_usage) {
-        goto end;
-    }
-
-    
+    if (disk_usage) { 
     if(!cJSON_IsNumber(disk_usage))
     {
     goto end; //Numeric
+    }
     }
 
     // agent_app->date
@@ -287,14 +276,11 @@ agent_app_t *agent_app_parseFromJSON(cJSON *agent_appJSON){
     if (cJSON_IsNull(date)) {
         date = NULL;
     }
-    if (!date) {
-        goto end;
-    }
-
-    
+    if (date) { 
     if(!cJSON_IsNumber(date))
     {
     goto end; //Numeric
+    }
     }
 
     // agent_app->application_type
@@ -344,14 +330,11 @@ agent_app_t *agent_app_parseFromJSON(cJSON *agent_appJSON){
     if (cJSON_IsNull(bundle_path)) {
         bundle_path = NULL;
     }
-    if (!bundle_path) {
-        goto end;
-    }
-
-    
-    if(!cJSON_IsString(bundle_path))
+    if (bundle_path) { 
+    if(!cJSON_IsString(bundle_path) && !cJSON_IsNull(bundle_path))
     {
     goto end; //String
+    }
     }
 
     // agent_app->bundle_data_path
@@ -359,14 +342,11 @@ agent_app_t *agent_app_parseFromJSON(cJSON *agent_appJSON){
     if (cJSON_IsNull(bundle_data_path)) {
         bundle_data_path = NULL;
     }
-    if (!bundle_data_path) {
-        goto end;
-    }
-
-    
-    if(!cJSON_IsString(bundle_data_path))
+    if (bundle_data_path) { 
+    if(!cJSON_IsString(bundle_data_path) && !cJSON_IsNull(bundle_data_path))
     {
     goto end; //String
+    }
     }
 
     // agent_app->is_launchable
@@ -396,14 +376,14 @@ agent_app_t *agent_app_parseFromJSON(cJSON *agent_appJSON){
 
     agent_app_local_var = agent_app_create_internal (
         tags ? tagsList : NULL,
-        running->valueint,
-        disk_usage->valuedouble,
-        date->valuedouble,
+        running ? running->valueint : 0,
+        disk_usage ? disk_usage->valuedouble : 0,
+        date ? date->valuedouble : 0,
         strdup(application_type->valuestring),
         name && !cJSON_IsNull(name) ? strdup(name->valuestring) : NULL,
         strdup(bundle_id->valuestring),
-        strdup(bundle_path->valuestring),
-        strdup(bundle_data_path->valuestring),
+        bundle_path && !cJSON_IsNull(bundle_path) ? strdup(bundle_path->valuestring) : NULL,
+        bundle_data_path && !cJSON_IsNull(bundle_data_path) ? strdup(bundle_data_path->valuestring) : NULL,
         is_launchable ? is_launchable->valueint : 0,
         icon && !cJSON_IsNull(icon) ? strdup(icon->valuestring) : NULL
         );

@@ -1674,6 +1674,10 @@ AgentAPI_v3ListAppsAgent(apiClient_t *apiClient, char *instanceId, char *loadIco
     //if (apiClient->response_code == 403) {
     //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 500) {
+    //    printf("%s\n","The agent returned an invalid app list.");
+    //}
     //nonprimitive not container
     agent_apps_list_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
