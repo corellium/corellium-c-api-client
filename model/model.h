@@ -64,6 +64,7 @@ typedef struct model_t {
     int supports_custom_devicetree; //boolean
     int supports_custom_mmio; //boolean
     int supports_fvp; //boolean
+    int supports_corelliumd; //boolean
     int mast; //boolean
 
     int _library_owned; // Is the library responsible for freeing this object?
@@ -110,6 +111,7 @@ __attribute__((deprecated)) model_t *model_create(
     int supports_custom_devicetree,
     int supports_custom_mmio,
     int supports_fvp,
+    int supports_corelliumd,
     int mast
 );
 

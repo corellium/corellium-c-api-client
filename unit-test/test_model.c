@@ -66,6 +66,7 @@ model_t* instantiate_model(int include_optional) {
       true,
       false,
       false,
+      true,
       true
     );
   } else {
@@ -110,6 +111,7 @@ model_t* instantiate_model(int include_optional) {
       true,
       false,
       false,
+      true,
       true
     );
   }

@@ -57,6 +57,7 @@ Name | Type | Description | Notes
 **orientation** | **double** | Device orientation. | [optional] 
 **mast** | **int** | Whether MATRIX is enabled. | [optional] 
 **wan_access** | **int** | Whether WAN access is enabled. | [optional] 
+**has_corelliumd** | **int** | Whether corelliumd is running on the instance. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

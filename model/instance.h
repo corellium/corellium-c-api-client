@@ -87,6 +87,7 @@ typedef struct instance_t {
     double orientation; //numeric
     int mast; //boolean
     int wan_access; //boolean
+    int has_corelliumd; //boolean
 
     int _library_owned; // Is the library responsible for freeing this object?
 } instance_t;
@@ -145,7 +146,8 @@ __attribute__((deprecated)) instance_t *instance_create(
     instance_uefi_bootloader_t *uefi_bootloader,
     double orientation,
     int mast,
-    int wan_access
+    int wan_access,
+    int has_corelliumd
 );
 
 void instance_free(instance_t *instance);

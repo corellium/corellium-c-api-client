@@ -46,6 +46,7 @@ static model_t *model_create_internal(
     int supports_custom_devicetree,
     int supports_custom_mmio,
     int supports_fvp,
+    int supports_corelliumd,
     int mast
     ) {
     model_t *model_local_var = malloc(sizeof(model_t));
@@ -92,6 +93,7 @@ static model_t *model_create_internal(
     model_local_var->supports_custom_devicetree = supports_custom_devicetree;
     model_local_var->supports_custom_mmio = supports_custom_mmio;
     model_local_var->supports_fvp = supports_fvp;
+    model_local_var->supports_corelliumd = supports_corelliumd;
     model_local_var->mast = mast;
 
     model_local_var->_library_owned = 1;
@@ -139,6 +141,7 @@ __attribute__((deprecated)) model_t *model_create(
     int supports_custom_devicetree,
     int supports_custom_mmio,
     int supports_fvp,
+    int supports_corelliumd,
     int mast
     ) {
     return model_create_internal (
@@ -182,6 +185,7 @@ __attribute__((deprecated)) model_t *model_create(
         supports_custom_devicetree,
         supports_custom_mmio,
         supports_fvp,
+        supports_corelliumd,
         mast
         );
 }
@@ -670,6 +674,15 @@ cJSON *model_convertToJSON(model_t *model) {
         goto fail;
     }
     if(cJSON_AddBoolToObject(item, "supportsFvp", model->supports_fvp) == NULL) {
+    goto fail; //Bool
+    }
+
+
+    // model->supports_corelliumd
+    if (!model->supports_corelliumd) {
+        goto fail;
+    }
+    if(cJSON_AddBoolToObject(item, "supportsCorelliumd", model->supports_corelliumd) == NULL) {
     goto fail; //Bool
     }
 
@@ -1323,6 +1336,21 @@ model_t *model_parseFromJSON(cJSON *modelJSON){
     goto end; //Bool
     }
 
+    // model->supports_corelliumd
+    cJSON *supports_corelliumd = cJSON_GetObjectItemCaseSensitive(modelJSON, "supportsCorelliumd");
+    if (cJSON_IsNull(supports_corelliumd)) {
+        supports_corelliumd = NULL;
+    }
+    if (!supports_corelliumd) {
+        goto end;
+    }
+
+    
+    if(!cJSON_IsBool(supports_corelliumd))
+    {
+    goto end; //Bool
+    }
+
     // model->mast
     cJSON *mast = cJSON_GetObjectItemCaseSensitive(modelJSON, "mast");
     if (cJSON_IsNull(mast)) {
@@ -1380,6 +1408,7 @@ model_t *model_parseFromJSON(cJSON *modelJSON){
         supports_custom_devicetree->valueint,
         supports_custom_mmio->valueint,
         supports_fvp->valueint,
+        supports_corelliumd->valueint,
         mast->valueint
         );
 
