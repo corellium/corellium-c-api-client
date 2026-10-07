@@ -15,7 +15,7 @@ Method | HTTP request | Description
 //
 // Turns two-factor sign-in off for your account. Send your `password` and a current six-digit code (`totpToken`) from your authenticator app. On success a confirmation email is sent, signing in no longer needs a code, and the response is a fresh login result with a new session token. Returns 401 if the password or code is wrong.
 //
-totp_status_response_t* TOTPAPI_v3DisableTotp(apiClient_t *apiClient, totp_disable_body_t *totp_disable_body);
+login_result_t* TOTPAPI_v3DisableTotp(apiClient_t *apiClient, totp_disable_body_t *totp_disable_body);
 ```
 
 ### Parameters
@@ -26,7 +26,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[totp_status_response_t](totp_status_response.md) *
+[login_result_t](login_result.md) *
 
 
 ### Authorization
@@ -46,7 +46,7 @@ Name | Type | Description  | Notes
 //
 // Step 2 of turning on two-factor sign-in. Send the `secret` from `v3GenerateTotp`, the current six-digit code (`totpToken`) the authenticator app shows for it, and your account `password`. If the password is right and the code matches, two-factor sign-in is turned on and a confirmation email is sent.  From then on, signing in with a username and password also needs `totpToken` (see `v3AuthLogin`). The response is a fresh login result with a new session token; use it for later requests. Returns 401 if the password or code is wrong; generate a new code and retry.
 //
-totp_status_response_t* TOTPAPI_v3EnableTotp(apiClient_t *apiClient, totp_enable_body_t *totp_enable_body);
+login_result_t* TOTPAPI_v3EnableTotp(apiClient_t *apiClient, totp_enable_body_t *totp_enable_body);
 ```
 
 ### Parameters
@@ -57,7 +57,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[totp_status_response_t](totp_status_response.md) *
+[login_result_t](login_result.md) *
 
 
 ### Authorization

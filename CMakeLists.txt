@@ -432,6 +432,7 @@ set(SRCS
     model/interconnect_protocol.c
     model/interconnect_response.c
     model/interfaces_schema_inner.c
+    model/invalid_credentials_error.c
     model/invalid_totp_error.c
     model/invitation.c
     model/invitation_by_token.c
@@ -668,9 +669,6 @@ set(SRCS
     model/totp_disable_body.c
     model/totp_enable_body.c
     model/totp_generate_response.c
-    model/totp_status_response.c
-    model/totp_status_response_domain.c
-    model/totp_status_response_user.c
     model/touch_curve_input.c
     model/touch_curve_input_request.c
     model/touch_curve_input_request_v1.c
@@ -703,6 +701,7 @@ set(SRCS
     model/update_network_connection_body.c
     model/update_network_connection_options.c
     model/update_network_connection_options_config.c
+    model/update_own_profile_body.c
     model/update_team_body.c
     model/update_trial_request_body.c
     model/update_trial_request_params.c
@@ -1207,6 +1206,7 @@ set(HDRS
     model/interconnect_protocol.h
     model/interconnect_response.h
     model/interfaces_schema_inner.h
+    model/invalid_credentials_error.h
     model/invalid_totp_error.h
     model/invitation.h
     model/invitation_by_token.h
@@ -1443,9 +1443,6 @@ set(HDRS
     model/totp_disable_body.h
     model/totp_enable_body.h
     model/totp_generate_response.h
-    model/totp_status_response.h
-    model/totp_status_response_domain.h
-    model/totp_status_response_user.h
     model/touch_curve_input.h
     model/touch_curve_input_request.h
     model/touch_curve_input_request_v1.h
@@ -1478,6 +1475,7 @@ set(HDRS
     model/update_network_connection_body.h
     model/update_network_connection_options.h
     model/update_network_connection_options_config.h
+    model/update_own_profile_body.h
     model/update_team_body.h
     model/update_trial_request_body.h
     model/update_trial_request_params.h

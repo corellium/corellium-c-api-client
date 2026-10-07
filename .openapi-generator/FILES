@@ -588,6 +588,7 @@ docs/interconnect_list.md
 docs/interconnect_protocol.md
 docs/interconnect_response.md
 docs/interfaces_schema_inner.md
+docs/invalid_credentials_error.md
 docs/invalid_totp_error.md
 docs/invitation.md
 docs/invitation_by_token.md
@@ -824,9 +825,6 @@ docs/token_validate_body.md
 docs/totp_disable_body.md
 docs/totp_enable_body.md
 docs/totp_generate_response.md
-docs/totp_status_response.md
-docs/totp_status_response_domain.md
-docs/totp_status_response_user.md
 docs/touch_curve_input.md
 docs/touch_curve_input_request.md
 docs/touch_curve_input_request_v1.md
@@ -859,6 +857,7 @@ docs/update_interconnect_v3_body.md
 docs/update_network_connection_body.md
 docs/update_network_connection_options.md
 docs/update_network_connection_options_config.md
+docs/update_own_profile_body.md
 docs/update_team_body.md
 docs/update_trial_request_body.md
 docs/update_trial_request_params.md
@@ -1678,6 +1677,8 @@ model/interconnect_response.c
 model/interconnect_response.h
 model/interfaces_schema_inner.c
 model/interfaces_schema_inner.h
+model/invalid_credentials_error.c
+model/invalid_credentials_error.h
 model/invalid_totp_error.c
 model/invalid_totp_error.h
 model/invitation.c
@@ -2152,12 +2153,6 @@ model/totp_enable_body.c
 model/totp_enable_body.h
 model/totp_generate_response.c
 model/totp_generate_response.h
-model/totp_status_response.c
-model/totp_status_response.h
-model/totp_status_response_domain.c
-model/totp_status_response_domain.h
-model/totp_status_response_user.c
-model/totp_status_response_user.h
 model/touch_curve_input.c
 model/touch_curve_input.h
 model/touch_curve_input_request.c
@@ -2222,6 +2217,8 @@ model/update_network_connection_options.c
 model/update_network_connection_options.h
 model/update_network_connection_options_config.c
 model/update_network_connection_options_config.h
+model/update_own_profile_body.c
+model/update_own_profile_body.h
 model/update_team_body.c
 model/update_team_body.h
 model/update_trial_request_body.c
@@ -2695,6 +2692,7 @@ unit-test/test_interconnect_list.c
 unit-test/test_interconnect_protocol.c
 unit-test/test_interconnect_response.c
 unit-test/test_interfaces_schema_inner.c
+unit-test/test_invalid_credentials_error.c
 unit-test/test_invalid_totp_error.c
 unit-test/test_invitation.c
 unit-test/test_invitation_by_token.c
@@ -2931,9 +2929,6 @@ unit-test/test_token_validate_body.c
 unit-test/test_totp_disable_body.c
 unit-test/test_totp_enable_body.c
 unit-test/test_totp_generate_response.c
-unit-test/test_totp_status_response.c
-unit-test/test_totp_status_response_domain.c
-unit-test/test_totp_status_response_user.c
 unit-test/test_touch_curve_input.c
 unit-test/test_touch_curve_input_request.c
 unit-test/test_touch_curve_input_request_v1.c
@@ -2966,6 +2961,7 @@ unit-test/test_update_interconnect_v3_body.c
 unit-test/test_update_network_connection_body.c
 unit-test/test_update_network_connection_options.c
 unit-test/test_update_network_connection_options_config.c
+unit-test/test_update_own_profile_body.c
 unit-test/test_update_team_body.c
 unit-test/test_update_trial_request_body.c
 unit-test/test_update_trial_request_params.c

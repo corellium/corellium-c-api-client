@@ -10,12 +10,14 @@
 #include "../model/change_password_body.h"
 #include "../model/create_user_body.h"
 #include "../model/get_reset_link_info_body.h"
+#include "../model/invalid_credentials_error.h"
 #include "../model/patch_user_body.h"
 #include "../model/reset_link_info.h"
 #include "../model/reset_password_body.h"
 #include "../model/reset_unauthorized_response.h"
 #include "../model/send_reset_link_body.h"
 #include "../model/unauthorized_error.h"
+#include "../model/update_own_profile_body.h"
 #include "../model/user_created.h"
 #include "../model/user_error_response.h"
 
@@ -82,5 +84,13 @@ UsersAPI_v3ResetPassword(apiClient_t *apiClient, reset_password_body_t *reset_pa
 //
 void
 UsersAPI_v3SendResetLink(apiClient_t *apiClient, send_reset_link_body_t *send_reset_link_body);
+
+
+// Update your profile
+//
+// Updates the caller's own display name. Needs no administrator role. Users created through an authentication provider cannot change their label, because the provider owns it.
+//
+void
+UsersAPI_v3UpdateOwnProfile(apiClient_t *apiClient, update_own_profile_body_t *update_own_profile_body);
 
 

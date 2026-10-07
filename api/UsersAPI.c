@@ -141,6 +141,10 @@ UsersAPI_v3ChangePassword(apiClient_t *apiClient, change_password_body_t *change
     //    printf("%s\n","The request was invalid, for example a missing or malformed field. The body says which field; fix it before retrying.");
     //}
     // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","The user does not exist or the old password is wrong.");
+    //}
+    // uncomment below to debug the error response
     //if (apiClient->response_code == 403) {
     //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
     //}
@@ -682,6 +686,90 @@ end:
     if (localVarSingleItemJSON_send_reset_link_body) {
         cJSON_Delete(localVarSingleItemJSON_send_reset_link_body);
         localVarSingleItemJSON_send_reset_link_body = NULL;
+    }
+    free(localVarBodyParameters);
+
+}
+
+// Update your profile
+//
+// Updates the caller's own display name. Needs no administrator role. Users created through an authentication provider cannot change their label, because the provider owns it.
+//
+void
+UsersAPI_v3UpdateOwnProfile(apiClient_t *apiClient, update_own_profile_body_t *update_own_profile_body)
+{
+    list_t    *localVarQueryParameters = NULL;
+    list_t    *localVarHeaderParameters = NULL;
+    list_t    *localVarFormParameters = NULL;
+    list_t *localVarHeaderType = list_createList();
+    list_t *localVarContentType = list_createList();
+    char      *localVarBodyParameters = NULL;
+    size_t     localVarBodyLength = 0;
+
+    // clear the error code from the previous api call
+    apiClient->response_code = 0;
+
+    // create the path
+    char *localVarPath = strdup("/v3/users/me");
+
+
+
+
+
+    // Body Param
+    cJSON *localVarSingleItemJSON_update_own_profile_body = NULL;
+    if (update_own_profile_body != NULL)
+    {
+        //not string, not binary
+        localVarSingleItemJSON_update_own_profile_body = update_own_profile_body_convertToJSON(update_own_profile_body);
+        localVarBodyParameters = cJSON_Print(localVarSingleItemJSON_update_own_profile_body);
+        localVarBodyLength = strlen(localVarBodyParameters);
+    }
+    list_addElement(localVarHeaderType,"application/json"); //produces
+    list_addElement(localVarContentType,"application/json"); //consumes
+    apiClient_invoke(apiClient,
+                    localVarPath,
+                    localVarQueryParameters,
+                    localVarHeaderParameters,
+                    localVarFormParameters,
+                    localVarHeaderType,
+                    localVarContentType,
+                    localVarBodyParameters,
+                    localVarBodyLength,
+                    "PATCH");
+
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 204) {
+    //    printf("%s\n","Profile updated.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 400) {
+    //    printf("%s\n","The label is missing, empty, or longer than 100 characters; the body has a field other than &#x60;label&#x60;; or the user was created through an authentication provider.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 401) {
+    //    printf("%s\n","The session token is missing, invalid, or expired.");
+    //}
+    // uncomment below to debug the error response
+    //if (apiClient->response_code == 403) {
+    //    printf("%s\n","Signed in, but not allowed to do this: you lack the required role, have no access to the project, or your license does not include the feature.");
+    //}
+    //No return type
+end:
+    if (apiClient->dataReceived) {
+        free(apiClient->dataReceived);
+        apiClient->dataReceived = NULL;
+        apiClient->dataReceivedLen = 0;
+    }
+    
+    
+    
+    list_freeList(localVarHeaderType);
+    list_freeList(localVarContentType);
+    free(localVarPath);
+    if (localVarSingleItemJSON_update_own_profile_body) {
+        cJSON_Delete(localVarSingleItemJSON_update_own_profile_body);
+        localVarSingleItemJSON_update_own_profile_body = NULL;
     }
     free(localVarBodyParameters);
 

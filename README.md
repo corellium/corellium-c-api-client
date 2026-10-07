@@ -606,6 +606,7 @@ Category | Method | HTTP request | Description
 *UsersAPI* | [**UsersAPI_v3PatchUser**](docs/UsersAPI.md#UsersAPI_v3PatchUser) | **PATCH** /v3/users/{userId} | Update a user
 *UsersAPI* | [**UsersAPI_v3ResetPassword**](docs/UsersAPI.md#UsersAPI_v3ResetPassword) | **POST** /v3/users/reset-password | Reset password
 *UsersAPI* | [**UsersAPI_v3SendResetLink**](docs/UsersAPI.md#UsersAPI_v3SendResetLink) | **POST** /v3/users/send-reset-link | Send a password reset link
+*UsersAPI* | [**UsersAPI_v3UpdateOwnProfile**](docs/UsersAPI.md#UsersAPI_v3UpdateOwnProfile) | **PATCH** /v3/users/me | Update your profile
 *UsersV1API* | [**UsersV1API_v1ChangePasswordUsers**](docs/UsersV1API.md#UsersV1API_v1ChangePasswordUsers) | **POST** /v1/users/change-password | Change User Password
 *UsersV1API* | [**UsersV1API_v1CreateUser**](docs/UsersV1API.md#UsersV1API_v1CreateUser) | **POST** /v1/users | Create User
 *UsersV1API* | [**UsersV1API_v1DeleteUser**](docs/UsersV1API.md#UsersV1API_v1DeleteUser) | **DELETE** /v1/users/{userId} | Delete User
@@ -1013,6 +1014,7 @@ Category | Method | HTTP request | Description
  - [interconnect_protocol_t](docs/interconnect_protocol.md)
  - [interconnect_response_t](docs/interconnect_response.md)
  - [interfaces_schema_inner_t](docs/interfaces_schema_inner.md)
+ - [invalid_credentials_error_t](docs/invalid_credentials_error.md)
  - [invalid_totp_error_t](docs/invalid_totp_error.md)
  - [invitation_t](docs/invitation.md)
  - [invitation_by_token_t](docs/invitation_by_token.md)
@@ -1249,9 +1251,6 @@ Category | Method | HTTP request | Description
  - [totp_disable_body_t](docs/totp_disable_body.md)
  - [totp_enable_body_t](docs/totp_enable_body.md)
  - [totp_generate_response_t](docs/totp_generate_response.md)
- - [totp_status_response_t](docs/totp_status_response.md)
- - [totp_status_response_domain_t](docs/totp_status_response_domain.md)
- - [totp_status_response_user_t](docs/totp_status_response_user.md)
  - [touch_curve_input_t](docs/touch_curve_input.md)
  - [touch_curve_input_request_t](docs/touch_curve_input_request.md)
  - [touch_curve_input_request_v1_t](docs/touch_curve_input_request_v1.md)
@@ -1284,6 +1283,7 @@ Category | Method | HTTP request | Description
  - [update_network_connection_body_t](docs/update_network_connection_body.md)
  - [update_network_connection_options_t](docs/update_network_connection_options.md)
  - [update_network_connection_options_config_t](docs/update_network_connection_options_config.md)
+ - [update_own_profile_body_t](docs/update_own_profile_body.md)
  - [update_team_body_t](docs/update_team_body.md)
  - [update_trial_request_body_t](docs/update_trial_request_body.md)
  - [update_trial_request_params_t](docs/update_trial_request_params.md)

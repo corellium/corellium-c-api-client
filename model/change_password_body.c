@@ -62,26 +62,29 @@ cJSON *change_password_body_convertToJSON(change_password_body_t *change_passwor
     cJSON *item = cJSON_CreateObject();
 
     // change_password_body->user
-    if(change_password_body->user) {
+    if (!change_password_body->user) {
+        goto fail;
+    }
     if(cJSON_AddStringToObject(item, "user", change_password_body->user) == NULL) {
     goto fail; //String
-    }
     }
 
 
     // change_password_body->old_password
-    if(change_password_body->old_password) {
+    if (!change_password_body->old_password) {
+        goto fail;
+    }
     if(cJSON_AddStringToObject(item, "oldPassword", change_password_body->old_password) == NULL) {
     goto fail; //String
-    }
     }
 
 
     // change_password_body->new_password
-    if(change_password_body->new_password) {
+    if (!change_password_body->new_password) {
+        goto fail;
+    }
     if(cJSON_AddStringToObject(item, "newPassword", change_password_body->new_password) == NULL) {
     goto fail; //String
-    }
     }
 
     return item;
@@ -101,11 +104,14 @@ change_password_body_t *change_password_body_parseFromJSON(cJSON *change_passwor
     if (cJSON_IsNull(user)) {
         user = NULL;
     }
-    if (user) { 
-    if(!cJSON_IsString(user) && !cJSON_IsNull(user))
+    if (!user) {
+        goto end;
+    }
+
+    
+    if(!cJSON_IsString(user))
     {
     goto end; //String
-    }
     }
 
     // change_password_body->old_password
@@ -113,11 +119,14 @@ change_password_body_t *change_password_body_parseFromJSON(cJSON *change_passwor
     if (cJSON_IsNull(old_password)) {
         old_password = NULL;
     }
-    if (old_password) { 
-    if(!cJSON_IsString(old_password) && !cJSON_IsNull(old_password))
+    if (!old_password) {
+        goto end;
+    }
+
+    
+    if(!cJSON_IsString(old_password))
     {
     goto end; //String
-    }
     }
 
     // change_password_body->new_password
@@ -125,18 +134,21 @@ change_password_body_t *change_password_body_parseFromJSON(cJSON *change_passwor
     if (cJSON_IsNull(new_password)) {
         new_password = NULL;
     }
-    if (new_password) { 
-    if(!cJSON_IsString(new_password) && !cJSON_IsNull(new_password))
+    if (!new_password) {
+        goto end;
+    }
+
+    
+    if(!cJSON_IsString(new_password))
     {
     goto end; //String
-    }
     }
 
 
     change_password_body_local_var = change_password_body_create_internal (
-        user && !cJSON_IsNull(user) ? strdup(user->valuestring) : NULL,
-        old_password && !cJSON_IsNull(old_password) ? strdup(old_password->valuestring) : NULL,
-        new_password && !cJSON_IsNull(new_password) ? strdup(new_password->valuestring) : NULL
+        strdup(user->valuestring),
+        strdup(old_password->valuestring),
+        strdup(new_password->valuestring)
         );
 
     return change_password_body_local_var;

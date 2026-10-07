@@ -423,6 +423,7 @@
 #define corellium_users_patch UsersAPI_v3PatchUser
 #define corellium_users_resetPassword UsersAPI_v3ResetPassword
 #define corellium_users_sendResetLink UsersAPI_v3SendResetLink
+#define corellium_users_updateProfile UsersAPI_v3UpdateOwnProfile
 
 /* activity */
 #define corellium_v1_activity_createExport ActivityV1API_v1ActivityExport
@@ -1039,6 +1040,7 @@
 #define corellium_v3_users_patch UsersAPI_v3PatchUser
 #define corellium_v3_users_resetPassword UsersAPI_v3ResetPassword
 #define corellium_v3_users_sendResetLink UsersAPI_v3SendResetLink
+#define corellium_v3_users_updateProfile UsersAPI_v3UpdateOwnProfile
 
 /* version */
 #define corellium_v3_version_get ConfigAPI_v3GetVersion

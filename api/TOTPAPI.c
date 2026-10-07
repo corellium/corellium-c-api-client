@@ -11,7 +11,7 @@
 //
 // Turns two-factor sign-in off for your account. Send your `password` and a current six-digit code (`totpToken`) from your authenticator app. On success a confirmation email is sent, signing in no longer needs a code, and the response is a fresh login result with a new session token. Returns 401 if the password or code is wrong.
 //
-totp_status_response_t*
+login_result_t*
 TOTPAPI_v3DisableTotp(apiClient_t *apiClient, totp_disable_body_t *totp_disable_body)
 {
     list_t    *localVarQueryParameters = NULL;
@@ -71,10 +71,10 @@ TOTPAPI_v3DisableTotp(apiClient_t *apiClient, totp_disable_body_t *totp_disable_
     //    printf("%s\n","Multi-factor authentication is not licensed for this deployment.");
     //}
     //nonprimitive not container
-    totp_status_response_t *elementToReturn = NULL;
+    login_result_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
         cJSON *TOTPAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = totp_status_response_parseFromJSON(TOTPAPIlocalVarJSON);
+        elementToReturn = login_result_parseFromJSON(TOTPAPIlocalVarJSON);
         cJSON_Delete(TOTPAPIlocalVarJSON);
         if(elementToReturn == NULL) {
             // return 0;
@@ -109,7 +109,7 @@ end:
 //
 // Step 2 of turning on two-factor sign-in. Send the `secret` from `v3GenerateTotp`, the current six-digit code (`totpToken`) the authenticator app shows for it, and your account `password`. If the password is right and the code matches, two-factor sign-in is turned on and a confirmation email is sent.  From then on, signing in with a username and password also needs `totpToken` (see `v3AuthLogin`). The response is a fresh login result with a new session token; use it for later requests. Returns 401 if the password or code is wrong; generate a new code and retry.
 //
-totp_status_response_t*
+login_result_t*
 TOTPAPI_v3EnableTotp(apiClient_t *apiClient, totp_enable_body_t *totp_enable_body)
 {
     list_t    *localVarQueryParameters = NULL;
@@ -173,10 +173,10 @@ TOTPAPI_v3EnableTotp(apiClient_t *apiClient, totp_enable_body_t *totp_enable_bod
     //    printf("%s\n","User not found.");
     //}
     //nonprimitive not container
-    totp_status_response_t *elementToReturn = NULL;
+    login_result_t *elementToReturn = NULL;
     if(apiClient->response_code >= 200 && apiClient->response_code < 300) {
         cJSON *TOTPAPIlocalVarJSON = cJSON_Parse(apiClient->dataReceived);
-        elementToReturn = totp_status_response_parseFromJSON(TOTPAPIlocalVarJSON);
+        elementToReturn = login_result_parseFromJSON(TOTPAPIlocalVarJSON);
         cJSON_Delete(TOTPAPIlocalVarJSON);
         if(elementToReturn == NULL) {
             // return 0;

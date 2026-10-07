@@ -12,6 +12,7 @@ Method | HTTP request | Description
 [**UsersAPI_v3PatchUser**](UsersAPI.md#UsersAPI_v3PatchUser) | **PATCH** /v3/users/{userId} | Update a user
 [**UsersAPI_v3ResetPassword**](UsersAPI.md#UsersAPI_v3ResetPassword) | **POST** /v3/users/reset-password | Reset password
 [**UsersAPI_v3SendResetLink**](UsersAPI.md#UsersAPI_v3SendResetLink) | **POST** /v3/users/send-reset-link | Send a password reset link
+[**UsersAPI_v3UpdateOwnProfile**](UsersAPI.md#UsersAPI_v3UpdateOwnProfile) | **PATCH** /v3/users/me | Update your profile
 
 
 # **UsersAPI_v3AgreeToTerms**
@@ -57,7 +58,7 @@ void UsersAPI_v3ChangePassword(apiClient_t *apiClient, change_password_body_t *c
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **apiClient** | **apiClient_t \*** | context containing the client configuration |
-**change_password_body** | **[change_password_body_t](change_password_body.md) \*** |  | [optional] 
+**change_password_body** | **[change_password_body_t](change_password_body.md) \*** |  | 
 
 ### Return type
 
@@ -249,6 +250,36 @@ void
 ### Authorization
 
 No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **UsersAPI_v3UpdateOwnProfile**
+```c
+// Update your profile
+//
+// Updates the caller's own display name. Needs no administrator role. Users created through an authentication provider cannot change their label, because the provider owns it.
+//
+void UsersAPI_v3UpdateOwnProfile(apiClient_t *apiClient, update_own_profile_body_t *update_own_profile_body);
+```
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**apiClient** | **apiClient_t \*** | context containing the client configuration |
+**update_own_profile_body** | **[update_own_profile_body_t](update_own_profile_body.md) \*** |  | 
+
+### Return type
+
+void
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
 
 ### HTTP request headers
 
