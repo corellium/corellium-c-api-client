@@ -97,7 +97,6 @@ instance_t* instantiate_instance(int include_optional) {
       instantiate_instance_uefi_bootloader(0),
       1,
       true,
-      true,
       true
     );
   } else {
@@ -154,7 +153,6 @@ instance_t* instantiate_instance(int include_optional) {
       NULL,
       NULL,
       1,
-      true,
       true,
       true
     );

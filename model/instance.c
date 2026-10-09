@@ -59,8 +59,7 @@ static instance_t *instance_create_internal(
     instance_uefi_bootloader_t *uefi_bootloader,
     double orientation,
     int mast,
-    int wan_access,
-    int has_corelliumd
+    int wan_access
     ) {
     instance_t *instance_local_var = malloc(sizeof(instance_t));
     if (!instance_local_var) {
@@ -120,7 +119,6 @@ static instance_t *instance_create_internal(
     instance_local_var->orientation = orientation;
     instance_local_var->mast = mast;
     instance_local_var->wan_access = wan_access;
-    instance_local_var->has_corelliumd = has_corelliumd;
 
     instance_local_var->_library_owned = 1;
     return instance_local_var;
@@ -180,8 +178,7 @@ __attribute__((deprecated)) instance_t *instance_create(
     instance_uefi_bootloader_t *uefi_bootloader,
     double orientation,
     int mast,
-    int wan_access,
-    int has_corelliumd
+    int wan_access
     ) {
     return instance_create_internal (
         id,
@@ -237,8 +234,7 @@ __attribute__((deprecated)) instance_t *instance_create(
         uefi_bootloader,
         orientation,
         mast,
-        wan_access,
-        has_corelliumd
+        wan_access
         );
 }
 
@@ -990,14 +986,6 @@ cJSON *instance_convertToJSON(instance_t *instance) {
     }
     }
 
-
-    // instance->has_corelliumd
-    if(instance->has_corelliumd) {
-    if(cJSON_AddBoolToObject(item, "hasCorelliumd", instance->has_corelliumd) == NULL) {
-    goto fail; //Bool
-    }
-    }
-
     return item;
 fail:
     if (item) {
@@ -1725,18 +1713,6 @@ instance_t *instance_parseFromJSON(cJSON *instanceJSON){
     }
     }
 
-    // instance->has_corelliumd
-    cJSON *has_corelliumd = cJSON_GetObjectItemCaseSensitive(instanceJSON, "hasCorelliumd");
-    if (cJSON_IsNull(has_corelliumd)) {
-        has_corelliumd = NULL;
-    }
-    if (has_corelliumd) { 
-    if(!cJSON_IsBool(has_corelliumd))
-    {
-    goto end; //Bool
-    }
-    }
-
 
     instance_local_var = instance_create_internal (
         strdup(id->valuestring),
@@ -1792,8 +1768,7 @@ instance_t *instance_parseFromJSON(cJSON *instanceJSON){
         uefi_bootloader ? uefi_bootloader_local_nonprim : NULL,
         orientation ? orientation->valuedouble : 0,
         mast ? mast->valueint : 0,
-        wan_access ? wan_access->valueint : 0,
-        has_corelliumd ? has_corelliumd->valueint : 0
+        wan_access ? wan_access->valueint : 0
         );
 
     return instance_local_var;

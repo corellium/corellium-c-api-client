@@ -43,7 +43,6 @@ Name | Type | Description | Notes
 **supports_custom_devicetree** | **int** | Whether a custom device tree is supported. | 
 **supports_custom_mmio** | **int** | Whether custom MMIO configuration is supported. | 
 **supports_fvp** | **int** | Whether this model is an Arm Fixed Virtual Platform. | 
-**supports_corelliumd** | **int** | Whether corelliumd is supported on instances of this model. | 
 **mast** | **int** | Whether MATRIX security assessments can run on instances of this model. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
