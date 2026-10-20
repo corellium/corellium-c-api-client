@@ -1,0 +1,58 @@
+#ifndef install_firmware_assets_body_TEST
+#define install_firmware_assets_body_TEST
+
+// the following is to include only the main from the first c file
+#ifndef TEST_MAIN
+#define TEST_MAIN
+#define install_firmware_assets_body_MAIN
+#endif // TEST_MAIN
+
+#include <stdlib.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdbool.h>
+#include "../external/cJSON.h"
+
+#include "../model/install_firmware_assets_body.h"
+install_firmware_assets_body_t* instantiate_install_firmware_assets_body(int include_optional);
+
+
+
+install_firmware_assets_body_t* instantiate_install_firmware_assets_body(int include_optional) {
+  install_firmware_assets_body_t* install_firmware_assets_body = NULL;
+  if (include_optional) {
+    install_firmware_assets_body = install_firmware_assets_body_create(
+      "3e1354a3-fb10-46c0-8b05-56e28edbde69"
+    );
+  } else {
+    install_firmware_assets_body = install_firmware_assets_body_create(
+      "3e1354a3-fb10-46c0-8b05-56e28edbde69"
+    );
+  }
+
+  return install_firmware_assets_body;
+}
+
+
+#ifdef install_firmware_assets_body_MAIN
+
+void test_install_firmware_assets_body(int include_optional) {
+    install_firmware_assets_body_t* install_firmware_assets_body_1 = instantiate_install_firmware_assets_body(include_optional);
+
+	cJSON* jsoninstall_firmware_assets_body_1 = install_firmware_assets_body_convertToJSON(install_firmware_assets_body_1);
+	printf("install_firmware_assets_body :\n%s\n", cJSON_Print(jsoninstall_firmware_assets_body_1));
+	install_firmware_assets_body_t* install_firmware_assets_body_2 = install_firmware_assets_body_parseFromJSON(jsoninstall_firmware_assets_body_1);
+	cJSON* jsoninstall_firmware_assets_body_2 = install_firmware_assets_body_convertToJSON(install_firmware_assets_body_2);
+	printf("repeating install_firmware_assets_body:\n%s\n", cJSON_Print(jsoninstall_firmware_assets_body_2));
+}
+
+int main() {
+  test_install_firmware_assets_body(1);
+  test_install_firmware_assets_body(0);
+
+  printf("Hello world \n");
+  return 0;
+}
+
+#endif // install_firmware_assets_body_MAIN
+#endif // install_firmware_assets_body_TEST
